@@ -7,6 +7,8 @@ sources:
   - nekurama/Bulb#2
   - nekurama/Bulb#3
   - historical ManojVysyaraju/bulb#1
+  - nekurama/Bulb: nekurama.md (exported ChatGPT research/conversation)
+  - nekurama/Bulb: nekurama.mht (archived ChatGPT export; currently empty in repository)
 ---
 
 # Thesis & Positioning
@@ -18,7 +20,7 @@ sources:
 
 This is the canonical two-sentence definition. The supporting capability set includes orders, customer engagement, catalogs, payments, fulfillment, staff operations and related workflows.
 
-Sources: `nekurama/Bulb#1`; historical `ManojVysyaraju/bulb#1`.
+Sources: `nekurama/Bulb#1`; historical `ManojVysyaraju/bulb#1`; exported ChatGPT conversation in `nekurama.md`.
 
 ## 2. Category — confirmed
 
@@ -220,5 +222,7 @@ These are deliberately left pending. We will discuss them **after the known/agre
 - Product execution context: `nekurama/Bulb#3`
 - Company context where product/company boundary matters: `nekurama/Bulb#2`
 - Historical chronological evidence: `ManojVysyaraju/bulb#1`
+- Exported ChatGPT conversation/research: `nekurama/Bulb/nekurama.md`
+- Archived MHT export: `nekurama/Bulb/nekurama.mht` (currently empty in repository)
 
-The historical issues are evidence/history. This file is the current durable knowledge candidate and should be updated only when a decision is confirmed, superseded or deliberately reopened.
+The historical issues and exported conversation are evidence/history. This file is the current durable knowledge candidate and should be updated only when a decision is confirmed, superseded or deliberately reopened.

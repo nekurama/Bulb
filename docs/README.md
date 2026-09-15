@@ -13,19 +13,15 @@ Knowledge files should stay focused. Split a file when a dimension becomes mater
 ## Mining method
 
 For each knowledge file:
-
-1. Mine all four issue sources chronologically:
-   - `ManojVysyaraju/bulb#1` — historical research/decision history
-   - `nekurama/Bulb#1` — BABAI strategy/architecture decisions
-   - `nekurama/Bulb#2` — NEKURAMA company battles/decisions
-   - `nekurama/Bulb#3` — BABAI execution/validation
-2. Identify decision evolution and conflicting decisions.
-3. Treat the latest explicit decision as the current candidate.
-4. Challenge it if it is weak, contradictory, unsupported or amateurish.
-5. Record confirmed decisions first.
-6. Record partial decisions with open questions; do not invent answers.
-7. Discuss pending/challenge-required items only after known decisions have been captured.
-8. Update the relevant file, then mark the roadmap item complete.
+1. Mine all four issue sources chronologically: `ManojVysyaraju/bulb#1`, `nekurama/Bulb#1`, `nekurama/Bulb#2`, `nekurama/Bulb#3`.
+2. Include relevant exported research/conversation sources such as `nekurama.md` and `nekurama.mht`.
+3. Identify decision evolution and conflicts.
+4. Treat the latest explicit decision as the current candidate.
+5. Challenge weak, contradictory or unsupported decisions.
+6. Record confirmed decisions first.
+7. Record partial decisions with open questions; do not invent answers.
+8. Discuss pending items only after known decisions are captured.
+9. Update the relevant file, then mark the roadmap item complete.
 
 A historical `RESOLVED` label is not automatically authoritative. Later evidence or decisions can supersede it.
 
@@ -34,15 +30,15 @@ A historical `RESOLVED` label is not automatically authoritative. Later evidence
 - `confirmed` — decision/current truth is established.
 - `partial` — some answer exists; open questions remain.
 - `unknown` — dimension identified but not yet researched/answered.
-- `challenge-required` — an existing decision needs another battle before becoming durable truth.
+- `challenge-required` — an existing decision needs another battle.
 - `living` — continuously maintained current truth.
 
 ## Step-by-step roadmap
 
 ### Phase 1 — Product truth
 
-- [x] **1.1 Thesis & positioning** → `products/babai/thesis-and-positioning.md` — known decisions mined; pending items remain for discussion
-- [ ] **1.2 Product definition** → `products/babai/product-definition.md`
+- [x] **1.1 Thesis & positioning** → `products/babai/thesis-and-positioning.md` — core thesis, promise, ICP, buyer, differentiation and positioning committed; refinements deferred
+- [ ] **1.2 Product definition** → `products/babai/product-definition.md` — **NEXT**
 
 ### Phase 2 — Architecture / domain
 

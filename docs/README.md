@@ -12,16 +12,33 @@ Knowledge files should stay focused. Split a file when a dimension becomes mater
 
 ## Mining method
 
+The authoritative source set for knowledge mining is now:
+
+1. `nekurama.chatgpt.md` — final chronological ChatGPT conversation export
+2. `nekurama.raw.chat.json` — raw structured export of the same conversation, use when structure/metadata not preserved in Markdown is needed
+3. `nekurama.babai.research.md` — consolidated BABAI field research and validation evidence
+4. `nekurama/Bulb#1` — BABAI strategy/architecture decision log
+5. `nekurama/Bulb#2` — NEKURAMA company battle/decision log
+6. `nekurama/Bulb#3` — BABAI product execution tracker
+7. Existing `docs/` knowledge files — current durable truth, to be challenged against the authoritative source set rather than treated as unquestionable history
+8. `ManojVysyaraju/bulb#1` — historical decision/research source, used when required to reconstruct earlier evolution
+
+### Mining rules
+
 For each knowledge file:
-1. Mine all four issue sources chronologically: `ManojVysyaraju/bulb#1`, `nekurama/Bulb#1`, `nekurama/Bulb#2`, `nekurama/Bulb#3`.
-2. Include relevant exported research/conversation sources such as `nekurama.md`, `nekurama.mht` and the final `nekurama.chatgpt.md` / raw export where available.
-3. Identify decision evolution and conflicts.
-4. Treat the latest explicit decision as the current candidate.
-5. Challenge weak, contradictory or unsupported decisions.
-6. Record confirmed decisions first.
-7. Record partial decisions with open questions; do not invent answers.
-8. Discuss pending items only after known decisions are captured.
-9. Update the relevant file, then mark the roadmap item complete.
+
+1. Start with the final conversation export and field research relevant to the dimension.
+2. Use the raw JSON when message structure, ordering, metadata or content omitted from Markdown matters.
+3. Read the relevant GitHub issue history to reconstruct explicit decisions, rationale and unresolved battles.
+4. Compare existing knowledge-file content against the source evidence; do not blindly preserve earlier conclusions.
+5. Identify decision evolution and conflicts.
+6. Treat the latest explicit, evidence-supported decision as the current candidate.
+7. Challenge weak, contradictory, unsupported or prematurely generalized decisions.
+8. Record confirmed decisions first.
+9. Record partial decisions with open questions; do not invent answers.
+10. Keep historical reasoning in issues; keep only current durable truth in knowledge files.
+11. Update the relevant knowledge file only after the source review is complete.
+12. Then mark the corresponding roadmap item complete in the execution tracker.
 
 A historical `RESOLVED` label is not automatically authoritative. Later evidence or decisions can supersede it.
 
@@ -30,7 +47,7 @@ A historical `RESOLVED` label is not automatically authoritative. Later evidence
 - `confirmed` — decision/current truth is established.
 - `partial` — some answer exists; open questions remain.
 - `unknown` — dimension identified but not yet researched/answered.
-- `challenge-required` — an existing decision needs another battle.
+- `challenge-required` — an existing decision needs another battle before becoming durable truth.
 - `living` — continuously maintained current truth.
 
 ## Step-by-step roadmap

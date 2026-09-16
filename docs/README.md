@@ -14,7 +14,7 @@ Knowledge files should stay focused. Split a file when a dimension becomes mater
 
 For each knowledge file:
 1. Mine all four issue sources chronologically: `ManojVysyaraju/bulb#1`, `nekurama/Bulb#1`, `nekurama/Bulb#2`, `nekurama/Bulb#3`.
-2. Include relevant exported research/conversation sources such as `nekurama.md` and `nekurama.mht`.
+2. Include relevant exported research/conversation sources such as `nekurama.md`, `nekurama.mht` and the final `nekurama.chatgpt.md` / raw export where available.
 3. Identify decision evolution and conflicts.
 4. Treat the latest explicit decision as the current candidate.
 5. Challenge weak, contradictory or unsupported decisions.
@@ -38,7 +38,7 @@ A historical `RESOLVED` label is not automatically authoritative. Later evidence
 ### Phase 1 — Product truth
 
 - [x] **1.1 Thesis & positioning** → `products/babai/thesis-and-positioning.md` — core thesis, promise, ICP, buyer, differentiation and positioning committed; refinements deferred
-- [ ] **1.2 Product definition** → `products/babai/product-definition.md` — **NEXT**
+- [x] **1.2 Product definition** → `products/babai/product-definition.md` — MVP boundary and first pilot workflow committed; detailed journeys, production cut and post-pilot roadmap remain open
 
 ### Phase 2 — Architecture / domain
 

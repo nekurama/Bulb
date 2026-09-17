@@ -1,7 +1,7 @@
 ---
 status: partial
 owner: BABAI
-last-reviewed: 2026-09-17
+last-reviewed: 2026-09-18
 sources:
   - nekurama/Bulb#1
   - nekurama/Bulb#3
@@ -38,7 +38,7 @@ The initial MVP is intentionally narrower than the long-term business operating 
 1. **Business / channel setup**
    - Connect the restaurant's business-owned WhatsApp identity.
    - Support the planned Meta-native connection path, with BSP fallback/adapter where required.
-   - Establish one restaurant/tenant, one branch and one WhatsApp channel for the narrow pilot.
+   - Establish one restaurant/tenant, one branch and one WhatsApp channel per participating restaurant for the initial pilot.
 
 2. **Catalog / menu**
    - Upload, review and publish a restaurant menu/catalog.
@@ -71,15 +71,15 @@ The initial MVP is intentionally narrower than the long-term business operating 
 7. **Initial fulfillment**
    - **Pickup-first** is the first validated workflow.
    - Provider-agnostic fulfillment remains the product abstraction so delivery can be added where useful.
-   - The first pilot should not depend on a delivery integration.
+   - The initial pilot should not depend on a delivery integration.
 
 8. **Customer communication**
    - Send transactional/order-status communication through the business's WhatsApp where supported.
    - Keep transactional/support/marketing messaging conceptually separate.
 
-## First pilot workflow
+## Initial pilot workflow
 
-The first real-world pilot is deliberately narrow:
+The initial real-world pilot is a **10-restaurant controlled beta**. The cohort is intentionally large enough to expose practical operational variation while remaining small enough for close founder-led observation and iteration.
 
 `Connect business WhatsApp`
 `→ upload/review/publish menu`
@@ -92,15 +92,15 @@ The first real-world pilot is deliberately narrow:
 
 Pilot operating boundary:
 
-- one business
-- one WhatsApp number/channel
-- one branch
+- 10 restaurants in the initial cohort
+- one WhatsApp number/channel per restaurant
+- one branch per restaurant for the initial pilot
 - pickup-first
 - manual human takeover available
 - no delivery dependency
 - founder-led onboarding
 
-The field research recommends selecting three businesses from the 19 interviewed businesses for the next validation stage, beginning with one business. The strongest proof target is three active pilots and at least one paying customer.
+The 10-restaurant pilot is the current business decision for the initial beta. It is not a fixed endpoint for the product's validation. After practical complexities are identified and the product becomes sufficiently stable, additional restaurants can be onboarded continuously in controlled increments based on evidence from real-world usage.
 
 ## Explicit pilot out of scope
 

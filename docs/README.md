@@ -59,7 +59,7 @@ A historical `RESOLVED` label is not automatically authoritative. Later evidence
 
 ### Phase 2 — Architecture / domain
 
-- [ ] **2.1 Domain model** → `products/babai/domain-model.md`
+- [ ] **2.1 Domain model** → `products/babai/domain-model.md` — **partial**; core aggregates, cart/order separation, catalog/menu structure, customer boundary, commercial engine boundaries and immutable transaction-result principle established; invariants, state transitions, stacking and remaining edge cases are open
 - [ ] **2.2 Architecture** → `products/babai/architecture.md`
 
 ### Phase 3 — Customer / experience

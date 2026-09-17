@@ -65,6 +65,67 @@ The model is intentionally generic enough for future local-business verticals wh
 - Availability should be modeled generically enough to apply to sellable levels where required, including variants/modifiers, without building a full inventory engine.
 - MVP inventory depth is limited to menu/item availability; do not build a generic warehouse/inventory suite yet.
 
+### Commercial engines and calculation boundaries
+
+BABAI uses **individual, composable domain capabilities/engines** rather than a monolithic commercial-rule capsule. The components can evolve independently while transaction boundaries preserve the evaluated result for reproducibility.
+
+Conceptual commercial flow:
+
+`Catalog/Menu → Cart Engine → Price Engine → Promotion Engine → Tax/GST Engine → Order Engine`
+
+Operational flow then continues through payment and fulfillment capabilities.
+
+- **Cart Engine** owns mutable customer purchase intent: item/variant/modifier selection, quantity, cart changes, validation and cart lifecycle. It does not own authoritative commercial prices.
+- **Price Engine** determines the base/commercial price of the cart. This includes ordinary item/variant/modifier pricing and pricing constructs such as bundles/combos. A combo can therefore be modeled as a special sellable/pricing construct rather than as a promotion.
+- **Promotion Engine** evaluates restaurant-defined offers against the priced cart/order context. It applies commercial benefits such as discounts and can support benefits that alter the resulting purchase composition, such as a free item, rather than being limited to a simple discount percentage.
+- **Tax/GST Engine** separately determines applicable taxes from the structured commercial context rather than being folded into price or promotion calculation.
+- **Order Engine** commits the commercial transaction and snapshots the evaluated result, including prices, applied promotion benefits, taxes, totals and provenance needed for historical reproducibility.
+
+Core principle:
+
+> **Individual rules/components remain flexible during evaluation; the committed commercial result becomes immutable at the Order boundary.**
+
+This means the promotion definition itself may evolve over time, while a historical Order remains reproducible from its snapshot of the evaluated commercial outcome.
+
+### Commercial engine inventory
+
+The current conceptual engine/capability map is:
+
+- `Catalog Engine` — menus, items, variants, modifiers and revisions.
+- `Availability Engine` — whether a sellable entity is currently available, including temporary/scheduled availability.
+- `Cart Engine` — mutable purchase intent.
+- `Price Engine` — base/commercial pricing, including bundle/combo constructs.
+- `Promotion Engine` — restaurant-controlled offers and benefits applied to priced context.
+- `Tax/GST Engine` — tax determination/calculation.
+- `Order Engine` — committed transaction and order lifecycle.
+- `Payment Engine` — payment intent, state, confirmation and reconciliation.
+- `Fulfillment Engine` — fulfillment lifecycle independent of Order.
+- `Delivery Engine` — delivery provider interaction, quote, booking and execution when delivery is used.
+- `Tracking Engine` — customer-facing and operational tracking state for fulfillment/delivery.
+- `Conversation Engine` — conversation lifecycle, automation and human takeover.
+- `Notification Engine` — transactional/support/other outbound communications.
+- `Identity Engine` — identity resolution across customers, businesses and staff.
+- `Authorization Engine` — permissions and scoped access decisions.
+- `Policy Engine` — business rules, constraints and preconditions.
+- `Workflow Engine` — long-running orchestration, retries, timers and human waits.
+- `Audit Engine` — immutable business/security history.
+- `Reconciliation Engine` — detection and resolution of mismatches with external systems.
+- `Channel/Integration Engine` — WhatsApp and future external channel/provider integrations.
+
+These are **domain capabilities**, not a commitment that every engine becomes a separately deployed service. Deployment boundaries can evolve independently of conceptual ownership boundaries.
+
+Future capabilities such as deeper inventory, loyalty, subscriptions, refunds/returns, settlement, analytics/reporting and discovery/search can be added when their domain complexity becomes material.
+
+### Promotions
+
+- Promotions are a tenant-owned domain capability.
+- Restaurants define promotion conditions, benefits, validity, eligibility and limits.
+- BABAI evaluates promotion rules deterministically against the applicable cart/order context.
+- Promotion components should remain composable rather than being forced into a fixed monolithic promotion type.
+- Promotion benefits may include discounts as well as purchase-composition benefits such as free/additional items.
+- The applied promotion result is snapshotted into the Order alongside the commercial calculation.
+- Promotion stacking/combination semantics remain an explicit open battle; the engine architecture should support restaurant-controlled composition without assuming a final stacking policy yet.
+
 ### Addresses and fulfillment
 
 - Address is not inherently a Customer-owned aggregate concept.
@@ -109,6 +170,8 @@ Proposed aggregate roots:
 
 `Catalog` is a branch-level organizational/container concept, not the primary transactional aggregate.
 
+The engine/capability boundaries above are intentionally separate from aggregate ownership. An engine may operate across multiple aggregates without becoming their aggregate root.
+
 ## Domain shape
 
 ```text
@@ -137,9 +200,10 @@ Events, audit, workflow and telemetry surround these domain boundaries rather th
 
 ## Remaining domain battles
 
-- [ ] Pricing, discounts, taxes and their ownership beyond the MVP commercial snapshot
+- [ ] Promotion stacking/combination semantics
 - [ ] Exact aggregate contents and cross-aggregate invariants
 - [ ] Multi-branch edge cases
 - [ ] Customer identity and assisted merge mechanics beyond the no-auto-merge rule
 - [ ] Inventory depth beyond MVP availability
 - [ ] Remaining domain invariants and state-transition rules
+- [ ] Exact production implementation boundaries and sequencing for the conceptual engines

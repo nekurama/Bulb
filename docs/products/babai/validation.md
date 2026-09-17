@@ -17,27 +17,35 @@ The 10-restaurant cohort is not a fixed endpoint for validation. After practical
 
 ## What to validate
 
+- **Restaurant adoption:** Determine whether restaurant managers and staff can use BABAI properly in day-to-day operations.
+- **Customer ordering adoption:** Determine whether customers are comfortable using BABAI/WhatsApp to place orders and whether they actually complete orders through it.
+- **Real-world operational complexity:** Use the pilot to discover practical restaurant workflow complexities that are difficult to predict before live usage.
+- **Traffic and usage behavior:** Observe what happens as customer and order traffic increases and identify any new operational requirements or bottlenecks.
+- **Ordering experience:** Determine whether WhatsApp ordering is genuinely easier and faster than manual replies from restaurant owners or staff.
+- **Customer experience and interface:** Use real customer behavior and feedback to determine whether the current experience is sufficient or whether interface, workflow, or other product initiatives are required.
+- **Meaningful business problem:** Validate that BABAI addresses a meaningful restaurant problem. Initial research indicates that commission costs on existing platforms are a recurring concern for restaurant businesses.
+- **Business value:** Determine whether BABAI provides enough practical value for restaurants to justify continuing with a subscription after the beta.
+- **Willingness to pay / paid continuation:** Treat post-beta paid continuation as a key validation hypothesis rather than an assumption.
+- **Onboarding and support burden:** Determine whether restaurants can adopt and operate BABAI with minimal training and ongoing support, supported by the familiar WhatsApp interaction model.
+- **Scalability of restaurant onboarding:** Determine whether the effort required per restaurant remains low enough to progressively add restaurants without onboarding or support becoming a bottleneck.
 - Activation and time-to-value
 - WhatsApp readiness
 - Menu/catalog setup
-- Staff adoption
-- Ordering completion
 - Human takeover usefulness
 - Payment workflow
 - Fulfillment/delivery where enabled
 - Repeat use
-- Willingness to pay
 - Owner-reported value / ROI
 - Gross contribution after variable costs
-- Support and onboarding burden
-- Practical operational complexity across different restaurants
 - Whether real-time business data is captured, organized and reflected correctly across the workflow
 
 ## Kill / success signals
 
-The product should be judged on sustained usage and business value, not merely feature completion.
+The product should be judged on sustained usage, customer and restaurant adoption, and business value, not merely feature completion.
 
-For the initial 10-restaurant beta, validation should establish whether BABAI can reliably support real restaurant operations, create sufficient business value, and expose the practical workflow and data complexities that must be addressed before broader market expansion.
+For the initial 10-restaurant beta, validation should establish whether BABAI can reliably support real restaurant operations, whether managers and staff can use it with reasonable effort, whether customers are comfortable ordering through it, whether it solves a meaningful problem, and whether restaurants see enough value to continue as paying customers after the beta.
+
+The pilot is also intended to expose practical workflow, traffic, customer-experience, and data complexities. Findings may lead to changes in the interface, workflows, onboarding, or other product initiatives before broader expansion.
 
 Expansion beyond the initial 10 should be based on evidence from the pilot, with restaurant onboarding increasing progressively rather than switching immediately to aggressive market acquisition.
 

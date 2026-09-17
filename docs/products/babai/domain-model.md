@@ -1,11 +1,10 @@
 ---
 status: partial
 owner: BABAI
-last-reviewed: 2026-09-17
+last-reviewed: 2026-09-18
 sources:
   - nekurama/Bulb#1
   - historical ManojVysyaraju/bulb#1
----
 
 # Domain Model
 
@@ -86,6 +85,31 @@ Core principle:
 > **Individual rules/components remain flexible during evaluation; the committed commercial result becomes immutable at the Order boundary.**
 
 This means the promotion definition itself may evolve over time, while a historical Order remains reproducible from its snapshot of the evaluated commercial outcome.
+
+### Calculation Capsule Principle
+
+Transaction-dependent engines evaluate structured facts from a shared **Calculation Capsule** against their applicable rules, configuration and metadata.
+
+The capsule is not a generic mutable bag of state and does not replace aggregate ownership. It is a structured calculation context containing relevant input facts, derived facts, decisions, adjustments and provenance for the current commercial evaluation.
+
+Each engine:
+
+1. reads the facts relevant to its responsibility;
+2. evaluates them against its rules/configuration/metadata;
+3. contributes a typed, attributable result to the capsule; and
+4. does not directly mutate another engine's authoritative domain state.
+
+Conceptually:
+
+`Outcome = f(Calculation Capsule + Applicable Rules + Metadata + Relevant Version/Provenance)`
+
+Therefore the same engine logic can produce different outcomes when the cart contents, item eligibility, promotion conditions, price metadata, availability, customer context or other applicable facts change.
+
+The commercial evaluation is not required to be a rigid one-pass pipeline. Engine dependencies and bounded re-evaluation may exist when a contribution changes the commercial context, such as a promotion that adds a free item. Evaluation must nevertheless remain deterministic and explicitly bounded; engines must not recursively mutate the calculation without defined semantics.
+
+At Order commitment, the relevant commercial inputs, engine contributions, decisions, applied benefits, totals and provenance are frozen into the Order commercial snapshot. Historical Orders are therefore not recalculated from today's rules or configuration.
+
+This principle is a design model for deterministic rule-driven evaluation; it does not prescribe a particular rules technology.
 
 ### Commercial engine inventory
 
@@ -172,6 +196,8 @@ Proposed aggregate roots:
 
 The engine/capability boundaries above are intentionally separate from aggregate ownership. An engine may operate across multiple aggregates without becoming their aggregate root.
 
+The current design also treats `Promotion` as a likely tenant-owned configuration aggregate/capability because its definition, activation and lifecycle are independently managed. Exact promotion usage/redemption mechanics remain part of the invariants battle; high-contention usage limits such as "first 50 per day" must not be reduced to an unsafe mutable counter assumption.
+
 ## Domain shape
 
 ```text
@@ -198,12 +224,21 @@ PLATFORM
 
 Events, audit, workflow and telemetry surround these domain boundaries rather than becoming one combined domain hierarchy.
 
+## Resolved design decisions from current domain battle
+
+- Multi-branch context: Tenant owns the customer relationship; Branch owns operational context. Menus, availability, pricing context, fulfillment, channel and staff authorization are branch-scoped where applicable.
+- Customer assisted merge: no automatic merge; possible matches may be surfaced; explicit human/business confirmation and auditable provenance are required.
+- Inventory: availability-first for MVP; no full Inventory Engine/suite until domain complexity justifies it.
+- State transitions: authoritative state changes occur through explicit, validated, auditable transitions rather than direct status mutation.
+- Engine boundaries: engines are cohesive logical capabilities, not one-microservice-per-engine commitments. They may initially live together and be separated later.
+- Commercial evaluation: use the Calculation Capsule Principle above; individual engine contributions remain composable while the Order freezes the evaluated commercial result.
+
 ## Remaining domain battles
 
 - [ ] Promotion stacking/combination semantics
 - [ ] Exact aggregate contents and cross-aggregate invariants
-- [ ] Multi-branch edge cases
-- [ ] Customer identity and assisted merge mechanics beyond the no-auto-merge rule
-- [ ] Inventory depth beyond MVP availability
 - [ ] Remaining domain invariants and state-transition rules
+- [ ] Exact combo/bundle sellable modeling and price-version/provenance semantics
+- [ ] Tax calculation/adjustment provenance and deterministic monetary/rounding rules
+- [ ] Delivery vs Fulfillment vs Tracking lifecycle/aggregate boundaries
 - [ ] Exact production implementation boundaries and sequencing for the conceptual engines

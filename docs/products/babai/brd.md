@@ -117,7 +117,7 @@ The distinction between **confirmed** and **partial** reconciles stale/thin plac
 | Meta onboarding/coexistence reliability | **challenge-required** | Real approved-channel onboarding and recovery tests; no current export proves reliability. |
 | Payment verification, refunds and reconciliation | **challenge-required** | Test gateway webhook and manual-payment paths with a pilot merchant; screenshots/claims are not authoritative payment proof. |
 | Pricing, onboarding fee and paid continuation | **challenge-required** | Paid pilot or deposit evidence; research explicitly says interest is not willingness to pay. |
-| Pilot instrumentation and numeric success/kill thresholds | **partial / proposed** | `validation.md` and `pilot-metrics.md` define candidate thresholds grounded in `economics-model.md`; all numeric gates remain pending founder approval. |
+| Pilot instrumentation and numeric success/kill thresholds | **partial / proposed** | `validation.md` defines candidate thresholds grounded in the finalized-for-planning `economics-model.md` v0.2 bands and actual-rate register; all numeric gates remain pending founder approval. |
 | Delivery and multilingual staff workflows | **unknown/challenge-required** | Defer delivery dependency; test only when evidence requires it, including language and provider failure cases. |
 | Competitive proof / moat | **challenge-required** | Workflow-level competitor comparison and evidence of retention/switching value, not feature-count comparison. |
 | Expansion gates beyond restaurants | **unknown** | Define quantitative evidence after the restaurant/pickup workflow is proven. |

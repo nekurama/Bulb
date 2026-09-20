@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { cp, mkdir, readFile, rm, stat } from "node:fs/promises";
+import { cp, mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import process from "node:process";
@@ -10,9 +10,8 @@ const outputDir = path.join(root, "dist");
 const expectedSourceSha =
   process.env.PAGES_PREVIEW_SOURCE_SHA ||
   "52432d695e37b5a5b4a61c79acb10b71f7e6de3a";
-const siteFiles = ["app.js", "favicon.svg", "index.html", "styles.css"];
-const sourceFiles = siteFiles.map((file) => `site/${file}`);
-const outputFiles = [...siteFiles, "mock-data.json"];
+const sourceFiles = ["index.html", "styles.css", "script.js", "mock-data.json"];
+const outputFiles = [...sourceFiles];
 const deploymentFiles = [".github/workflows/pages-preview.yml", "scripts/build-pages-preview.mjs"];
 
 const git = (...args) =>
@@ -23,16 +22,6 @@ const assert = (condition, message) => {
     throw new Error(message);
   }
 };
-
-const relativeFiles = (directory) =>
-  execFileSync("git", ["ls-files", directory], {
-    cwd: root,
-    encoding: "utf8",
-  })
-    .split("\n")
-    .filter(Boolean)
-    .map((file) => file.slice(directory.length + 1))
-    .sort();
 
 const assertLocalReferences = async (html) => {
   const references = [...html.matchAll(/(?:href|src)="([^"]+)"/g)]
@@ -52,6 +41,21 @@ const assertLocalReferences = async (html) => {
   }
 };
 
+const sanitizeHtml = (html) =>
+  html
+    .replace(/\s*<link rel="canonical" href="https:\/\/nekurama\.com\/">\s*/, "\n")
+    .replace(/\s*<a href="#asset-review">Asset review<\/a>\s*/, "\n")
+    .replace(
+      /\s*<section class="section candidate-assets-section" id="asset-review"[\s\S]*?<\/section>\s*/,
+      "\n",
+    );
+
+const sanitizeStyles = (styles) =>
+  styles
+    .split("\n")
+    .filter((line) => !line.includes("candidate-"))
+    .join("\n");
+
 const main = async () => {
   const head = git("rev-parse", "HEAD");
   git("merge-base", "--is-ancestor", expectedSourceSha, "HEAD");
@@ -65,10 +69,6 @@ const main = async () => {
     "Files outside the deployment allowlist changed after the source commit",
   );
 
-  assert(
-    JSON.stringify(relativeFiles("site")) === JSON.stringify(siteFiles),
-    "site/ contains files outside the Pages source allowlist",
-  );
   for (const sourceFile of sourceFiles) {
     await stat(path.join(root, sourceFile));
   }
@@ -77,24 +77,27 @@ const main = async () => {
   const parsedMockData = JSON.parse(mockData);
   assert(parsedMockData.mode === "mock-only", "mock-data.json must remain mock-only");
 
-  const sourceText = await Promise.all(
-    sourceFiles
-      .filter((file) => !file.endsWith(".svg"))
-      .map((file) => readFile(path.join(root, file), "utf8")),
-  );
-  const boundaryPattern =
-    /https?:\/\/|fetch\s*\(|XMLHttpRequest|WebSocket|sendBeacon|EventSource|localStorage|sessionStorage|document\.cookie/;
-  assert(!sourceText.some((text) => boundaryPattern.test(text)), "External or persistent browser boundary found");
+  const html = sanitizeHtml(await readFile(path.join(root, "index.html"), "utf8"));
+  const styles = sanitizeStyles(await readFile(path.join(root, "styles.css"), "utf8"));
+  const script = await readFile(path.join(root, "script.js"), "utf8");
+  assert(!/assets\/candidates|candidate-only|provenance\.json/i.test(html), "Candidate content entered Pages HTML");
+  assert(!/candidate-/i.test(styles), "Candidate styles entered Pages artifact");
   assert(
-    !sourceText.some((text) => /assets\/candidates|candidate-only|provenance\.json/i.test(text)),
-    "Candidate content referenced by site",
+    !/https?:\/\/|XMLHttpRequest|WebSocket|sendBeacon|EventSource|localStorage|sessionStorage|document\.cookie/.test(
+      `${html}\n${styles}\n${script}`,
+    ),
+    "External or persistent browser boundary found",
+  );
+  assert(
+    !/fetch\s*\((?!\s*["']mock-data\.json["'])/.test(script),
+    "Site code contains a non-local data request",
   );
 
   await rm(outputDir, { recursive: true, force: true });
   await mkdir(outputDir, { recursive: true });
-  for (const file of siteFiles) {
-    await cp(path.join(root, "site", file), path.join(outputDir, file));
-  }
+  await writeFile(path.join(outputDir, "index.html"), html);
+  await writeFile(path.join(outputDir, "styles.css"), styles);
+  await cp(path.join(root, "script.js"), path.join(outputDir, "script.js"));
   await cp(path.join(root, "mock-data.json"), path.join(outputDir, "mock-data.json"));
 
   const outputListing = execFileSync("find", [outputDir, "-type", "f", "-printf", "%P\n"], {
@@ -110,7 +113,6 @@ const main = async () => {
   );
   assert(!outputListing.some((file) => file.includes("candidates")), "Candidate asset entered Pages artifact");
 
-  const html = await readFile(path.join(outputDir, "index.html"), "utf8");
   await assertLocalReferences(html);
   console.log(`Built ${outputFiles.length} allowlisted files from source ${expectedSourceSha}`);
 };

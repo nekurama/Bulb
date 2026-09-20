@@ -31,6 +31,48 @@ continues to govern product intent and domain constraints. Items marked
 **unresolved** require design, pilot, provider, operational or legal/security
 validation before they become stronger commitments.
 
+## Internal platform acceptance contract
+
+The first implementation should satisfy this contract while remaining
+deployable outside AWS:
+
+1. Build one OCI-compatible image containing API and worker entry points; run
+   as non-root, expose health/readiness checks and deploy by immutable digest.
+2. Keep configuration in environment/config providers and credentials in a
+   managed secret facility or equivalent encrypted store. Human administration
+   requires MFA, named accounts, least privilege and a separately audited
+   break-glass path.
+3. Treat managed standard PostgreSQL as authoritative. Use transactional
+   migrations, bounded connection pools, encrypted automated backups and an
+   export/restore path. Prefer expand/migrate/contract changes so application
+   rollback does not require destructive schema reversal.
+4. Write domain state, outbox rows and required audit records in one
+   transaction. Publish to a managed at-least-once queue; consumers persist
+   inbox/idempotency state, use bounded retries and quarantine poison or
+   human-action messages. The queue is replaceable and is not Kafka.
+5. Store large imports, media, exports and backup artifacts in private
+   S3-compatible object storage. Use short-lived signed access and add a CDN
+   only for content classified as public/cache-safe.
+6. Emit redacted structured logs and metrics, plus sampled traces where useful,
+   with correlation/causation, tenant/branch/flow and provider references.
+   Telemetry never authorizes a business transition.
+7. CI/CD must test, type-check/lint, scan dependencies and images, produce an
+   SBOM, publish an immutable artifact, validate migrations, deploy a smoke
+   check and require explicit production approval. Keep the previous digest
+   available for rollback.
+8. Portability evidence must include PostgreSQL export/restore, object export,
+   configuration reconstruction and safe queue replay. No multi-region or
+   zero-data-loss claim is part of this contract.
+
+The platform mapping is ECS/Fargate as the preferred AWS candidate, App Runner
+only after worker/network/rollback validation, and a small EC2 host as a
+founder-accepted cost fallback. Provider service names, regions, tiers,
+quotes, credits and approval terms remain unresolved external inputs. The
+support envelope is 6 hours/week for Manoj, 8 for Vinay and 14 combined, with
+10 hours/week as the planned-load ceiling and no 24x7 commitment. Detailed
+planning ranges and scale/rollback thresholds are maintained in
+[`architecture-cost-options.md`](architecture-cost-options.md).
+
 ## Committed starting posture
 
 | Concern | Starting choice | Still unresolved |

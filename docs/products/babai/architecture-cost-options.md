@@ -1,5 +1,5 @@
 ---
-status: proposed-options
+status: partial
 owner: BABAI Architecture
 last-reviewed: 2026-09-21
 sources:
@@ -75,46 +75,6 @@ the true cost model must retain pre-credit cost, founder hours, provider
 pass-throughs and tax. Provider choices, credits, rates, legal approvals and
 production SLOs remain **unresolved/input-required**.
 
-## Founder Decision Packet: recommended now / revisit when
-
-| Area | Recommended now | Revisit when |
-|---|---|---|
-| Runtime | **ECS/Fargate is the default AWS pilot candidate** after account/credit, region, like-for-like cost and restore checks; keep a portable OCI image and worker contract | App Runner proves a simpler worker path, or EC2's measured all-in cost outweighs its founder operations burden |
-| Database | Small managed standard PostgreSQL tier, initially single-AZ if restore and load evidence pass | Measured recovery, availability or connection/load evidence justifies Multi-AZ, Aurora or another managed PostgreSQL option |
-| Queue/outbox | Managed at-least-once queue plus PostgreSQL outbox/inbox, bounded retries and DLQ/quarantine | Measured ordering, fan-out, throughput or workflow needs justify FIFO/event bus/broker/workflow product |
-| Object storage/CDN | Encrypted private object storage for backups and controlled artefacts; CDN only for public static assets, not private domain data | Public asset traffic, measured transfer, cacheability and access-control evidence justify CDN configuration |
-| Secrets/MFA | Managed secret store candidate, short-lived workload credentials, founder MFA/security keys and audited break-glass access | Rotation, access review, tenant isolation or incident evidence requires stronger controls |
-| CI/CD | Immutable image build, tests, staged smoke, manual promotion and backward-compatible migrations | Deployment frequency and evidence support automated promotion with the same rollback controls |
-| Observability | Redacted structured logs, core metrics, backup/restore signals and actionable alerts; sampled traces only where useful | Pilot incident volume, debugging time or SLO evidence justifies expanded retention/tracing |
-| Support | Founder-only coverage with Stage 0/Stage 1 caps and no 24x7 promise | Support budget, provider escalation and paid-pilot evidence justify a broader operating model |
-| AWS credits | Apply credits to right-sized measured services after account/expiry/eligibility verification | Credit expiry, cash-vs-credit comparison or usage growth changes the economics |
-
-### Proposed cost and capacity stop gates
-
-These are **planning guardrails**, not approved budgets:
-
-- Keep pre-credit monthly infrastructure in the low/base envelopes while
-  learning: **₹0–₹30,000/month**.
-- Require founder review before entering the high infrastructure envelope:
-  **above ₹30,000/month pre-credit** or any commitment to Multi-AZ, Aurora,
-  EKS, Kafka, multi-region or long-retention observability.
-- Require a total-expenditure review when projected monthly pilot cash spend
-  (infrastructure, providers, payment fees, tooling, remediation and any
-  approved founder opportunity-cost view) exceeds **₹50,000/month**. The
-  founder must approve the actual budget before enrollment; this is not a
-  pricing or margin decision.
-- Pause new restaurant enrollment if combined founder support exceeds
-  **24 hours/week**, steady-state support exceeds **2 hours per active
-  restaurant/week**, P1 incidents recur, unresolved P2 work exceeds one
-  business day, or restore/reconciliation work is not current.
-- Do not expand from Stage 0 to Stage 1, or toward the 10-restaurant
-  hypothesis, until cost, support, restore and provider evidence is recorded.
-
-The expenditure trigger includes pre-credit and post-credit views. A credit
-that reduces cash spend but increases pre-credit commitment still requires
-review. Support time must be reported separately from infrastructure so AWS
-savings cannot hide an unsustainable founder operating burden.
-
 ## Cost model conventions
 
 All monetary figures in this document are **internal planning envelopes**, not
@@ -133,24 +93,17 @@ actual credit account before enrollment or a provider commitment.
 
 ### Pilot infrastructure envelopes
 
-| Envelope | Assumptions | Planning cash range before credits | Founder support burden | Scaling/rollback gate |
-|---|---|---:|---|---|
-| **Low / learning** | One small application task or container, one small single-AZ PostgreSQL instance or equivalent pilot tier, managed queue, short log retention, private object-storage backups, no standby database | **₹0–₹10,000/month** | **8–12 founder-hours/week**; manual recovery remains possible | Add capacity only after measured saturation or backlog; restore the last known-good image/configuration and replay safely |
-| **Base / controlled pilot** | One or two right-sized application tasks, managed PostgreSQL with automated backup, queue + DLQ, basic alarms, encrypted object storage, measured restore drill, minimal staging | **₹10,000–₹30,000/month** | **16–24 founder-hours/week** across onboarding, support, incidents and restore drills; no 24x7 promise | Scale app/worker on sustained latency, CPU, queue-age or outbox-age evidence; pause enrollment if support or restore gates fail |
-| **High / evidence-backed resilience** | Redundant application capacity, standby/Multi-AZ database or equivalent, more retention/observability, isolated restore environment and network/transfer overhead where required | **₹30,000–₹100,000+/month** | **Above 24 founder-hours/week is a stop signal**, not an automatic hiring assumption | Revisit architecture only with evidence; rollback requires a tested previous runtime plus database/provider recovery path |
+| Envelope | Assumptions | Planning cash range before credits | Main risk |
+|---|---|---:|---|
+| **Low / learning** | One small API/worker container capacity, one small single-primary managed PostgreSQL tier, managed at-least-once queue + DLQ, short log retention, private object-storage backups and no standby database | **₹8,000–₹20,000/month** | A single failure can require manual recovery; capacity and restore evidence are limited |
+| **Base / controlled pilot** | One or two right-sized API/worker capacities, managed PostgreSQL with automated backup, queue + DLQ, basic alarms, encrypted object storage, measured restore drill and minimal staging | **₹25,000–₹60,000/month** | Higher fixed cost before usage and still not a high-availability guarantee |
+| **High / evidence-backed scale** | Measured higher request/queue volume, larger single-primary database or additional application/worker capacity, more observability and an isolated restore environment; no multi-region default | **₹75,000–₹180,000/month** | Cost and operational load can outgrow founder capacity; still excludes provider pass-through fees |
 
 The ranges are a budgeting aid only. They must not be used to publish BABAI
 pricing or margin claims. The product BRD requires actual infrastructure,
 provider, payment, tooling, support, failure and refund costs to be recorded
 per pilot before public pricing is set. [`brd.md`; `business-model.md`;
 `validation.md`]
-
-These are internal planning envelopes, not quotes. They exclude Meta/BSP,
-payment, AI, delivery, tax and one-time onboarding costs. Founder-hours are
-capacity assumptions, not labour pricing or a hiring plan. Provisional
-triggers are sustained request/worker saturation, queue or outbox growth,
-database connection pressure, restore failure, or a P1/P2/support-capacity
-breach; exact thresholds must be measured during the pilot.
 
 ## AWS managed deployment options
 
@@ -234,7 +187,33 @@ operations compared with ECS.
 **Cost posture:** potentially between the low and base envelopes, but only
   after a worker and restore proof. It is not selected over ECS.
 
-### Option D — Lambda/API Gateway + Aurora Serverless v2 or RDS Proxy
+### Option D — small EC2 host + containers + managed PostgreSQL/SQS
+
+Run the same API and worker images on one small EC2 host, with managed
+PostgreSQL and queue services retained. This is the cost fallback, not the
+default posture.
+
+**Advantages**
+
+- Lowest apparent fixed compute cost for a very small pilot.
+- Preserves the container image, PostgreSQL and queue ports.
+- Useful for a bounded learning stage when managed container overhead is
+  disproportionate to traffic.
+
+**Tradeoffs**
+
+- Founders own host patching, disk/instance recovery, deployment safety,
+  capacity and single-host failure handling.
+- A host outage can exceed the normal support envelope and threaten the RTO
+  unless the recovery runbook is exercised.
+- Security updates and monitoring cannot be deferred because the host is
+  inexpensive.
+
+**Cost posture:** allowed only when the founders explicitly accept the
+single-host and patching risk, with a documented exit trigger to ECS/Fargate
+or the portable managed baseline.
+
+### Option E — Lambda/API Gateway + Aurora Serverless v2 or RDS Proxy
 
 Split HTTP and queue handlers into functions and use Aurora Serverless v2 or
 RDS through a connection-management layer.
@@ -264,7 +243,8 @@ RDS through a connection-management layer.
 The current recommendation is **not a provider choice**: compare Option A
 and Option B with the same workload, backup retention, queue volume, logs,
 restore drill and support assumptions. Option C is a secondary simplification
-candidate. Option D is deferred. Credits are an economic input, not an
+candidate. Option D is a cost fallback with an explicit operations penalty.
+Option E is deferred. Credits are an economic input, not an
 architecture requirement.
 
 For the pilot decision, Option A is the portability baseline and Option B is
@@ -281,20 +261,6 @@ Record before using credits:
    backup and snapshots.
 4. Exit evidence: container image, PostgreSQL export/restore, queue replay and
    provider-adapter tests outside AWS.
-
-### Runtime scaling and rollback gates
-
-| Runtime | Founder support burden | Scaling trigger | Rollback posture | Packet decision |
-|---|---|---|---|---|
-| **ECS/Fargate** | Low-to-moderate platform burden after networking, logs and task operations are documented | Add task/worker capacity only after measured sustained saturation, queue age/outbox growth or worker lag; resize PostgreSQL after connection/load or restore evidence | Redeploy the last known-good immutable image/configuration; keep migrations backward-compatible and pause risky consumers before replay | **Recommended AWS candidate now**, subject to account, cost and restore validation |
-| **App Runner** | Potentially lower HTTP deployment work, but worker, scheduled work, networking and diagnosis are unproven | Revisit only after a representative worker/outbox test demonstrates stable background processing and acceptable all-in cost | Re-deploy the last known-good service revision and retain an independently runnable worker/container path | **Time-boxed alternative; not default** |
-| **Small EC2 host + containers** | Highest founder burden: patching, host health, emergency access, backup and replacement are manual responsibilities | Leave fallback or add capacity when host maintenance/failure, queue backlog or support load threatens RPO/RTO or founder limits | Restore the previous image/compose configuration or replacement host from tested backups; accept single-host recovery interruption | **Cost fallback only** |
-
-For every runtime, a release that increases error rate, violates domain
-invariants, grows the outbox/DLQ, or creates reconciliation ambiguity must be
-paused or rolled back before more traffic is admitted. Destructive schema
-migrations are incompatible with this rollback posture. These are operating
-gates, not availability promises.
 
 ## PostgreSQL options
 
@@ -344,45 +310,54 @@ is not claimed. [Raw T115 `bbb210cc-a1ef-4ea9-b1a7-7c52f0011721`; Raw T119
 `e472fe3d-22d5-4595-aafd-986683b13a3c`; Raw T264
 `bbb21a7f-4d44-4cc1-8f60-1172bdcc303c`; `architecture-lld.md`]
 
-## Object storage and CDN
+## Object storage and CDN posture
 
-Object storage is for encrypted backup exports, restore-test artefacts,
-tenant-controlled uploads and other bounded artefacts that do not belong in
-the transactional database. The default pilot posture is private buckets or
-containers, short-lived signed access where needed, lifecycle rules and
-separate access logs. It is not a second source of truth for orders, payments,
-events or outbox state.
-
-| Option | Pilot use | Tradeoff and decision |
-|---|---|---|
-| **Managed object storage** | Backups, exports, controlled uploads and restore evidence | **Recommended now** behind an object-storage adapter; provider encryption, retention, deletion and egress terms remain to be validated |
-| **CDN for public static assets** | Cache versioned web assets if the pilot has public traffic | **Optional now**; enable only when measured transfer/latency justifies cost and cache invalidation/access controls are tested |
-| **CDN for private business data or APIs** | Not a pilot requirement | **Do not use now**; signed URLs, cache keys, tenant isolation and invalidation errors create avoidable risk |
-
-S3/CloudFront or equivalent services may be used as implementation candidates
-in the AWS comparison, but no provider is selected and no data-location,
-security or legal approval is implied. Keep object keys, metadata and export
-formats documented so a bounded backup or asset set can be copied and
-verified outside the provider.
+Use private, encrypted S3-compatible object storage for menu imports, media,
+exports, restore artifacts and other large blobs. Keep object identifiers and
+metadata in PostgreSQL, issue short-lived signed access, and apply
+tenant-scoped authorization before issuing a URL. A CDN is optional and
+limited to public/static or explicitly cache-safe content; customer messages,
+payment evidence, private exports and unrestricted tenant data must not be
+publicly cacheable. This keeps the domain portable while avoiding a CDN
+dependency for the core order path.
 
 ## Secrets, MFA and administrative access
 
-The pilot must keep credentials out of source control, images, ordinary
-configuration files, logs, events and support tickets. Use a managed secret
-store or an equivalent encrypted mechanism, inject only the minimum secret
-needed by a workload, rotate provider tokens through an explicit runbook, and
-audit reads and changes. Workloads should use short-lived or narrowly scoped
-identities where the runtime supports them; long-lived founder credentials are
-not a service-to-service contract.
+Human administration requires MFA, separate named accounts, least privilege,
+audited access and a controlled break-glass account. Workloads should use
+short-lived workload identity or equivalent credentials; long-lived provider
+keys must not be committed, baked into images or copied into ordinary
+environment files. Store secrets in a managed secret facility or an
+equivalent encrypted store, rotate them on a documented schedule and test
+revocation/recovery without exposing values. The exact secret manager, key
+ownership, rotation cadence and break-glass approver remain external security
+gates, not provider approvals made by this packet.
 
-Founder and administrative access should require MFA, preferably a
-hardware/security key for privileged accounts, with separate named identities,
-least privilege, access review and a documented break-glass path. Break-glass
-use must be time-bound and audited. These are architecture controls and
-operating requirements, not a statement that any provider, legal reviewer or
-security assessor has approved them. Exact secret store, key ownership,
-rotation interval, recovery access and DPDPA/security evidence remain
-unresolved.
+## CI/CD and rollback posture
+
+The pipeline should build the OCI image, run unit/integration tests and
+type-check/lint, scan dependencies and the image, produce an SBOM, publish an
+immutable digest, validate database migrations, deploy a smoke check and
+require an explicit production approval. The previous known-good digest must
+remain deployable. Database changes use expand/migrate/contract sequencing;
+destructive schema rollback is not assumed.
+
+Scale the API/worker or database tier only after a measured 15-minute window
+shows at least two of the following, or a single safety-critical failure:
+
+- API p95 above 750 ms or 5xx above 2%;
+- oldest queue message or outbox record above 2 minutes, or a growing DLQ;
+- database CPU or connection use above 70%, or lock contention affecting
+  commands;
+- repeated provider timeouts or reconciliation mismatches that added capacity
+  can demonstrably relieve.
+
+Roll back to the previous image digest when health checks fail, 5xx exceeds
+5% for 5 minutes, queue/outbox age accelerates after deployment, a migration
+violates an invariant, or payment/order reconciliation becomes ambiguous.
+Freeze incompatible consumers, preserve failed payloads, and replay only after
+versioned remediation is tested. Use backup restore for data corruption or a
+destructive migration incident, not as the normal application rollback.
 
 ## Meta / WhatsApp provider options
 
@@ -492,31 +467,6 @@ ownership must be validated together. Do not put credentials, payment secrets
 or unrestricted PII in logs, events or traces. [`architecture-lld.md`;
 `docs/company/security-privacy-controls.md`]
 
-## CI/CD and release rollback
-
-The pilot delivery path should be the smallest repeatable pipeline that
-protects the domain and recovery boundaries:
-
-1. Build an immutable OCI image from a reviewed commit.
-2. Run formatting, type/build checks, targeted tests and dependency/security
-   checks available in the repository.
-3. Publish the image by digest to a non-production environment and run a
-   smoke test covering the API, worker, queue/outbox and restore-sensitive
-   configuration.
-4. Promote manually to the pilot runtime with a recorded change and
-   backward-compatible database migration.
-5. Monitor error rate, queue/outbox age, callback verification, payment
-   reconciliation and backup signals before declaring success.
-
-GitHub Actions or another CI service may implement this flow, but no CI/CD
-provider, runner, registry, deployment approval or production SLA is selected
-here. Secrets must be supplied through the secret mechanism, not committed
-pipeline variables. A rollback must redeploy the last known-good image and
-configuration, stop or quarantine unsafe consumers, and use an authorized
-replay/reconciliation procedure if external side effects were attempted.
-Schema changes must support old and new application versions during rollback;
-destructive migrations require a separate reviewed recovery plan.
-
 ## Backup, restore and continuity assumptions
 
 ### Baseline
@@ -585,15 +535,19 @@ Until measured support data exists:
 - **Stage 0:** one active restaurant, one branch and one number.
 - **Stage 1:** no more than three active restaurants concurrently under
   founder-only support.
-- **Combined support budget:** target no more than 24 founder-hours/week,
-  including onboarding, incidents, merchant communication, reconciliation and
-  restore drills.
-- **Steady-state guardrail:** target no more than 2 support hours per active
-  restaurant per week, excluding a one-time onboarding budget of up to 6
-  hours per restaurant.
-- **Pause enrollment** when the combined support budget is exceeded for two
-  consecutive weeks, P1 incidents recur, unresolved P2 backlog exceeds one
-  business day, or restore/reconciliation work is not current.
+- **Manoj hard cap:** 6 hours/week, including technical incidents,
+  deployment/rollback, provider failures, data recovery and security-sensitive
+  engineering. Keep at least 2 hours uncommitted for incidents.
+- **Vinay hard cap:** 8 hours/week, including onboarding, menu/business
+  process support, merchant communication and operational triage. Keep at
+  least 2 hours uncommitted for escalations.
+- **Combined hard cap:** 14 founder-hours/week, with a 10-hour/week planned
+  load ceiling covering onboarding, incidents, reconciliation and restore
+  drills. There is no 24x7 commitment.
+- **Pause enrollment** when either founder's two-week rolling average exceeds
+  their cap, combined planned load exceeds 10 hours/week, a P1 incident
+  remains active beyond the planned coverage window, unresolved P2 backlog
+  exceeds one business day, or restore/reconciliation work is not current.
 - The product's gradual ceiling of up to 10 restaurants is not a promise that
   two founders can support 10 restaurants alone. Reaching that ceiling
   requires measured evidence, reduced manual work, documented provider
@@ -601,9 +555,34 @@ Until measured support data exists:
   founder workload.
 
 These limits protect the validation sequence from turning AWS savings into
-unbounded founder on-call work. They are proposed assumptions to validate
-against Stage 0/Stage 1 data, not new product thresholds. [`brd.md`;
-`validation.md`; `nekurama.babai.research.md`]
+unbounded founder on-call work. Admissible capacity is:
+
+```text
+admissible restaurants
+  <= min(10, floor((10 planned founder-hours/week) /
+                    measured average support-hours/restaurant/week))
+```
+
+They are proposed operating guardrails to validate against Stage 0/Stage 1
+data, not new product thresholds. [`brd.md`; `validation.md`;
+`nekurama.babai.research.md`]
+
+## Internal acceptance disposition
+
+**Accepted for internal planning:** portable OCI container baseline; ECS/Fargate
+as the preferred AWS candidate; App Runner only after worker/network/rollback
+validation; small EC2 as a founder-accepted cost fallback; managed standard
+PostgreSQL; managed queue plus transactional outbox/inbox; private object
+storage with selective CDN; MFA and managed secrets; provider-neutral
+observability; gated CI/CD; export-oriented portability; RPO 24h/RTO 8h; and
+the founder support caps above.
+
+**External/parked gates:** AWS account and credit eligibility, current
+region/service quotes, Meta Tech Provider/BSP approval and coexistence,
+payment-provider approval and rates, legal/privacy/security review,
+subprocessor and data-location terms, production SLO approval, and any
+availability or staffing commitment. AWS credits are a planning sensitivity,
+not an approval or reason to overprovision.
 
 ## Unresolved decisions and required evidence
 
@@ -619,11 +598,9 @@ against Stage 0/Stage 1 data, not new product thresholds. [`brd.md`;
    is assumed.
 6. Obtain merchant payment-provider terms, webhook/refund/reconciliation
    evidence and direct-settlement confirmation.
-7. Test private object-storage export/restore, signed access, secret rotation,
-   MFA/recovery access and last-known-good CI/CD rollback.
-8. Measure founder support effort, P1/P2 rates, provider response and actual
+7. Measure founder support effort, P1/P2 rates, provider response and actual
    per-pilot contribution before expanding beyond three active pilots.
-9. Have legal, privacy and finance owners validate DPDPA roles, notices,
+8. Have legal, privacy and finance owners validate DPDPA roles, notices,
    retention/deletion, subprocessors, GST and payment responsibilities.
 
 ## Source and pricing references
@@ -659,20 +636,12 @@ against Stage 0/Stage 1 data, not new product thresholds. [`brd.md`;
 
 - [AWS Fargate pricing](https://aws.amazon.com/fargate/pricing/) — resource
   dimensions, task duration, storage and additional charges.
-- [Amazon EC2 pricing](https://aws.amazon.com/ec2/pricing/) — instance,
-  storage, transfer and host-operations dimensions for the fallback.
 - [Amazon RDS for PostgreSQL pricing](https://aws.amazon.com/rds/postgresql/pricing/) —
   instance, storage, backup, I/O and transfer dimensions.
 - [Amazon Aurora pricing](https://aws.amazon.com/rds/aurora/pricing/) —
   capacity, storage, I/O and commitment considerations.
 - [Amazon SQS pricing](https://aws.amazon.com/sqs/pricing/) — request-metered
   queue pricing and current free-tier terms.
-- [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/) — storage, requests,
-  lifecycle and transfer dimensions for artefacts and backups.
-- [Amazon CloudFront pricing](https://aws.amazon.com/cloudfront/pricing/) —
-  CDN transfer, request and cache-invalidation dimensions.
-- [AWS Secrets Manager pricing](https://aws.amazon.com/secrets-manager/pricing/) —
-  secret count, API access and rotation cost dimensions.
 - [AWS startup credits](https://aws.amazon.com/startups/credits/) — program
   entry point; actual balance and eligibility remain account-specific.
 - [AWS App Runner pricing](https://aws.amazon.com/apprunner/pricing/) —

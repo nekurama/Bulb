@@ -9,12 +9,11 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages-preview-babai-feature
-  cancel-in-progress: false
+  group: pages-preview-babai-template
+  cancel-in-progress: true
 
 jobs:
   deploy:
-    # Manager integration target: do not run this workflow from a role branch.
     if: github.ref == 'refs/heads/nekurama/babai-feature'
     runs-on: ubuntu-latest
     environment:
@@ -22,36 +21,41 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Check out the committed feature source
+      - name: Check out the committed preview source
         uses: actions/checkout@v4
         with:
           ref: nekurama/babai-feature
+          persist-credentials: false
 
-      - name: Verify Pages artifact boundary
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build and verify Pages artifact
         shell: bash
         run: |
           set -euo pipefail
-          printf 'Source ref: %s\nSource revision: %s\n' \
-            'nekurama/babai-feature' "$(git rev-parse HEAD)" >> "$GITHUB_STEP_SUMMARY"
-          expected="$(printf '%s\n' site/app.js site/favicon.svg site/index.html site/styles.css)"
-          actual="$(git ls-files site | sort)"
-          test "$actual" = "$expected"
-          test -f site/index.html
-          test -f site/styles.css
-          test -f site/app.js
-          test -f site/favicon.svg
-          ! grep -RInE '(^|[^:])https?://|fetch\(|XMLHttpRequest|WebSocket|localStorage|sessionStorage|document\.cookie|Authorization:|Bearer [A-Za-z0-9._-]{12,}|gh[pousr]_[A-Za-z0-9]{20,}|-----BEGIN .* PRIVATE KEY-----' site \
-            --exclude='favicon.svg'
-          ! grep -RInE '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}|\+?[0-9][0-9 ()-]{7,}' site \
-            --exclude='favicon.svg'
+          node --check site/app.js
+          node -e "JSON.parse(require('fs').readFileSync('mock-data.json', 'utf8'))"
+          node scripts/build-pages-preview.mjs
+
+      - name: Verify static boundary and artifact allowlist
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(find dist -type f -printf '%P\n' | sort)" = "$(printf '%s\n' favicon.svg index.html mock-data.json script.js styles.css)"
+          ! grep -RInE 'https?://|XMLHttpRequest|WebSocket|sendBeacon|EventSource|localStorage|sessionStorage|document\.cookie|assets/candidates|candidate-only|provenance\.json' dist \
+            --include='*.html' --include='*.css' --include='*.js' --include='*.json'
+          ! find dist -type f -path '*candidates*' | grep .
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload only the site directory
+      - name: Upload only the verified static artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./site
+          path: ./dist
 
       - name: Deploy Pages artifact
         id: deployment

@@ -14,7 +14,6 @@ sources:
   - nekurama.chatgpt.md:L8122-L8123
   - nekurama.chatgpt.md:L27589-L27598
   - nekurama.chatgpt.md:L48218-L48228
-  - docs/company/finance-tax-compliance.md
   - "2026-09-20 ADMIN DECISION PACKET"
   - "2026-09-21 FOUNDER DECISION PACKET"
 ---
@@ -30,13 +29,13 @@ quote, forecast or pilot success threshold. Low/base/high values marked
 with invoices, provider exports, time logs and refund records.
 
 The current commercial decision is a **fixed 90-day paid pilot**. It is not a
-free trial. The pilot amount, collection schedule, minimum-paying terms and
-cancellation/refund treatment remain open until they are recorded in a signed
-agreement. Customer-order money settles directly to the restaurant and is
-separate from BABAI subscription billing. [Research:
+free trial, and the agreed payment or deposit must be received before the
+pilot starts. The pilot amount, collection schedule, deposit/refund treatment,
+minimum-paying terms and cancellation/refund treatment remain open until they
+are recorded in a signed agreement. Customer-order money settles directly to
+the restaurant and is separate from BABAI subscription billing. [Research:
 `nekurama.babai.research.md:L65-L81`, `nekurama.raw.chat.json:L192-L205`;
-decision sources: `2026-09-20 ADMIN DECISION PACKET`, `2026-09-21 FOUNDER
-DECISION PACKET`]
+internal product decision packet: `2026-09-21 FOUNDER DECISION PACKET`]
 
 Pricing must be derived from contribution economics, not assumed tiers. The
 historical ₹999, ₹2,499 and ₹4,999 figures remain research history only; they
@@ -66,9 +65,9 @@ restaurant → BABAI subscription / pilot billing
 ```
 
 This preserves the MVP boundary that BABAI does not custody, pool or settle
-restaurant funds. It does not make a legal or tax conclusion. [Research:
-`nekurama.raw.chat.json:L192-L205`; `docs/company/finance-tax-compliance.md`,
-“Current durable answer”]
+restaurant funds. Accounting and tax treatment remain input-dependent and are
+not concluded by this model. [Research:
+`nekurama.raw.chat.json:L192-L205`]
 
 ## Inputs and confidence
 
@@ -314,6 +313,11 @@ center shown in the next table.
 | Vinay failure/recovery time | ₹60 | ₹750 | ₹2,700 |
 | **Fixed expenditure `F_90`** | **₹5,682** | **₹19,345** | **₹62,848** |
 | Subscription collection + refund reserve at center | ₹36 | ₹1,382 | ₹15,712 |
+
+The component rows are displayed as rounded rupees; `F_90`, break-even and
+target-fee outputs use the unrounded inputs. Small one-rupee differences
+between a displayed component sum and a displayed aggregate are therefore
+rounding artifacts, not additional cost assumptions.
 
 ### Scenario output and recommended fee bands
 

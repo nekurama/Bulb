@@ -18,12 +18,13 @@ The validation plan is explicitly staged:
 | Stage | Current purpose | Status |
 |---|---|---|
 | **Stage 0** | One-business operational pilot proving the narrow pickup-first flow with one WhatsApp number, one branch, manual takeover and no delivery dependency. | **confirmed boundary** |
-| **Stage 1** | Fixed 90-day paid pilot under signed minimum-paying terms; not a free trial. | **confirmed term; agreement details open** |
+| **Stage 1** | Fixed 90-day paid pilot under signed minimum-paying terms, with the agreed payment or deposit received before start; not a free trial. | **confirmed term and start gate; agreement details open** |
 | **Stage 2** | Team-defined readiness evidence gate for materially larger onboarding volumes. | **proposed gate** |
 
 These are sequential learning gates, not competing cohort decisions. The paid
-pilot has a fixed 90-day term and is not free. At the day-90 decision point,
-the pilot closes when the readiness evidence gate supports materially larger
+pilot has a fixed 90-day term, is not free, and does not start until the agreed
+payment or deposit is received. At the day-90 decision point, the pilot closes
+when the readiness evidence gate supports materially larger
 onboarding volumes. If the gate is not met, record the outcome and hold
 expansion; do not silently extend the pilot. Any extension or continuation
 requires a separately approved decision and agreement. Numeric entry/exit,
@@ -58,7 +59,8 @@ fulfillment, manual human takeover and no delivery dependency. [Evidence:
 ## What to measure — partial
 
 - Pilot commitment and access to real WhatsApp/menu data
-- Signed agreement version, minimum-paying term and billing record
+- Signed agreement version, minimum-paying term, payment/deposit receipt and
+  billing record
 - Onboarding time and menu correction rate
 - Activation and time to first usable order
 - Customer question-to-order conversion and order completion
@@ -143,10 +145,11 @@ Before enrollment, the following remain external or professional gates:
 
 ## Agreement and external validation boundary
 
-The product artifacts may specify that the pilot is paid, fixed at 90 days and
-subject to minimum-paying terms. They do not draft legal cancellation/refund
-language. Before enrollment, founders must approve the commercial fields and a
-qualified professional must validate the signed agreement, applicable
+The product artifacts may specify that the pilot is paid, fixed at 90 days,
+requires the agreed payment or deposit before start, and is subject to
+minimum-paying terms. They do not draft legal cancellation/refund language or
+classify the payment/deposit. Before enrollment, founders must approve the
+commercial fields and a qualified professional must validate the signed agreement, applicable
 consumer/commercial rules, GST/invoicing and accounting treatment. The open
 requirements template is maintained in
 [`business-model.md`](business-model.md).

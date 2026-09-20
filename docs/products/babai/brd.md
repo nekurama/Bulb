@@ -19,6 +19,28 @@ This is the product/BRD index for current durable truth. It reconciles the found
 - **unknown** — the dimension is named but no reliable decision is present.
 - **challenge-required** — existing direction needs a deliberate battle or external validation before it becomes durable truth.
 
+## Raw conversation anchor convention
+
+The primary founder source is `nekurama.raw.chat.json`, whose conversation title
+is **Startup Benefits Recheck**. Line ranges in the files are useful export
+locations, but the more durable discussion anchors are the chronological
+message index, the stable mapping node ID and the nearest explicit section
+heading. Key anchors for this BRD are:
+
+| Product intent | Conversation section and message/node anchor |
+|---|---|
+| Identity and buyer | `Battle 1.2 — BABAI in one sentence`, messages 647–652; buyer correction node `bbb21914-7687-4f6e-848a-30e1e7e850f8`, accepted wording node `bbb21eb2-e878-4ef3-a499-f81e1cdc2d83` |
+| Promise and thesis | `Battle 1.3 — BABAI's Core Promise`, messages 654–658; final promise node `d76bcb18-7149-4225-b3d5-cb4d3c03d4f0` |
+| Restaurant wedge / marketplace boundary | messages 552–557; founder direction node `bbb219ab-0e1e-4617-bbd9-b6b930e06e93` |
+| ICP and problem | `Battle 1.4 — Target Customer`, messages 674–678; ICP node `80d3b357-07bb-46da-87a8-1171a7744a5f` |
+| Personas and channel surfaces | `Battle 1.5 — Primary Users & Personas`, messages 682–684; persona model node `44d1fcec-99bf-4882-9f0f-bfa7acda49d7` |
+| Pilot/flow inventory | flow inventory message 335; pilot and threshold evidence is also recorded in `nekurama/Bulb#3` and `nekurama.babai.research.md` |
+| Pricing direction | pricing battle message 445, node `26a13805-2db3-4536-9d60-49cd653654ef` |
+
+Assistant recommendations in the raw conversation are not treated as founder
+decisions unless the current issue sources, later explicit direction or field
+evidence supports them.
+
 ## Confirmed product truth
 
 ### Identity, buyer and wedge — confirmed
@@ -82,6 +104,23 @@ The distinction between **confirmed** and **partial** reconciles stale/thin plac
 | Expansion gates beyond restaurants | **unknown** | Define quantitative evidence after the restaurant/pickup workflow is proven. |
 
 The field research is intentionally not upgraded: it reports strong interest and a real problem, but explicitly does not prove payment, continued use, automated trust, Meta onboarding, refunds, delivery or multilingual workflows. [Evidence: `nekurama.babai.research.md:L104-L116`, `nekurama.babai.research.md:L145-L163`]
+
+## Thin/placeholder file disposition
+
+| File | Status and disposition |
+|---|---|
+| `customer-market.md` | Previously question-heavy; now retains an evidence-backed ICP and market answer, with segmentation, switching and expansion gates still partial/unknown. |
+| `experience-and-channels.md` | Previously thin; now records the confirmed WhatsApp/web principle, onboarding and takeover direction, with detailed UX still partial. |
+| `business-model.md` | Retained as a partial subscription/pricing hypothesis; no unsupported unit economics were promoted. |
+| `validation.md` | Retained as a partial pilot gate and measurement file; numeric success/kill and paid-continuation thresholds remain open. |
+| `product-definition.md` | Retained as the current MVP boundary; production cut, edge cases and post-pilot scope remain partial. |
+| `thesis-and-positioning.md` | Retained as current positioning; differentiation is explicitly a thesis, not a proven moat, and legal clearance remains separate. |
+| `domain-model.md` | Reviewed but not changed in this pass; it is a substantial domain artifact with its own remaining battles. |
+| `architecture.md` and `architecture-lld.md` | Reviewed but not changed; architecture work is outside this product-intent pass and existing working-tree changes were left untouched. |
+| `README.md` | Retained as the product index; this BRD is the evidence/status register it points to. |
+
+Company docs, landing-page material, secrets, deployment state and unrelated
+working-tree files were not part of this pass.
 
 ## Historical context retained
 

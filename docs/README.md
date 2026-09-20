@@ -23,6 +23,10 @@ The authoritative source set for knowledge mining is now:
 7. Existing `docs/` knowledge files — current durable truth, to be challenged against the authoritative source set rather than treated as unquestionable history
 8. `ManojVysyaraju/bulb#1` — historical decision/research source, used when required to reconstruct earlier evolution
 
+For the BABAI product-intent pass, `nekurama.raw.chat.json` is the primary
+founder discussion source. `products/babai/brd.md` records the conversation
+title, message/node anchors, decision status and disposition of thin files.
+
 ### Mining rules
 
 For each knowledge file:
@@ -97,3 +101,6 @@ A historical `RESOLVED` label is not automatically authoritative. Later evidence
 - Issues remain the battle/decision/execution history.
 - Files contain the current durable knowledge.
 - Cross-reference the relevant issue(s) rather than duplicating reasoning.
+- When a conversation claim matters, cite the raw export's conversation title
+  plus a message/node anchor; do not promote an assistant recommendation to a
+  confirmed decision without supporting evidence.

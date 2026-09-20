@@ -1,60 +1,56 @@
 ---
 status: partial
 owner: BABAI
-last-reviewed: 2026-09-18
+last-reviewed: 2026-09-20
 sources:
-  - nekurama/Bulb#1
-  - historical ManojVysyaraju/bulb#1
+  - nekurama.raw.chat.json
+  - nekurama.chatgpt.md
+  - nekurama.babai.research.md
 ---
 
-# Validation
+# Validation / Pilot
 
-## Primary gate
+## Validation gate — confirmed structure
 
-The first **10 restaurants** are the primary product validation gate. This is the initial controlled beta cohort and early selling/onboarding is founder-led.
+The first 10 restaurants are the broad controlled-beta gate. The immediate field plan is to select three businesses from the 19 interviews, run a narrow pilot and seek three active pilot businesses plus at least one paying customer. The broad cohort and the immediate proof target are sequential thresholds, not competing claims. [Evidence: `nekurama.raw.chat.json:L79770-L79820`; `nekurama.babai.research.md:L118-L163`]
 
-The 10-restaurant cohort is not a fixed endpoint for validation. After practical complexities are identified and the product becomes sufficiently stable, additional restaurants should be onboarded continuously in controlled increments based on evidence from real-world usage.
+Expansion beyond the initial cohort should happen in controlled increments based on real-world evidence, not an immediate aggressive acquisition switch. [Evidence: `nekurama.babai.research.md:L176-L186`]
 
-## What to validate
+## Pilot workflow — confirmed
 
-- **Restaurant adoption:** Determine whether restaurant managers and staff can use BABAI properly in day-to-day operations.
-- **Customer ordering adoption:** Determine whether customers are comfortable using BABAI/WhatsApp to place orders and whether they actually complete orders through it.
-- **Real-world operational complexity:** Use the pilot to discover practical restaurant workflow complexities that are difficult to predict before live usage.
-- **Traffic and usage behavior:** Observe what happens as customer and order traffic increases and identify any new operational requirements or bottlenecks.
-- **Ordering experience:** Determine whether WhatsApp ordering is genuinely easier and faster than manual replies from restaurant owners or staff.
-- **Customer experience and interface:** Use real customer behavior and feedback to determine whether the current experience is sufficient or whether interface, workflow, or other product initiatives are required.
-- **Meaningful business problem:** Validate that BABAI addresses a meaningful restaurant problem. Initial research indicates that commission costs on existing platforms are a recurring concern for restaurant businesses.
-- **Business value:** Determine whether BABAI provides enough practical value for restaurants to justify continuing with a subscription after the beta.
-- **Willingness to pay / paid continuation:** Treat post-beta paid continuation as a key validation hypothesis rather than an assumption.
-- **Onboarding and support burden:** Determine whether restaurants can adopt and operate BABAI with minimal training and ongoing support, supported by the familiar WhatsApp interaction model.
-- **Scalability of restaurant onboarding:** Determine whether the effort required per restaurant remains low enough to progressively add restaurants without onboarding or support becoming a bottleneck.
-- Activation and time-to-value
-- WhatsApp readiness
-- Menu/catalog setup
-- Human takeover usefulness
-- Payment workflow
-- Fulfillment/delivery where enabled
-- Repeat use
-- Owner-reported value / ROI
-- Gross contribution after variable costs
-- Whether real-time business data is captured, organized and reflected correctly across the workflow
+```text
+Connect business WhatsApp
+→ upload/review/publish menu or catalog
+→ customer asks questions
+→ customer places pickup order
+→ business accepts or rejects
+→ payment is recorded or confirmed
+→ staff completes the order
+→ customer receives status
+```
 
-## Kill / success signals
+Start with one business, one WhatsApp number, one branch, pickup-first fulfillment, manual human takeover and no delivery dependency. [Evidence: `nekurama.babai.research.md:L118-L143`]
 
-The product should be judged on sustained usage, customer and restaurant adoption, and business value, not merely feature completion.
+## What to measure — partial
 
-For the initial 10-restaurant beta, validation should establish whether BABAI can reliably support real restaurant operations, whether managers and staff can use it with reasonable effort, whether customers are comfortable ordering through it, whether it solves a meaningful problem, and whether restaurants see enough value to continue as paying customers after the beta.
+- Pilot commitment and access to real WhatsApp/menu data
+- Onboarding time and menu correction rate
+- Activation and time to first usable order
+- Customer question-to-order conversion and order completion
+- Staff handling time, takeover frequency and operational errors
+- Missed/duplicate messages and payment confirmation problems
+- Repeat orders and owner-reported value
+- Support effort and actual Meta, AI, infrastructure and payment costs
+- Pilot-to-paid conversion and gross contribution
 
-The pilot is also intended to expose practical workflow, traffic, customer-experience, and data complexities. Findings may lead to changes in the interface, workflows, onboarding, or other product initiatives before broader expansion.
+The sequence is behavior → successful fulfillment → staff adoption → business value → retention → willingness to pay, not feature completion. [Evidence: `nekurama.babai.research.md:L145-L163`; corroboration: `nekurama.chatgpt.md:L39763-L39780`]
 
-Expansion beyond the initial 10 should be based on evidence from the pilot, with restaurant onboarding increasing progressively rather than switching immediately to aggressive market acquisition.
+## Success / kill criteria — unknown
 
-## Questions
+Numeric thresholds, baseline period, instrumentation design, ROI calculation and kill criteria are not yet established. The source discussion explicitly leaves these as the next product battle; no threshold is invented here. [Evidence: `nekurama.raw.chat.json:L66495-L66540`; corroboration: `nekurama.chatgpt.md:L27050-L27263`, `nekurama.chatgpt.md:L51948-L51955`]
 
-- [ ] Pilot instrumentation
-- [ ] Baseline metrics before BABAI
-- [ ] Success thresholds
-- [ ] Kill thresholds
-- [ ] Interview/research script
-- [ ] ROI calculation method
-- [ ] Pilot-to-paid conversion criteria
+## Validation risks still open
+
+Field interest is not proof of willingness to pay, continued use, trust in automation, Meta onboarding reliability, delivery, payment verification, refunds, message reliability or multilingual staff workflows. [Evidence: `nekurama.babai.research.md:L104-L116`]
+
+The next evidence should come from real pilots, not further architecture expansion based only on positive interviews. [Evidence: `nekurama.babai.research.md:L176-L180`]

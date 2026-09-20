@@ -13,6 +13,7 @@ sources:
 ## Current IP policy
 
 - NEKURAMA is the intended IP-holding company; BABAI is the product/brand. [raw turn 784 / ID bbb214cb-4959-4878-b6a9-2358ddbf2b07; raw turn 785 / ID 23a95bbe-abfb-44c6-bcf0-3111efa6a14a]
+- The founder-origin rationale in [`../web/brand-origin-rationale.md`](../web/brand-origin-rationale.md) is internal storytelling/visual-exploration input only. It is not legal meaning, externally verified etymology or trademark clearance.
 - The company owns **only new NEKURAMA/BABAI work** created for the company, excluding employer-owned, employer-confidential, personal background, and other third-party IP.
 - Pre-incorporation work must not be silently described as transferred company IP. After the incorporation certificate, execute founder/company adoption, assignment, licence, and confidentiality documents with lawyer/CS review.
 - The clean-room direction remains to build BABAI using NEKURAMA resources rather than relying on employer or unrelated personal assets. [raw turn 816 / ID 132869d0-2faa-4814-9164-54a67faa4160]

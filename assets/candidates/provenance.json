@@ -1,11 +1,11 @@
 {
   "status": "candidate-only",
-  "purpose": "Internal website/template asset review",
+  "purpose": "Internal website/template review of locally authored candidate SVGs",
   "copiedOn": "2026-09-21",
-  "transformation": "Source JPEGs copied without re-encoding, cropping or generation",
+  "transformation": "Candidate SVGs locally authored for review; no user-supplied JPEG is retained",
   "reviewUpdate": "Added role, aria-labelledby and desc metadata to the four candidate SVGs during internal QA; generated-asset hashes below reflect the reviewed files",
   "approvalBoundary": "No trademark clearance, licensing decision, final brand approval or public-asset approval is implied",
-  "assets": [
+  "removedAssets": [
     {
       "id": "nekurama-cat-orange-wordmark",
       "brand": "NEKURAMA",

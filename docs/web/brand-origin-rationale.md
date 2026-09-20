@@ -4,10 +4,14 @@ owner: NEKURAMA
 last-reviewed: 2026-09-21
 scope: Founder-provided brand-story rationale only; no etymology, trademark, clearance or ownership decision
 sources:
-  - FOUNDER PACKET — WEB/QA BRAND CANDIDATES (2026-09-21)
+  - "FOUNDER PACKET — WEB/QA BRAND CANDIDATES (2026-09-21)"
+  - "nekurama.chatgpt.md:L33104-L33118 (NEKU + RAMA)"
+  - "nekurama.chatgpt.md:L33494-L33615 (Kurama / nine-tails / identity)"
+  - "nekurama.chatgpt.md:L36925-L36945 (BABAI relationship context)"
+  - "nekurama.chatgpt.md:L39843-L39955 (Business Automation By AI brand story)"
+  - "nekurama.raw.chat.json:L63563 (founder Kurama/nine-tails wording)"
   - docs/company/identity-and-strategy.md
   - docs/company/ip-brand-legal.md
-  - nekurama.raw.chat.json
 ---
 
 # NEKURAMA origin rationale
@@ -24,10 +28,9 @@ The requested founder-origin framing is a personal fusion of:
 
 1. **Neku / cat curiosity** — a Japanese-sounding “neku/neko” association and
    the founder’s personal likeness for cats.
-2. **Rama** — a personal reference to Indian mythology and the name’s
-   mythological layer.
-3. **Ne / my** — a personal marker: the name is a founder-origin story rather
-   than a claimed universal meaning.
+2. **Rama** — a personal reference to Lord Rama and Indian mythology.
+3. **Ne / my / mine** — a personal marker: the name is a founder-origin story
+   rather than a claimed universal meaning.
 4. **Kurama / Nine-Tails / Naruto tribute** — the founder’s anime reference to
    Kurama and the Nine-Tails.
 5. **“My nine tails”** — a personal reinterpretation of the Nine-Tails motif as
@@ -67,6 +70,18 @@ all of those layers from the wordmark.
 
 The story supports NEKURAMA as the personal, imaginative parent identity while
 BABAI remains the friendly, capable business-automation product direction.
+The founder-origin reading for BABAI is a familiar Telugu-style address used
+among friends and in everyday food-market interactions, carrying warmth,
+familiarity, approachability and human relationship. This is internal intent,
+not a universal linguistic claim or externally verified etymology.
+
+The founder-approved internal product expansion is:
+
+> **BABAI — Business Automation by AI**
+
+It is wording for internal product and brand exploration only, not a legal
+name, final tagline, public-copy approval or trademark conclusion.
+
 Candidate lockups should therefore be reviewed for:
 
 - clear but non-legalistic parent/product hierarchy;
@@ -74,6 +89,12 @@ Candidate lockups should therefore be reviewed for:
 - enough operational capability to support the restaurant wedge without making
   restaurant imagery a permanent category boundary; and
 - legibility and accessibility independent of the origin story.
+
+Candidate directions should test curious-cat, nine-tail, Indian-cultural
+warmth, friendly food-place interaction and AI/business-operator metaphors.
+Test those directions without stereotyping, caricature, religious
+misrepresentation or anime-derived copying, and do not claim that an
+exploratory metaphor is an approved mark or capability.
 
 ## Open brand/legal decisions
 

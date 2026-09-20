@@ -8,6 +8,11 @@ selection anchor is `1d2ed7d6-7699-4263-a9fc-d79c2acde692`; the raw naming
 research contains the phrase at `nekurama.raw.chat.json:L616-L618` as a
 research occurrence, not an etymology source.
 
+The internal founder-origin record is [`../../web/brand-origin-rationale.md`](../../web/brand-origin-rationale.md).
+It distinguishes the current NEKURAMA/BABAI intent story from historical
+naming exploration and public copy. Web/QA may use it only for internal
+storytelling and visual exploration until public copy is approved.
+
 ## Current product truth
 
 **BABAI is a business operating platform built around WhatsApp.** It helps businesses run customer and operational workflows through AI and automation. The current promise is **“Run your business without leaving WhatsApp,”** with the important qualification that WhatsApp-first does not mean WhatsApp-only: web remains the dense configuration, operations and recovery surface. [Evidence: `nekurama.raw.chat.json:L13591-L13630`, `nekurama.raw.chat.json:L47145-L47170`; corroboration: `nekurama.chatgpt.md:L40716-L40825`]

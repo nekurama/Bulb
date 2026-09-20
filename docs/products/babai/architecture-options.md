@@ -1,7 +1,7 @@
 ---
 status: partial
 owner: BABAI Architecture
-last-reviewed: 2026-09-20
+last-reviewed: 2026-09-21
 sources:
   - "Track 4 — Architecture/Cost Options (2026-09-20)"
   - "Admin Decision Packet (2026-09-20)"
@@ -21,6 +21,12 @@ sources:
 This artifact compares viable starting options for the committed BABAI
 posture. It is not a procurement decision, price quote, cloud commitment or
 production runbook.
+
+The detailed, current Track 4 decision record is
+[`architecture-cost-options.md`](architecture-cost-options.md). This earlier
+matrix remains useful as a compact comparison; cost envelopes, support gates,
+restore evidence and the recommended-now/revisit-when decision live in the
+detailed artifact.
 
 The baseline being evaluated is:
 

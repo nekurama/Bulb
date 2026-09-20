@@ -75,6 +75,44 @@ the true cost model must retain pre-credit cost, founder hours, provider
 pass-throughs and tax. Provider choices, credits, rates, legal approvals and
 production SLOs remain **unresolved/input-required**.
 
+## Recommended now / revisit when
+
+| Area | Recommended now | Revisit when |
+|---|---|---|
+| Runtime | Portable OCI container baseline; test ECS/Fargate as the AWS-credit candidate with one small API/worker capacity model | Measured pilot needs independent scaling, stronger failure isolation or a different cost/operations trade-off |
+| Database | Small managed standard PostgreSQL tier, initially single-AZ if restore and load evidence pass | Measured recovery, availability or connection/load evidence justifies Multi-AZ, Aurora or another managed PostgreSQL option |
+| Queue/outbox | Managed at-least-once queue plus PostgreSQL outbox/inbox, bounded retries and DLQ/quarantine | Measured ordering, fan-out, throughput or workflow needs justify FIFO/event bus/broker/workflow product |
+| Object storage/CDN | Encrypted object storage for backups and controlled artefacts; no CDN for private or low-volume pilot data | Public static assets, measured transfer, cacheability or privacy review justifies CDN configuration |
+| Observability | Redacted structured logs, core metrics, backup/restore signals and actionable alerts; sampled traces only where useful | Pilot incident volume, debugging time or SLO evidence justifies expanded retention/tracing |
+| Support | Founder-only coverage with Stage 0/Stage 1 caps and no 24x7 promise | Support budget, provider escalation and paid-pilot evidence justify a broader operating model |
+| AWS credits | Apply credits to right-sized measured services after account/expiry/eligibility verification | Credit expiry, cash-vs-credit comparison or usage growth changes the economics |
+
+### Proposed cost and capacity stop gates
+
+These are **planning guardrails**, not approved budgets:
+
+- Keep pre-credit monthly infrastructure in the low/base envelopes while
+  learning: **₹0–₹30,000/month**.
+- Require founder review before entering the high infrastructure envelope:
+  **above ₹30,000/month pre-credit** or any commitment to Multi-AZ, Aurora,
+  EKS, Kafka, multi-region or long-retention observability.
+- Require a total-expenditure review when projected monthly pilot cash spend
+  (infrastructure, providers, payment fees, tooling, remediation and any
+  approved founder opportunity-cost view) exceeds **₹50,000/month**. The
+  founder must approve the actual budget before enrollment; this is not a
+  pricing or margin decision.
+- Pause new restaurant enrollment if combined founder support exceeds
+  **24 hours/week**, steady-state support exceeds **2 hours per active
+  restaurant/week**, P1 incidents recur, unresolved P2 work exceeds one
+  business day, or restore/reconciliation work is not current.
+- Do not expand from Stage 0 to Stage 1, or toward the 10-restaurant
+  hypothesis, until cost, support, restore and provider evidence is recorded.
+
+The expenditure trigger includes pre-credit and post-credit views. A credit
+that reduces cash spend but increases pre-credit commitment still requires
+review. Support time must be reported separately from infrastructure so AWS
+savings cannot hide an unsustainable founder operating burden.
+
 ## Cost model conventions
 
 All monetary figures in this document are **internal planning envelopes**, not

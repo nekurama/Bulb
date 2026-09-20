@@ -3,10 +3,42 @@ status: partial
 owner: BABAI
 last-reviewed: 2026-09-18
 sources:
+  - nekurama.raw.chat.json
   - nekurama/Bulb#1
   - historical ManojVysyaraju/bulb#1
 
 # Domain Model
+
+## Evidence-backed additions
+
+The raw founder discussion confirms the following domain constraints and fills several cross-cutting gaps. Raw turn numbers below use the chronological substantive-message index defined in `architecture.md`.
+
+### Tenant-scoped privacy and deletion
+
+- The canonical customer identity may be global, but the relationship, consent, conversation, order and operational data exposed to a business are always scoped through `TenantCustomer`.
+- A deletion request received in a restaurant conversation defaults to that tenant relationship. It must not silently delete the customer's relationship with another tenant.
+- Platform-wide identity deletion, legal/financial retention and audit retention are separate policy decisions; they must not be inferred from a tenant-scoped request.
+- Customer phone/WhatsApp identifiers are resolution keys, not immutable domain identity.
+
+This preserves future cross-business capabilities without exposing one business's customer relationship to another. [Raw T99 `bbb21fb5-8f72-4a7f-b42b-333101d4a900`; Raw T102 `fa5fecac-d416-4c7e-aa77-f3d9d77978bd`; Raw T149 `bbb2129e-e9fa-43bf-adca-b0bc7a956664`]
+
+### Event and transition discipline
+
+- Events have explicit identity, type/schema version and correlation/causation context; related events may also carry session/flow context.
+- Event type is derived from trusted flow context, not accepted as an authority from the client.
+- Events coordinate side effects and integration; aggregate state and validated transitions remain authoritative.
+- At-least-once delivery, deduplication/idempotency, retry/DLQ handling, replay controls and reconciliation are reliability requirements, not domain substitutes.
+- The exact event-code registry, event-history retention and transport remain open battles.
+
+[Raw T125 `bbb21b98-7460-45d5-a616-418ffbf47484`; Raw T137 `bbb21f78-6e9b-4ef8-9a07-60fe2273e772`; Raw T139 `bbb213b8-d58c-403e-b858-bdaa1ac750b8`; Raw T264 `bbb21a7f-4d44-4cc1-8f60-1172bdcc303c`; Raw T268 `bbb21426-5f7e-4c38-82e4-e288b9aae01c`]
+
+### Staff-owned order corrections
+
+Order modification and cancellation are requests for restaurant intervention, not automatic customer/AI mutations. Staff decide the correction; Ordering validates authorization, scope, policy and legal state transitions. A resulting order/invoice/payment correction is auditable and may require customer acknowledgement, pending payment or refund handling. [Raw T209 `bbb21545-4598-4ecd-a1fa-af977810bd5b`; Raw T216 `bbb216f2-0ccd-4871-a670-e02f94100750`; Raw T218 `bbb21ee2-2265-4c8a-ba89-82249c36e181`]
+
+### Channel and branch context
+
+The domain must keep `Channel` distinct from `Tenant`, `Branch`, subscription and provider account. A restaurant-owned WhatsApp number is a channel endpoint; a shared number may require an explicit branch selection, while a branch-specific number can resolve branch context directly. The provider's account identifiers are integration references, not the permanent business identity. [Raw T33 `ded20a72-7392-4785-8983-b6e7d75eae3b`; Raw T34 `bbb21cdc-296c-4806-af69-c1b7f40c4cf8`; Raw T65 `31e96409-07af-4d5c-a00c-fbe2a55c0433`]
 
 ## Core hierarchy
 

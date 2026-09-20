@@ -41,5 +41,5 @@ CS/lawyer review is required for the incorporation transition, director structur
 
 ## Historical / demoted claims
 
-- DAWAT, PINGU, and BOLO were earlier product-name candidates, not current company identity. [raw turn 579 / ID b431e93c-8a37-4cd6-8c55-e2222ddb4693; raw turn 590 / ID 6dffa65a-2045-4073-995b-be03b8e59fee]
+- DAWAT, PINGU, and BOLO were earlier product-name candidates, not current company identity. [raw turn 579 / ID b431e93c-8a37-4cd6-8c55-e2222ddb4693; raw turn 590 / ID 6dffa65a-2045-4073-995a-be03b8e59fee]
 - “Certificate issued,” “NEKURAMA Private Limited is operational,” and “Hyderabad is the registered office” remain unsupported until evidence is linked.

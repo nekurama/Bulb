@@ -3,212 +3,251 @@ status: partial
 owner: BABAI
 last-reviewed: 2026-09-20
 sources:
-  - docs/products/babai/architecture.md
-  - docs/products/babai/domain-model.md
-  - docs/products/babai/product-definition.md
+  - "Admin Decision Packet (2026-09-20)"
+  - "nekurama.raw.chat.json (conversation_id: 6aa2f947-fce0-83e8-99d0-9a52ab2b15cd)"
   - nekurama.chatgpt.md
-  - nekurama.raw.chat.json
+  - docs/products/babai/architecture.md
+  - docs/products/babai/architecture-boundaries.md
+  - docs/products/babai/domain-model.md
 ---
 
-# BABAI Logical Design (LLD posture)
+# BABAI Architecture LLD
 
 ## Purpose and status
 
-This document is a design-phase input, not an implementation specification. It
-defines the logical contracts that should survive a later choice of runtime,
-database, broker, workflow engine or deployment topology. Every item marked
-**challenge-required** needs design review or a POC before becoming a build
-contract.
+This is the low-level companion to `architecture.md` and
+`architecture-boundaries.md`. It records the implementation starting posture
+without collapsing logical domain boundaries into deployment boundaries.
 
-The founder history explicitly separates domain state, a state-transition
-model and durable workflow/orchestration, while keeping the implementation
-choice open. [Raw mappings `d4062caf-6da4-4c9b-8a77-058f65c6d76d` and
-`0011555d-10c7-4dbc-aca8-2bf7c55d324b`;
-nekurama.chatgpt.md:12849-12884,12888-12941,13011-13053]
+The **Admin Decision Packet (2026-09-20)** is the current administrative
+decision source for the starting implementation posture. Founder evidence
+continues to govern product intent and domain constraints. Items marked
+**unresolved** require design, pilot, provider, operational or legal/security
+validation before they become stronger commitments.
 
-## Logical modules
+## Committed starting posture
 
-| Module | Responsibility | Authoritative state |
-| --- | --- | --- |
-| Identity and authorization | identity resolution, memberships, roles, scopes and policy decisions | identity/membership/access records |
-| Tenant and billing | tenant, branch, channel association and subscription context | tenant/branch/channel/billing records |
-| Catalog and availability | menu, immutable revisions, publication and availability | menu and revision records |
-| Conversation and channel | provider-normalized messages, conversation lifecycle, automation and takeover | conversation/message records |
-| Cart and commercial evaluation | cart lifecycle and composable price/promotion/tax contributions | cart plus calculation provenance |
-| Order | commitment, accepted/rejected/operational order states and commercial snapshot | order and transition records |
-| Payment | payment intent/state, provider callbacks and reconciliation | payment and provider-reference records |
-| Fulfillment/delivery | pickup or delivery lifecycle, provider calls and tracking | fulfillment/delivery records |
-| Notification | outbound transactional/support communication and delivery status | notification records |
-| Workflow | process coordination, waits, retries, compensation and recovery | workflow execution metadata, never business truth |
-| Audit/reconciliation | immutable business/security history and mismatch resolution | audit and reconciliation records |
+| Concern | Starting choice | Still unresolved |
+|---|---|---|
+| Deployment | TypeScript/Node modular monolith with clear domain modules | Extraction triggers, packaging and environment model |
+| Persistence | PostgreSQL for authoritative domain state | Schema/module layout, projections, partitioning, migrations and retention |
+| Async work | Managed queue with transactional outbox/inbox | Queue vendor, partitioning, ordering, visibility and cost |
+| Integrations | Provider adapters | Exact SDKs, credential lifecycle, callback verification and failover |
+| WhatsApp | Official Meta Cloud API / Tech Provider target | Meta approval, coexistence, billing, portability and production limits |
+| BSP | Fallback adapter, not a domain dependency | Provider selection, commercial terms and exit testing |
+| AI | Advisory assistance only | Model/provider policy, evaluation, privacy, cost and multilingual behavior |
+| Reliability | Idempotency, retries, DLQ/quarantine, reconciliation and auditability | Exact SLOs, alerting, replay and operational ownership |
+| Payments | Direct UPI/gateway merchant settlement; no wallet/escrow | Provider, webhook verification, refunds and reconciliation |
+| Operations | Portable design; AWS credits may be evaluated without overprovisioning | AWS service selection, portability tests and cost evidence |
+| Continuity | Initial RPO 24h/RTO 8h, daily backups and tested restore | Restore evidence, automation, monitoring and final recovery runbook |
+| Privacy/security | DPDPA-ready minimisation, consent, retention, deletion, access, subprocessors and incident controls | Legal review, notices, processor terms, encryption/key management and operating evidence |
 
-These are logical ownership units. They must not be interpreted as one
-aggregate, one database, or one deployable service each. The current domain
-model explicitly separates capability boundaries from aggregate ownership.
-[docs/products/babai/domain-model.md:138-165,196-202]
+No initial microservices or EKS deployment is selected. Logical capabilities
+remain explicit so extraction can be evidence-driven later. [Admin Decision
+Packet (2026-09-20); `architecture.md`; `architecture-boundaries.md`]
 
-## Aggregate and reference rules
+## Module map
 
-The current aggregate candidates are:
+The initial codebase should use clear modules with explicit dependencies and
+contracts. Modules are not automatically services or separate databases.
 
-```text
-Tenant
-Branch
-Channel
-TenantCustomer
-Menu
-Conversation
-Cart
-Order
-Payment
-Fulfillment
-```
+| Module | Owns | Depends through |
+|---|---|---|
+| `identity` | Identity resolution, credentials and memberships | Identity contracts |
+| `authorization` | Roles, permissions, scope and policy decisions | Identity and resource context |
+| `tenant` | Billing-account relationship, tenant, branch and channel context | Provider references and membership IDs |
+| `catalog` | Catalog/menu revisions, publication and availability | Tenant/branch context |
+| `conversation` | Conversations, messages, automation and human takeover | Channel and customer relationship |
+| `commercial` | Price, promotion and tax evaluations | Catalog and structured calculation capsule |
+| `cart` | Mutable purchase intent | Catalog and commercial contracts |
+| `order` | Committed order state and immutable commercial snapshot | Cart, commercial results and policy |
+| `payment` | Payment intent/state, callbacks and reconciliation | Order reference and provider adapter |
+| `fulfillment` | Pickup/delivery lifecycle and tracking references | Order reference and provider adapter |
+| `billing` | BABAI subscription, invoice and entitlements | Tenant/billing-account context |
+| `notification` | Outbound message intent, templates and delivery status | Provider adapter and consent/policy |
+| `workflow` | Timers, retries, waits, recovery and reconciliation orchestration | Typed commands/events; never authoritative aggregate state |
+| `audit` | Immutable security/business history and sensitive-operation evidence | Domain events and access policy |
 
-`Promotion` is a likely tenant-owned configuration aggregate/capability.
-`Catalog` is an organizational container rather than the primary transactional
-aggregate. Cross-aggregate references use stable IDs; authoritative state is
-not embedded or silently copied across ownership boundaries.
-[docs/products/babai/domain-model.md:196-223]
+The module map follows the aggregate and capability boundaries in
+`domain-model.md`; it does not select one microservice per row. [Raw T153
+`bbb21941-90d7-47d8-b4e0-671c6caecb09`; Raw T154
+`1764f643-59fd-4cf5-be14-6aee32fc973a`; Raw T157
+`bbb21f46-ddff-464d-bb6c-8a47d4188b9a`; `domain-model.md`]
 
-The commercial boundary is:
-
-```text
-Catalog/Menu
-  -> Cart
-  -> Price contribution
-  -> Promotion contribution
-  -> Tax/GST contribution
-  -> Order commitment and immutable snapshot
-```
-
-The calculation context may be recomputed in a bounded, deterministic way
-before commitment. After commitment, the order snapshot is historical truth and
-must not be recalculated from current menu or promotion rules.
-[docs/products/babai/domain-model.md:91-136]
-
-## State transition and workflow separation
-
-Every controlled state change follows this logical sequence:
+## Request and command path
 
 ```text
-Command or verified provider event
-  -> resolve identity, tenant, branch and authorization context
-  -> load the owning aggregate
-  -> validate the requested transition and policy
-  -> persist the new authoritative state
-  -> record transition/audit facts
-  -> record publishable event intent atomically
-  -> commit
-  -> execute asynchronous consumers and external effects
-  -> reconcile provider outcomes and retryable failures
+Provider webhook / Web request
+  -> edge authentication and signature verification
+  -> channel/provider resolution
+  -> identity, tenant, branch and session context
+  -> authorization and policy decision
+  -> typed module command
+  -> aggregate load and invariant validation
+  -> PostgreSQL transaction:
+       authoritative state transition
+       outbox record
+       audit record where required
+  -> bounded command response
+  -> managed queue delivery
+  -> idempotent consumers, notifications, workflow and reconciliation
 ```
 
-The state-transition model answers whether a change is valid. Workflow
-orchestration answers how a long-running process reaches its next step,
-including waits, timers, retries, human intervention, recovery and
-compensation. Neither layer may make the workflow engine the source of order,
-payment or fulfillment truth. [nekurama.chatgpt.md:12860-12881,12888-12941]
+The client or AI must not choose the authoritative event type, tenant scope,
+payment outcome or order transition. Commands are typed, authenticated,
+authorized and validated by the owning module. [Raw T139
+`bbb213b8-d58c-403e-b858-bdaa1ac750b8`; Raw T165
+`bbb21849-7c34-4782-a440-5be8c75acb62`; Raw T410
+`bbb21914-7687-4f6e-848a-30e1e7e850f8`; `architecture.md`]
 
-## Event and command contract (proposed)
+## PostgreSQL and transaction rules
 
-The following envelope is a **design proposal; challenge-required**:
+- PostgreSQL is the authoritative store for module-owned domain state.
+- A transaction may update only the authoritative state owned by its module
+  and the outbox/audit records required for that transition.
+- Cross-module reads use explicit contracts or projections; modules do not
+  reach into each other's tables as an ownership shortcut.
+- Orders store immutable commercial inputs, evaluated benefits, totals and
+  menu provenance at commitment.
+- Payment and fulfillment state are separate from order state.
+- Monetary precision, rounding, tax provenance, promotion stacking and
+  high-contention usage limits require explicit domain rules before production.
+- Read models and analytics may be eventually consistent and must not replace
+  authoritative state.
+
+The exact PostgreSQL schema layout, migration strategy, projection mechanism,
+partitioning, indexing, retention and archival remain unresolved. [Raw T206
+`128e9fdc-9032-4a5d-b627-4f0118fc3ba3`; `domain-model.md`]
+
+## Outbox, inbox and managed queue
+
+The starting reliability pattern is:
+
+1. Commit domain state and an outbox record atomically.
+2. Publish outbox records to the managed queue.
+3. Consumers record inbox/idempotency state before applying effects.
+4. Retry transient failures with bounded backoff.
+5. Quarantine non-retryable or human-action failures in a DLQ path.
+6. Reconcile provider state and replay only under explicit authorization and
+   schema/version rules.
+7. Record the outcome in audit/observability facilities.
+
+At-least-once delivery is expected. Exactly-once processing is not assumed.
+The queue vendor, ordering/partition semantics, deduplication storage,
+visibility timeout, replay tooling and DLQ operations remain unresolved. [Raw
+T125 `bbb21b98-7460-45d5-a616-418ffbf47484`; Raw T126
+`e472fe3d-22d5-4595-aafd-986683b13a3c`; Raw T264
+`bbb21a7f-4d44-4cc1-8f60-1172bdcc303c`; `architecture.md`]
+
+## State engine and workflow boundary
+
+Authoritative aggregate state and validated transitions stay in domain modules.
+The workflow layer coordinates long-running work such as timers, retries,
+human waits, recovery and reconciliation around those transitions.
+
+The following remain unresolved:
+
+- generic versus flow-specific state-machine schemas;
+- custom versus open-source versus managed workflow execution;
+- Temporal or any other workflow product;
+- timer, wait, retry, compensation, recovery and replay semantics;
+- workflow/event-history persistence and retention;
+- ownership split between domain transitions, workflow orchestration and
+  provider retry logic.
+
+The Admin Decision Packet commits the need for the capability, not a workflow
+product. This preserves the research-stage founder instruction to define and
+compare the State Engine contract before selecting an implementation. [Raw T115
+`bbb210cc-a1ef-4ea9-b1a7-7c52f0011721`; Raw T117
+`bbb216ed-0269-4c6c-8e28-f17031c1fa93`; Raw T119
+`bbb211c0-c142-4837-aca7-b67a21454ec8`; Raw T122
+`0011555d-10c7-4dbc-aca8-2bf7c55d324b`; Raw T136
+`09c90c51-c4ae-40a6-9bd8-aea16eaf3339`; Admin Decision Packet (2026-09-20)]
+
+## Provider adapters
+
+### Meta / WhatsApp
 
 ```text
-eventId
-eventType
-schemaVersion
-occurredAt
-source
-aggregateType
-aggregateId
-tenantId
-branchId (when applicable)
-correlationId
-causationId
-actor / actorType
-idempotencyKey (when applicable)
-dataClassification
-payload
+Channel module
+  -> WhatsApp provider port
+  -> Meta Cloud API / Tech Provider adapter
+  -> BSP adapter fallback
 ```
 
-Required design properties:
+The domain uses a provider-neutral `Channel`; WABA, phone and provider IDs are
+integration references. Existing-number coexistence, approval, webhook
+behavior, billing, disconnect and portability require validation. [Raw T37
+`eadec8d3-a035-43e3-814a-6d3312001bbf`; Raw T47
+`1df966d4-0c16-4a9a-b8cb-4375e5c2fda7`; Raw T51
+`e305d46c-dbf1-4875-b1b1-58a381a9f86a`; Raw T65
+`31e96409-07af-4d5c-a00c-fbe2a55c0433`]
 
-- event type and schema are explicit and versioned;
-- event identity is distinct from aggregate identity;
-- correlation and causation support traceable workflows;
-- provider event IDs are retained for deduplication where available;
-- sensitive payload fields have an explicit classification and retention rule;
-- commands express requested change, while events describe committed facts;
-- event consumers are safe under at-least-once delivery;
-- replay and reconciliation do not silently repeat irreversible effects.
-
-This preserves the research-level decision for explicit event contracts,
-observable command lifecycles and categorized event origins/types without
-choosing Kafka, SQS, SNS, RabbitMQ, Redis or another broker.
-[Raw mappings `bbb21b98-7460-45d5-a616-418ffbf47484`,
-`917b3372-5f2b-4ef9-ac8c-1e3bdc7408a7`,
-`e339c152-9a88-475f-babb-de1cac6dfdce`;
-nekurama.chatgpt.md:13143-13150,13726-13734]
-
-## Reliable event publication
-
-The current reliability pattern is:
+### Payments
 
 ```text
-Authoritative state change
-  + publishable event intent
-  -> same logical transaction
-  -> committed outbox/event record
-  -> publisher
-  -> broker/queue (unselected)
-  -> idempotent consumer
-  -> retry/DLQ/replay/reconciliation
+Payment module
+  -> payment provider port
+  -> UPI/gateway merchant settlement
 ```
 
-This is a reliability requirement, not a commitment to an event-sourced
-system. At-least-once delivery is expected; exactly-once processing is not an
-assumption. The inbox/deduplication, retry and reconciliation policies must be
-specified for each external effect. [nekurama.chatgpt.md:13108-13134]
+BABAI does not create a wallet, escrow or customer-funds custody layer.
+Payment completion remains separate from order acceptance. Provider selection,
+webhook authenticity, refund behavior, settlement reconciliation and legal
+responsibility remain validation work. [Raw T68
+`bbb21613-1461-4278-a34f-d4c055c03c84`; Raw T72
+`bbb21c29-06e2-44d7-bd05-c2f9c28c3f4f`; Raw T216
+`bbb216f2-0ccd-4871-a670-e02f94100750`; `domain-model.md`]
 
-## Representative order flow
+## AI and controlled state
 
-The first pilot should be implementable with one business, one branch, one
-WhatsApp channel and pickup-first fulfillment:
+AI may classify, extract, summarize, recommend and draft. It cannot directly
+commit orders, payments, permissions, consent, refunds, fulfillment or other
+controlled business state. An AI proposal becomes a typed command and passes
+authorization, policy, deterministic validation and any required human
+decision. [Admin Decision Packet (2026-09-20); Raw T410
+`bbb21914-7687-4f6e-848a-30e1e7e850f8`; Raw T414
+`bbb21eb2-e878-4ef3-a499-f81e1cdc2d83`; Raw T434
+`bbb21a5b-1600-43f4-b2db-6456579c3a2f`]
 
-```text
-Meta webhook
-  -> verify provider event and deduplicate
-  -> resolve channel -> branch -> tenant
-  -> append inbound message / update conversation
-  -> acknowledge provider promptly
-  -> interpret intent (AI may assist)
-  -> propose or update cart
-  -> calculate and show reviewable commercial result
-  -> customer confirms
-  -> commit order snapshot and OrderCreated fact
-  -> notify staff
-  -> staff accepts/rejects through authorized transition
-  -> record payment state independently
-  -> progress pickup fulfillment
-  -> send transactional status
-```
+Model/provider choice, prompt/data boundaries, evaluation, guardrails,
+multilingual behavior, cost controls and escalation policy remain unresolved.
 
-Human takeover changes who handles the conversation; it does not cancel or
-silently rewrite order, payment or fulfillment state. AI suggestions require
-the same validation and authorization as any other command before controlled
-state changes. [docs/products/babai/product-definition.md:48-78,124-144]
+## Privacy, security and continuity
 
-## Design decisions still required
+The implementation should be DPDPA-ready through minimisation,
+purpose/channel-scoped consent, retention and deletion workflows, scoped
+access, auditability, subprocessors controls and incident handling. This is a
+readiness target, not a legal certification. Notices, retention periods,
+processor terms, data location, encryption/key management and incident
+procedures require legal/security validation.
 
-| Decision | Status | Required evidence |
-| --- | --- | --- |
-| Exact service/deployment cut | **challenge-required** | Compare modular-monolith and coarse-grained-service options against pilot operations, security isolation, cost and team capacity. |
-| State transition contract | **challenge-required** | Define guards, actor/scopes, transition history, concurrency and rejection semantics for each aggregate. |
-| Workflow implementation | **unknown** | Compare Temporal, other durable engines, lightweight custom orchestration and combinations against the stated guarantees. [Raw mappings `d4062caf-6da4-4c9b-8a77-058f65c6d76d`, `0011555d-10c7-4dbc-aca8-2bf7c55d324b`; nekurama.chatgpt.md:12989-12995,13043-13049] |
-| Persistence model | **unknown** | Define transaction boundaries, outbox/inbox storage, consistency, retention, backup and recovery targets. |
-| Event infrastructure | **unknown** | Select broker/queue only after event volume, ordering, replay, operational burden and cost are measured. |
-| Event schema governance | **challenge-required** | Define compatibility, ownership, validation, registry and migration policy. |
-| Meta coexistence | **challenge-required** | Validate exact onboarding, token/ID lifecycle, app coexistence, webhook guarantees and disconnection behavior. [nekurama.chatgpt.md:6984-7003] |
-| Payment and refund semantics | **unknown** | Validate provider callbacks, confirmation authority, partial failure and reconciliation in a POC. |
-| Delivery boundary | **unknown** | Define when Delivery is a capability inside Fulfillment versus a separate provider-facing boundary. |
-| SLO/DR/cost envelope | **unknown** | Measure the controlled beta before setting production targets. [nekurama.babai.research.md:104-116,145-160] |
+Initial continuity baseline:
+
+- RPO: 24 hours.
+- RTO: 8 hours.
+- Daily backups.
+- Tested restore.
+
+PostgreSQL backup/restore automation, monitoring, regional placement, evidence
+of restore testing and the final recovery runbook remain unresolved. AWS
+credits may be evaluated, but the implementation must remain portable and
+must not be overprovisioned to consume credits. [Admin Decision Packet
+(2026-09-20); `architecture.md`; `architecture-boundaries.md`;
+`docs/company/security-privacy-controls.md`]
+
+## Validation gates before stronger commitment
+
+- Complete a real Meta Tech Provider onboarding and fallback-provider exit
+  test.
+- Exercise payment webhook, manual confirmation, refund and reconciliation
+  paths with a pilot merchant.
+- Prove outbox/inbox, retry, DLQ, reconciliation and replay behavior.
+- Define and test state/workflow contracts before selecting a workflow product.
+- Run daily backup restore tests and record RPO/RTO evidence.
+- Review DPDPA readiness with legal/security owners and document subprocessors,
+  access, deletion and incident controls.
+- Compare AWS-credit economics with a portable baseline before selecting
+  AWS-specific services.
+- Establish production SLOs and support/observability ownership after pilot
+  load and failure evidence.

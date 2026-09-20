@@ -8,6 +8,7 @@ sources:
   - nekurama.babai.research.md
   - nekurama.raw.chat.json (ordered turns 70, 276, 278; mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `04cc446b-3a6d-4c19-adc7-4d94ab17d21b`)
   - Admin decision packet (2026-09-20; current task input)
+  - economics-model.md
 ---
 
 # Business Model
@@ -49,6 +50,11 @@ Restaurant → BABAI subscription
 BABAI should not hold or settle customer funds in the initial product. Customer order funds settle directly to the restaurant/business; BABAI subscription or pilot billing is separate. Payment, delivery and messaging provider charges should be recorded in the cost model and their pass-through/billing treatment validated before commercial launch.
 
 The model should establish whether onboarding and ongoing support effort per restaurant is low enough to support gradual expansion toward up to 10 restaurants without support becoming a business bottleneck.
+
+The detailed Track 2 formulas, low/base/high ranges, per-restaurant
+break-even view and unresolved inputs are maintained in
+[`economics-model.md`](economics-model.md). That artifact is a planning model,
+not an approved price or margin decision.
 
 ## Evidence and open economics
 

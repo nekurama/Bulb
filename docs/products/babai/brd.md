@@ -147,6 +147,7 @@ The field research is intentionally not upgraded: it reports strong interest and
 | `customer-market.md` | Previously question-heavy; now retains an evidence-backed ICP and market answer, with segmentation, switching and expansion gates still partial/unknown. |
 | `experience-and-channels.md` | Previously thin; now records the confirmed WhatsApp/web principle, onboarding and takeover direction, with detailed UX still partial. |
 | `business-model.md` | Retained as a partial commercial model; public pricing is withheld while cost, contribution, GST and pilot-term evidence is collected. |
+| `economics-model.md` | New Track 2 planning artifact; provides low/base/high cost ranges, formulas and break-even sensitivity without selecting a price. |
 | `validation.md` | Retained as a partial pilot gate and measurement file; numeric success/kill and paid-continuation thresholds remain open. |
 | `product-definition.md` | Retained as the current MVP boundary; production cut, edge cases and post-pilot scope remain partial. |
 | `thesis-and-positioning.md` | Retained as current positioning; differentiation is explicitly a thesis, not a proven moat, and legal clearance remains separate. |
@@ -168,4 +169,5 @@ Early discussions used Dawat and proposed Tadka/Thali/Dawat tiers, low pilot pri
 - `customer-market.md` — ICP and market evidence
 - `experience-and-channels.md` — WhatsApp/web and onboarding principles
 - `business-model.md` — subscription and unit-economics hypotheses
+- `economics-model.md` — Track 2 cost model, formulas, ranges and unresolved economics decisions
 - `validation.md` — pilot evidence and measurement

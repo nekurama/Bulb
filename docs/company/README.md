@@ -1,63 +1,56 @@
+---
+status: partial
+owner: NEKURAMA
+last-reviewed: 2026-09-20
+sources:
+  - admin decision packet (2026-09-20)
+  - nekurama.raw.chat.json
+  - nekurama.chatgpt.md
+  - docs/company/e-setup-checklist.md
+---
+
 # NEKURAMA Company Knowledge
 
-Current durable company-level truth. Product-specific detail belongs under `docs/products/`.
+This directory records company-level truth, decisions, open questions, and execution controls. BABAI product architecture and implementation detail belongs under `docs/products/`.
 
 ## Status vocabulary
 
-- **confirmed** — current direction or principle is explicit in the source record
-- **partial** — direction exists, but execution details or open questions remain
-- **unknown** — the dimension is identified but no reliable current answer is recorded
-- **professional-validation-required** — legal, tax, accounting, employment or regulatory confirmation is required before acting
-- **stale** — a file conflicts with a later source decision and must not be used as current truth
+- **Confirmed** — explicit in the current admin packet or supported by the founder discussion; it is not necessarily evidence that a filing or control is complete.
+- **Proposed / intended** — the direction to execute, subject to founder approval, professional advice, or evidence.
+- **Unknown / open** — the source does not settle the matter.
+- **Professional validation required** — CS, lawyer, CA, accountant, employer-policy, or other specialist review is required before acting.
+- **Historical / superseded** — retained only to prevent stale material from being mistaken for current truth.
 
-## Core dimensions
+Raw citations use the chronological index of non-empty messages in `nekurama.raw.chat.json` as the stable turn number, plus the message UUID.
 
-- Identity and strategy
-- Corporate structure and governance
-- Founders and ownership
-- IP, brand and legal
-- Finance, tax and compliance
-- Privacy, security and company controls
-- Operations, vendors and capital
+## Current company spine
 
-## E-setup workstream
-
-`e-setup-checklist.md` is the bounded cross-dimension checklist for incorporation, founder/governance, IP/brand/legal, finance/tax/compliance and security/privacy setup. It records actionable work without turning unresolved questions into company decisions.
-
-## Current handoff status
-
-| Dimension | Status | Immediate evidence or action |
+| Area | Current position | Status |
 | --- | --- | --- |
-| Identity and strategy | **partial** | Private Limited and one-company/multiple-products are the current direction; obtain professional incorporation and employment/IP compatibility advice. |
-| Founders, ownership and governance | **partial** | Manoj 55% / Vinay 45% is the latest intended split; execute agreements, governance rules and funding instruments before issuance. |
-| IP, brand and legal | **partial** | NEKURAMA is the intended IP holder and BABAI is a product/brand; complete provenance, clearance, assignments and contract review. |
-| Finance, tax and compliance | **partial** | Separate capital, expenses, SaaS revenue and settlement flows; validate registrations, accounting treatment and scheme eligibility with a CA/CS. |
-| Security, privacy and controls | **partial** | Company ownership, least privilege, tenant isolation and auditability are principles; implementation status is unknown until evidence is collected. |
+| Company identity | NEKURAMA is the umbrella/company identity; BABAI is a product/brand. | Confirmed direction |
+| Entity | Private Limited application has already been applied. The incorporation certificate is the transition point for company execution. | Confirmed packet state |
+| Founders | Manoj Vysyaraju and Vinay. | Confirmed discussion |
+| Founder ownership | Manoj 55% / Vinay 45%. | Confirmed decision |
+| Founder vesting | Four-year vesting with a one-year cliff. | Confirmed packet decision; documents pending |
+| IP | Company owns only new NEKURAMA/BABAI work, excluding employer and third-party IP. | Confirmed policy; adoption docs pending |
+| Finance | GST/tax setup is handled with the CA; books and controlled accounting start from incorporation. | Confirmed packet state |
+| Incentives | DPIIT, T-Hub, and incubator applications remain eligibility-gated. | Open/professional validation |
+| Account control | Founder-owned domain, GitHub, AWS, Meta, billing, and recovery accounts are to migrate to company control with MFA. | Required execution |
 
-No row above means that incorporation, ownership issuance, trademark registration, tax eligibility or control implementation has already occurred.
+## Transition rule
 
-## Sources
+Before the incorporation certificate: do not treat the company as incorporated, execute major contracts, hire, or perform formal IP transfer. Prepare the documents and evidence. After the certificate: execute the founder/shareholder agreement immediately, before material contracts, and complete company adoption/assignment documents with CS/lawyer review.
 
-Primary decision/history: `nekurama/Bulb#2` and current company specification `nekurama/Bulb#5`; supporting product/company decisions may reference `nekurama/Bulb#1` and historical `ManojVysyaraju/bulb#1`.
+## Workstreams
 
-Conversation evidence is anchored in `nekurama.raw.chat.json` by message UUID, including:
+The cross-dimension sequence and owners are maintained in [`e-setup-checklist.md`](e-setup-checklist.md). The five dimension files retain durable truth and detailed checklists:
 
-- `bbb2179b-ab78-4f20-98ef-1bf49a0702f7` — Pvt Ltd vs LLP costs, roles and founder participation questions
-- `bbb21d97-c664-432c-9a10-f74d42232df7` — spouse funding as loan versus equity
-- `bbb214cb-4959-4878-b6a9-2358ddbf2b07` — BABAI/product boundary versus NEKURAMA technology/IP
-- `bbb21ece-7bb6-4a1f-9798-9ebd4ed6bcbd` — legal brand clearance and domain direction
-- `bbb217ee-01a7-4f44-a207-116c50531b56` — acquiring the company domain and subdomain structure
-- `bbb21621-2657-4cf5-a886-3d3079042f08` — startup rebates and GST questions
-- `bbb21e3d-91a3-48de-90a7-986c6beb716b` — DPIIT and government-procurement/ONDC question
+- `identity-and-strategy.md`
+- `founders-ownership-governance.md`
+- `ip-brand-legal.md`
+- `finance-tax-compliance.md`
+- `security-privacy-controls.md`
 
-Raw messages are founder-history evidence, not executed agreements or professional advice. A raw message can record a proposal, question or historical option; the later issue decision and implementation evidence determine whether it is current.
+## Evidence boundary
 
-## Thin-file inventory
-
-- `README.md` is intentionally a thin index, not a company decision record.
-- The five dimension files are compact **partial** durable-truth files. Their question lists are deliberate open work, not empty placeholders.
-- No additional tracked company-relevant placeholder file was found. The cross-dimension checklist is separate so the dimension files remain focused.
-
-## Handoff rule
-
-Before acting on a company item, retain the relevant evidence artifact: certificate or filing receipt, signed agreement, cap-table/register entry, clearance report, invoice/ledger entry, access-control proof, or tested recovery/incident record. If the artifact does not exist, keep the item **partial**, **unknown** or **professional-validation-required** rather than upgrading its status.
+The founder discussion records decisions and research directions, not certificates, executed agreements, trademark clearance, tax rulings, account transfers, or enabled controls. Link evidence before changing a pending item to complete. No secrets, passwords, tokens, recovery codes, or unverified credentials belong in this repository.

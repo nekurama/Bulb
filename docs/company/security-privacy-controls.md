@@ -1,61 +1,41 @@
 ---
-status: partial — control principles confirmed; baseline implementation and privacy decisions pending
+status: partial
 owner: NEKURAMA
 last-reviewed: 2026-09-20
 sources:
-  - nekurama/Bulb#2
-  - nekurama/Bulb#1
-  - nekurama/Bulb#5
-  - nekurama.raw.chat.json#bbb213b8-d58c-403e-b858-bdaa1ac750b8
-  - nekurama.raw.chat.json#bbb2129e-e9fa-43bf-adca-b0bc7a956664
-  - nekurama.raw.chat.json#bbb21426-5f7e-4c38-82e4-e288b9aae01c
+  - admin decision packet (2026-09-20)
+  - nekurama.raw.chat.json
+  - docs/company/README.md
 ---
 
 # Security, Privacy & Company Controls
 
-## Current answer
+## Company account-control decision
 
-NEKURAMA should use company-owned domains, repositories, cloud accounts, provider accounts and secrets. Access follows least privilege and zero-trust principles, with explicit offboarding.
+Founder-owned domain, GitHub, AWS, Meta, billing, and recovery accounts are to migrate to company control after incorporation, with MFA and company-controlled recovery. The existing GitHub direction keeps BABAI inside the NEKURAMA organization. [raw turn 809 / ID 98947e13-1b0d-4d3f-b9d1-869f51bddd0f; raw turn 841 / ID e8a40bae-4fa2-427b-9e9f-c2d349b05cc2]
 
-BABAI must support tenant isolation, scoped authorization, auditability, retention/deletion controls, privacy obligations, backup/recovery and cross-border data assessment.
+Required posture:
 
-## Questions
+- no passwords, tokens, recovery codes, secrets, or unverified credentials in this repository, issues, screenshots, or normal data;
+- MFA/2FA, named accounts, least privilege, separate admin access, recovery controls, access review, and offboarding;
+- auditable account ownership, billing ownership, provider access, and banking/account-change approvals; and
+- scoped, auditable support/security access without unrestricted cross-tenant access. [raw turn 711 / ID 44d1fcec-99bf-4882-9f0f-bfa7acda49d7]
 
-- [ ] Company security baseline
-- [ ] Identity/SSO/MFA policy
-- [ ] Secrets management
-- [ ] Device/access/offboarding controls
-- [ ] Incident response
-- [ ] Backup and disaster recovery
-- [ ] Privacy policy and DPA baseline
-- [ ] Data retention/deletion schedule
-- [ ] Cross-border data transfer assessment
-- [ ] Vendor security review process
+## Security and privacy checklist
 
-Evidence: later company decisions preserve the company-owned operating model and require company-owned infrastructure, least privilege, explicit offboarding, tenant isolation, auditability, retention/deletion, backup/recovery and cross-border assessment. This is a required control direction, not evidence that the controls are implemented.
+- [ ] **Technical owner:** inventory domain, GitHub, AWS, Meta, billing, email, CI/CD, analytics, support, and recovery accounts.
+- [ ] **Founders:** migrate ownership/admin and recovery channels after incorporation; preserve evidence and do not expose credentials.
+- [ ] **Technical owner:** enable MFA, RBAC, audit logs, secret management, branch protection, environment separation, and break-glass procedures.
+- [ ] **Founders + finance owner:** apply hybrid approvals to banking changes, billing ownership, material payments, contracts, hiring, and IP transfers.
+- [ ] **Technical owner:** document joiner/mover/leaver, device revocation, token rotation, backup-code, and vendor-offboarding procedures.
+- [ ] **Security owner:** define incident severity, reporting, evidence preservation, notification decisions, recovery, and review.
+- [ ] **Security/privacy owner:** maintain data map, retention/deletion, data-subject requests, subprocessors, cross-border review, and breach obligations with counsel.
+- [ ] **Manager:** keep BABAI tenant isolation, authorization, privacy UX, backups, deletion, and product security in product docs; this file records company gates.
 
-## Raw founder-message citations
+## Professional validation
 
-- `nekurama.raw.chat.json#bbb213b8-d58c-403e-b858-bdaa1ac750b8`: “Our services should be oauthed imo, kind of decentralized auth with zero trust.” The same message requires hard flow/identity boundaries; this supports the control principle, not a deployed design.
-- `nekurama.raw.chat.json#bbb2129e-e9fa-43bf-adca-b0bc7a956664`: proposes public/scoped/sensitive/restrictive data classes, restaurant tenancy, sensitive logging and Vault-style secret handling.
-- `nekurama.raw.chat.json#bbb21426-5f7e-4c38-82e4-e288b9aae01c`: says deletion depends on agreed terms and applicable law; this is why retention/deletion remains professional-validation-required rather than a fixed policy.
+CS/lawyer/privacy counsel review is required for director and approval authority, privacy/DPA terms, data roles, retention, cross-border transfers, incident obligations, and regulated data handling. A listed control is not evidence that it is implemented.
 
-## E-setup checklist
+## Historical / demoted claims
 
-- [ ] **Ownership:** move domains/DNS, repositories, cloud projects, provider accounts, billing, documentation, backups and secrets to company ownership; retain transfer and recovery evidence.
-- [ ] **Identity:** enforce MFA, recovery methods, SSO where practical, least privilege, privileged-access review and a dated access recertification cadence.
-- [ ] **Secrets:** use managed secrets storage, environment separation and rotation; prohibit secrets in source, tickets, chat and personal accounts.
-- [ ] **Lifecycle:** define device security, joiner/mover/leaver, immediate revocation, asset-return and emergency-access procedures.
-- [ ] **Application controls:** document tenant/branch isolation, scoped authorization, audit-log access/retention, production-access review and sensitive-data redaction.
-- [ ] **Data map:** inventory and classify customer, employee, operational, payment-related and provider data with owners, purposes, locations and retention candidates.
-- [ ] **Privacy/legal review:** define privacy notice, DPA/subprocessors, retention/deletion/export, user/restaurant requests and cross-border transfer decisions with qualified advice.
-- [ ] **Resilience:** establish incident response, breach assessment, notification/escalation, evidence preservation, backup/restore testing and disaster-recovery objectives.
-- [ ] **Vendors:** review critical messaging, payment, AI, hosting, analytics and support vendors for security, privacy, availability, concentration, pricing and offboarding risk.
-
-## Status boundaries
-
-- **Confirmed direction:** company-owned infrastructure, least privilege/zero trust, explicit offboarding, and BABAI data-control requirements.
-- **professional-validation-required:** controller/processor allocation, privacy/DPA terms, subprocessors, retention/deletion obligations, and cross-border transfer assessment.
-- **unknown:** whether any company-owned MFA, secrets, offboarding, backup, incident, or vendor-review controls are currently implemented.
-- **partial:** the control principles and product boundary are documented, but implementation evidence, policy owners and review cadence are not recorded here.
-- **stale:** none identified; provider capabilities, applicable law and security standards must be rechecked before implementation.
+- “The company owns all accounts,” “MFA is enabled,” and “BABAI controls are implemented” remain unsupported until migration and control evidence are linked.

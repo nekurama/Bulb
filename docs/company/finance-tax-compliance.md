@@ -1,64 +1,39 @@
 ---
-status: partial — accounting principles confirmed; registrations, professional validation, and operating controls pending
+status: partial
 owner: NEKURAMA
 last-reviewed: 2026-09-20
 sources:
-  - nekurama/Bulb#2
-  - nekurama/Bulb#5
-  - nekurama.raw.chat.json#bbb21621-2657-4cf5-a886-3d3079042f08
-  - nekurama.raw.chat.json#bbb21e3d-91a3-48de-90a7-986c6beb716b
-  - nekurama.raw.chat.json#bbb2132e-759f-45c5-a475-0e0dad831706
-  - nekurama.raw.chat.json#bbb211d7-bd71-4cf5-ba30-dcb8a9830d33
+  - admin decision packet (2026-09-20)
+  - nekurama.raw.chat.json
+  - docs/company/README.md
 ---
 
 # Finance, Tax & Compliance
 
-## Current answer
+## Current position
 
-Company finance must distinguish founder capital, expenses/reimbursements, company operating revenue, SaaS revenue, customer payment flows, provider charges, taxes and FX.
+- GST and tax setup is already being handled with the CA. This is not a claim that every registration, filing, or eligibility decision is complete.
+- Books and bookkeeping begin from incorporation. Use controlled accounting software, company-controlled access, and monthly reconciliation.
+- Maintain separate records for share capital, founder loans, expenses, reimbursements, salary, SaaS revenue, provider charges, taxes, FX, and merchant settlement. [raw turn 774 / ID bbb2132e-759f-45c5-a475-0e0dad831706]
+- BABAI subscription/platform revenue must remain distinct from money collected for merchants; transaction treatment requires CA/legal validation before payment launch.
+- DPIIT, T-Hub, and incubator applications remain eligibility-gated. Do not present an application, benefit, or approval as secured without evidence.
 
-BABAI customer payments to restaurants are not company revenue/custody by default. BABAI subscription billing is separate from restaurant order settlement.
+## Finance checklist
 
-Current company opportunity/compliance direction includes DPIIT recognition and SIPP/IPR support. DeepTech status and 80-IAC eligibility need professional validation. GeM is optional. ONDC is deliberately not an immediate company workstream, while architecture remains aware of it. Central and state schemes belong in an opportunity register and must not be treated as guaranteed benefits.
+- [ ] **CA:** confirm the GST/tax setup, filing calendar, applicable registrations, and evidence of completed work.
+- [ ] **Finance owner + CA:** establish books from the incorporation date and select controlled accounting software with role/access controls.
+- [ ] **Bookkeeper:** reconcile bank, payment, provider, and accounting records monthly; retain invoices, receipts, approvals, and tax evidence.
+- [ ] **Founders + CA:** separate equity, founder loans, reimbursements, expenses, salary, and any future investment before funds move.
+- [ ] **Finance/legal:** validate subscription revenue, merchant settlement, provider pass-through, refunds, and payment custody treatment.
+- [ ] **CA/CS:** assess DPIIT, T-Hub, incubator, DeepTech, 80-IAC, and state-program eligibility only against current rules and actual company evidence.
+- [ ] **Finance owner:** maintain an incentive register with eligibility, owner, deadline, evidence, benefit, renewal, and clawback conditions.
+- [ ] **Evidence owner:** link CA confirmation, books setup, software decision, reconciliation record, and applications/approvals.
 
-## Questions
+## Professional validation
 
-- [ ] Incorporation and accounting setup
-- [ ] Corporate banking
-- [ ] GST/tax registration and filing model
-- [ ] Founder compensation and reimbursement policy
-- [ ] Revenue recognition/accounting treatment
-- [ ] Customer payment/settlement accounting
-- [ ] DPIIT execution status
-- [ ] DeepTech eligibility validation
-- [ ] 80-IAC eligibility validation
-- [ ] Scheme/opportunity register
-- [ ] GeM decision when commercially relevant
+CA/accountant review is required for GST, tax, books, filings, revenue recognition, payment flows, audit, and incentive eligibility. CS/lawyer review is required where entity, contracts, directors, or funding instruments affect compliance.
 
-Evidence: founder history [250] separates BABAI subscription billing from restaurant customer payments; [70] warns that custody/settlement creates additional regulatory and reconciliation complexity. Later company decisions identify accounting/tax as an active workstream and Hyderabad/Telangana as the intended company ground without creating an entity merely for incentives.
+## Historical / demoted claims
 
-## Raw founder-message citations
-
-- `nekurama.raw.chat.json#bbb21621-2657-4cf5-a886-3d3079042f08`: “We do get started up rebates too right on gst central and state level too right. Lets keep those points also here to check?” This is a question to validate, not evidence of eligibility or a rebate.
-- `nekurama.raw.chat.json#bbb21e3d-91a3-48de-90a7-986c6beb716b`: “Agree wtih DPIIT. Govt procurement for like ONDC ?” This separates the DPIIT direction from the unresolved procurement/ONDC question.
-- `nekurama.raw.chat.json#bbb2132e-759f-45c5-a475-0e0dad831706`: asks for the expenses and investment required to reach a 10-customer prototype; it supports maintaining an evidence-backed ledger, not a fixed budget.
-- `nekurama.raw.chat.json#bbb211d7-bd71-4cf5-ba30-dcb8a9830d33`: asks whether AP or Hyderabad/Telangana presence affects benefits; this remains an eligibility question requiring current professional advice.
-
-## E-setup checklist
-
-- [ ] **Entity evidence:** after incorporation, retain PAN/TAN, bank-account proof, books, statutory registers, auditor/CA engagement and every filing receipt.
-- [ ] **Chart of accounts:** create separate ledgers for founder capital/loans, expenses/reimbursements, SaaS revenue, provider charges, taxes, FX and any settlement flows; reconcile monthly.
-- [ ] **Professional validation:** obtain CA/CS advice on GST, TDS, professional tax, Shops & Establishments, audit, ROC filings, invoicing, refunds and revenue recognition before relying on a filing position.
-- [ ] **Operating controls:** adopt founder compensation, reimbursement, payment approval, evidence-retention and month-end close policies with named approvers.
-- [ ] **Settlement boundary:** keep restaurant funds outside NEKURAMA custody unless a separately reviewed payment/regulatory design makes the company a collection or settlement party.
-- [ ] **Opportunity register:** validate DPIIT, SIPP/IPR, DeepTech, 80-IAC, Udyam/MSME, Telangana opportunities and GeM eligibility; record legal basis, date, owner, evidence and expiry/reassessment date.
-- [ ] **Compliance calendar:** track owner, deadline, filing evidence, reviewer, payment, escalation and dependencies; do not infer a deadline from a consultant quote.
-- [ ] **Product distinction:** reassess ONDC only when a concrete commercial or regulatory trigger exists; do not treat it as company compliance.
-
-## Status boundaries
-
-- **Confirmed direction:** finance categories must remain separate; subscription billing is not restaurant settlement; bootstrap-first incentives are optional.
-- **professional-validation-required:** entity/tax structure, GST/TDS/payroll/audit triggers, revenue recognition, 80-IAC/DeepTech eligibility, and any state-incentive claim.
-- **unknown:** accounting software, exact filing dates, selected CA/CS provider, and first-year transaction volumes.
-- **partial:** the finance taxonomy and opportunity direction are recorded, but no operating books, registrations, validated eligibility decisions or recurring filing evidence are recorded here.
-- **stale:** none identified; tax rates, thresholds, schemes and filing requirements must be revalidated at the time of action.
+- Earlier fee estimates, thresholds, cloud-credit assumptions, and state-benefit comparisons were research only.
+- “GST/tax complete,” “DPIIT/T-Hub/incubator benefit secured,” “DeepTech qualified,” and “80-IAC eligible” require current professional and documentary validation.

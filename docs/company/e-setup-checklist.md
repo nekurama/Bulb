@@ -12,6 +12,20 @@ sources:
 
 This is the execution sequence for the company workstreams. It records the admin decision packet without inventing legal, tax, employment, or regulatory conclusions.
 
+Internal control assumptions for NEKURAMA/BABAI identity, account migration, MFA/recovery,
+expense approvals, founder support/time records, clean-room boundaries and the internal evidence
+ledger are consolidated in [`internal-controls.md`](internal-controls.md). The external entity
+register is separate and remains unchanged.
+
+## Status key
+
+- **confirmed** — current direction is explicit, but may still need execution evidence
+- **partial** — direction is recorded; an action, instrument or evidence is still open
+- **unknown** — no reliable implementation answer is recorded
+- **professional-validation-required** — obtain qualified CS, lawyer, CA, employment, tax,
+  regulatory, privacy or security confirmation before acting
+- **deferred** — intentionally not executed now; preserve a plan and trigger
+
 ## 1. Before the incorporation certificate
 
 - [ ] Preserve the Private Limited application record and monitor the incorporation certificate.

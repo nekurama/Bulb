@@ -18,6 +18,13 @@ sources:
 - Pre-incorporation work must not be silently described as transferred company IP. After the incorporation certificate, execute founder/company adoption, assignment, licence, and confidentiality documents with lawyer/CS review.
 - The clean-room direction remains to build BABAI using NEKURAMA resources rather than relying on employer or unrelated personal assets. [raw turn 816 / ID 132869d0-2faa-4814-9164-54a67faa4160]
 
+The internal clean-room and evidence-ledger boundary is maintained in
+[`internal-controls.md`](internal-controls.md). It records provenance and exclusion dependencies
+without claiming that an assignment, adoption document, employer review or trademark clearance
+has been completed.
+
+Brand direction: BABAI is the selected product name/finalist, subject to professional trademark clearance. NEKURAMA and BABAI word/device marks are contemplated. Word mark first is preferred; Class 42 is the primary SaaS/software/AI class, with other classes only when justified. A domain purchase or company-name reservation must not be treated as trademark clearance.
+
 ## Brand and legal gates
 
 | Topic | Position | Status |

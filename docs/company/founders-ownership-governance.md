@@ -17,6 +17,12 @@ sources:
 - Founder vesting: **four years with a one-year cliff**. The vesting terms must be drafted and reviewed; this entry is not a substitute for executed documents.
 - Founder equity remains separate from salary, role, time commitment, reimbursements, loans, and other funding. [raw turn 773 / ID c91312fe-d427-421a-9c4b-7079fb13c4a3; raw turn 775 / ID 4b6e7e60-389e-4e20-912c-be0a681aa908]
 
+The internal control packet requires dated founder support/time records and separate
+classification of expenses, reimbursements, loans, capital, salary and equity. It does not
+create employment, tax, ownership or reimbursement treatment. Funding does not automatically
+change the 55:45 allocation, and any future equity or ESOP issuance remains a deliberate,
+reviewed and deferred decision.
+
 ## Incorporation transition
 
 Before the incorporation certificate, prepare but do not treat the following as executed company arrangements:

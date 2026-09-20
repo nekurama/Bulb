@@ -21,6 +21,13 @@ Required posture:
 - auditable account ownership, billing ownership, provider access, and banking/account-change approvals; and
 - scoped, auditable support/security access without unrestricted cross-tenant access. [raw turn 711 / ID 44d1fcec-99bf-4882-9f0f-bfa7acda49d7]
 
+The internal migration plan and evidence-ledger fields are maintained in
+[`internal-controls.md`](internal-controls.md). Company-controlled recovery means that no
+founder's personal email, phone or device is the sole recovery path; this is a required design
+dependency, not evidence that a provider transfer or MFA setting is complete.
+
+BABAI must support tenant isolation, scoped authorization, auditability, retention/deletion controls, privacy obligations, backup/recovery and cross-border data assessment.
+
 ## Security and privacy checklist
 
 - [ ] **Technical owner:** inventory domain, GitHub, AWS, Meta, billing, email, CI/CD, analytics, support, and recovery accounts.

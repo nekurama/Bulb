@@ -33,6 +33,15 @@ sources:
 
 CA/accountant review is required for GST, tax, books, filings, revenue recognition, payment flows, audit, and incentive eligibility. CS/lawyer review is required where entity, contracts, directors, or funding instruments affect compliance.
 
+Founder support, time and founder-paid costs are tracked separately from equity, salary, loans and
+reimbursements. The internal control packet defines the minimum time/support record and approval
+evidence in [`internal-controls.md`](internal-controls.md); it does not set tax, payroll or
+employment treatment.
+
+DPIIT, T-Hub and incubator eligibility must be validated against the company's actual
+incorporation, registered address, operations, GST position and each programme's current rules.
+No benefit is assumed from founder residence, a portal listing or AI usage alone.
+
 ## Historical / demoted claims
 
 - Earlier fee estimates, thresholds, cloud-credit assumptions, and state-benefit comparisons were research only.

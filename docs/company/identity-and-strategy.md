@@ -17,6 +17,10 @@ sources:
 - The one-company/multiple-products model remains the current direction. Major group/subsidiary architecture is deferred unless a concrete legal, economic, ownership, regulatory, or operating trigger appears. [raw turn 753 / ID bbb217a2-4f1b-4554-98fd-1b84a493bf20]
 - Bootstrap-first remains the operating posture; funding is optional and separate from founder ownership. [raw turn 774 / ID bbb2132e-759f-45c5-a475-0e0dad831706]
 
+For internal planning, [`internal-controls.md`](internal-controls.md) is the authoritative
+company-control packet for the NEKURAMA identity and BABAI product boundary. It does not replace
+the incorporation certificate or any professional/external approval.
+
 ## Decision table
 
 | Topic | Current position | Status |

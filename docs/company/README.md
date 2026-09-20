@@ -23,6 +23,29 @@ This directory records company-level truth, decisions, open questions, and execu
 
 Raw citations use the chronological index of non-empty messages in `nekurama.raw.chat.json` as the stable turn number, plus the message UUID.
 
+## E-setup workstream
+
+`e-setup-checklist.md` is the bounded cross-dimension checklist for incorporation, founder/governance, IP/brand/legal, finance/tax/compliance and security/privacy setup. It records actionable work without turning unresolved questions into company decisions.
+
+`internal-controls.md` is the internal-only control packet for NEKURAMA/BABAI identity,
+account migration, MFA/recovery ownership, expense approvals, founder support/time records,
+clean-room boundaries and the internal evidence ledger. It must not be used as evidence of an
+external approval or provider completion.
+
+`external-entity-register.json` is the durable evidence register for external certificates, professional reviews, trademark clearances, registrations, programme decisions and provider approvals. It records owners, dependencies, next actions and control boundaries; it does not claim completion without evidence.
+
+## Current handoff status
+
+| Dimension | Status | Immediate evidence or action |
+| --- | --- | --- |
+| Identity and strategy | **partial** | Private Limited has already been applied for; the incorporation certificate is the transition point. Major commitments remain deferred until incorporation. |
+| Founders, ownership and governance | **partial** | Manoj 55% / Vinay 45% with four-year vesting and a one-year cliff is the current packet direction; CS/lawyer review and execution remain. |
+| IP, brand and legal | **partial** | New NEKURAMA/BABAI work is intended for the company, excluding employer/third-party IP; clearance and post-incorporation adoption documents remain. |
+| Finance, tax and compliance | **partial** | CA/bookkeeper-led books begin at incorporation with controlled software and monthly reconciliation; GST/tax and scheme eligibility require validation. |
+| Security, privacy and controls | **partial** | Migrate founder-owned assets to company control with MFA; implementation evidence and privacy/security reviews remain. |
+
+No row above means that incorporation, ownership issuance, trademark registration, tax eligibility or control implementation has already occurred.
+
 ## Current company spine
 
 | Area | Current position | Status |

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" fill="none" role="img" aria-labelledby="title desc">
+  <title>Candidate BABAI mascot with an AI spark</title>
+  <desc id="desc">Internal candidate mascot mark with a friendly face and orange spark.</desc>
+  <path d="M88 126 70 74l48 24c20-18 45-27 67-27s47 9 67 27l48-24-18 52c12 22 17 47 14 72-8 58-51 91-111 91S82 256 74 198c-3-25 2-50 14-72Z" fill="#163D35"/>
+  <path d="M110 156c0-23 17-40 38-40 12 0 22 5 30 15 8-10 18-15 30-15 21 0 38 17 38 40v31c0 34-28 58-68 58s-68-24-68-58v-31Z" fill="#FFFDF7"/>
+  <circle cx="139" cy="172" r="8" fill="#163D35"/>
+  <circle cx="181" cy="172" r="8" fill="#163D35"/>
+  <path d="M148 204c10 10 22 10 32 0" stroke="#163D35" stroke-width="8" stroke-linecap="round"/>
+  <path d="M235 63 245 38l10 25 25 10-25 10-10 25-10-25-25-10 25-10Z" fill="#E77D43"/>
+  <path d="M68 222c-12-2-23-9-31-20M252 222c12-2 23-9 31-20" stroke="#E77D43" stroke-width="10" stroke-linecap="round"/>
+</svg>

@@ -44,5 +44,6 @@ Evidence: founder history [504]-[505] supersedes the earlier 60:40 working ratio
 ## Status boundaries
 
 - **Confirmed:** Manoj 55% / Vinay 45%; funding and compensation are separate from ownership.
-- **Professional-validation-required:** employment/conflict-of-interest restrictions, founder/shareholder documents, statutory share issuance, and governance terms.
+- **professional-validation-required:** employment/conflict-of-interest restrictions, founder/shareholder documents, statutory share issuance, and governance terms.
+- **unknown:** whether and when an ESOP/equity incentive pool is needed and its final terms.
 - **Pending:** executed agreements, directors, reserved matters, vesting/leaver terms, deadlock mechanism, funding documents, and ESOP policy.

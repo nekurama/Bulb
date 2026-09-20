@@ -49,5 +49,6 @@ Evidence: founder history [503] records the clean-room principle and NEKURAMA ow
 ## Status boundaries
 
 - **Confirmed direction:** NEKURAMA owns company IP; BABAI is a product/brand; Class 42 is the primary contemplated class.
-- **Professional-validation-required:** founder/worker assignments, employer-IP exclusions, trademark clearance/filing, and customer/vendor contract terms.
+- **professional-validation-required:** founder/worker assignments, employer-IP exclusions, trademark clearance/filing, and customer/vendor contract terms.
+- **unknown:** final OSS/AI-provider approval process and the complete customer/vendor contract set.
 - **Pending:** incorporation details, executed assignments, formal clearance, filings, domains, customer contracts, and OSS controls.

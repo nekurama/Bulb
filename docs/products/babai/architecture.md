@@ -86,9 +86,11 @@ shape. [Admin Decision Packet (2026-09-20); `architecture-boundaries.md`;
 
 The proposed pilot posture is one small containerized modular-monolith runtime
 plus a managed worker capacity model, managed standard PostgreSQL, a managed
-at-least-once queue behind a port, and provider adapters. Compare a portable
-OCI baseline with AWS ECS/Fargate using the same workload, backup/restore,
-queue, observability and founder-support assumptions. Start with the
+at-least-once queue behind a port, and provider adapters. **ECS/Fargate is the
+default AWS pilot candidate** after a like-for-like cost and restore check;
+retain a portable OCI baseline and keep App Runner as a time-boxed worker
+proof alternative. A small EC2/container host is a cost fallback only because
+its patching and recovery work transfers to the founders. Start with the
 low/base cost envelope; do not add EKS, Aurora, Multi-AZ, Kafka, multi-region
 recovery or long-retention telemetry merely to consume credits.
 
@@ -100,6 +102,40 @@ merchant settlement, RPO 24h/RTO 8h, daily backups/tested restore and
 deterministic business-state ownership remain unchanged. See
 [`architecture-cost-options.md`](architecture-cost-options.md) for the
 comparison, assumptions and validation gates.
+
+### Founder Decision Packet operating posture
+
+The internal recommendation is to keep the first pilot intentionally small:
+
+- **Runtime:** one right-sized API task/container and one worker capacity
+  model; scale only from measured request, queue, outbox or database pressure.
+- **Data and async:** managed standard PostgreSQL as authoritative state,
+  transactional outbox/inbox, managed at-least-once queue, DLQ/quarantine and
+  authorized replay.
+- **Artefacts:** private encrypted object storage for backups/exports and
+  controlled uploads; CDN only for measured public static-asset traffic.
+- **Access:** managed secret storage candidate, least-privilege workload
+  identities, MFA/security keys for founder/admin access, and audited
+  break-glass access.
+- **Delivery:** immutable image builds, tests, staged smoke, manual promotion,
+  backward-compatible migrations and last-known-good rollback.
+- **Operations:** redacted logs, core metrics, actionable alerts and
+  correlation IDs; no 24x7 or hiring assumption.
+
+The monthly infrastructure planning envelopes are **₹0–₹10,000 low,
+₹10,000–₹30,000 base and ₹30,000–₹100,000+ high before credits**. These are
+internal estimates, not quotes, and exclude provider pass-throughs, tax,
+support labour and one-time onboarding. Pause enrollment when the proposed
+founder support envelope (24 hours/week, 2 hours per active restaurant/week,
+recurring P1s, unresolved P2s or overdue restore/reconciliation work) is
+exceeded. Revisit the posture only with measured scaling, recovery,
+provider-failure or support evidence. See
+[`architecture-cost-options.md`](architecture-cost-options.md) for the
+comparison, gates and rollback posture.
+
+This recommendation does not claim provider, legal, security, Meta, payment
+or external approval. Those decisions remain parked until their stated
+validation evidence exists.
 
 ### Key HLD/LLD decision citation index
 
@@ -210,6 +246,27 @@ Decision Packet (2026-09-20); Raw T153
 `bbb21941-90d7-47d8-b4e0-671c6caecb09`; Raw T154
 `1764f643-59fd-4cf5-be14-6aee32fc973a`; `architecture-lld.md`;
 `architecture-boundaries.md`]
+
+### Pilot platform support boundaries
+
+The deployment shape must keep these concerns replaceable and operationally
+small:
+
+- private object storage holds backups, exports and controlled artefacts;
+  public static assets may use a CDN only after measured need;
+- secrets are retrieved from a managed or equivalent encrypted store, never
+  from source control or general telemetry; founder/admin access uses MFA and
+  audited break-glass procedures;
+- CI/CD produces immutable container images, runs tests and smoke checks,
+  promotes manually during the pilot, and supports last-known-good rollback
+  with backward-compatible migrations;
+- logs and metrics are redacted, correlated and alertable without becoming
+  business-state authority.
+
+These are architectural boundaries, not provider selections. The ECS/Fargate,
+App Runner and small EC2/container comparison, monthly planning envelopes,
+founder-support gates and rollback triggers are maintained in
+[`architecture-cost-options.md`](architecture-cost-options.md).
 
 ### LLD boundary
 
@@ -551,6 +608,10 @@ These align with the MVP boundary and the founder's explicit intent that the pro
 - production SLOs, capacity thresholds, disaster recovery and cost model;
 - observability signal ownership, telemetry retention/sampling and support
   alert thresholds;
+- object-storage retention/export format, CDN use and access-control
+  boundaries;
+- secret-store/key ownership, MFA/recovery access, CI/CD promotion controls
+  and rollback evidence;
 - exact AWS credits, service rates, Meta/BSP/payment rates, tax treatment and
   legal approvals;
 - exact promotion stacking, tax/rounding, delivery/tracking and reconciliation rules;

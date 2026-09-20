@@ -44,6 +44,9 @@ validation before they become stronger commitments.
 | AI | Advisory assistance only | Model/provider policy, evaluation, privacy, cost and multilingual behavior |
 | Reliability | Idempotency, retries, DLQ/quarantine, reconciliation and auditability | Exact SLOs, alerting, replay and operational ownership |
 | Payments | Direct UPI/gateway merchant settlement; no wallet/escrow | Provider, webhook verification, refunds and reconciliation |
+| Artefacts | Private object storage for backups/exports and controlled artefacts; CDN only for measured public static assets | Provider, retention, export format, signed access, cache invalidation and data-location controls |
+| Access | Managed secret-store candidate, least-privilege workload identity, founder/admin MFA and audited break-glass access | Secret/key ownership, rotation, recovery access, access review and provider implementation |
+| Delivery | Immutable image, tests, staged smoke, manual pilot promotion and backward-compatible migrations | CI provider, registry, deployment integration, promotion policy and rollback evidence |
 | Operations | Portable design; AWS credits may be evaluated without overprovisioning | AWS service selection, portability tests and cost evidence |
 | Continuity | Initial RPO 24h/RTO 8h, daily backups and tested restore | Restore evidence, automation, monitoring and final recovery runbook |
 | Privacy/security | DPDPA-ready minimisation, consent, retention, deletion, access, subprocessors and incident controls | Legal review, notices, processor terms, encryption/key management and operating evidence |
@@ -147,6 +150,62 @@ alert routing, cost and Manoj/Vinay ownership require validation. Telemetry
 must carry enough context to investigate a failure and must not authorize a
 business transition or silently turn an error into success. [`architecture.md`;
 `architecture-cost-options.md`; `docs/company/security-privacy-controls.md`]
+
+## Object storage and CDN contract
+
+Object storage is an artefact boundary, not authoritative domain storage. The
+implementation should:
+
+- keep backups, exports, restore-test evidence and controlled uploads private
+  by default;
+- use explicit object ownership, classification, retention/lifecycle and
+  deletion rules;
+- issue short-lived, scoped access for downloads/uploads where needed;
+- record checksums, provenance and restore/export metadata without putting
+  secrets or unrestricted PII into object names or logs;
+- use a CDN only for versioned public static assets after cache-control,
+  invalidation and access boundaries are tested.
+
+Object-storage APIs and CDN behavior belong behind infrastructure adapters.
+The exact provider, bucket/container policy, encryption/key ownership,
+cross-region copy, export format and data-location rules remain unresolved.
+Private business data and API responses are not a CDN cache target by default.
+
+## Secrets, MFA and administrative access contract
+
+Runtime and deployment secrets must not be stored in source control, container
+images, ordinary checked-in configuration, logs or event payloads. Workloads
+retrieve only the credentials needed for their scope from a managed or
+equivalent encrypted secret store. Provider tokens, database credentials and
+signing keys require explicit rotation, revocation and recovery procedures.
+
+Founder and administrative access uses separate named identities, least
+privilege, MFA (preferably a hardware/security key for privileged access),
+access review and an audited, time-bound break-glass path. Break-glass access
+does not become a normal service identity. The secret store, key-management
+boundary, rotation cadence, recovery path and evidence of access review remain
+unresolved; this is not a provider or legal/security approval claim.
+
+## CI/CD, migration and rollback contract
+
+The pilot delivery contract is:
+
+1. Build an immutable OCI image from a reviewed commit.
+2. Run repository-standard formatting, type/build, targeted test and
+   dependency/security checks.
+3. Deploy the image by digest to a non-production environment and smoke-test
+   the API, worker, queue/outbox and required configuration.
+4. Promote manually during the pilot with a recorded change and a
+   backward-compatible database migration.
+5. Observe errors, queue/outbox age, callback verification,
+   reconciliation and backup signals before completion.
+
+Rollback redeploys the last known-good image and configuration, pauses or
+quarantines unsafe consumers, and uses an authorized replay/reconciliation
+procedure for any attempted external side effects. Migrations must allow the
+previous application version to run; destructive changes require a separate
+reviewed recovery plan. The CI provider, registry, deployment integration,
+promotion approval and automated-release threshold remain unresolved.
 
 ## Outbox, inbox and managed queue
 
@@ -278,6 +337,10 @@ support comparison. It does not select a vendor or claim approval.
 - Prove outbox/inbox, retry, DLQ, reconciliation and replay behavior.
 - Define and test state/workflow contracts before selecting a workflow product.
 - Run daily backup restore tests and record RPO/RTO evidence.
+- Test private object-storage export/restore, signed access and any CDN cache
+  boundary without exposing tenant data.
+- Test secret rotation, MFA/recovery access, immutable-image promotion and
+  last-known-good rollback with a backward-compatible migration.
 - Review DPDPA readiness with legal/security owners and document subprocessors,
   access, deletion and incident controls.
 - Compare AWS-credit economics with a portable baseline before selecting

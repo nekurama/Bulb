@@ -75,14 +75,16 @@ the true cost model must retain pre-credit cost, founder hours, provider
 pass-throughs and tax. Provider choices, credits, rates, legal approvals and
 production SLOs remain **unresolved/input-required**.
 
-## Recommended now / revisit when
+## Founder Decision Packet: recommended now / revisit when
 
 | Area | Recommended now | Revisit when |
 |---|---|---|
-| Runtime | Portable OCI container baseline; test ECS/Fargate as the AWS-credit candidate with one small API/worker capacity model | Measured pilot needs independent scaling, stronger failure isolation or a different cost/operations trade-off |
+| Runtime | **ECS/Fargate is the default AWS pilot candidate** after account/credit, region, like-for-like cost and restore checks; keep a portable OCI image and worker contract | App Runner proves a simpler worker path, or EC2's measured all-in cost outweighs its founder operations burden |
 | Database | Small managed standard PostgreSQL tier, initially single-AZ if restore and load evidence pass | Measured recovery, availability or connection/load evidence justifies Multi-AZ, Aurora or another managed PostgreSQL option |
 | Queue/outbox | Managed at-least-once queue plus PostgreSQL outbox/inbox, bounded retries and DLQ/quarantine | Measured ordering, fan-out, throughput or workflow needs justify FIFO/event bus/broker/workflow product |
-| Object storage/CDN | Encrypted object storage for backups and controlled artefacts; no CDN for private or low-volume pilot data | Public static assets, measured transfer, cacheability or privacy review justifies CDN configuration |
+| Object storage/CDN | Encrypted private object storage for backups and controlled artefacts; CDN only for public static assets, not private domain data | Public asset traffic, measured transfer, cacheability and access-control evidence justify CDN configuration |
+| Secrets/MFA | Managed secret store candidate, short-lived workload credentials, founder MFA/security keys and audited break-glass access | Rotation, access review, tenant isolation or incident evidence requires stronger controls |
+| CI/CD | Immutable image build, tests, staged smoke, manual promotion and backward-compatible migrations | Deployment frequency and evidence support automated promotion with the same rollback controls |
 | Observability | Redacted structured logs, core metrics, backup/restore signals and actionable alerts; sampled traces only where useful | Pilot incident volume, debugging time or SLO evidence justifies expanded retention/tracing |
 | Support | Founder-only coverage with Stage 0/Stage 1 caps and no 24x7 promise | Support budget, provider escalation and paid-pilot evidence justify a broader operating model |
 | AWS credits | Apply credits to right-sized measured services after account/expiry/eligibility verification | Credit expiry, cash-vs-credit comparison or usage growth changes the economics |
@@ -131,17 +133,24 @@ actual credit account before enrollment or a provider commitment.
 
 ### Pilot infrastructure envelopes
 
-| Envelope | Assumptions | Planning cash range before credits | Main risk |
-|---|---|---:|---|
-| **Low / learning** | One small application task or container, one small single-AZ PostgreSQL instance or an equivalent pilot tier, SQS Standard or equivalent managed queue, short log retention, object-storage backups, no standby database | **₹0–₹10,000/month** | A single failure can require manual recovery; capacity and restore evidence are limited |
-| **Base / controlled pilot** | One or two right-sized application tasks, managed PostgreSQL with automated backup, queue + DLQ, basic alarms, encrypted object storage, measured restore drill, minimal staging | **₹10,000–₹30,000/month** | Higher fixed cost before usage and still not a high-availability guarantee |
-| **High / evidence-backed resilience** | Redundant application capacity, Multi-AZ database or equivalent, more retention/observability, isolated restore environment, NAT/load-balancer/transfer overhead where required | **₹30,000–₹100,000+/month** | Overprovisioning and AWS coupling before pilot evidence; still excludes provider pass-through fees |
+| Envelope | Assumptions | Planning cash range before credits | Founder support burden | Scaling/rollback gate |
+|---|---|---:|---|---|
+| **Low / learning** | One small application task or container, one small single-AZ PostgreSQL instance or equivalent pilot tier, managed queue, short log retention, private object-storage backups, no standby database | **₹0–₹10,000/month** | **8–12 founder-hours/week**; manual recovery remains possible | Add capacity only after measured saturation or backlog; restore the last known-good image/configuration and replay safely |
+| **Base / controlled pilot** | One or two right-sized application tasks, managed PostgreSQL with automated backup, queue + DLQ, basic alarms, encrypted object storage, measured restore drill, minimal staging | **₹10,000–₹30,000/month** | **16–24 founder-hours/week** across onboarding, support, incidents and restore drills; no 24x7 promise | Scale app/worker on sustained latency, CPU, queue-age or outbox-age evidence; pause enrollment if support or restore gates fail |
+| **High / evidence-backed resilience** | Redundant application capacity, standby/Multi-AZ database or equivalent, more retention/observability, isolated restore environment and network/transfer overhead where required | **₹30,000–₹100,000+/month** | **Above 24 founder-hours/week is a stop signal**, not an automatic hiring assumption | Revisit architecture only with evidence; rollback requires a tested previous runtime plus database/provider recovery path |
 
 The ranges are a budgeting aid only. They must not be used to publish BABAI
 pricing or margin claims. The product BRD requires actual infrastructure,
 provider, payment, tooling, support, failure and refund costs to be recorded
 per pilot before public pricing is set. [`brd.md`; `business-model.md`;
 `validation.md`]
+
+These are internal planning envelopes, not quotes. They exclude Meta/BSP,
+payment, AI, delivery, tax and one-time onboarding costs. Founder-hours are
+capacity assumptions, not labour pricing or a hiring plan. Provisional
+triggers are sustained request/worker saturation, queue or outbox growth,
+database connection pressure, restore failure, or a P1/P2/support-capacity
+breach; exact thresholds must be measured during the pilot.
 
 ## AWS managed deployment options
 
@@ -273,6 +282,20 @@ Record before using credits:
 4. Exit evidence: container image, PostgreSQL export/restore, queue replay and
    provider-adapter tests outside AWS.
 
+### Runtime scaling and rollback gates
+
+| Runtime | Founder support burden | Scaling trigger | Rollback posture | Packet decision |
+|---|---|---|---|---|
+| **ECS/Fargate** | Low-to-moderate platform burden after networking, logs and task operations are documented | Add task/worker capacity only after measured sustained saturation, queue age/outbox growth or worker lag; resize PostgreSQL after connection/load or restore evidence | Redeploy the last known-good immutable image/configuration; keep migrations backward-compatible and pause risky consumers before replay | **Recommended AWS candidate now**, subject to account, cost and restore validation |
+| **App Runner** | Potentially lower HTTP deployment work, but worker, scheduled work, networking and diagnosis are unproven | Revisit only after a representative worker/outbox test demonstrates stable background processing and acceptable all-in cost | Re-deploy the last known-good service revision and retain an independently runnable worker/container path | **Time-boxed alternative; not default** |
+| **Small EC2 host + containers** | Highest founder burden: patching, host health, emergency access, backup and replacement are manual responsibilities | Leave fallback or add capacity when host maintenance/failure, queue backlog or support load threatens RPO/RTO or founder limits | Restore the previous image/compose configuration or replacement host from tested backups; accept single-host recovery interruption | **Cost fallback only** |
+
+For every runtime, a release that increases error rate, violates domain
+invariants, grows the outbox/DLQ, or creates reconciliation ambiguity must be
+paused or rolled back before more traffic is admitted. Destructive schema
+migrations are incompatible with this rollback posture. These are operating
+gates, not availability promises.
+
 ## PostgreSQL options
 
 | Option | Fit for the pilot | Cost/operations | Portability and risk |
@@ -320,6 +343,46 @@ is not claimed. [Raw T115 `bbb210cc-a1ef-4ea9-b1a7-7c52f0011721`; Raw T119
 `bbb21b98-7460-45d5-a616-418ffbf47484`; Raw T126
 `e472fe3d-22d5-4595-aafd-986683b13a3c`; Raw T264
 `bbb21a7f-4d44-4cc1-8f60-1172bdcc303c`; `architecture-lld.md`]
+
+## Object storage and CDN
+
+Object storage is for encrypted backup exports, restore-test artefacts,
+tenant-controlled uploads and other bounded artefacts that do not belong in
+the transactional database. The default pilot posture is private buckets or
+containers, short-lived signed access where needed, lifecycle rules and
+separate access logs. It is not a second source of truth for orders, payments,
+events or outbox state.
+
+| Option | Pilot use | Tradeoff and decision |
+|---|---|---|
+| **Managed object storage** | Backups, exports, controlled uploads and restore evidence | **Recommended now** behind an object-storage adapter; provider encryption, retention, deletion and egress terms remain to be validated |
+| **CDN for public static assets** | Cache versioned web assets if the pilot has public traffic | **Optional now**; enable only when measured transfer/latency justifies cost and cache invalidation/access controls are tested |
+| **CDN for private business data or APIs** | Not a pilot requirement | **Do not use now**; signed URLs, cache keys, tenant isolation and invalidation errors create avoidable risk |
+
+S3/CloudFront or equivalent services may be used as implementation candidates
+in the AWS comparison, but no provider is selected and no data-location,
+security or legal approval is implied. Keep object keys, metadata and export
+formats documented so a bounded backup or asset set can be copied and
+verified outside the provider.
+
+## Secrets, MFA and administrative access
+
+The pilot must keep credentials out of source control, images, ordinary
+configuration files, logs, events and support tickets. Use a managed secret
+store or an equivalent encrypted mechanism, inject only the minimum secret
+needed by a workload, rotate provider tokens through an explicit runbook, and
+audit reads and changes. Workloads should use short-lived or narrowly scoped
+identities where the runtime supports them; long-lived founder credentials are
+not a service-to-service contract.
+
+Founder and administrative access should require MFA, preferably a
+hardware/security key for privileged accounts, with separate named identities,
+least privilege, access review and a documented break-glass path. Break-glass
+use must be time-bound and audited. These are architecture controls and
+operating requirements, not a statement that any provider, legal reviewer or
+security assessor has approved them. Exact secret store, key ownership,
+rotation interval, recovery access and DPDPA/security evidence remain
+unresolved.
 
 ## Meta / WhatsApp provider options
 
@@ -429,6 +492,31 @@ ownership must be validated together. Do not put credentials, payment secrets
 or unrestricted PII in logs, events or traces. [`architecture-lld.md`;
 `docs/company/security-privacy-controls.md`]
 
+## CI/CD and release rollback
+
+The pilot delivery path should be the smallest repeatable pipeline that
+protects the domain and recovery boundaries:
+
+1. Build an immutable OCI image from a reviewed commit.
+2. Run formatting, type/build checks, targeted tests and dependency/security
+   checks available in the repository.
+3. Publish the image by digest to a non-production environment and run a
+   smoke test covering the API, worker, queue/outbox and restore-sensitive
+   configuration.
+4. Promote manually to the pilot runtime with a recorded change and
+   backward-compatible database migration.
+5. Monitor error rate, queue/outbox age, callback verification, payment
+   reconciliation and backup signals before declaring success.
+
+GitHub Actions or another CI service may implement this flow, but no CI/CD
+provider, runner, registry, deployment approval or production SLA is selected
+here. Secrets must be supplied through the secret mechanism, not committed
+pipeline variables. A rollback must redeploy the last known-good image and
+configuration, stop or quarantine unsafe consumers, and use an authorized
+replay/reconciliation procedure if external side effects were attempted.
+Schema changes must support old and new application versions during rollback;
+destructive migrations require a separate reviewed recovery plan.
+
 ## Backup, restore and continuity assumptions
 
 ### Baseline
@@ -531,9 +619,11 @@ against Stage 0/Stage 1 data, not new product thresholds. [`brd.md`;
    is assumed.
 6. Obtain merchant payment-provider terms, webhook/refund/reconciliation
    evidence and direct-settlement confirmation.
-7. Measure founder support effort, P1/P2 rates, provider response and actual
+7. Test private object-storage export/restore, signed access, secret rotation,
+   MFA/recovery access and last-known-good CI/CD rollback.
+8. Measure founder support effort, P1/P2 rates, provider response and actual
    per-pilot contribution before expanding beyond three active pilots.
-8. Have legal, privacy and finance owners validate DPDPA roles, notices,
+9. Have legal, privacy and finance owners validate DPDPA roles, notices,
    retention/deletion, subprocessors, GST and payment responsibilities.
 
 ## Source and pricing references
@@ -569,12 +659,20 @@ against Stage 0/Stage 1 data, not new product thresholds. [`brd.md`;
 
 - [AWS Fargate pricing](https://aws.amazon.com/fargate/pricing/) — resource
   dimensions, task duration, storage and additional charges.
+- [Amazon EC2 pricing](https://aws.amazon.com/ec2/pricing/) — instance,
+  storage, transfer and host-operations dimensions for the fallback.
 - [Amazon RDS for PostgreSQL pricing](https://aws.amazon.com/rds/postgresql/pricing/) —
   instance, storage, backup, I/O and transfer dimensions.
 - [Amazon Aurora pricing](https://aws.amazon.com/rds/aurora/pricing/) —
   capacity, storage, I/O and commitment considerations.
 - [Amazon SQS pricing](https://aws.amazon.com/sqs/pricing/) — request-metered
   queue pricing and current free-tier terms.
+- [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/) — storage, requests,
+  lifecycle and transfer dimensions for artefacts and backups.
+- [Amazon CloudFront pricing](https://aws.amazon.com/cloudfront/pricing/) —
+  CDN transfer, request and cache-invalidation dimensions.
+- [AWS Secrets Manager pricing](https://aws.amazon.com/secrets-manager/pricing/) —
+  secret count, API access and rotation cost dimensions.
 - [AWS startup credits](https://aws.amazon.com/startups/credits/) — program
   entry point; actual balance and eligibility remain account-specific.
 - [AWS App Runner pricing](https://aws.amazon.com/apprunner/pricing/) —

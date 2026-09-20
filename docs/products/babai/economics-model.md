@@ -1,9 +1,9 @@
 ---
 status: partial — finalized Track 2 planning bands; actual rates and founder approval pending
 owner: BABAI Product / BRD
-last-reviewed: 2026-09-20
+last-reviewed: 2026-09-21
 sources:
-  - Admin decision packet (2026-09-20; current task input)
+  - Founder decision packet (2026-09-21; current task input)
   - nekurama.babai.research.md (Pricing hypothesis, What remains unvalidated, Success criteria)
   - nekurama.chatgpt.md (historical planning model; explicitly not a forecast)
   - nekurama.raw.chat.json (mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `04cc446b-3a6d-4c19-adc7-4d94ab17d21b`, `4702681b-d611-4408-af5f-9001d04b6cfa`, `f58ce128-39ed-4015-9be9-5b6135a39f20`)
@@ -16,12 +16,12 @@ sources:
 
 ## Purpose and decision posture
 
-This is the **Track 2 planning model v0.2** for the thin restaurant-first,
+This is the **Track 2 planning model v0.3** for the thin restaurant-first,
 pickup-first, WhatsApp-native MVP. The low/base/high planning bands below are
 finalized for internal planning and instrumentation only; every proposed
 number remains provisional and pending founder approval. The model is designed
-to collect comparable evidence during a paid or deposit-backed pilot and
-gradual onboarding toward up to 10 restaurants.
+to collect comparable evidence during a fixed 90-day paid pilot and readiness-
+gated gradual onboarding toward up to 10 restaurants.
 
 It is **not a forecast, approved price list, margin commitment or accounting
 position**. The model deliberately keeps price, order GMV, GST treatment,
@@ -206,9 +206,25 @@ These are candidate commercial structures, not selected terms:
 | Deposit applied to continuation | Deposit paid before activation | Apply to later paid continuation only if terms permit | Refund if continuation is not accepted or not delivered | Fixed calendar date plus explicit conversion decision |
 | Fee plus deposit | Separate onboarding/service fee and security deposit | Track each component separately | Each component needs its own rule | Fixed calendar date in signed terms |
 
-The current decision requires a paid or deposit-backed pilot with an explicit
-end date, but does not select an option, amount, refund rule or date. Do not
-infer any of those from the historical subscription prices.
+The current decision requires a **fixed 90-day paid pilot**, not a free trial.
+Cancellation, refund and minimum-paying terms must be tied to a signed
+agreement template. The exact option, amount, refund rule and agreement
+wording remain open; do not infer any of them from historical subscription
+prices. The pilot closes at the 90-day readiness review when team-defined
+evidence supports materially larger onboarding volumes.
+
+## 90-day plan and readiness-gated exit
+
+| Period | Operating focus | Required evidence |
+|---|---|---|
+| Days 0–14 | Paid enrollment, signed agreement, channel/menu/staff readiness and baseline capture | Commercial terms, cancellation/refund placeholders, minimum-paying field, end date and instrumentation recorded |
+| Days 15–45 | Live pickup workflow and staff operation | Activation, order success, fulfillment, support incidents, provider/payment costs and founder hours |
+| Days 46–75 | Repeat use and economics | Repeat behavior, staff adoption, actual-rate register, total expenditure and income bar |
+| Days 76–90 | Readiness review and next-stage decision | Team-defined evidence shows whether materially larger onboarding volumes are operationally safe and economically supportable |
+
+The 90-day term is fixed. The readiness review determines whether BABAI is
+ready for materially larger onboarding volumes; it does not authorize an
+automatic extension, price increase or legal agreement change.
 
 ## GST treatment
 
@@ -310,7 +326,7 @@ failure/refund outcomes, `T`, and the chosen accounting treatment for `D`.
 
 ## Track 3 dependency
 
-Track 3 consumes this v0.2 artifact through the proposed metric contract in
+Track 3 consumes this v0.3 artifact through the proposed metric contract in
 [`validation.md`](validation.md), not as a price decision. The candidate
 thresholds use the base/high founder-time bands, failure/refund sensitivities
 and contribution-margin sensitivities here; they remain pending founder
@@ -322,6 +338,8 @@ any threshold is treated as a decision:
 3. fixing the pilot end date and commercial/deposit treatment;
 4. deciding whether payment/provider/refund costs are passed through; and
 5. approving the contribution target and GST/accounting treatment.
+6. completing the team-defined readiness evidence for materially larger
+   onboarding volumes.
 
 Until those inputs exist, this model remains a planning range and unresolved
 decision register.

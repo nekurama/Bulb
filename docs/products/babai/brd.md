@@ -6,7 +6,7 @@ sources:
   - nekurama.raw.chat.json
   - nekurama.chatgpt.md
   - nekurama.babai.research.md
-  - Admin decision packet (2026-09-20; current task input)
+  - Founder decision packet (2026-09-21; current task input)
 ---
 
 # BABAI Product BRD
@@ -38,15 +38,17 @@ heading. Key anchors for this BRD are:
 | Pilot/flow inventory | flow inventory message 335; pilot and threshold evidence is also recorded in `nekurama/Bulb#3` and `nekurama.babai.research.md` |
 | Pricing direction | pricing battle message 445, node `26a13805-2db3-4536-9d60-49cd653654ef` |
 
-The 2026-09-20 admin decision packet is the current product-input override where
-it narrows or reframes earlier hypotheses: keep the MVP thin and
-restaurant/pickup/WhatsApp-first; onboard gradually up to 10 restaurants; use
-a paid or deposit-backed pilot with an explicit end date; model costs and
-contribution before public pricing; settle customer funds directly to the
-restaurant; and measure activation, orders, fulfillment, repeat use, staff
-adoption, support, economics and willingness to pay. The packet does not
-provide a pilot amount, refund rule, end date, margin target, GST treatment or
-numeric metric thresholds.
+The 2026-09-21 founder decision packet is the current product/commercial
+override: use a fixed 90-day paid pilot, not a free trial; tie cancellation,
+refund and minimum-paying terms to a signed agreement template without
+inventing legal wording; close the pilot at a day-90 readiness review when
+team-defined evidence supports materially larger onboarding volumes; calculate
+margins from total expenditure against the same-period income bar; derive
+pricing from contribution economics; review pricing six months after the
+pilot without an automatic increase; and keep NEKURAMA as company identity and
+BABAI as product identity. Founder-approved wording is “Business Automation
+by AI”; it is an intent/descriptor line, not an invented etymology or legal
+expansion.
 
 Assistant recommendations in the raw conversation are not treated as founder
 decisions unless the current issue sources, later explicit direction or field
@@ -61,6 +63,13 @@ BABAI is a business operating platform built around WhatsApp. It helps businesse
 BABAI is B2B SaaS: the restaurant/business is the customer and economic buyer; owner/operator is the primary buyer, managers are likely champions, staff are daily operators, and the end customer participates in the workflow. Restaurants are the first wedge, not a permanent category boundary. The initial ICP is small-to-medium, WhatsApp-heavy, direct-relationship restaurants with enough operational pain that manual conversation handling is costly. [Evidence: `nekurama.chatgpt.md:L40500-L40520`, `nekurama.chatgpt.md:L42146-L42232`; corroboration: `nekurama.babai.research.md:L91-L102`, `nekurama.babai.research.md:L178-L186`]
 
 The business normally retains its own WhatsApp identity and customer relationship. BABAI is the operating layer, not a consumer marketplace, POS/ERP replacement, generic API wrapper or merely an AI chatbot. [Evidence: `nekurama.raw.chat.json:L21506-L21540`, `nekurama.raw.chat.json:L48598-L48630`; corroboration: `nekurama.babai.research.md:L42-L63`, `nekurama.chatgpt.md:L38650-L38994`]
+
+`NEKURAMA` is the company identity and `BABAI` is the product identity. The
+founder-approved wording **“Business Automation by AI”** may be used as a
+descriptor/intent line. The raw naming intent is founder turn 386 / mapping
+`bbb21347-433a-45d7-b022-6a9a210f8a4c`; the phrase appears in the source at
+mapping `078f95a4-5e81-4488-ad45-5de38830c874`. No etymology, legal expansion
+or originality claim is inferred.
 
 ### MVP / pilot boundary — confirmed, with validation detail partial
 
@@ -95,7 +104,7 @@ WhatsApp is the primary conversational/action surface for customer and staff att
 | Product identity | **confirmed** | Business operating platform built around WhatsApp; AI/automation are enabling mechanisms. |
 | Buyer / ICP | **confirmed** | B2B restaurant/business buyer; initial fit is WhatsApp-heavy direct-relationship restaurants with operational pain. |
 | First workflow | **confirmed** | Menu/catalog → conversation → pickup order → restaurant decision → payment record/confirmation → completion → status. |
-| Pilot sequence | **partial** | Stage 0 is one business; Stage 1 is up to three pilots and at least one payer; Stage 2 is a controlled 10-restaurant beta. Exact stage gates and numeric success/kill thresholds remain open. |
+| Pilot sequence | **partial** | Fixed 90-day paid pilot; Stage 0 is one business, then gradual onboarding up to 10 restaurants; day-90 exit requires team-defined readiness evidence. |
 | Dashboard boundary | **partial** | WhatsApp remains first-class; web handles density and recovery. Exact MVP screens and entitlements remain open. |
 | Onboarding | **partial** | Progressive and resumable; exact Meta handoff, Admin tooling, retention and web information architecture remain open. |
 | Pricing / packaging | **challenge-required** | No public price is committed. ₹999 / ₹2,499 / ₹4,999 + GST and older prices remain hypotheses only; cost/contribution evidence and paid-pilot terms are required. |
@@ -117,7 +126,7 @@ The distinction between **confirmed** and **partial** reconciles stale/thin plac
 | Meta onboarding/coexistence reliability | **challenge-required** | Real approved-channel onboarding and recovery tests; no current export proves reliability. |
 | Payment verification, refunds and reconciliation | **challenge-required** | Test gateway webhook and manual-payment paths with a pilot merchant; screenshots/claims are not authoritative payment proof. |
 | Pricing, onboarding fee and paid continuation | **challenge-required** | Paid pilot or deposit evidence; research explicitly says interest is not willingness to pay. |
-| Pilot instrumentation and numeric success/kill thresholds | **partial / proposed** | `validation.md` defines candidate thresholds grounded in the finalized-for-planning `economics-model.md` v0.2 bands and actual-rate register; all numeric gates remain pending founder approval. |
+| Pilot instrumentation and numeric success/kill thresholds | **partial / proposed** | `validation.md` defines candidate thresholds grounded in `economics-model.md` v0.3 and actual-rate register; all numeric gates remain pending founder approval. |
 | Delivery and multilingual staff workflows | **unknown/challenge-required** | Defer delivery dependency; test only when evidence requires it, including language and provider failure cases. |
 | Competitive proof / moat | **challenge-required** | Workflow-level competitor comparison and evidence of retention/switching value, not feature-count comparison. |
 | Expansion gates beyond restaurants | **unknown** | Define quantitative evidence after the restaurant/pickup workflow is proven. |
@@ -147,7 +156,7 @@ The field research is intentionally not upgraded: it reports strong interest and
 | `customer-market.md` | Previously question-heavy; now retains an evidence-backed ICP and market answer, with segmentation, switching and expansion gates still partial/unknown. |
 | `experience-and-channels.md` | Previously thin; now records the confirmed WhatsApp/web principle, onboarding and takeover direction, with detailed UX still partial. |
 | `business-model.md` | Retained as a partial commercial model; public pricing is withheld while cost, contribution, GST and pilot-term evidence is collected. |
-| `economics-model.md` | Track 2 v0.2 internal planning artifact; provides finalized-for-planning low/base/high bands, an actual-rate register, direct/indirect cost formulas, pilot-term options and break-even sensitivity without selecting a price. |
+| `economics-model.md` | Track 2 v0.3 internal planning artifact; provides finalized-for-planning low/base/high bands, actual-rate register, 90-day plan, direct/indirect cost formulas, pilot-term options and break-even sensitivity without selecting a price. |
 | `validation.md` | Track 3 metric contract with proposed entry/exit/success/kill thresholds; founder approval and pilot evidence remain required. |
 | `product-definition.md` | Retained as the current MVP boundary; production cut, edge cases and post-pilot scope remain partial. |
 | `thesis-and-positioning.md` | Retained as current positioning; differentiation is explicitly a thesis, not a proven moat, and legal clearance remains separate. |
@@ -160,7 +169,7 @@ working-tree files were not part of this pass.
 
 ## Historical context retained
 
-Early discussions used Dawat and proposed Tadka/Thali/Dawat tiers, low pilot pricing and broader delivery ambitions. Those are preserved as history in the exports; they are not current product truth. No public price is currently committed; ₹999 / ₹2,499 / ₹4,999 + GST and earlier levels remain hypotheses. Current MVP proof is the staged, pickup-first sequence above. [Evidence: `nekurama.raw.chat.json:L192-L205`; corroboration: `nekurama.chatgpt.md:L2432-L2685`, `nekurama.chatgpt.md:L27598-L27598`; current input: admin packet 2026-09-20]
+Early discussions used Dawat and proposed Tadka/Thali/Dawat tiers, low pilot pricing and broader delivery ambitions. Those are preserved as history in the exports; they are not current product truth. No public price is currently committed; ₹999 / ₹2,499 / ₹4,999 + GST and earlier levels remain hypotheses. Current MVP proof is the fixed 90-day paid, pickup-first sequence with a readiness-gated exit. [Evidence: `nekurama.raw.chat.json:L192-L205`; corroboration: `nekurama.chatgpt.md:L2432-L2685`, `nekurama.chatgpt.md:L27598-L27598`; current input: founder packet 2026-09-21]
 
 ## Related files
 

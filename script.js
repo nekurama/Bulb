@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const state = { step: 0, route: "Pilot conversation", demo: null };
+  const state = { step: 0, route: "Primary route placeholder", demo: null };
   const elements = {
     kicker: document.querySelector("#mock-kicker"),
     title: document.querySelector("#mock-title"),
@@ -34,13 +34,21 @@
     elements.detail.textContent = scene.detail;
     elements.back.disabled = state.step === 0;
     elements.next.textContent = state.step === (state.demo || fallbackDemo).length - 1 ? "Restart scene ↺" : "Next scene →";
-    elements.steps.forEach((button, index) => button.classList.toggle("is-active", index === state.step));
+    elements.steps.forEach((button, index) => {
+      const isActive = index === state.step;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-current", isActive ? "step" : "false");
+    });
   }
 
   function chooseRoute(button) {
     state.route = button.dataset.route;
     elements.route.value = state.route;
-    elements.routes.forEach((route) => route.classList.toggle("is-selected", route === button));
+    elements.routes.forEach((route) => {
+      const isSelected = route === button;
+      route.classList.toggle("is-selected", isSelected);
+      route.setAttribute("aria-pressed", String(isSelected));
+    });
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     document.querySelector("#pilot-form").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
   }
@@ -72,16 +80,27 @@
     elements.status.focus();
   });
 
+  elements.form.addEventListener("invalid", () => {
+    elements.status.hidden = false;
+    elements.status.textContent = "Complete each required field to preview this local-only request. Nothing will be sent or stored.";
+  }, true);
+
   fetch("mock-data.json")
     .then((response) => {
       if (!response.ok) throw new Error("Mock data unavailable");
       return response.json();
     })
     .then((data) => {
-      if (Array.isArray(data.demo) && data.demo.length > 0) {
+      if (data.mode === "mock-only" && Array.isArray(data.demo) && data.demo.length > 0) {
         state.demo = data.demo;
         renderStep();
+        return;
       }
+      throw new Error("Mock data is not marked mock-only");
     })
-    .catch(() => renderStep());
+    .catch((error) => {
+      console.warn("Local mock-data.json unavailable; using inline demo fallback.", error);
+      document.querySelector("#mock-source-note").textContent = "BABAI / inline mock fallback";
+      renderStep();
+    });
 })();

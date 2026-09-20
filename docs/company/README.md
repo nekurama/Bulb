@@ -1,79 +1,63 @@
 # NEKURAMA Company Knowledge
 
-Current company-level working truth. Product-specific requirements belong under `docs/products/`.
-These pages preserve founder intent while clearly separating decisions, working hypotheses,
-and matters that require professional or founder confirmation.
+Current durable company-level truth. Product-specific detail belongs under `docs/products/`.
 
-## Status meanings
+## Status vocabulary
 
-- **Confirmed direction**: repeated founder intent or a company-level principle; not necessarily
-  an executed legal instrument.
-- **Working intent**: the current operating assumption; do not treat it as an incorporated,
-  filed, registered, or contractually binding fact.
-- **Hypothesis**: a commercial or operating assumption that must be tested.
-- **Partial / open**: evidence exists, but an important dependency or decision is missing.
-- **Challenge required**: a CA/CS, corporate/IP/privacy counsel, security owner, or the founders
-  must validate it before reliance or execution.
+- **confirmed** — current direction or principle is explicit in the source record
+- **partial** — direction exists, but execution details or open questions remain
+- **unknown** — the dimension is identified but no reliable current answer is recorded
+- **professional-validation-required** — legal, tax, accounting, employment or regulatory confirmation is required before acting
+- **stale** — a file conflicts with a later source decision and must not be used as current truth
 
-## Artifact map
+## Core dimensions
 
-| Artifact | Durable scope |
-|---|---|
-| [Identity & Strategy](identity-and-strategy.md) | NEKURAMA/BABAI relationship, entity direction, e-setup gates |
-| [Founders, Ownership & Governance](founders-ownership-governance.md) | Founder status, working ownership, roles, funding and reserved matters |
-| [IP, Brand & Legal](ip-brand-legal.md) | IP provenance, assignments, brands, domains and contract workstreams |
-| [Finance, Tax & Compliance](finance-tax-compliance.md) | Books, money flows, tax/benefit workstreams and commercial hypotheses |
-| [Security, Privacy & Company Controls](security-privacy-controls.md) | Company controls, privacy boundaries, access and pilot-readiness gaps |
+- Identity and strategy
+- Corporate structure and governance
+- Founders and ownership
+- IP, brand and legal
+- Finance, tax and compliance
+- Privacy, security and company controls
+- Operations, vendors and capital
 
-## Company-level durable direction
+## E-setup workstream
 
-- NEKURAMA is the intended operating and IP-holding company; BABAI is a product/brand of
-  NEKURAMA, not currently a separate legal entity.
-- Bootstrap-first remains the funding posture; funding is optional, not assumed.
-- Founder equity, founder funding, salary/compensation and future employee equity are separate
-  concepts.
-- BABAI's initial payment direction is direct merchant payment with a separate SaaS
-  subscription; NEKURAMA should not accidentally become the custodian or settlement
-  intermediary for restaurant funds.
-- Company-owned domains, repositories, cloud/provider accounts and secrets are required;
-  access must be least-privilege and offboarding-capable.
+`e-setup-checklist.md` is the bounded cross-dimension checklist for incorporation, founder/governance, IP/brand/legal, finance/tax/compliance and security/privacy setup. It records actionable work without turning unresolved questions into company decisions.
 
-## Source hierarchy and citation convention
+## Current handoff status
 
-1. `nekurama.raw.chat.json` is the primary founder intent/history source. Raw-chat citations use
-   the exact conversation node UUID, for example `raw chat node 23a95bbe...`.
-2. `nekurama.chatgpt.md` is the final markdown export. Cite the heading and line range when
-   quoting an exported decision.
-3. `nekurama.babai.research.md` is field evidence, not legal or financial proof. Cite the
-   section and line range and retain its validation limits.
-4. Existing GitHub issue references (`nekurama/Bulb#1` and `nekurama/Bulb#2`) are historical
-   context; an issue status is not a substitute for an executed agreement, filing, clearance,
-   or professional opinion.
+| Dimension | Status | Immediate evidence or action |
+| --- | --- | --- |
+| Identity and strategy | **partial** | Private Limited and one-company/multiple-products are the current direction; obtain professional incorporation and employment/IP compatibility advice. |
+| Founders, ownership and governance | **partial** | Manoj 55% / Vinay 45% is the latest intended split; execute agreements, governance rules and funding instruments before issuance. |
+| IP, brand and legal | **partial** | NEKURAMA is the intended IP holder and BABAI is a product/brand; complete provenance, clearance, assignments and contract review. |
+| Finance, tax and compliance | **partial** | Separate capital, expenses, SaaS revenue and settlement flows; validate registrations, accounting treatment and scheme eligibility with a CA/CS. |
+| Security, privacy and controls | **partial** | Company ownership, least privilege, tenant isolation and auditability are principles; implementation status is unknown until evidence is collected. |
 
-No page in this directory is legal, tax, accounting, privacy, or security advice. Open items
-are written as checklists rather than filled with unsupported conclusions.
+No row above means that incorporation, ownership issuance, trademark registration, tax eligibility or control implementation has already occurred.
 
-## Retained prior handoff vocabulary and inventory
+## Sources
 
-The earlier handoff used the following labels, which remain valid alongside the expanded status
-meanings above: **confirmed** means the current direction is explicit in the source record;
-**partial** means direction exists while execution details or open questions remain; **unknown**
-means no reliable current answer is recorded; and **professional-validation-required** means
-legal, tax, accounting, employment, regulatory, privacy or security confirmation is required
-before acting.
+Primary decision/history: `nekurama/Bulb#2` and current company specification `nekurama/Bulb#5`; supporting product/company decisions may reference `nekurama/Bulb#1` and historical `ManojVysyaraju/bulb#1`.
 
-`e-setup-checklist.md` remains the bounded cross-dimension checklist for incorporation,
-founder/governance, IP/brand/legal, finance/tax/compliance and security/privacy setup.
+Conversation evidence is anchored in `nekurama.raw.chat.json` by message UUID, including:
 
-Prior source anchors remain part of the evidence record: `nekurama/Bulb#5`,
-`nekurama.raw.chat.json#bbb2179b-ab78-4f20-98ef-1bf49a0702f7`,
-`nekurama.raw.chat.json#bbb21d97-c664-432c-9a10-f74d42232df7`,
-`nekurama.raw.chat.json#bbb214cb-4959-4878-b6a9-2358ddbf2b07`,
-`nekurama.raw.chat.json#bbb21ece-7bb6-4a1f-9798-9ebd4ed6bcbd`,
-`nekurama.raw.chat.json#bbb217ee-01a7-4f44-a207-116c50531b56`,
-`nekurama.raw.chat.json#bbb21621-2657-4cf5-a886-3d3079042f08`, and
-`nekurama.raw.chat.json#bbb21e3d-91a3-48de-90a7-986c6beb716b`.
+- `bbb2179b-ab78-4f20-98ef-1bf49a0702f7` — Pvt Ltd vs LLP costs, roles and founder participation questions
+- `bbb21d97-c664-432c-9a10-f74d42232df7` — spouse funding as loan versus equity
+- `bbb214cb-4959-4878-b6a9-2358ddbf2b07` — BABAI/product boundary versus NEKURAMA technology/IP
+- `bbb21ece-7bb6-4a1f-9798-9ebd4ed6bcbd` — legal brand clearance and domain direction
+- `bbb217ee-01a7-4f44-a207-116c50531b56` — acquiring the company domain and subdomain structure
+- `bbb21621-2657-4cf5-a886-3d3079042f08` — startup rebates and GST questions
+- `bbb21e3d-91a3-48de-90a7-986c6beb716b` — DPIIT and government-procurement/ONDC question
 
-The thin-file inventory is deliberate: the five dimension files are partial durable-truth
-records, their open questions are not empty placeholders, and the cross-dimension checklist is
-kept separate so each dimension remains focused.
+Raw messages are founder-history evidence, not executed agreements or professional advice. A raw message can record a proposal, question or historical option; the later issue decision and implementation evidence determine whether it is current.
+
+## Thin-file inventory
+
+- `README.md` is intentionally a thin index, not a company decision record.
+- The five dimension files are compact **partial** durable-truth files. Their question lists are deliberate open work, not empty placeholders.
+- No additional tracked company-relevant placeholder file was found. The cross-dimension checklist is separate so the dimension files remain focused.
+
+## Handoff rule
+
+Before acting on a company item, retain the relevant evidence artifact: certificate or filing receipt, signed agreement, cap-table/register entry, clearance report, invoice/ledger entry, access-control proof, or tested recovery/incident record. If the artifact does not exist, keep the item **partial**, **unknown** or **professional-validation-required** rather than upgrading its status.

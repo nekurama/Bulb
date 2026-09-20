@@ -1,96 +1,61 @@
 ---
-status: partial
+status: partial — control principles confirmed; baseline implementation and privacy decisions pending
 owner: NEKURAMA
 last-reviewed: 2026-09-20
 sources:
   - nekurama/Bulb#2
   - nekurama/Bulb#1
   - nekurama/Bulb#5
-  - raw chat node 39e2f9bb-f490-461b-a7c0-ddc8baf13701
-  - raw chat node 2cbff692-fc78-42d6-b97b-7c6ae9256876
-  - raw chat node 43953802-8fdc-4ee4-a329-782796871b42
+  - nekurama.raw.chat.json#bbb213b8-d58c-403e-b858-bdaa1ac750b8
+  - nekurama.raw.chat.json#bbb2129e-e9fa-43bf-adca-b0bc7a956664
+  - nekurama.raw.chat.json#bbb21426-5f7e-4c38-82e4-e288b9aae01c
 ---
 
 # Security, Privacy & Company Controls
 
-## Current durable answer
+## Current answer
 
-NEKURAMA should use company-owned domains, repositories, cloud accounts, provider accounts and
-secrets. Access follows least privilege and zero-trust principles, with explicit offboarding.
-Personal accounts may be used only as a temporary bootstrap exception with an owner, transfer
-date and recovery path.
+NEKURAMA should use company-owned domains, repositories, cloud accounts, provider accounts and secrets. Access follows least privilege and zero-trust principles, with explicit offboarding.
 
-BABAI must support tenant isolation, scoped authorization, auditability, retention/deletion
-controls, privacy obligations, backup/recovery and cross-border data assessment. The research-level
-identity model is global platform identity plus restaurant-scoped relationships; restaurant
-operations must authorize against the restaurant tenant first.
+BABAI must support tenant isolation, scoped authorization, auditability, retention/deletion controls, privacy obligations, backup/recovery and cross-border data assessment.
 
-Privacy roles are not decided. For each processing purpose, the restaurant may be the relevant
-Data Fiduciary and NEKURAMA a Data Processor, but future platform processing could change that
-analysis. This requires a data map and professional privacy review.
+## Questions
 
-## Company control baseline
+- [ ] Company security baseline
+- [ ] Identity/SSO/MFA policy
+- [ ] Secrets management
+- [ ] Device/access/offboarding controls
+- [ ] Incident response
+- [ ] Backup and disaster recovery
+- [ ] Privacy policy and DPA baseline
+- [ ] Data retention/deletion schedule
+- [ ] Cross-border data transfer assessment
+- [ ] Vendor security review process
 
-- Company-controlled email/domain, source control, cloud, Meta/provider, finance and registrar
-  accounts.
-- MFA on every privileged account; named users rather than shared credentials.
-- Password/secret management with rotation and emergency recovery; no secrets in repository,
-  issue, chat export or documentation.
-- Least privilege, tenant-scoped authorization, auditable admin access and explicit offboarding.
-- Backups and restore tests for operational data, configuration and required audit records.
-- Incident triage, notification/escalation and provider-contact runbooks before pilot.
+Evidence: later company decisions preserve the company-owned operating model and require company-owned infrastructure, least privilege, explicit offboarding, tenant isolation, auditability, retention/deletion, backup/recovery and cross-border assessment. This is a required control direction, not evidence that the controls are implemented.
 
-## Action checklist
+## Raw founder-message citations
 
-| Checklist item | Owner | Required input/evidence | Status |
-|---|---|---|---|
-| Inventory company accounts and transfer ownership | Operations/security owner | Domain, repo, cloud, Meta/provider, finance and registrar list | Not started |
-| Enforce MFA and named access | Security owner | Account inventory, recovery contacts and break-glass procedure | Not started |
-| Define secrets/key management | Engineering/security owner | Provider tokens, encryption keys, rotation/revocation and audit requirements | Not started |
-| Define joiner/mover/leaver process | Operations/security owner | Roles, approval chain, offboarding checklist and device/access inventory | Not started |
-| Map data and tenant boundaries | Product/security/privacy owners | Customer, restaurant, staff, payment, message, audit and backup data flows | Open |
-| Determine Fiduciary/Processor roles and notices | Privacy counsel + founders | Data map, contracts, purposes, consent/notice and subprocessors | Challenge required |
-| Define retention, deletion, export and legal holds | Privacy/security/finance owners | Data categories, statutory/accounting needs, backups and audit requirements | Open |
-| Threat-model pilot flows | Security owner | Meta/webhooks, payments, admin, staff takeover, tenant isolation and abuse cases | Before pilot |
-| Define incident response and vendor escalation | Security/operations owner | Contacts, severity levels, evidence handling and notification decisions | Before pilot |
-| Test backup restore and credential revocation | Engineering/security owner | Recovery objectives, backup scope and test record | Before production |
-| Review vendors and cross-border processing | Security/privacy owners | Provider list, locations, subprocessors, terms and transfer mechanisms | Open |
+- `nekurama.raw.chat.json#bbb213b8-d58c-403e-b858-bdaa1ac750b8`: “Our services should be oauthed imo, kind of decentralized auth with zero trust.” The same message requires hard flow/identity boundaries; this supports the control principle, not a deployed design.
+- `nekurama.raw.chat.json#bbb2129e-e9fa-43bf-adca-b0bc7a956664`: proposes public/scoped/sensitive/restrictive data classes, restaurant tenancy, sensitive logging and Vault-style secret handling.
+- `nekurama.raw.chat.json#bbb21426-5f7e-4c38-82e4-e288b9aae01c`: says deletion depends on agreed terms and applicable law; this is why retention/deletion remains professional-validation-required rather than a fixed policy.
 
-## Explicit privacy boundaries
+## E-setup checklist
 
-- A customer request to delete/withdraw a restaurant relationship is not automatically a request
-  to delete every platform identity or another restaurant's relationship.
-- Restaurant APIs and staff views must not gain cross-restaurant customer access merely because a
-  global identity exists.
-- Payment, financial, audit and security records may have different retention/deletion treatment;
-  do not promise immediate erasure without a documented policy and legal review.
-- Human takeover changes conversation ownership; it does not grant staff unrestricted access to
-  orders, payments or other tenants.
+- [ ] **Ownership:** move domains/DNS, repositories, cloud projects, provider accounts, billing, documentation, backups and secrets to company ownership; retain transfer and recovery evidence.
+- [ ] **Identity:** enforce MFA, recovery methods, SSO where practical, least privilege, privileged-access review and a dated access recertification cadence.
+- [ ] **Secrets:** use managed secrets storage, environment separation and rotation; prohibit secrets in source, tickets, chat and personal accounts.
+- [ ] **Lifecycle:** define device security, joiner/mover/leaver, immediate revocation, asset-return and emergency-access procedures.
+- [ ] **Application controls:** document tenant/branch isolation, scoped authorization, audit-log access/retention, production-access review and sensitive-data redaction.
+- [ ] **Data map:** inventory and classify customer, employee, operational, payment-related and provider data with owners, purposes, locations and retention candidates.
+- [ ] **Privacy/legal review:** define privacy notice, DPA/subprocessors, retention/deletion/export, user/restaurant requests and cross-border transfer decisions with qualified advice.
+- [ ] **Resilience:** establish incident response, breach assessment, notification/escalation, evidence preservation, backup/restore testing and disaster-recovery objectives.
+- [ ] **Vendors:** review critical messaging, payment, AI, hosting, analytics and support vendors for security, privacy, availability, concentration, pricing and offboarding risk.
 
-## Citations and historical context
+## Status boundaries
 
-- The identity/privacy record defines global identity plus restaurant-scoped customer relationships,
-  tenant-first authorization and unresolved Fiduciary/Processor roles (raw chat node
-  `39e2f9bb-f490-461b-a7c0-ddc8baf13701`).
-- The production queue explicitly leaves retention/deletion, threat model, secrets, tenant
-  isolation, incident response and India/privacy obligations open (raw chat node
-  `2cbff692-fc78-42d6-b97b-7c6ae9256876`).
-- The human-takeover history warns that staff channels and Meta coexistence still need exact
-  validation (raw chat node `43953802-8fdc-4ee4-a329-782796871b42`).
-
-## Retained prior handoff status boundaries
-
-- **Confirmed direction:** company-owned infrastructure, least privilege/zero trust, explicit
-  offboarding and BABAI data-control requirements.
-- **Professional validation required:** controller/processor allocation, privacy/DPA terms,
-  subprocessors, retention/deletion obligations and cross-border transfer assessment.
-- **Unknown:** whether any company-owned MFA, secrets, offboarding, backup, incident or
-  vendor-review controls are currently implemented.
-- **Pending:** security baseline, identity policy, secrets system, device controls, incident plan,
-  recovery objectives, privacy/DPA documents, retention schedule, transfer assessment and vendor
-  process.
-
-The earlier source record also requires company-owned infrastructure, least privilege, explicit
-offboarding, tenant isolation, auditability, retention/deletion, backup/recovery and
-cross-border assessment; this is a required control direction, not evidence that the controls
-are implemented.
+- **Confirmed direction:** company-owned infrastructure, least privilege/zero trust, explicit offboarding, and BABAI data-control requirements.
+- **professional-validation-required:** controller/processor allocation, privacy/DPA terms, subprocessors, retention/deletion obligations, and cross-border transfer assessment.
+- **unknown:** whether any company-owned MFA, secrets, offboarding, backup, incident, or vendor-review controls are currently implemented.
+- **partial:** the control principles and product boundary are documented, but implementation evidence, policy owners and review cadence are not recorded here.
+- **stale:** none identified; provider capabilities, applicable law and security standards must be rechecked before implementation.

@@ -1,12 +1,14 @@
 ---
 status: partial
 owner: BABAI
-last-reviewed: 2026-09-18
+last-reviewed: 2026-09-20
 sources:
   - nekurama/Bulb#1
   - nekurama/Bulb#3
   - nekurama.babai.research.md
   - historical ManojVysyaraju/bulb#1
+  - nekurama.raw.chat.json (ordered turns 71, 278, 290; mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `04cc446b-3a6d-4c19-adc7-4d94ab17d21b`, `4702681b-d611-4408-af5f-9001d04b6cfa`)
+  - Admin decision packet (2026-09-20; current task input)
 ---
 
 # Product Definition
@@ -31,13 +33,13 @@ This follows the operating principle:
 
 ## MVP boundary
 
-The initial MVP is intentionally narrower than the long-term business operating platform.
+The initial MVP is intentionally thin and narrower than the long-term business operating platform: restaurant-first, pickup-first and WhatsApp-native, with delivery and additional verticals kept as extensible later boundaries rather than pilot dependencies.
 
 ### In scope
 
 1. **Business / channel setup**
    - Connect the restaurant's business-owned WhatsApp identity.
-   - Support the planned Meta-native connection path, with BSP fallback/adapter where required.
+   - Use the planned Meta-native connection path; a BSP/provider adapter may be used where required, but onboarding/coexistence reliability is still a pilot validation item.
    - Establish one restaurant/tenant, one branch and one WhatsApp channel per participating restaurant for the initial pilot.
 
 2. **Catalog / menu**
@@ -79,7 +81,7 @@ The initial MVP is intentionally narrower than the long-term business operating 
 
 ## Initial pilot workflow
 
-The initial real-world pilot is a **10-restaurant controlled beta**. The cohort is intentionally large enough to expose practical operational variation while remaining small enough for close founder-led observation and iteration.
+The initial real-world validation is staged. The immediate field step is a **paid or deposit-backed pilot with an explicit end date**, beginning with one business and expanding only as operational evidence supports the next increment. The sequence may grow toward **up to 10 restaurants**; 10 is a ceiling for gradual validation, not a requirement to launch all at once or evidence that the thesis is already proven. The pilot fee/deposit amount, refund treatment and calendar end date remain unknown.
 
 `Connect business WhatsApp`
 `→ upload/review/publish menu`
@@ -90,17 +92,25 @@ The initial real-world pilot is a **10-restaurant controlled beta**. The cohort 
 `→ staff completes order`
 `→ customer receives status`
 
-Pilot operating boundary:
+Immediate pilot operating boundary:
 
-- 10 restaurants in the initial cohort
+- one selected business at a time, beginning with the research cohort
 - one WhatsApp number/channel per restaurant
 - one branch per restaurant for the initial pilot
 - pickup-first
 - manual human takeover available
 - no delivery dependency
 - founder-led onboarding
+- paid or deposit-backed pilot terms
+- explicit pilot end date before enrollment
 
-The 10-restaurant pilot is the current business decision for the initial beta. It is not a fixed endpoint for the product's validation. After practical complexities are identified and the product becomes sufficiently stable, additional restaurants can be onboarded continuously in controlled increments based on evidence from real-world usage.
+Controlled-beta boundary after the first pilot:
+
+- grow gradually toward up to 10 restaurants only after operational evidence supports the next increment
+- retain one branch and pickup-first constraints unless evidence requires a change
+- continue founder-led observation and progressive onboarding
+
+The paid/deposit-backed pilot and gradual onboarding toward up to 10 restaurants are current validation decisions. They are not fixed product limits. Additional branches, delivery, stores or other verticals require evidence from real-world usage.
 
 ## Explicit pilot out of scope
 
@@ -147,7 +157,13 @@ BABAI should integrate with existing business infrastructure where appropriate r
 
 The September 2026 field research covers 19 businesses: 15 restaurants and 4 stores. It reports strong interest in direct customer relationships, dissatisfaction with aggregator economics, existing WhatsApp ordering behavior and difficulty managing conversations. It also reports positive reaction to a proposition centered on the business's own WhatsApp, direct payment, no marketplace commission and no customer app installation.
 
-The research supports the problem and initial workflow, but explicitly does **not** yet prove willingness to pay, sustained usage, operational trust, Meta onboarding reliability, payment verification, refunds, delivery or multilingual staff workflows. Therefore the product definition should be treated as **partial/committed for the MVP boundary, with validation still required before broadening scope**.
+The research supports the problem and initial workflow, but explicitly does **not** yet prove willingness to pay, sustained usage, operational trust, Meta onboarding reliability, payment verification, refunds, delivery or multilingual staff workflows. Therefore the product definition is **committed for the narrow MVP boundary but partial for production breadth and commercial proof**.
+
+## Evidence and decision status
+
+- **Confirmed:** restaurant-first, one branch/number for the first pilot, pickup-first, human takeover, no delivery dependency, direct customer-to-business payment, no customer app requirement, and a paid/deposit-backed pilot with an end date (admin packet; `nekurama.babai.research.md`; raw turns 71 and 290).
+- **Partial:** Meta embedded onboarding/coexistence, payment confirmation/refunds, multilingual staff workflows, and exact web information architecture.
+- **Unknown:** pilot fee/deposit amount, refund treatment, calendar end date, final feature cut, operational thresholds, paid conversion, retention and when to broaden beyond restaurants.
 
 ## Current questions
 
@@ -158,6 +174,7 @@ The research supports the problem and initial workflow, but explicitly does **no
 - [ ] Detailed onboarding flow
 - [ ] Post-pilot roadmap and vertical expansion gates
 - [ ] Final pilot success/kill thresholds
+- [ ] Pilot fee/deposit, refund treatment and end date
 
 ## Related durable truth
 

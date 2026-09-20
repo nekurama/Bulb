@@ -1,5 +1,5 @@
 ---
-status: partial — finalized Track 2 planning bands; actual rates and founder approval pending
+status: partial — internal fee recommendation added; all numbers remain provisional and pending founder approval
 owner: BABAI Product / BRD
 last-reviewed: 2026-09-21
 sources:
@@ -16,7 +16,7 @@ sources:
 
 ## Purpose and decision posture
 
-This is the **Track 2 planning model v0.3** for the thin restaurant-first,
+This is the **Track 2 planning model v0.4** for the thin restaurant-first,
 pickup-first, WhatsApp-native MVP. The low/base/high planning bands below are
 finalized for internal planning and instrumentation only; every proposed
 number remains provisional and pending founder approval. The model is designed
@@ -124,6 +124,27 @@ FounderCost = (h_M × r_M) + (h_V × r_V)
 
 Until `r_M` and `r_V` are approved, report founder cost as hours and show
 monetary sensitivity only, not as booked company expense.
+
+## Internal fee calculation inputs — provisional
+
+The following midpoint inputs are used only to calculate an internal planning
+recommendation. They are not public prices, quotes, legal/tax conclusions or
+external provider rates.
+
+| Input | Low | Base | High | Status |
+|---|---:|---:|---:|---|
+| Combined founder opportunity-cost rate `r_f` | ₹1,000/hour | ₹1,000/hour | ₹1,000/hour | Provisional internal estimate; founder approval pending |
+| Monthly customer-order GMV `G` | ₹25,000 | ₹60,000 | ₹1,20,000 | Provisional internal estimate; actual volume unknown |
+| Payment rate `q` midpoint | 1.75% | 2.25% | 3.00% | Planning sensitivity; provider terms unknown |
+| Fixed payment cost `x` midpoint | ₹50 | ₹200 | ₹525 | Planning sensitivity; provider terms unknown |
+| Failure/refund reserve midpoint | 1.00% of `G` | 2.75% of `G` | 7.00% of `G` | Planning sensitivity; incident data unknown |
+| Shared fixed overhead midpoint `F` | ₹10,000/month | ₹25,000/month | ₹55,000/month | Planning allocation; actual shared pool unknown |
+| Target contribution sensitivity `τ` | 40% | 40% | 40% | Proposed internal sensitivity; not an approved target |
+| Planning variance around fee midpoint | ±15% | ±15% | ±15% | Maximum planning variance; not a quote range |
+
+The founder-hour rate is a blended internal opportunity-cost assumption for
+calculation only. Record Manoj and Vinay hours separately and replace `r_f`
+with approved `r_M` and `r_V` when available.
 
 ## Direct and indirect cost classification
 
@@ -295,6 +316,103 @@ If the denominator is zero or negative, report **not break-even** rather than
 inventing a restaurant count. These views are sensitivity outputs only; they
 do not select `P` or approve `τ`.
 
+## Internal planning fee recommendation — provisional
+
+The following recommendation is an internal planning output, not public
+pricing, a quote, a legal/tax conclusion or an external rate.
+
+For each cost posture, use the midpoint inputs above and calculate:
+
+```text
+FounderSupportCost =
+    FounderSupportHours × r_f
+
+PaymentCost =
+    (q × G) + x
+
+FailureRefundCost =
+    FailureRefundReserveRate × G
+
+OnboardingAmortization =
+    (OnboardingHours × r_f) / 3
+
+SharedOverheadAllocation =
+    F / N
+
+TotalMonthlyExpenditure =
+    Infrastructure
+  + MetaProviderAI
+  + Tooling
+  + FounderSupportCost
+  + PaymentCost
+  + FailureRefundCost
+  + OnboardingAmortization
+  + SharedOverheadAllocation
+
+RequiredMonthlyIncomeBar =
+    TotalMonthlyExpenditure / (1 - τ)
+
+90DayPilotFee =
+    3 × RequiredMonthlyIncomeBar
+
+PlanningFeeBand =
+    RequiredFeeMidpoint × [0.85, 1.15]
+```
+
+`N=1` is used for the full-cost view of a single-restaurant pilot. `N=10` is
+used for the post-pilot operating view at the current onboarding ceiling.
+These allocations are planning assumptions; do not treat them as approved
+commercial terms.
+
+### Recommended internal fee bands at proposed 40% contribution sensitivity
+
+Rounded to the nearest ₹100 for readability. Every amount is an internal
+planning estimate pending founder approval; it is not public pricing.
+
+| Cost posture | 90-day paid pilot, `N=1` full-cost view | Post-pilot monthly plan, `N=10` shared-cost view |
+|---|---:|---:|
+| Low | Midpoint **₹88,100**; band **₹74,900–₹101,300** | Midpoint **₹14,400**; band **₹12,200–₹16,500** |
+| Base | Midpoint **₹2,19,500**; band **₹1,86,600–₹2,52,400** | Midpoint **₹35,700**; band **₹30,300–₹41,000** |
+| High | Midpoint **₹5,03,900**; band **₹4,28,300–₹5,79,500** | Midpoint **₹85,500**; band **₹72,600–₹98,300** |
+
+The high-cost row is a stress case, not a recommended public tier. If the
+founder chooses to charge below an internal planning floor, record the
+difference explicitly:
+
+```text
+EconomicSubsidy =
+    RequiredMonthlyIncomeBar - CollectedMonthlyIncomeBar
+```
+
+The subsidy must not be presented as margin or hidden by excluding founder
+time, shared overhead, failure/refund cost or onboarding.
+
+### Contribution sensitivity at the base cost posture
+
+Using the base `N=10` monthly expenditure midpoint of approximately ₹21,400:
+
+| Proposed sensitivity `τ` | Required monthly income bar | 90-day equivalent |
+|---:|---:|---:|
+| 20% | approximately ₹26,800 | approximately ₹80,300 |
+| 40% | approximately ₹35,700 | approximately ₹1,07,000 |
+| 60% | approximately ₹53,500 | approximately ₹1,60,500 |
+
+These are sensitivity calculations only. They do not select a tier or
+authorize a public quote.
+
+### GST treatment for the internal fee view
+
+If applicable, calculate customer-facing gross separately:
+
+```text
+CustomerInvoiceGross =
+    CollectedFeeExGST × (1 + g)
+```
+
+`g` remains blank until professional validation. GST is not included in the
+income bar or contribution calculation unless the approved accounting
+treatment explicitly requires otherwise.
+
 ## Low/base/high interpretation
 
 The first populated model should produce three rows per restaurant:
@@ -326,7 +444,7 @@ failure/refund outcomes, `T`, and the chosen accounting treatment for `D`.
 
 ## Track 3 dependency
 
-Track 3 consumes this v0.3 artifact through the proposed metric contract in
+Track 3 consumes this v0.4 artifact through the proposed metric contract in
 [`validation.md`](validation.md), not as a price decision. The candidate
 thresholds use the base/high founder-time bands, failure/refund sensitivities
 and contribution-margin sensitivities here; they remain pending founder

@@ -8,7 +8,7 @@ sources:
   - nekurama.babai.research.md
   - nekurama.raw.chat.json (ordered turns 70, 290; mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `4702681b-d611-4408-af5f-9001d04b6cfa`, `f58ce128-39ed-4015-9be9-5b6135a39f20`)
   - Founder decision packet (2026-09-21; current task input)
-  - economics-model.md (Track 2 v0.3)
+  - economics-model.md (Track 2 v0.4)
 ---
 
 # Validation
@@ -97,7 +97,7 @@ No numeric success or kill thresholds are yet confirmed. Do not invent them from
 
 The following are **candidate** entry, exit, success and kill thresholds. They
 are not approved decisions. They are derived from the finalized-for-planning
-Track 2 v0.3 bands and actual-rate register in
+Track 2 v0.4 bands, internal fee bands and actual-rate register in
 [`economics-model.md`](economics-model.md), not from observed BABAI data.
 
 ### Proposed assumptions
@@ -137,8 +137,8 @@ Track 2 v0.3 bands and actual-rate register in
 | Staff adoption | Staff handle at least **80%** of active order sessions without founder intervention; recurring founder support ≤ **12 hours/restaurant/month** | <60% staff-handled sessions or recurring support > **24 hours/restaurant/month** |
 | Support load | Onboarding and support remain within the Track 2 base bands, with a declining trend after the first restaurant | Support remains in the high band after remediation, or founder effort prevents the next onboarding increment |
 | Economics data completeness | 100% of cost lines used in the end-date true-up have an actual rate/value, source and owner in the v0.2 register; no blanks are treated as zero | Any material cost line remains blank, unsupported or unallocated at true-up |
-| Contribution | Base-case `ContributionAfterOnboarding` is non-negative and reaches the proposed **40% contribution-margin sensitivity**; low/base/high views use income-bar versus total-expenditure margins | Base-case contribution is negative, `P ≤ C`, or the conclusion depends on an unapproved price, missing rate or unapproved GST treatment |
-| Failure/refund economics | Actual failure/refund/remediation cost remains within the v0.3 base sensitivity of **1.5–4% of `G`** when BABAI absorbs it, or is separately evidenced when passed through | Cost exceeds **10% of `G`**, or credits/refunds/remediation are not recorded |
+| Contribution | Base-case `ContributionAfterOnboarding` is non-negative and reaches the proposed **40% contribution-margin sensitivity**; low/base/high views use income-bar versus total-expenditure margins and record any gap below the internal fee floor as subsidy | Base-case contribution is negative, `P ≤ C`, or the conclusion depends on an unapproved price, missing rate or unapproved GST treatment |
+| Failure/refund economics | Actual failure/refund/remediation cost remains within the v0.4 base sensitivity of **1.5–4% of `G`** when BABAI absorbs it, or is separately evidenced when passed through | Cost exceeds **10% of `G`**, or credits/refunds/remediation are not recorded |
 | Willingness to pay | At least **2 of the first 3 completed pilots** accept paid continuation or renewal terms after the end date | 0 of 3 accept continuation after complete observation; below 3 completed pilots remains inconclusive |
 
 ### Proposed kill or immediate-hold conditions
@@ -177,7 +177,7 @@ real restaurant operations, whether managers and staff can use it with
 reasonable effort, whether customers are comfortable ordering through it,
 whether it solves a meaningful problem, and whether restaurants see enough
 value to continue as paying customers. The economics decision must use the
-v0.3 low/base/high views, income-bar versus total-expenditure margin and
+v0.4 low/base/high views, internal fee bands, income-bar versus total-expenditure margin and
 actual-rate register rather than historical price hypotheses.
 
 The pilot is also intended to expose practical workflow, traffic, customer-experience, and data complexities. Findings may lead to changes in the interface, workflows, onboarding, or other product initiatives before broader expansion.

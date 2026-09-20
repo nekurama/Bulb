@@ -107,7 +107,7 @@ WhatsApp is the primary conversational/action surface for customer and staff att
 | Pilot sequence | **partial** | Fixed 90-day paid pilot; Stage 0 is one business, then gradual onboarding up to 10 restaurants; day-90 exit requires team-defined readiness evidence. |
 | Dashboard boundary | **partial** | WhatsApp remains first-class; web handles density and recovery. Exact MVP screens and entitlements remain open. |
 | Onboarding | **partial** | Progressive and resumable; exact Meta handoff, Admin tooling, retention and web information architecture remain open. |
-| Pricing / packaging | **challenge-required** | No public price is committed. ₹999 / ₹2,499 / ₹4,999 + GST and older prices remain hypotheses only; cost/contribution evidence and paid-pilot terms are required. |
+| Pricing / packaging | **challenge-required** | No public price is committed. Internal v0.4 fee bands are calculated from total expenditure and contribution sensitivity; ₹999 / ₹2,499 / ₹4,999 + GST and older prices remain hypotheses only. |
 | Payment verification | **challenge-required** | Direct merchant payment is preferred; gateway/webhook and manual confirmation behavior require pilot testing. |
 | Delivery | **unknown for MVP** | Provider-agnostic delivery is a later capability; no delivery integration is required to prove pickup-first MVP. |
 | ROI / success thresholds | **partial** | Measure activation, orders, fulfillment, repeat use, staff adoption, support, economics and willingness to pay; numeric thresholds are not set. |
@@ -156,7 +156,7 @@ The field research is intentionally not upgraded: it reports strong interest and
 | `customer-market.md` | Previously question-heavy; now retains an evidence-backed ICP and market answer, with segmentation, switching and expansion gates still partial/unknown. |
 | `experience-and-channels.md` | Previously thin; now records the confirmed WhatsApp/web principle, onboarding and takeover direction, with detailed UX still partial. |
 | `business-model.md` | Retained as a partial commercial model; public pricing is withheld while cost, contribution, GST and pilot-term evidence is collected. |
-| `economics-model.md` | Track 2 v0.3 internal planning artifact; provides finalized-for-planning low/base/high bands, actual-rate register, 90-day plan, direct/indirect cost formulas, pilot-term options and break-even sensitivity without selecting a price. |
+| `economics-model.md` | Track 2 v0.4 internal planning artifact; provides finalized-for-planning low/base/high bands, actual-rate register, 90-day plan, direct/indirect cost formulas, provisional fee bands and break-even sensitivity without selecting public pricing. |
 | `validation.md` | Track 3 metric contract with proposed entry/exit/success/kill thresholds; founder approval and pilot evidence remain required. |
 | `product-definition.md` | Retained as the current MVP boundary; production cut, edge cases and post-pilot scope remain partial. |
 | `thesis-and-positioning.md` | Retained as current positioning; differentiation is explicitly a thesis, not a proven moat, and legal clearance remains separate. |

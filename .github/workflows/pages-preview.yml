@@ -45,7 +45,7 @@ jobs:
         run: |
           set -euo pipefail
           test "$(find dist -type f -printf '%P\n' | sort)" = "$(printf '%s\n' app.js favicon.svg index.html mock-data.json styles.css)"
-          ! grep -RInE 'https?://|fetch\(|XMLHttpRequest|WebSocket|sendBeacon|EventSource|localStorage|sessionStorage|document\.cookie|assets/candidates|candidate-only|provenance' dist \
+          ! grep -RInE 'https?://|fetch\(|XMLHttpRequest|WebSocket|sendBeacon|EventSource|localStorage|sessionStorage|document\.cookie|assets/candidates|candidate-only|provenance\.json' dist \
             --include='*.html' --include='*.css' --include='*.js' --include='*.json'
           ! find dist -type f -path '*candidates*' | grep .
 

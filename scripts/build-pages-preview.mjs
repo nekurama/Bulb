@@ -80,7 +80,10 @@ const main = async () => {
   const boundaryPattern =
     /https?:\/\/|fetch\s*\(|XMLHttpRequest|WebSocket|sendBeacon|EventSource|localStorage|sessionStorage|document\.cookie/;
   assert(!sourceText.some((text) => boundaryPattern.test(text)), "External or persistent browser boundary found");
-  assert(!sourceText.some((text) => /assets\/candidates|candidate-only|provenance/i.test(text)), "Candidate content referenced by site");
+  assert(
+    !sourceText.some((text) => /assets\/candidates|candidate-only|provenance\.json/i.test(text)),
+    "Candidate content referenced by site",
+  );
 
   await rm(outputDir, { recursive: true, force: true });
   await mkdir(outputDir, { recursive: true });

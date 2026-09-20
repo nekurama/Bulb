@@ -19,3 +19,9 @@ and a NEKURAMA-endorsed BABAI lockup). `provenance.json` records their intent,
 source anchors, contrast guidance, aspect/crop guidance and alt text. They do
 not replace approved branding assets and must not be published or treated as
 trademark, licensing or final-approval evidence.
+
+For internal QA only, the current working recommendation is the wordmark +
+spark as the default responsive test, with mascot + spark as the supporting
+mark, operator + spark as a restaurant-context mark, and the endorsed lockup
+held for parent/product review. This does not finalize the brand, name,
+descriptor, legal relationship or public use.

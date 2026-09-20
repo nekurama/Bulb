@@ -110,7 +110,18 @@
       "sourceAnchors": [
         "docs/products/babai/thesis-and-positioning.md#L160-L162",
         "docs/products/babai/thesis-and-positioning.md#L101-L112"
-      ]
+      ],
+      "qa": {
+        "reviewedOn": "2026-09-21",
+        "contrastChecks": [
+          "Deep green #163D35 on cream #FFFDF7: 11.78:1 (WCAG AA/AAA for text sizes)",
+          "Orange #E77D43 on dark #14201E: 5.91:1 (accent shape only; do not use as small text)"
+        ],
+        "altCheck": "Informative light specimen has descriptive alt text; duplicate dark specimen is aria-hidden.",
+        "cropCheck": "Pass when the complete 1:1 viewBox is contained; retain both ears and the spark.",
+        "responsiveCheck": "Pass at contained square dimensions; do not crop, squeeze into a wordmark or use as a tiny favicon.",
+        "provenanceCheck": "Locally authored candidate SVG; no external source, re-encoding or derived image."
+      }
     },
     {
       "id": "babai-operator-spark",
@@ -130,7 +141,18 @@
       "sourceAnchors": [
         "docs/products/babai/thesis-and-positioning.md#L85-L112",
         "docs/products/babai/product-definition.md#L32-L78"
-      ]
+      ],
+      "qa": {
+        "reviewedOn": "2026-09-21",
+        "contrastChecks": [
+          "Deep green #163D35 on cream #FFFDF7: 11.78:1 (WCAG AA/AAA for text sizes)",
+          "Yellow #F2C75C on deep green #163D35: 7.47:1 (display accent; not a text lockup)"
+        ],
+        "altCheck": "Informative light specimen has descriptive alt text; duplicate dark specimen is aria-hidden.",
+        "cropCheck": "Pass when the complete 1:1 viewBox is contained; retain the spark and lower base.",
+        "responsiveCheck": "Pass as a contained square badge; do not crop into a narrow lockup or rely on the spark alone.",
+        "provenanceCheck": "Locally authored candidate SVG; no external source, re-encoding or derived image."
+      }
     },
     {
       "id": "babai-wordmark-spark",
@@ -150,7 +172,18 @@
       "sourceAnchors": [
         "docs/products/babai/thesis-and-positioning.md#L16-L25",
         "docs/products/babai/thesis-and-positioning.md#L126-L148"
-      ]
+      ],
+      "qa": {
+        "reviewedOn": "2026-09-21",
+        "contrastChecks": [
+          "Cream #FFFDF7 on deep green #163D35: 11.78:1 (WCAG AA/AAA for text sizes)",
+          "Orange #E77D43 on dark #14201E: 5.91:1 (spark accent only; not the text carrier)"
+        ],
+        "altCheck": "Informative light specimen has descriptive alt text; duplicate dark specimen is aria-hidden.",
+        "cropCheck": "Pass only at the supplied 3:1 viewBox; retain the full wordmark, spark and underline.",
+        "responsiveCheck": "Pass as the default horizontal responsive test; preserve the 3:1 ratio and switch to the mascot mark when a square is required.",
+        "provenanceCheck": "Locally authored candidate SVG; no external source, re-encoding or derived image."
+      }
     },
     {
       "id": "babai-endorsed-lockup",
@@ -172,7 +205,19 @@
         "docs/company/ip-brand-legal.md#L13-L18",
         "docs/products/babai/thesis-and-positioning.md#L188-L192",
         "docs/products/babai/thesis-and-positioning.md#L126-L148"
-      ]
+      ],
+      "qa": {
+        "reviewedOn": "2026-09-21",
+        "contrastChecks": [
+          "Cream #FFFDF7 on deep green #163D35: 11.78:1 (WCAG AA/AAA for text sizes)",
+          "Yellow #F2C75C on deep green #163D35: 7.47:1 (descriptor display text)",
+          "Green-soft #DCE9DF on deep green #163D35: 9.56:1 (endorsement display text)"
+        ],
+        "altCheck": "Informative light specimen names the candidate wording and endorsement; duplicate dark specimen is aria-hidden.",
+        "cropCheck": "Pass only when the complete 3:1 frame remains visible, including descriptor and endorsement.",
+        "responsiveCheck": "Internal review only at medium and wide sizes; descriptor and endorsement must remain readable before any public use.",
+        "provenanceCheck": "Locally authored candidate SVG using internal wording; no trademark, licensing or parent-approval conclusion."
+      }
     }
   ]
 }

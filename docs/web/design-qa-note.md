@@ -1,7 +1,7 @@
 ---
-status: draft
+status: qa-ready / founder review pending
 owner: web-qa / Track 5
-last-reviewed: 2026-09-20
+last-reviewed: 2026-09-21
 ---
 
 # BABAI static template: design and QA note
@@ -113,11 +113,13 @@ absence of a live form action or canonical domain.
   local-only form preview exposed its status and clear-fields restored empty
   values plus the default route; the mobile disclosure opened from a focused
   `summary` with Enter.
-- **Media/network:** At 360px CSS width, `body.scrollWidth` matched the
-  viewport width. Reduced-motion emulation changed document scrolling to
-  `auto`. The only network requests were `/`, `styles.css`, `script.js` and
-  `mock-data.json` on the local server; the inline favicon produced no
-  additional request.
+- **Media/network:** At 320px, 768px and 1440px CSS widths,
+  `body.scrollWidth` matched the viewport width. Reduced-motion emulation
+  changed document scrolling to `auto`. The local server requests were the
+  page, `styles.css`, `script.js`, `mock-data.json`, the five candidate JPEGs
+  and the four candidate SVGs; there were no remote fonts, trackers, embeds or
+  external form destinations. The inline favicon produced no additional
+  request.
 - **Responsive assertions:** the stylesheet includes a 320px-safe shell,
   mobile disclosure navigation, stacked grids, wrapped CTA/actions and
   reduced-motion behavior. A browser-level visual review remains a founder QA
@@ -191,6 +193,49 @@ These are visual QA notes, not legal clearance, trademark meaning, licensing
 evidence, final selection or public-asset approval. Absolute local paths are
 reported in the implementation handoff rather than embedded as deployment
 references.
+
+### Working naming and story treatment
+
+For this internal QA packet, the naming hierarchy is treated as:
+
+`NEKURAMA` (parent/company direction) → `BABAI` (product/brand) → future
+products or verticals.
+
+The working story is **friendly, capable business automation with a human
+operator in control**. “BABAI — Business Automation by AI” is retained only
+as founder-approved internal descriptor text inside the endorsed candidate; it
+is not public copy, a legal name, a trademark conclusion or a product
+availability claim. The page keeps the public headline, supporting copy and
+CTA as slots until the founder/product/legal gates close.
+
+The QA recommendation is to use **wordmark + spark** as the default responsive
+lockup test because it keeps the product name legible in a horizontal header.
+Use **mascot + spark** as the flexible supporting mark, **operator + spark** for
+restaurant-operator contexts, and hold the **endorsed lockup** for internal
+parent/product review because its descriptor and endorsement lose legibility
+earlier at small sizes. This is a design QA recommendation, not founder
+approval.
+
+### SVG QA record
+
+The four candidate SVGs are locally authored, transparent, dependency-free
+studies. `assets/candidates/provenance.json` is the source of record for the
+hashes, dimensions, alt text, source anchors and per-asset QA fields. The
+tested specimen colors are cream `#FFFDF7`, deep green `#163D35`, dark
+surface `#14201E`, and green-soft `#DCE9DF`. Relative-luminance checks record
+11.78:1 for deep green/cream, 5.91:1 for orange/dark, 7.47:1 for
+yellow/deep green and 9.56:1 for green-soft/deep green; accents are not
+treated as small-text carriers.
+
+All four concepts pass the crop rule only when their full supplied viewBox is
+contained. The square studies must retain the ears, spark and base; the
+horizontal studies must retain the full 3:1 frame, descriptor and endorsement.
+Responsive QA keeps intrinsic dimensions in the markup, uses `object-fit:
+contain`, and moves the board to one column below 860px so no candidate is
+cropped or squeezed. Informative light-surface specimens have draft alt text;
+duplicate dark specimens are hidden from assistive technology. None of these
+studies is approved for favicon, public navigation, trademark, licensing or
+production use.
 
 ## Unresolved decisions
 

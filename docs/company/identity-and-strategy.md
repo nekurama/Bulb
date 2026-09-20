@@ -21,6 +21,10 @@ The Private Limited application has already been made. The incorporation certifi
 transition point: before it, avoid major contracts, hiring and IP-transfer commitments; after it,
 complete founder/company adoption documents and proceed with company commitments.
 
+For internal planning, [`internal-controls.md`](internal-controls.md) is the authoritative
+company-control packet for the NEKURAMA identity and BABAI product boundary. It does not replace
+the incorporation certificate or any professional/external approval.
+
 Current strategic direction: bootstrap-first, with funding optional; keep the company structure simple unless a concrete trigger justifies complexity.
 
 ## Questions

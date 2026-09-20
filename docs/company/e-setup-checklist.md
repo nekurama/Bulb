@@ -27,6 +27,11 @@ source for administrative sequencing and supersedes earlier working assumptions 
 specific. A packet decision is not proof of incorporation, ownership issuance, registration,
 clearance, implementation or professional approval.
 
+Internal control assumptions for NEKURAMA/BABAI identity, account migration, MFA/recovery,
+expense approvals, founder support/time records, clean-room boundaries and the internal evidence
+ledger are consolidated in [`internal-controls.md`](internal-controls.md). The external entity
+register is separate and remains unchanged.
+
 ## Status key
 
 - **confirmed** — current direction is explicit, but may still need execution evidence

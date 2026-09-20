@@ -25,6 +25,11 @@ recovery accounts to company control, with MFA and retained transfer evidence. T
 organization is controlled through named personal accounts, not a fictitious shared company login;
 at least two appropriate owners should be maintained.
 
+The internal migration plan and evidence-ledger fields are maintained in
+[`internal-controls.md`](internal-controls.md). Company-controlled recovery means that no
+founder's personal email, phone or device is the sole recovery path; this is a required design
+dependency, not evidence that a provider transfer or MFA setting is complete.
+
 BABAI must support tenant isolation, scoped authorization, auditability, retention/deletion controls, privacy obligations, backup/recovery and cross-border data assessment.
 
 ## Questions

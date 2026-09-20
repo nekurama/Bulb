@@ -31,6 +31,11 @@ delegation, while founder payments, non-routine or material spend, related-party
 commitments require explicit approval and evidence. GST/tax setup is handled with the CA, with
 filing receipts and advice retained.
 
+Founder support, time and founder-paid costs are tracked separately from equity, salary, loans and
+reimbursements. The internal control packet defines the minimum time/support record and approval
+evidence in [`internal-controls.md`](internal-controls.md); it does not set tax, payroll or
+employment treatment.
+
 DPIIT, T-Hub and incubator eligibility must be validated against the company's actual
 incorporation, registered address, operations, GST position and each programme's current rules.
 No benefit is assumed from founder residence, a portal listing or AI usage alone.

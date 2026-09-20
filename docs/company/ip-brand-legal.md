@@ -31,6 +31,11 @@ certificate, execute founder/company adoption documents and then proceed with ma
 
 IP provenance is divided into: background IP; NEKURAMA-created IP; third-party/OSS; and customer-owned material/data. General knowledge and skills are not automatically company IP. Employer-confidential or restricted third-party material must not enter BABAI without rights.
 
+The internal clean-room and evidence-ledger boundary is maintained in
+[`internal-controls.md`](internal-controls.md). It records provenance and exclusion dependencies
+without claiming that an assignment, adoption document, employer review or trademark clearance
+has been completed.
+
 Brand direction: BABAI is the selected product name/finalist, subject to professional trademark clearance. NEKURAMA and BABAI word/device marks are contemplated. Word mark first is preferred; Class 42 is the primary SaaS/software/AI class, with other classes only when justified. A domain purchase or company-name reservation must not be treated as trademark clearance.
 
 ## Questions

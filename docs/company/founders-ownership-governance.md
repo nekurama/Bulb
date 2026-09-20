@@ -25,6 +25,8 @@ sources:
 - Founder funding does not automatically change ownership.
 - New equity should be a deliberate priced issuance and causes dilution.
 - Founder/company decisions should be governed by formal agreements rather than informal assumptions.
+- Founder support and time records are planning evidence only; they do not automatically create
+  salary, reimbursement, loan, capital or equity treatment.
 - Execute the founder/shareholder agreement immediately after incorporation and before any
   material contract.
 - An unpaid non-executive director structure is only a proposal pending CS/lawyer review. It
@@ -52,6 +54,10 @@ Evidence: later company issue decisions supersede the earlier 60:40 working disc
 
 ## E-setup checklist
 
+- [ ] **Internal controls:** keep dated founder support/time records and classify founder-paid
+  amounts separately from equity, salary, loans and reimbursements; use
+  [`internal-controls.md`](internal-controls.md) without treating it as an employment or tax
+  determination.
 - [ ] **Founder documents:** after incorporation, obtain legal drafting/review for the founder/shareholder agreement, cap table, confidentiality and IP-adoption schedules before issuance or material contracts.
 - [ ] **Governance:** define board/director structure, reserved matters, approval thresholds, meeting cadence, minutes, conflicts and signing authority.
 - [ ] **Founder protections:** document the four-year vesting/one-year cliff direction, transfer restrictions, good/bad leaver treatment, founder exit and deadlock resolution.

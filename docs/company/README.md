@@ -32,6 +32,11 @@ Current durable company-level truth. Product-specific detail belongs under `docs
 
 `e-setup-checklist.md` is the bounded cross-dimension checklist for incorporation, founder/governance, IP/brand/legal, finance/tax/compliance and security/privacy setup. It records actionable work without turning unresolved questions into company decisions.
 
+`internal-controls.md` is the internal-only control packet for NEKURAMA/BABAI identity,
+account migration, MFA/recovery ownership, expense approvals, founder support/time records,
+clean-room boundaries and the internal evidence ledger. It must not be used as evidence of an
+external approval or provider completion.
+
 `external-entity-register.json` is the durable evidence register for external certificates, professional reviews, trademark clearances, registrations, programme decisions and provider approvals. It records owners, dependencies, next actions and control boundaries; it does not claim completion without evidence.
 
 ## Current handoff status

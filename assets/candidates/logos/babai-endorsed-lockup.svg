@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 260" fill="none">
+  <title>Candidate BABAI product lockup endorsed by NEKURAMA</title>
+  <rect x="8" y="8" width="744" height="244" rx="48" fill="#163D35"/>
+  <circle cx="108" cy="130" r="64" fill="#FFFDF7"/>
+  <path d="M73 126 62 92l30 15c8-8 18-12 28-12s20 4 28 12l30-15-11 34c6 10 8 21 7 32-3 28-25 44-54 44s-51-16-54-44c-1-11 1-22 7-32Z" fill="#163D35"/>
+  <circle cx="102" cy="135" r="4" fill="#FFFDF7"/>
+  <circle cx="122" cy="135" r="4" fill="#FFFDF7"/>
+  <path d="M106 150c5 5 9 5 14 0" stroke="#FFFDF7" stroke-width="4" stroke-linecap="round"/>
+  <path d="m153 68 7-18 7 18 18 7-18 7-7 18-7-18-18-7 18-7Z" fill="#E77D43"/>
+  <text x="202" y="118" fill="#FFFDF7" font-family="Georgia, Times New Roman, serif" font-size="72" font-weight="700" letter-spacing="-3">BABAI</text>
+  <text x="207" y="156" fill="#F2C75C" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" letter-spacing="1">BUSINESS AUTOMATION BY AI</text>
+  <path d="M208 184h252" stroke="#E77D43" stroke-width="5" stroke-linecap="round"/>
+  <text x="208" y="218" fill="#DCE9DF" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing="2">BY NEKURAMA</text>
+</svg>

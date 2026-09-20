@@ -90,5 +90,89 @@
       "responsiveReview": "Use only as a contained candidate specimen; do not let object-fit cover turn it into a cropped logo",
       "altText": "NEKURAMA winged cat illustration with orange wordmark on a black background, candidate asset"
     }
+  ],
+  "generatedAssets": [
+    {
+      "id": "babai-mascot-spark",
+      "brand": "BABAI",
+      "sourceType": "locally authored candidate SVG",
+      "repositoryPath": "assets/candidates/logos/babai-mascot-spark.svg",
+      "sha256": "ae4fe560726e5319ed09cd91eb1ebf262df50d01b287fa433ddc957a1d915c86",
+      "mimeType": "image/svg+xml",
+      "width": 320,
+      "height": 320,
+      "aspectRatio": "1:1",
+      "hasAlpha": true,
+      "intent": "Friendly mascot plus AI spark/light cue; exploratory product mark only",
+      "altText": "Candidate BABAI mascot mark with an orange AI spark, transparent SVG concept",
+      "usage": "Prefer cream or deep-green surfaces; preserve square viewBox and full spark/ear silhouette. Use as a contained mark, not a cropped wordmark.",
+      "contrast": "Deep green and cream pass WCAG AA on the tested light/dark specimens; orange is an accent and must not carry small text.",
+      "sourceAnchors": [
+        "docs/products/babai/thesis-and-positioning.md#L160-L162",
+        "docs/products/babai/thesis-and-positioning.md#L101-L112"
+      ]
+    },
+    {
+      "id": "babai-operator-spark",
+      "brand": "BABAI",
+      "sourceType": "locally authored candidate SVG",
+      "repositoryPath": "assets/candidates/logos/babai-operator-spark.svg",
+      "sha256": "a39a3d2a58e14a59eaa9bf6a1b4565eb11250795aff458b2d029812ff913e1cb",
+      "mimeType": "image/svg+xml",
+      "width": 320,
+      "height": 320,
+      "aspectRatio": "1:1",
+      "hasAlpha": true,
+      "intent": "Restaurant operator/service badge plus secondary AI spark cue; exploratory product mark only",
+      "altText": "Candidate BABAI restaurant operator badge with an AI spark, transparent SVG concept",
+      "usage": "Prefer a square badge or contained stamp; preserve breathing room around the spark and base. Do not crop into a narrow lockup.",
+      "contrast": "Deep green and cream pass WCAG AA on the tested light/dark specimens; orange and yellow are display accents only.",
+      "sourceAnchors": [
+        "docs/products/babai/thesis-and-positioning.md#L85-L112",
+        "docs/products/babai/product-definition.md#L32-L78"
+      ]
+    },
+    {
+      "id": "babai-wordmark-spark",
+      "brand": "BABAI",
+      "sourceType": "locally authored candidate SVG",
+      "repositoryPath": "assets/candidates/logos/babai-wordmark-spark.svg",
+      "sha256": "64dae04ee55c14a93560dffdc4a2dcf4cda5058753bea3f579cdc26a667b718a",
+      "mimeType": "image/svg+xml",
+      "width": 640,
+      "height": 220,
+      "aspectRatio": "3:1",
+      "hasAlpha": true,
+      "intent": "Readable product wordmark with a restrained AI spark cue; exploratory lockup only",
+      "altText": "Candidate BABAI wordmark with an orange AI spark, transparent SVG concept",
+      "usage": "Use at the native horizontal ratio; do not squeeze into a square or crop the spark. Best for headers, operator tools and review decks.",
+      "contrast": "Cream on deep green and deep green on cream pass WCAG AA for the wordmark; orange/yellow remain non-text accents.",
+      "sourceAnchors": [
+        "docs/products/babai/thesis-and-positioning.md#L16-L25",
+        "docs/products/babai/thesis-and-positioning.md#L126-L148"
+      ]
+    },
+    {
+      "id": "babai-endorsed-lockup",
+      "brand": "BABAI / NEKURAMA",
+      "sourceType": "locally authored candidate SVG",
+      "repositoryPath": "assets/candidates/logos/babai-endorsed-lockup.svg",
+      "sha256": "b2763726f3856994f117c2c37ef5b2e8f26f3ef1b8b55300aeed6aac187e14c2",
+      "mimeType": "image/svg+xml",
+      "width": 760,
+      "height": 260,
+      "aspectRatio": "3:1",
+      "hasAlpha": true,
+      "intent": "Parent/company relationship plus product lockup using founder-approved internal wording; exploratory lockup only",
+      "wordingStatus": "Founder-approved wording for internal review only: BABAI — Business Automation by AI",
+      "altText": "Candidate BABAI lockup with founder-approved wording and a by NEKURAMA endorsement, transparent SVG concept",
+      "usage": "Keep as a full horizontal lockup; do not split or treat the endorsement as trademark clearance or final parent approval. Preserve the 3:1 crop.",
+      "contrast": "Cream on deep green and yellow/orange display accents are legible in the tested specimens; endorsement text is for internal review and should be rechecked at final size.",
+      "sourceAnchors": [
+        "docs/company/ip-brand-legal.md#L13-L18",
+        "docs/products/babai/thesis-and-positioning.md#L188-L192",
+        "docs/products/babai/thesis-and-positioning.md#L126-L148"
+      ]
+    }
   ]
 }

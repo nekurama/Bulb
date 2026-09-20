@@ -163,6 +163,35 @@ asynchronous decoding and contained responsive rendering); a future approved
 source should be optimized separately after founder selection and legal/assets
 review.
 
+## Founder decision packet: candidate lockup directions
+
+The internal packet adds four locally authored transparent SVG studies under
+`assets/candidates/logos/`:
+
+1. **Mascot + spark** — friendly, capable companion cue with a restrained AI
+   light/spark.
+2. **Restaurant operator + spark** — contained badge cue for the owner/operator
+   and restaurant service context.
+3. **Wordmark + spark** — readable product-first lockup for headers and operator
+   surfaces.
+4. **Endorsed lockup** — BABAI product relationship with NEKURAMA as the
+   parent/company direction.
+
+The studies are grounded in `docs/products/babai/thesis-and-positioning.md`
+(brand personality, restaurant-first buyer and messaging hierarchy),
+`docs/products/babai/product-definition.md` (restaurant-first operating
+boundary), and `docs/company/README.md` plus `docs/company/ip-brand-legal.md`
+(NEKURAMA parent/company and BABAI product/brand relationship). The phrase
+“BABAI — Business Automation by AI” appears only as founder-approved internal
+wording in the endorsed study; final public copy remains gated.
+
+Each concept is shown on light and dark specimen surfaces with draft alt text,
+transparent-background usage notes, contrast guidance and aspect/crop rules.
+These are visual QA notes, not legal clearance, trademark meaning, licensing
+evidence, final selection or public-asset approval. Absolute local paths are
+reported in the implementation handoff rather than embedded as deployment
+references.
+
 ## Unresolved decisions
 
 Final copy and CTA wording, approved CTA destination and owner, privacy notice,

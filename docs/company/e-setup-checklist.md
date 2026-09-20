@@ -3,93 +3,184 @@ status: living
 owner: NEKURAMA
 last-reviewed: 2026-09-20
 sources:
+  - 2026-09-20 ADMIN DECISION PACKET (current decision source)
   - nekurama/Bulb#2
   - nekurama/Bulb#5
-  - nekurama.raw.chat.json
+  - nekurama.raw.chat.json#bbb2179b-ab78-4f20-98ef-1bf49a0702f7
+  - nekurama.raw.chat.json#ddcdee52-365b-4ca1-bde0-8d06c42659a9
+  - nekurama.raw.chat.json#de9b64a0-bb15-44aa-80a4-83f0c50d58d3
+  - nekurama.raw.chat.json#0c707bc3-1291-438d-bf24-6b6ab185775a
+  - nekurama.raw.chat.json#0b63f1d6-b8e5-4e0e-b962-3fabc9366461
+  - nekurama.raw.chat.json#fbd76d92-2a25-44fe-a156-f18abe966639
+  - nekurama.raw.chat.json#bbb21ece-7bb6-4a1f-9798-9ebd4ed6bcbd
+  - nekurama.raw.chat.json#2012055b-4f07-4db1-9f2d-d6c6202bce07
+  - nekurama.raw.chat.json#1a7e5861-74a7-4600-bdaa-94a4c95993ca
+  - nekurama.raw.chat.json#d9960ebd-982b-4bd5-875b-a73bb2149864
+  - nekurama.raw.chat.json#98947e13-1b0d-4d3f-b9d1-869f51bddd0f
 ---
 
 # NEKURAMA Company E-Setup Checklist
 
-This is an evidence-backed execution checklist for company setup. It does not replace legal, tax, accounting, employment or security advice, and it does not close a decision that the source record leaves open.
+This is an evidence-backed execution checklist. It is not legal, tax, accounting, employment,
+privacy or security advice. The **2026-09-20 ADMIN DECISION PACKET** is the current decision
+source for administrative sequencing and supersedes earlier working assumptions where it is more
+specific. A packet decision is not proof of incorporation, ownership issuance, registration,
+clearance, implementation or professional approval.
 
 ## Status key
 
-- **confirmed** — explicit current direction/principle
-- **partial** — direction exists; execution or details remain
-- **unknown** — no reliable current answer is recorded
-- **professional-validation-required** — obtain qualified legal, tax, accounting, employment or regulatory confirmation before acting
+- **confirmed** — current direction is explicit, but may still need execution evidence
+- **partial** — direction is recorded; an action, instrument or evidence is still open
+- **unknown** — no reliable implementation answer is recorded
+- **professional-validation-required** — obtain qualified CS, lawyer, CA, employment, tax,
+  regulatory, privacy or security confirmation before acting
+- **deferred** — intentionally not executed now; preserve a plan and trigger
 
-## Current company baseline
+## Current decision packet
 
-| Area | Current status | Evidence |
+| Decision | Current direction | Evidence/status |
 | --- | --- | --- |
-| Company/product boundary | **confirmed** — NEKURAMA is the intended operating company and BABAI is a product/brand, not a separate company | `nekurama/Bulb#2` comment `IC_kwDOUYGptM8AAAABUPMg3A`; `nekurama/Bulb#5` §§1, 5; raw `bbb214cb-4959-4878-b6a9-2358ddbf2b07` |
-| Legal form | **partial; professional-validation-required** — Private Limited is preferred, but incorporation is not legally locked | `nekurama/Bulb#2` comment `IC_kwDOUYGptM8AAAABUPKU-w`; `nekurama/Bulb#5` §§1, 7; raw `bbb2179b-ab78-4f20-98ef-1bf49a0702f7` |
-| Founder ownership | **confirmed** — latest issue record is Manoj 55% / Vinay 45%; earlier 60:40 discussion is historical and superseded | `nekurama/Bulb#2` comment `IC_kwDOUYGptM8AAAABURgwyw`; earlier principle `IC_kwDOUYGptM8AAAABUQCQ1w`; raw `bbb21a4e-30b7-44bf-a04e-12e206e2411c` |
-| Founder funding | **confirmed principle; partial execution** — funding is separate from equity and must be documented as capital and/or a loan | `nekurama/Bulb#2` comments `IC_kwDOUYGptM8AAAABUQCQ1w`, `IC_kwDOUYGptM8AAAABUfqjQw`; raw `bbb21d97-c664-432c-9a10-f74d42232df7` |
-| IP architecture | **confirmed direction; partial execution** — NEKURAMA is intended IP holder; background, company, third-party/OSS and customer material/data remain distinct | `nekurama/Bulb#2` comments `IC_kwDOUYGptM8AAAABURBgOA`, `IC_kwDOUYGptM8AAAABURk3QA`, `IC_kwDOUYGptM8AAAABURlsyA`; `nekurama/Bulb#5` §3 |
-| Brand/domain | **confirmed direction; professional-validation-required** — company-owned NEKURAMA/BABAI marks and domain control are intended; clearance and filing remain work | `nekurama/Bulb#2` comment `IC_kwDOUYGptM8AAAABURuSLQ`; raw `bbb21ece-7bb6-4a1f-9798-9ebd4ed6bcbd`, `bbb217ee-01a7-4f44-a207-116c50531b56` |
-| Startup benefits | **partial** — DPIIT and SIPP/IPR are post-incorporation objectives; DeepTech and 80-IAC need later validation; GeM is optional and ONDC is a product/architecture track | `nekurama/Bulb#2` comments `IC_kwDOUYGptM8AAAABUqUflw`, `IC_kwDOUYGptM8AAAABUrXTVw`; raw `bbb21e3d-91a3-48de-90a7-986c6beb716b` |
+| Entity | Private Limited application already made; the incorporation certificate is the transition point | **partial** — packet decision; retain certificate and filing evidence |
+| Pre-incorporation sequencing | Defer major contracts, hiring and IP-transfer commitments until incorporation | **confirmed** — packet decision |
+| Post-incorporation adoption | Immediately after the certificate, execute founder/company adoption documents, then material contracts | **partial** — packet decision; CS/lawyer review required |
+| Founder ownership | Manoj 55% / Vinay 45% | **confirmed direction** — corroborated by raw `ddcdee52-365b-4ca1-bde0-8d06c42659a9` |
+| Founder vesting | Four-year vesting with a one-year cliff | **confirmed direction; professional-validation-required** — raw `de9b64a0-bb15-44aa-80a4-83f0c50d58d3` describes the common pattern; Indian drafting remains open |
+| Founder agreement | Execute immediately after incorporation and before material contracts | **partial** — packet decision; align with Articles and statutory records |
+| Director structure | Unpaid non-executive structure is a proposal only | **professional-validation-required** — CS/lawyer review plus Qualcomm outside-directorship, conflict, IP and disclosure checks |
+| Company IP | Company owns only new work intentionally created for NEKURAMA/BABAI and properly adopted after incorporation | **confirmed direction; partial execution** — raw `0b63f1d6-b8e5-4e0e-b962-3fabc9366461` and `fbd76d92-2a25-44fe-a156-f18abe966639` corroborate the boundary |
+| Excluded IP | Employer, Qualcomm, third-party, customer and unrelated personal IP is excluded | **confirmed boundary; professional-validation-required** for employment/IP review |
+| Brand | NEKURAMA and BABAI require separate professional clearance | **professional-validation-required** — raw `bbb21ece-7bb6-4a1f-9798-9ebd4ed6bcbd` corroborates clearance remains open |
+| Finance | CA/bookkeeper books begin at incorporation in controlled software with monthly reconciliation | **partial** — packet decision; retain books and reconciliation evidence |
+| Expenses | Hybrid approval: delegated routine spend, explicit approval for founder, related-party, material or non-routine spend | **partial** — packet decision; policy and evidence trail remain |
+| Tax | CA handles GST/tax setup; preserve advice, filings, receipts and evidence | **professional-validation-required** |
+| Benefits | Validate DPIIT, T-Hub and incubator eligibility against current company facts and programme rules | **professional-validation-required** — raw `1a7e5861-74a7-4600-bdaa-94a4c95993ca` and `d9960ebd-982b-4bd5-875b-a73bb2149864` support validation boundaries |
+| ESOP | Defer implementation until key hires or funding; plan the mechanism now | **deferred** — raw `552668fc-9e91-4ec6-ab0d-011617336689` and `20ba195f-7eb7-4450-b420-1081bd1eec93` corroborate preserving future capability |
+| Account control | Migrate founder-owned domain, GitHub, AWS, Meta, billing and recovery accounts to company control with MFA | **partial** — packet decision; raw `98947e13-1b0d-4d3f-b9d1-869f51bddd0f` corroborates company-controlled GitHub governance |
 
-## Workstream checklists
+## Transition gate: before and after incorporation
 
-### 1. Identity, entity and governance
+### Before the incorporation certificate
 
-- [ ] **professional-validation-required** Confirm name availability, entity form, registered office, incorporation documents, director/promoter eligibility and statutory filings with a qualified CS/lawyer.
-- [ ] **professional-validation-required** Review current/future employment, outside-business, conflict-of-interest and invention-assignment restrictions before founder appointment or company work. The issue record specifically flags Manoj's Qualcomm employment for review (`nekurama/Bulb#2`, comment `IC_kwDOUYGptM8AAAABUPKU-w`).
-- [ ] **partial** Execute founder/shareholder agreement and align it with the Articles: 55:45 ownership, reserved matters, voting thresholds, transfer restrictions, leaver provisions, vesting/lock-in if chosen, deadlock resolution and founder exit.
-- [ ] **partial** Record each founder's role separately from founder/shareholder/director/employee status; do not infer titles or ownership for other contributors.
-- [ ] **partial** Choose and document founder funding instruments (share capital versus properly documented founder loan), approval authority and reimbursement rules.
-- [ ] **unknown** Decide whether and when an ESOP/equity incentive pool is needed; obtain legal/tax implementation advice before issuing anything.
+- [ ] **confirmed** Keep work as a clean-room build for NEKURAMA/BABAI; do not use employer,
+  Qualcomm, third-party or customer-confidential material.
+- [ ] **professional-validation-required** Complete CS/lawyer review of the application, proposed
+  directors/promoters, registered office, employment restrictions and filing requirements.
+- [ ] **partial** Maintain a dated list of pre-incorporation assets and expenses without
+  representing that title has already transferred to the company.
+- [ ] **deferred** Do not sign major customer, vendor, employment, contractor, financing or
+  other material contracts.
+- [ ] **deferred** Do not execute founder-to-company IP transfers or adoption documents yet.
+- [ ] **partial** Prepare, but do not treat as executed, the cap table, founder/shareholder
+  agreement, vesting terms, IP/exclusion schedule, approval matrix and account-migration plan.
 
-### 2. IP, brand and legal stack
+### At and after the incorporation certificate
 
-- [ ] **confirmed direction / partial execution** Prepare the background-IP disclosure and exclusion schedule, including the pre-incorporation `nekurama.com` asset, then document transfer/control by NEKURAMA after incorporation (`nekurama/Bulb#2`, comments `IC_kwDOUYGptM8AAAABURLh-Q`, `IC_kwDOUYGptM8AAAABURc-DQ`).
-- [ ] **professional-validation-required** Execute founder, employee and contractor confidentiality and IP-assignment documents; exclude employer, third-party and unrelated personal material.
-- [ ] **partial** Maintain IP provenance for code, designs, prompts/workflows, documentation, inventions, trademarks, dependencies and customer-provided material.
-- [ ] **partial** Create a third-party/OSS and AI-provider register: licence, attribution, SBOM/provenance, service terms, data retention/training use, commercial-use rights and security review.
-- [ ] **professional-validation-required** Run separate NEKURAMA and BABAI trademark clearance; decide word/device marks, classes and filing owner/timing. Domain ownership is not trademark clearance.
-- [ ] **professional-validation-required** Draft and review founder/shareholder, employment/contractor, SaaS/customer, Terms of Service, privacy notice/DPA, vendor/provider and partner agreements.
-- [ ] **unknown** Confirm whether any customer, payment, messaging, AI or infrastructure provider contract imposes data-location, audit, indemnity, retention or subprocessor obligations.
+- [ ] **partial** Retain the certificate, constitutional documents, PAN/TAN, statutory registers,
+  filing receipts and incorporation-date evidence.
+- [ ] **professional-validation-required** Immediately obtain CS/lawyer review and execute the
+  founder/shareholder agreement, four-year vesting/one-year cliff terms, founder/company
+  adoption documents, confidentiality and IP schedules.
+- [ ] **professional-validation-required** Complete director appointment and the unpaid
+  non-executive proposal only after CS/lawyer review and Qualcomm outside-directorship,
+  conflict-of-interest, IP and disclosure checks.
+- [ ] **partial** Sign material contracts only after the founder/shareholder and adoption
+  documents are aligned with the Articles and company authority.
+- [ ] **partial** Open company banking, activate the approval matrix and start the controlled
+  accounting and evidence-retention process from the certificate date.
 
-### 3. Finance, tax and compliance
+## 1. Founders, ownership and governance
 
-- [ ] **confirmed direction / partial execution** Engage a CA/CS operating model covering bookkeeping, monthly close, GST/TDS/income-tax assessment, ROC/MCA calendar, statutory records and management reporting (`nekurama/Bulb#2`, comment `IC_kwDOUYGptM8AAAABUWdirQ`).
-- [ ] **professional-validation-required** Confirm incorporation-time tax structure, GST registration trigger, invoicing, TDS/payroll obligations, audit applicability, tax regime and revenue-recognition treatment.
-- [ ] **partial** Open a company current account and maintain separate books for founder capital, founder loans, reimbursements, operating expenses, SaaS revenue, provider charges, taxes and FX.
-- [ ] **partial** Keep restaurant customer order money separate from NEKURAMA/BABAI SaaS revenue unless a reviewed contract/payment design makes the company a collection or settlement party.
-- [ ] **unknown** Select accounting software and define approval, payment, reconciliation and month-end close controls (`nekurama/Bulb#2`, comment `IC_kwDOUYGptM8AAAABUdl6sg`).
-- [ ] **confirmed direction / partial execution** Apply for DPIIT recognition promptly after incorporation and use SIPP/IPR support only for genuine qualifying filings (`nekurama/Bulb#2`, comment `IC_kwDOUYGptM8AAAABUqUflw`).
-- [ ] **professional-validation-required** Validate DeepTech eligibility and 80-IAC timing/eligibility with current evidence and a CA/tax adviser; do not claim either from AI usage or from the DPIIT ceiling alone.
-- [ ] **partial** Maintain a small opportunity register for Telangana/AP/state and central schemes; evaluate eligibility, operating-presence requirements and net economics before acting. Do not create an entity solely for incentives.
-- [ ] **confirmed direction** Keep GeM as an optional future channel and ONDC as a separate BABAI product/architecture workstream, not company compliance (`nekurama/Bulb#2`, comments `IC_kwDOUYGptM8AAAABUqUflw`, `IC_kwDOUYGptM8AAAABUrXTVw`).
+- [ ] **confirmed direction** Record Manoj 55% / Vinay 45% as the intended founder allocation;
+  do not change it automatically for funding, salary, hours or full-time timing.
+- [ ] **professional-validation-required** Draft four-year founder vesting with a one-year cliff,
+  leaver, transfer, repurchase, deadlock and exit mechanics suitable for the Indian company.
+- [ ] **professional-validation-required** Execute the founder/shareholder agreement immediately
+  after incorporation and before material contracts; align it with the Articles and cap table.
+- [ ] **professional-validation-required** Review whether either founder will be a director,
+  executive, employee or non-executive director; do not infer one status from another.
+- [ ] **professional-validation-required** For Manoj, review Qualcomm outside-directorship,
+  conflict-of-interest, invention-assignment, confidentiality and disclosure restrictions with
+  qualified employment/IP counsel and the required Qualcomm channels.
+- [ ] **deferred** Do not create ESOP grants or an ESOP pool now. Maintain an implementation plan
+  for the key-hire or funding trigger, with legal/tax review before any grant or issuance.
+- [ ] **partial** Document founder funding separately as capital, loan or another CA/counsel-reviewed
+  instrument; funding does not change the 55:45 allocation automatically.
 
-### 4. Security, privacy and company controls
+## 2. IP, brand and contracts
 
-- [ ] **confirmed principle / unknown implementation** Put domains/DNS, repositories, cloud, messaging/provider accounts, billing, documentation, backups and secrets under company-controlled ownership rather than one founder's personal identity.
-- [ ] **unknown** Establish company identity with MFA, recovery methods, least-privilege roles, break-glass access and an access review cadence; use SSO where proportionate.
-- [ ] **unknown** Create a secrets-management, credential-rotation and environment-separation baseline. Never place secrets in repositories or shared personal accounts.
-- [ ] **unknown** Define joiner/mover/leaver and emergency-offboarding procedures, including transfer of domains, repositories, provider accounts, billing and recovery assets.
-- [ ] **partial** Define incident ownership, notification/escalation, evidence preservation, vulnerability handling and customer/provider communication.
-- [ ] **unknown** Test backup restoration and document recovery objectives for source, configuration, data, audit logs and company records.
-- [ ] **partial / professional-validation-required** Map controller/processor roles, lawful purposes, data categories, retention/deletion, export/correction, subprocessors and cross-border transfers; reflect the result in privacy/DPA terms.
-- [ ] **confirmed product boundary / partial company control** Preserve tenant isolation, scoped authorization and auditability without treating customer data as unrestricted NEKURAMA-owned IP (`nekurama/Bulb#2`, comment `IC_kwDOUYGptM8AAAABURlsyA`).
-- [ ] **unknown** Create a lightweight vendor-security review and renewal register for messaging, payments, AI, hosting, analytics and support providers.
+- [ ] **confirmed boundary** NEKURAMA owns only new work intentionally created for NEKURAMA/BABAI
+  and properly adopted by the incorporated company.
+- [ ] **confirmed boundary** Exclude Qualcomm/employer IP, third-party IP, customer material/data
+  and unrelated personal work. Maintain provenance and rights evidence.
+- [ ] **deferred, then professional-validation-required** After incorporation, execute founder/company
+  adoption, confidentiality and IP documents for eligible new and pre-incorporation venture
+  materials; do not call a pre-incorporation asset transferred before that execution.
+- [ ] **professional-validation-required** Run separate NEKURAMA and BABAI trademark/name clearance.
+  A domain, application or company name is not trademark clearance.
+- [ ] **partial** Maintain an IP register for code, designs, documentation, workflows, domains,
+  marks, dependencies, AI-provider material and customer-owned material.
+- [ ] **deferred, then professional-validation-required** Prepare and review customer, vendor,
+  employment/contractor, SaaS, privacy/DPA and partner contracts after incorporation and before
+  the relevant relationship begins.
+
+## 3. Finance, tax and compliance
+
+- [ ] **partial** Engage the CA/bookkeeper and start the books from the incorporation date using
+  controlled accounting software selected for the company's facts.
+- [ ] **partial** Use one authoritative ledger with separate accounts for founder capital/loans,
+  expenses/reimbursements, SaaS revenue, provider charges, taxes, FX and settlement flows.
+- [ ] **partial** Reconcile monthly and retain invoices, receipts, bank evidence, ledger exports,
+  review sign-off and corrections.
+- [ ] **partial** Use hybrid expense approvals: delegated routine spend is documented; founder,
+  related-party, material, non-routine or commitment spend requires explicit approval before
+  payment where practicable.
+- [ ] **professional-validation-required** Have the CA determine GST registration/applicability,
+  invoicing, TDS/payroll, income-tax, audit and related filing obligations; preserve advice,
+  applications, acknowledgements, challans, returns and correspondence.
+- [ ] **confirmed boundary** Keep restaurant order money separate from NEKURAMA/BABAI SaaS
+  revenue unless a separately reviewed contract and payment design makes the company a
+  collection or settlement party.
+- [ ] **professional-validation-required** Validate DPIIT recognition, T-Hub participation,
+  incubator access, SIPP/IPR, DeepTech, 80-IAC, Telangana/state schemes and GeM against current
+  official rules and the company's incorporation, address, operations and GST facts.
+- [ ] **partial** Preserve evidence for every eligibility decision; do not infer eligibility
+  from founder residence, AI usage, a portal listing or a consultant statement.
+
+## 4. Company-controlled accounts and security
+
+- [ ] **partial** Inventory and migrate founder-owned `nekurama.com`/DNS/registrar, GitHub
+  organization and repositories, AWS/cloud, Meta/provider, billing, documentation, backup and
+  recovery assets to company control after incorporation.
+- [ ] **partial** Keep GitHub access through named personal accounts with at least two appropriate
+  organization owners; do not create a shared or fictitious company login.
+- [ ] **partial** Enable MFA on every privileged account, use company-controlled recovery methods,
+  record ownership and retain transfer/recovery evidence.
+- [ ] **unknown** Establish least privilege, break-glass access, access reviews, secrets rotation,
+  environment separation, offboarding and backup-restore tests.
+- [ ] **professional-validation-required** Complete privacy/data-role, retention/deletion,
+  subprocessors and cross-border reviews before relying on customer-facing terms.
 
 ## Completion evidence to retain
 
-- Incorporation certificate, PAN/TAN/GST and statutory records where applicable
-- Signed founder/shareholder, employment/contractor and IP/confidentiality documents
-- Background-IP schedule and domain transfer/control record
-- Trademark clearance and filing decisions
-- Company bank, accounting policy, chart of accounts and reconciliation evidence
-- DPIIT/SIPP applications or eligibility decisions
-- Asset/access register, MFA/recovery proof, offboarding record and backup-restore test
-- Privacy/data map, retention schedule, DPA/subprocessor register and incident runbook
+- Incorporation certificate, constitutional documents, PAN/TAN, statutory registers and filings
+- Signed founder/shareholder agreement, vesting terms, director records and adoption/IP schedules
+- Qualcomm/employment/IP/conflict review evidence where applicable
+- NEKURAMA and BABAI clearance reports and filing decisions
+- CA/bookkeeper engagement, controlled ledger, monthly reconciliations and tax/GST evidence
+- DPIIT/T-Hub/incubator eligibility evidence and reassessment dates
+- Account inventory, transfer records, MFA/recovery proof, access reviews and restore tests
+- Customer/vendor/employment/contractor/privacy/DPA documents before their relationships begin
 
-## Explicitly not decided here
+## Unresolved professional-validation items
 
-- Final incorporation date, directors, reserved-matter thresholds, vesting/leaver terms or ESOP design
-- Tax regime, GST timing, 80-IAC claim years, DeepTech status or state incentive claim
-- Trademark registration outcome, legal contract wording or data-protection role allocation
-- Specific accounting software, CA/CS firm, cloud/provider selection or security certification
+- CS/lawyer: incorporation filings, registered office, director/promoter eligibility, Articles,
+  founder/shareholder agreement, vesting/cliff, leaver/transfer terms and non-executive structure
+- Qualcomm/employment/IP counsel and required employer channels: outside directorship, conflicts,
+  invention assignment, confidentiality and disclosures
+- IP/trademark counsel: NEKURAMA and BABAI clearance, filing strategy and pre-incorporation asset
+  adoption/assignment
+- CA/bookkeeper/CS: books, expense controls, GST/tax/TDS/payroll/audit/ROC treatment and evidence
+- CA/tax adviser and programme authorities: DPIIT, DeepTech, 80-IAC, T-Hub, incubator and state
+  incentive eligibility
+- Privacy/security counsel or responsible professional: data roles, DPA, retention/deletion,
+  subprocessors and cross-border processing

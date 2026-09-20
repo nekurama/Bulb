@@ -1,5 +1,5 @@
 ---
-status: partial — direction confirmed; legal identity and planning remain pending
+status: partial — application made; certificate and professional validation remain
 owner: NEKURAMA
 last-reviewed: 2026-09-20
 sources:
@@ -8,6 +8,7 @@ sources:
   - nekurama/Bulb#5
   - nekurama.raw.chat.json#bbb214cb-4959-4878-b6a9-2358ddbf2b07
   - nekurama.raw.chat.json#bbb2179b-ab78-4f20-98ef-1bf49a0702f7
+  - 2026-09-20 ADMIN DECISION PACKET
 ---
 
 # Identity & Strategy
@@ -16,11 +17,15 @@ sources:
 
 NEKURAMA is the parent operating company. It can build and own multiple products; BABAI is the first product/brand.
 
+The Private Limited application has already been made. The incorporation certificate is the
+transition point: before it, avoid major contracts, hiring and IP-transfer commitments; after it,
+complete founder/company adoption documents and proceed with company commitments.
+
 Current strategic direction: bootstrap-first, with funding optional; keep the company structure simple unless a concrete trigger justifies complexity.
 
 ## Questions
 
-- [ ] Final legal/company identity and incorporation details
+- [ ] **professional-validation-required** Complete incorporation, registered-office, director/promoter and statutory checks with the CS/lawyer; retain the certificate and filing evidence.
 - [ ] Final mission, vision and long-term strategic narrative
 - [ ] Product portfolio principles beyond BABAI
 - [ ] Explicit 1/3/5-year company objectives
@@ -38,15 +43,16 @@ Evidence: later company issue decisions record “NEKURAMA = parent/company,” 
 
 ## E-setup checklist
 
-- [ ] **Professional validation:** confirm name availability, registered office, jurisdiction, authorised capital, director/promoter eligibility, employment restrictions and incorporation timeline with a qualified CS/lawyer.
-- [ ] **Incorporation evidence:** if proceeding, retain the certificate, constitutional documents, PAN/TAN, statutory registers and every filing receipt; do not mark incorporation confirmed until those exist.
+- [ ] **Professional validation:** confirm registered office, jurisdiction, authorised capital, director/promoter eligibility, employment restrictions and incorporation filings with a qualified CS/lawyer.
+- [ ] **Incorporation evidence:** retain the certificate, constitutional documents, PAN/TAN, statutory registers and every filing receipt; treat the certificate as the transition point.
+- [ ] **Sequencing:** defer major contracts, hiring and IP-transfer commitments until the certificate; then execute founder/company adoption documents before material contracts.
 - [ ] **Governance evidence:** approve the 55:45 intended cap table and founder/shareholder documents before issuing shares; reconcile the final register to the executed documents.
 - [ ] **Strategy record:** approve a short mission, portfolio principles and measurable 1/3/5-year objectives in a dated founder decision record.
 - [ ] **Reassessment:** review separate-entity triggers at each material liability, ownership, investor, regulatory, tax or operational change and record the outcome.
 
 ## Status boundaries
 
-- **Confirmed direction:** NEKURAMA is the parent operating company; BABAI is its first product/brand.
+- **Confirmed direction:** NEKURAMA is the parent operating company; BABAI is its first product/brand, and Private Limited is the applied-for form.
 - **professional-validation-required:** legal name, incorporation form, founder eligibility, employment restrictions, and invention-assignment compatibility.
 - **unknown:** final mission, portfolio principles, and measurable 1/3/5-year objectives.
 - **partial:** bootstrap-first is the current strategy, but funding triggers and the future group-company threshold are not formalised.

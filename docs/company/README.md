@@ -1,5 +1,13 @@
 # NEKURAMA Company Knowledge
 
+## Current decision source
+
+The **2026-09-20 ADMIN DECISION PACKET** is the current administrative decision source for
+company setup. It supersedes earlier working assumptions where it is more specific, but it does
+not replace a certificate, signed instrument, filing receipt or professional advice. Raw-chat
+citations below are retained where they corroborate the packet; packet-only decisions are
+explicitly marked as such in the e-setup checklist.
+
 Current durable company-level truth. Product-specific detail belongs under `docs/products/`.
 
 ## Status vocabulary
@@ -28,11 +36,11 @@ Current durable company-level truth. Product-specific detail belongs under `docs
 
 | Dimension | Status | Immediate evidence or action |
 | --- | --- | --- |
-| Identity and strategy | **partial** | Private Limited and one-company/multiple-products are the current direction; obtain professional incorporation and employment/IP compatibility advice. |
-| Founders, ownership and governance | **partial** | Manoj 55% / Vinay 45% is the latest intended split; execute agreements, governance rules and funding instruments before issuance. |
-| IP, brand and legal | **partial** | NEKURAMA is the intended IP holder and BABAI is a product/brand; complete provenance, clearance, assignments and contract review. |
-| Finance, tax and compliance | **partial** | Separate capital, expenses, SaaS revenue and settlement flows; validate registrations, accounting treatment and scheme eligibility with a CA/CS. |
-| Security, privacy and controls | **partial** | Company ownership, least privilege, tenant isolation and auditability are principles; implementation status is unknown until evidence is collected. |
+| Identity and strategy | **partial** | Private Limited has already been applied for; the incorporation certificate is the transition point. Major commitments remain deferred until incorporation. |
+| Founders, ownership and governance | **partial** | Manoj 55% / Vinay 45% with four-year vesting and a one-year cliff is the current packet direction; CS/lawyer review and execution remain. |
+| IP, brand and legal | **partial** | New NEKURAMA/BABAI work is intended for the company, excluding employer/third-party IP; clearance and post-incorporation adoption documents remain. |
+| Finance, tax and compliance | **partial** | CA/bookkeeper-led books begin at incorporation with controlled software and monthly reconciliation; GST/tax and scheme eligibility require validation. |
+| Security, privacy and controls | **partial** | Migrate founder-owned assets to company control with MFA; implementation evidence and privacy/security reviews remain. |
 
 No row above means that incorporation, ownership issuance, trademark registration, tax eligibility or control implementation has already occurred.
 

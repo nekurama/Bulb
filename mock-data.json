@@ -1,0 +1,30 @@
+{
+  "mode": "mock-only",
+  "source": "invented local demo scenes",
+  "demo": [
+    {
+      "kicker": "CUSTOMER · MOCK CONVERSATION",
+      "title": "“Is the paneer bowl available for pickup tonight?”",
+      "copy": "A customer question arrives in the restaurant’s own WhatsApp context. The assistant can help interpret it; it does not invent inventory or promise an order.",
+      "detail": "Invented scene; no real customer or menu data is used."
+    },
+    {
+      "kicker": "CONTEXT · MOCK MENU",
+      "title": "A reviewed menu gives the conversation useful context.",
+      "copy": "A future controlled setup could provide a validated catalog or menu. This preview uses an invented item and no restaurant data.",
+      "detail": "Invented scene; suggestion ≠ published menu state."
+    },
+    {
+      "kicker": "ORDER · MOCK STATE",
+      "title": "Pickup order drafted for business review.",
+      "copy": "The proposed order is structured so staff can accept, reject or correct it. Payment and order state are not inferred from a chat message.",
+      "detail": "Invented scene; status: needs human review."
+    },
+    {
+      "kicker": "TAKEOVER · MOCK HANDOFF",
+      "title": "A person can take over when context needs care.",
+      "copy": "Human takeover is part of the intended pilot boundary. Staff remain responsible for controlled business decisions and customer communication.",
+      "detail": "Invented scene; no message is sent from this page."
+    }
+  ]
+}

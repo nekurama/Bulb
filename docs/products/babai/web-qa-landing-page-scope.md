@@ -20,7 +20,7 @@ sources:
 
 This is the content, evidence, privacy, accessibility and QA scope for a future GitHub Pages landing page. It does not authorize deployment, domain purchase, analytics installation, lead collection or production claims.
 
-Repository inspection on 2026-09-20 found no existing HTML, CSS, JavaScript, JSX/TSX or landing-page artifact. No placeholder or empty file was touched; this focused scope document is the new durable artifact because the repository's file rules call for focused knowledge files and allow a placeholder only when useful (`docs/README.md#L90-L98`).
+The approved static mock implementation is the root [`index.html`](../../../index.html), [`styles.css`](../../../styles.css), [`script.js`](../../../script.js) and [`mock-data.json`](../../../mock-data.json). The implementation and QA boundary are recorded in [`docs/web/design-qa-note.md`](../../web/design-qa-note.md); no deployment is implied.
 
 The source hierarchy for this document follows the repository's mining rules: the raw founder export is primary for intent/history, the final Markdown export and field research corroborate it, and existing knowledge files hold current durable truth (`docs/README.md#L15-L24`, `docs/README.md#L28-L43`).
 
@@ -164,4 +164,4 @@ No deployment is included in this scope.
 - **High:** A lead form without privacy/DPA/retention ownership would create avoidable personal-data risk (`docs/company/security-privacy-controls.md#L16-L29`).
 - **Medium:** “Without leaving WhatsApp” can be misread as “no web”; the page must explain WhatsApp-first, not WhatsApp-only (`docs/products/babai/thesis-and-positioning.md#L49-L57`).
 - **Medium:** BABAI trademark/domain/legal status remains open, so legal footer and brand claims need clearance before public use (`docs/company/ip-brand-legal.md#L15-L30`).
-- **Medium:** No existing web artifact means implementation conventions, build configuration and deployment workflow are still unspecified; this document intentionally defines scope only.
+- **Medium:** The static mock has no build configuration or deployment workflow; this document and [`docs/web/design-qa-note.md`](../../web/design-qa-note.md) intentionally define scope and QA only.

@@ -467,6 +467,10 @@ consume credits. The exact AWS services, queue provider, production SLOs,
 capacity thresholds, DR design and cost model remain open. [Admin Decision
 Packet (2026-09-20); `architecture-lld.md`; `architecture-boundaries.md`]
 
+The cost, provider and founder-support alternatives are recorded in
+[`architecture-cost-options.md`](architecture-cost-options.md). That artifact
+is a comparison and validation aid, not a final provider decision.
+
 ## Payment custody boundary
 
 Customer order money should flow directly to the business through supported

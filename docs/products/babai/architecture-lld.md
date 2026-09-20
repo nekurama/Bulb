@@ -9,6 +9,7 @@ sources:
   - docs/products/babai/architecture.md
   - docs/products/babai/architecture-boundaries.md
   - docs/products/babai/architecture-options.md
+  - docs/products/babai/architecture-cost-options.md
   - docs/products/babai/domain-model.md
 ---
 
@@ -21,9 +22,9 @@ This is the low-level companion to `architecture.md` and
 without collapsing logical domain boundaries into deployment boundaries.
 
 For AWS/provider/queue/database trade-offs, portability, continuity economics
-and founder-only support capacity, see `architecture-options.md`. That file
-contains options and validation gates rather than additional implementation
-commitments.
+and founder-only support capacity, see
+`architecture-cost-options.md`. That file contains options and validation gates
+rather than additional implementation commitments.
 
 The **Admin Decision Packet (2026-09-20)** is the current administrative
 decision source for the starting implementation posture. Founder evidence

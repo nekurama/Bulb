@@ -43,7 +43,7 @@ Before the incorporation certificate: do not treat the company as incorporated, 
 
 ## Workstreams
 
-The cross-dimension sequence and owners are maintained in [`e-setup-checklist.md`](e-setup-checklist.md). The five dimension files retain durable truth and detailed checklists:
+The cross-dimension sequence and owners are maintained in [`e-setup-checklist.md`](e-setup-checklist.md). The [`external-entity-register.json`](external-entity-register.json) file is the evidence register for certificates, professional reviews, clearances, registrations, programme decisions and provider approvals. The five dimension files retain durable truth and detailed checklists:
 
 - `identity-and-strategy.md`
 - `founders-ownership-governance.md`

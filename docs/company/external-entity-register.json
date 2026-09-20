@@ -1,0 +1,489 @@
+{
+  "register": "NEKURAMA external entity register",
+  "status": "living",
+  "owner": "NEKURAMA",
+  "last_reviewed": "2026-09-20",
+  "purpose": "Track external certificates, professional reviews, clearances, registrations, programme decisions, and provider approvals needed for company setup.",
+  "scope_boundary": "This register records evidence and next actions only. A current direction, packet decision, application, or conversation does not prove a certificate, filing, clearance, approval, registration, contract, or professional opinion.",
+  "status_vocabulary": {
+    "confirmed": "Current direction or boundary is explicit, but execution evidence may still be open.",
+    "partial": "Some evidence or direction exists; a required action, instrument, or evidence item remains open.",
+    "unknown": "No reliable current implementation or approval answer is recorded.",
+    "professional-validation-required": "Qualified CS, lawyer, CA, employment/IP counsel, tax adviser, regulatory adviser, privacy/security professional, or the relevant external authority must validate before reliance or action.",
+    "deferred": "Intentionally not executed now; preserve the trigger and plan."
+  },
+  "items": [
+    {
+      "id": "incorporation-certificate",
+      "external_entity": "Registrar of Companies / Ministry of Corporate Affairs",
+      "scope": "Private Limited incorporation application and the certificate that becomes the transition point for company commitments.",
+      "owner": "Founders with the appointed CS/lawyer",
+      "evidence_required": [
+        "Issued certificate of incorporation and incorporation date",
+        "Application and filing acknowledgements",
+        "Constitutional documents, registered-office evidence, director/promoter checks, and PAN/TAN evidence",
+        "Statutory registers and any post-incorporation filing receipts"
+      ],
+      "current_status": {
+        "label": "partial",
+        "detail": "The current record says the Private Limited application has been made, but no certificate or filing pack is recorded here."
+      },
+      "dependency": [
+        "CS/lawyer review of the application, registered office, directors/promoters, and statutory requirements",
+        "Qualcomm/employment review before any proposed Manoj director or officer role",
+        "Founder decisions on the final roles and company details"
+      ],
+      "next_action": "Have the appointed CS/lawyer verify the application and retain the issued certificate and complete filing pack when the authority provides them; do not treat the packet or this register as incorporation evidence.",
+      "outside_chat_control": [
+        "Authority processing, queries, approval, rejection, issuance timing, and statutory requirements",
+        "Accuracy and completeness of founder-provided identity, address, and role information"
+      ],
+      "citations": [
+        {
+          "source": "2026-09-20 ADMIN DECISION PACKET",
+          "locator": "docs/company/e-setup-checklist.md:39-45, 60-89",
+          "relevance": "Makes the certificate the transition point, defers major commitments, and lists the evidence to retain."
+        },
+        {
+          "source": "docs/company/identity-and-strategy.md",
+          "locator": "Current answer; Questions; E-setup checklist",
+          "relevance": "Records the applied-for Private Limited form and certificate evidence boundary."
+        },
+        {
+          "source": "nekurama.raw.chat.json#bbb2179b-ab78-4f20-98ef-1bf49a0702f7",
+          "locator": "Founder message UUID",
+          "relevance": "Records the earlier Private Limited versus LLP question and founder-role context; it is not proof of incorporation."
+        }
+      ]
+    },
+    {
+      "id": "cs-lawyer-review",
+      "external_entity": "Qualified company secretary and corporate lawyer",
+      "scope": "Professional review of incorporation, Articles, founder/shareholder agreement, vesting, director structure, statutory issuance, and post-incorporation adoption.",
+      "owner": "Founders; appointed CS/lawyer",
+      "evidence_required": [
+        "Named professional engagement or instruction record",
+        "Written review or advice covering the application, registered office, directors/promoters, Articles, founder/shareholder agreement, vesting/cliff, leaver/transfer terms, and signing authority",
+        "Reviewed and executed agreements, board/member approvals, registers, and filing receipts where applicable"
+      ],
+      "current_status": {
+        "label": "professional-validation-required",
+        "detail": "The need for CS/lawyer review is recorded, but no professional review or executed governance instrument is recorded here."
+      },
+      "dependency": [
+        "Current incorporation application and company particulars",
+        "Founder confirmation of roles, intended 55:45 allocation, vesting direction, and reserved matters",
+        "Qualcomm review if Manoj is proposed as a director, officer, or signatory"
+      ],
+      "next_action": "Engage a qualified CS/lawyer and obtain written review before accepting director roles, issuing shares, signing material contracts, or executing founder/company adoption documents.",
+      "outside_chat_control": [
+        "Professional advice, drafting quality, conflicts, fees, availability, and legal interpretation",
+        "Founder execution, statutory approvals, and filing acceptance"
+      ],
+      "citations": [
+        {
+          "source": "2026-09-20 ADMIN DECISION PACKET",
+          "locator": "docs/company/e-setup-checklist.md:45-49, 66-85, 174-186",
+          "relevance": "Requires CS/lawyer review at the transition gate and preserves unresolved professional-validation items."
+        },
+        {
+          "source": "docs/company/founders-ownership-governance.md",
+          "locator": "Current answer; Questions; Status boundaries",
+          "relevance": "Separates intended ownership/vesting from executed agreements and requires review of the proposed non-executive structure."
+        },
+        {
+          "source": "nekurama.raw.chat.json#de9b64a0-bb15-44aa-80a4-83f0c50d58d3",
+          "locator": "Founder message UUID",
+          "relevance": "Corroborates that the four-year vesting and one-year cliff is a pattern requiring Indian drafting, not an executed term."
+        }
+      ]
+    },
+    {
+      "id": "qualcomm-employment-review",
+      "external_entity": "Qualcomm and qualified employment/IP counsel",
+      "scope": "Outside-directorship, conflict-of-interest, invention-assignment, confidentiality, employer-IP, and disclosure review for Manoj before a company role or IP adoption.",
+      "owner": "Manoj with employment/IP counsel and the required Qualcomm channels",
+      "evidence_required": [
+        "Applicable employment agreement, invention-assignment terms, confidentiality obligations, policies, and conflict/outside-activity rules",
+        "Written counsel assessment and any required Qualcomm disclosure, consent, or approval",
+        "Clean-room and IP-exclusion schedule showing no Qualcomm or employer-confidential material is used",
+        "Record of the final role decision and any restrictions or safeguards"
+      ],
+      "current_status": {
+        "label": "professional-validation-required",
+        "detail": "The review is an explicit gate; no employer response, consent, or counsel opinion is recorded here."
+      },
+      "dependency": [
+        "Proposed director/officer/employee/signatory role and expected time commitment",
+        "Pre-incorporation IP and work-product inventory",
+        "CS/lawyer review of the company role and adoption documents"
+      ],
+      "next_action": "Collect the applicable employment materials, obtain qualified employment/IP counsel review, and use the required Qualcomm disclosure or approval channel before accepting a role, assigning IP, or representing employer compatibility.",
+      "outside_chat_control": [
+        "Qualcomm policy interpretation, conflict decision, consent, restrictions, and response timing",
+        "Counsel's professional opinion and any later change in employment terms"
+      ],
+      "citations": [
+        {
+          "source": "2026-09-20 ADMIN DECISION PACKET",
+          "locator": "docs/company/e-setup-checklist.md:49-51, 64-67, 80-85, 101-103, 111-117, 176-179",
+          "relevance": "Requires Qualcomm outside-directorship, conflict, IP, confidentiality, and disclosure checks and excludes employer IP."
+        },
+        {
+          "source": "docs/company/founders-ownership-governance.md",
+          "locator": "Current answer; Questions; Status boundaries",
+          "relevance": "Makes the proposed unpaid non-executive role conditional on Qualcomm and counsel review."
+        },
+        {
+          "source": "nekurama.raw.chat.json#bbb2179b-ab78-4f20-98ef-1bf49a0702f7",
+          "locator": "Founder message UUID",
+          "relevance": "Identifies Manoj's Qualcomm employment context; it does not establish permission or clearance."
+        }
+      ]
+    },
+    {
+      "id": "nekurama-trademark-clearance",
+      "external_entity": "IP/trademark counsel and relevant trademark/domain/common-law sources",
+      "scope": "Separate professional clearance and filing decision for the NEKURAMA mark.",
+      "owner": "Founders with IP/trademark counsel",
+      "evidence_required": [
+        "Exact, phonetic, formative, domain, and relevant common-law search results",
+        "Goods/services specification and class rationale, with Class 42 considered only where justified",
+        "Written clearance or risk opinion, conflicts, oppositions, and recommended filing strategy",
+        "Applicant/entity decision and any application, correspondence, or objection record"
+      ],
+      "current_status": {
+        "label": "professional-validation-required",
+        "detail": "NEKURAMA clearance is open; no clearance report, filing, or registration evidence is recorded here."
+      },
+      "dependency": [
+        "Incorporation and final applicant/entity details",
+        "Final goods/services scope and brand strategy",
+        "Counsel's search methodology and current source databases"
+      ],
+      "next_action": "Commission separate NEKURAMA clearance and record the written result before filing, public legal claims, or treating a domain/company name as trademark rights.",
+      "outside_chat_control": [
+        "Third-party marks, registry records, common-law use, examiner decisions, objections, and opposition outcomes",
+        "Counsel's risk assessment and filing recommendation"
+      ],
+      "citations": [
+        {
+          "source": "2026-09-20 ADMIN DECISION PACKET",
+          "locator": "docs/company/e-setup-checklist.md:50-52, 111-124, 174-181",
+          "relevance": "Requires separate professional clearance and prohibits treating a domain, application, or company name as clearance."
+        },
+        {
+          "source": "docs/company/ip-brand-legal.md",
+          "locator": "Current answer; Questions; E-setup checklist",
+          "relevance": "Records the proposed word/device strategy and the open NEKURAMA clearance workstream."
+        },
+        {
+          "source": "nekurama.raw.chat.json#bbb21ece-7bb6-4a1f-9798-9ebd4ed6bcbd",
+          "locator": "Founder message UUID",
+          "relevance": "Requests a deep legal brand-clearance review in India; it is not a clearance result."
+        }
+      ]
+    },
+    {
+      "id": "babai-trademark-clearance",
+      "external_entity": "IP/trademark counsel and relevant trademark/domain/common-law sources",
+      "scope": "Separate professional clearance and filing decision for the BABAI product mark.",
+      "owner": "Founders with IP/trademark counsel",
+      "evidence_required": [
+        "Exact, phonetic, formative, domain, and relevant common-law search results",
+        "Goods/services specification and class rationale for the BABAI product",
+        "Written clearance or risk opinion, existing software/automation conflict analysis, and filing strategy",
+        "Applicant/entity decision and any application, correspondence, or objection record"
+      ],
+      "current_status": {
+        "label": "professional-validation-required",
+        "detail": "BABAI is the selected product name/finalist, but clearance remains open and no filing or registration evidence is recorded here."
+      },
+      "dependency": [
+        "Incorporation and final applicant/entity details",
+        "Final product scope and mark design",
+        "NEKURAMA company/product ownership and counsel's search methodology"
+      ],
+      "next_action": "Commission separate BABAI clearance, document any collision risk and class decision, and only then decide whether to file the word mark and later any device mark.",
+      "outside_chat_control": [
+        "Third-party use, registry results, examiner decisions, objections, and opposition outcomes",
+        "Counsel's risk assessment and filing recommendation"
+      ],
+      "citations": [
+        {
+          "source": "2026-09-20 ADMIN DECISION PACKET",
+          "locator": "docs/company/e-setup-checklist.md:50-52, 111-124, 163-181",
+          "relevance": "Requires separate NEKURAMA/BABAI clearance and preserves clearance reports and filing decisions as evidence."
+        },
+        {
+          "source": "docs/company/ip-brand-legal.md",
+          "locator": "Current answer; Questions; E-setup checklist",
+          "relevance": "Identifies BABAI as a finalist, prefers word-mark-first, and keeps clearance open."
+        },
+        {
+          "source": "nekurama.raw.chat.json#bbb21ece-7bb6-4a1f-9798-9ebd4ed6bcbd",
+          "locator": "Founder message UUID",
+          "relevance": "Requests legal brand clearance and defers the product/domain choice until that work is done."
+        }
+      ]
+    },
+    {
+      "id": "ca-tax-gst",
+      "external_entity": "CA/bookkeeper, CS, tax authorities, and GST authorities",
+      "scope": "Books, tax/GST applicability, invoicing, TDS/payroll, audit/ROC treatment, revenue recognition, and retained filing evidence.",
+      "owner": "Founders with CA/bookkeeper and CS",
+      "evidence_required": [
+        "CA/bookkeeper engagement and written applicability advice",
+        "Certificate/PAN/TAN, bank evidence, chart of accounts, controlled ledger, and monthly reconciliations",
+        "GST registration or documented applicability conclusion, invoices, returns, challans, acknowledgements, and correspondence",
+        "Advice and filing evidence for TDS/payroll, income tax, audit, professional tax, Shops & Establishments, ROC, refunds, and revenue recognition as applicable"
+      ],
+      "current_status": {
+        "label": "professional-validation-required",
+        "detail": "The post-incorporation books model is recorded, but no CA engagement, GST conclusion, registration, filing, or recurring evidence is recorded here."
+      },
+      "dependency": [
+        "Incorporation certificate, PAN/TAN, registered address, bank account, and actual activities",
+        "Supply, invoicing, subscription, payment, settlement, employee, and provider facts",
+        "Written professional analysis of current rules and thresholds"
+      ],
+      "next_action": "Appoint the CA/bookkeeper, obtain written GST/tax advice, start controlled books from the certificate date, and retain every filing and review artifact.",
+      "outside_chat_control": [
+        "Professional tax/accounting advice, authority interpretation, registration decisions, notices, filing deadlines, and processing",
+        "Actual transaction volumes, contracts, invoices, bank activity, and founder-provided records"
+      ],
+      "citations": [
+        {
+          "source": "2026-09-20 ADMIN DECISION PACKET",
+          "locator": "docs/company/e-setup-checklist.md:53-56, 126-147, 163-170, 182-184",
+          "relevance": "Sets the CA/bookkeeper-led books model, GST/tax validation, evidence retention, and separation of settlement flows."
+        },
+        {
+          "source": "docs/company/finance-tax-compliance.md",
+          "locator": "Current answer; Questions; E-setup checklist",
+          "relevance": "Separates finance categories and explicitly keeps GST/tax registration and filing as professional validation."
+        },
+        {
+          "source": "nekurama.raw.chat.json#bbb21621-2657-4cf5-a886-3d3079042f08",
+          "locator": "Founder message UUID",
+          "relevance": "Raises GST and startup-rebate questions that require current professional validation rather than proving eligibility."
+        }
+      ]
+    },
+    {
+      "id": "dpiit-recognition",
+      "external_entity": "DPIIT / Startup India",
+      "scope": "Post-incorporation DPIIT recognition and any related SIPP/IPR pathway considered for NEKURAMA.",
+      "owner": "Founders/operations with CA or tax adviser",
+      "evidence_required": [
+        "Certificate, constitutional documents, PAN, registered address, and company particulars",
+        "Current official eligibility assessment against actual objects, operations, innovation/scalability narrative, and age/turnover conditions",
+        "Application, acknowledgement, recognition decision, and any programme correspondence or reassessment date"
+      ],
+      "current_status": {
+        "label": "professional-validation-required",
+        "detail": "DPIIT recognition is a current direction after incorporation, not an approval or eligibility finding."
+      },
+      "dependency": [
+        "Incorporation certificate and final company particulars",
+        "Current official DPIIT rules and supporting innovation/scalability evidence",
+        "CA/tax adviser review where recognition interacts with tax or incentive claims"
+      ],
+      "next_action": "After incorporation, validate the current official criteria, prepare the evidence pack, and retain the application acknowledgement and decision without claiming recognition prematurely.",
+      "outside_chat_control": [
+        "Current programme rules, portal operation, authority review, queries, approval, rejection, and reassessment",
+        "Whether the company's actual facts satisfy the criteria"
+      ],
+      "citations": [
+        {
+          "source": "2026-09-20 ADMIN DECISION PACKET",
+          "locator": "docs/company/e-setup-checklist.md:56, 143-147, 163-170, 183-184",
+          "relevance": "Requires validation of DPIIT and related benefits against current company facts and official rules."
+        },
+        {
+          "source": "docs/company/finance-tax-compliance.md",
+          "locator": "Current answer; E-setup checklist; Status boundaries",
+          "relevance": "Treats DPIIT as an opportunity/compliance direction while keeping eligibility and evidence open."
+        },
+        {
+          "source": "nekurama.raw.chat.json#bbb21e3d-91a3-48de-90a7-986c6beb716b",
+          "locator": "Founder message UUID",
+          "relevance": "Records the founder's DPIIT direction and unresolved government-procurement question."
+        }
+      ]
+    },
+    {
+      "id": "t-hub-incubator-approvals",
+      "external_entity": "T-Hub and relevant incubator programmes",
+      "scope": "Eligibility, application, acceptance, terms, fees, and ongoing obligations for T-Hub or incubator participation.",
+      "owner": "Founders/operations with CA or programme adviser",
+      "evidence_required": [
+        "Current programme criteria and written fit assessment using incorporation, address, operations, GST, and product facts",
+        "Application, acknowledgement, interview or diligence records, acceptance/rejection, and signed terms",
+        "Fees, benefits, deliverables, data/IP/confidentiality terms, conflicts, and reassessment or renewal dates"
+      ],
+      "current_status": {
+        "label": "professional-validation-required",
+        "detail": "No T-Hub or incubator approval, acceptance, or eligibility determination is recorded here."
+      },
+      "dependency": [
+        "Incorporation certificate and registered address",
+        "Current programme rules, actual operations, GST position, and requested participation scope",
+        "Professional review of tax, IP, confidentiality, and commercial terms before acceptance"
+      ],
+      "next_action": "Shortlist relevant programmes, verify current official eligibility and terms, and retain the complete application and decision record; do not infer acceptance from a listing or founder residence.",
+      "outside_chat_control": [
+        "Programme availability, eligibility interpretation, selection, acceptance, fees, terms, and renewal",
+        "Whether participation is commercially or operationally beneficial"
+      ],
+      "citations": [
+        {
+          "source": "2026-09-20 ADMIN DECISION PACKET",
+          "locator": "docs/company/e-setup-checklist.md:56, 143-147, 163-170, 183-184",
+          "relevance": "Requires T-Hub and incubator validation against incorporation, address, operations, GST, and current programme rules."
+        },
+        {
+          "source": "docs/company/finance-tax-compliance.md",
+          "locator": "Current answer; Questions; E-setup checklist",
+          "relevance": "Keeps T-Hub/incubator access as an open professional-validation workstream and requires evidence for each decision."
+        },
+        {
+          "source": "nekurama.raw.chat.json#d9960ebd-982b-4bd5-875b-a73bb2149864",
+          "locator": "Founder message UUID",
+          "relevance": "Supports the programme/benefit validation boundary; it does not prove eligibility or acceptance."
+        }
+      ]
+    },
+    {
+      "id": "meta-whatsapp-approval",
+      "external_entity": "Meta / WhatsApp and any required technology-provider programme",
+      "scope": "Business verification, WhatsApp Business Account/phone onboarding, provider or Tech Provider approval, coexistence limitations, terms, billing, and account control.",
+      "owner": "Product/operations owner with security and legal review",
+      "evidence_required": [
+        "Company-controlled Meta account, business verification, WABA/phone ownership, and named-owner/recovery records",
+        "Written provider/programme approval or onboarding decision and applicable terms",
+        "Test evidence for onboarding, messaging categories, templates, limits, coexistence, billing, suspension/recovery, and data handling",
+        "Vendor security/privacy review, DPA/subprocessor position, and offboarding/export evidence"
+      ],
+      "current_status": {
+        "label": "unknown",
+        "detail": "Meta onboarding and approval reliability remain unvalidated; company control is a required direction, not approval evidence."
+      },
+      "dependency": [
+        "Incorporation/company identity and company-controlled domain, billing, recovery, and Meta accounts",
+        "Chosen integration/provider path and current Meta programme requirements",
+        "Privacy/security and customer-data review"
+      ],
+      "next_action": "Determine the exact Meta/WhatsApp path, verify current approval requirements, and run onboarding tests under company-controlled accounts; record the provider decision and limits before making availability claims.",
+      "outside_chat_control": [
+        "Meta/provider eligibility, review, approval, policies, pricing, account limits, coexistence behavior, suspension, and support response",
+        "Third-party platform changes and operational reliability"
+      ],
+      "citations": [
+        {
+          "source": "2026-09-20 ADMIN DECISION PACKET",
+          "locator": "docs/company/e-setup-checklist.md:58, 149-161, 170-185",
+          "relevance": "Requires Meta/provider account migration, MFA, ownership evidence, and vendor/privacy/security review."
+        },
+        {
+          "source": "docs/company/security-privacy-controls.md",
+          "locator": "Current answer; E-setup checklist; Status boundaries",
+          "relevance": "Names Meta among founder-owned accounts to migrate and keeps provider approval/control implementation open."
+        },
+        {
+          "source": "nekurama.raw.chat.json#bbb213b8-d58c-403e-b858-bdaa1ac750b8",
+          "locator": "Founder message UUID",
+          "relevance": "Supports the need for explicit identity and authorization boundaries; it is not Meta approval evidence."
+        }
+      ]
+    },
+    {
+      "id": "payment-provider-approval",
+      "external_entity": "Payment provider(s), merchant/acquirer, and relevant regulated payment parties",
+      "scope": "Merchant onboarding, direct restaurant settlement, subscription billing, refunds, chargebacks, reconciliation, fees, and provider terms.",
+      "owner": "Product/finance owner with CA, legal, and security review",
+      "evidence_required": [
+        "Company and merchant KYC, bank account, tax/GST information, and provider onboarding decision",
+        "Executed provider agreement, pricing/fees, settlement/refund/chargeback terms, and support/escalation contacts",
+        "Test evidence for payment intent, confirmation, failure, refund, reconciliation, and account recovery",
+        "Written confirmation that customer funds flow directly to the restaurant where intended, or a separately reviewed custody/settlement design",
+        "Privacy/DPA, security, data-retention, subprocessor, and offboarding evidence"
+      ],
+      "current_status": {
+        "label": "professional-validation-required",
+        "detail": "Direct merchant settlement is the product boundary, but no payment provider approval, contract, merchant onboarding, or settlement evidence is recorded here."
+      },
+      "dependency": [
+        "Incorporation, bank account, GST/tax position, merchant/customer model, and provider selection",
+        "Reviewed contract and regulatory design if NEKURAMA ever collects or settles restaurant funds",
+        "Product reconciliation and refund requirements"
+      ],
+      "next_action": "Shortlist providers, obtain merchant/onboarding requirements and reviewed terms, and prove direct-merchant settlement and reconciliation before any paid flow or custody claim.",
+      "outside_chat_control": [
+        "Provider KYC, underwriting, approval, pricing, settlement timing, holds, disputes, regulatory obligations, and service availability",
+        "Restaurant merchant participation and actual payment/refund behavior"
+      ],
+      "citations": [
+        {
+          "source": "2026-09-20 ADMIN DECISION PACKET",
+          "locator": "docs/company/e-setup-checklist.md:140-147, 151-161, 163-172",
+          "relevance": "Requires separation of restaurant funds from SaaS revenue and vendor/payment review evidence."
+        },
+        {
+          "source": "docs/company/finance-tax-compliance.md",
+          "locator": "Current answer; Evidence; E-setup checklist",
+          "relevance": "Records direct merchant settlement, separate subscription billing, and the need to validate refunds, revenue recognition, and custody boundaries."
+        },
+        {
+          "source": "nekurama.raw.chat.json#0410d7b4-9ea0-48e1-b850-d4583a4f8f00",
+          "locator": "Founder message UUID",
+          "relevance": "States the intended Customer-to-Restaurant and Restaurant-to-SaaS flows; it is not a provider approval or regulatory conclusion."
+        }
+      ]
+    },
+    {
+      "id": "cloud-and-provider-approvals",
+      "external_entity": "Cloud, AI, messaging, analytics, support, and other critical service providers",
+      "scope": "Company-owned account setup, billing, service terms, security/privacy review, data location and subprocessors, production limits, and offboarding for selected providers.",
+      "owner": "Engineering/operations owner with security, privacy, and finance review",
+      "evidence_required": [
+        "Provider inventory with owner, purpose, environment, data categories, billing account, renewal, and offboarding path",
+        "Company-controlled account/org, named owners, MFA/recovery, billing, and transfer evidence",
+        "Current terms, DPA/subprocessor details, data-location/retention/training-use terms, service limits, and security documentation",
+        "Internal vendor/security/privacy approval and production-readiness decision",
+        "Backup/export/restore and termination evidence for material data or configuration"
+      ],
+      "current_status": {
+        "label": "unknown",
+        "detail": "The company-owned provider-account direction is recorded, but the selected provider set, approvals, contracts, and implementation evidence are not recorded here."
+      },
+      "dependency": [
+        "Incorporation and company-controlled billing/recovery accounts",
+        "Data map, privacy/DPA review, least-privilege design, budget, and environment plan",
+        "Provider-specific onboarding and production requirements"
+      ],
+      "next_action": "Create the provider inventory, identify approval and contract requirements for each selected service, and retain the review, account-control, billing, and offboarding evidence before production use.",
+      "outside_chat_control": [
+        "Provider acceptance, service terms, pricing, regional availability, security posture, limits, support, outages, and policy changes",
+        "Professional privacy/security interpretation and the company's actual provider configuration"
+      ],
+      "citations": [
+        {
+          "source": "2026-09-20 ADMIN DECISION PACKET",
+          "locator": "docs/company/e-setup-checklist.md:58, 149-161, 170-185",
+          "relevance": "Requires migration of AWS/cloud/provider, billing, recovery, MFA, vendor review, and privacy/security evidence."
+        },
+        {
+          "source": "docs/company/security-privacy-controls.md",
+          "locator": "Current answer; E-setup checklist; Status boundaries",
+          "relevance": "Defines company-owned infrastructure, least privilege, vendor review, data mapping, and the non-completion boundary."
+        },
+        {
+          "source": "nekurama.raw.chat.json#bbb2129e-e9fa-43bf-adca-b0bc7a956664",
+          "locator": "Founder message UUID",
+          "relevance": "Supports scoped data classes, sensitive logging, and managed-secret handling as control requirements; it is not provider approval evidence."
+        }
+      ]
+    }
+  ]
+}

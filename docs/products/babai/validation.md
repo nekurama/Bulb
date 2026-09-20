@@ -19,7 +19,7 @@ sources:
 
 Begin with one selected business from the 19 September 2026 interviews. Require, where possible, a real menu/catalog, approved WhatsApp channel or test access, an operating contact and a staff member responsible for orders. The pilot must be paid or deposit-backed and have an explicit end date before enrollment. The fee/deposit amount, refund treatment and date are not supplied.
 
-Expand gradually to additional businesses only after the measured workflow supports the next increment, up to a maximum validation cohort of 10 restaurants. No numeric activation, conversion or kill threshold has been supplied.
+Expand gradually to additional businesses only after the measured workflow supports the next increment, up to a maximum validation cohort of 10 restaurants. No numeric activation, conversion or kill threshold is approved; proposed candidates are maintained separately and require founder approval.
 
 This refines the field research's three-business target (`nekurama.babai.research.md`, “Immediate pilot plan” and “Success criteria”) with the current admin commercial gate.
 
@@ -53,7 +53,7 @@ If Gate 1 is operationally stable, expand in controlled increments toward **up t
 
 ## Required metric set
 
-Record baseline, observed value and evidence for each pilot. Numeric thresholds are intentionally not supplied and must remain open:
+Record baseline, observed value and evidence for each pilot. Numeric thresholds below and in [`pilot-metrics.md`](pilot-metrics.md) are proposed candidates, not approved gates, and must remain open until founder approval:
 
 | Metric | What to record |
 |---|---|
@@ -83,6 +83,11 @@ For each pilot, record baseline and observed values for:
 No numeric success or kill thresholds are yet confirmed. Do not invent them from feature completion; record the baseline, instrument the workflow and use the pilot evidence to set the next gate.
 
 ## Track 3 candidate metric contract — proposed, pending founder approval
+
+The fuller proposed scorecard and Stage 0/1/2 gates are maintained in
+[`pilot-metrics.md`](pilot-metrics.md). They are a planning contract for
+founder review, not approved gates; this file remains the durable validation
+context until a pilot record adopts an approved version.
 
 The following are **candidate** entry, exit, success and kill thresholds. They
 are not approved decisions. They are derived from the Track 2 planning bands

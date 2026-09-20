@@ -32,5 +32,7 @@ The MVP is a thin, restaurant-first, pickup-first, WhatsApp-native workflow. The
 - Architecture and integrations
 - Business model/commercials
 - Validation/pilot evidence
+- Candidate pilot metrics and stage gates
+- GitHub Pages landing-page scope and web QA
 
-Partial, unknown and historical areas must remain labelled as such and should be recorded as questions rather than invented decisions.
+Partial, unknown and historical areas must remain labelled as such and should be recorded as questions rather than invented decisions. The candidate thresholds in [`pilot-metrics.md`](pilot-metrics.md) are explicitly proposed and require founder approval before use.

@@ -19,7 +19,7 @@ This specification defines a static, public-facing GitHub Pages landing page for
 
 The page may communicate BABAI's current positioning, restaurant-first entry point, operating workflow, channel philosophy, product boundaries, and controlled-beta validation context. It must distinguish confirmed positioning from hypotheses, future direction, and unresolved decisions.
 
-The page must use only repository-owned, approved assets. The current relevant brand assets are `assets/branding/logo/nekurama-cat.svg` and `assets/branding/logo/nekurama-kurama.svg`. No product screenshots, customer logos, testimonials, or landing-page implementation currently exist in the repository.
+The page must use only repository-owned, approved assets. The current relevant brand assets are `assets/branding/logo/nekurama-cat.svg` and `assets/branding/logo/nekurama-kurama.svg`. The mock implementation is the root [`index.html`](../../../index.html), [`styles.css`](../../../styles.css), [`script.js`](../../../script.js) and [`mock-data.json`](../../../mock-data.json), with QA notes in [`docs/web/design-qa-note.md`](../../web/design-qa-note.md). No product screenshots, customer logos or testimonials are included.
 
 ## Evidence-backed content requirements
 

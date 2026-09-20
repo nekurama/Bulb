@@ -22,7 +22,9 @@ contract.
 
 The founder history explicitly separates domain state, a state-transition
 model and durable workflow/orchestration, while keeping the implementation
-choice open. [nekurama.chatgpt.md:12849-12884,12888-12941,13011-13053]
+choice open. [Raw mappings `d4062caf-6da4-4c9b-8a77-058f65c6d76d` and
+`0011555d-10c7-4dbc-aca8-2bf7c55d324b`;
+nekurama.chatgpt.md:12849-12884,12888-12941,13011-13053]
 
 ## Logical modules
 
@@ -143,7 +145,10 @@ Required design properties:
 This preserves the research-level decision for explicit event contracts,
 observable command lifecycles and categorized event origins/types without
 choosing Kafka, SQS, SNS, RabbitMQ, Redis or another broker.
-[nekurama.chatgpt.md:13143-13150,13726-13734]
+[Raw mappings `bbb21b98-7460-45d5-a616-418ffbf47484`,
+`917b3372-5f2b-4ef9-ac8c-1e3bdc7408a7`,
+`e339c152-9a88-475f-babb-de1cac6dfdce`;
+nekurama.chatgpt.md:13143-13150,13726-13734]
 
 ## Reliable event publication
 
@@ -199,7 +204,7 @@ state changes. [docs/products/babai/product-definition.md:48-78,124-144]
 | --- | --- | --- |
 | Exact service/deployment cut | **challenge-required** | Compare modular-monolith and coarse-grained-service options against pilot operations, security isolation, cost and team capacity. |
 | State transition contract | **challenge-required** | Define guards, actor/scopes, transition history, concurrency and rejection semantics for each aggregate. |
-| Workflow implementation | **unknown** | Compare Temporal, other durable engines, lightweight custom orchestration and combinations against the stated guarantees. [nekurama.chatgpt.md:12989-12995,13043-13049] |
+| Workflow implementation | **unknown** | Compare Temporal, other durable engines, lightweight custom orchestration and combinations against the stated guarantees. [Raw mappings `d4062caf-6da4-4c9b-8a77-058f65c6d76d`, `0011555d-10c7-4dbc-aca8-2bf7c55d324b`; nekurama.chatgpt.md:12989-12995,13043-13049] |
 | Persistence model | **unknown** | Define transaction boundaries, outbox/inbox storage, consistency, retention, backup and recovery targets. |
 | Event infrastructure | **unknown** | Select broker/queue only after event volume, ordering, replay, operational burden and cost are measured. |
 | Event schema governance | **challenge-required** | Define compatibility, ownership, validation, registry and migration policy. |

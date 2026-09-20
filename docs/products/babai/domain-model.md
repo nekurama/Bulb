@@ -1,7 +1,7 @@
 ---
 status: partial
 owner: BABAI
-last-reviewed: 2026-09-18
+last-reviewed: 2026-09-20
 sources:
   - nekurama/Bulb#1
   - historical ManojVysyaraju/bulb#1
@@ -279,10 +279,66 @@ The following sources are the evidence base for the current model:
   subscription:
   `nekurama.chatgpt.md:5066-5115`.
 - Founder state/workflow separation and deferred implementation choice:
-  `nekurama.raw.chat.json:24; nekurama.chatgpt.md:12843-12995,13011-13053`.
+  `nekurama.raw.chat.json:24, mapping
+  \`0011555d-10c7-4dbc-aca8-2bf7c55d324b\`; nekurama.chatgpt.md:12843-12995,13011-13053`.
 - Founder event-first and reliability direction:
-  `nekurama.chatgpt.md:13100-13134,13143-13150,13726-13734`.
+  `nekurama.raw.chat.json, mappings
+  \`bbb21b98-7460-45d5-a616-418ffbf47484\`,
+  \`917b3372-5f2b-4ef9-ac8c-1e3bdc7408a7\`,
+  \`e339c152-9a88-475f-babb-de1cac6dfdce\`;
+  nekurama.chatgpt.md:13100-13134,13143-13150,13726-13734`.
 
 Where this document says **confirmed**, it means the domain/product principle
 is the current working truth. It does not mean that the database schema,
 service topology or implementation technology has been selected.
+
+## BRD domain commitment boundary
+
+For manager handoff, the domain model has three levels of certainty:
+
+### Committed for MVP/pilot
+
+- The pilot uses one tenant/business, one branch and one WhatsApp channel;
+  the model must still permit future multi-branch operation.
+- Tenant/business, branch, channel and billing account are separate concepts.
+  Subscription does not belong to a WhatsApp number.
+- Customer identity is global; the tenant relationship is represented by
+  `TenantCustomer`.
+- Conversation, cart and order have separate lifecycles. Order commitment
+  freezes the commercial result and menu provenance.
+- Payment and fulfillment remain separate from order; the first workflow is
+  pickup-first and does not require delivery.
+
+Sources: `docs/products/babai/product-definition.md` §Initial pilot workflow,
+lines 80-103; `docs/products/babai/domain-model.md` §Core hierarchy and
+§Resolved principles, lines 35-76,177-189; raw mappings
+`97f25c92-127f-4c8c-bde9-c314010cbef7` and
+`7f795540-2e98-4e64-b095-1d3bdb454394`.
+
+### Hypotheses or design directions
+
+- Conceptual engines are separate capabilities, but not necessarily separate
+  deployables.
+- Promotion, tax, workflow, audit, reconciliation and delivery boundaries may
+  evolve as invariants and operational complexity become material.
+- Calculation Capsule evaluation should be deterministic and bounded, but the
+  implementation mechanism is intentionally unspecified.
+
+Sources: `docs/products/babai/domain-model.md` §Commercial engines and
+calculation boundaries and §Commercial engine inventory, lines 91-165;
+raw mappings `d4062caf-6da4-4c9b-8a77-058f65c6d76d`,
+`0011555d-10c7-4dbc-aca8-2bf7c55d324b` and
+`e339c152-9a88-475f-babb-de1cac6dfdce`.
+
+### Unknown or challenge-required
+
+Exact aggregate contents, cross-aggregate invariants, promotion stacking,
+combo modeling, tax rounding/provenance, delivery-versus-fulfillment
+boundaries and physical persistence/deployment remain open. They require
+design review, provider validation or POC evidence before being promoted into
+the BRD as commitments.
+
+Sources: `docs/products/babai/domain-model.md` §Remaining domain battles,
+lines 260-268; `docs/products/babai/architecture-lld.md` §Design decisions
+still required, lines 196-209; raw mapping
+`0011555d-10c7-4dbc-aca8-2bf7c55d324b`.

@@ -21,7 +21,59 @@ deployment diagram, technology selection, or implementation plan.
 The founder discussion explicitly places BABAI in research/product-architecture
 work. Exact state contracts, schemas, persistence, workflow technology and
 technical architecture belong to design and POC work, not to this document
-yet. [nekurama.raw.chat.json:24; nekurama.chatgpt.md:13011-13053]
+yet. [nekurama.raw.chat.json:24, mapping `0011555d-10c7-4dbc-aca8-2bf7c55d324b`;
+nekurama.chatgpt.md:13011-13053]
+
+## Manager handoff: current BRD posture
+
+This section separates the current business requirements document (BRD) from
+the architecture hypotheses that still require validation. It is derived from
+founder intent in the raw mapping and the durable product/research documents.
+
+### Committed MVP and pilot
+
+| Commitment | Current BRD interpretation | Evidence |
+| --- | --- | --- |
+| Product wedge | BABAI is the operating layer around a business's own WhatsApp, not a marketplace, POS replacement or generic chatbot. | Raw mapping `7f795540-2e98-4e64-b095-1d3bdb454394`; `docs/products/babai/product-definition.md` §Current answer, lines 14-30 |
+| Pilot shape | Controlled restaurant-first pilot: one business/tenant, one branch, one WhatsApp channel, pickup-first, manual human takeover and no delivery dependency. | `docs/products/babai/product-definition.md` §Initial pilot workflow, lines 80-103; `nekurama.babai.research.md` §Immediate pilot plan, lines 118-133; raw mapping `7f795540-2e98-4e64-b095-1d3bdb454394` |
+| Core workflow | Connect business WhatsApp, review/publish menu, handle customer conversation, create/confirm order, record/confirm payment, operate the order and send status. | `docs/products/babai/product-definition.md` §Current answer and §MVP boundary, lines 16-78; `nekurama.babai.research.md` §Immediate pilot plan, lines 120-133 |
+| Business relationship | The business owns the customer relationship; customer funds go directly to the business; BABAI subscription billing is separate. | `docs/products/babai/product-definition.md` §Product boundaries / non-negotiables, lines 124-144; raw mapping `086daecb-94cd-4e21-b976-d50190686376` |
+| Domain shape | Tenant/business, branch, channel and billing account remain distinct; a WhatsApp number is not the business identity. | `docs/products/babai/domain-model.md` §Core hierarchy, lines 35-43; raw mapping `97f25c92-127f-4c8c-bde9-c314010cbef7` |
+
+### Hypotheses and validation work
+
+These are useful working directions, not additional committed MVP scope:
+
+- Direct Meta Tech Provider/Cloud API is the target topology, with BSP as a
+  bridge/fallback; exact existing-number coexistence and onboarding constraints
+  still require provider validation. [Raw mapping
+  `1df966d4-0c16-4a9a-b8cb-4375e5c2fda7`; `nekurama.chatgpt.md` lines
+  6984-7003; `docs/products/babai/product-definition.md` §MVP boundary,
+  lines 38-41.]
+- Durable workflow execution is a requirement, but Temporal, another engine,
+  custom orchestration or a combination is not selected. [Raw mapping
+  `d4062caf-6da4-4c9b-8a77-058f65c6d76d`; raw mapping
+  `0011555d-10c7-4dbc-aca8-2bf7c55d324b`; `nekurama.chatgpt.md` lines
+  12843-13053.]
+- Event-first asynchronous processing, explicit event contracts and
+  at-least-once/idempotent processing are research-level architecture
+  directions, not a broker or event-sourcing commitment. [Raw mappings
+  `bbb21b98-7460-45d5-a616-418ffbf47484`,
+  `917b3372-5f2b-4ef9-ac8c-1e3bdc7408a7`,
+  `e339c152-9a88-475f-babb-de1cac6dfdce`; `nekurama.chatgpt.md` lines
+  13143-13150,13726-13734.]
+
+### Unknowns and challenge-required decisions
+
+The following must not be presented to managers or implementers as settled
+requirements: modular monolith versus coarse-grained service deployment;
+runtime/protocol/database/hosting; broker and event schema governance; exact
+aggregate invariants; payment verification/refunds; delivery integration;
+Meta coexistence; SLOs, cost ceilings and disaster-recovery targets. The
+founder record explicitly keeps these in design/POC or validation work
+([nekurama.raw.chat.json:24, mapping `0011555d-10c7-4dbc-aca8-2bf7c55d324b`;
+`docs/products/babai/product-definition.md` §What the field research changes,
+lines 146-160).
 
 ## Current architecture answer
 

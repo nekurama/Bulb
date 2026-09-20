@@ -57,4 +57,3 @@ This is the execution sequence for the company workstreams. It records the admin
 ## Evidence rule
 
 Each checked item requires an artefact: certificate, signed agreement, counsel/CA confirmation, clearance report, account-control record, software/access record, reconciliation, filing, or application evidence. Never use a credential or unverified screenshot as evidence.
-

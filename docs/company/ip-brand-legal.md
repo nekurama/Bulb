@@ -1,54 +1,97 @@
 ---
-status: partial — ownership model and brand direction confirmed; clearance and contracts pending
+status: partial
 owner: NEKURAMA
 last-reviewed: 2026-09-20
 sources:
   - nekurama/Bulb#2
   - nekurama/Bulb#1
-  - historical ManojVysyaraju/bulb#1
   - nekurama/Bulb#5
   - nekurama.raw.chat.json#bbb214cb-4959-4878-b6a9-2358ddbf2b07
   - nekurama.raw.chat.json#bbb21ece-7bb6-4a1f-9798-9ebd4ed6bcbd
+  - historical ManojVysyaraju/bulb#1
+  - raw chat node 23a95bbe-abfb-44c6-bcf0-3111efa6a14a
+  - raw chat node 0b63f1d6-b8e5-4e0e-b962-3fabc9366461
+  - raw chat node 1d2ed7d6-7693-4268-a9fc-d79c2acde692
+  - raw chat node 0d569809-e6d9-456a-8aae-09be85aacf2f
 ---
 
 # IP, Brand & Legal
 
-## Current answer
+## Current durable answer
 
-NEKURAMA is intended to hold company/product IP. BABAI is a product/brand, not a separate legal entity.
+NEKURAMA is intended to hold company/product IP. BABAI is a product/brand of NEKURAMA, not a
+separate legal entity at present.
 
-IP provenance is divided into: background IP; NEKURAMA-created IP; third-party/OSS; and customer-owned material/data. General knowledge and skills are not automatically company IP. Employer-confidential or restricted third-party material must not enter BABAI without rights.
+IP provenance is divided into: background IP; NEKURAMA-created IP; third-party/OSS; and
+customer-owned material/data. General knowledge and skills are not automatically company IP.
+Employer-confidential or restricted third-party material must not enter BABAI without rights.
+The company needs a written schedule and assignment/licence trail; the principle alone does not
+transfer title.
 
-Brand direction: BABAI is the selected product name/finalist, subject to professional trademark clearance. NEKURAMA and BABAI word/device marks are contemplated. Word mark first is preferred; Class 42 is the primary SaaS/software/AI class, with other classes only when justified.
+Brand direction: BABAI is the selected product name/finalist, subject to professional clearance.
+NEKURAMA and BABAI word/device marks are contemplated. Class 42 is the primary SaaS/software/AI
+candidate; Classes 9, 35, 38 or others require a goods/services-specific rationale. A domain
+being available, a company name being accepted, or an application being filed is not trademark
+clearance or registration.
 
-## Questions
+## IP provenance and ownership workstream
 
-- [ ] Incorporation/legal entity details
-- [ ] Founder IP assignment and confidentiality agreements
-- [ ] Employee/contractor IP and confidentiality templates
-- [ ] Formal IP provenance process
-- [ ] NEKURAMA trademark clearance
-- [ ] BABAI trademark clearance
-- [ ] Domain ownership/registration policy
-- [ ] Customer contract / ToS / DPA legal stack
-- [ ] Open-source policy and notices
+| Bucket | Working rule | Evidence/action required |
+|---|---|---|
+| Background IP | Remains with original owner unless deliberately assigned/licensed | Founder IP schedule and licence terms |
+| NEKURAMA IP | Work intentionally created for NEKURAMA/BABAI should vest in NEKURAMA through valid documentation | Signed founder/contributor assignments and dated provenance |
+| Employer/third-party IP | Excluded unless rights are documented; Qualcomm restrictions are a live gate | Employment/IP review before use or assignment |
+| OSS/third-party | Respective owner retains rights; NEKURAMA follows licence obligations | SBOM, notices, licence review and approval path |
+| Customer material/data | Customer ownership is respected; NEKURAMA receives only service-required rights | Customer terms, DPA and deletion/export rules |
 
-Evidence: founder history [503] records the clean-room principle and NEKURAMA ownership of new work; [511] separates founder shares, company IP, and BABAI branding; [517] records the proposed marks, Class 42 priority, and NEKURAMA Private Limited as owner. History [367] and [391] keep BABAI clearance pending because of existing software/automation usage and other marks.
+## Action checklist
 
-## E-setup checklist
+| Checklist item | Owner | Required input/evidence | Status |
+|---|---|---|---|
+| Build pre-incorporation IP schedule and exclusions | Manoj + Vinay | Existing designs, code, docs, domains, third-party sources and dates | Open |
+| Review Qualcomm and other contributor restrictions | Manoj + IP/employment counsel | Employment agreements, policies and invention-assignment clauses | Challenge required |
+| Execute founder IP assignment/confidentiality documents | Founders + IP counsel | Approved schedule, entity details and consideration/terms | Not started |
+| Create employee/contractor invention, confidentiality and OSS terms | Counsel + future hiring owner | Role scope, access, deliverables and licence policy | Not started |
+| Establish provenance register | Engineering owner | Repository history, author, date, dependency/licence metadata | Not started |
+| Clear NEKURAMA and BABAI names | IP counsel | India searches, common-law/web/domain conflicts, target goods/services | Open |
+| Decide word/device mark filing strategy | Founders + IP counsel | Final marks, applicant entity, classes and specifications | Open |
+| Acquire/hold domains and registrar accounts in company control | Operations owner | Final legal owner, recovery contact and access policy | Open |
+| Draft customer ToS, privacy notice, DPA and data-use terms | Privacy/commercial counsel | Data map, roles, service scope, retention/deletion and subprocessors | Not started |
+| Define OSS notices and release review | Engineering/security owner | Dependency inventory, licences, distribution model | Not started |
 
-- [ ] Execute founder confidentiality and IP-assignment agreements plus a signed pre-incorporation background-IP schedule.
-- [ ] Create an IP provenance register for background IP, NEKURAMA-created work, third-party/OSS components, and customer-owned material/data.
-- [ ] Prohibit employer-confidential or restricted third-party material unless rights are documented and approved.
-- [ ] Run professional clearance for NEKURAMA and BABAI, including relevant exact, phonetic, formative, domain, and common-law conflicts.
-- [ ] File word marks first only after clearance and filing strategy approval; file device marks after final designs.
-- [ ] Put all domains and brand accounts under company-controlled registrars and credentials.
-- [ ] Prepare customer agreement/ToS, privacy notice, DPA terms, and IP/data-use terms before the first paying customer.
-- [ ] Establish OSS approval, licence notices, attribution, and SBOM/provenance records.
+## Brand/legal caution
 
-## Status boundaries
+BABAI is selected as a product direction, not declared legally clear. Founder research identified
+existing BABAI software/automation usage and warned that trademark search alone is insufficient
+for collision analysis. The brand decision can therefore remain useful while clearance remains
+pending.
 
-- **Confirmed direction:** NEKURAMA owns company IP; BABAI is a product/brand; Class 42 is the primary contemplated class.
-- **professional-validation-required:** founder/worker assignments, employer-IP exclusions, trademark clearance/filing, and customer/vendor contract terms.
-- **unknown:** final OSS/AI-provider approval process and the complete customer/vendor contract set.
-- **Pending:** incorporation details, executed assignments, formal clearance, filings, domains, customer contracts, and OSS controls.
+## Citations and historical context
+
+- The founder record defines NEKURAMA as IP-holding/operating company and BABAI as product/brand,
+  with four provenance buckets and an explicit exclusion list (raw chat node
+  `23a95bbe-abfb-44c6-bcf0-3111efa6a14a`).
+- The assignment record requires written documentation for pre- and post-incorporation work and
+  preserves unrelated personal/employer IP (raw chat node
+  `0b63f1d6-b8e5-4e0e-b962-3fabc9366461`).
+- BABAI was selected with trademark/legal clearance explicitly pending (raw chat node
+  `1d2ed7d6-7693-4268-a9fc-d79c2acde692`).
+- The class discussion treats Class 42 as primary and other classes as evidence-dependent rather
+  than automatic (raw chat node `0d569809-e6d9-456a-8aae-09be85aacf2f`).
+
+## Retained prior handoff status boundaries
+
+- **Confirmed direction:** NEKURAMA owns company IP; BABAI is a product/brand; Class 42 is the
+  primary contemplated class.
+- **Professional validation required:** founder/worker assignments, employer-IP exclusions,
+  trademark clearance/filing and customer/vendor contract terms.
+- **Unknown:** final OSS/AI-provider approval process and the complete customer/vendor contract
+  set.
+- **Pending:** incorporation details, executed assignments, formal clearance, filings, domains,
+  customer contracts and OSS controls.
+
+Earlier evidence anchors remain available: `[503]` records the clean-room principle and
+NEKURAMA ownership of new work; `[511]` separates founder shares, company IP and BABAI branding;
+`[517]` records the proposed marks, Class 42 priority and NEKURAMA Private Limited as owner; and
+`[367]` and `[391]` keep BABAI clearance pending because of existing software/automation usage
+and other marks.

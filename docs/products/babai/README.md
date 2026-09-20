@@ -35,5 +35,8 @@ intentionally untouched product files.
 - Architecture and integrations
 - Business model/commercials
 - Validation/pilot evidence
+- GitHub Pages landing-page scope and web QA
+
+The landing-page scope is documented in [`web-qa-landing-page-scope.md`](web-qa-landing-page-scope.md). It is a partial, source-linked QA/content contract; it does not authorize deployment or public claims beyond the cited evidence.
 
 Partial or unknown areas should be recorded as questions rather than invented.

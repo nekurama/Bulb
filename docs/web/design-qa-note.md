@@ -116,7 +116,8 @@ absence of a live form action or canonical domain.
 - **Media/network:** At 360px CSS width, `body.scrollWidth` matched the
   viewport width. Reduced-motion emulation changed document scrolling to
   `auto`. The only network requests were `/`, `styles.css`, `script.js` and
-  `mock-data.json` on the local server.
+  `mock-data.json` on the local server; the inline favicon produced no
+  additional request.
 - **Responsive assertions:** the stylesheet includes a 320px-safe shell,
   mobile disclosure navigation, stacked grids, wrapped CTA/actions and
   reduced-motion behavior. A browser-level visual review remains a founder QA

@@ -1,45 +1,63 @@
 ---
-status: partial
+status: partial — application made; certificate and professional validation remain
 owner: NEKURAMA
 last-reviewed: 2026-09-20
 sources:
-  - admin decision packet (2026-09-20)
-  - nekurama.raw.chat.json
-  - docs/company/README.md
+  - nekurama/Bulb#2
+  - nekurama/Bulb#1
+  - nekurama/Bulb#5
+  - nekurama.raw.chat.json#bbb214cb-4959-4878-b6a9-2358ddbf2b07
+  - nekurama.raw.chat.json#bbb2179b-ab78-4f20-98ef-1bf49a0702f7
+  - 2026-09-20 ADMIN DECISION PACKET
 ---
 
 # Identity & Strategy
 
-## Current truth
+## Current answer
 
-- **NEKURAMA** is the umbrella/company identity and **BABAI** is a product/brand, not a separate company. [raw turn 537 / ID aad46dc0-5d23-4a75-bcd7-7fc1076bacb7; raw turn 756 / ID ac6e5b2c-5ebd-4d2b-9813-d72297a2afff]
-- The Private Limited application has already been applied. The incorporation certificate is the transition point for company execution; this packet does not assert that the certificate has been issued.
-- The one-company/multiple-products model remains the current direction. Major group/subsidiary architecture is deferred unless a concrete legal, economic, ownership, regulatory, or operating trigger appears. [raw turn 753 / ID bbb217a2-4f1b-4554-98fd-1b84a493bf20]
-- Bootstrap-first remains the operating posture; funding is optional and separate from founder ownership. [raw turn 774 / ID bbb2132e-759f-45c5-a475-0e0dad831706]
+NEKURAMA is the parent operating company. It can build and own multiple products; BABAI is the first product/brand.
 
-## Decision table
+The Private Limited application has already been made. The incorporation certificate is the
+transition point: before it, avoid major contracts, hiring and IP-transfer commitments; after it,
+complete founder/company adoption documents and proceed with company commitments.
 
-| Topic | Current position | Status |
-| --- | --- | --- |
-| Legal entity | Private Limited application already applied | Confirmed packet state |
-| Incorporation certificate | Transition gate for company execution | Pending evidence |
-| Product boundary | BABAI is commercialized by NEKURAMA | Confirmed direction |
-| Group/subsidiaries | Defer until a concrete trigger | Proposed guardrail |
-| Mission and 1/3/5-year objectives | Not finally settled | Unknown |
+For internal planning, [`internal-controls.md`](internal-controls.md) is the authoritative
+company-control packet for the NEKURAMA identity and BABAI product boundary. It does not replace
+the incorporation certificate or any professional/external approval.
 
-## Action checklist
+Current strategic direction: bootstrap-first, with funding optional; keep the company structure simple unless a concrete trigger justifies complexity.
 
-- [ ] **Founders + CS:** retain the application record and add the incorporation certificate, company identifiers, and registered-office evidence when issued.
-- [ ] **Founders + lawyer/CS:** do not sign major contracts, hire, or formally transfer IP before the certificate unless professional advice expressly supports the action.
-- [ ] **Founders:** define the product-agnostic mission, long-term narrative, and measurable 1/3/5-year objectives.
-- [ ] **Founders:** record the approval trigger for any future subsidiary or group structure.
-- [ ] **Manager:** keep BABAI positioning, product scope, and web messaging in product docs; do not convert product language into legal-company facts.
+## Questions
 
-## Professional validation
+- [ ] **professional-validation-required** Complete incorporation, registered-office, director/promoter and statutory checks with the CS/lawyer; retain the certificate and filing evidence.
+- [ ] Final mission, vision and long-term strategic narrative
+- [ ] Product portfolio principles beyond BABAI
+- [ ] Explicit 1/3/5-year company objectives
 
-CS/lawyer review is required for the incorporation transition, director structure, founder obligations, contract timing, and any employment or conflict restrictions. The company files do not provide legal conclusions.
+## Decision notes
 
-## Historical / demoted claims
+BABAI is not currently intended to be a separate subsidiary. Separate-entity triggers include liability isolation, different ownership/investors, JV/acquisition, regulation, material tax/capital advantage, or operational/governance complexity. The long-term ambition may include a group, but the current planning horizon does not justify paying for that complexity.
 
-- DAWAT, PINGU, and BOLO were earlier product-name candidates, not current company identity. [raw turn 579 / ID b431e93c-8a37-4cd6-8c55-e2222ddb4693; raw turn 590 / ID 6dffa65a-2045-4073-995a-be03b8e59fee]
-- “Certificate issued,” “NEKURAMA Private Limited is operational,” and “Hyderabad is the registered office” remain unsupported until evidence is linked.
+Evidence: later company issue decisions record “NEKURAMA = parent/company,” “Private Limited,” “one company, multiple products,” and Manoj 55% / Vinay 45%. These are operating decisions, not proof of incorporation or registration.
+
+## Raw founder-message citations
+
+- `nekurama.raw.chat.json#bbb2179b-ab78-4f20-98ef-1bf49a0702f7`: “Babai is not company. Its product.” The same message asks whether to use a Private Limited or LLP structure and describes future participation; it is evidence of the founder's direction/questions, not a completed entity choice.
+- `nekurama.raw.chat.json#bbb214cb-4959-4878-b6a9-2358ddbf2b07`: “Business belongs to BABAI. tech, ip and limitation rights belong to Nekurama.” This is a founder framing that the later IP model refines; it does not itself establish legal ownership.
+
+## E-setup checklist
+
+- [ ] **Professional validation:** confirm registered office, jurisdiction, authorised capital, director/promoter eligibility, employment restrictions and incorporation filings with a qualified CS/lawyer.
+- [ ] **Incorporation evidence:** retain the certificate, constitutional documents, PAN/TAN, statutory registers and every filing receipt; treat the certificate as the transition point.
+- [ ] **Sequencing:** defer major contracts, hiring and IP-transfer commitments until the certificate; then execute founder/company adoption documents before material contracts.
+- [ ] **Governance evidence:** approve the 55:45 intended cap table and founder/shareholder documents before issuing shares; reconcile the final register to the executed documents.
+- [ ] **Strategy record:** approve a short mission, portfolio principles and measurable 1/3/5-year objectives in a dated founder decision record.
+- [ ] **Reassessment:** review separate-entity triggers at each material liability, ownership, investor, regulatory, tax or operational change and record the outcome.
+
+## Status boundaries
+
+- **Confirmed direction:** NEKURAMA is the parent operating company; BABAI is its first product/brand, and Private Limited is the applied-for form.
+- **professional-validation-required:** legal name, incorporation form, founder eligibility, employment restrictions, and invention-assignment compatibility.
+- **unknown:** final mission, portfolio principles, and measurable 1/3/5-year objectives.
+- **partial:** bootstrap-first is the current strategy, but funding triggers and the future group-company threshold are not formalised.
+- **stale:** none identified in the current source reconciliation.

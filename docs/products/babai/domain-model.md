@@ -5,8 +5,32 @@ last-reviewed: 2026-09-18
 sources:
   - nekurama/Bulb#1
   - historical ManojVysyaraju/bulb#1
+  - nekurama.raw.chat.json
+  - nekurama.chatgpt.md
+  - nekurama.babai.research.md
+  - docs/products/babai/product-definition.md
+---
 
 # Domain Model
+
+## Decision status and evidence
+
+This document is the current domain posture, not a final implementation
+schema. The labels below preserve founder uncertainty and distinguish domain
+decisions from design work:
+
+| Area | Status | Evidence |
+| --- | --- | --- |
+| Tenant, branch, channel and billing hierarchy | **confirmed** | `Tenant` is distinct from `Branch`; `Channel` is a business endpoint; subscription is attached to `BillingAccount`. [docs/products/babai/domain-model.md:35-43; nekurama.chatgpt.md:5078-5115] |
+| Restaurant-first, one-branch pilot context | **confirmed for MVP** | The initial workflow is one branch/channel per pilot business and pickup-first. [docs/products/babai/product-definition.md:80-103; nekurama.babai.research.md:118-133] |
+| Global customer plus tenant relationship | **confirmed** | Customer identity is global, while `TenantCustomer` owns tenant-scoped relationship state. [docs/products/babai/domain-model.md:53-61] |
+| Conversation, cart and order separation | **confirmed** | Conversation, cart and committed order have separate lifecycle and consistency boundaries. [docs/products/babai/domain-model.md:63-76] |
+| Menu revision and order provenance | **confirmed** | Published menu revisions are immutable and order truth retains the relevant revision/provenance. [docs/products/babai/domain-model.md:78-89; docs/products/babai/product-definition.md:43-46] |
+| Composable commercial evaluation | **confirmed at domain level** | Individual engines contribute typed results; the order freezes the evaluated result. The rules technology is not selected. [docs/products/babai/domain-model.md:91-136] |
+| Payment and fulfillment independence | **confirmed boundary** | Payment and fulfillment are separate state machines from order; pickup is MVP. [docs/products/babai/domain-model.md:177-189] |
+| Logical engine/capability map | **confirmed as conceptual** | Engines are capabilities, not one-service-per-engine commitments. [docs/products/babai/domain-model.md:138-165] |
+| Exact aggregate contents and invariants | **partial; challenge-required** | Candidate roots exist, but cross-aggregate invariants, promotion usage, combo modeling, tax rounding and delivery boundaries remain open. [docs/products/babai/domain-model.md:204-223,260-268] |
+| Physical deployment and persistence boundaries | **unknown** | The founder history keeps deployment, storage and workflow technology in design/POC. [nekurama.chatgpt.md:13011-13053] |
 
 ## Core hierarchy
 
@@ -242,3 +266,23 @@ Events, audit, workflow and telemetry surround these domain boundaries rather th
 - [ ] Tax calculation/adjustment provenance and deterministic monetary/rounding rules
 - [ ] Delivery vs Fulfillment vs Tracking lifecycle/aggregate boundaries
 - [ ] Exact production implementation boundaries and sequencing for the conceptual engines
+
+## Domain source map
+
+The following sources are the evidence base for the current model:
+
+- Product workflow, AI/human/payment/integration boundaries:
+  `docs/products/babai/product-definition.md:16-30,38-78,124-144`.
+- Pilot limits and validation uncertainty:
+  `nekurama.babai.research.md:104-133,176-186`.
+- Founder hierarchy decision separating restaurant, branch, WhatsApp number and
+  subscription:
+  `nekurama.chatgpt.md:5066-5115`.
+- Founder state/workflow separation and deferred implementation choice:
+  `nekurama.raw.chat.json:24; nekurama.chatgpt.md:12843-12995,13011-13053`.
+- Founder event-first and reliability direction:
+  `nekurama.chatgpt.md:13100-13134,13143-13150,13726-13734`.
+
+Where this document says **confirmed**, it means the domain/product principle
+is the current working truth. It does not mean that the database schema,
+service topology or implementation technology has been selected.

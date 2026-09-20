@@ -6,11 +6,10 @@ sources:
   - nekurama/Bulb#2
   - nekurama/Bulb#1
   - historical ManojVysyaraju/bulb#1
-  - nekurama/Bulb#5
-  - nekurama.raw.chat.json#bbb214cb-4959-4878-b6a9-2358ddbf2b07
-  - nekurama.raw.chat.json#bbb21ece-7bb6-4a1f-9798-9ebd4ed6bcbd
-  - nekurama.raw.chat.json#bbb21415-90f0-4972-97a7-d16a296157bb
-  - nekurama.raw.chat.json#bbb217ee-01a7-4f44-a207-116c50531b56
+  - raw chat node 23a95bbe-abfb-44c6-bcf0-3111efa6a14a
+  - raw chat node 0b63f1d6-b8e5-4e0e-b962-3fabc9366461
+  - raw chat node 1d2ed7d6-7699-4263-a9fc-d79c2acde692
+  - raw chat node 0d569809-e6d9-456a-8aae-09be85aacf2f
 ---
 
 # IP, Brand & Legal
@@ -55,10 +54,13 @@ Evidence: later company issue decisions record the clean-room principle, NEKURAM
 - [ ] **Contracts:** prepare and legally review customer agreement/ToS, privacy notice, DPA/data-use terms, vendor terms and IP warranties before the first paying customer.
 - [ ] **OSS/AI controls:** establish approval, licences, notices, attribution, SBOM/provenance, provider terms, data-retention/training-use and security review records.
 
-## Status boundaries
-
-- **Confirmed direction:** NEKURAMA owns company IP; BABAI is a product/brand; Class 42 is the primary contemplated class.
-- **professional-validation-required:** founder/worker assignments, employer-IP exclusions, trademark clearance/filing, and customer/vendor contract terms.
-- **unknown:** final OSS/AI-provider approval process and the complete customer/vendor contract set.
-- **partial:** the IP taxonomy and intended ownership boundary exist, but no complete provenance register, executed assignment set or clearance report is recorded here.
-- **stale:** none identified; any prior name/domain availability result must be rechecked before filing.
+- The founder record defines NEKURAMA as IP-holding/operating company and BABAI as product/brand,
+  with four provenance buckets and an explicit exclusion list (raw chat node
+  `23a95bbe-abfb-44c6-bcf0-3111efa6a14a`).
+- The assignment record requires written documentation for pre- and post-incorporation work and
+  preserves unrelated personal/employer IP (raw chat node
+  `0b63f1d6-b8e5-4e0e-b962-3fabc9366461`).
+- BABAI was selected with trademark/legal clearance explicitly pending (raw chat node
+  `1d2ed7d6-7699-4263-a9fc-d79c2acde692`).
+- The class discussion treats Class 42 as primary and other classes as evidence-dependent rather
+  than automatic (raw chat node `0d569809-e6d9-456a-8aae-09be85aacf2f`).

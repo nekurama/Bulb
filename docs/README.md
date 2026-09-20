@@ -74,8 +74,10 @@ A historical `RESOLVED` label is not automatically authoritative. Later evidence
 
 ### Phase 4 — Commercial / validation
 
-- [ ] **4.1 Business model** → `products/babai/business-model.md`
-- [ ] **4.2 Validation / pilot** → `products/babai/validation.md`
+- [ ] **4.1 Business model** → `products/babai/business-model.md` — **partial**; fixed 90-day paid pilot, agreement requirements and contribution-derived pricing are recorded, while legal wording and commercial amounts remain open
+- [ ] **4.2 Economics model** → `products/babai/economics-model.md` — **partial**; total expenditure is measured against recognized income; historical price hypotheses are not tiers
+- [ ] **4.3 Validation / pilot** → `products/babai/validation.md` — **partial**; fixed paid term is confirmed, while readiness and numeric success/kill thresholds remain proposed
+- [ ] **4.4 Pilot metrics** → `products/babai/pilot-metrics.md` — **partial**; proposed scorecard and team-defined readiness evidence gate
 
 ### Phase 5 — Company
 

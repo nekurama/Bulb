@@ -1,7 +1,7 @@
 ---
 status: partial
 owner: BABAI Product / Finance
-last-reviewed: 2026-09-20
+last-reviewed: 2026-09-21
 sources:
   - nekurama.raw.chat.json:L192-L205
   - nekurama.raw.chat.json:L79721-L79820
@@ -16,6 +16,7 @@ sources:
   - nekurama.chatgpt.md:L48218-L48228
   - docs/company/finance-tax-compliance.md
   - "2026-09-20 ADMIN DECISION PACKET"
+  - "2026-09-21 FOUNDER DECISION PACKET"
 ---
 
 # BABAI Economics Model
@@ -28,13 +29,18 @@ quote, forecast or pilot success threshold. Low/base/high values marked
 **planning input** are placeholders for the pilot ledger and must be replaced
 with invoices, provider exports, time logs and refund records.
 
-The current commercial posture is a paid or deposit-backed pilot with an
-explicit end date. Pricing remains challenge-required; ₹999, ₹2,499 and
-₹4,999 per month before GST are research hypotheses only. Customer-order money
-settles directly to the restaurant and is separate from BABAI subscription
-billing. [Research: `nekurama.babai.research.md:L65-L81`,
-`nekurama.raw.chat.json:L192-L205`; decision source: `2026-09-20 ADMIN
+The current commercial decision is a **fixed 90-day paid pilot**. It is not a
+free trial. The pilot amount, collection schedule, minimum-paying terms and
+cancellation/refund treatment remain open until they are recorded in a signed
+agreement. Customer-order money settles directly to the restaurant and is
+separate from BABAI subscription billing. [Research:
+`nekurama.babai.research.md:L65-L81`, `nekurama.raw.chat.json:L192-L205`;
+decision sources: `2026-09-20 ADMIN DECISION PACKET`, `2026-09-21 FOUNDER
 DECISION PACKET`]
+
+Pricing must be derived from contribution economics, not assumed tiers. The
+historical ₹999, ₹2,499 and ₹4,999 figures remain research history only; they
+must not be presented as current packages or used as an implied price ladder.
 
 ## Accounting boundaries
 
@@ -72,7 +78,7 @@ replaced.
 
 | Input | Low | Base | High | Status / treatment |
 |---|---:|---:|---:|---|
-| Subscription price `S` | ₹999 | ₹2,499 | ₹4,999 | Historical research hypotheses; not approved packaging |
+| Pilot/subscription amount `S` | Unknown | Unknown | Unknown | Must be set from the signed 90-day agreement and later contribution analysis; no assumed tiers |
 | Shared hosting, storage, DB, monitoring per year | ₹20,000 | ₹40,000 | ₹52,000 | Repository planning range, not a vendor quote; allocate across `N` restaurants |
 | Shared tooling/dev/admin per year | ₹15,000 | ₹30,000 | ₹39,000 | Repository planning range, not a vendor quote; allocate across `N` restaurants |
 | Billable Meta/provider messages per month | 250 | 750 | 2,000 | **Planning input**; replace with message-category export |
@@ -175,6 +181,36 @@ economic_contribution_rate
   = economic_contribution / S_net_revenue
 ```
 
+## Income-bar and total-expenditure margin
+
+The margin view is an income bar against **total expenditure**, not a
+variable-cost-only view:
+
+```text
+total_expenditure
+  = cash_cost
+  + founder/support/onboarding economic cost
+  + absorbed failure, refund, credit and remediation cost
+  + any other attributable pilot expenditure
+
+contribution_amount
+  = recognized_income - total_expenditure
+
+contribution_margin
+  = contribution_amount / recognized_income
+```
+
+`recognized_income` is the pilot or subscription income treated as revenue
+under the confirmed accounting treatment. A separately collected GST
+component is not income until qualified finance advice says otherwise. A
+blank, unsupported or unallocated expenditure line is an unknown, not zero.
+No contribution percentage is approved by this artifact.
+
+The price decision should therefore be derived by testing the signed pilot or
+continuation amount against the measured total-expenditure ledger and a
+founder-approved contribution case. The model does not select plans or
+automatic increases.
+
 Merchant-order payment cost is shown separately:
 
 ```text
@@ -208,36 +244,37 @@ threshold. The following uses the base planning inputs, direct Meta only,
 | Onboarding effort amortized | `4h × ₹1,000 / 12` | ₹333 economic cost |
 | Economic fixed cost before `S` percentages | ₹758 + ₹2,000 + ₹500 + ₹333 | ₹3,592 |
 
-Under this illustration:
+Under this historical illustration:
 
 ```text
 cash_contribution(S)     = S - ₹758 - (2% × S) - (2% × S)
 economic_contribution(S) = S - ₹3,592 - (2% × S) - (2% × S)
 ```
 
-| Research price hypothesis | Cash contribution | Economic contribution | Interpretation |
+| Historical research amount | Cash contribution | Economic contribution | Interpretation |
 |---:|---:|---:|---|
 | ₹999 | ~₹201 | ~-₹2,633 | Founder time makes this case negative in the base illustration |
 | ₹2,499 | ~₹1,641 | ~-₹1,193 | Positive cash contribution, negative after founder time |
 | ₹4,999 | ~₹4,041 | ~₹1,207 | Positive after the illustrative founder-time allocation |
 
-These are not price recommendations. They expose the central decision: a
+These are not price recommendations and must not be treated as tiers. They
+expose the central decision: a
 low subscription can look healthy on cash cost while consuming too much
 founder capacity. Unknown provider add-ons, AI usage, direct onboarding cash,
 actual refunds and tax/accounting treatment would reduce the displayed
 contribution.
 
-### Break-even price for a target contribution
+### Break-even amount for a target contribution
 
 For a target economic contribution rate `t`, assuming the base 2% collection
 fee and 2% refund reserve:
 
 ```text
-required_S = economic_fixed_cost / (1 - 2% - 2% - t)
-            = ₹3,592 / (96% - t)
+required_income = economic_fixed_cost / (1 - 2% - 2% - t)
+                 = ₹3,592 / (96% - t)
 ```
 
-| Target contribution case | Formula | Illustrative required monthly amount |
+| Target contribution case | Formula | Illustrative required monthly income |
 |---:|---|---:|
 | 20% | `₹3,592 / (0.96 - 0.20)` | ~₹4,726 |
 | 40% | `₹3,592 / (0.96 - 0.40)` | ~₹6,414 |
@@ -270,7 +307,8 @@ For every restaurant and month, capture:
 
 - quoted amount, GST component, amount collected, invoice status and accounting
   treatment;
-- active days, plan/pilot term, discount, deposit, refund and credit reason;
+- 90-day pilot term, signed-agreement version, minimum-paying term, cancellation
+  notice/trigger, refund or credit outcome and reason;
 - Meta category, message count, provider/channel identifier and invoice amount;
 - AI/API usage and retries, hosting/storage/logging allocation and tooling
   allocation;
@@ -290,8 +328,15 @@ pilot-to-paid conversion to be measured. [Research:
 
 ## Unresolved decisions
 
-- Exact pilot fee, deposit treatment, end dates, continuation price and plan
-  entitlements remain open.
+- Exact 90-day pilot fee, billing schedule, minimum-paying term, cancellation
+  and refund treatment remain open pending the signed agreement template and
+  professional review. A free pilot is not an approved option.
+- The team-defined evidence gate for operational readiness for materially
+  larger onboarding volumes remains proposed; the exact thresholds, owner and
+  observation window must be recorded before relying on it.
+- Post-pilot pricing is reviewed every six months after the pilot/continuation
+  decision. Review is not an automatic increase and does not pre-approve a
+  price change.
 - Direct Meta versus BSP/provider topology, provider contract, markup,
   minimums, FX treatment and who pays each fee remain open.
 - AI/model costs, storage/retention, observability and shared-cost allocation

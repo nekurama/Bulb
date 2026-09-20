@@ -31,7 +31,15 @@ The research supports the problem and restaurant wedge, but does not prove that 
 
 ## Customer validation path — partial
 
-Customer evidence should be gathered in the staged order: first make one business operational, then test repeatability with up to three pilots and at least one payer, then run a controlled 10-restaurant beta. Interest from the 19 interviews is an input to recruitment, not evidence that any stage has passed. [Evidence: `nekurama.raw.chat.json:L79721-L79820`; corroboration: `nekurama.babai.research.md:L118-L163`, `nekurama.babai.research.md:L176-L186`]
+Customer evidence should be gathered in the staged order: first make one
+business operational, then run the fixed 90-day paid pilot, then use the
+team-defined readiness evidence gate to decide whether materially larger
+onboarding volumes are justified. Interest from the 19 interviews is an input
+to recruitment, not evidence that any stage has passed. [Evidence:
+`nekurama.raw.chat.json:L79721-L79820`; corroboration:
+`nekurama.babai.research.md:L118-L163`,
+`nekurama.babai.research.md:L176-L186`; current decision source:
+`2026-09-21 FOUNDER DECISION PACKET`]
 
 ## Market and expansion posture — partial
 

@@ -55,10 +55,16 @@ The founder source frames the product work as a constrained MVP/pilot battle: de
 The reconciled operating sequence is:
 
 1. **Stage 0 — one-business operational pilot:** run the narrow pickup-first flow with one business, one WhatsApp number and one branch, with manual takeover and no delivery dependency.
-2. **Stage 1 — up to three pilots and at least one payer:** repeat the operational flow with no more than three pilot businesses and seek at least one paying customer.
-3. **Stage 2 — controlled 10-restaurant beta:** expand to a bounded ten-restaurant cohort only after the earlier stages provide enough operational evidence to justify controlled support and instrumentation.
+2. **Stage 1 — fixed 90-day paid pilot:** run the agreed term under signed minimum-paying terms; it is not a free trial.
+3. **Stage 2 — readiness decision:** close the pilot at the day-90 decision point when the team-defined evidence gate supports materially larger onboarding volumes; hold expansion if it does not.
 
-The stages are sequential learning gates. Stage 0 is confirmed as the initial operating boundary; the detailed entry/exit criteria, support model, numeric success/kill thresholds and post-beta plan remain partial or unknown. The 10-restaurant beta does not block learning or iteration in Stages 0–1. [Evidence: `nekurama.raw.chat.json:L79721-L79820`; corroboration: `nekurama.babai.research.md:L118-L163`, `nekurama.babai.research.md:L176-L186`]
+The stages are sequential learning gates. Stage 0 is confirmed as the initial
+operating boundary; the readiness evidence, support model, numeric success/kill
+thresholds and post-pilot plan remain partial or proposed. [Evidence:
+`nekurama.raw.chat.json:L79721-L79820`; corroboration:
+`nekurama.babai.research.md:L118-L163`,
+`nekurama.babai.research.md:L176-L186`; current decision source:
+`2026-09-21 FOUNDER DECISION PACKET`]
 
 The final production feature cut, launch blockers, post-pilot roadmap and expansion criteria remain open. [Evidence: `nekurama.raw.chat.json:L66495-L66540`; corroboration: `nekurama.chatgpt.md:L27050-L27263`]
 

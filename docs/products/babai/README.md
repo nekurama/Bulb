@@ -1,6 +1,12 @@
 # BABAI Knowledge Base
 
-BABAI is NEKURAMA's first product/brand.
+**NEKURAMA** is the company identity and **BABAI** is its first product/brand.
+The founder-approved internal wording is **“BABAI — Business Automation by
+AI.”** This records wording and naming intent; it is not an invented
+etymology, a public claim or legal/trademark clearance. The raw founder
+selection anchor is `1d2ed7d6-7699-4263-a9fc-d79c2acde692`; the raw naming
+research contains the phrase at `nekurama.raw.chat.json:L616-L618` as a
+research occurrence, not an etymology source.
 
 ## Current product truth
 
@@ -8,7 +14,17 @@ BABAI is NEKURAMA's first product/brand.
 
 Initial wedge: restaurants. The buyer is the business/merchant; the end customer is a workflow participant, not the primary SaaS buyer. The long-term local-business direction remains subject to evidence. [Evidence: `nekurama.chatgpt.md:L40500-L40520`, `nekurama.chatgpt.md:L42146-L42232`; corroboration: `nekurama.babai.research.md:L178-L186`]
 
-The initial product proof is staged: **Stage 0** is a one-business operational pilot; **Stage 1** is up to three pilots and at least one payer; **Stage 2** is a controlled 10-restaurant beta. These are sequential learning gates, and the detailed numeric success/kill thresholds remain open. [Evidence: `nekurama.raw.chat.json:L79721-L79820`; `nekurama.babai.research.md:L118-L163`, `nekurama.babai.research.md:L176-L186`]
+The initial product proof is staged: **Stage 0** is a one-business
+operational pilot; **Stage 1** is a fixed 90-day paid pilot, not a free trial;
+**Stage 2** is a team-defined readiness evidence gate for materially larger
+onboarding volumes. Cancellation/refund treatment is tied to a signed
+agreement and explicit minimum-paying terms, without invented legal wording.
+These are sequential learning gates, and the detailed numeric success/kill
+thresholds remain proposed or open. [Evidence:
+`nekurama.raw.chat.json:L79721-L79820`;
+`nekurama.babai.research.md:L118-L163`,
+`nekurama.babai.research.md:L176-L186`; current decision source:
+`2026-09-21 FOUNDER DECISION PACKET`]
 
 ## Sources
 
@@ -16,6 +32,7 @@ The initial product proof is staged: **Stage 0** is a one-business operational p
 - Corroborating founder export: `nekurama.chatgpt.md`
 - Field research: `nekurama.babai.research.md`
 - Product BRD and gap register: `brd.md`
+- Founder decision packet: fixed paid pilot, readiness, economics and identity
 - Historical issue/decision logs: `nekurama/Bulb#1`, `ManojVysyaraju/bulb#1`
 - Company context: `nekurama/Bulb#2`
 
@@ -34,6 +51,16 @@ intentionally untouched product files.
 - Domain model
 - Architecture and integrations
 - Business model/commercials
+- Economics model
 - Validation/pilot evidence
+- Candidate pilot metrics and readiness gate
 
 Partial or unknown areas should be recorded as questions rather than invented.
+
+## Related product artifacts
+
+- [`brd.md`](brd.md) — durable decision/status register and founder packet
+- [`business-model.md`](business-model.md) — paid-pilot agreement requirements and contribution-derived pricing
+- [`economics-model.md`](economics-model.md) — total-expenditure versus income model
+- [`validation.md`](validation.md) — pilot evidence and external-validation boundary
+- [`pilot-metrics.md`](pilot-metrics.md) — proposed scorecard and team-defined readiness evidence gate

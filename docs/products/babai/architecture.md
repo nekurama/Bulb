@@ -3,6 +3,7 @@ status: partial
 owner: BABAI
 last-reviewed: 2026-09-20
 sources:
+  - "Admin Decision Packet (2026-09-20)"
   - "nekurama.raw.chat.json (conversation_id: 6aa2f947-fce0-83e8-99d0-9a52ab2b15cd)"
   - nekurama.chatgpt.md
   - nekurama/Bulb#1
@@ -11,6 +12,8 @@ sources:
   - docs/products/babai/product-definition.md
   - docs/products/babai/domain-model.md
   - docs/products/babai/experience-and-channels.md
+  - docs/products/babai/architecture-boundaries.md
+  - docs/products/babai/architecture-lld.md
 ---
 
 # Architecture
@@ -44,6 +47,39 @@ evidence rather than an independently current decision source.
 - **Non-goal** — explicitly outside the current MVP or architecture handoff.
 
 This document uses those labels to avoid turning research discussion, assistant recommendations or candidate deployment shapes into decisions.
+
+## Committed starting posture
+
+The **Admin Decision Packet (2026-09-20)** establishes the implementation
+starting posture for the first product slice:
+
+- **Deployment:** modular monolith with clear domain modules; no initial
+  microservices or EKS.
+- **Runtime:** TypeScript/Node.
+- **Persistence:** PostgreSQL.
+- **Asynchronous work:** managed queue plus transactional outbox/inbox
+  patterns.
+- **Integrations:** provider adapters, with official Meta Cloud API/Tech
+  Provider as the WhatsApp target and BSP as a fallback.
+- **Authority:** AI is advisory only; deterministic domain capabilities own
+  orders, payments, permissions, consent and other controlled business state.
+- **Reliability:** idempotency, outbox/inbox, retries, DLQ/quarantine,
+  reconciliation and auditability are required from the start.
+- **Payments:** direct UPI/gateway merchant settlement; no BABAI wallet or
+  escrow.
+- **Operations:** AWS credits may be evaluated, but the design remains
+  portable and must not overprovision around credits.
+- **Continuity baseline:** initial RPO 24 hours and RTO 8 hours, daily backups
+  and tested restore.
+- **Privacy/security baseline:** DPDPA-ready minimisation, consent,
+  retention, deletion, access, subprocessors and incident controls.
+
+This is a **starting posture**, not a claim that the exact cloud services,
+queue provider, Meta approval path, workflow implementation, production SLOs
+or legal/security controls have been validated. Logical capability and
+aggregate boundaries remain independent from the modular-monolith deployment
+shape. [Admin Decision Packet (2026-09-20); `architecture-boundaries.md`;
+`architecture-lld.md`; `domain-model.md`]
 
 ### Key HLD/LLD decision citation index
 
@@ -128,21 +164,37 @@ The domain model's aggregate map remains the authority for transactional ownersh
 
 ## MVP deployment posture versus conceptual boundaries
 
-### MVP deployment (deliberately partial)
+### MVP deployment (committed starting shape)
 
-The MVP should use a **small number of deployables**, selected after the pilot exposes actual security, data, scaling and operational needs. A reasonable starting shape is:
+The MVP starts as a **modular monolith** with clear domain modules, a
+managed-queue worker path and provider adapters:
 
-1. **Channel edge / BFF** for web, WhatsApp webhooks and outbound-provider calls.
-2. **Core domain runtime** containing the first cohesive tenant, catalog, conversation, cart/order and payment/fulfillment capabilities.
-3. **Durable worker/runtime** for menu ingestion, outbound delivery, retries, timers and reconciliation.
-4. **External integration adapters** for Meta/WhatsApp, payment and optional delivery providers.
-5. **Audit/observability facilities** with access controlled separately from business state.
+1. **Channel edge / BFF** for web, WhatsApp webhooks and outbound-provider
+   calls.
+2. **Core modular-monolith runtime** containing tenant, catalog,
+   conversation, cart/order, payment and fulfillment modules.
+3. **Managed queue plus outbox/inbox worker path** for menu ingestion,
+   outbound delivery, retries, timers, reconciliation and recovery.
+4. **External provider adapters** for Meta/WhatsApp, payment and optional
+   delivery providers.
+5. **Audit/observability facilities** with access controlled separately from
+   business state.
 
-These can be fewer or more deployables without changing the conceptual boundaries. Do not select Kubernetes, a cloud, a broker, a database, a workflow product, or a one-microservice-per-capability topology from this document. The founder expressed a preference for microservices, but the durable rule is coarse-grained separation by capability, security, data ownership and lifecycle—not decomposition by noun. [Raw T153 `bbb21941-90d7-47d8-b4e0-671c6caecb09`; Raw T154 `1764f643-59fd-4cf5-be14-6aee32fc973a`; `domain-model.md`]
+There is **no initial microservices or EKS commitment**. Domain modules and
+contracts must remain clear enough to extract a capability later when
+security, data ownership, scaling, provider-failure containment, lifecycle or
+operational evidence justifies it. TypeScript/Node and PostgreSQL are the
+starting implementation choices; the exact cloud services, managed queue,
+deployment packaging and workflow product remain validation work. [Admin
+Decision Packet (2026-09-20); Raw T153
+`bbb21941-90d7-47d8-b4e0-671c6caecb09`; Raw T154
+`1764f643-59fd-4cf5-be14-6aee32fc973a`; `architecture-lld.md`;
+`architecture-boundaries.md`]
 
 ### LLD boundary
 
-The first implementation should make these contracts explicit even when code is colocated:
+The first implementation should make these contracts explicit inside the
+modular monolith even when code is colocated:
 
 - inbound channel message/webhook contract;
 - context-resolution and authorization command contract;
@@ -152,7 +204,15 @@ The first implementation should make these contracts explicit even when code is 
 - idempotency, retry and reconciliation contract;
 - audit and sensitive-data access contract.
 
-Exact REST/gRPC/GraphQL choice, serialization, broker, database and workflow engine remain unknown. The raw discussion explored gRPC/Protobuf and asynchronous flows, but did not establish a production protocol decision. [Raw T163 `bbb2111f-375d-4b57-b543-441369f304ec`; Raw T185 `bbb211a0-56e1-4951-bb51-9ee3f587f7d8`; Raw T195 `bbb21fcf-8976-43bb-a749-8a7ae584a904`; Raw T200 `1aaa80e7-2767-49ae-8054-8d0fb81f4fc0`]
+PostgreSQL, TypeScript/Node, managed queue/outbox and provider adapters are
+the committed starting posture. Exact REST/gRPC/GraphQL choice, serialization,
+queue vendor, cloud services, workflow engine and deployment packaging remain
+unknown. The raw discussion explored gRPC/Protobuf and asynchronous flows, but
+did not establish a production protocol decision. [Admin Decision Packet
+(2026-09-20); Raw T163 `bbb2111f-375d-4b57-b543-441369f304ec`; Raw T185
+`bbb211a0-56e1-4951-bb51-9ee3f587f7d8`; Raw T195
+`bbb21fcf-8976-43bb-a749-8a7ae584a904`; Raw T200
+`1aaa80e7-2767-49ae-8054-8d0fb81f4fc0`; `architecture-lld.md`]
 
 ## State engine and workflow posture (HLD/LLD)
 
@@ -265,9 +325,9 @@ infer answers from the candidate boundaries above:
 
 - Final MVP deployment topology, packaging, environment model and capability
   extraction sequence.
-- Physical data stores, transaction boundaries, tenancy partitioning,
-  migrations, retention, backup and disaster recovery.
-- Event broker/queue, partition and ordering guarantees, schema registry,
+- PostgreSQL schema/module layout, transaction boundaries, tenancy
+  partitioning, migrations, retention, backup and disaster recovery details.
+- Managed queue selection, partition and ordering guarantees, schema registry,
   replay tooling and retention.
 - Workflow engine selection, including whether Temporal or another engine is
   justified after the design/POC phase.
@@ -280,8 +340,12 @@ infer answers from the candidate boundaries above:
 - Delivery provider contracts and the delivery/tracking lifecycle split.
 - AI model/provider architecture, data handling, evaluation, multilingual
   behavior, guardrails and escalation policy.
-- Production SLOs, observability/support design, cost/scaling thresholds and
-  RTO/RPO.
+- Production SLOs beyond the initial RPO 24h/RTO 8h baseline,
+  observability/support design and cost/scaling thresholds.
+- AWS service selection, portability tests and whether credits improve
+  economics without overprovisioning.
+- DPDPA implementation evidence, legal review, subprocessors, incident
+  controls, encryption/key management and access-review operation.
 - Remaining aggregate invariants and transition rules, including promotion
   stacking, combo/bundle modeling, tax/rounding provenance and high-contention
   promotion limits.
@@ -347,7 +411,7 @@ AI is **not authoritative** for:
 - data deletion/retention decisions;
 - external side effects.
 
-An AI suggestion must become a typed command, pass trusted policy and domain validation, and require a human decision where the product boundary says so. Restaurant staff remain the decision-maker for order modification and cancellation; the domain service validates the transition and emits the consequences. [Raw T209 `bbb21545-4598-4ecd-a1fa-af977810bd5b`; Raw T212 `3b8ef53b-6082-4581-9afd-72f155a9b2da`; Raw T216 `bbb216f2-0ccd-4871-a670-e02f94100750`; Raw T218 `bbb21ee2-2265-4c8a-ba89-82249c36e181`; `product-definition.md`]
+An AI suggestion must become a typed command, pass trusted policy and domain validation, and require a human decision where the product boundary says so. Restaurant staff remain the decision-maker for order modification and cancellation; the domain service validates the transition and emits the consequences. AI is advisory only: deterministic services own orders, payments, permissions, consent and other controlled business state. [Admin Decision Packet (2026-09-20); Raw T209 `bbb21545-4598-4ecd-a1fa-af977810bd5b`; Raw T212 `3b8ef53b-6082-4581-9afd-72f155a9b2da`; Raw T216 `bbb216f2-0ccd-4871-a670-e02f94100750`; Raw T218 `bbb21ee2-2265-4c8a-ba89-82249c36e181`; `product-definition.md`]
 
 ## Security and tenant isolation
 
@@ -373,9 +437,45 @@ This preserves future platform-level capabilities without exposing one restauran
 
 Zero-trust service authentication and policy-at-boundary are architectural requirements; the token mechanism, policy language, policy cache/revocation, encryption/key management and exact data-classification taxonomy remain LLD/security work. The founder's White/Green/Yellow/Red classification is retained as a proposal, not a locked standard. [Raw T139 `bbb213b8-d58c-403e-b858-bdaa1ac750b8`; Raw T144 `548da5a7-b8c7-4fd8-b129-04c2115c9134`; Raw T149 `bbb2129e-e9fa-43bf-adca-b0bc7a956664`; Raw T153 `bbb21941-90d7-47d8-b4e0-671c6caecb09`]
 
+### Privacy and operational baseline
+
+The starting implementation must be DPDPA-ready in design and operations:
+
+- minimise collection and exposure;
+- record purpose- and channel-scoped consent;
+- define retention and deletion behavior;
+- enforce scoped access and audit sensitive operations;
+- maintain a subprocessors register and provider-data boundaries;
+- define incident detection, escalation and notification controls.
+
+This is a readiness baseline, not a legal certification. Exact notices,
+retention periods, processor terms, cross-border/data-location requirements,
+incident obligations, encryption/key management and access-review cadence
+remain legal/security validation work. [Admin Decision Packet (2026-09-20);
+`domain-model.md`; `docs/company/security-privacy-controls.md`]
+
+## Reliability and continuity baseline
+
+The initial operational baseline is **RPO 24 hours** and **RTO 8 hours**, with
+daily backups and a tested restore procedure. PostgreSQL is the authoritative
+starting persistence choice; backup storage, restore automation, regional
+placement, monitoring and the exact recovery runbook remain to be validated.
+
+AWS credits may be evaluated for cost reduction, but the architecture remains
+portable and must not overprovision or introduce AWS-only coupling merely to
+consume credits. The exact AWS services, queue provider, production SLOs,
+capacity thresholds, DR design and cost model remain open. [Admin Decision
+Packet (2026-09-20); `architecture-lld.md`; `architecture-boundaries.md`]
+
 ## Payment custody boundary
 
-Customer order money should flow directly to the business. BABAI does not custody customer funds or become the merchant of record by default for the initial product. BABAI's own subscription billing is a separate commercial flow. [Raw T72 `bbb21c29-06e2-44d7-bd05-c2f9c28c3f4f`; `product-definition.md`]
+Customer order money should flow directly to the business through supported
+UPI or gateway merchant settlement. BABAI does not custody customer funds,
+operate a wallet or escrow, or become the merchant of record by default for
+the initial product. BABAI's own subscription billing is a separate
+commercial flow. The exact provider, settlement, refund and reconciliation
+implementation remains validation work. [Admin Decision Packet (2026-09-20);
+Raw T72 `bbb21c29-06e2-44d7-bd05-c2f9c28c3f4f`; `product-definition.md`]
 
 Consequences:
 
@@ -386,7 +486,11 @@ Consequences:
 - Invoice revisions and pending/refund corrections must preserve the agreed commercial history rather than overwrite it.
 - Delivery-provider charges and settlement are not BABAI custody by implication; exact commercial responsibility remains a product/legal question.
 
-The provider, settlement, refund and reconciliation implementation is unknown. [Raw T68 `bbb21613-1461-4278-a34f-d4c055c03c84`; Raw T76 `bbb21803-3975-4faf-9eda-c51cade91dfe`; Raw T214 `bbb21c1a-3430-49da-9c8d-5f9edbc4dc87`; Raw T216 `bbb216f2-0ccd-4871-a670-e02f94100750`]
+The provider, settlement, refund and reconciliation implementation is unknown.
+[Raw T68 `bbb21613-1461-4278-a34f-d4c055c03c84`; Raw T76
+`bbb21803-3975-4faf-9eda-c51cade91dfe`; Raw T214
+`bbb21c1a-3430-49da-9c8d-5f9edbc4dc87`; Raw T216
+`bbb216f2-0ccd-4871-a670-e02f94100750`]
 
 ## Explicit non-goals and unknowns
 

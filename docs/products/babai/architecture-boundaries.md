@@ -3,8 +3,10 @@ status: partial
 owner: BABAI
 last-reviewed: 2026-09-20
 sources:
+  - "Admin Decision Packet (2026-09-20)"
   - nekurama.raw.chat.json
   - nekurama.chatgpt.md
+  - docs/products/babai/architecture-lld.md
   - docs/products/babai/architecture.md
   - docs/products/babai/domain-model.md
 ---
@@ -13,7 +15,13 @@ sources:
 
 ## Status
 
-**Partial.** The source establishes several ownership, trust and lifecycle boundaries, but it does not establish the final deployment topology or implementation choices. This handoff records confirmed constraints, candidate deployment boundaries and unresolved questions without selecting microservices, Temporal, storage, an AI provider or a cloud/deployment topology.
+**Partial.** The source establishes several ownership, trust and lifecycle
+boundaries. The starting deployment posture is now committed as a modular
+monolith with TypeScript/Node, PostgreSQL, a managed queue/outbox path and
+provider adapters; it does not select initial microservices or EKS. This
+handoff preserves the distinction between that starting posture and future
+logical-boundary extraction, while recording unresolved provider, workflow,
+cloud, SLO and legal/security details.
 
 Raw-founder citations use `Raw T<number> (message-id)`. `T<number>` is the stable chronological substantive-message index derived from `nekurama.raw.chat.json`, ordered by `create_time` and then mapping-node ID. Founder-authored messages are primary product-intent evidence; assistant messages are retained as recorded decision history and recommendations, not as independent founder approval.
 
@@ -42,7 +50,30 @@ Raw-founder citations use `Raw T<number> (message-id)`. `T<number>` is the stabl
 | AI authority | AI may assist with interpretation, extraction, summaries and suggestions; it is not authoritative for identity, authorization, commercial commitment, payment, fulfillment or external side effects | Raw T410 `bbb21914-7687-4f6e-848a-30e1e7e850f8`; Raw T414 `bbb21eb2-e878-4ef3-a499-f81e1cdc2d83`; `architecture.md` |
 | Channel/provider | Restaurant-owned WhatsApp and Meta/provider accounts remain behind a provider-neutral `Channel` and adapter boundary | Raw T37 `eadec8d3-a035-43e3-814a-6d3312001bbf`; Raw T47 `1df966d4-0c16-4a9a-b8cb-4375e5c2fda7`; Raw T65 `31e96409-07af-4d5c-a00c-fbe2a55c0433` |
 
-## Candidate deployment boundaries
+## Committed starting deployment posture
+
+The first runtime is a **modular monolith** with clear domain modules,
+PostgreSQL persistence, a managed queue plus transactional outbox/inbox path,
+and external provider adapters. The initial deployment does not use
+microservices or EKS. Logical capabilities remain explicit so later extraction
+is possible when evidence justifies it.
+
+The starting runtime includes:
+
+1. Channel edge/BFF.
+2. Core domain modules for tenant, catalog, conversation, cart/order,
+   payment and fulfillment.
+3. Managed queue/worker path for asynchronous work, retries, timers,
+   reconciliation and recovery.
+4. Meta/WhatsApp, payment and optional delivery provider adapters.
+5. Controlled audit and observability facilities.
+
+TypeScript/Node and PostgreSQL are committed starting choices. AWS credits may
+be evaluated, but deployment must remain portable and must not be
+overprovisioned to consume credits. [Admin Decision Packet (2026-09-20);
+`architecture.md`; `architecture-lld.md`]
+
+## Candidate future deployment boundaries
 
 These are **proposed starting shapes**, not a selected topology:
 
@@ -52,7 +83,15 @@ These are **proposed starting shapes**, not a selected topology:
 4. **External integration adapters** — Meta/WhatsApp, payment and optional delivery-provider integration concerns.
 5. **Audit/observability facilities** — controlled access to immutable history, operational telemetry and sensitive-operation evidence.
 
-These candidates may be combined or split after design evidence. A capability becomes a deployment boundary only when independent security, data ownership, scaling, provider-failure containment, lifecycle or operational ownership justifies it. The founder expressed a microservices preference, but that preference does not select one-microservice-per-capability or any deployment topology. [Raw T153 `bbb21941-90d7-47d8-b4e0-671c6caecb09`; Raw T154 `1764f643-59fd-4cf5-be14-6aee32fc973a`; `architecture.md`]
+These candidates may be combined with the starting monolith or split after
+design evidence. A capability becomes a deployment boundary only when
+independent security, data ownership, scaling, provider-failure containment,
+lifecycle or operational ownership justifies it. The founder expressed a
+microservices preference, but that preference does not override the committed
+no-initial-microservices posture or select one-microservice-per-capability.
+[Admin Decision Packet (2026-09-20); Raw T153
+`bbb21941-90d7-47d8-b4e0-671c6caecb09`; Raw T154
+`1764f643-59fd-4cf5-be14-6aee32fc973a`; `architecture.md`]
 
 ## HLD requirements
 
@@ -70,6 +109,27 @@ These candidates may be combined or split after design evidence. A capability be
 - Specify outbox/inbox, deduplication, retries, quarantine/DLQ, replay authorization and reconciliation.
 - Specify provider connection lifecycle, callback verification and failure semantics.
 - Specify aggregate invariants, order snapshots, monetary precision/rounding, audit access and retention/deletion behavior.
+
+Starting LLD choices are TypeScript/Node modules, PostgreSQL transactions,
+managed queue/outbox/inbox processing and provider adapters. Exact queue
+vendor, internal protocol, workflow product, schema layout and deployment
+packaging remain unresolved. [Admin Decision Packet (2026-09-20);
+`architecture-lld.md`]
+
+## Reliability, privacy and continuity baseline
+
+- Idempotency, outbox/inbox, retries, DLQ/quarantine, reconciliation and
+  auditability are required from the start.
+- Initial continuity target is RPO 24 hours and RTO 8 hours, with daily backups
+  and tested restore.
+- DPDPA-ready controls cover minimisation, consent, retention, deletion,
+  access, subprocessors and incident handling.
+- Exact SLOs beyond the initial RPO/RTO baseline, backup/restore evidence,
+  legal text, processor terms, data-location rules, encryption/key management
+  and incident operating procedures remain validation work.
+
+[Admin Decision Packet (2026-09-20); `architecture.md`;
+`domain-model.md`]
 
 ## State-engine unknowns
 
@@ -90,12 +150,14 @@ The founder's research-stage instruction was to define the contract and compare 
 ## Unresolved questions
 
 - What is the smallest MVP deployable split, and what evidence triggers extraction?
-- Which storage model supports authoritative state, projections, workflow metadata, event history and retention?
+- Which PostgreSQL schema/module layout supports authoritative state, projections, workflow metadata, event history and retention?
+- Which managed queue/transport, if any, is justified by pilot volume and failure semantics?
 - Which flow-specific sync/async contracts and internal protocols are required?
-- Which broker/transport, if any, is justified by pilot volume and failure semantics?
 - Which AI architecture, model policy and provider strategy satisfy privacy, cost and quality requirements?
 - How are Meta Tech Provider approval, coexistence limitations, disconnect, portability and provider billing handled?
-- What are the exact tenant/branch invariants, deletion/retention rules, production SLOs, recovery targets and cost thresholds?
+- What are the exact tenant/branch invariants, deletion/retention rules, production SLOs beyond the initial RPO/RTO baseline, recovery evidence and cost thresholds?
+- Which AWS services are portable enough to use credits without overprovisioning or lock-in?
+- What legal/security evidence closes DPDPA readiness, subprocessors, incident controls, encryption/key management and access review?
 
 ## Evidence index
 

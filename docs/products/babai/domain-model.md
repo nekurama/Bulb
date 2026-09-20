@@ -3,6 +3,7 @@ status: partial
 owner: BABAI
 last-reviewed: 2026-09-18
 sources:
+  - "Admin Decision Packet (2026-09-20)"
   - nekurama.raw.chat.json
   - nekurama/Bulb#1
   - historical ManojVysyaraju/bulb#1
@@ -42,7 +43,7 @@ These terms prevent a conceptual engine or aggregate from being treated as an au
 - Keep authoritative domain state distinct from events, workflow records, audit history and telemetry.
 - Enforce identity, authorization, policy and tenant/branch scope at trusted boundaries.
 - Keep payment, fulfillment, conversation automation and human takeover as independent lifecycle concerns.
-- Treat candidate deployment shapes as partial hypotheses; do not select a cloud, broker, database, workflow product, AI provider or microservice topology here.
+- Treat future extraction shapes as partial hypotheses; the committed starting posture is a modular monolith, TypeScript/Node, PostgreSQL, managed queue/outbox and provider adapters. Do not select a cloud service, queue vendor, workflow product, AI provider or future microservice topology here.
 
 ### LLD requirements
 
@@ -53,6 +54,31 @@ These terms prevent a conceptual engine or aggregate from being treated as an au
 - Define audit, sensitive-data access, retention/deletion and recovery semantics.
 
 These are design requirements, not claims that the implementation already exists. See `architecture.md` and `architecture-boundaries.md` for the corresponding system-level handoff.
+
+## Committed implementation alignment
+
+The **Admin Decision Packet (2026-09-20)** records the starting implementation
+posture without changing domain ownership:
+
+- Domain capabilities and aggregates remain logical boundaries inside a
+  TypeScript/Node modular monolith; no initial microservices or EKS.
+- PostgreSQL is the starting authoritative persistence choice.
+- Managed queue/outbox/inbox processing, idempotency, retries, DLQ/quarantine,
+  reconciliation and auditability are baseline reliability mechanisms.
+- AI remains advisory; deterministic domain services own orders, payments,
+  permissions, consent and other controlled business state.
+- Customer settlement is direct to the merchant through UPI/gateway flows;
+  BABAI does not introduce a wallet or escrow.
+- DPDPA-ready minimisation, consent, retention, deletion, access, subprocessors
+  and incident controls are implementation/privacy requirements, not new
+  aggregates.
+
+Initial RPO 24 hours, RTO 8 hours, daily backups and tested restore are
+continuity baselines. AWS credits may be evaluated without making the domain
+AWS-specific or overprovisioned. Exact cloud services, queue vendor, workflow
+implementation, SLOs and legal/security evidence remain open. [Admin Decision
+Packet (2026-09-20); `architecture.md`; `architecture-lld.md`;
+`architecture-boundaries.md`]
 
 ## State engine and workflow unknowns
 

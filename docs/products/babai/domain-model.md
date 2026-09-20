@@ -13,6 +13,64 @@ sources:
 
 The raw founder discussion confirms the following domain constraints and fills several cross-cutting gaps. Raw turn numbers below use the chronological substantive-message index defined in `architecture.md`.
 
+## Decision status and boundary vocabulary
+
+Use the following status vocabulary throughout the domain and architecture documents:
+
+- **Confirmed** — source-backed domain constraint or explicit invariant.
+- **Proposed** — useful candidate model that still needs design validation.
+- **Unresolved** — requirement or question is known, but the implementation or final boundary is not selected.
+- **Non-goal** — intentionally outside the current MVP.
+
+Boundary terms are distinct:
+
+- **Aggregate boundary** — transactional ownership, invariants and validated state transitions.
+- **Capability/engine boundary** — cohesive responsibility for commands, calculations or policy that may span aggregates.
+- **State/workflow boundary** — authoritative domain state and transitions versus durable orchestration of timers, retries, waits and recovery.
+- **Integration boundary** — provider-facing adapter and external identity/transport semantics.
+- **Trust/policy boundary** — authentication, authorization, tenant/branch scope and policy decisions before a state-changing command.
+- **Deployment boundary** — an independently operated runtime; it is a candidate only when ownership, security, data, scaling or lifecycle evidence justifies it.
+
+These terms prevent a conceptual engine or aggregate from being treated as an automatic microservice, database or workflow-product decision.
+
+## Architecture handoff requirements (HLD/LLD)
+
+### HLD requirements
+
+- Preserve the `Tenant → Branch → Channel` context and tenant-scoped customer relationship.
+- Keep aggregate ownership, capability ownership, provider adapters and deployment candidates explicit and separate.
+- Keep authoritative domain state distinct from events, workflow records, audit history and telemetry.
+- Enforce identity, authorization, policy and tenant/branch scope at trusted boundaries.
+- Keep payment, fulfillment, conversation automation and human takeover as independent lifecycle concerns.
+- Treat candidate deployment shapes as partial hypotheses; do not select a cloud, broker, database, workflow product, AI provider or microservice topology here.
+
+### LLD requirements
+
+- Define typed commands, queries, state transitions, preconditions and event envelopes.
+- Define correlation/causation, flow scope, schema versioning, idempotency, outbox/inbox, retries, quarantine/DLQ and reconciliation.
+- Define monetary, promotion, tax, availability and order-snapshot invariants before implementation.
+- Define provider callback verification and adapter lifecycle contracts.
+- Define audit, sensitive-data access, retention/deletion and recovery semantics.
+
+These are design requirements, not claims that the implementation already exists. See `architecture.md` and `architecture-boundaries.md` for the corresponding system-level handoff.
+
+## State engine and workflow unknowns
+
+**Confirmed requirement:** the product needs a state engine for business flows, not only payments. The founder then asked for a general state-engine evaluation and named idempotency, transactions, automatic retries, timers, human waits/interventions, audit history and recovery as required behavior. [Raw T115 `bbb210cc-a1ef-4ea9-b1a7-7c52f0011721`; Raw T117 `bbb216ed-0269-4c6c-8e28-f17031c1fa93`; Raw T119 `bbb211c0-c142-4837-aca7-b67a21454ec8`]
+
+The domain implication is that every stateful aggregate keeps authoritative state and validates transitions, while a workflow layer may coordinate long-running work around those transitions. It must not become a substitute for aggregate state or silently invent successful outcomes.
+
+Still unresolved:
+
+- generic state machine versus flow-specific state machines;
+- custom state handling versus open-source or managed workflow execution;
+- Temporal, n8n, Jenkins, GitHub Actions or any other implementation;
+- timer, human-wait, retry, compensation, recovery and replay semantics per flow;
+- event-history/workflow-record persistence and retention;
+- exact command/event/workflow ownership for onboarding, conversation, ordering, payment, fulfillment and delivery.
+
+The raw mapping records the research-stage instruction to define the State Engine contract and compare options before selecting an implementation; it explicitly does not lock Temporal or another product. [Raw T122 `0011555d-10c7-4dbc-aca8-2bf7c55d324b`; Raw T136 `09c90c51-c4ae-40a6-9bd8-aea16eaf3339`]
+
 ### Tenant-scoped privacy and deletion
 
 - The canonical customer identity may be global, but the relationship, consent, conversation, order and operational data exposed to a business are always scoped through `TenantCustomer`.

@@ -141,4 +141,5 @@ Early discussions used Dawat and proposed Tadka/Thali/Dawat tiers, low pilot pri
 - `customer-market.md` — ICP and market evidence
 - `experience-and-channels.md` — WhatsApp/web and onboarding principles
 - `business-model.md` — subscription and unit-economics hypotheses
+- `economics-model.md` — per-restaurant economics baseline and sensitivity model
 - `validation.md` — pilot evidence and measurement

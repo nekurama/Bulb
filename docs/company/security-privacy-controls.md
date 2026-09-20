@@ -46,5 +46,6 @@ Evidence: founder history [572] preserves company continuity and the company-own
 ## Status boundaries
 
 - **Confirmed direction:** company-owned infrastructure, least privilege/zero trust, explicit offboarding, and BABAI data-control requirements.
-- **Professional-validation-required:** controller/processor allocation, privacy/DPA terms, subprocessors, retention/deletion obligations, and cross-border transfer assessment.
+- **professional-validation-required:** controller/processor allocation, privacy/DPA terms, subprocessors, retention/deletion obligations, and cross-border transfer assessment.
+- **unknown:** whether any company-owned MFA, secrets, offboarding, backup, incident, or vendor-review controls are currently implemented.
 - **Pending:** security baseline, identity policy, secrets system, device controls, incident plan, recovery objectives, privacy/DPA documents, retention schedule, transfer assessment, and vendor process.

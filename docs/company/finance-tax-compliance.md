@@ -49,5 +49,6 @@ Evidence: founder history [250] separates BABAI subscription billing from restau
 ## Status boundaries
 
 - **Confirmed direction:** finance categories must remain separate; subscription billing is not restaurant settlement; bootstrap-first incentives are optional.
-- **Professional-validation-required:** entity/tax structure, GST/TDS/payroll/audit triggers, revenue recognition, 80-IAC/DeepTech eligibility, and any state-incentive claim.
+- **professional-validation-required:** entity/tax structure, GST/TDS/payroll/audit triggers, revenue recognition, 80-IAC/DeepTech eligibility, and any state-incentive claim.
+- **unknown:** accounting software, exact filing dates, selected CA/CS provider, and first-year transaction volumes.
 - **Pending:** incorporation, bank/accounting setup, registrations, filing model, founder policy, treatment validation, and scheme execution.

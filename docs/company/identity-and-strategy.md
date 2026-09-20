@@ -41,5 +41,6 @@ Evidence: founder history [572] records “NEKURAMA = parent/company,” “Priv
 ## Status boundaries
 
 - **Confirmed direction:** NEKURAMA is the parent operating company; BABAI is its first product/brand.
-- **Professional-validation-required:** legal name, incorporation form, founder eligibility, employment restrictions, and invention-assignment compatibility.
+- **professional-validation-required:** legal name, incorporation form, founder eligibility, employment restrictions, and invention-assignment compatibility.
+- **unknown:** final mission, portfolio principles, and measurable 1/3/5-year objectives.
 - **Pending:** legal name clearance, incorporation, statutory registrations, mission, portfolio principles, and measurable objectives.

@@ -1,6 +1,8 @@
 {
   "mode": "mock-only",
+  "schemaVersion": 1,
   "source": "invented local demo scenes",
+  "resetBehavior": "Return to scene one; never persist or transmit form values.",
   "demo": [
     {
       "kicker": "CUSTOMER · MOCK CONVERSATION",

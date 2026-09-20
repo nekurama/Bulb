@@ -1,5 +1,5 @@
 ---
-status: partial — gate and measures defined; numeric thresholds and paid proof pending
+status: partial — proposed Track 3 thresholds pending founder approval
 owner: BABAI
 last-reviewed: 2026-09-20
 sources:
@@ -8,6 +8,7 @@ sources:
   - nekurama.babai.research.md
   - nekurama.raw.chat.json (ordered turns 70, 290; mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `4702681b-d611-4408-af5f-9001d04b6cfa`, `f58ce128-39ed-4015-9be9-5b6135a39f20`)
   - Admin decision packet (2026-09-20; current task input)
+  - economics-model.md (Track 2)
 ---
 
 # Validation
@@ -81,6 +82,67 @@ For each pilot, record baseline and observed values for:
 
 No numeric success or kill thresholds are yet confirmed. Do not invent them from feature completion; record the baseline, instrument the workflow and use the pilot evidence to set the next gate.
 
+## Track 3 candidate metric contract — proposed, pending founder approval
+
+The following are **candidate** entry, exit, success and kill thresholds. They
+are not approved decisions. They are derived from the Track 2 planning bands
+in [`economics-model.md`](economics-model.md), not from observed BABAI data.
+
+### Proposed assumptions
+
+- The pilot is paid or deposit-backed and has a stated end date before
+  enrollment.
+- Rate-based order metrics require at least **10 completed orders per
+  restaurant**; below that sample, report the metric as directional/unknown.
+- Repeat-use evaluation requires at least **10 unique customers** and a
+  proposed **30-day observation window** after first order; the observation
+  window is not yet approved.
+- Founder-support thresholds use combined Manoj + Vinay time. The Track 2
+  base bands are onboarding **8–16 hours** and recurring support **6–12
+  hours/restaurant/month**; the high bands are 16–32 and 12–24 hours.
+- Economics thresholds use actual costs where available and the Track 2
+  contribution sensitivity; the 40% contribution sensitivity is proposed, not
+  an approved target.
+
+### Proposed entry gate
+
+| Entry condition | Proposed threshold | Hold/kill condition |
+|---|---:|---|
+| Commercial commitment | 100% of enrolled businesses have paid or deposited the agreed amount, signed pilot terms and an explicit end date | Do not start without all three; amount, refund treatment and date remain unresolved decisions |
+| Operational readiness | 100% have an approved WhatsApp channel, reviewed/published menu and named operating staff contact | Hold until channel, menu or staff ownership is ready |
+| Instrumentation | Baseline captured before first customer order for activation, orders, fulfillment, staff time, support and economics | Hold until baseline and event capture are available |
+
+### Proposed stage exit and success thresholds
+
+| Metric | Proposed success / advance threshold | Proposed fail / hold threshold |
+|---|---|---|
+| Activation | At least **80%** of enrolled restaurants live within **7 calendar days**; onboarding effort ≤ **16 combined founder hours/restaurant** | <70% live by day 14, or any restaurant exceeds **32 onboarding hours** without a documented recovery plan |
+| Order success | At least **80%** of initiated orders reach completed status after the 10-order minimum; missed/duplicate orders ≤ **5%** | <70% completed, or missed/duplicate orders > **10%** |
+| Fulfillment | At least **90%** of accepted pickup orders reach completed/collected status with correct customer status | <80% completion, repeated status divergence, or any unresolved customer/payment safety incident |
+| Repeat use | At least **20%** of eligible customers place a repeat order within the proposed 30-day window, after the 10-customer minimum | 0% repeat after the minimum sample and observation window; otherwise remain unknown |
+| Staff adoption | Staff handle at least **80%** of active order sessions without founder intervention; recurring founder support ≤ **12 hours/restaurant/month** | <60% staff-handled sessions or recurring support > **24 hours/restaurant/month** |
+| Support load | Onboarding and support remain within the Track 2 base bands, with a declining trend after the first restaurant | Support remains in the high band after remediation, or founder effort prevents the next onboarding increment |
+| Contribution | Base-case `ContributionAfterOnboarding` is non-negative and reaches the proposed **40% contribution-margin sensitivity** using recognized revenue, actual costs and approved accounting treatment | Base-case contribution is negative at pilot end, or `P ≤ C` after actual costs; do not compensate with an unapproved price |
+| Willingness to pay | At least **2 of the first 3 completed pilots** accept paid continuation or renewal terms after the end date | 0 of 3 accept continuation after complete observation; below 3 completed pilots remains inconclusive |
+
+### Proposed kill or immediate-hold conditions
+
+These are proposed safety/economics controls, pending founder approval:
+
+- Any unresolved customer-funds custody, authorization, privacy or payment
+  integrity issue.
+- More than **10%** missed/duplicate orders or less than **80%** accepted-order
+  fulfillment after the minimum sample.
+- Base-case contribution remains negative after actual costs and recognized
+  revenue are reconciled at the pilot end date.
+- Support remains above **24 combined founder hours per restaurant/month** or
+  onboarding exceeds **32 combined hours** without a specific corrective plan.
+- No completed pilot produces a credible paid-continuation signal after the
+  stated end date and observation window.
+
+These conditions should stop expansion while the evidence is reviewed; they do
+not authorize refunds, pricing changes, or accounting treatment by themselves.
+
 ## Kill / success signals
 
 The product should be judged on sustained usage, customer and restaurant adoption, and business value, not merely feature completion. The founder north star is:
@@ -107,4 +169,6 @@ Expansion beyond the initial 10 should be based on evidence from the pilot, with
 - [ ] Minimum active-pilot and paid-conversion thresholds for advancing from Gate 1 to Gate 2
 - [ ] Kill criteria for unsafe, unreliable or uneconomic operation
 - [ ] Pilot fee/deposit amount, refund treatment and end date
+- [ ] Founder approval of proposed entry/exit/success/kill thresholds
 - [ ] Per-metric numeric thresholds and baseline collection method
+- [ ] Approved repeat-use observation window and sample rules

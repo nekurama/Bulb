@@ -117,7 +117,7 @@ The distinction between **confirmed** and **partial** reconciles stale/thin plac
 | Meta onboarding/coexistence reliability | **challenge-required** | Real approved-channel onboarding and recovery tests; no current export proves reliability. |
 | Payment verification, refunds and reconciliation | **challenge-required** | Test gateway webhook and manual-payment paths with a pilot merchant; screenshots/claims are not authoritative payment proof. |
 | Pricing, onboarding fee and paid continuation | **challenge-required** | Paid pilot or deposit evidence; research explicitly says interest is not willingness to pay. |
-| Pilot instrumentation and numeric success/kill thresholds | **partial** | Instrument Stage 0 before expanding; compare activation, conversion, staff time, errors, repeat use, support and gross contribution across stages. Numeric thresholds are not set. |
+| Pilot instrumentation and numeric success/kill thresholds | **partial / proposed** | `validation.md` defines candidate thresholds grounded in `economics-model.md`; all numeric gates remain pending founder approval. |
 | Delivery and multilingual staff workflows | **unknown/challenge-required** | Defer delivery dependency; test only when evidence requires it, including language and provider failure cases. |
 | Competitive proof / moat | **challenge-required** | Workflow-level competitor comparison and evidence of retention/switching value, not feature-count comparison. |
 | Expansion gates beyond restaurants | **unknown** | Define quantitative evidence after the restaurant/pickup workflow is proven. |
@@ -148,7 +148,7 @@ The field research is intentionally not upgraded: it reports strong interest and
 | `experience-and-channels.md` | Previously thin; now records the confirmed WhatsApp/web principle, onboarding and takeover direction, with detailed UX still partial. |
 | `business-model.md` | Retained as a partial commercial model; public pricing is withheld while cost, contribution, GST and pilot-term evidence is collected. |
 | `economics-model.md` | New Track 2 planning artifact; provides low/base/high cost ranges, formulas and break-even sensitivity without selecting a price. |
-| `validation.md` | Retained as a partial pilot gate and measurement file; numeric success/kill and paid-continuation thresholds remain open. |
+| `validation.md` | Track 3 metric contract with proposed entry/exit/success/kill thresholds; founder approval and pilot evidence remain required. |
 | `product-definition.md` | Retained as the current MVP boundary; production cut, edge cases and post-pilot scope remain partial. |
 | `thesis-and-positioning.md` | Retained as current positioning; differentiation is explicitly a thesis, not a proven moat, and legal clearance remains separate. |
 | `domain-model.md` | Reviewed but not changed in this pass; it is a substantial domain artifact with its own remaining battles. |

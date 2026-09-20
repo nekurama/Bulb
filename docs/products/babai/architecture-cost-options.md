@@ -1,7 +1,7 @@
 ---
 status: proposed-options
 owner: BABAI Architecture
-last-reviewed: 2026-09-20
+last-reviewed: 2026-09-21
 sources:
   - "Admin Decision Packet (2026-09-20)"
   - nekurama.raw.chat.json
@@ -46,6 +46,34 @@ No table below constitutes vendor approval, Meta approval, a payment-provider
 selection, a production SLO, or a claim that any control is already
 implemented. [Admin Decision Packet (2026-09-20); `architecture.md`;
 `architecture-lld.md`; `architecture-boundaries.md`]
+
+## Recommended pilot posture and decision record
+
+**Working recommendation:** use a small, containerized TypeScript/Node
+modular monolith with one managed worker capacity model, standard PostgreSQL on
+the smallest managed tier that passes the restore/load tests, and a managed
+queue with a transactional outbox/inbox and DLQ path. Run only the low/base
+infrastructure envelope until measured traffic, recovery or support evidence
+requires more. This is a cost-sensitive pilot posture, not a vendor or
+production-availability commitment.
+
+| Decision area | Pilot posture | Input required before commitment |
+|---|---|---|
+| Runtime | Compare portable OCI deployment with AWS ECS/Fargate; use the smallest viable API/worker capacity and no EKS | AWS account/credits, region, network design, workload estimate and comparable non-AWS quote |
+| Database | Managed standard PostgreSQL, initially single-AZ if it passes the continuity test | Tier, storage, connection limits, backup retention, restore evidence, region and rate |
+| Queue/outbox | Managed at-least-once queue behind a port; PostgreSQL outbox/inbox, bounded retries, DLQ/quarantine and authorized replay | Queue provider, ordering/visibility semantics, request/retry/DLQ rates, replay tooling and cost |
+| Meta/WhatsApp | Provider-neutral `Channel`; target Meta Cloud API/Tech Provider, with a BSP adapter or test channel if onboarding blocks | Meta approval, coexistence eligibility, messaging rules, billing, disconnect/export and BSP terms |
+| Payments | Merchant-owned UPI/gateway adapter with direct settlement; manual confirmation is a pilot fallback | Merchant KYC/contract, current rates/taxes, webhook/refund/reconciliation evidence and legal/accounting review |
+| Observability | Structured redacted logs, core metrics, actionable alerts and correlation IDs; sampled traces only if useful | Signal ownership, retention, alert thresholds, tooling price, data residency and support windows |
+| Continuity | Daily successful backups and tested isolated restore against RPO 24h/RTO 8h | Backup location/retention, encryption/key ownership, restore runbook, measured elapsed time and reconciliation evidence |
+| Founder support | Manoj owns technical/recovery escalation; Vinay owns merchant operations; no hiring or 24x7 assumption | Accepted weekly capacity, coverage windows, provider escalation terms and restaurant admission cap |
+
+The recommendation intentionally avoids Aurora, Multi-AZ, Kafka, EKS,
+multi-region recovery, long log retention and other fixed-cost resilience
+features until evidence justifies them. AWS credits may lower cash spend, but
+the true cost model must retain pre-credit cost, founder hours, provider
+pass-throughs and tax. Provider choices, credits, rates, legal approvals and
+production SLOs remain **unresolved/input-required**.
 
 ## Cost model conventions
 
@@ -192,6 +220,11 @@ restore drill and support assumptions. Option C is a secondary simplification
 candidate. Option D is deferred. Credits are an economic input, not an
 architecture requirement.
 
+For the pilot decision, Option A is the portability baseline and Option B is
+the AWS managed-runtime candidate. Select neither until the same measured
+workload, continuity evidence and founder-support assumptions produce a
+defensible comparison.
+
 Record before using credits:
 
 1. AWS account owner, remaining balance, expiry, eligible services and
@@ -273,7 +306,7 @@ assumption. See the official [WhatsApp Business Platform pricing
 documentation](https://developers.facebook.com/documentation/business-messaging/whatsapp/pricing).
 
 No BSP price, Meta approval, coexistence capability, message-category
-classification or contract term is selected or implied here. [Raw T37
+classification, rate or contract term is selected or implied here. [Raw T37
 `eadec8d3-a035-43e3-814a-6d3312001bbf`; Raw T47
 `1df966d4-0c16-4a9a-b8cb-4375e5c2fda7`; Raw T51
 `e305d46c-dbf1-4875-b1b1-58a381a9f86a`; Raw T65
@@ -289,15 +322,16 @@ acceptance.
 | Option | Cost posture | Operational/legal tradeoff |
 |---|---|---|
 | **Manual UPI QR or merchant payment link** | No gateway price is assumed; bank/PSP terms, QR ownership and any link fee are unknown | Lowest integration cost and direct settlement, but manual confirmation, duplicate payment and refund reconciliation are founder/merchant work |
-| **Hosted gateway on the merchant's account** | Public India pricing varies by provider and contract. For example, Razorpay's India pricing page currently lists 2% per successful domestic transaction plus 18% GST on the platform fee, with stated zero setup/AMC/refund fees; verify the merchant contract and product-specific exceptions before relying on it | Better webhooks and reconciliation, but success rates, settlement timing, refunds, KYC, chargebacks, taxes and provider terms remain open |
+| **Hosted gateway on the merchant's account** | Public India rates, taxes and exceptions vary by provider and contract; use the official pricing page only as a current reference and do not treat it as a BABAI rate | Better webhooks and reconciliation, but success rates, settlement timing, refunds, KYC, chargebacks, taxes and provider terms remain open |
 | **Alternative gateway adapter (Cashfree, PayU or another approved provider)** | Exact rates, minimums, settlement, refunds and support are unknown until a merchant quote and terms are available | Preserves negotiation and fallback options; increases certification and reconciliation work |
 | **BABAI wallet/escrow or marketplace collection** | Not a cost option for the initial product | Violates the current direct-settlement/no-custody boundary and introduces materially different legal, reconciliation and operational obligations |
 
-The Razorpay figure is an external public reference, not an endorsement or a
-BABAI rate. See [Razorpay India pricing](https://razorpay.com/pricing/) and
-record the actual merchant contract, GST treatment and settlement report
-before modelling contribution. The current product and architecture sources
-explicitly keep provider selection, refunds and reconciliation unresolved.
+Public pricing pages are references only, not an endorsement or a BABAI rate.
+See [Razorpay India pricing](https://razorpay.com/pricing/) and obtain the
+actual merchant contract, GST treatment, settlement report and product
+exceptions before modelling contribution. The current product and
+architecture sources explicitly keep provider selection, rates, refunds and
+reconciliation unresolved.
 [Admin Decision Packet (2026-09-20); Raw T68
 `bbb21613-1461-4278-a34f-d4c055c03c84`; Raw T72
 `bbb21c29-06e2-44d7-bd05-c2f9c28c3f4f`; Raw T76
@@ -330,6 +364,32 @@ Portability reduces exit risk but does not make providers interchangeable:
 Meta approval/coexistence, payment KYC and settlement, queue delivery
 semantics, regional data controls and backup tooling still require provider
 specific validation.
+
+## Observability and supportability
+
+The pilot needs enough telemetry to protect deterministic business-state
+boundaries and the founder support envelope, not a large observability
+platform. The provider-neutral minimum is:
+
+- structured, redacted application and worker logs carrying correlation,
+  causation, tenant/branch scope and aggregate/provider reference IDs where
+  permitted;
+- metrics for request error/latency, queue age and retry volume, oldest
+  outbox record, DLQ/quarantine count, webhook signature failures, payment
+  reconciliation mismatches, backup age/last-success and restore duration;
+- alerts for business-risk conditions, not only host health: duplicate or
+  ambiguous payment state, queue/outbox growth, failed backups, suspected
+  cross-tenant access, repeated provider callbacks and an approaching support
+  capacity limit;
+- optional sampled traces for cross-module/provider latency, with payloads
+  excluded unless explicitly classified and redacted.
+
+CloudWatch, an external error tracker or another managed tool may implement
+these signals, but no observability provider is selected. Retention, sampling,
+data location, access review, alert routing, pricing and Manoj/Vinay
+ownership must be validated together. Do not put credentials, payment secrets
+or unrestricted PII in logs, events or traces. [`architecture-lld.md`;
+`docs/company/security-privacy-controls.md`]
 
 ## Backup, restore and continuity assumptions
 
@@ -479,6 +539,11 @@ against Stage 0/Stage 1 data, not new product thresholds. [`brd.md`;
   queue pricing and current free-tier terms.
 - [AWS startup credits](https://aws.amazon.com/startups/credits/) — program
   entry point; actual balance and eligibility remain account-specific.
+- [AWS App Runner pricing](https://aws.amazon.com/apprunner/pricing/) —
+  managed-runtime pricing dimensions to recheck if Option C is tested.
+- [Amazon CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/) —
+  logs, metrics, alarms and tracing cost dimensions to include in the pilot
+  estimate.
 - [WhatsApp Business Platform pricing](https://developers.facebook.com/documentation/business-messaging/whatsapp/pricing) —
   template/category/country and customer-service-window rules.
 - [Razorpay India pricing](https://razorpay.com/pricing/) — public reference

@@ -1,14 +1,13 @@
 ---
 status: partial
 owner: BABAI
-last-reviewed: 2026-09-20
+last-reviewed: 2026-09-21
 sources:
   - "Admin Decision Packet (2026-09-20)"
   - "nekurama.raw.chat.json (conversation_id: 6aa2f947-fce0-83e8-99d0-9a52ab2b15cd)"
   - nekurama.chatgpt.md
   - docs/products/babai/architecture.md
   - docs/products/babai/architecture-boundaries.md
-  - docs/products/babai/architecture-options.md
   - docs/products/babai/architecture-cost-options.md
   - docs/products/babai/domain-model.md
 ---
@@ -22,9 +21,9 @@ This is the low-level companion to `architecture.md` and
 without collapsing logical domain boundaries into deployment boundaries.
 
 For AWS/provider/queue/database trade-offs, portability, continuity economics
-and founder-only support capacity, see
-`architecture-cost-options.md`. That file contains options and validation gates
-rather than additional implementation commitments.
+and founder-only support capacity, see `architecture-cost-options.md`. That file
+contains options and validation gates rather than additional implementation
+commitments.
 
 The **Admin Decision Packet (2026-09-20)** is the current administrative
 decision source for the starting implementation posture. Founder evidence
@@ -125,6 +124,29 @@ authorized and validated by the owning module. [Raw T139
 The exact PostgreSQL schema layout, migration strategy, projection mechanism,
 partitioning, indexing, retention and archival remain unresolved. [Raw T206
 `128e9fdc-9032-4a5d-b627-4f0118fc3ba3`; `domain-model.md`]
+
+## Observability contract
+
+Observability describes and protects authoritative state; it never becomes a
+second source of truth. The minimum implementation contract is:
+
+- structured, redacted logs with correlation/causation, tenant/branch scope,
+  flow and aggregate/provider references where allowed;
+- metrics for request latency/errors, queue age/retries, oldest outbox record,
+  DLQ/quarantine count, callback verification failures, payment
+  reconciliation mismatches, backup age/last success and restore duration;
+- alerts for failed backups, growing outbox/queue/DLQ, ambiguous settlement,
+  repeated provider failures, suspected scope violations and founder support
+  capacity pressure;
+- optional sampled traces for cross-module/provider latency, excluding
+  secrets, payment data and unrestricted PII.
+
+CloudWatch or another provider-neutral/managed telemetry implementation is an
+unresolved adapter choice. Retention, sampling, data location, access review,
+alert routing, cost and Manoj/Vinay ownership require validation. Telemetry
+must carry enough context to investigate a failure and must not authorize a
+business transition or silently turn an error into success. [`architecture.md`;
+`architecture-cost-options.md`; `docs/company/security-privacy-controls.md`]
 
 ## Outbox, inbox and managed queue
 
@@ -242,6 +264,10 @@ credits may be evaluated, but the implementation must remain portable and
 must not be overprovisioned to consume credits. [Admin Decision Packet
 (2026-09-20); `architecture.md`; `architecture-boundaries.md`;
 `docs/company/security-privacy-controls.md`]
+
+See [`architecture-cost-options.md`](architecture-cost-options.md) for the
+non-binding AWS, PostgreSQL, queue, Meta, payment, portability and founder-only
+support comparison. It does not select a vendor or claim approval.
 
 ## Validation gates before stronger commitment
 

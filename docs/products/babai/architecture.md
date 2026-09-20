@@ -1,7 +1,7 @@
 ---
 status: partial
 owner: BABAI
-last-reviewed: 2026-09-20
+last-reviewed: 2026-09-21
 sources:
   - "Admin Decision Packet (2026-09-20)"
   - "nekurama.raw.chat.json (conversation_id: 6aa2f947-fce0-83e8-99d0-9a52ab2b15cd)"
@@ -14,6 +14,7 @@ sources:
   - docs/products/babai/experience-and-channels.md
   - docs/products/babai/architecture-boundaries.md
   - docs/products/babai/architecture-lld.md
+  - docs/products/babai/architecture-cost-options.md
 ---
 
 # Architecture
@@ -80,6 +81,25 @@ or legal/security controls have been validated. Logical capability and
 aggregate boundaries remain independent from the modular-monolith deployment
 shape. [Admin Decision Packet (2026-09-20); `architecture-boundaries.md`;
 `architecture-lld.md`; `domain-model.md`]
+
+### Cost-sensitive pilot recommendation
+
+The proposed pilot posture is one small containerized modular-monolith runtime
+plus a managed worker capacity model, managed standard PostgreSQL, a managed
+at-least-once queue behind a port, and provider adapters. Compare a portable
+OCI baseline with AWS ECS/Fargate using the same workload, backup/restore,
+queue, observability and founder-support assumptions. Start with the
+low/base cost envelope; do not add EKS, Aurora, Multi-AZ, Kafka, multi-region
+recovery or long-retention telemetry merely to consume credits.
+
+This recommendation is an internal decision record for pilot evaluation, not
+a provider selection. AWS credits, service/region/tier, queue vendor, Meta
+approval/BSP terms, payment provider/rates, observability tooling, legal
+approvals and production SLOs remain unresolved/input-required. Direct
+merchant settlement, RPO 24h/RTO 8h, daily backups/tested restore and
+deterministic business-state ownership remain unchanged. See
+[`architecture-cost-options.md`](architecture-cost-options.md) for the
+comparison, assumptions and validation gates.
 
 ### Key HLD/LLD decision citation index
 
@@ -464,7 +484,8 @@ placement, monitoring and the exact recovery runbook remain to be validated.
 AWS credits may be evaluated for cost reduction, but the architecture remains
 portable and must not overprovision or introduce AWS-only coupling merely to
 consume credits. The exact AWS services, queue provider, production SLOs,
-capacity thresholds, DR design and cost model remain open. [Admin Decision
+capacity thresholds, observability ownership, DR design and cost model remain
+open. [Admin Decision
 Packet (2026-09-20); `architecture-lld.md`; `architecture-boundaries.md`]
 
 The cost, provider and founder-support alternatives are recorded in
@@ -528,6 +549,10 @@ These align with the MVP boundary and the founder's explicit intent that the pro
 - exact tenant/branch invariants and deletion/retention policy;
 - data classification, encryption, secret storage and token/revocation model;
 - production SLOs, capacity thresholds, disaster recovery and cost model;
+- observability signal ownership, telemetry retention/sampling and support
+  alert thresholds;
+- exact AWS credits, service rates, Meta/BSP/payment rates, tax treatment and
+  legal approvals;
 - exact promotion stacking, tax/rounding, delivery/tracking and reconciliation rules;
 - ONDC role and integration, if evidence later makes it material.
 

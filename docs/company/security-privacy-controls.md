@@ -6,6 +6,9 @@ sources:
   - nekurama/Bulb#2
   - nekurama/Bulb#1
   - nekurama/Bulb#5
+  - nekurama.raw.chat.json#bbb213b8-d58c-403e-b858-bdaa1ac750b8
+  - nekurama.raw.chat.json#bbb2129e-e9fa-43bf-adca-b0bc7a956664
+  - nekurama.raw.chat.json#bbb21426-5f7e-4c38-82e4-e288b9aae01c
 ---
 
 # Security, Privacy & Company Controls
@@ -29,23 +32,30 @@ BABAI must support tenant isolation, scoped authorization, auditability, retenti
 - [ ] Cross-border data transfer assessment
 - [ ] Vendor security review process
 
-Evidence: founder history [572] preserves company continuity and the company-owned operating model; the source decision trail also requires company-owned infrastructure, least privilege, explicit offboarding, tenant isolation, auditability, retention/deletion, backup/recovery, and cross-border assessment. This is a required control direction, not evidence that the controls are implemented.
+Evidence: later company decisions preserve the company-owned operating model and require company-owned infrastructure, least privilege, explicit offboarding, tenant isolation, auditability, retention/deletion, backup/recovery and cross-border assessment. This is a required control direction, not evidence that the controls are implemented.
+
+## Raw founder-message citations
+
+- `nekurama.raw.chat.json#bbb213b8-d58c-403e-b858-bdaa1ac750b8`: “Our services should be oauthed imo, kind of decentralized auth with zero trust.” The same message requires hard flow/identity boundaries; this supports the control principle, not a deployed design.
+- `nekurama.raw.chat.json#bbb2129e-e9fa-43bf-adca-b0bc7a956664`: proposes public/scoped/sensitive/restrictive data classes, restaurant tenancy, sensitive logging and Vault-style secret handling.
+- `nekurama.raw.chat.json#bbb21426-5f7e-4c38-82e4-e288b9aae01c`: says deletion depends on agreed terms and applicable law; this is why retention/deletion remains professional-validation-required rather than a fixed policy.
 
 ## E-setup checklist
 
-- [ ] Move domains, repositories, cloud projects, provider accounts, billing, and secrets to company ownership.
-- [ ] Enforce MFA, SSO where practical, least privilege, privileged-access review, and quarterly access recertification.
-- [ ] Use managed secrets storage; prohibit secrets in source, tickets, chat, and personal accounts.
-- [ ] Define device security, joiner/mover/leaver, immediate revocation, and asset-return procedures.
-- [ ] Document tenant isolation, scoped authorization, audit-log access/retention, and production-access review.
-- [ ] Inventory and classify customer, employee, operational, payment-related, and provider data.
-- [ ] Define privacy notice, DPA/subprocessors, retention/deletion/export, and cross-border transfer decisions.
-- [ ] Establish incident response, breach assessment, notification, evidence preservation, backup/restore testing, and disaster recovery objectives.
-- [ ] Review critical vendors for security, privacy, availability, concentration, pricing, and offboarding risk.
+- [ ] **Ownership:** move domains/DNS, repositories, cloud projects, provider accounts, billing, documentation, backups and secrets to company ownership; retain transfer and recovery evidence.
+- [ ] **Identity:** enforce MFA, recovery methods, SSO where practical, least privilege, privileged-access review and a dated access recertification cadence.
+- [ ] **Secrets:** use managed secrets storage, environment separation and rotation; prohibit secrets in source, tickets, chat and personal accounts.
+- [ ] **Lifecycle:** define device security, joiner/mover/leaver, immediate revocation, asset-return and emergency-access procedures.
+- [ ] **Application controls:** document tenant/branch isolation, scoped authorization, audit-log access/retention, production-access review and sensitive-data redaction.
+- [ ] **Data map:** inventory and classify customer, employee, operational, payment-related and provider data with owners, purposes, locations and retention candidates.
+- [ ] **Privacy/legal review:** define privacy notice, DPA/subprocessors, retention/deletion/export, user/restaurant requests and cross-border transfer decisions with qualified advice.
+- [ ] **Resilience:** establish incident response, breach assessment, notification/escalation, evidence preservation, backup/restore testing and disaster-recovery objectives.
+- [ ] **Vendors:** review critical messaging, payment, AI, hosting, analytics and support vendors for security, privacy, availability, concentration, pricing and offboarding risk.
 
 ## Status boundaries
 
 - **Confirmed direction:** company-owned infrastructure, least privilege/zero trust, explicit offboarding, and BABAI data-control requirements.
 - **professional-validation-required:** controller/processor allocation, privacy/DPA terms, subprocessors, retention/deletion obligations, and cross-border transfer assessment.
 - **unknown:** whether any company-owned MFA, secrets, offboarding, backup, incident, or vendor-review controls are currently implemented.
-- **Pending:** security baseline, identity policy, secrets system, device controls, incident plan, recovery objectives, privacy/DPA documents, retention schedule, transfer assessment, and vendor process.
+- **partial:** the control principles and product boundary are documented, but implementation evidence, policy owners and review cadence are not recorded here.
+- **stale:** none identified; provider capabilities, applicable law and security standards must be rechecked before implementation.

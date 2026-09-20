@@ -9,6 +9,8 @@ sources:
   - nekurama/Bulb#5
   - nekurama.raw.chat.json#bbb214cb-4959-4878-b6a9-2358ddbf2b07
   - nekurama.raw.chat.json#bbb21ece-7bb6-4a1f-9798-9ebd4ed6bcbd
+  - nekurama.raw.chat.json#bbb21415-90f0-4972-97a7-d16a296157bb
+  - nekurama.raw.chat.json#bbb217ee-01a7-4f44-a207-116c50531b56
 ---
 
 # IP, Brand & Legal
@@ -19,7 +21,7 @@ NEKURAMA is intended to hold company/product IP. BABAI is a product/brand, not a
 
 IP provenance is divided into: background IP; NEKURAMA-created IP; third-party/OSS; and customer-owned material/data. General knowledge and skills are not automatically company IP. Employer-confidential or restricted third-party material must not enter BABAI without rights.
 
-Brand direction: BABAI is the selected product name/finalist, subject to professional trademark clearance. NEKURAMA and BABAI word/device marks are contemplated. Word mark first is preferred; Class 42 is the primary SaaS/software/AI class, with other classes only when justified.
+Brand direction: BABAI is the selected product name/finalist, subject to professional trademark clearance. NEKURAMA and BABAI word/device marks are contemplated. Word mark first is preferred; Class 42 is the primary SaaS/software/AI class, with other classes only when justified. A domain purchase or company-name reservation must not be treated as trademark clearance.
 
 ## Questions
 
@@ -33,22 +35,30 @@ Brand direction: BABAI is the selected product name/finalist, subject to profess
 - [ ] Customer contract / ToS / DPA legal stack
 - [ ] Open-source policy and notices
 
-Evidence: founder history [503] records the clean-room principle and NEKURAMA ownership of new work; [511] separates founder shares, company IP, and BABAI branding; [517] records the proposed marks, Class 42 priority, and NEKURAMA Private Limited as owner. History [367] and [391] keep BABAI clearance pending because of existing software/automation usage and other marks.
+Evidence: later company issue decisions record the clean-room principle, NEKURAMA ownership of new work, the four IP categories and the proposed marks. Raw messages below are the founder's stated boundary and requests for clearance; they are not assignments, registrations or legal opinions.
+
+## Raw founder-message citations
+
+- `nekurama.raw.chat.json#bbb214cb-4959-4878-b6a9-2358ddbf2b07`: “Business belongs to BABAI. tech, ip and limitation rights belong to Nekurama.” Treat this as the starting boundary that later decisions refine into product/brand versus company IP.
+- `nekurama.raw.chat.json#bbb21ece-7bb6-4a1f-9798-9ebd4ed6bcbd`: “Do the deep dive on the legal brand clearance in india” and defer the product/domain choice until that work is done.
+- `nekurama.raw.chat.json#bbb21415-90f0-4972-97a7-d16a296157bb`: asks whether `*.nekurama.com` subdomains are possible; this supports company-controlled namespace planning, not trademark rights.
+- `nekurama.raw.chat.json#bbb217ee-01a7-4f44-a207-116c50531b56`: records the intent to acquire the company domain before public work begins; retain purchase evidence and transfer/control evidence separately.
 
 ## E-setup checklist
 
-- [ ] Execute founder confidentiality and IP-assignment agreements plus a signed pre-incorporation background-IP schedule.
-- [ ] Create an IP provenance register for background IP, NEKURAMA-created work, third-party/OSS components, and customer-owned material/data.
-- [ ] Prohibit employer-confidential or restricted third-party material unless rights are documented and approved.
-- [ ] Run professional clearance for NEKURAMA and BABAI, including relevant exact, phonetic, formative, domain, and common-law conflicts.
-- [ ] File word marks first only after clearance and filing strategy approval; file device marks after final designs.
-- [ ] Put all domains and brand accounts under company-controlled registrars and credentials.
-- [ ] Prepare customer agreement/ToS, privacy notice, DPA terms, and IP/data-use terms before the first paying customer.
-- [ ] Establish OSS approval, licence notices, attribution, and SBOM/provenance records.
+- [ ] **Founder/IP evidence:** execute founder confidentiality and IP-assignment agreements plus a signed pre-incorporation background-IP schedule; list `nekurama.com` as an asset requiring control transfer after incorporation if acquired pre-incorporation.
+- [ ] **Provenance:** maintain a register for background IP, NEKURAMA-created work, third-party/OSS components, AI-provider material and customer-owned material/data, with source and rights evidence.
+- [ ] **Clean room:** prohibit employer-confidential, customer-confidential or restricted third-party material unless a qualified reviewer confirms documented rights.
+- [ ] **Clearance:** obtain professional clearance for NEKURAMA and BABAI, including exact, phonetic, formative, domain and relevant common-law conflicts.
+- [ ] **Filing decision:** file word marks only after clearance and filing-owner/class strategy approval; file device marks after final designs. Record applications and objections; do not call a mark registered from an application receipt.
+- [ ] **Company control:** put domains, DNS, registrars, brand accounts and recovery methods under company-controlled credentials and an access register.
+- [ ] **Contracts:** prepare and legally review customer agreement/ToS, privacy notice, DPA/data-use terms, vendor terms and IP warranties before the first paying customer.
+- [ ] **OSS/AI controls:** establish approval, licences, notices, attribution, SBOM/provenance, provider terms, data-retention/training-use and security review records.
 
 ## Status boundaries
 
 - **Confirmed direction:** NEKURAMA owns company IP; BABAI is a product/brand; Class 42 is the primary contemplated class.
 - **professional-validation-required:** founder/worker assignments, employer-IP exclusions, trademark clearance/filing, and customer/vendor contract terms.
 - **unknown:** final OSS/AI-provider approval process and the complete customer/vendor contract set.
-- **Pending:** incorporation details, executed assignments, formal clearance, filings, domains, customer contracts, and OSS controls.
+- **partial:** the IP taxonomy and intended ownership boundary exist, but no complete provenance register, executed assignment set or clearance report is recorded here.
+- **stale:** none identified; any prior name/domain availability result must be rechecked before filing.

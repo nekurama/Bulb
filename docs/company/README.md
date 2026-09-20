@@ -8,6 +8,7 @@ Current durable company-level truth. Product-specific detail belongs under `docs
 - **partial** — direction exists, but execution details or open questions remain
 - **unknown** — the dimension is identified but no reliable current answer is recorded
 - **professional-validation-required** — legal, tax, accounting, employment or regulatory confirmation is required before acting
+- **stale** — a file conflicts with a later source decision and must not be used as current truth
 
 ## Core dimensions
 
@@ -23,6 +24,18 @@ Current durable company-level truth. Product-specific detail belongs under `docs
 
 `e-setup-checklist.md` is the bounded cross-dimension checklist for incorporation, founder/governance, IP/brand/legal, finance/tax/compliance and security/privacy setup. It records actionable work without turning unresolved questions into company decisions.
 
+## Current handoff status
+
+| Dimension | Status | Immediate evidence or action |
+| --- | --- | --- |
+| Identity and strategy | **partial** | Private Limited and one-company/multiple-products are the current direction; obtain professional incorporation and employment/IP compatibility advice. |
+| Founders, ownership and governance | **partial** | Manoj 55% / Vinay 45% is the latest intended split; execute agreements, governance rules and funding instruments before issuance. |
+| IP, brand and legal | **partial** | NEKURAMA is the intended IP holder and BABAI is a product/brand; complete provenance, clearance, assignments and contract review. |
+| Finance, tax and compliance | **partial** | Separate capital, expenses, SaaS revenue and settlement flows; validate registrations, accounting treatment and scheme eligibility with a CA/CS. |
+| Security, privacy and controls | **partial** | Company ownership, least privilege, tenant isolation and auditability are principles; implementation status is unknown until evidence is collected. |
+
+No row above means that incorporation, ownership issuance, trademark registration, tax eligibility or control implementation has already occurred.
+
 ## Sources
 
 Primary decision/history: `nekurama/Bulb#2` and current company specification `nekurama/Bulb#5`; supporting product/company decisions may reference `nekurama/Bulb#1` and historical `ManojVysyaraju/bulb#1`.
@@ -37,8 +50,14 @@ Conversation evidence is anchored in `nekurama.raw.chat.json` by message UUID, i
 - `bbb21621-2657-4cf5-a886-3d3079042f08` — startup rebates and GST questions
 - `bbb21e3d-91a3-48de-90a7-986c6beb716b` — DPIIT and government-procurement/ONDC question
 
+Raw messages are founder-history evidence, not executed agreements or professional advice. A raw message can record a proposal, question or historical option; the later issue decision and implementation evidence determine whether it is current.
+
 ## Thin-file inventory
 
 - `README.md` is intentionally a thin index, not a company decision record.
 - The five dimension files are compact **partial** durable-truth files. Their question lists are deliberate open work, not empty placeholders.
 - No additional tracked company-relevant placeholder file was found. The cross-dimension checklist is separate so the dimension files remain focused.
+
+## Handoff rule
+
+Before acting on a company item, retain the relevant evidence artifact: certificate or filing receipt, signed agreement, cap-table/register entry, clearance report, invoice/ledger entry, access-control proof, or tested recovery/incident record. If the artifact does not exist, keep the item **partial**, **unknown** or **professional-validation-required** rather than upgrading its status.

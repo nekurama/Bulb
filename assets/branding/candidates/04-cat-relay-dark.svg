@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">Candidate 04: Cat relay lockup, dark variant</title>
+  <desc id="desc">A friendly cat-like relay mark with a speech spark explores NEKURAMA mascot energy beside the BABAI product wordmark, for dark surfaces.</desc>
+  <g fill="none" stroke="#F4EFE4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M58 72 95 46l20 46c22-12 48-18 76-18s54 6 76 18l20-46 37 26-14 63c8 20 12 42 12 66 0 74-58 108-131 108S60 275 60 201c0-24 4-46 12-66z" stroke-width="12"/>
+    <circle cx="146" cy="182" r="9" fill="#F4EFE4" stroke="none"/>
+    <circle cx="218" cy="182" r="9" fill="#F4EFE4" stroke="none"/>
+    <path d="M163 231c15 13 30 13 45 0M127 258h110" stroke="#F3654B" stroke-width="11"/>
+    <path d="M276 83h57v49h-28l-17 19v-19h-12z" fill="#D8F06B" stroke="#F4EFE4" stroke-width="8"/>
+    <path d="m304 91 7 16 16 7-16 7-7 17-7-17-16-7 16-7z" fill="#F3654B" stroke="#F3654B" stroke-width="4"/>
+  </g>
+  <text x="385" y="116" fill="#BFC8BE" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" letter-spacing="8">NEKURAMA / PRODUCT CANDIDATE</text>
+  <text x="378" y="230" fill="#F4EFE4" font-family="Arial, Helvetica, sans-serif" font-size="126" font-weight="800" letter-spacing="-7">BABAI</text>
+  <text x="388" y="280" fill="#D8F06B" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" letter-spacing="4">BUSINESS AUTOMATION BY AI</text>
+</svg>

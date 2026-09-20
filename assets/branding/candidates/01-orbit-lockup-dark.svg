@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">Candidate 01: Orbit lockup, dark variant</title>
+  <desc id="desc">NEKURAMA parent wordmark above BABAI, connected by an orbit and an AI spark, for dark surfaces.</desc>
+  <g fill="none" stroke="#F4EFE4" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="170" cy="180" r="94" stroke-width="12"/>
+    <ellipse cx="170" cy="180" rx="128" ry="48" stroke="#F3654B" stroke-width="10" transform="rotate(-22 170 180)"/>
+    <path d="M170 111v138M101 180h138" stroke="#D8F06B" stroke-width="8"/>
+    <path d="m170 137 12 30 30 13-30 12-12 31-12-31-30-12 30-13z" fill="#F3654B" stroke="#F3654B" stroke-width="6"/>
+  </g>
+  <text x="345" y="120" fill="#BFC8BE" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="9">NEKURAMA</text>
+  <text x="340" y="230" fill="#F4EFE4" font-family="Arial, Helvetica, sans-serif" font-size="126" font-weight="800" letter-spacing="-7">BABAI</text>
+  <text x="350" y="280" fill="#D8F06B" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" letter-spacing="4">BUSINESS AUTOMATION BY AI</text>
+</svg>

@@ -341,6 +341,36 @@ manifest, build step, runtime dependency, external font, image host, analytics
 script, API endpoint or production integration. No deployment or DNS change was
 performed.
 
+### Feature-controlled Pages deployment contract
+
+The workflow configuration is `.github/workflows/pages-preview.yml`. It is
+manual-dispatch-only and is intentionally locked to the manager integration
+target `nekurama/babai-feature`; it must not be triggered from
+`nekurama/architecture`, `main` or another branch. The workflow checks out the
+committed target ref, verifies this exact artifact allowlist, and uploads only
+`site/`:
+
+```text
+site/app.js
+site/favicon.svg
+site/index.html
+site/styles.css
+```
+
+After the workflow is integrated into `nekurama/babai-feature`, the exact
+trigger is:
+
+```sh
+gh workflow run pages-preview.yml \
+  --repo nekurama/bulb \
+  --ref nekurama/babai-feature
+```
+
+The run summary records the resolved source revision. A rollback must stop
+dispatches, restore the previous approved Pages source/revision or revert the
+workflow integration, and verify that the Pages build points to the restored
+revision. This role-branch correction does not push, enable or deploy Pages.
+
 ### React versus native — decision
 
 | Option | Benefits | Costs / risks | Decision |

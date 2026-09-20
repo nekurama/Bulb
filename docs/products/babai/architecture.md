@@ -3,8 +3,11 @@ status: partial
 owner: BABAI
 last-reviewed: 2026-09-20
 sources:
-  - nekurama.raw.chat.json
+  - "nekurama.raw.chat.json (conversation_id: 6aa2f947-fce0-83e8-99d0-9a52ab2b15cd)"
   - nekurama.chatgpt.md
+  - nekurama/Bulb#1
+  - historical ManojVysyaraju/bulb#1
+  - nekurama/Bulb#3
   - docs/products/babai/product-definition.md
   - docs/products/babai/domain-model.md
   - docs/products/babai/experience-and-channels.md
@@ -21,7 +24,26 @@ This document separates:
 
 Logical capability boundaries are not a commitment to one deployed service per capability. A boundary becomes a deployment boundary only when a meaningful ownership, data, security, scaling or lifecycle reason exists.
 
-Raw-founder citations use the form `Raw T<number> (message-id)`. The turn number is a stable, derived chronological index over substantive `user`/`assistant` text messages in `nekurama.raw.chat.json`, ordered by `create_time` and then mapping-node ID. Assistant turns are included as recorded decision history; founder-authored turns remain the primary evidence for product intent.
+Raw-founder citations use the form `Raw T<number> (message-id)`. The turn
+number is a stable, derived chronological index over substantive
+`user`/`assistant` text messages in `nekurama.raw.chat.json`, ordered by
+`create_time` and then mapping-node ID. For an exact source anchor, use
+`nekurama.raw.chat.json#conversation_id=6aa2f947-fce0-83e8-99d0-9a52ab2b15cd;mapping/message=<message-id>`.
+Assistant turns are included as recorded decision history; founder-authored
+turns remain the primary evidence for product intent.
+
+The current decision log is `nekurama/Bulb#1` (especially §§8-22, §§24-25,
+§29 and §31). `historical ManojVysyaraju/bulb#1` remains preserved historical
+evidence rather than an independently current decision source.
+
+### Decision-status vocabulary
+
+- **Confirmed** — directly supported by founder intent or an explicit domain invariant; implementation details may still be open.
+- **Proposed** — an architecture hypothesis or candidate shape useful for design work; it is not a commitment.
+- **Unresolved** — the evidence establishes a requirement or question but does not select an implementation, provider or topology.
+- **Non-goal** — explicitly outside the current MVP or architecture handoff.
+
+This document uses those labels to avoid turning research discussion, assistant recommendations or candidate deployment shapes into decisions.
 
 ## Current architectural answer
 
@@ -114,6 +136,28 @@ The first implementation should make these contracts explicit even when code is 
 
 Exact REST/gRPC/GraphQL choice, serialization, broker, database and workflow engine remain unknown. The raw discussion explored gRPC/Protobuf and asynchronous flows, but did not establish a production protocol decision. [Raw T163 `bbb2111f-375d-4b57-b543-441369f304ec`; Raw T185 `bbb211a0-56e1-4951-bb51-9ee3f587f7d8`; Raw T195 `bbb21fcf-8976-43bb-a749-8a7ae584a904`; Raw T200 `1aaa80e7-2767-49ae-8054-8d0fb81f4fc0`]
 
+## State engine and workflow posture (HLD/LLD)
+
+**Confirmed requirement:** BABAI needs a state/transition capability for business flows, not only for payment processing. The founder explicitly broadened the requirement to a general state engine and then listed idempotency, transactions, retries, timers, human waits/interventions, audit history and recovery as functional needs. [Raw T115 `bbb210cc-a1ef-4ea9-b1a7-7c52f0011721`; Raw T117 `bbb216ed-0269-4c6c-8e28-f17031c1fa93`; Raw T119 `bbb211c0-c142-4837-aca7-b67a21454ec8`]
+
+The HLD boundary is therefore the separation between:
+
+- authoritative domain state and validated transitions owned by the relevant aggregate/capability; and
+- durable workflow execution that coordinates timers, retries, asynchronous work, human intervention and recovery around that state.
+
+The LLD must define state schemas, transition commands, preconditions, transition authorization, event effects, idempotency, timeout/timer behavior, human-wait behavior, retry/compensation behavior, audit history and recovery/replay semantics. These requirements apply to ordering, payment, fulfillment, conversation, onboarding and other long-running flows as they become material.
+
+The following remain **unresolved**:
+
+- whether state handling is one generic framework, flow-specific state machines, or a constrained combination;
+- whether workflow execution is custom, open source or a managed platform;
+- whether a durable workflow product such as Temporal is suitable; it is explicitly not selected during research;
+- where workflow records, event history, timers and recovery metadata are stored;
+- the exact boundary between domain transitions, workflow orchestration and integration retry logic;
+- the sync/async contract and operational ownership for each flow.
+
+The founder's research-stage position was to define the State Engine contract and compare alternatives before choosing an implementation; it did not authorize locking Temporal or another product. [Raw T122 `0011555d-10c7-4dbc-aca8-2bf7c55d324b`; Raw T136 `09c90c51-c4ae-40a6-9bd8-aea16eaf3339`; `architecture-boundaries.md`]
+
 ## Data, events and reliability (LLD)
 
 ### Command and state transition pattern
@@ -178,6 +222,55 @@ Use at-least-once delivery with:
 - alerts to the correct platform, tenant, staff or customer actor.
 
 The system must not silently convert a failed event or provider callback into success-shaped state. The exact broker and workflow implementation are unknown. [Raw T125 `bbb21b98-7460-45d5-a616-418ffbf47484`; Raw T126 `e472fe3d-22d5-4595-aafd-986683b13a3c`; Raw T264 `bbb21a7f-4d44-4cc1-8f60-1172bdcc303c`; `domain-model.md`]
+
+## Thin/placeholder artifact inventory
+
+Before this handoff, `docs/products/babai/architecture.md` was the only
+architecture-specific thin artifact: it contained a short current answer and a
+question list, but no ownership map, HLD/LLD boundary, integration seams,
+data/reliability contract or source anchors. This file now fills that gap
+without turning design-stage hypotheses into confirmed deployment decisions.
+
+The adjacent files are substantive partial inputs, not architecture
+placeholders:
+
+- `domain-model.md` owns aggregate, invariant and commercial-engine decisions.
+- `product-definition.md` owns the MVP/product boundary and pilot constraints.
+- `experience-and-channels.md` owns channel and human-takeover experience.
+- `docs/README.md` owns knowledge-base mining/status rules rather than system
+  architecture.
+
+## Explicit open questions
+
+These questions remain intentionally unresolved; the architecture must not
+infer answers from the candidate boundaries above:
+
+- Final MVP deployment topology, packaging, environment model and capability
+  extraction sequence.
+- Physical data stores, transaction boundaries, tenancy partitioning,
+  migrations, retention, backup and disaster recovery.
+- Event broker/queue, partition and ordering guarantees, schema registry,
+  replay tooling and retention.
+- Workflow engine selection, including whether Temporal or another engine is
+  justified after the design/POC phase.
+- Policy engine selection and the detailed threat model, key management and
+  abuse controls.
+- Meta production onboarding, coexistence, webhook behavior, messaging
+  policy/templates and multi-agent operation.
+- Payment provider, payment verification, refunds, reconciliation and unit
+  economics.
+- Delivery provider contracts and the delivery/tracking lifecycle split.
+- AI model/provider architecture, data handling, evaluation, multilingual
+  behavior, guardrails and escalation policy.
+- Production SLOs, observability/support design, cost/scaling thresholds and
+  RTO/RPO.
+- Remaining aggregate invariants and transition rules, including promotion
+  stacking, combo/bundle modeling, tax/rounding provenance and high-contention
+  promotion limits.
+
+These open questions are consistent with `nekurama/Bulb#1` §31 and the
+remaining battles in `domain-model.md`; they are evidence gaps, not silent
+architecture commitments.
 
 ## WhatsApp / Meta and channel topology
 

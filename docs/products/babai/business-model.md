@@ -1,37 +1,47 @@
 ---
 status: partial
 owner: BABAI
-last-reviewed: 2026-09-18
+last-reviewed: 2026-09-20
 sources:
-  - nekurama/Bulb#1
-  - historical ManojVysyaraju/bulb#1
+  - nekurama.raw.chat.json
+  - nekurama.chatgpt.md
+  - nekurama.babai.research.md
 ---
 
 # Business Model
 
-## Current answer
+## Current answer — confirmed direction
 
-BABAI is a SaaS business. Restaurant order payments and BABAI subscription billing are separate flows; BABAI should not depend on transaction/delivery margin as its initial economic foundation.
+BABAI is intended to be a subscription SaaS business. Restaurant customer-order payments and BABAI subscription billing are separate. BABAI should not depend on transaction or delivery margin as its initial economic foundation, and it should not hold or settle customer funds in the initial product. [Evidence: `nekurama.raw.chat.json:L192-L205`; corroboration: `nekurama.babai.research.md:L56-L63`]
 
-The initial business-value hypothesis is that restaurants have a meaningful pain around commission costs on existing platforms. Initial research found this concern recurring among restaurant businesses. BABAI's intended model is to make the order commission component negligible and instead charge restaurants a subscription fee.
+The value hypothesis is direct-order economics, customer ownership, staff-effort/error reduction and better service recovery, less BABAI subscription and variable provider costs. The exact value is restaurant-specific and must use the restaurant's own baseline rather than a blanket “save 30%” claim. [Evidence: `nekurama.raw.chat.json:L64404-L64420`; corroboration: `nekurama.babai.research.md:L24-L36`]
 
-The initial 10-restaurant beta should validate whether BABAI delivers enough practical value to restaurants that they choose to continue as paying customers after the beta. Paid continuation is a validation hypothesis, not an assumption of success.
+## Pricing — challenge-required hypothesis
 
-Current public pricing direction discussed: ₹999 / ₹2,499 / ₹4,999 + GST. Exact pricing remains a pilot-validation question; earlier price points are historical experiments, not current truth.
+The current public pricing direction is:
 
-## Unit economics
+- Basic: ₹999/month before GST
+- Premium: ₹2,499/month before GST
+- Advanced: ₹4,999/month before GST
 
-Major variable-cost drivers expected: acquisition, onboarding/support, WhatsApp messaging, AI, payment/delivery integrations and infrastructure.
+These are starting hypotheses for paid-pilot testing, not locked packaging or permanent pricing. Earlier Tadka/Thali/Dawat names and lower price points are historical experiments retained in the source history, not current truth. [Evidence: `nekurama.babai.research.md:L65-L81`; corroboration: `nekurama.raw.chat.json:L192-L205`, `nekurama.chatgpt.md:L27598-L27598`]
 
-The pilot should also help establish whether onboarding and ongoing support effort per restaurant is low enough to support progressive expansion without support becoming a business bottleneck.
+Open commercial questions include plan entitlements, usage limits, onboarding/training fee, pilot fee or deposit, billing/cancellation, payment-provider pass-through and gross contribution by restaurant. [Evidence: `nekurama.babai.research.md:L73-L81`, `nekurama.babai.research.md:L135-L161`]
 
-## Questions
+## Unit economics — partial
 
-- [ ] Final packaging/entitlements
-- [ ] Final pricing after pilot
-- [ ] Gross contribution model
-- [ ] CAC and acquisition assumptions
-- [ ] Onboarding/support cost
-- [ ] Expansion/upsell model
-- [ ] Billing and cancellation policy
-- [ ] Trial/pilot commercial terms
+Expected variable-cost drivers are onboarding/support, WhatsApp messaging, AI, payment/delivery integrations and infrastructure. The pilot must measure actual costs and support effort per restaurant before expansion. [Evidence: `nekurama.babai.research.md:L145-L161`; corroboration: `nekurama.chatgpt.md:L4163-L4163`]
+
+The initial economic decision is not “maximize plan revenue”; it is whether restaurants receive enough practical value to continue as paying customers after the beta. Paid continuation is a validation hypothesis. [Evidence: `nekurama.raw.chat.json:L79770-L79820`; `nekurama.babai.research.md:L161-L180`]
+
+## Commercial gaps
+
+- Final packaging and entitlements
+- Pricing and onboarding-fee test design
+- Pilot-to-paid conversion threshold
+- Baseline order economics and ROI calculation
+- CAC, onboarding and support cost
+- WhatsApp/AI/payment/delivery variable cost model
+- Billing, cancellation and refund policy for BABAI subscription
+
+No numerical unit-economics decision is promoted until pilot data exists. [Evidence: `nekurama.babai.research.md:L104-L116`, `nekurama.babai.research.md:L145-L180`]

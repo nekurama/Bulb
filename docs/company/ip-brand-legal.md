@@ -8,7 +8,7 @@ sources:
   - historical ManojVysyaraju/bulb#1
   - raw chat node 23a95bbe-abfb-44c6-bcf0-3111efa6a14a
   - raw chat node 0b63f1d6-b8e5-4e0e-b962-3fabc9366461
-  - raw chat node 1d2ed7d6-7693-4268-a9fc-d79c2acde692
+  - raw chat node 1d2ed7d6-7699-4263-a9fc-d79c2acde692
   - raw chat node 0d569809-e6d9-456a-8aae-09be85aacf2f
 ---
 
@@ -72,6 +72,6 @@ pending.
   preserves unrelated personal/employer IP (raw chat node
   `0b63f1d6-b8e5-4e0e-b962-3fabc9366461`).
 - BABAI was selected with trademark/legal clearance explicitly pending (raw chat node
-  `1d2ed7d6-7693-4268-a9fc-d79c2acde692`).
+  `1d2ed7d6-7699-4263-a9fc-d79c2acde692`).
 - The class discussion treats Class 42 as primary and other classes as evidence-dependent rather
   than automatic (raw chat node `0d569809-e6d9-456a-8aae-09be85aacf2f`).

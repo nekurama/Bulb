@@ -242,6 +242,10 @@ must not be overprovisioned to consume credits. [Admin Decision Packet
 (2026-09-20); `architecture.md`; `architecture-boundaries.md`;
 `docs/company/security-privacy-controls.md`]
 
+See [`architecture-cost-options.md`](architecture-cost-options.md) for the
+non-binding AWS, PostgreSQL, queue, Meta, payment, portability and founder-only
+support comparison. It does not select a vendor or claim approval.
+
 ## Validation gates before stronger commitment
 
 - Complete a real Meta Tech Provider onboarding and fallback-provider exit

@@ -14,8 +14,8 @@ Knowledge files should stay focused. Split a file when a dimension becomes mater
 
 The authoritative source set for knowledge mining is now:
 
-1. `nekurama.chatgpt.md` — final chronological ChatGPT conversation export
-2. `nekurama.raw.chat.json` — raw structured export of the same conversation, use when structure/metadata not preserved in Markdown is needed
+1. `nekurama.raw.chat.json` — primary structured founder export; use its chronology, message roles and metadata as the first authority
+2. `nekurama.chatgpt.md` — chronological Markdown export used to corroborate and make decisions readable
 3. `nekurama.babai.research.md` — consolidated BABAI field research and validation evidence
 4. `nekurama/Bulb#1` — BABAI strategy/architecture decision log
 5. `nekurama/Bulb#2` — NEKURAMA company battle/decision log
@@ -27,8 +27,8 @@ The authoritative source set for knowledge mining is now:
 
 For each knowledge file:
 
-1. Start with the final conversation export and field research relevant to the dimension.
-2. Use the raw JSON when message structure, ordering, metadata or content omitted from Markdown matters.
+1. Start with the raw founder export and field research relevant to the dimension.
+2. Use the Markdown export to corroborate and make the founder discussion readable; use raw JSON line ranges when ordering, role or message structure matters.
 3. Read the relevant GitHub issue history to reconstruct explicit decisions, rationale and unresolved battles.
 4. Compare existing knowledge-file content against the source evidence; do not blindly preserve earlier conclusions.
 5. Identify decision evolution and conflicts.
@@ -56,6 +56,7 @@ A historical `RESOLVED` label is not automatically authoritative. Later evidence
 
 - [x] **1.1 Thesis & positioning** → `products/babai/thesis-and-positioning.md` — core thesis, promise, ICP, buyer, differentiation and positioning committed; refinements deferred
 - [x] **1.2 Product definition** → `products/babai/product-definition.md` — MVP boundary and first pilot workflow committed; detailed journeys, production cut and post-pilot roadmap remain open
+- [ ] **1.3 Product BRD / gap register** → `products/babai/brd.md` — **partial**; confirmed truth is separated from pilot evidence, challenge-required decisions and unknowns
 
 ### Phase 2 — Architecture / domain
 

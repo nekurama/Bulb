@@ -10,9 +10,17 @@ sources:
 
 # Validation / Pilot
 
-## Validation gate — confirmed structure
+## Validation gate — staged, with detail partial
 
-The first 10 restaurants are the broad controlled-beta gate. The immediate field plan is to select three businesses from the 19 interviews, run a narrow pilot and seek three active pilot businesses plus at least one paying customer. The broad cohort and the immediate proof target are sequential thresholds, not competing claims. [Evidence: `nekurama.raw.chat.json:L79770-L79820`; `nekurama.babai.research.md:L118-L163`]
+The validation plan is explicitly staged:
+
+| Stage | Current purpose | Status |
+|---|---|---|
+| **Stage 0** | One-business operational pilot proving the narrow pickup-first flow with one WhatsApp number, one branch, manual takeover and no delivery dependency. | **confirmed boundary** |
+| **Stage 1** | Up to three pilots and at least one payer, testing repeatability and willingness to pay. | **partial target** |
+| **Stage 2** | Controlled 10-restaurant beta testing repeatability with bounded support and instrumentation. | **partial target** |
+
+These are sequential learning gates, not competing cohort decisions. The 10-restaurant beta does not require waiting to learn in Stage 0 or Stage 1. The source does not establish numeric entry/exit, success/kill or continuation thresholds; those remain open. [Evidence: `nekurama.raw.chat.json:L66495-L66540`, `nekurama.raw.chat.json:L79721-L79820`; corroboration: `nekurama.babai.research.md:L118-L163`, `nekurama.babai.research.md:L176-L186`]
 
 Expansion beyond the initial cohort should happen in controlled increments based on real-world evidence, not an immediate aggressive acquisition switch. [Evidence: `nekurama.babai.research.md:L176-L186`]
 
@@ -43,7 +51,7 @@ Start with one business, one WhatsApp number, one branch, pickup-first fulfillme
 - Support effort and actual Meta, AI, infrastructure and payment costs
 - Pilot-to-paid conversion and gross contribution
 
-The sequence is behavior → successful fulfillment → staff adoption → business value → retention → willingness to pay, not feature completion. [Evidence: `nekurama.babai.research.md:L145-L163`; corroboration: `nekurama.chatgpt.md:L39763-L39780`]
+The evidence sequence is behavior → successful fulfillment → staff adoption → business value → retention → willingness to pay, not feature completion. Apply it first in Stage 0, repeat it through Stage 1, and use Stage 2 to test controlled repeatability. [Evidence: `nekurama.babai.research.md:L145-L163`; corroboration: `nekurama.raw.chat.json:L79721-L79820`, `nekurama.chatgpt.md:L39763-L39780`]
 
 ## Success / kill criteria — unknown
 

@@ -48,9 +48,17 @@ The narrow pilot starts with one business, one WhatsApp number, one branch, pick
 
 These exclusions preserve the restaurant/pickup proof; they do not permanently prohibit later capabilities. [Evidence: `nekurama.raw.chat.json:L79770-L79820`; corroboration: `nekurama.babai.research.md:L178-L186`]
 
-## Pilot sequence — partial, not contradictory
+## Pilot sequence — partial, explicitly staged
 
-The broad validation gate is the first 10 restaurants. The immediate operational target is to select three businesses from the 19 interviews, run active pilots and obtain at least one paying customer. The 10-restaurant cohort is therefore a controlled beta gate, while three pilots/one payer are the first conversion proof; neither number is silently replacing the other. [Evidence: `nekurama.raw.chat.json:L79770-L79820`; `nekurama.babai.research.md:L118-L163`]
+The founder source frames the product work as a constrained MVP/pilot battle: define the smallest real product, then measure activation, orders, successful fulfillment, repeat use, staff adoption, economics, retention and willingness to pay. [Evidence: `nekurama.raw.chat.json:L66495-L66540`, `nekurama.raw.chat.json:L79721-L79820`]
+
+The reconciled operating sequence is:
+
+1. **Stage 0 — one-business operational pilot:** run the narrow pickup-first flow with one business, one WhatsApp number and one branch, with manual takeover and no delivery dependency.
+2. **Stage 1 — up to three pilots and at least one payer:** repeat the operational flow with no more than three pilot businesses and seek at least one paying customer.
+3. **Stage 2 — controlled 10-restaurant beta:** expand to a bounded ten-restaurant cohort only after the earlier stages provide enough operational evidence to justify controlled support and instrumentation.
+
+The stages are sequential learning gates. Stage 0 is confirmed as the initial operating boundary; the detailed entry/exit criteria, support model, numeric success/kill thresholds and post-beta plan remain partial or unknown. The 10-restaurant beta does not block learning or iteration in Stages 0–1. [Evidence: `nekurama.raw.chat.json:L79721-L79820`; corroboration: `nekurama.babai.research.md:L118-L163`, `nekurama.babai.research.md:L176-L186`]
 
 The final production feature cut, launch blockers, post-pilot roadmap and expansion criteria remain open. [Evidence: `nekurama.raw.chat.json:L66495-L66540`; corroboration: `nekurama.chatgpt.md:L27050-L27263`]
 

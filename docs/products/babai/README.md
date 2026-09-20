@@ -8,7 +8,7 @@ BABAI is NEKURAMA's first product/brand.
 
 Initial wedge: restaurants. The buyer is the business/merchant; the end customer is a workflow participant, not the primary SaaS buyer. The long-term local-business direction remains subject to evidence. [Evidence: `nekurama.chatgpt.md:L40500-L40520`, `nekurama.chatgpt.md:L42146-L42232`; corroboration: `nekurama.babai.research.md:L178-L186`]
 
-The initial product proof is a controlled restaurant pilot: the broad gate is 10 restaurants, while the immediate evidence target is three active pilots and at least one paying customer. These are sequential validation thresholds, not contradictory cohort decisions. [Evidence: `nekurama.raw.chat.json:L79770-L79820`; `nekurama.babai.research.md:L118-L163`]
+The initial product proof is staged: **Stage 0** is a one-business operational pilot; **Stage 1** is up to three pilots and at least one payer; **Stage 2** is a controlled 10-restaurant beta. These are sequential learning gates, and the detailed numeric success/kill thresholds remain open. [Evidence: `nekurama.raw.chat.json:L79721-L79820`; `nekurama.babai.research.md:L118-L163`, `nekurama.babai.research.md:L176-L186`]
 
 ## Sources
 

@@ -32,7 +32,7 @@ Open commercial questions include plan entitlements, usage limits, onboarding/tr
 
 Expected variable-cost drivers are onboarding/support, WhatsApp messaging, AI, payment/delivery integrations and infrastructure. The pilot must measure actual costs and support effort per restaurant before expansion. [Evidence: `nekurama.babai.research.md:L145-L161`; corroboration: `nekurama.chatgpt.md:L4163-L4163`]
 
-The initial economic decision is not “maximize plan revenue”; it is whether restaurants receive enough practical value to continue as paying customers after the beta. Paid continuation is a validation hypothesis. [Evidence: `nekurama.raw.chat.json:L79770-L79820`; `nekurama.babai.research.md:L161-L180`]
+The initial economic decision is not “maximize plan revenue”; it is whether restaurants receive enough practical value to continue as paying customers. Stage 0 proves the workflow can operate, Stage 1 tests up to three pilots and at least one payer, and Stage 2 tests whether the operating model can be repeated in a controlled ten-restaurant beta. Paid continuation remains a validation hypothesis, not a forecast. [Evidence: `nekurama.raw.chat.json:L79721-L79820`; `nekurama.babai.research.md:L161-L180`]
 
 ## Commercial gaps
 

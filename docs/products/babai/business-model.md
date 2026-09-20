@@ -8,7 +8,7 @@ sources:
   - nekurama.babai.research.md
   - nekurama.raw.chat.json (ordered turns 70, 276, 278; mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `04cc446b-3a6d-4c19-adc7-4d94ab17d21b`)
   - Admin decision packet (2026-09-20; current task input)
-  - economics-model.md
+  - economics-model.md (Track 2 v0.2)
 ---
 
 # Business Model
@@ -51,8 +51,9 @@ BABAI should not hold or settle customer funds in the initial product. Customer 
 
 The model should establish whether onboarding and ongoing support effort per restaurant is low enough to support gradual expansion toward up to 10 restaurants without support becoming a business bottleneck.
 
-The detailed Track 2 formulas, low/base/high ranges, per-restaurant
-break-even view and unresolved inputs are maintained in
+The detailed Track 2 v0.2 formulas, finalized-for-planning low/base/high
+ranges, actual-rate input register, per-restaurant break-even view and
+unresolved inputs are maintained in
 [`economics-model.md`](economics-model.md). That artifact is a planning model,
 not an approved price or margin decision.
 

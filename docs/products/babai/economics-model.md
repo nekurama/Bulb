@@ -1,5 +1,5 @@
 ---
-status: partial — planning model for Track 2; no public price or contribution target approved
+status: partial — finalized Track 2 planning bands; actual rates and founder approval pending
 owner: BABAI Product / BRD
 last-reviewed: 2026-09-20
 sources:
@@ -16,10 +16,12 @@ sources:
 
 ## Purpose and decision posture
 
-This is the **Track 2 planning model** for the thin restaurant-first,
-pickup-first, WhatsApp-native MVP. It is designed to collect comparable
-low/base/high evidence during a paid or deposit-backed pilot and gradual
-onboarding toward up to 10 restaurants.
+This is the **Track 2 planning model v0.2** for the thin restaurant-first,
+pickup-first, WhatsApp-native MVP. The low/base/high planning bands below are
+finalized for internal planning and instrumentation only; every proposed
+number remains provisional and pending founder approval. The model is designed
+to collect comparable evidence during a paid or deposit-backed pilot and
+gradual onboarding toward up to 10 restaurants.
 
 It is **not a forecast, approved price list, margin commitment or accounting
 position**. The model deliberately keeps price, order GMV, GST treatment,
@@ -56,6 +58,28 @@ The ranges below are deliberately provisional operating assumptions for
 instrumentation. They are not observed BABAI costs, vendor quotes or approved
 targets. Replace them with invoices, logs, time records and pilot outcomes.
 
+## Actual-rate input register
+
+Populate the blank **actual rate/value** field from the named source before
+using a rate in a contribution or break-even decision. Blank fields are
+intentional unknowns, not zeroes.
+
+| Input | Actual rate/value | Unit | Source/evidence to collect | Owner | Status |
+|---|---|---|---|---|---|
+| Hosting, storage, observability and infrastructure |  | per restaurant/month | Vendor invoices, usage export and allocation method | Engineering + Product | Pending pilot measurement |
+| Meta/WhatsApp/BSP/provider usage |  | per message/restaurant/month | Current provider terms, invoice and message ledger | Integrations owner + Product | Pending provider validation |
+| AI usage |  | per message/token/restaurant | Model billing export and usage ledger | Engineering + Product | Pending provider validation |
+| Payment gateway fee |  | % of `G` + fixed fee | Gateway schedule, merchant agreement and settlement report | Finance + Product | Pending provider/CA review |
+| Delivery/provider fee, if enabled |  | per order or pass-through | Provider terms and restaurant/customer invoice | Product + Finance | Not in MVP; open |
+| Tooling allocation |  | per restaurant/month | Tool invoices and shared-cost allocation | Engineering + Product | Pending allocation |
+| Founder opportunity cost: Manoj |  | per hour | Founder approval and time records | Manoj | Blank pending approval |
+| Founder opportunity cost: Vinay |  | per hour | Founder approval and time records | Vinay | Blank pending approval |
+| Failure/refund remediation |  | % of `G` or actual incident cost | Incident, refund, credit and support ledger | Product + Support | Pending pilot evidence |
+| Applicable GST treatment |  | rate/treatment | Written CA/CS advice and invoice decision | Finance + CA/CS | Blank pending professional validation |
+| Pilot fee/deposit |  | per pilot | Signed pilot terms and receipt | Founder + Product | Blank pending founder approval |
+| Pilot end date |  | calendar date | Signed pilot terms | Founder + Product | Blank pending founder approval |
+| Target contribution margin |  | % of recognized revenue | Founder-approved commercial target | Founder + Product | Blank pending founder approval |
+
 ## Model scope and variables
 
 Model one restaurant for one pilot month unless stated otherwise.
@@ -73,7 +97,7 @@ Model one restaurant for one pilot month unless stated otherwise.
 | `g` | Applicable GST rate/treatment | Unknown; CA/CS validation required |
 | `τ` | Target contribution margin sensitivity | Unknown; no target approved |
 
-## Low/base/high operating assumptions
+## Finalized low/base/high planning assumptions
 
 “High” means a high-cost/high-support case, not a high-revenue outcome.
 
@@ -100,6 +124,28 @@ FounderCost = (h_M × r_M) + (h_V × r_V)
 
 Until `r_M` and `r_V` are approved, report founder cost as hours and show
 monetary sensitivity only, not as booked company expense.
+
+## Direct and indirect cost classification
+
+Direct costs are attributable to a specific restaurant or pilot period:
+
+- hosting/usage allocation;
+- Meta, BSP/provider and AI usage;
+- payment fees if BABAI absorbs them;
+- restaurant-specific tooling allocation;
+- restaurant-specific onboarding and founder support time;
+- failure, refund, credit and remediation cost.
+
+Indirect/shared costs are not naturally attributable to one restaurant:
+
+- shared platform overhead and common tooling;
+- non-restaurant-specific product, engineering, finance and administration
+  time;
+- shared monitoring, security and operational reserves.
+
+Allocate indirect costs only with a documented rule. Keep the unallocated
+shared pool visible so a per-restaurant contribution does not look like
+company-level profitability.
 
 ## Cost formulas
 
@@ -149,6 +195,21 @@ PilotContribution_i =
 Cash collected as a refundable deposit must remain distinct from recognized
 revenue until the commercial and accounting treatment is approved.
 
+## Pilot fee, deposit, refund and end-date options
+
+These are candidate commercial structures, not selected terms:
+
+| Option | Cash at entry | Revenue treatment | Refund/credit question | End-date shape |
+|---|---|---|---|---|
+| Paid pilot fee | Fixed fee paid before activation | Recognize only according to agreed delivery/accounting terms | None, partial or service-credit treatment must be written | Fixed calendar date in signed terms |
+| Refundable deposit | Deposit paid before activation | Keep distinct from revenue until earned/recognized | Return conditions, deductions and timing required | Fixed calendar date in signed terms |
+| Deposit applied to continuation | Deposit paid before activation | Apply to later paid continuation only if terms permit | Refund if continuation is not accepted or not delivered | Fixed calendar date plus explicit conversion decision |
+| Fee plus deposit | Separate onboarding/service fee and security deposit | Track each component separately | Each component needs its own rule | Fixed calendar date in signed terms |
+
+The current decision requires a paid or deposit-backed pilot with an explicit
+end date, but does not select an option, amount, refund rule or date. Do not
+infer any of those from the historical subscription prices.
+
 ## GST treatment
 
 If `g` is applicable:
@@ -195,6 +256,29 @@ PriceFloorForTargetContribution =
 Use `τ` only as a sensitivity input. For planning views, show 20%, 40% and
 60% contribution-margin sensitivities; none is an approved target.
 
+### Break-even sensitivity view
+
+Let `C_L`, `C_B` and `C_H` be the low/base/high monthly per-restaurant costs
+after the chosen onboarding amortization. The required recognized revenue
+under contribution sensitivities is:
+
+| Cost posture | 20% contribution sensitivity | 40% contribution sensitivity | 60% contribution sensitivity |
+|---|---:|---:|---:|
+| Low | `C_L / 0.80` | `C_L / 0.60` | `C_L / 0.40` |
+| Base | `C_B / 0.80` | `C_B / 0.60` | `C_B / 0.40` |
+| High | `C_H / 0.80` | `C_H / 0.60` | `C_H / 0.40` |
+
+For each populated row, also calculate:
+
+```text
+BreakEvenRestaurants_L/B/H =
+    ceil(F_L/B/H / (P - C_L/B/H))
+```
+
+If the denominator is zero or negative, report **not break-even** rather than
+inventing a restaurant count. These views are sensitivity outputs only; they
+do not select `P` or approve `τ`.
+
 ## Low/base/high interpretation
 
 The first populated model should produce three rows per restaurant:
@@ -226,11 +310,12 @@ failure/refund outcomes, `T`, and the chosen accounting treatment for `D`.
 
 ## Track 3 dependency
 
-Track 3 consumes this artifact through the proposed metric contract in
+Track 3 consumes this v0.2 artifact through the proposed metric contract in
 [`validation.md`](validation.md), not as a price decision. The candidate
 thresholds use the base/high founder-time bands, failure/refund sensitivities
 and contribution-margin sensitivities here; they remain pending founder
-approval. Track 3 depends on:
+approval. Track 3 depends on the actual-rate register being populated before
+any threshold is treated as a decision:
 
 1. instrumenting the required validation metrics;
 2. collecting actual pilot invoices, provider terms and time records;

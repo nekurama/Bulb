@@ -147,7 +147,7 @@ The field research is intentionally not upgraded: it reports strong interest and
 | `customer-market.md` | Previously question-heavy; now retains an evidence-backed ICP and market answer, with segmentation, switching and expansion gates still partial/unknown. |
 | `experience-and-channels.md` | Previously thin; now records the confirmed WhatsApp/web principle, onboarding and takeover direction, with detailed UX still partial. |
 | `business-model.md` | Retained as a partial commercial model; public pricing is withheld while cost, contribution, GST and pilot-term evidence is collected. |
-| `economics-model.md` | New Track 2 planning artifact; provides low/base/high cost ranges, formulas and break-even sensitivity without selecting a price. |
+| `economics-model.md` | Track 2 v0.2 internal planning artifact; provides finalized-for-planning low/base/high bands, an actual-rate register, direct/indirect cost formulas, pilot-term options and break-even sensitivity without selecting a price. |
 | `validation.md` | Track 3 metric contract with proposed entry/exit/success/kill thresholds; founder approval and pilot evidence remain required. |
 | `product-definition.md` | Retained as the current MVP boundary; production cut, edge cases and post-pilot scope remain partial. |
 | `thesis-and-positioning.md` | Retained as current positioning; differentiation is explicitly a thesis, not a proven moat, and legal clearance remains separate. |

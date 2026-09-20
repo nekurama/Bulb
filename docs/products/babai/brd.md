@@ -124,7 +124,7 @@ The field research is intentionally not upgraded: it reports strong interest and
 | `product-definition.md` | Retained as the current MVP boundary; production cut, edge cases and post-pilot scope remain partial. |
 | `thesis-and-positioning.md` | Retained as current positioning; differentiation is explicitly a thesis, not a proven moat, and legal clearance remains separate. |
 | `domain-model.md` | Reviewed but not changed in this pass; it is a substantial domain artifact with its own remaining battles. |
-| `architecture.md` and `architecture-lld.md` | Reviewed but not changed; architecture work is outside this product-intent pass and existing working-tree changes were left untouched. |
+| `architecture.md` and `architecture-boundaries.md` | Reviewed but not changed; architecture work is outside this product-intent pass and existing working-tree changes were left untouched. |
 | `README.md` | Retained as the product index; this BRD is the evidence/status register it points to. |
 
 Company docs, landing-page material, secrets, deployment state and unrelated

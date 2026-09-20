@@ -45,6 +45,24 @@ evidence rather than an independently current decision source.
 
 This document uses those labels to avoid turning research discussion, assistant recommendations or candidate deployment shapes into decisions.
 
+### Key HLD/LLD decision citation index
+
+The following index is the review handoff for the decisions most likely to be
+mistaken for implementation commitments. Each row names exact raw mapping
+message UUIDs and the current repository documents that must be read with the
+raw evidence.
+
+| Decision area | Raw mapping/message UUIDs | Current repository sources |
+|---|---|---|
+| Restaurant-owned channel and BABAI operating behind it | Raw T33 `ded20a72-7392-4785-8983-b6e7d75eae3b`; Raw T37 `eadec8d3-a035-43e3-814a-6d3312001bbf`; Raw T47 `1df966d4-0c16-4a9a-b8cb-4375e5c2fda7`; Raw T48 `bbb21b07-0508-4dde-94f1-60e9982ec3e8` | `product-definition.md`; `experience-and-channels.md` |
+| Tenant, branch, channel and customer relationship boundaries | Raw T34 `bbb21cdc-296c-4806-af69-c1b7f40c4cf8`; Raw T99 `bbb21fb5-8f72-4a7f-b42b-333101d4a900`; Raw T149 `bbb2129e-e9fa-43bf-adca-b0bc7a956664` | `domain-model.md`; `product-definition.md` |
+| Coarse capability boundaries without one-service-per-capability deployment | Raw T153 `bbb21941-90d7-47d8-b4e0-671c6caecb09`; Raw T154 `1764f643-59fd-4cf5-be14-6aee32fc973a`; Raw T157 `bbb21f46-ddff-464d-bb6c-8a47d4188b9a` | `architecture.md`; `domain-model.md` |
+| General state/transition and workflow capability; implementation unresolved | Raw T115 `bbb210cc-a1ef-4ea9-b1a7-7c52f0011721`; Raw T117 `bbb216ed-0269-4c6c-8e28-f17031c1fa93`; Raw T119 `bbb211c0-c142-4837-aca7-b67a21454ec8`; Raw T122 `0011555d-10c7-4dbc-aca8-2bf7c55d324b`; Raw T136 `09c90c51-c4ae-40a6-9bd8-aea16eaf3339` | `architecture.md`; `domain-model.md` |
+| Versioned, correlated, flow-scoped events and reliable delivery | Raw T125 `bbb21b98-7460-45d5-a616-418ffbf47484`; Raw T137 `bbb21f78-6e9b-4ef8-9a07-60fe2273e772`; Raw T139 `bbb213b8-d58c-403e-b858-bdaa1ac750b8`; Raw T264 `bbb21a7f-4d44-4cc1-8f60-1172bdcc303c`; Raw T268 `bbb21426-5f7e-4c38-82e4-e288b9aae01c` | `architecture.md`; `domain-model.md` |
+| Zero-trust, scoped authorization and sensitive-data controls | Raw T139 `bbb213b8-d58c-403e-b858-bdaa1ac750b8`; Raw T144 `548da5a7-b8c7-4fd8-b129-04c2115c9134`; Raw T149 `bbb2129e-e9fa-43bf-adca-b0bc7a956664` | `architecture.md`; `domain-model.md` |
+| Direct business payment and staff-owned commercial corrections | Raw T72 `bbb21c29-06e2-44d7-bd05-c2f9c28c3f4f`; Raw T209 `bbb21545-4598-4ecd-a1fa-af977810bd5b`; Raw T216 `bbb216f2-0ccd-4871-a670-e02f94100750`; Raw T218 `bbb21ee2-2265-4c8a-ba89-82249c36e181` | `product-definition.md`; `domain-model.md` |
+| AI assistance without authority over controlled state | Raw T410 `bbb21914-7687-4f6e-848a-30e1e7e850f8`; Raw T414 `bbb21eb2-e878-4ef3-a499-f81e1cdc2d83`; Raw T434 `bbb21a5b-1600-43f4-b2db-6456579c3a2f` | `product-definition.md`; `domain-model.md` |
+
 ## Current architectural answer
 
 BABAI is a business operating platform built around WhatsApp. Its first validated workflow is restaurant-first: a business-owned channel receives customer conversations, turns structured intent into a cart and order, and coordinates payment, staff operations and pickup-first fulfillment. Web remains the dense configuration and operations surface; WhatsApp remains the immediate conversational/action surface. This matches the product definition and the founder's formulation of BABAI as a platform for customer and operational workflows, not a marketplace or generic chatbot. [Raw T410 `bbb21914-7687-4f6e-848a-30e1e7e850f8`; Raw T414 `bbb21eb2-e878-4ef3-a499-f81e1cdc2d83`; `nekurama.chatgpt.md`; `product-definition.md`]
@@ -156,7 +174,7 @@ The following remain **unresolved**:
 - the exact boundary between domain transitions, workflow orchestration and integration retry logic;
 - the sync/async contract and operational ownership for each flow.
 
-The founder's research-stage position was to define the State Engine contract and compare alternatives before choosing an implementation; it did not authorize locking Temporal or another product. [Raw T122 `0011555d-10c7-4dbc-aca8-2bf7c55d324b`; Raw T136 `09c90c51-c4ae-40a6-9bd8-aea16eaf3339`; `architecture-boundaries.md`]
+The founder's research-stage position was to define the State Engine contract and compare alternatives before choosing an implementation; it did not authorize locking Temporal or another product. [Raw T122 `0011555d-10c7-4dbc-aca8-2bf7c55d324b`; Raw T136 `09c90c51-c4ae-40a6-9bd8-aea16eaf3339`; this document's open questions]
 
 ## Data, events and reliability (LLD)
 
@@ -391,6 +409,9 @@ These align with the MVP boundary and the founder's explicit intent that the pro
 ### Open design questions
 
 - exact MVP deployable split and extraction triggers;
+- state-engine contract, flow coverage and transition ownership;
+- generic versus flow-specific state modeling;
+- durable workflow implementation, timer/human-wait semantics and recovery/replay controls;
 - authoritative storage, read models/projections and retention;
 - event code registry, schema governance, event history store and replay controls;
 - exact sync/async matrix, transport and workflow implementation;

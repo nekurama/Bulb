@@ -101,6 +101,34 @@ deterministic business-state ownership remain unchanged. See
 [`architecture-cost-options.md`](architecture-cost-options.md) for the
 comparison, assumptions and validation gates.
 
+### Internal platform acceptance
+
+The internal planning acceptance is now explicit: use one portable
+OCI-compatible image for API and worker processes, deploy by immutable digest,
+and keep PostgreSQL, queue, object storage and provider behavior behind
+replaceable ports. ECS/Fargate is the preferred AWS candidate; App Runner is
+only a bounded API alternative after worker/network/rollback validation; and
+small EC2 is a founder-accepted cost fallback with a single-host recovery
+penalty.
+
+The accepted platform baseline is managed standard PostgreSQL, a managed
+at-least-once queue with transactional outbox/inbox, private object storage
+with selective CDN use, MFA plus managed secrets/workload identity where
+available, provider-neutral redacted telemetry, and CI/CD with tests,
+security checks, migration gates, smoke checks and explicit production
+approval. The previous image remains deployable for rollback, and database
+changes use expand/migrate/contract sequencing.
+
+Planning envelopes are ₹8,000–₹20,000 low, ₹25,000–₹60,000 base and
+₹75,000–₹180,000 high per month for cloud/platform costs only. These are
+estimates, not quotes. AWS credits are a planning sensitivity that can reduce
+cash outlay only after external eligibility is confirmed; they do not approve
+AWS spend or justify unused capacity. Founder-only support is capped at
+6 hours/week for Manoj, 8 for Vinay and 14 combined, with a 10-hour/week
+planned-load ceiling and no 24x7 promise. Scale and rollback triggers,
+assumptions and parked provider gates are maintained in
+[`architecture-cost-options.md`](architecture-cost-options.md).
+
 ### Key HLD/LLD decision citation index
 
 The following index is the review handoff for the decisions most likely to be

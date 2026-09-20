@@ -1,190 +1,124 @@
 ---
-status: partial
+status: partial — SaaS direction confirmed; pricing, pilot terms and economics remain open
 owner: BABAI
 last-reviewed: 2026-09-21
 sources:
-  - nekurama.raw.chat.json
-  - nekurama.chatgpt.md
+  - nekurama/Bulb#1
+  - historical ManojVysyaraju/bulb#1
   - nekurama.babai.research.md
-  - "2026-09-21 FOUNDER DECISION PACKET"
+  - nekurama.raw.chat.json (ordered turns 70, 276, 278; mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `04cc446b-3a6d-4c19-adc7-4d94ab17d21b`)
+  - Founder decision packet (2026-09-21; current task input)
+  - economics-model.md (Track 2 v0.4)
 ---
 
 # Business Model
 
-## Current answer — confirmed direction
+## Current answer
 
-NEKURAMA is the company identity and BABAI is its product identity. BABAI is
-intended to be a subscription SaaS business. Restaurant customer-order
-payments and BABAI subscription billing are separate. BABAI should not depend
-on transaction or delivery margin as its initial economic foundation, and it
-should not hold or settle customer funds in the initial product. [Evidence:
-`nekurama.raw.chat.json:L192-L205`; corroboration:
-`nekurama.babai.research.md:L56-L63`; company/product identity:
-`raw chat node 23a95bbe-abfb-44c6-bcf0-3111efa6a14a`,
-`raw chat node 1d2ed7d6-7699-4263-a9fc-d79c2acde692`]
+BABAI is a SaaS business. Restaurant order payments and BABAI subscription billing are separate flows; BABAI should not depend on transaction/delivery margin as its initial economic foundation.
 
-The value hypothesis is direct-order economics, customer ownership, staff-effort/error reduction and better service recovery, less BABAI subscription and variable provider costs. The exact value is restaurant-specific and must use the restaurant's own baseline rather than a blanket “save 30%” claim. [Evidence: `nekurama.raw.chat.json:L64404-L64420`; corroboration: `nekurama.babai.research.md:L24-L36`]
+The initial business-value hypothesis is that restaurants have a meaningful pain around commission costs on existing platforms. Initial research found this concern recurring among restaurant businesses. BABAI's intended model is to avoid a marketplace commission and instead charge the restaurant a subscription fee. This is a value and pricing hypothesis, not yet paid validation.
 
-## Fixed paid pilot — founder decision
+The next commercial validation is a **fixed 90-day paid pilot**, not a free
+trial. Cancellation, refund and minimum-paying terms must be tied to a signed
+agreement template; the exact commercial and legal wording remains open. The
+pilot closes at the 90-day review when team-defined readiness evidence shows
+BABAI is operationally ready for materially larger onboarding volumes. Paid
+continuation remains a validation hypothesis, not an assumption of success.
 
-The first commercial validation is a **fixed 90-day paid pilot**. It is not a
-free trial. The agreed payment or deposit must be received **before the pilot
-starts**. The exact amount, billing schedule, deposit/refund treatment,
-minimum-paying terms and agreement mechanics remain open until recorded and
-signed. The pilot should end as a pilot at the 90-day decision point, with
-continuation or a separately approved extension treated as a new decision.
+There is **no committed public price** in the current BRD. The previously discussed ₹999 / ₹2,499 / ₹4,999 + GST levels remain historical pricing hypotheses to test, not published tiers or current commercial truth (`nekurama.raw.chat.json`, ordered turns 276 and 278; mapping `04cc446b-3a6d-4c19-adc7-4d94ab17d21b`).
 
-The intended exit condition is that BABAI has evidence of operational
-readiness for materially larger onboarding volumes. The readiness evidence
-gate is team-defined and remains **proposed** in
-[`pilot-metrics.md`](pilot-metrics.md); it is not a public scale claim.
+The earlier ₹499/month, ₹1,499–₹2,499/month, ₹999 setup and Tadka/Thali/Feast package ideas in `nekurama.chatgpt.md` are historical experiments and are not current commercial commitments.
 
-## Cancellation/refund agreement template — open
+## Unit economics
 
-This is a requirements template, not legal wording. No cancellation or refund
-promise should be made until the founders approve the business terms and a
-qualified professional turns them into a signed agreement.
+The pilot should build a cost and contribution model before public pricing is set. At minimum, record per restaurant and per pilot:
 
-| Agreement field | Current state |
+| Model component | Required treatment |
 |---|---|
-| Pilot term | **90 calendar days; confirmed founder decision** |
-| Paid status | **Paid; not free; confirmed founder decision** |
-| Start/payment gate | Agreed payment or deposit received before day 1; exact treatment remains agreement-dependent |
-| Pilot amount and billing schedule | Open founder/commercial decision |
-| Minimum-paying term | Open founder/commercial decision; must be explicit before enrollment |
-| Cancellation trigger and notice | Open; counsel to draft operative language |
-| Refund/credit eligibility, calculation and timing | Open; counsel/finance to validate operative language and accounting |
-| Service/readiness obligations and evidence | Team-defined proposed gate in `pilot-metrics.md` |
-| End-of-term treatment | Pilot closes at the decision point; continuation/extension requires a new approved decision |
+| Infrastructure | Hosting, storage, observability and operational tooling attributable to the pilot |
+| Provider and payment fees | WhatsApp/Meta, AI, payment gateway and any delivery/provider charges |
+| Onboarding and support | Setup, menu/catalog work, training, founder/operator support and ongoing interventions |
+| Tooling | Development, monitoring, support and other recurring tools needed to operate the pilot |
+| Failure/refund cost | Failed messages, duplicate/missed orders, payment exceptions, refunds, credits and remediation effort |
+| Revenue basis | Pilot fee or deposit terms, with refundable deposits kept distinct from recognized revenue until finance validation |
+| Margin | Contribution after the above costs; no target percentage has been supplied |
+| GST | Tax treatment and invoice presentation require professional CA/CS validation; GST must not be silently counted as margin |
 
-The signed agreement must bind the pre-start payment/deposit, cancellation and
-refund treatment to the minimum-paying terms actually approved for the pilot.
-This page intentionally does not invent legal wording, statutory rights, a
-deposit classification or a refund entitlement.
-
-## Pricing — challenge-required, contribution-derived
-
-There are no approved public tiers. Historical ₹999 / ₹2,499 / ₹4,999
-amounts, and earlier Tadka/Thali/Dawat packaging, remain research history and
-must not be presented as current commercial truth.
-
-Pricing is derived from the contribution model:
+The initial money-flow boundary is:
 
 ```text
-recognized income
-- total attributable expenditure
-= contribution amount
-
-contribution amount / recognized income
-= contribution margin
+Customer → Restaurant
+Restaurant → BABAI subscription
 ```
 
-`total attributable expenditure` includes cash costs, provider/payment costs,
-onboarding and support effort, tooling, failure/refund/remediation cost and
-other attributable expenditure. The durable calculation and unknowns are
-maintained in [`economics-model.md`](economics-model.md). The model does not
-select a tier or guarantee a margin.
+BABAI should not hold or settle customer funds in the initial product. Customer order funds settle directly to the restaurant/business; BABAI subscription or pilot billing is separate. Payment, delivery and messaging provider charges should be recorded in the cost model and their pass-through/billing treatment validated before commercial launch.
 
-After the pilot, review pricing every **six months** against observed
-contribution economics, customer value and operating readiness. The cadence is
-a review point, not an automatic increase.
+The model should establish whether onboarding and ongoing support effort per restaurant is low enough to support gradual expansion toward up to 10 restaurants without support becoming a business bottleneck.
 
-## 90-day paid pilot acceptance packet — planning assumptions
+The detailed Track 2 v0.4 formulas, finalized-for-planning low/base/high
+ranges, actual-rate input register, per-restaurant break-even view and
+unresolved inputs are maintained in
+[`economics-model.md`](economics-model.md). That artifact is a planning model,
+not an approved price or margin decision.
 
-The following is the recommended internal commercial shape for a signed
-agreement. It is deliberately written as business assumptions, not legal
-wording. Founders must approve the fields and a qualified professional must
-turn them into operative agreement language.
+## Margin, pricing and review cadence
 
-| Field | Planning assumption for founder review |
-|---|---|
-| Pilot term | Fixed 90 calendar days from the agreed start date; not a free trial |
-| Minimum-paying term | The restaurant commits to the full 90-day pilot fee once the pilot is activated |
-| Billing schedule | Planning default: 50% at signing/activation and 50% before day 31; use a different schedule only if approved and recorded |
-| Cancellation | A restaurant may request cancellation, but cancellation does not automatically erase the approved minimum-paying commitment; operational stop date and any remaining balance must follow the signed agreement |
-| Refund/credit | Assume no discretionary pro-rata refund after activation; any exception is limited to a documented service/readiness failure or inability to start, with amount, approver and timing recorded |
-| Customer-order refunds | Remain the restaurant's responsibility and outside BABAI subscription economics unless an approved agreement explicitly says otherwise |
-| End of term | Close at day 90 with a readiness decision; continuation or extension is a new approved commercial decision, not a silent renewal |
-| Price review | If continuing, review pricing every six months; review is not an automatic increase |
+Margins are calculated against the same-period income bar:
 
-These assumptions do not decide statutory rights, enforceability, tax treatment,
-accounting treatment or dispute handling. Do not promise cancellation or refund
-outcomes to a restaurant until the signed agreement and professional review are
-complete.
+```text
+Margin = (IncomeBar - TotalExpenditure) / IncomeBar
+```
 
-### Planning fee bands
+`TotalExpenditure` includes direct costs, indirect/shared costs, provider and
+payment fees, onboarding/support, founder opportunity cost, tooling and
+failure/refund remediation. GST treatment remains separate and requires
+professional validation.
 
-The economics model produces the following **90-day, before-GST planning
-bands** per restaurant. They are income bars derived from total expenditure,
-price-linked payment/refund costs and the stated contribution case; they are
-not approved public tiers.
+Pricing must be derived from measured contribution economics and signed pilot
+evidence, not assumed tiers. The first pricing review is scheduled for **six
+months after the 90-day pilot**, subject to founder approval and evidence. The
+cadence is a review point, not an automatic price increase.
 
-| Scenario | Planning fee band before GST | Use |
-|---|---:|---|
-| Low-cost floor | ₹6,075–₹8,219 | Only when actual onboarding/support and provider usage validate the low case |
-| **Base recommendation** | **₹29,362–₹39,727** | Default founder discussion band for a three-restaurant planning cohort |
-| High-cost stress bar | ₹166,940–₹225,860 | Stress-test only; do not quote without a separately approved scope/capacity decision |
+The current internal planning output at the proposed 40% contribution
+sensitivity is:
 
-Each band is limited to ±15% around its calculated center. GST is an input to
-the customer cash amount, not a hidden margin: at the base center, the cash bar
-is ₹34,544 at `g=0%`, ₹36,271 at `g=5%` or ₹40,762 at `g=18%`. The exact
-assumptions, formulas, cohort sensitivity and per-restaurant break-even are in
-[`economics-model.md`](economics-model.md).
+| Cost posture | 90-day paid pilot, full-cost `N=1` view | Post-pilot monthly plan, shared-cost `N=10` view |
+|---|---:|---:|
+| Low | ₹74,900–₹1,01,300 | ₹12,200–₹16,500 |
+| Base | ₹1,86,600–₹2,52,400 | ₹30,300–₹41,000 |
+| High | ₹4,28,300–₹5,79,500 | ₹72,600–₹98,300 |
 
-### Onboarding-readiness exit gate
+These are internal planning bands with a maximum ±15% variance around each
+midpoint. They are not public prices, quotes or approved tiers. Any amount
+collected below the model floor is recorded as an explicit economic subsidy.
 
-At day 90, close the pilot and hold expansion unless the proposed internal gate
-in [`pilot-metrics.md`](pilot-metrics.md) is met. In plain business terms, the
-team should have evidence that onboarding is repeatable, order and payment
-operations are reliable, staff can run the workflow without founder takeover,
-support remains within capacity, all expenditure lines are evidenced, the base
-contribution case is positive, and no unresolved safety/privacy/payment
-exception remains. The gate is proposed and requires founder/team approval; it
-is not a public scale claim.
+## Founder decisions versus external validation
 
-## Unit economics — partial
+**Founder decisions:** approve the 90-day paid terms, readiness-gated exit
+evidence, minimum-paying agreement-template fields, contribution-derived
+pricing method, six-month review cadence and any public pricing.
 
-Expected variable-cost drivers are onboarding/support, WhatsApp messaging, AI, payment/delivery integrations and infrastructure. The pilot must measure actual costs and support effort per restaurant before expansion. [Evidence: `nekurama.babai.research.md:L145-L161`; corroboration: `nekurama.chatgpt.md:L4163-L4163`]
+**External/professional validation:** prepare and review cancellation/refund
+wording, payment-provider terms, GST/accounting treatment, revenue recognition,
+deposit handling and trademark/legal implications. This artifact does not
+invent legal language.
 
-The durable calculation artifact is [`economics-model.md`](economics-model.md).
-It separates revenue, cash cost, founder time, pass-through merchant costs,
-GST fields and contribution, and provides low/base/high planning sensitivities
-without promoting them to final pilot thresholds. Provider and tax inputs that
-are not supported by repository evidence remain unknown or explicitly marked
-as research pointers. [Decision source: `2026-09-20 ADMIN DECISION PACKET`]
+## Evidence and open economics
 
-The initial economic decision is not “maximize plan revenue”; it is whether
-restaurants receive enough practical value to continue as paying customers.
-Stage 0 proves the workflow can operate, Stage 1 is the fixed 90-day paid
-pilot, and Stage 2 tests the team-defined readiness evidence for materially
-larger onboarding volumes. Paid continuation remains a validation hypothesis,
-not a forecast. [Evidence: `nekurama.raw.chat.json:L79721-L79820`;
-`nekurama.babai.research.md:L161-L180`]
+Field interviews support the problem and interest, but not willingness to pay (`nekurama.babai.research.md`, “What remains unvalidated”). The immediate commercial proof is a completed fixed 90-day paid pilot with measured willingness to pay; no conversion threshold beyond the founder packet has been supplied.
 
-## Commercial gaps
+## Questions
 
-- Final packaging and entitlements
-- Pilot amount and billing schedule
-- Signed agreement template, pre-start payment/deposit receipt and
-  minimum-paying terms
-- Pilot-to-continuation decision
-- Baseline order economics and ROI calculation
-- CAC, onboarding and support cost
-- WhatsApp/AI/payment/delivery variable cost model
-- Billing, cancellation and refund policy for BABAI subscription, subject to
-  professional legal/finance validation
-- Team-defined readiness evidence gate for materially larger onboarding volumes
-
-No numerical unit-economics or public-pricing decision is promoted until pilot
-data exists. [Evidence: `nekurama.babai.research.md:L104-L116`,
-`nekurama.babai.research.md:L145-L180`]
-
-## Founder decisions vs external validation
-
-| Founder/product decision | External or professional validation still required |
-|---|---|
-| 90-day paid pilot; not free | Signed agreement drafting; enforceability and applicable consumer/commercial rules |
-| Payment/deposit before pilot start | Agreement drafting, payment/deposit classification, accounting and refund treatment |
-| Pricing derived from contribution economics | Accounting treatment, GST, invoicing and revenue recognition |
-| Six-month pricing review cadence; no automatic increase | Contract changes and customer communications |
-| NEKURAMA company identity / BABAI product identity | Entity records, IP ownership and brand/trademark clearance |
+- [ ] Final packaging/entitlements
+- [ ] Final pricing after pilot
+- [ ] Gross contribution model
+- [ ] CAC and acquisition assumptions
+- [ ] Onboarding/support cost
+- [ ] Expansion/upsell model
+- [ ] Billing and cancellation policy
+- [ ] Pilot fee/deposit amount, refund treatment and end date
+- [ ] Trial/pilot commercial terms and billing instrument
+- [ ] Cost allocation method per restaurant and per order
+- [ ] Failure/refund reserve or remediation policy
+- [ ] Margin target and GST treatment with CA/CS

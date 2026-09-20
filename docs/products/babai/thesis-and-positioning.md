@@ -1,7 +1,7 @@
 ---
 status: partial — core thesis confirmed; market proof, copy and expansion remain open
 owner: BABAI
-last-reviewed: 2026-09-20
+last-reviewed: 2026-09-21
 sources:
   - nekurama/Bulb#1
   - nekurama/Bulb#2
@@ -9,6 +9,8 @@ sources:
   - historical ManojVysyaraju/bulb#1
   - nekurama/Bulb: nekurama.md (exported ChatGPT research/conversation)
   - nekurama/Bulb: nekurama.mht (archived ChatGPT export)
+  - nekurama.raw.chat.json
+  - Founder decision packet (2026-09-21; current task input)
 ---
 
 # Thesis & Positioning
@@ -190,6 +192,12 @@ BABAI had the strongest restaurant signal. Professional trademark clearance rema
 `NEKURAMA → BABAI → future products/verticals`
 
 BABAI is a product brand of NEKURAMA, not a separate company in the current architecture.
+
+Founder-approved wording: **“Business Automation by AI.”** This may be used
+as a product descriptor or intent line. The raw naming/intent anchor is founder
+turn 386 / mapping `bbb21347-433a-45d7-b022-6a9a210f8a4c`; the source phrase is
+at mapping `078f95a4-5e81-4488-ad45-5de38830c874`. This is not an invented
+etymology, legal expansion, originality claim or architectural constraint.
 
 ## 20. Historical decisions not carried forward
 

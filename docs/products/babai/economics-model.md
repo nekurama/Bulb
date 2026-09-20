@@ -1,308 +1,345 @@
 ---
-status: partial
-owner: BABAI Product / Finance
-last-reviewed: 2026-09-20
+status: partial — finalized Track 2 planning bands; actual rates and founder approval pending
+owner: BABAI Product / BRD
+last-reviewed: 2026-09-21
 sources:
-  - nekurama.raw.chat.json:L192-L205
-  - nekurama.raw.chat.json:L79721-L79820
-  - nekurama.babai.research.md:L65-L81
-  - nekurama.babai.research.md:L104-L116
-  - nekurama.babai.research.md:L145-L163
-  - nekurama.chatgpt.md:L3593-L3605
-  - nekurama.chatgpt.md:L4546-L4552
-  - nekurama.chatgpt.md:L6703-L6749
-  - nekurama.chatgpt.md:L8122-L8123
-  - nekurama.chatgpt.md:L27589-L27598
-  - nekurama.chatgpt.md:L48218-L48228
+  - Founder decision packet (2026-09-21; current task input)
+  - nekurama.babai.research.md (Pricing hypothesis, What remains unvalidated, Success criteria)
+  - nekurama.chatgpt.md (historical planning model; explicitly not a forecast)
+  - nekurama.raw.chat.json (mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `04cc446b-3a6d-4c19-adc7-4d94ab17d21b`, `4702681b-d611-4408-af5f-9001d04b6cfa`, `f58ce128-39ed-4015-9be9-5b6135a39f20`)
+  - docs/products/babai/brd.md
+  - docs/products/babai/business-model.md
   - docs/company/finance-tax-compliance.md
-  - "2026-09-20 ADMIN DECISION PACKET"
 ---
 
 # BABAI Economics Model
 
-## Purpose and status
+## Purpose and decision posture
 
-This is the economics baseline required before Track 3. It is a reproducible
-per-restaurant monthly model, not an approved price list, tax position, vendor
-quote, forecast or pilot success threshold. Low/base/high values marked
-**planning input** are placeholders for the pilot ledger and must be replaced
-with invoices, provider exports, time logs and refund records.
+This is the **Track 2 planning model v0.3** for the thin restaurant-first,
+pickup-first, WhatsApp-native MVP. The low/base/high planning bands below are
+finalized for internal planning and instrumentation only; every proposed
+number remains provisional and pending founder approval. The model is designed
+to collect comparable evidence during a fixed 90-day paid pilot and readiness-
+gated gradual onboarding toward up to 10 restaurants.
 
-The current commercial posture is a paid or deposit-backed pilot with an
-explicit end date. Pricing remains challenge-required; ₹999, ₹2,499 and
-₹4,999 per month before GST are research hypotheses only. Customer-order money
-settles directly to the restaurant and is separate from BABAI subscription
-billing. [Research: `nekurama.babai.research.md:L65-L81`,
-`nekurama.raw.chat.json:L192-L205`; decision source: `2026-09-20 ADMIN
-DECISION PACKET`]
+It is **not a forecast, approved price list, margin commitment or accounting
+position**. The model deliberately keeps price, order GMV, GST treatment,
+founder valuation rates and contribution targets as inputs. The admin packet
+does not supply those values.
 
-## Accounting boundaries
+## Evidence versus estimates
 
-The model reports four different things:
+### Known evidence
 
-1. **Revenue:** BABAI subscription or pilot amount earned, excluding any GST
-   component that qualified accounting treatment classifies as tax collected
-   rather than revenue.
-2. **Cash cost:** money paid by BABAI, such as hosting, provider usage,
-   subscription collection fees, refunds/credits and tools.
-3. **Founder time:** hours spent on onboarding, support and recovery. This is
-   not cash cost unless paid or accrued, but it is an economic cost and must
-   not be hidden.
-4. **Pass-through cost:** a customer-order payment or delivery fee paid by or
-   settled for the restaurant. It is excluded from BABAI contribution unless a
-   contract makes BABAI absorb it.
+- Field research covered 19 businesses: 15 restaurants and 4 stores. It
+  explicitly calls the ₹999 / ₹2,499 / ₹4,999 + GST plans hypotheses to test
+  through paid pilots, not validated pricing
+  (`nekurama.babai.research.md`, “Pricing hypothesis”).
+- The field research requires measuring onboarding time, support effort,
+  actual Meta/AI/infrastructure/payment costs and pilot-to-paid conversion
+  (`nekurama.babai.research.md`, “Success criteria”).
+- Customer funds should settle directly to the restaurant; BABAI should not
+  hold or settle customer funds. BABAI billing is separate
+  (`nekurama.babai.research.md`, “Proposed BABAI solution”; raw mapping
+  `4bbdb489-0a0d-45d5-af27-70535c5d4acc`).
+- The founder discussion records ₹999 / ₹2,499 / ₹4,999 + GST as an initial
+  pricing hypothesis, not permanent pricing (raw mapping
+  `04cc446b-3a6d-4c19-adc7-4d94ab17d21b`).
+- An older founder-side model used a temporary ₹1,299 blended ARPU and roughly
+  ±30% uncertainty. It explicitly said it was a planning model, not a
+  forecast, and used historical Tadka/Thali/Dawat prices
+  (`nekurama.chatgpt.md:L3650-L3760`). Those numbers are retained only as
+  historical context.
 
-Customer-order GMV is therefore not BABAI revenue:
+### Planning estimates in this artifact
 
-```text
-restaurant customer → restaurant payment account
-restaurant → BABAI subscription / pilot billing
-```
+The ranges below are deliberately provisional operating assumptions for
+instrumentation. They are not observed BABAI costs, vendor quotes or approved
+targets. Replace them with invoices, logs, time records and pilot outcomes.
 
-This preserves the MVP boundary that BABAI does not custody, pool or settle
-restaurant funds. It does not make a legal or tax conclusion. [Research:
-`nekurama.raw.chat.json:L192-L205`; `docs/company/finance-tax-compliance.md`,
-“Current durable answer”]
+## Actual-rate input register
 
-## Inputs and confidence
+Populate the blank **actual rate/value** field from the named source before
+using a rate in a contribution or break-even decision. Blank fields are
+intentional unknowns, not zeroes.
 
-The table distinguishes repository evidence from internal planning inputs.
-Planning inputs are intentionally explicit so they can be challenged and
-replaced.
+| Input | Actual rate/value | Unit | Source/evidence to collect | Owner | Status |
+|---|---|---|---|---|---|
+| Hosting, storage, observability and infrastructure |  | per restaurant/month | Vendor invoices, usage export and allocation method | Engineering + Product | Pending pilot measurement |
+| Meta/WhatsApp/BSP/provider usage |  | per message/restaurant/month | Current provider terms, invoice and message ledger | Integrations owner + Product | Pending provider validation |
+| AI usage |  | per message/token/restaurant | Model billing export and usage ledger | Engineering + Product | Pending provider validation |
+| Payment gateway fee |  | % of `G` + fixed fee | Gateway schedule, merchant agreement and settlement report | Finance + Product | Pending provider/CA review |
+| Delivery/provider fee, if enabled |  | per order or pass-through | Provider terms and restaurant/customer invoice | Product + Finance | Not in MVP; open |
+| Tooling allocation |  | per restaurant/month | Tool invoices and shared-cost allocation | Engineering + Product | Pending allocation |
+| Founder opportunity cost: Manoj |  | per hour | Founder approval and time records | Manoj | Blank pending approval |
+| Founder opportunity cost: Vinay |  | per hour | Founder approval and time records | Vinay | Blank pending approval |
+| Failure/refund remediation |  | % of `G` or actual incident cost | Incident, refund, credit and support ledger | Product + Support | Pending pilot evidence |
+| Applicable GST treatment |  | rate/treatment | Written CA/CS advice and invoice decision | Finance + CA/CS | Blank pending professional validation |
+| Pilot fee/deposit |  | per pilot | Signed pilot terms and receipt | Founder + Product | Blank pending founder approval |
+| Pilot end date |  | calendar date | Signed pilot terms | Founder + Product | Blank pending founder approval |
+| Target contribution margin |  | % of recognized revenue | Founder-approved commercial target | Founder + Product | Blank pending founder approval |
 
-| Input | Low | Base | High | Status / treatment |
+## Model scope and variables
+
+Model one restaurant for one pilot month unless stated otherwise.
+
+| Symbol | Meaning | Current state |
+|---|---|---|
+| `P` | Recognized BABAI revenue per restaurant for the period, excluding applicable GST | Unknown; no public price approved |
+| `D` | Pilot fee or deposit collected | Unknown; refundable deposits are not automatically revenue |
+| `T` | Pilot duration in months | Unknown; an explicit end date is required before enrollment |
+| `G` | Customer order GMV processed through the workflow | Unknown; money settles to the restaurant |
+| `q` | Payment/provider fee rate applied if BABAI absorbs the fee | Unknown; validate per provider |
+| `x` | Fixed payment/provider fee per transaction or period | Unknown |
+| `r_M`, `r_V` | Internal opportunity-cost rate for Manoj and Vinay time | Unknown; no compensation/rate decision |
+| `h_M`, `h_V` | Manoj/Vinay hours for onboarding or support | Measure separately; combined hours are shown in the scenarios |
+| `g` | Applicable GST rate/treatment | Unknown; CA/CS validation required |
+| `τ` | Target contribution margin sensitivity | Unknown; no target approved |
+
+## Finalized low/base/high planning assumptions
+
+“High” means a high-cost/high-support case, not a high-revenue outcome.
+
+| Cost driver | Low | Base | High | Measurement rule |
 |---|---:|---:|---:|---|
-| Subscription price `S` | ₹999 | ₹2,499 | ₹4,999 | Historical research hypotheses; not approved packaging |
-| Shared hosting, storage, DB, monitoring per year | ₹20,000 | ₹40,000 | ₹52,000 | Repository planning range, not a vendor quote; allocate across `N` restaurants |
-| Shared tooling/dev/admin per year | ₹15,000 | ₹30,000 | ₹39,000 | Repository planning range, not a vendor quote; allocate across `N` restaurants |
-| Billable Meta/provider messages per month | 250 | 750 | 2,000 | **Planning input**; replace with message-category export |
-| Utility/authentication share | 95% | 85% | 60% | **Planning input** |
-| Marketing share | 5% | 15% | 40% | **Planning input**; marketing must not be treated as unlimited |
-| Meta utility/auth rate | ₹0.115 | ₹0.115 | ₹0.115 | Repository-reported research snapshot; verify against the current Meta rate card |
-| Meta marketing rate | ₹0.8631 | ₹0.8631 | ₹0.8631 | Repository-reported research snapshot; verify before quoting customers |
-| Direct Meta platform-access fee | ₹0 | ₹0 | ₹0 | Repository-reported research says no additional direct-access fee; not a contract |
-| BSP/provider add-on | `0` direct | `0.005 × FX_USD × messages` | `49 × FX_EUR` per channel | Research pointers only: Twilio per-message add-on and 360dialog channel fee; FX and plan terms unknown |
-| Founder onboarding hours per restaurant | 2h | 4h | 8h | Research supports approximately 2h training; total setup/menu/configuration is **planning input** |
-| Founder support hours per month | 1h | 2h | 4h | **Planning input**; replace with time logs |
-| Founder opportunity value per hour `V` | ₹500 | ₹1,000 | ₹2,000 | Internal sensitivity only; not salary, consultant quote or accounting treatment |
-| Failure/retry hours per month | 0.1h | 0.5h | 1h | **Planning input** |
-| Provider retry factor | 1% | 3% | 8% | **Planning input** applied to Meta/provider spend |
-| BABAI refund/credit rate | 0.5% | 2% | 5% of `S` | **Planning input**; customer-order refunds remain outside BABAI unless BABAI absorbs them |
-| Subscription collection fee | Unknown | ~2% research pointer | Unknown | Repository reports Razorpay “~2% + GST” standard processing; verify contract and whether BABAI pays it |
-| Merchant-order payment fee | ~2% pointer | ~2% pointer | ~2% pointer | Pass-through by default; exact provider, GST and payer remain unknown |
-| GST rate, registration, recoverability and invoice treatment | Unknown | Unknown | Unknown | CA/CS decision required; no tax conclusion is inferred |
-| Target contribution rate | 20% | 40% | 60% | Internal planning cases only; not final pilot thresholds |
+| Hosting, storage, observability and infrastructure per restaurant/month | ₹150–₹400 | ₹400–₹1,000 | ₹1,000–₹2,500 | Allocate shared infrastructure consistently; retain actual invoices |
+| Meta/provider/AI usage per restaurant/month | ₹100–₹500 | ₹500–₹1,500 | ₹1,500–₹4,000 | Separate WhatsApp/Meta, AI and any BSP/provider charges |
+| Payment cost if BABAI absorbs it | 1.5–2.0% of `G` + ₹0–₹100 | 2.0–2.5% of `G` + ₹100–₹300 | 2.5–3.5% of `G` + ₹300–₹750 | If passed through, record pass-through and actual exceptions instead |
+| One-time onboarding effort, Manoj + Vinay combined | 4–8 hours | 8–16 hours | 16–32 hours | Record `h_M` and `h_V` separately; include menu work, setup and training |
+| Recurring founder support, Manoj + Vinay combined/month | 2–6 hours | 6–12 hours | 12–24 hours | Record incident, support and follow-up time separately |
+| Shared tooling allocation per restaurant/month | ₹100–₹500 | ₹500–₹1,500 | ₹1,500–₹4,000 | Allocate only the attributable share of monitoring, support and development tools |
+| Failure/refund reserve if BABAI absorbs customer remediation | 0.5–1.5% of `G` | 1.5–4.0% of `G` | 4.0–10.0% of `G` | Otherwise record actual credits, refunds and remediation hours; do not double count |
+| Shared fixed monthly overhead across the pilot | ₹5,000–₹15,000 | ₹15,000–₹35,000 | ₹35,000–₹75,000 | Keep separate from per-restaurant allocation |
 
-The hosting, tooling and company-budget ranges come from the repository's
-planning table, not an invoice. The Meta, BSP and payment figures are
-research snapshots recorded in the founder export and must be re-verified
-before commercial use. [Research:
-`nekurama.chatgpt.md:L6703-L6749`, `nekurama.chatgpt.md:L8122-L8123`,
-`nekurama.chatgpt.md:L27594-L27598`, `nekurama.chatgpt.md:L48218-L48228`]
+The payment and failure/refund percentages are planning sensitivities, not
+provider facts. They must be replaced with actual terms and incident data.
 
-## Formulas
-
-Let:
+Founder time is a real economic input even when Manoj and Vinay take no salary.
+The model should report both hours and an optional opportunity-cost view:
 
 ```text
-N                  = active restaurants sharing fixed monthly costs
-S                  = BABAI subscription/pilot amount before GST
-g                  = applicable GST treatment (unknown; do not assume a rate)
-M                  = total billable Meta/provider messages
-u, m               = utility/authentication and marketing message shares
-r_u, r_m           = verified Meta rates for those categories
-P_provider         = verified BSP/provider add-on, if any
-H, T               = annual hosting and annual tooling allocations
-B                  = customer-order GMV processed by a merchant provider
-p_sub              = BABAI subscription collection fee rate, if any
-p_order            = merchant payment fee rate
-h_onb, h_support   = onboarding and monthly support founder hours
-h_fail             = monthly recovery/failure founder hours
-V                  = founder opportunity value per hour
-q_retry            = provider retry factor
-q_refund           = BABAI refund/credit rate
-C_onb_cash         = direct cash onboarding cost, currently unknown
-L                  = onboarding amortization months, a modelling choice
+FounderCost = (h_M × r_M) + (h_V × r_V)
 ```
 
-Revenue and tax separation:
+Until `r_M` and `r_V` are approved, report founder cost as hours and show
+monetary sensitivity only, not as booked company expense.
+
+## Direct and indirect cost classification
+
+Direct costs are attributable to a specific restaurant or pilot period:
+
+- hosting/usage allocation;
+- Meta, BSP/provider and AI usage;
+- payment fees if BABAI absorbs them;
+- restaurant-specific tooling allocation;
+- restaurant-specific onboarding and founder support time;
+- failure, refund, credit and remediation cost.
+
+Indirect/shared costs are not naturally attributable to one restaurant:
+
+- shared platform overhead and common tooling;
+- non-restaurant-specific product, engineering, finance and administration
+  time;
+- shared monitoring, security and operational reserves.
+
+Allocate indirect costs only with a documented rule. Keep the unallocated
+shared pool visible so a per-restaurant contribution does not look like
+company-level profitability.
+
+## Cost formulas
+
+For restaurant `i` in a period:
 
 ```text
-S_net_revenue = S                         # when S is quoted before GST
-S_net_revenue = S_cash_collected / (1+g) # only if a confirmed inclusive-GST quote applies
-GST_component = S_cash_collected - S_net_revenue
+DirectCost_i =
+    Infrastructure_i
+  + ProviderAndAI_i
+  + Tooling_i
+  + (q_i × G_i) + x_i
+  + FailureRefundReserve_i
+  + (h_support_M_i × r_M) + (h_support_V_i × r_V)
 ```
 
-Until a qualified adviser confirms `g`, record quoted amount, GST component,
-amount collected and invoice/accounting treatment as separate fields. Do not
-count a separately collected GST component as contribution until that
-treatment is confirmed.
-
-Provider and shared-cost formulas:
+One-time onboarding cost:
 
 ```text
-C_meta = (M × u × r_u) + (M × m × r_m)
-C_provider = C_meta + P_provider
-C_hosting = H / 12 / N
-C_tooling = T / 12 / N
-C_payment_sub = S_net_revenue × p_sub
-C_payment_order_pass_through = B × p_order
-C_retry_cash = C_provider × q_retry
-C_refund_credit = S_net_revenue × q_refund
-C_onboarding_economic = C_onb_cash + (h_onb × V)
-C_support_economic = h_support × V
-C_failure_economic = C_retry_cash + (h_fail × V)
+OnboardingCost_i =
+    OnboardingNonFounderCost_i
+  + (h_onboard_M_i × r_M) + (h_onboard_V_i × r_V)
 ```
 
-Contribution views:
+Contribution before shared fixed overhead:
 
 ```text
-cash_cost
-  = C_hosting + C_tooling + C_provider + C_retry_cash
-  + C_payment_sub + C_refund_credit + C_onb_cash
-
-cash_contribution
-  = S_net_revenue - cash_cost
-
-economic_cost
-  = cash_cost + (h_support × V) + (h_fail × V) + ((h_onb × V) / L)
-    # the last term is the steady-state amortized onboarding effort
-
-economic_contribution
-  = S_net_revenue - economic_cost
-
-economic_contribution_rate
-  = economic_contribution / S_net_revenue
+Contribution_i = P_i - DirectCost_i
 ```
 
-Merchant-order payment cost is shown separately:
+Contribution after onboarding amortization over `T_i` months:
 
 ```text
-BABAI pass-through order cost = B × p_order
-BABAI contribution impact     = 0 unless BABAI contractually absorbs it
+ContributionAfterOnboarding_i =
+    P_i - DirectCost_i - (OnboardingCost_i / T_i)
 ```
 
-This prevents customer funds and merchant payment fees from being mistaken
-for BABAI revenue or an unpriced BABAI subsidy.
-
-## Per-restaurant monthly break-even view
-
-### Base illustration at `N = 10`
-
-`N = 10` is only an allocation illustration because the current decision
-packet caps this decision cycle at ten restaurants; it is not a final pilot
-threshold. The following uses the base planning inputs, direct Meta only,
-`L = 12`, and excludes unknown direct onboarding cash and any BSP add-on:
-
-| Base component | Formula | Monthly amount |
-|---|---|---:|
-| Hosting allocation | `₹40,000 / 12 / 10` | ₹333 |
-| Tooling allocation | `₹30,000 / 12 / 10` | ₹250 |
-| Meta usage | `750 × 85% × ₹0.115 + 750 × 15% × ₹0.8631` | ₹170 |
-| Retry cash | `₹170 × 3%` | ₹5 |
-| Subscription collection fee | `S × 2%` | `2% × S` |
-| BABAI refund/credit reserve | `S × 2%` | `2% × S` |
-| Cash fixed cost before `S` percentages | sum above excluding the last two rows | ₹758 |
-| Founder support time | `2h × ₹1,000` | ₹2,000 economic cost |
-| Failure/recovery founder time | `0.5h × ₹1,000` | ₹500 economic cost |
-| Onboarding effort amortized | `4h × ₹1,000 / 12` | ₹333 economic cost |
-| Economic fixed cost before `S` percentages | ₹758 + ₹2,000 + ₹500 + ₹333 | ₹3,592 |
-
-Under this illustration:
+If the pilot fee is collected:
 
 ```text
-cash_contribution(S)     = S - ₹758 - (2% × S) - (2% × S)
-economic_contribution(S) = S - ₹3,592 - (2% × S) - (2% × S)
+RecognizedPilotRevenue_i = revenue-recognized portion of D_i
+PilotContribution_i =
+    RecognizedPilotRevenue_i
+  - OnboardingCost_i
+  - (T_i × DirectCost_i)
 ```
 
-| Research price hypothesis | Cash contribution | Economic contribution | Interpretation |
-|---:|---:|---:|---|
-| ₹999 | ~₹201 | ~-₹2,633 | Founder time makes this case negative in the base illustration |
-| ₹2,499 | ~₹1,641 | ~-₹1,193 | Positive cash contribution, negative after founder time |
-| ₹4,999 | ~₹4,041 | ~₹1,207 | Positive after the illustrative founder-time allocation |
+Cash collected as a refundable deposit must remain distinct from recognized
+revenue until the commercial and accounting treatment is approved.
 
-These are not price recommendations. They expose the central decision: a
-low subscription can look healthy on cash cost while consuming too much
-founder capacity. Unknown provider add-ons, AI usage, direct onboarding cash,
-actual refunds and tax/accounting treatment would reduce the displayed
-contribution.
+## Pilot fee, deposit, refund and end-date options
 
-### Break-even price for a target contribution
+These are candidate commercial structures, not selected terms:
 
-For a target economic contribution rate `t`, assuming the base 2% collection
-fee and 2% refund reserve:
+| Option | Cash at entry | Revenue treatment | Refund/credit question | End-date shape |
+|---|---|---|---|---|
+| Paid pilot fee | Fixed fee paid before activation | Recognize only according to agreed delivery/accounting terms | None, partial or service-credit treatment must be written | Fixed calendar date in signed terms |
+| Refundable deposit | Deposit paid before activation | Keep distinct from revenue until earned/recognized | Return conditions, deductions and timing required | Fixed calendar date in signed terms |
+| Deposit applied to continuation | Deposit paid before activation | Apply to later paid continuation only if terms permit | Refund if continuation is not accepted or not delivered | Fixed calendar date plus explicit conversion decision |
+| Fee plus deposit | Separate onboarding/service fee and security deposit | Track each component separately | Each component needs its own rule | Fixed calendar date in signed terms |
+
+The current decision requires a **fixed 90-day paid pilot**, not a free trial.
+Cancellation, refund and minimum-paying terms must be tied to a signed
+agreement template. The exact option, amount, refund rule and agreement
+wording remain open; do not infer any of them from historical subscription
+prices. The pilot closes at the 90-day readiness review when team-defined
+evidence supports materially larger onboarding volumes.
+
+## 90-day plan and readiness-gated exit
+
+| Period | Operating focus | Required evidence |
+|---|---|---|
+| Days 0–14 | Paid enrollment, signed agreement, channel/menu/staff readiness and baseline capture | Commercial terms, cancellation/refund placeholders, minimum-paying field, end date and instrumentation recorded |
+| Days 15–45 | Live pickup workflow and staff operation | Activation, order success, fulfillment, support incidents, provider/payment costs and founder hours |
+| Days 46–75 | Repeat use and economics | Repeat behavior, staff adoption, actual-rate register, total expenditure and income bar |
+| Days 76–90 | Readiness review and next-stage decision | Team-defined evidence shows whether materially larger onboarding volumes are operationally safe and economically supportable |
+
+The 90-day term is fixed. The readiness review determines whether BABAI is
+ready for materially larger onboarding volumes; it does not authorize an
+automatic extension, price increase or legal agreement change.
+
+## GST treatment
+
+If `g` is applicable:
 
 ```text
-required_S = economic_fixed_cost / (1 - 2% - 2% - t)
-            = ₹3,592 / (96% - t)
+CustomerInvoiceGross = P × (1 + g)
 ```
 
-| Target contribution case | Formula | Illustrative required monthly amount |
-|---:|---|---:|
-| 20% | `₹3,592 / (0.96 - 0.20)` | ~₹4,726 |
-| 40% | `₹3,592 / (0.96 - 0.40)` | ~₹6,414 |
-| 60% | `₹3,592 / (0.96 - 0.60)` | ~₹9,978 |
+GST collected must not be counted as BABAI contribution. Registration,
+applicable rate, input-tax credit, invoice treatment, deposit treatment and
+revenue recognition require CA/CS validation. This artifact intentionally
+does not assume a GST rate or claim that GST is complete.
 
-The target rates are scenario controls, not final pilot gates. A later model
-should calculate both contribution before founder time and contribution after
-founder time, then compare both with actual continuation behavior.
+## Per-restaurant break-even view
 
-## Low/base/high sensitivity summary
+Let `F` be shared fixed monthly overhead and let `C` be the expected
+per-restaurant monthly cost after any onboarding amortization.
 
-At `N = 10`, direct Meta only and excluding unknown direct onboarding cash,
-the scenario structure is:
+```text
+MonthlyContributionPerRestaurant = P - C
 
-| Scenario | Cash fixed cost before subscription percentages | Economic fixed cost after founder time | Main driver |
-|---|---:|---:|---|
-| Low | ~₹330/month | ~₹963/month | Low usage and 1h support at ₹500/h |
-| Base | ~₹758/month | ~₹3,592/month | 2h support at ₹1,000/h |
-| High | ~₹1,653/month | ~₹12,986/month | 4h support at ₹2,000/h and higher recovery effort |
+BreakEvenRestaurants =
+    ceil(F / MonthlyContributionPerRestaurant)
+```
 
-The high case is deliberately a stress test, not a forecast. It shows why
-founder support time, onboarding effort, message mix, provider topology and
-shared-cost allocation need telemetry before final packaging. Add the
-provider/BSP formula, direct onboarding cash and any AI cost to each case when
-quotes and usage records exist.
+The break-even count is valid only when `P > C`. If `P ≤ C`, no number of
+restaurants covers fixed overhead without changing price, usage, scope or
+costs.
 
-## Ledger fields required before Track 3
+Onboarding payback:
 
-For every restaurant and month, capture:
+```text
+OnboardingPaybackMonths =
+    OnboardingCost / MonthlyContributionPerRestaurant
+```
 
-- quoted amount, GST component, amount collected, invoice status and accounting
-  treatment;
-- active days, plan/pilot term, discount, deposit, refund and credit reason;
-- Meta category, message count, provider/channel identifier and invoice amount;
-- AI/API usage and retries, hosting/storage/logging allocation and tooling
-  allocation;
-- customer-order GMV and merchant payment fee as a separately marked
-  pass-through field;
-- onboarding hours, menu corrections, travel/direct cash and staff training;
-- founder/support hours by reason, incident, takeover and recovery action;
-- failed messages, duplicate work, provider retries, downtime impact and
-  refunds/credits;
-- cash contribution, economic contribution and the assumptions version used.
+Target-price sensitivity, without selecting a price:
 
-The field research specifically calls for actual Meta, AI, infrastructure and
-payment costs, onboarding time, support effort, failure/retry behavior and
-pilot-to-paid conversion to be measured. [Research:
-`nekurama.babai.research.md:L145-L163`; corroboration:
-`nekurama.chatgpt.md:L3593-L3605`]
+```text
+PriceFloorForTargetContribution =
+    C / (1 - τ)
+```
 
-## Unresolved decisions
+Use `τ` only as a sensitivity input. For planning views, show 20%, 40% and
+60% contribution-margin sensitivities; none is an approved target.
 
-- Exact pilot fee, deposit treatment, end dates, continuation price and plan
-  entitlements remain open.
-- Direct Meta versus BSP/provider topology, provider contract, markup,
-  minimums, FX treatment and who pays each fee remain open.
-- AI/model costs, storage/retention, observability and shared-cost allocation
-  need actual usage records.
-- Subscription payment processor and whether BABAI absorbs the fee remain
-  open. Merchant-order payment remains pass-through by default.
-- Refund authority, commercial credits, failed settlement exposure and
-  accounting entries require operational and finance decisions.
-- GST registration/applicability, rate, place-of-supply, invoice treatment,
-  recoverability and revenue recognition require qualified CA/CS review.
-- Founder hourly opportunity value, support capacity and onboarding staffing
-  are planning controls, not approved compensation or hiring assumptions.
-- No final pilot success, kill, contribution or continuation threshold is set
-  by this document.
+### Break-even sensitivity view
+
+Let `C_L`, `C_B` and `C_H` be the low/base/high monthly per-restaurant costs
+after the chosen onboarding amortization. The required recognized revenue
+under contribution sensitivities is:
+
+| Cost posture | 20% contribution sensitivity | 40% contribution sensitivity | 60% contribution sensitivity |
+|---|---:|---:|---:|
+| Low | `C_L / 0.80` | `C_L / 0.60` | `C_L / 0.40` |
+| Base | `C_B / 0.80` | `C_B / 0.60` | `C_B / 0.40` |
+| High | `C_H / 0.80` | `C_H / 0.60` | `C_H / 0.40` |
+
+For each populated row, also calculate:
+
+```text
+BreakEvenRestaurants_L/B/H =
+    ceil(F_L/B/H / (P - C_L/B/H))
+```
+
+If the denominator is zero or negative, report **not break-even** rather than
+inventing a restaurant count. These views are sensitivity outputs only; they
+do not select `P` or approve `τ`.
+
+## Low/base/high interpretation
+
+The first populated model should produce three rows per restaurant:
+
+| View | Cost posture | Required output |
+|---|---|---|
+| Low-cost | Lower usage, lower support and fewer incidents | `P`, `G`, direct cost, contribution, onboarding payback and break-even count |
+| Base | Expected pilot operating range | Same outputs, with measured founder hours and provider invoices |
+| High-cost | Higher usage, support, failure/refund and provider burden | Same outputs plus the minimum viable `P` under selected `τ` sensitivities |
+
+No single revenue, margin or break-even conclusion should be published until
+the pilot supplies `P`, `G`, actual provider/payment costs, founder hours,
+failure/refund outcomes, `T`, and the chosen accounting treatment for `D`.
+
+## Unknowns and professional validation
+
+- Pilot fee/deposit amount, refund rules, billing instrument and end date.
+- Whether provider, payment and remediation costs are passed through or
+  absorbed by BABAI.
+- Actual Meta/BSP, AI, hosting and payment pricing at pilot volume.
+- Manoj/Vinay time split and internal opportunity-cost rates.
+- Shared tooling and fixed-overhead allocation.
+- Customer order GMV, order volume, payment mix and refund/failure rate.
+- Contribution-margin target, public pricing and packaging.
+- GST registration, rate, input-tax credit, invoice, deposit and revenue
+  recognition treatment with CA/CS.
+- CAC, sales effort and post-pilot support capacity; this artifact does not
+  yet model acquisition economics.
+
+## Track 3 dependency
+
+Track 3 consumes this v0.3 artifact through the proposed metric contract in
+[`validation.md`](validation.md), not as a price decision. The candidate
+thresholds use the base/high founder-time bands, failure/refund sensitivities
+and contribution-margin sensitivities here; they remain pending founder
+approval. Track 3 depends on the actual-rate register being populated before
+any threshold is treated as a decision:
+
+1. instrumenting the required validation metrics;
+2. collecting actual pilot invoices, provider terms and time records;
+3. fixing the pilot end date and commercial/deposit treatment;
+4. deciding whether payment/provider/refund costs are passed through; and
+5. approving the contribution target and GST/accounting treatment.
+6. completing the team-defined readiness evidence for materially larger
+   onboarding volumes.
+
+Until those inputs exist, this model remains a planning range and unresolved
+decision register.

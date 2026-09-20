@@ -1,14 +1,14 @@
 ---
 status: partial — SaaS direction confirmed; pricing, pilot terms and economics remain open
 owner: BABAI
-last-reviewed: 2026-09-20
+last-reviewed: 2026-09-21
 sources:
   - nekurama/Bulb#1
   - historical ManojVysyaraju/bulb#1
   - nekurama.babai.research.md
   - nekurama.raw.chat.json (ordered turns 70, 276, 278; mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `04cc446b-3a6d-4c19-adc7-4d94ab17d21b`)
-  - Admin decision packet (2026-09-20; current task input)
-  - economics-model.md
+  - Founder decision packet (2026-09-21; current task input)
+  - economics-model.md (Track 2 v0.2)
 ---
 
 # Business Model
@@ -19,7 +19,12 @@ BABAI is a SaaS business. Restaurant order payments and BABAI subscription billi
 
 The initial business-value hypothesis is that restaurants have a meaningful pain around commission costs on existing platforms. Initial research found this concern recurring among restaurant businesses. BABAI's intended model is to avoid a marketplace commission and instead charge the restaurant a subscription fee. This is a value and pricing hypothesis, not yet paid validation.
 
-The next commercial validation should be a **paid or deposit-backed pilot with an explicit end date**. A deposit may be refundable or applied according to terms that are not yet decided. The amount, refund treatment, billing instrument and calendar end date are unknown and must be fixed before enrollment. Paid continuation remains a validation hypothesis, not an assumption of success.
+The next commercial validation is a **fixed 90-day paid pilot**, not a free
+trial. Cancellation, refund and minimum-paying terms must be tied to a signed
+agreement template; the exact commercial and legal wording remains open. The
+pilot closes at the 90-day review when team-defined readiness evidence shows
+BABAI is operationally ready for materially larger onboarding volumes. Paid
+continuation remains a validation hypothesis, not an assumption of success.
 
 There is **no committed public price** in the current BRD. The previously discussed ₹999 / ₹2,499 / ₹4,999 + GST levels remain historical pricing hypotheses to test, not published tiers or current commercial truth (`nekurama.raw.chat.json`, ordered turns 276 and 278; mapping `04cc446b-3a6d-4c19-adc7-4d94ab17d21b`).
 
@@ -51,14 +56,44 @@ BABAI should not hold or settle customer funds in the initial product. Customer 
 
 The model should establish whether onboarding and ongoing support effort per restaurant is low enough to support gradual expansion toward up to 10 restaurants without support becoming a business bottleneck.
 
-The detailed Track 2 formulas, low/base/high ranges, per-restaurant
-break-even view and unresolved inputs are maintained in
+The detailed Track 2 v0.2 formulas, finalized-for-planning low/base/high
+ranges, actual-rate input register, per-restaurant break-even view and
+unresolved inputs are maintained in
 [`economics-model.md`](economics-model.md). That artifact is a planning model,
 not an approved price or margin decision.
 
+## Margin, pricing and review cadence
+
+Margins are calculated against the same-period income bar:
+
+```text
+Margin = (IncomeBar - TotalExpenditure) / IncomeBar
+```
+
+`TotalExpenditure` includes direct costs, indirect/shared costs, provider and
+payment fees, onboarding/support, founder opportunity cost, tooling and
+failure/refund remediation. GST treatment remains separate and requires
+professional validation.
+
+Pricing must be derived from measured contribution economics and signed pilot
+evidence, not assumed tiers. The first pricing review is scheduled for **six
+months after the 90-day pilot**, subject to founder approval and evidence. The
+cadence is a review point, not an automatic price increase.
+
+## Founder decisions versus external validation
+
+**Founder decisions:** approve the 90-day paid terms, readiness-gated exit
+evidence, minimum-paying agreement-template fields, contribution-derived
+pricing method, six-month review cadence and any public pricing.
+
+**External/professional validation:** prepare and review cancellation/refund
+wording, payment-provider terms, GST/accounting treatment, revenue recognition,
+deposit handling and trademark/legal implications. This artifact does not
+invent legal language.
+
 ## Evidence and open economics
 
-Field interviews support the problem and interest, but not willingness to pay (`nekurama.babai.research.md`, “What remains unvalidated”). The immediate commercial proof is a completed paid or deposit-backed pilot with an explicit end date and measured willingness to pay; no conversion threshold beyond the admin packet has been supplied.
+Field interviews support the problem and interest, but not willingness to pay (`nekurama.babai.research.md`, “What remains unvalidated”). The immediate commercial proof is a completed fixed 90-day paid pilot with measured willingness to pay; no conversion threshold beyond the founder packet has been supplied.
 
 ## Questions
 

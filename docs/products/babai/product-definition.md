@@ -1,14 +1,14 @@
 ---
 status: partial
 owner: BABAI
-last-reviewed: 2026-09-20
+last-reviewed: 2026-09-21
 sources:
   - nekurama/Bulb#1
   - nekurama/Bulb#3
   - nekurama.babai.research.md
   - historical ManojVysyaraju/bulb#1
   - nekurama.raw.chat.json (ordered turns 71, 278, 290; mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `04cc446b-3a6d-4c19-adc7-4d94ab17d21b`, `4702681b-d611-4408-af5f-9001d04b6cfa`)
-  - Admin decision packet (2026-09-20; current task input)
+  - Founder decision packet (2026-09-21; current task input)
 ---
 
 # Product Definition
@@ -81,7 +81,14 @@ The initial MVP is intentionally thin and narrower than the long-term business o
 
 ## Initial pilot workflow
 
-The initial real-world validation is staged. The immediate field step is a **paid or deposit-backed pilot with an explicit end date**, beginning with one business and expanding only as operational evidence supports the next increment. The sequence may grow toward **up to 10 restaurants**; 10 is a ceiling for gradual validation, not a requirement to launch all at once or evidence that the thesis is already proven. The pilot fee/deposit amount, refund treatment and calendar end date remain unknown.
+The initial real-world validation is a **fixed 90-day paid pilot**, not a free
+trial. It begins with one business and may expand gradually toward up to 10
+restaurants only when evidence supports the next increment. Cancellation,
+refund and minimum-paying terms must be tied to a signed agreement template;
+legal wording and exact terms remain open. The pilot closes at the 90-day
+readiness review when team-defined evidence shows BABAI is operationally ready
+for materially larger onboarding volumes. Readiness evidence is defined in
+`validation.md`; there is no automatic extension or pricing increase decision.
 
 `Connect business WhatsApp`
 `→ upload/review/publish menu`
@@ -101,8 +108,9 @@ Immediate pilot operating boundary:
 - manual human takeover available
 - no delivery dependency
 - founder-led onboarding
-- paid or deposit-backed pilot terms
-- explicit pilot end date before enrollment
+- paid pilot terms
+- fixed 90-day term
+- signed-agreement cancellation/refund and minimum-paying-term placeholders
 
 Controlled-beta boundary after the first pilot:
 
@@ -110,7 +118,10 @@ Controlled-beta boundary after the first pilot:
 - retain one branch and pickup-first constraints unless evidence requires a change
 - continue founder-led observation and progressive onboarding
 
-The paid/deposit-backed pilot and gradual onboarding toward up to 10 restaurants are current validation decisions. They are not fixed product limits. Additional branches, delivery, stores or other verticals require evidence from real-world usage.
+The fixed 90-day paid pilot and readiness-gated gradual onboarding toward up to
+10 restaurants are current validation decisions. They are not fixed product
+limits. Additional branches, delivery, stores or other verticals require
+evidence from real-world usage.
 
 ## Explicit pilot out of scope
 
@@ -161,9 +172,9 @@ The research supports the problem and initial workflow, but explicitly does **no
 
 ## Evidence and decision status
 
-- **Confirmed:** restaurant-first, one branch/number for the first pilot, pickup-first, human takeover, no delivery dependency, direct customer-to-business payment, no customer app requirement, and a paid/deposit-backed pilot with an end date (admin packet; `nekurama.babai.research.md`; raw turns 71 and 290).
+- **Confirmed:** restaurant-first, one branch/number for the first pilot, pickup-first, human takeover, no delivery dependency, direct customer-to-business payment, no customer app requirement, and a fixed 90-day paid pilot with a readiness-gated exit (founder packet; `nekurama.babai.research.md`; raw turns 71 and 290).
 - **Partial:** Meta embedded onboarding/coexistence, payment confirmation/refunds, multilingual staff workflows, and exact web information architecture.
-- **Unknown:** pilot fee/deposit amount, refund treatment, calendar end date, final feature cut, operational thresholds, paid conversion, retention and when to broaden beyond restaurants.
+- **Unknown:** cancellation/refund wording, minimum-paying terms, readiness evidence finalization, final feature cut, operational thresholds, paid conversion, retention and when to broaden beyond restaurants.
 
 ## Current questions
 

@@ -1,27 +1,38 @@
 ---
 status: partial — proposed Track 3 thresholds grounded in economics v0.2; founder approval pending
 owner: BABAI
-last-reviewed: 2026-09-20
+last-reviewed: 2026-09-21
 sources:
   - nekurama/Bulb#1
   - historical ManojVysyaraju/bulb#1
   - nekurama.babai.research.md
   - nekurama.raw.chat.json (ordered turns 70, 290; mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `4702681b-d611-4408-af5f-9001d04b6cfa`, `f58ce128-39ed-4015-9be9-5b6135a39f20`)
-  - Admin decision packet (2026-09-20; current task input)
-  - economics-model.md (Track 2 v0.2)
+  - Founder decision packet (2026-09-21; current task input)
+  - economics-model.md (Track 2 v0.3)
 ---
 
 # Validation
 
 ## Primary gate — staged
 
-### Gate 1: paid/deposit-backed operational pilot
+### Gate 1: fixed 90-day paid operational pilot
 
-Begin with one selected business from the 19 September 2026 interviews. Require, where possible, a real menu/catalog, approved WhatsApp channel or test access, an operating contact and a staff member responsible for orders. The pilot must be paid or deposit-backed and have an explicit end date before enrollment. The fee/deposit amount, refund treatment and date are not supplied.
+Begin with one selected business from the 19 September 2026 interviews. The
+pilot is fixed at **90 calendar days** and is paid, not free. Require a real
+menu/catalog, approved WhatsApp channel or test access, an operating contact
+and a staff member responsible for orders. Cancellation, refund and
+minimum-paying terms must be represented in a signed agreement template; legal
+wording and exact terms remain open.
 
-Expand gradually to additional businesses only after the measured workflow supports the next increment, up to a maximum validation cohort of 10 restaurants. No numeric activation, conversion or kill threshold is approved; proposed candidates are maintained separately and require founder approval.
+Expand gradually to additional businesses only after the measured workflow
+supports the next increment, up to a maximum validation cohort of 10
+restaurants. The pilot ends at the day-90 readiness review when team-defined
+evidence shows BABAI is operationally ready for materially larger onboarding
+volumes. No automatic extension or price increase is implied.
 
-This refines the field research's three-business target (`nekurama.babai.research.md`, “Immediate pilot plan” and “Success criteria”) with the current admin commercial gate.
+This refines the field research's three-business target
+(`nekurama.babai.research.md`, “Immediate pilot plan” and “Success criteria”)
+with the current founder commercial gate.
 
 ### Gate 2: gradual validation up to 10 restaurants
 
@@ -53,7 +64,7 @@ If Gate 1 is operationally stable, expand in controlled increments toward **up t
 
 ## Required metric set
 
-Record baseline, observed value and evidence for each pilot. Numeric thresholds below and in [`pilot-metrics.md`](pilot-metrics.md) are proposed candidates, not approved gates, and must remain open until founder approval:
+Record baseline, observed value and evidence for each pilot. Numeric thresholds are intentionally not supplied and must remain open:
 
 | Metric | What to record |
 |---|---|
@@ -84,39 +95,34 @@ No numeric success or kill thresholds are yet confirmed. Do not invent them from
 
 ## Track 3 candidate metric contract — proposed, pending founder approval
 
-The fuller proposed scorecard and Stage 0/1/2 gates are maintained in
-[`pilot-metrics.md`](pilot-metrics.md). They are a planning contract for
-founder review, not approved gates; this file remains the durable validation
-context until a pilot record adopts an approved version.
-
 The following are **candidate** entry, exit, success and kill thresholds. They
 are not approved decisions. They are derived from the finalized-for-planning
-Track 2 v0.2 bands and actual-rate register in
+Track 2 v0.3 bands and actual-rate register in
 [`economics-model.md`](economics-model.md), not from observed BABAI data.
 
 ### Proposed assumptions
 
-- The pilot is paid or deposit-backed and has a stated end date before
-  enrollment.
+- The pilot is fixed at 90 calendar days, paid and not free, with the end date
+  recorded before enrollment.
 - Rate-based order metrics require at least **10 completed orders per
   restaurant**; below that sample, report the metric as directional/unknown.
 - Repeat-use evaluation requires at least **10 unique customers** and a
   proposed **30-day observation window** after first order; the observation
   window is not yet approved.
-- Founder-support thresholds use combined Manoj + Vinay time. The Track 2 v0.2
+- Founder-support thresholds use combined Manoj + Vinay time. The Track 2 v0.3
   base bands are onboarding **8–16 hours** and recurring support **6–12
   hours/restaurant/month**; the high bands are 16–32 and 12–24 hours.
 - Economics thresholds use actual costs where available and the Track 2
   contribution sensitivity; the 40% contribution sensitivity is proposed, not
   an approved target.
-- Cost rates must come from the v0.2 actual-rate register; a blank rate is an
+- Cost rates must come from the v0.3 actual-rate register; a blank rate is an
   unknown and must not be treated as zero.
 
 ### Proposed entry gate
 
 | Entry condition | Proposed threshold | Hold/kill condition |
 |---|---:|---|
-| Commercial commitment | 100% of enrolled businesses have paid or deposited the agreed amount, signed pilot terms and an explicit end date | Do not start without all three; amount, refund treatment and date remain unresolved decisions |
+| Commercial commitment | 100% of enrolled businesses have paid, signed the agreement template and recorded the fixed 90-day end date | Do not start without payment, signed terms and the day-90 date; legal wording and minimum-paying terms remain open |
 | Operational readiness | 100% have an approved WhatsApp channel, reviewed/published menu and named operating staff contact | Hold until channel, menu or staff ownership is ready |
 | Instrumentation | Baseline captured before first customer order for activation, orders, fulfillment, staff time, support and economics | Hold until baseline and event capture are available |
 
@@ -131,8 +137,8 @@ Track 2 v0.2 bands and actual-rate register in
 | Staff adoption | Staff handle at least **80%** of active order sessions without founder intervention; recurring founder support ≤ **12 hours/restaurant/month** | <60% staff-handled sessions or recurring support > **24 hours/restaurant/month** |
 | Support load | Onboarding and support remain within the Track 2 base bands, with a declining trend after the first restaurant | Support remains in the high band after remediation, or founder effort prevents the next onboarding increment |
 | Economics data completeness | 100% of cost lines used in the end-date true-up have an actual rate/value, source and owner in the v0.2 register; no blanks are treated as zero | Any material cost line remains blank, unsupported or unallocated at true-up |
-| Contribution | Base-case `ContributionAfterOnboarding` is non-negative and reaches the proposed **40% contribution-margin sensitivity**; low/base/high views are populated using recognized revenue, actual costs and approved accounting treatment | Base-case contribution is negative, `P ≤ C`, or the conclusion depends on an unapproved price, missing rate or unapproved GST treatment |
-| Failure/refund economics | Actual failure/refund/remediation cost remains within the v0.2 base sensitivity of **1.5–4% of `G`** when BABAI absorbs it, or is separately evidenced when passed through | Cost exceeds **10% of `G`**, or credits/refunds/remediation are not recorded |
+| Contribution | Base-case `ContributionAfterOnboarding` is non-negative and reaches the proposed **40% contribution-margin sensitivity**; low/base/high views use income-bar versus total-expenditure margins | Base-case contribution is negative, `P ≤ C`, or the conclusion depends on an unapproved price, missing rate or unapproved GST treatment |
+| Failure/refund economics | Actual failure/refund/remediation cost remains within the v0.3 base sensitivity of **1.5–4% of `G`** when BABAI absorbs it, or is separately evidenced when passed through | Cost exceeds **10% of `G`**, or credits/refunds/remediation are not recorded |
 | Willingness to pay | At least **2 of the first 3 completed pilots** accept paid continuation or renewal terms after the end date | 0 of 3 accept continuation after complete observation; below 3 completed pilots remains inconclusive |
 
 ### Proposed kill or immediate-hold conditions
@@ -165,7 +171,14 @@ The product should be judged on sustained usage, customer and restaurant adoptio
 
 This is recorded in `nekurama.raw.chat.json` (ordered turn 290; mapping `4702681b-d611-4408-af5f-9001d04b6cfa`). The ROI/measurement battle is also anchored at mapping `f58ce128-39ed-4015-9be9-5b6135a39f20`.
 
-For the paid/deposit-backed pilot and later gradual expansion toward up to 10 restaurants, validation should establish whether BABAI can reliably support real restaurant operations, whether managers and staff can use it with reasonable effort, whether customers are comfortable ordering through it, whether it solves a meaningful problem, and whether restaurants see enough value to continue as paying customers. The economics decision must use the v0.2 low/base/high views and actual-rate register rather than historical price hypotheses.
+For the fixed 90-day paid pilot and later gradual expansion toward up to 10
+restaurants, validation should establish whether BABAI can reliably support
+real restaurant operations, whether managers and staff can use it with
+reasonable effort, whether customers are comfortable ordering through it,
+whether it solves a meaningful problem, and whether restaurants see enough
+value to continue as paying customers. The economics decision must use the
+v0.3 low/base/high views, income-bar versus total-expenditure margin and
+actual-rate register rather than historical price hypotheses.
 
 The pilot is also intended to expose practical workflow, traffic, customer-experience, and data complexities. Findings may lead to changes in the interface, workflows, onboarding, or other product initiatives before broader expansion.
 
@@ -187,3 +200,6 @@ Expansion beyond the initial 10 should be based on evidence from the pilot, with
 - [ ] Per-metric numeric thresholds and baseline collection method
 - [ ] Approved repeat-use observation window and sample rules
 - [ ] Actual-rate register completion and cost-allocation sign-off
+- [ ] Team-defined readiness evidence for materially larger onboarding volumes
+- [ ] Signed agreement-template cancellation/refund and minimum-paying terms
+- [ ] Six-month post-pilot pricing review inputs; no automatic increase

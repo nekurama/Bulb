@@ -18,9 +18,10 @@ This is an internal candidate scorecard for the fixed 90-day paid pilot. It
 preserves proposed statuses and does not create public claims, a free trial,
 approved success thresholds, legal terms or a scale guarantee.
 
-The pilot is paid and fixed at 90 days. Cancellation/refund handling is
-controlled by the signed agreement and its minimum-paying terms; this file
-does not draft those terms.
+The pilot is paid and fixed at 90 days, with the agreed payment or deposit
+received before the pilot starts. Cancellation/refund handling is controlled
+by the signed agreement and its minimum-paying terms; this file does not draft
+those terms.
 
 ## Required pilot record
 
@@ -28,6 +29,7 @@ does not draft those terms.
 |---|---|---|
 | Pilot term | 90 calendar days | **confirmed founder decision** |
 | Paid status | Paid; not free | **confirmed founder decision** |
+| Payment/deposit gate | Agreed payment or deposit received before day 1 | **required before start; exact treatment open** |
 | Signed agreement | Agreement version, signatories and effective dates | **required before enrollment** |
 | Minimum-paying term | Exact commercial obligation recorded in the signed agreement | **open founder decision** |
 | Cancellation/refund | Agreement reference and actual outcome; no invented entitlement | **open / legal validation required** |
@@ -101,6 +103,7 @@ is a review cadence, not an automatic increase.
 ## Open decisions
 
 - Exact minimum-paying term and billing schedule
+- Agreed pre-start payment/deposit amount, receipt and treatment
 - Signed agreement cancellation/refund fields and professional wording
 - Owners, observation windows and thresholds for the readiness evidence gate
 - Founder-approved contribution target or continuation rule

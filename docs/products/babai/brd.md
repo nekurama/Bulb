@@ -53,6 +53,7 @@ pilot has succeeded.
 | Decision | Status | Durable treatment |
 |---|---|---|
 | Pilot term | **confirmed** | Fixed **90-day paid pilot**; not a free trial |
+| Payment/start gate | **confirmed internal gate; treatment open** | Collect the agreed payment or deposit before the pilot starts; exact amount, classification and refund treatment require the signed agreement and professional validation |
 | Cancellation/refund | **partial / challenge-required** | Terms must be tied to a signed agreement and explicit minimum-paying terms; use the open requirements template in `business-model.md`, not invented legal language |
 | Pilot completion | **partial / proposed gate** | The pilot closes at the 90-day decision point when the team-defined readiness evidence gate supports materially larger onboarding volumes; no silent extension or public scale claim |
 | Margin | **confirmed calculation / open threshold** | Compare recognized income against total attributable expenditure; target contribution/margin remains open |
@@ -103,7 +104,7 @@ The initial operational boundary is one business, one WhatsApp number, one branc
 The pilot is a staged operating and evidence sequence, not one simultaneous launch target:
 
 1. **Stage 0 — one-business operational pilot:** prove the narrow pickup-first flow with one business, one WhatsApp number, one branch, manual takeover and no delivery dependency.
-2. **Stage 1 — fixed 90-day paid pilot:** run the agreed pilot term under signed minimum-paying terms; it is not a free trial.
+2. **Stage 1 — fixed 90-day paid pilot:** after the signed agreement and receipt of the agreed payment or deposit, run the term under signed minimum-paying terms; it is not a free trial.
 3. **Stage 2 — readiness decision:** close the pilot when the team-defined evidence gate supports materially larger onboarding volumes; if the gate is not met at day 90, record the result and hold expansion rather than silently extending.
 
 Stage 0 is a confirmed operating boundary. The paid term is a confirmed

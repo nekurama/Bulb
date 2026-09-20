@@ -45,21 +45,17 @@ tagline, category or legal name.
 
 Each direction has a transparent SVG for light and dark surfaces:
 
-```text
-/local/mnt/workspace/personal/bulb/.worktrees/architecture/assets/branding/candidates/01-orbit-lockup-light.svg
-/local/mnt/workspace/personal/bulb/.worktrees/architecture/assets/branding/candidates/01-orbit-lockup-dark.svg
-/local/mnt/workspace/personal/bulb/.worktrees/architecture/assets/branding/candidates/02-operator-spark-light.svg
-/local/mnt/workspace/personal/bulb/.worktrees/architecture/assets/branding/candidates/02-operator-spark-dark.svg
-/local/mnt/workspace/personal/bulb/.worktrees/architecture/assets/branding/candidates/03-menu-signal-light.svg
-/local/mnt/workspace/personal/bulb/.worktrees/architecture/assets/branding/candidates/03-menu-signal-dark.svg
-/local/mnt/workspace/personal/bulb/.worktrees/architecture/assets/branding/candidates/04-cat-relay-light.svg
-/local/mnt/workspace/personal/bulb/.worktrees/architecture/assets/branding/candidates/04-cat-relay-dark.svg
-```
-
 Repository-relative paths are:
 
 ```text
-assets/branding/candidates/
+assets/branding/candidates/01-orbit-lockup-light.svg
+assets/branding/candidates/01-orbit-lockup-dark.svg
+assets/branding/candidates/02-operator-spark-light.svg
+assets/branding/candidates/02-operator-spark-dark.svg
+assets/branding/candidates/03-menu-signal-light.svg
+assets/branding/candidates/03-menu-signal-dark.svg
+assets/branding/candidates/04-cat-relay-light.svg
+assets/branding/candidates/04-cat-relay-dark.svg
 ```
 
 No PNGs were generated. SVG is preferred here because it keeps the candidate
@@ -119,7 +115,11 @@ Contrast must be rechecked if the palette, size, typeface or background changes.
 - **Raw anchors:** NEKURAMA/BABAI company-product relationship is recorded in
   raw Turn 537 / ID `aad46dc0-5d23-4a75-bcd7-7fc1076bacb7` and Turn 756 / ID
   `ac6e5b2c-5ebd-4d2b-9813-d72297a2afff`; the founder’s BABAI naming feedback
-  appears in Turn 618 / ID `bbb21699-9902-40fc-9815-72621981d0a6`.
+  appears in Turn 618 / ID `bbb21699-9902-40fc-9815-72621981d0a6`. The
+  founder-approved wording is anchored at Turn 386 / mapping
+  `bbb21347-433a-45d7-b022-6a9a210f8a4c`, with the source phrase at mapping
+  `078f95a4-5e81-4488-ad45-5de38830c874`; it remains wording/intent only,
+  pending professional trademark and public-copy validation.
 
 ## QA and publication gates
 

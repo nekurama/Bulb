@@ -30,10 +30,11 @@ quote, forecast or pilot success threshold. Low/base/high values marked
 with invoices, provider exports, time logs and refund records.
 
 The current commercial decision is a **fixed 90-day paid pilot**. It is not a
-free trial. The pilot amount, collection schedule, minimum-paying terms and
-cancellation/refund treatment remain open until they are recorded in a signed
-agreement. Customer-order money settles directly to the restaurant and is
-separate from BABAI subscription billing. [Research:
+free trial, and the agreed payment or deposit must be received before the
+pilot starts. The pilot amount, collection schedule, deposit/refund treatment,
+minimum-paying terms and cancellation/refund treatment remain open until they
+are recorded in a signed agreement. Customer-order money settles directly to
+the restaurant and is separate from BABAI subscription billing. [Research:
 `nekurama.babai.research.md:L65-L81`, `nekurama.raw.chat.json:L192-L205`;
 decision sources: `2026-09-20 ADMIN DECISION PACKET`, `2026-09-21 FOUNDER
 DECISION PACKET`]

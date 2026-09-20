@@ -55,7 +55,7 @@ The founder source frames the product work as a constrained MVP/pilot battle: de
 The reconciled operating sequence is:
 
 1. **Stage 0 — one-business operational pilot:** run the narrow pickup-first flow with one business, one WhatsApp number and one branch, with manual takeover and no delivery dependency.
-2. **Stage 1 — fixed 90-day paid pilot:** run the agreed term under signed minimum-paying terms; it is not a free trial.
+2. **Stage 1 — fixed 90-day paid pilot:** after the signed agreement and receipt of the agreed payment or deposit, run the term under signed minimum-paying terms; it is not a free trial.
 3. **Stage 2 — readiness decision:** close the pilot at the day-90 decision point when the team-defined evidence gate supports materially larger onboarding volumes; hold expansion if it does not.
 
 The stages are sequential learning gates. Stage 0 is confirmed as the initial

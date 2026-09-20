@@ -28,7 +28,8 @@ The value hypothesis is direct-order economics, customer ownership, staff-effort
 ## Fixed paid pilot — founder decision
 
 The first commercial validation is a **fixed 90-day paid pilot**. It is not a
-free trial. The pilot has a fixed term; the exact amount, billing schedule,
+free trial. The agreed payment or deposit must be received **before the pilot
+starts**. The exact amount, billing schedule, deposit/refund treatment,
 minimum-paying terms and agreement mechanics remain open until recorded and
 signed. The pilot should end as a pilot at the 90-day decision point, with
 continuation or a separately approved extension treated as a new decision.
@@ -48,6 +49,7 @@ qualified professional turns them into a signed agreement.
 |---|---|
 | Pilot term | **90 calendar days; confirmed founder decision** |
 | Paid status | **Paid; not free; confirmed founder decision** |
+| Start/payment gate | Agreed payment or deposit received before day 1; exact treatment remains agreement-dependent |
 | Pilot amount and billing schedule | Open founder/commercial decision |
 | Minimum-paying term | Open founder/commercial decision; must be explicit before enrollment |
 | Cancellation trigger and notice | Open; counsel to draft operative language |
@@ -55,9 +57,10 @@ qualified professional turns them into a signed agreement.
 | Service/readiness obligations and evidence | Team-defined proposed gate in `pilot-metrics.md` |
 | End-of-term treatment | Pilot closes at the decision point; continuation/extension requires a new approved decision |
 
-The signed agreement must bind the cancellation/refund treatment to the
-minimum-paying terms actually approved for the pilot. This page intentionally
-does not invent legal wording, statutory rights, or a refund entitlement.
+The signed agreement must bind the pre-start payment/deposit, cancellation and
+refund treatment to the minimum-paying terms actually approved for the pilot.
+This page intentionally does not invent legal wording, statutory rights, a
+deposit classification or a refund entitlement.
 
 ## Pricing — challenge-required, contribution-derived
 
@@ -109,7 +112,8 @@ not a forecast. [Evidence: `nekurama.raw.chat.json:L79721-L79820`;
 
 - Final packaging and entitlements
 - Pilot amount and billing schedule
-- Signed agreement template and minimum-paying terms
+- Signed agreement template, pre-start payment/deposit receipt and
+  minimum-paying terms
 - Pilot-to-continuation decision
 - Baseline order economics and ROI calculation
 - CAC, onboarding and support cost
@@ -127,6 +131,7 @@ data exists. [Evidence: `nekurama.babai.research.md:L104-L116`,
 | Founder/product decision | External or professional validation still required |
 |---|---|
 | 90-day paid pilot; not free | Signed agreement drafting; enforceability and applicable consumer/commercial rules |
+| Payment/deposit before pilot start | Agreement drafting, payment/deposit classification, accounting and refund treatment |
 | Pricing derived from contribution economics | Accounting treatment, GST, invoicing and revenue recognition |
 | Six-month pricing review cadence; no automatic increase | Contract changes and customer communications |
 | NEKURAMA company identity / BABAI product identity | Entity records, IP ownership and brand/trademark clearance |

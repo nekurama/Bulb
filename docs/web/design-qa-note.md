@@ -88,6 +88,43 @@ for `styles.css`, `script.js` and `mock-data.json`. Basic structural checks
 should confirm one `h1`, `header`, `nav`, `main`, `footer`, the skip link,
 labels for each form control and the reduced-motion rule.
 
+## Candidate asset review
+
+Five user-supplied JPEGs are copied under `assets/candidates/` for internal
+template review only. `assets/candidates/provenance.json` records the original
+temporary paths, SHA-256 hashes, dimensions, draft alt text and review notes.
+The source files are all opaque 800 × 800 JPEGs with a 1:1 aspect ratio; none
+has an alpha channel. Four use an opaque black field and one has a checkerboard
+pattern baked into the JPEG, so none is treated as transparent.
+
+The template's **Asset review** section shows each candidate on light and dark
+specimen surfaces with `object-fit: contain`, fixed intrinsic dimensions,
+`loading="lazy"` and informative alt text on the first specimen. The duplicate
+dark-surface specimen is hidden from assistive technology to avoid repeating the
+same description. The board is explicitly candidate-only and does not replace
+the approved repository SVGs or imply trademark clearance, licensing,
+selection, final brand approval or public-asset approval.
+
+Review findings:
+
+- The BABAI character/wordmark candidate is most legible on light surfaces but
+  its black JPEG field blends into dark surfaces; keep it contained and do not
+  crop the character, bulb or wordmark.
+- The NEKURAMA orange-wordmark candidates retain useful orange contrast, but
+  their dark illustration detail weakens on dark surfaces and their black field
+  is not transparent.
+- The checkerboard NEKURAMA candidate has the checkerboard baked into the
+  image; it is not a transparency treatment and should not be used as a logo
+  source.
+- The minimal NEKURAMA cat/keyhole candidate loses linework contrast on dark
+  surfaces and at small responsive sizes.
+
+No derived images were generated or re-encoded. The only optimization applied
+to the template is delivery behavior (`width`/`height`, lazy loading,
+asynchronous decoding and contained responsive rendering); a future approved
+source should be optimized separately after founder selection and legal/assets
+review.
+
 ## Unresolved decisions
 
 Final copy and CTA wording, approved CTA destination and owner, privacy notice,

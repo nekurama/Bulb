@@ -226,8 +226,11 @@ failure/refund outcomes, `T`, and the chosen accounting treatment for `D`.
 
 ## Track 3 dependency
 
-Track 3 should consume this artifact as a variable-driven template, not as a
-price decision. It depends on:
+Track 3 consumes this artifact through the proposed metric contract in
+[`validation.md`](validation.md), not as a price decision. The candidate
+thresholds use the base/high founder-time bands, failure/refund sensitivities
+and contribution-margin sensitivities here; they remain pending founder
+approval. Track 3 depends on:
 
 1. instrumenting the required validation metrics;
 2. collecting actual pilot invoices, provider terms and time records;

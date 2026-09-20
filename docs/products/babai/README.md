@@ -26,3 +26,6 @@ Initial wedge: restaurants. Long-term direction: a WhatsApp-native B2B2C local-b
 - Validation/pilot evidence
 
 Partial or unknown areas should be recorded as questions rather than invented.
+
+Landing-page implementation and QA decisions are recorded in
+`docs/products/babai/web-qa-landing-page-scope.md`.

@@ -26,23 +26,33 @@ client-side routing. This template does not make that commitment.
 
 ## Design direction
 
-The visual direction is editorial and tactile: warm paper, deep green, orange
-annotation accents, serif display type and an asymmetric conversation-to-order
-illustration made entirely from CSS. It intentionally uses no generated images,
-stock photography or remote fonts. The template banner and repeated boundary
-labels make provisional content, demo-only behavior and unresolved CTA
-destinations visible in the interface.
+The visual direction is editorial and tactile: warm paper, deep green, burnt
+orange annotation accents, serif display type and an asymmetric
+conversation-to-order illustration made entirely from CSS. It intentionally
+uses no generated images, stock photography or remote fonts. The template
+banner, slot labels and repeated boundary notes make provisional content,
+demo-only behavior and unresolved CTA destinations visible in the interface.
 
 ## Interaction and accessibility
 
 - `header`, `nav`, `main`, section headings and `footer` provide landmarks; the
-  page has one `h1`.
+  page has one `h1`. The canonical URL was intentionally omitted while domain
+  ownership and publication remain unresolved.
 - A skip link, visible `:focus-visible` treatment, native form controls and
   keyboard-operable buttons support keyboard traversal.
-- Demo step buttons expose the active step with `aria-current`; route choices
-  expose selection with `aria-pressed`.
-- The form uses native required-field validation, local-only status text and no
-  submission endpoint. The optional contact field is not autocomplete-enabled.
+- The mobile navigation uses a native `details`/`summary` disclosure so its
+  links remain keyboard-operable without JavaScript.
+- Demo step buttons expose the active step with `aria-current` and
+  `aria-controls`; route choices expose selection with `aria-pressed`.
+- The demo has an explicit reset control. Mock data is schema-checked, scene
+  count is matched to the controls, invalid step indexes are ignored, and the
+  four-scene inline fallback keeps controls safe if the JSON request fails.
+- The form uses native required-field validation, local-only status text,
+  `aria-invalid` recovery and no submission endpoint. Clear-fields resets the
+  hidden route and status as well as visible values; no values enter storage.
+  The preview submit control stays disabled until the local script initializes,
+  so JavaScript-disabled browsing cannot fall through to a browser form
+  submission.
 - `prefers-reduced-motion` disables non-essential smooth scrolling and motion.
 - Responsive rules reflow the process list at tablet and mobile widths instead
   of requiring page-level horizontal scrolling.
@@ -55,8 +65,7 @@ This is a content-neutral template. Final headline, product claims, evidence,
 testimonials and exact CTA wording remain placeholders pending Tracks 1–4.
 `mock-data.json` contains invented demo scenes only. The form does not transmit,
 persist or submit business details, menus, customer data, WhatsApp identifiers,
-payment data or staff credentials. No secrets, tokens, passwords, private URLs or
-environment credentials belong in the mock or repository.
+payment data or staff credentials.
 
 The page structure follows the current BABAI landing-page and QA contracts:
 
@@ -81,12 +90,41 @@ git diff --check
 python -m json.tool mock-data.json >/dev/null
 node --check script.js
 python -m http.server 4173
+curl --fail --silent --show-error http://127.0.0.1:4173/ >/dev/null
 ```
 
 The static-server smoke check should load `/` and confirm local requests only
 for `styles.css`, `script.js` and `mock-data.json`. Basic structural checks
 should confirm one `h1`, `header`, `nav`, `main`, `footer`, the skip link,
-labels for each form control and the reduced-motion rule.
+labels for each form control, the native mobile menu, reset controls,
+`aria-controls`/`aria-current` step semantics, the reduced-motion rule and the
+absence of a live form action or canonical domain.
+
+## 2026-09-21 QA evidence
+
+- **Scope:** `nekurama/web-qa` only; `data/executed_workflows/index.json` remains
+  untracked and untouched.
+- **Static checks:** `git diff --check`, JSON parsing, `node --check`, local
+  HTTP smoke and landmark/accessibility assertions are run against the final
+  worktree. Results are recorded in the handoff rather than treated as public
+  launch evidence.
+- **Browser smoke:** Chromium loaded the page without console errors; the
+  local mock advanced from scene one to scene two and reset to scene one;
+  local-only form preview exposed its status and clear-fields restored empty
+  values plus the default route; the mobile disclosure opened from a focused
+  `summary` with Enter.
+- **Media/network:** At 360px CSS width, `body.scrollWidth` matched the
+  viewport width. Reduced-motion emulation changed document scrolling to
+  `auto`. The only network requests were `/`, `styles.css`, `script.js` and
+  `mock-data.json` on the local server; the inline favicon produced no
+  additional request.
+- **Responsive assertions:** the stylesheet includes a 320px-safe shell,
+  mobile disclosure navigation, stacked grids, wrapped CTA/actions and
+  reduced-motion behavior. A browser-level visual review remains a founder QA
+  step before publication.
+- **Privacy boundary:** no remote fonts, analytics, third-party embeds,
+  external form action, canonical domain, secrets or invented customer data
+  are present.
 
 ## Candidate asset review
 
@@ -124,6 +162,35 @@ to the template is delivery behavior (`width`/`height`, lazy loading,
 asynchronous decoding and contained responsive rendering); a future approved
 source should be optimized separately after founder selection and legal/assets
 review.
+
+## Founder decision packet: candidate lockup directions
+
+The internal packet adds four locally authored transparent SVG studies under
+`assets/candidates/logos/`:
+
+1. **Mascot + spark** — friendly, capable companion cue with a restrained AI
+   light/spark.
+2. **Restaurant operator + spark** — contained badge cue for the owner/operator
+   and restaurant service context.
+3. **Wordmark + spark** — readable product-first lockup for headers and operator
+   surfaces.
+4. **Endorsed lockup** — BABAI product relationship with NEKURAMA as the
+   parent/company direction.
+
+The studies are grounded in `docs/products/babai/thesis-and-positioning.md`
+(brand personality, restaurant-first buyer and messaging hierarchy),
+`docs/products/babai/product-definition.md` (restaurant-first operating
+boundary), and `docs/company/README.md` plus `docs/company/ip-brand-legal.md`
+(NEKURAMA parent/company and BABAI product/brand relationship). The phrase
+“BABAI — Business Automation by AI” appears only as founder-approved internal
+wording in the endorsed study; final public copy remains gated.
+
+Each concept is shown on light and dark specimen surfaces with draft alt text,
+transparent-background usage notes, contrast guidance and aspect/crop rules.
+These are visual QA notes, not legal clearance, trademark meaning, licensing
+evidence, final selection or public-asset approval. Absolute local paths are
+reported in the implementation handoff rather than embedded as deployment
+references.
 
 ## Unresolved decisions
 

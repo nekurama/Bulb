@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 220" fill="none" role="img" aria-labelledby="title desc">
+  <title>Candidate BABAI wordmark with an AI spark</title>
+  <desc id="desc">Internal horizontal BABAI wordmark candidate with an orange spark.</desc>
+  <rect x="8" y="8" width="624" height="204" rx="64" fill="#163D35"/>
+  <path d="M112 72v76h45c27 0 42-12 42-32 0-13-7-23-20-28 9-5 14-13 14-24 0-15-12-28-37-28h-44v36Zm34-10h10c8 0 12 4 12 10s-4 10-12 10h-10V62Zm0 42h14c10 0 15 4 15 12s-5 12-15 12h-14v-24Zm80 44 7-20h43l7 20h36l-42-112h-44l-42 112h35Zm28-82 13 37h-26l13-37Zm80-30v112h34V80h28V48h-90v32h28Zm79 0v112h34V80h28V48h-90v32h28Z" fill="#FFFDF7"/>
+  <path d="M488 57 500 27l12 30 30 12-30 12-12 30-12-30-30-12 30-12Z" fill="#E77D43"/>
+  <path d="M482 155h88" stroke="#F2C75C" stroke-width="8" stroke-linecap="round"/>
+</svg>

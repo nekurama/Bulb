@@ -13,6 +13,7 @@ const expectedSourceSha =
 const siteFiles = ["app.js", "favicon.svg", "index.html", "styles.css"];
 const sourceFiles = siteFiles.map((file) => `site/${file}`);
 const outputFiles = [...siteFiles, "mock-data.json"];
+const deploymentFiles = [".github/workflows/pages-preview.yml", "scripts/build-pages-preview.mjs"];
 
 const git = (...args) =>
   execFileSync("git", args, { cwd: root, encoding: "utf8" }).trim();
@@ -53,12 +54,16 @@ const assertLocalReferences = async (html) => {
 
 const main = async () => {
   const head = git("rev-parse", "HEAD");
-  const parent = git("rev-parse", "HEAD^");
-  assert(
-    parent === expectedSourceSha,
-    `Expected deployment commit parent ${expectedSourceSha}, got ${parent}`,
-  );
+  git("merge-base", "--is-ancestor", expectedSourceSha, "HEAD");
   assert(head !== expectedSourceSha, "Deployment changes must be committed before building");
+  const changedSinceSource = git("diff", "--name-only", `${expectedSourceSha}..HEAD`)
+    .split("\n")
+    .filter(Boolean)
+    .sort();
+  assert(
+    changedSinceSource.every((file) => deploymentFiles.includes(file)),
+    "Files outside the deployment allowlist changed after the source commit",
+  );
 
   assert(
     JSON.stringify(relativeFiles("site")) === JSON.stringify(siteFiles),

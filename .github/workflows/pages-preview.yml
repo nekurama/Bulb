@@ -9,28 +9,30 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages-preview-nekurama-architecture
+  group: pages-preview-babai-feature
   cancel-in-progress: false
 
 jobs:
   deploy:
-    # This preview is intentionally controlled by the role branch only.
-    if: github.ref == 'refs/heads/nekurama/architecture'
+    # Manager integration target: do not run this workflow from a role branch.
+    if: github.ref == 'refs/heads/nekurama/babai-feature'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Check out the committed role-branch source
+      - name: Check out the committed feature source
         uses: actions/checkout@v4
         with:
-          ref: nekurama/architecture
+          ref: nekurama/babai-feature
 
       - name: Verify Pages artifact boundary
         shell: bash
         run: |
           set -euo pipefail
+          printf 'Source ref: %s\nSource revision: %s\n' \
+            'nekurama/babai-feature' "$(git rev-parse HEAD)" >> "$GITHUB_STEP_SUMMARY"
           expected="$(printf '%s\n' site/app.js site/favicon.svg site/index.html site/styles.css)"
           actual="$(git ls-files site | sort)"
           test "$actual" = "$expected"
@@ -38,7 +40,9 @@ jobs:
           test -f site/styles.css
           test -f site/app.js
           test -f site/favicon.svg
-          ! grep -RInE '(^|[^:])https?://|fetch\(|XMLHttpRequest|WebSocket|localStorage|sessionStorage|document\.cookie' site \
+          ! grep -RInE '(^|[^:])https?://|fetch\(|XMLHttpRequest|WebSocket|localStorage|sessionStorage|document\.cookie|Authorization:|Bearer [A-Za-z0-9._-]{12,}|gh[pousr]_[A-Za-z0-9]{20,}|-----BEGIN .* PRIVATE KEY-----' site \
+            --exclude='favicon.svg'
+          ! grep -RInE '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}|\+?[0-9][0-9 ()-]{7,}' site \
             --exclude='favicon.svg'
 
       - name: Configure GitHub Pages

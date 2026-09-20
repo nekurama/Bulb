@@ -57,26 +57,28 @@ source, observation window and threshold. A blank is unknown, not zero.
 | Willingness to pay | Continuation response after the stated end date and objections | Founder/commercial owner | Proposed |
 | Readiness | Evidence that materially larger onboarding volumes can be supported | Team decision owner | Proposed |
 
-## Team-defined operational-readiness evidence gate
+## Proposed onboarding-readiness exit gate
 
-The readiness gate is a **proposed team decision structure**, not a preset
-numeric threshold. Before relying on it, the team must fill the threshold,
-owner and evidence location for each category:
+This is the proposed internal gate for the day-90 decision. It is not an
+approved public metric contract or scale guarantee. The team should adopt a
+version number, owners and evidence links before using it to approve larger
+onboarding volumes. A blank, unsupported or unallocated cost is **unknown**, not
+zero.
 
-| Evidence category | Team-defined threshold | Evidence location | Status |
-|---|---|---|---|
-| Repeatable onboarding | `[team to define]` | `[pilot records]` | Proposed |
-| Operational reliability | `[team to define]` | `[incident/recovery records]` | Proposed |
-| Staff/customer workflow adoption | `[team to define]` | `[usage and interview records]` | Proposed |
-| Support capacity | `[team to define]` | `[time logs and support records]` | Proposed |
-| Economics completeness | `[team to define]` | `[income/expenditure ledger]` | Proposed |
-| Contribution outcome | `[team to define]` | `[economics-model.md output]` | Proposed |
-| Safety/payment/privacy exceptions | `[team to define]` | `[incident and review records]` | Proposed |
+| Evidence category | Proposed exit threshold | Hold / fail condition | Owner | Evidence location | Status |
+|---|---|---|---|---|---|
+| Repeatable onboarding | At least 3 restaurants activated; at least 80% live within 7 calendar days; median combined Manoj + Vinay onboarding effort ≤16 hours/restaurant | Any restaurant >32 combined hours without a documented recovery plan, or <70% live by day 14 | Pilot operator | Onboarding log and activation events | Proposed |
+| Operational reliability | ≥90% of accepted pickup orders reach completed/collected status; missed/duplicate orders ≤5% after at least 10 completed orders/restaurant | <80% completion, >10% missed/duplicate, or unresolved customer-impacting incident | Product/operations | Order, message and incident records | Proposed |
+| Staff/customer workflow adoption | ≥80% of active order sessions handled by restaurant staff without founder intervention; ≥20% repeat ordering among eligible customers after ≥10 unique customers and a 30-day window | <60% staff-handled sessions, 0% repeat after minimum sample, or sample remains insufficient at decision | Restaurant operator | Usage events and interview records | Proposed |
+| Support capacity | Recurring combined founder support ≤12 hours/restaurant/month; no restaurant >24 hours/month; next onboarding can start without displacing committed support | High-band support persists after remediation or the next onboarding increment cannot be staffed | Pilot operator | Manoj/Vinay time logs and support queue | Proposed |
+| Economics completeness | 100% of material income/expenditure lines have actual value, source, owner and allocation; GST input and treatment recorded separately | Any material line is blank, unsupported, unallocated or treated as zero | Finance/product | Pilot ledger and rate register | Proposed |
+| Contribution outcome | Base-case recognized income less total expenditure is non-negative and reaches the proposed 40% contribution sensitivity; low/base/high views are populated | Base contribution is negative, price is below break-even, or result depends on missing rate or unapproved GST treatment | Finance/product | `economics-model.md` output and true-up | Proposed |
+| Safety/payment/privacy | Zero unresolved customer-funds custody, authorization, privacy or payment-integrity exception | Any unresolved material safety, privacy or payment exception | Operations/finance | Incident review and payment reconciliation | Proposed |
 
 The gate should be judged against measured evidence, not feature completion.
-It must answer whether BABAI can support materially larger onboarding volumes
-without hiding support effort, expenditure, operational incidents or unsafe
-payment/privacy conditions.
+All rows are intended to be met together for an advance decision. If a row is
+inconclusive because the minimum sample or observation window was not reached,
+the day-90 result is **inconclusive**, not a pass.
 
 ## Day-90 decision
 
@@ -91,6 +93,26 @@ At the fixed 90-day end:
 The day-90 decision does not automatically extend the pilot, increase pricing,
 or create a refund entitlement. Those outcomes require the signed agreement
 and separate founder/legal/finance decisions.
+
+## Proposed 90-day acceptance thresholds
+
+For the fixed paid pilot, use the following minimum evidence rules alongside
+the readiness gate:
+
+| Metric | Proposed acceptance bar | Minimum evidence |
+|---|---|---|
+| Activation | ≥80% of enrolled restaurants live within 7 days | Enrollment, channel and menu readiness events |
+| Order completion | ≥80% of initiated orders completed, with ≥90% of accepted pickup orders completed | At least 10 completed orders per restaurant |
+| Error rate | Missed/duplicate orders ≤5% for advance; >10% is a hold | Message/order reconciliation |
+| Repeat use | ≥20% eligible-customer repeat order rate | ≥10 unique customers and 30-day observation |
+| Staff adoption | ≥80% staff-handled active order sessions | Session ownership events |
+| Support | ≤12 combined founder support hours/restaurant/month; 24 hours is a hard hold | Manoj/Vinay time logs |
+| Economics | Base contribution ≥40% sensitivity and no negative base contribution | End-date true-up with actual rates |
+| Continuation signal | At least 2 of the first 3 completed pilots accept continuation terms | Complete end-date decision records |
+
+These thresholds are planning assumptions for internal acceptance, pending
+founder/team approval. They do not authorize refunds, pricing changes,
+accounting treatment or a claim that expansion will succeed.
 
 ## Post-pilot pricing review
 

@@ -86,6 +86,59 @@ After the pilot, review pricing every **six months** against observed
 contribution economics, customer value and operating readiness. The cadence is
 a review point, not an automatic increase.
 
+## 90-day paid pilot acceptance packet — planning assumptions
+
+The following is the recommended internal commercial shape for a signed
+agreement. It is deliberately written as business assumptions, not legal
+wording. Founders must approve the fields and a qualified professional must
+turn them into operative agreement language.
+
+| Field | Planning assumption for founder review |
+|---|---|
+| Pilot term | Fixed 90 calendar days from the agreed start date; not a free trial |
+| Minimum-paying term | The restaurant commits to the full 90-day pilot fee once the pilot is activated |
+| Billing schedule | Planning default: 50% at signing/activation and 50% before day 31; use a different schedule only if approved and recorded |
+| Cancellation | A restaurant may request cancellation, but cancellation does not automatically erase the approved minimum-paying commitment; operational stop date and any remaining balance must follow the signed agreement |
+| Refund/credit | Assume no discretionary pro-rata refund after activation; any exception is limited to a documented service/readiness failure or inability to start, with amount, approver and timing recorded |
+| Customer-order refunds | Remain the restaurant's responsibility and outside BABAI subscription economics unless an approved agreement explicitly says otherwise |
+| End of term | Close at day 90 with a readiness decision; continuation or extension is a new approved commercial decision, not a silent renewal |
+| Price review | If continuing, review pricing every six months; review is not an automatic increase |
+
+These assumptions do not decide statutory rights, enforceability, tax treatment,
+accounting treatment or dispute handling. Do not promise cancellation or refund
+outcomes to a restaurant until the signed agreement and professional review are
+complete.
+
+### Planning fee bands
+
+The economics model produces the following **90-day, before-GST planning
+bands** per restaurant. They are income bars derived from total expenditure,
+price-linked payment/refund costs and the stated contribution case; they are
+not approved public tiers.
+
+| Scenario | Planning fee band before GST | Use |
+|---|---:|---|
+| Low-cost floor | ₹6,075–₹8,219 | Only when actual onboarding/support and provider usage validate the low case |
+| **Base recommendation** | **₹29,362–₹39,727** | Default founder discussion band for a three-restaurant planning cohort |
+| High-cost stress bar | ₹166,940–₹225,860 | Stress-test only; do not quote without a separately approved scope/capacity decision |
+
+Each band is limited to ±15% around its calculated center. GST is an input to
+the customer cash amount, not a hidden margin: at the base center, the cash bar
+is ₹34,544 at `g=0%`, ₹36,271 at `g=5%` or ₹40,762 at `g=18%`. The exact
+assumptions, formulas, cohort sensitivity and per-restaurant break-even are in
+[`economics-model.md`](economics-model.md).
+
+### Onboarding-readiness exit gate
+
+At day 90, close the pilot and hold expansion unless the proposed internal gate
+in [`pilot-metrics.md`](pilot-metrics.md) is met. In plain business terms, the
+team should have evidence that onboarding is repeatable, order and payment
+operations are reliable, staff can run the workflow without founder takeover,
+support remains within capacity, all expenditure lines are evidenced, the base
+contribution case is positive, and no unresolved safety/privacy/payment
+exception remains. The gate is proposed and requires founder/team approval; it
+is not a public scale claim.
+
 ## Unit economics — partial
 
 Expected variable-cost drivers are onboarding/support, WhatsApp messaging, AI, payment/delivery integrations and infrastructure. The pilot must measure actual costs and support effort per restaurant before expansion. [Evidence: `nekurama.babai.research.md:L145-L161`; corroboration: `nekurama.chatgpt.md:L4163-L4163`]

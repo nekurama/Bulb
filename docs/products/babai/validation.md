@@ -97,16 +97,49 @@ At day 90:
   continuation/onboarding decision;
 - if the gate is not met, close the pilot as not ready for materially larger
   onboarding volumes and hold expansion;
+- if the evidence sample is incomplete, close the pilot as inconclusive and
+  specify the missing evidence for a separately approved continuation;
 - do not automatically extend the term, increase prices or promise refunds.
+
+The proposed gate requires, together, repeatable activation of at least three
+restaurants, at least 80% live within seven days, at least 90% accepted-order
+completion, no more than 5% missed/duplicate orders, at least 80% staff-led
+active order sessions, recurring combined Manoj/Vinay support of no more than
+12 hours per restaurant per month, complete income/expenditure evidence,
+non-negative base contribution at the proposed 40% sensitivity, and zero
+unresolved safety, privacy or payment-integrity exception. The minimum samples
+and hold conditions are maintained in [`pilot-metrics.md`](pilot-metrics.md).
 
 ## Success / kill criteria — proposed, pending founder/team approval
 
-Numeric thresholds, baseline period, instrumentation design, ROI calculation
-and kill criteria are not yet confirmed. The source discussion explicitly
-leaves these as the next product battle; no threshold is promoted here.
+These are proposed planning thresholds, not observed BABAI performance. The
+baseline period, instrumentation implementation, ROI calculation and founder
+approval remain open. A hold or kill result stops expansion while the evidence
+is reviewed; it does not itself create a refund, price change or accounting
+outcome.
 [Evidence: `nekurama.raw.chat.json:L66495-L66540`; corroboration:
 `nekurama.chatgpt.md:L27050-L27263`,
 `nekurama.chatgpt.md:L51948-L51955`]
+
+## Economics acceptance and external gates
+
+The 90-day economics acceptance uses recognized pilot income against total
+attributable expenditure, including hosting, tooling, Meta/provider, payment
+collection, onboarding, Manoj/Vinay founder time, support, retry, failure and
+refund/credit reserve. `economics-model.md` provides low/base/high estimates,
+the per-restaurant break-even, the recommended ±15% fee bands and GST input
+sensitivity. These are internal planning estimates and must be replaced by
+actual invoices, exports, time logs and approved accounting treatment.
+
+Before enrollment, the following remain external or professional gates:
+
+- signed agreement language for the 90-day minimum-paying commitment,
+  cancellation trigger/notice, refund or credit treatment and payment timing;
+- provider/BSP terms, current Meta rate card, payment processor fees and any
+  minimums or FX exposure;
+- GST registration/applicability, rate, invoice presentation, recoverability
+  and revenue recognition;
+- privacy, payment authorization, customer-funds and entity/IP/brand review.
 
 ## Agreement and external validation boundary
 

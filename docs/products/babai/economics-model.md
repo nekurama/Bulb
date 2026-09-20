@@ -221,6 +221,141 @@ BABAI contribution impact     = 0 unless BABAI contractually absorbs it
 This prevents customer funds and merchant payment fees from being mistaken
 for BABAI revenue or an unpriced BABAI subsidy.
 
+## 90-day paid-pilot acceptance economics (planning v0.3)
+
+This section is the internal acceptance calculation for one restaurant over a
+fixed 90-calendar-day paid pilot. It is a planning model, not a quote,
+approved margin, tax conclusion or signed commercial term. The central
+planning cohort is `N = 3` restaurants so shared costs are not silently
+allocated to one founder-supported customer. The `N = 1` and `N = 10`
+sensitivity cases show the allocation effect.
+
+### Scenario inputs
+
+| Input | Low | Base | High | Treatment |
+|---|---:|---:|---:|---|
+| Pilot duration | 90 days | 90 days | 90 days | **Founder decision; fixed term** |
+| Shared-cost cohort `N` | 3 | 3 | 3 | Planning input; sensitivity shown below |
+| Annual hosting/storage/DB/monitoring | ₹20,000 | ₹40,000 | ₹52,000 | Planning estimate; no vendor quote |
+| Annual tooling/dev/admin | ₹15,000 | ₹30,000 | ₹39,000 | Planning estimate; no vendor quote |
+| Meta/provider messages per month | 250 | 750 | 2,000 | Planning input |
+| Utility/authentication share | 95% | 85% | 60% | Planning input |
+| Marketing share | 5% | 15% | 40% | Planning input |
+| Meta utility/auth rate | ₹0.115 | ₹0.115 | ₹0.115 | Research snapshot; re-verify |
+| Meta marketing rate | ₹0.8631 | ₹0.8631 | ₹0.8631 | Research snapshot; re-verify |
+| Provider/BSP add-on over 90 days | ₹0 | ₹956 | ₹4,704 | Estimate: direct / `0.005 × ₹85 × 2,250` / `€49 × ₹96` |
+| Subscription collection fee `p_sub` | 0% | 2% | 3% | Planning input; processor contract required |
+| BABAI refund/credit reserve `q_refund` | 0.5% | 2% | 5% | Planning input applied to pilot income |
+| Provider retry factor | 1% | 3% | 8% | Planning input applied to Meta + provider |
+| Direct cash onboarding cost | ₹0 | ₹500 | ₹1,500 | Planning estimate; record receipts |
+| Manoj onboarding hours / rate | 1.2h / ₹500 | 2h / ₹1,000 | 4.4h / ₹2,000 | Opportunity-value sensitivity, not compensation |
+| Vinay onboarding hours / rate | 0.8h / ₹500 | 2h / ₹1,000 | 3.6h / ₹2,000 | Opportunity-value sensitivity, not compensation |
+| Manoj support hours / month / rate | 0.6h / ₹500 | 1h / ₹1,000 | 2.2h / ₹2,000 | Time-log replacement required |
+| Vinay support hours / month / rate | 0.4h / ₹500 | 1h / ₹1,000 | 1.8h / ₹2,000 | Time-log replacement required |
+| Manoj failure/recovery hours / month | 0.06h | 0.25h | 0.55h | Planning input |
+| Vinay failure/recovery hours / month | 0.04h | 0.25h | 0.45h | Planning input |
+| GST input `g` | 0% | 18% | 18% | **Unknown tax input; not a conclusion** |
+| Target contribution rate `t` | 20% | 40% | 60% | Planning case, pending founder approval |
+
+GST is shown as an input only. If the signed quote is exclusive of GST, the
+customer cash bar is `P × (1 + g)` and recognized income may remain `P` subject
+to confirmed accounting treatment. If the quote is inclusive, recognized
+income is `P_cash / (1 + g)`. Until a qualified adviser confirms the
+treatment, show both values and do not count GST as BABAI income.
+
+### 90-day formulas
+
+```text
+C_hosting_90       = annual_hosting × 3 / 12 / N
+C_tooling_90       = annual_tooling × 3 / 12 / N
+C_meta_90          = 3 × M × (u × r_u + m × r_m)
+C_provider_90      = verified provider add-on for the 90-day term
+C_retry_cash       = (C_meta_90 + C_provider_90) × q_retry
+C_founder_90       = (h_M_onb × V_M) + (h_V_onb × V_V)
+                     + 3 × ((h_M_support + h_V_support
+                     + h_M_fail + h_V_fail) × V)
+F_90               = C_hosting_90 + C_tooling_90 + C_meta_90
+                     + C_provider_90 + C_retry_cash + C_onb_cash
+                     + C_founder_90
+total_expenditure  = F_90 + P × p_sub + P × q_refund
+recognized_income  = P                         # before GST, if confirmed
+contribution       = recognized_income - total_expenditure
+contribution_rate  = contribution / recognized_income
+break_even_P       = F_90 / (1 - p_sub - q_refund)
+target_P           = F_90 / (1 - p_sub - q_refund - t)
+customer_cash_bar  = P × (1 + g)                # exclusive-GST quote input
+```
+
+`F_90` is the total 90-day expenditure before price-linked collection and
+refund/credit costs. The formula includes Manoj and Vinay onboarding, support
+and failure/recovery time as economic cost even when no cash salary is paid.
+Merchant-order payment fees remain a separately recorded pass-through unless a
+signed agreement makes BABAI absorb them.
+
+### Cost bars at each scenario center
+
+Amounts below are per restaurant for 90 days. Founder rows are economic cost,
+not cash payroll. The payment/refund row is price-linked and uses the scenario
+center shown in the next table.
+
+| Cost bar | Low | Base | High stress |
+|---|---:|---:|---:|
+| Hosting/storage/DB/monitoring | ₹1,667 | ₹3,333 | ₹4,333 |
+| Tooling/dev/admin | ₹1,250 | ₹2,500 | ₹3,250 |
+| Meta usage | ₹114 | ₹511 | ₹2,485 |
+| Provider/BSP add-on | ₹0 | ₹956 | ₹4,704 |
+| Provider retry cash | ₹1 | ₹44 | ₹575 |
+| Direct cash onboarding | ₹0 | ₹500 | ₹1,500 |
+| Manoj onboarding time | ₹600 | ₹2,000 | ₹8,800 |
+| Vinay onboarding time | ₹400 | ₹2,000 | ₹7,200 |
+| Manoj support time, 90 days | ₹900 | ₹3,000 | ₹13,200 |
+| Vinay support time, 90 days | ₹600 | ₹3,000 | ₹10,800 |
+| Manoj failure/recovery time | ₹90 | ₹750 | ₹3,300 |
+| Vinay failure/recovery time | ₹60 | ₹750 | ₹2,700 |
+| **Fixed expenditure `F_90`** | **₹5,682** | **₹19,345** | **₹62,848** |
+| Subscription collection + refund reserve at center | ₹36 | ₹1,382 | ₹15,712 |
+
+### Scenario output and recommended fee bands
+
+The center is the `target_P` calculated from each scenario's target
+contribution case. The displayed recommendation is rounded for planning only.
+Each band is exactly `center × (1 ± 15%)`; the ±15% is the maximum planning
+variance around that center, not a promise to discount or an approved price.
+
+| Scenario | 90-day fixed expenditure `F_90` | Break-even `P` | Target center `P` | ±15% planning fee band, before GST | Total expenditure at center | Contribution at center |
+|---|---:|---:|---:|---:|---:|---:|
+| Low | ₹5,682 | ₹5,711 | ₹7,147 (`t=20%`) | **₹6,075–₹8,219** | ₹5,718 | ₹1,429 (20%) |
+| Base | ₹19,345 | ₹20,151 | ₹34,544 (`t=40%`) | **₹29,362–₹39,727** | ₹20,727 | ₹13,818 (40%) |
+| High stress | ₹62,848 | ₹68,313 | ₹196,400 (`t=60%`) | **₹166,940–₹225,860** | ₹78,560 | ₹117,840 (60%) |
+
+The base band is the recommended planning band for founder discussion; the low
+band is a floor only when actual support and provider costs validate the low
+case. The high band is a stress-test income bar, not a customer quote. If the
+high case is approached, reduce support intensity, narrow scope or separately
+approve a materially different commercial design instead of silently
+subsidizing the gap.
+
+At the base center, the GST cash input changes the customer-facing bar to
+₹34,544 at `g=0%`, ₹36,271 at `g=5%`, or ₹40,762 at `g=18%`; it does not change
+the pre-GST contribution calculation unless accounting treatment says it does.
+
+### Per-restaurant break-even sensitivity
+
+The base scenario below keeps all variable inputs constant and changes only
+the number of restaurants sharing annual hosting and tooling. This is a
+planning allocation sensitivity, not a scale forecast.
+
+| Shared-cost cohort `N` | Base hosting + tooling allocation | Base `F_90` | Break-even 90-day fee | 40% target fee |
+|---:|---:|---:|---:|---:|
+| 1 | ₹17,500 | ₹31,012 | ₹32,304 | ₹55,378 |
+| 3 | ₹5,833 | ₹19,345 | ₹20,151 | ₹34,544 |
+| 10 | ₹1,750 | ₹15,262 | ₹15,897 | ₹27,253 |
+
+The cells must be recalculated from the ledger before use; they are
+intentionally not treated as approved prices. The exact formulas are
+`F_90(N) = F_90(3) + (₹70,000 × 3 / 12) × (1/N - 1/3)` and the two price
+formulas above.
+
 ## Per-restaurant monthly break-even view
 
 ### Base illustration at `N = 10`

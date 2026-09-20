@@ -66,6 +66,34 @@ agreement language, cancellation/refund enforceability, minimum-paying
 obligations, GST/invoicing/revenue treatment, entity/IP ownership and
 trademark/brand clearance are not decided by this BRD.
 
+## Internal acceptance packet — proposed operating assumptions
+
+For the 90-day paid pilot, the internal planning packet assumes a full
+90-calendar-day minimum-paying commitment, a default 50%/50% collection split
+at activation and before day 31, no discretionary pro-rata refund after
+activation, and exception-only credits/refunds for a documented service or
+inability-to-start case. These are business assumptions for founder approval,
+not legal wording or a promise of statutory treatment. The signed agreement
+must state the approved cancellation trigger, notice, balance, refund/credit
+authority and timing.
+
+The contribution-derived 90-day planning bands are ₹6,075–₹8,219 for the low
+case, **₹29,362–₹39,727 as the base planning recommendation**, and
+₹166,940–₹225,860 for the high stress case, all before GST. Each is capped at
+±15% around its calculated center. These figures are estimates based on the
+three-restaurant allocation case and must be replaced by actual provider
+invoices, payment exports and founder time logs before being treated as a
+commercial quote. See [`economics-model.md`](economics-model.md) for the
+income bars, formulas, GST sensitivity and break-even table.
+
+The pilot closes at day 90. The proposed onboarding-readiness exit gate in
+[`pilot-metrics.md`](pilot-metrics.md) must show repeatable onboarding,
+reliable order/payment operations, staff-led operation, support capacity,
+complete expenditure evidence, positive base contribution and no unresolved
+safety/privacy/payment exception before materially larger onboarding volumes
+are approved. If the gate is not met or is inconclusive, close the pilot,
+record the gap and hold expansion; do not silently extend or imply scale.
+
 ## Confirmed product truth
 
 ### Identity, buyer and wedge — confirmed
@@ -153,7 +181,7 @@ The distinction between **confirmed** and **partial** reconciles stale/thin plac
 | Meta onboarding/coexistence reliability | **challenge-required** | Real approved-channel onboarding and recovery tests; no current export proves reliability. |
 | Payment verification, refunds and reconciliation | **challenge-required** | Test gateway webhook and manual-payment paths with a pilot merchant; screenshots/claims are not authoritative payment proof. |
 | Pricing, onboarding fee and paid continuation | **challenge-required** | Fixed paid-pilot evidence and contribution economics; research explicitly says interest is not willingness to pay. |
-| Pilot instrumentation and numeric success/kill thresholds | **partial** | Instrument Stage 0 before expanding; compare activation, conversion, staff time, errors, repeat use, support and gross contribution across stages. Numeric thresholds are not set. |
+| Pilot instrumentation and numeric success/kill thresholds | **partial / proposed** | Instrument Stage 0 before expanding; use the proposed activation, completion, staff-time, error, repeat-use, support and contribution thresholds in `pilot-metrics.md`; founder/team approval and observed evidence remain required. |
 | Delivery and multilingual staff workflows | **unknown/challenge-required** | Defer delivery dependency; test only when evidence requires it, including language and provider failure cases. |
 | Competitive proof / moat | **challenge-required** | Workflow-level competitor comparison and evidence of retention/switching value, not feature-count comparison. |
 | Expansion gates beyond restaurants | **unknown** | Define quantitative evidence after the restaurant/pickup workflow is proven. |

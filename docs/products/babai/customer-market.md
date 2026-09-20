@@ -1,63 +1,60 @@
 ---
-status: partial — ICP and buyer are confirmed hypotheses; market size and repeatability are unvalidated
+status: partial
 owner: BABAI
 last-reviewed: 2026-09-20
 sources:
-  - nekurama/Bulb#1
-  - historical ManojVysyaraju/bulb#1
-  - Admin decision packet (2026-09-20; current task input)
+  - nekurama.raw.chat.json
+  - nekurama.chatgpt.md
+  - nekurama.babai.research.md
 ---
 
 # Customer & Market
 
-## Current answer
+## Current answer — confirmed
 
-### Initial wedge and geography
+BABAI sells to businesses, not consumers. The initial wedge is independent and small-to-medium restaurants; the end customer is an important workflow participant but not the primary SaaS buyer. [Evidence: `nekurama.chatgpt.md:L40500-L40520`; corroboration: `nekurama.babai.research.md:L91-L102`]
 
-The initial wedge is **small-to-medium-sized restaurants**, with founder-led selling and onboarding. Hyderabad is the first learning market; the product strategy should remain India-aware without claiming India-wide market proof. Stores and other local businesses are later expansion candidates, not current ICP.
+The initial ICP is a restaurant with approximately 1–5 branches, a business-owned customer relationship, meaningful WhatsApp/direct-order activity, staff involved in order handling, repeat-purchase potential and enough operational complexity that manual conversation management is painful. The branch range is a starting sweet spot, not a permanent exclusion rule. [Evidence: `nekurama.chatgpt.md:L42146-L42232`]
 
-### ICP — confirmed working hypothesis
+Primary buyer/user model:
 
-Restaurants with approximately **1–5 branches** that:
+- **Owner/operator:** economic buyer; cares about direct-order economics, customer ownership, service quality and effort.
+- **Manager/admin:** likely operational champion and high-frequency configuration user.
+- **Staff:** daily order, preparation and support operators.
+- **Customer:** end participant/beneficiary.
 
-- care about customer experience and repeat business;
-- already receive, or want to receive, direct orders through WhatsApp or phone;
-- feel aggregator commissions or loss of customer relationship;
-- struggle to manage WhatsApp manually during busy periods; and
-- can provide an owner/operator and staff contact for a narrow pilot.
+## Evidence — confirmed problem, partial commercial proof
 
-The branch range is a sweet spot for discovery, not a hard exclusion boundary.
+Field research covered 19 businesses: 15 restaurants and 4 stores. It reports aggregator dissatisfaction, demand for direct customer relationships, existing WhatsApp ordering and staff difficulty managing conversations. [Evidence: `nekurama.babai.research.md:L7-L14`, `nekurama.babai.research.md:L20-L40`]
 
-### Buyer and users
+The research supports the problem and restaurant wedge, but does not prove that businesses will provide their number/menu, change operating habits, trust automation, pay, continue after trial or support delivery/payment/refund/multilingual workflows. [Evidence: `nekurama.babai.research.md:L104-L116`]
 
-- **Owner/operator:** primary economic buyer; cares about direct-order economics, customer ownership, service quality and effort.
-- **Manager/admin:** likely champion and high-frequency operational user.
-- **Staff:** accepts, prepares and completes orders; uses human takeover when needed.
-- **Customer:** end participant and beneficiary, not the SaaS buyer.
+## Customer validation path — partial
 
-This B2B buyer model is supported by the founder decision sequence (`nekurama.raw.chat.json`, ordered turns 71 and 411) and the current thesis document.
+Customer evidence should be gathered in the staged order: first make one
+business operational, then run the fixed 90-day paid pilot, then use the
+team-defined readiness evidence gate to decide whether materially larger
+onboarding volumes are justified. Interest from the 19 interviews is an input
+to recruitment, not evidence that any stage has passed. [Evidence:
+`nekurama.raw.chat.json:L79721-L79820`; corroboration:
+`nekurama.babai.research.md:L118-L163`,
+`nekurama.babai.research.md:L176-L186`; current decision source:
+`2026-09-21 FOUNDER DECISION PACKET`]
 
-### Jobs to be tested
+## Market and expansion posture — partial
 
-1. Capture direct customer demand without adding marketplace commission.
-2. Handle routine questions and orders when staff are busy.
-3. Preserve the restaurant's own customer relationship and WhatsApp identity.
-4. Give staff a simple path to take over conversations and complete orders.
-5. Improve direct-order economics enough to justify a subscription.
+Hyderabad is the initial learning and founder-led selling context; product architecture should not be treated as Hyderabad-only. Stores and other local businesses remain later expansion opportunities until the restaurant/pickup workflow is proven. [Evidence: `nekurama.chatgpt.md:L3141-L3141`; corroboration: `nekurama.babai.research.md:L178-L186`]
 
-### Alternatives and competitive posture
+The expansion thesis is businesses with repeat purchases, conversational customer service, WhatsApp relevance, direct-relationship value and operational workflows that benefit from automation plus human intervention. No quantitative vertical scorecard or permanent market boundary is confirmed. [Evidence: `nekurama.chatgpt.md:L42146-L42232`]
 
-Observed alternatives include calls, manual WhatsApp replies, an existing restaurant app, aggregators and generic WhatsApp automation/inbox tools. BABAI's working differentiation is the operating layer around the business-owned relationship, not a claim that it is already superior to every alternative.
+## Gaps
 
-## Validation path
+- Restaurant segmentation by order volume, cuisine, staffing and current tools
+- Minimum pain/volume threshold for activation
+- Current alternatives and switching behavior
+- Acquisition channels and founder-led sales motion
+- First-50 onboarding/support model
+- Quantitative expansion gate beyond restaurants
+- Competitive workflow proof and switching value
 
-The immediate field step is to select one business from the 19 interviews and run a paid or deposit-backed pilot with an explicit end date. Seek real menu/WhatsApp access, operating contacts and staff ownership. Expand gradually toward up to 10 restaurants only when activation, order, fulfillment, staff-adoption, support, economics and willingness-to-pay evidence supports the next increment. The pilot amount, refund treatment and end date are not supplied.
-
-## Partial / unknown
-
-- [ ] Exact restaurant segment: cuisine, order volume, branch complexity and software maturity
-- [ ] Willingness to change existing habits and trust automation during rush periods
-- [ ] Paid conversion, retention and price sensitivity
-- [ ] Competitive win rate versus aggregators, manual operations and generic providers
-- [ ] Repeatable founder-led sales motion, acquisition channels and first-50 onboarding cost
-- [ ] Market size, expansion scorecard and quantitative gate for stores/other verticals
+These remain partial or challenge-required because the available evidence is interview interest, not sustained usage or paid retention. [Evidence: `nekurama.babai.research.md:L145-L180`]

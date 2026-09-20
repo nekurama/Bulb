@@ -29,6 +29,10 @@ Field research covered 19 businesses: 15 restaurants and 4 stores. It reports ag
 
 The research supports the problem and restaurant wedge, but does not prove that businesses will provide their number/menu, change operating habits, trust automation, pay, continue after trial or support delivery/payment/refund/multilingual workflows. [Evidence: `nekurama.babai.research.md:L104-L116`]
 
+## Customer validation path — partial
+
+Customer evidence should be gathered in the staged order: first make one business operational, then test repeatability with up to three pilots and at least one payer, then run a controlled 10-restaurant beta. Interest from the 19 interviews is an input to recruitment, not evidence that any stage has passed. [Evidence: `nekurama.raw.chat.json:L79721-L79820`; corroboration: `nekurama.babai.research.md:L118-L163`, `nekurama.babai.research.md:L176-L186`]
+
 ## Market and expansion posture — partial
 
 Hyderabad is the initial learning and founder-led selling context; product architecture should not be treated as Hyderabad-only. Stores and other local businesses remain later expansion opportunities until the restaurant/pickup workflow is proven. [Evidence: `nekurama.chatgpt.md:L3141-L3141`; corroboration: `nekurama.babai.research.md:L178-L186`]

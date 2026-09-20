@@ -33,6 +33,10 @@ Complex setup may move from WhatsApp to web without creating a second account or
 
 The direction is settled, but exact Meta handoff, Admin tooling, retention, web information architecture and readiness criteria remain open. [Evidence: `nekurama.chatgpt.md:L28378-L28378`]
 
+## Pilot experience sequence — partial
+
+The first experience must support Stage 0 as a human-supported one-business operation: a resumable setup, reviewed/published menu, pickup order flow, explicit business acceptance, payment recording or confirmation, staff completion and customer status. Stage 1 and Stage 2 should reuse that path rather than add new channel or delivery scope before repeatability is evidenced. [Evidence: `nekurama.raw.chat.json:L79721-L79820`; corroboration: `nekurama.babai.research.md:L118-L163`]
+
 ## Human takeover — confirmed principle, detailed UX partial
 
 Human takeover pauses conversational automation for the conversation while order, payment and fulfillment processing continue independently. Staff can act from WhatsApp or web according to density and authorization. [Evidence: `nekurama.raw.chat.json:L21506-L21540`; corroboration: `nekurama.chatgpt.md:L7207-L7450`]

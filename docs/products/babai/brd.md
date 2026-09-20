@@ -59,7 +59,15 @@ The smallest real pilot flow is:
 
 The initial operational boundary is one business, one WhatsApp number, one branch, pickup-first, manual human takeover and no delivery dependency. AI may assist with extraction, understanding and suggestions; publication and controlled business state require review/validated transitions. [Evidence: `nekurama.babai.research.md:L118-L143`; corroboration: `nekurama.chatgpt.md:L6233-L6446`, `nekurama.chatgpt.md:L27072-L27263`]
 
-The broad validation gate is the first 10 restaurants. The immediate conversion proof is narrower: select three businesses from the 19 interviews, achieve three active pilots and at least one paying customer. The 10-restaurant gate should not be read as proof that all ten must be live before learning or iteration begins. [Evidence: `nekurama.raw.chat.json:L79770-L79820`; `nekurama.babai.research.md:L118-L163`, `nekurama.babai.research.md:L178-L186`]
+#### Reconciled pilot sequence — partial
+
+The pilot is a staged operating and evidence sequence, not one simultaneous launch target:
+
+1. **Stage 0 — one-business operational pilot:** prove the narrow pickup-first flow with one business, one WhatsApp number, one branch, manual takeover and no delivery dependency.
+2. **Stage 1 — up to three pilots and at least one payer:** expand only after the Stage 0 flow is operational, using the interviewed businesses to test repeatability and willingness to pay.
+3. **Stage 2 — controlled 10-restaurant beta:** use a bounded ten-restaurant cohort to test whether the validated operating model can be repeated with controlled support and instrumentation.
+
+Stage 0 is a confirmed operating boundary. Stage 1 and Stage 2 are the current sequencing decision, while entry/exit criteria, support capacity, numeric success/kill thresholds and post-beta continuation remain partial or unknown. The 10-restaurant beta is not a requirement to wait before learning in Stage 0 or Stage 1. [Evidence: `nekurama.raw.chat.json:L79721-L79820`; corroboration: `nekurama.babai.research.md:L118-L163`, `nekurama.babai.research.md:L176-L186`]
 
 ### Money, payment and fulfillment boundaries — confirmed
 
@@ -76,7 +84,7 @@ WhatsApp is the primary conversational/action surface for customer and staff att
 | Product identity | **confirmed** | Business operating platform built around WhatsApp; AI/automation are enabling mechanisms. |
 | Buyer / ICP | **confirmed** | B2B restaurant/business buyer; initial fit is WhatsApp-heavy direct-relationship restaurants with operational pain. |
 | First workflow | **confirmed** | Menu/catalog → conversation → pickup order → restaurant decision → payment record/confirmation → completion → status. |
-| Pilot cohort | **partial** | 10 restaurants is the broad gate; three active pilots plus one payer is the immediate proof target. |
+| Pilot sequence | **partial** | Stage 0 is one business; Stage 1 is up to three pilots and at least one payer; Stage 2 is a controlled 10-restaurant beta. Exact stage gates and numeric success/kill thresholds remain open. |
 | Dashboard boundary | **partial** | WhatsApp remains first-class; web handles density and recovery. Exact MVP screens and entitlements remain open. |
 | Onboarding | **partial** | Progressive and resumable; exact Meta handoff, Admin tooling, retention and web information architecture remain open. |
 | Pricing / packaging | **challenge-required** | ₹999 / ₹2,499 / ₹4,999 + GST is a starting hypothesis only; final plans, limits and paid-pilot terms require evidence. |
@@ -92,13 +100,13 @@ The distinction between **confirmed** and **partial** reconciles stale/thin plac
 
 | Gap | Status | Required evidence before closure |
 |---|---|---|
-| Exact pilot feature cut and launch blockers | **partial** | Run the narrow flow with real restaurants; document what must be production-safe versus manual. |
+| Exact pilot feature cut and launch blockers | **partial** | Run Stage 0, then Stage 1, and document what must be production-safe versus manual before Stage 2. |
 | Customer and staff journeys, including exceptions | **partial** | Observe real order, correction, cancellation, refund, missed-message and takeover cases. |
 | Dashboard MVP and tier entitlements | **partial** | Test whether density, bulk operations and recovery justify web scope; do not infer from feature lists. |
 | Meta onboarding/coexistence reliability | **challenge-required** | Real approved-channel onboarding and recovery tests; no current export proves reliability. |
 | Payment verification, refunds and reconciliation | **challenge-required** | Test gateway webhook and manual-payment paths with a pilot merchant; screenshots/claims are not authoritative payment proof. |
 | Pricing, onboarding fee and paid continuation | **challenge-required** | Paid pilot or deposit evidence; research explicitly says interest is not willingness to pay. |
-| Pilot instrumentation and numeric success/kill thresholds | **partial** | Baselines plus event instrumentation for activation, conversion, staff time, errors, repeat use, support and gross contribution. |
+| Pilot instrumentation and numeric success/kill thresholds | **partial** | Instrument Stage 0 before expanding; compare activation, conversion, staff time, errors, repeat use, support and gross contribution across stages. Numeric thresholds are not set. |
 | Delivery and multilingual staff workflows | **unknown/challenge-required** | Defer delivery dependency; test only when evidence requires it, including language and provider failure cases. |
 | Competitive proof / moat | **challenge-required** | Workflow-level competitor comparison and evidence of retention/switching value, not feature-count comparison. |
 | Expansion gates beyond restaurants | **unknown** | Define quantitative evidence after the restaurant/pickup workflow is proven. |
@@ -124,7 +132,7 @@ working-tree files were not part of this pass.
 
 ## Historical context retained
 
-Early discussions used Dawat and proposed Tadka/Thali/Dawat tiers, low pilot pricing and broader delivery ambitions. Those are preserved as history in the exports; they are not current product truth. Current pricing is only the ₹999 / ₹2,499 / ₹4,999 + GST hypothesis, and current MVP proof is pickup-first. [Evidence: `nekurama.raw.chat.json:L192-L205`; corroboration: `nekurama.chatgpt.md:L2432-L2685`, `nekurama.chatgpt.md:L27598-L27598`]
+Early discussions used Dawat and proposed Tadka/Thali/Dawat tiers, low pilot pricing and broader delivery ambitions. Those are preserved as history in the exports; they are not current product truth. Current pricing is only the ₹999 / ₹2,499 / ₹4,999 + GST hypothesis, and current MVP proof is the staged, pickup-first sequence above. [Evidence: `nekurama.raw.chat.json:L192-L205`; corroboration: `nekurama.chatgpt.md:L2432-L2685`, `nekurama.chatgpt.md:L27598-L27598`]
 
 ## Related files
 

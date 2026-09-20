@@ -11,7 +11,7 @@ const expectedSourceSha =
   process.env.PAGES_PREVIEW_SOURCE_SHA ||
   "52432d695e37b5a5b4a61c79acb10b71f7e6de3a";
 const sourceFiles = ["index.html", "styles.css", "script.js", "mock-data.json"];
-const outputFiles = [...sourceFiles];
+const outputFiles = ["favicon.svg", ...sourceFiles];
 const deploymentFiles = [".github/workflows/pages-preview.yml", "scripts/build-pages-preview.mjs"];
 
 const git = (...args) =>
@@ -44,6 +44,10 @@ const assertLocalReferences = async (html) => {
 const sanitizeHtml = (html) =>
   html
     .replace(/\s*<link rel="canonical" href="https:\/\/nekurama\.com\/">\s*/, "\n")
+    .replace(
+      /(\s*<meta name="theme-color" content="[^"]+">\s*)/,
+      '$1    <link rel="icon" href="favicon.svg" type="image/svg+xml">\n',
+    )
     .replace(/\s*<a href="#asset-review">Asset review<\/a>\s*/, "\n")
     .replace(
       /\s*<section class="section candidate-assets-section" id="asset-review"[\s\S]*?<\/section>\s*/,
@@ -80,6 +84,7 @@ const main = async () => {
   const html = sanitizeHtml(await readFile(path.join(root, "index.html"), "utf8"));
   const styles = sanitizeStyles(await readFile(path.join(root, "styles.css"), "utf8"));
   const script = await readFile(path.join(root, "script.js"), "utf8");
+  const favicon = await readFile(path.join(root, "assets/branding/logo/nekurama-cat.svg"), "utf8");
   assert(!/assets\/candidates|candidate-only|provenance\.json/i.test(html), "Candidate content entered Pages HTML");
   assert(!/candidate-/i.test(styles), "Candidate styles entered Pages artifact");
   assert(
@@ -88,6 +93,7 @@ const main = async () => {
     ),
     "External or persistent browser boundary found",
   );
+  assert(/<svg\b/.test(favicon) && !/<script|<iframe|foreignObject|(?:href|xlink:href)="https?:\/\//.test(favicon), "Unsafe favicon asset");
   assert(
     !/fetch\s*\((?!\s*["']mock-data\.json["'])/.test(script),
     "Site code contains a non-local data request",
@@ -99,6 +105,7 @@ const main = async () => {
   await writeFile(path.join(outputDir, "styles.css"), styles);
   await cp(path.join(root, "script.js"), path.join(outputDir, "script.js"));
   await cp(path.join(root, "mock-data.json"), path.join(outputDir, "mock-data.json"));
+  await writeFile(path.join(outputDir, "favicon.svg"), favicon);
 
   const outputListing = execFileSync("find", [outputDir, "-type", "f", "-printf", "%P\n"], {
     cwd: root,

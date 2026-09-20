@@ -32,6 +32,8 @@ Current durable company-level truth. Product-specific detail belongs under `docs
 
 `e-setup-checklist.md` is the bounded cross-dimension checklist for incorporation, founder/governance, IP/brand/legal, finance/tax/compliance and security/privacy setup. It records actionable work without turning unresolved questions into company decisions.
 
+`external-entity-register.json` is the durable evidence register for external certificates, professional reviews, trademark clearances, registrations, programme decisions and provider approvals. It records owners, dependencies, next actions and control boundaries; it does not claim completion without evidence.
+
 ## Current handoff status
 
 | Dimension | Status | Immediate evidence or action |
@@ -64,7 +66,8 @@ Raw messages are founder-history evidence, not executed agreements or profession
 
 - `README.md` is intentionally a thin index, not a company decision record.
 - The five dimension files are compact **partial** durable-truth files. Their question lists are deliberate open work, not empty placeholders.
-- No additional tracked company-relevant placeholder file was found. The cross-dimension checklist is separate so the dimension files remain focused.
+- `external-entity-register.json` is the focused cross-dimension evidence register for external gates and approvals.
+- The cross-dimension checklist remains separate so the dimension files remain focused.
 
 ## Handoff rule
 

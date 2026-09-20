@@ -19,6 +19,11 @@ The initial product proof is a controlled restaurant pilot: the broad gate is 10
 - Historical issue/decision logs: `nekurama/Bulb#1`, `ManojVysyaraju/bulb#1`
 - Company context: `nekurama/Bulb#2`
 
+`brd.md` is the durable evidence/status register for this product pass. It
+records raw-conversation message/node anchors, distinguishes confirmed,
+partial, unknown and challenge-required decisions, and inventories thin or
+intentionally untouched product files.
+
 ## Knowledge dimensions
 
 - Product BRD and gap register

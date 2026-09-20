@@ -86,6 +86,7 @@ A historical `RESOLVED` label is not automatically authoritative. Later evidence
 - [ ] **6.2 Research & evidence** — create focused file when mined
 - [ ] **6.3 Additional product dimensions** — create only when a new dimension becomes material
 - [ ] **6.4 Additional company dimensions** — create only when a new dimension becomes material
+- [ ] **6.5 Web publication** → `web/landing-page.md` — GitHub Pages landing-page scope, claim gates, publication constraints and static-site QA plan; implementation remains out of scope
 
 ## File rules
 

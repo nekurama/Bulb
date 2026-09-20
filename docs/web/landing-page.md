@@ -2,7 +2,7 @@
 status: partial
 owner: NEKURAMA / BABAI
 last-reviewed: 2026-09-20
-scope: GitHub Pages landing-page and mock-demo definition; no site implementation
+scope: GitHub Pages landing-page and native mock-demo template; no external deployment
 sources:
   - NEW ADMIN DECISION PACKET (2026-09-20)
   - nekurama.raw.chat.json
@@ -320,6 +320,48 @@ mock/demo persona, invented quote or synthetic logo is never a testimonial.
 - External deployment, DNS changes or production service connections in this
   documentation task.
 
+## 5A. Implementation path and framework tradeoff
+
+### Selected path — native HTML/CSS/JS
+
+The first template is implemented in `site/`:
+
+```text
+site/
+├── index.html   # semantic page shell, placeholders and mock-flow markup
+├── styles.css   # responsive visual system, layout and reduced-motion rules
+├── app.js       # fixture-only tabs, steps and mock-state transitions
+└── favicon.svg  # local, content-neutral template mark
+```
+
+The directory is GitHub Pages-compatible as a static root or as the source
+directory of a later, separately approved Pages workflow. It has no package
+manifest, build step, runtime dependency, external font, image host, analytics
+script, API endpoint or production integration. No deployment or DNS change was
+performed.
+
+### React versus native — decision
+
+| Option | Benefits | Costs / risks | Decision |
+| --- | --- | --- | --- |
+| Native HTML/CSS/JS | Zero dependency surface; direct GitHub Pages compatibility; no build or bundling gate; easy network/provenance inspection; resilient no-JavaScript content shell. | State and templating remain intentionally small; richer product-like flows would need a deliberate component boundary. | **Selected for this template.** |
+| React | Reusable components, typed state and a clearer path if the mock becomes a multi-screen product prototype. | Adds package/build/dependency/license and deployment complexity before product copy, evidence and CTA decisions are settled. | **Deferred.** Reconsider only when reusable state/components justify the added surface. |
+
+The current interaction has three tabs, three fixture-only steps and one
+resettable state path, which does not justify React. A future React migration
+must preserve the same no-backend, mock-only, provenance and accessibility
+gates rather than become a route to production functionality.
+
+### Placeholder and fixture boundary
+
+- Final copy, claims, testimonials, logos, legal text and exact CTA wording
+  remain placeholders until Tracks 1–4 approve them.
+- Every visible mock record is invented and marked as demo-only in the UI.
+- `site/app.js` exposes `window.__MOCK_TEMPLATE__ = true` as a lightweight QA
+  assertion; it does not store, transmit or retrieve user data.
+- The CTA links intentionally loop to the local `#contact` placeholder until
+  an approved destination exists. No live contact route is fabricated.
+
 ## 6. Accessibility requirements
 
 **Target — proposed:** WCAG 2.2 AA for the published page, with no known
@@ -425,8 +467,9 @@ domain ownership and customer contract/privacy documents are also open in
 
 ## 8. Static-site validation and QA plan
 
-The site is not implemented yet. When an implementation exists, release QA
-must produce a pass/fail record for each item below.
+The native template exists under `site/`, but it is not a published product
+site. Release QA must produce a pass/fail record for each item below before
+any external deployment.
 
 ### Source and claims
 

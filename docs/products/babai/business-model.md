@@ -1,47 +1,70 @@
 ---
-status: partial
+status: partial — SaaS direction confirmed; pricing, pilot terms and economics remain open
 owner: BABAI
 last-reviewed: 2026-09-20
 sources:
-  - nekurama.raw.chat.json
-  - nekurama.chatgpt.md
+  - nekurama/Bulb#1
+  - historical ManojVysyaraju/bulb#1
   - nekurama.babai.research.md
+  - nekurama.raw.chat.json (ordered turns 70, 276, 278; mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `04cc446b-3a6d-4c19-adc7-4d94ab17d21b`)
+  - Admin decision packet (2026-09-20; current task input)
 ---
 
 # Business Model
 
-## Current answer — confirmed direction
+## Current answer
 
-BABAI is intended to be a subscription SaaS business. Restaurant customer-order payments and BABAI subscription billing are separate. BABAI should not depend on transaction or delivery margin as its initial economic foundation, and it should not hold or settle customer funds in the initial product. [Evidence: `nekurama.raw.chat.json:L192-L205`; corroboration: `nekurama.babai.research.md:L56-L63`]
+BABAI is a SaaS business. Restaurant order payments and BABAI subscription billing are separate flows; BABAI should not depend on transaction/delivery margin as its initial economic foundation.
 
-The value hypothesis is direct-order economics, customer ownership, staff-effort/error reduction and better service recovery, less BABAI subscription and variable provider costs. The exact value is restaurant-specific and must use the restaurant's own baseline rather than a blanket “save 30%” claim. [Evidence: `nekurama.raw.chat.json:L64404-L64420`; corroboration: `nekurama.babai.research.md:L24-L36`]
+The initial business-value hypothesis is that restaurants have a meaningful pain around commission costs on existing platforms. Initial research found this concern recurring among restaurant businesses. BABAI's intended model is to avoid a marketplace commission and instead charge the restaurant a subscription fee. This is a value and pricing hypothesis, not yet paid validation.
 
-## Pricing — challenge-required hypothesis
+The next commercial validation should be a **paid or deposit-backed pilot with an explicit end date**. A deposit may be refundable or applied according to terms that are not yet decided. The amount, refund treatment, billing instrument and calendar end date are unknown and must be fixed before enrollment. Paid continuation remains a validation hypothesis, not an assumption of success.
 
-The current public pricing direction is:
+There is **no committed public price** in the current BRD. The previously discussed ₹999 / ₹2,499 / ₹4,999 + GST levels remain historical pricing hypotheses to test, not published tiers or current commercial truth (`nekurama.raw.chat.json`, ordered turns 276 and 278; mapping `04cc446b-3a6d-4c19-adc7-4d94ab17d21b`).
 
-- Basic: ₹999/month before GST
-- Premium: ₹2,499/month before GST
-- Advanced: ₹4,999/month before GST
+The earlier ₹499/month, ₹1,499–₹2,499/month, ₹999 setup and Tadka/Thali/Feast package ideas in `nekurama.chatgpt.md` are historical experiments and are not current commercial commitments.
 
-These are starting hypotheses for paid-pilot testing, not locked packaging or permanent pricing. Earlier Tadka/Thali/Dawat names and lower price points are historical experiments retained in the source history, not current truth. [Evidence: `nekurama.babai.research.md:L65-L81`; corroboration: `nekurama.raw.chat.json:L192-L205`, `nekurama.chatgpt.md:L27598-L27598`]
+## Unit economics
 
-Open commercial questions include plan entitlements, usage limits, onboarding/training fee, pilot fee or deposit, billing/cancellation, payment-provider pass-through and gross contribution by restaurant. [Evidence: `nekurama.babai.research.md:L73-L81`, `nekurama.babai.research.md:L135-L161`]
+The pilot should build a cost and contribution model before public pricing is set. At minimum, record per restaurant and per pilot:
 
-## Unit economics — partial
+| Model component | Required treatment |
+|---|---|
+| Infrastructure | Hosting, storage, observability and operational tooling attributable to the pilot |
+| Provider and payment fees | WhatsApp/Meta, AI, payment gateway and any delivery/provider charges |
+| Onboarding and support | Setup, menu/catalog work, training, founder/operator support and ongoing interventions |
+| Tooling | Development, monitoring, support and other recurring tools needed to operate the pilot |
+| Failure/refund cost | Failed messages, duplicate/missed orders, payment exceptions, refunds, credits and remediation effort |
+| Revenue basis | Pilot fee or deposit terms, with refundable deposits kept distinct from recognized revenue until finance validation |
+| Margin | Contribution after the above costs; no target percentage has been supplied |
+| GST | Tax treatment and invoice presentation require professional CA/CS validation; GST must not be silently counted as margin |
 
-Expected variable-cost drivers are onboarding/support, WhatsApp messaging, AI, payment/delivery integrations and infrastructure. The pilot must measure actual costs and support effort per restaurant before expansion. [Evidence: `nekurama.babai.research.md:L145-L161`; corroboration: `nekurama.chatgpt.md:L4163-L4163`]
+The initial money-flow boundary is:
 
-The initial economic decision is not “maximize plan revenue”; it is whether restaurants receive enough practical value to continue as paying customers. Stage 0 proves the workflow can operate, Stage 1 tests up to three pilots and at least one payer, and Stage 2 tests whether the operating model can be repeated in a controlled ten-restaurant beta. Paid continuation remains a validation hypothesis, not a forecast. [Evidence: `nekurama.raw.chat.json:L79721-L79820`; `nekurama.babai.research.md:L161-L180`]
+```text
+Customer → Restaurant
+Restaurant → BABAI subscription
+```
 
-## Commercial gaps
+BABAI should not hold or settle customer funds in the initial product. Customer order funds settle directly to the restaurant/business; BABAI subscription or pilot billing is separate. Payment, delivery and messaging provider charges should be recorded in the cost model and their pass-through/billing treatment validated before commercial launch.
 
-- Final packaging and entitlements
-- Pricing and onboarding-fee test design
-- Pilot-to-paid conversion threshold
-- Baseline order economics and ROI calculation
-- CAC, onboarding and support cost
-- WhatsApp/AI/payment/delivery variable cost model
-- Billing, cancellation and refund policy for BABAI subscription
+The model should establish whether onboarding and ongoing support effort per restaurant is low enough to support gradual expansion toward up to 10 restaurants without support becoming a business bottleneck.
 
-No numerical unit-economics decision is promoted until pilot data exists. [Evidence: `nekurama.babai.research.md:L104-L116`, `nekurama.babai.research.md:L145-L180`]
+## Evidence and open economics
+
+Field interviews support the problem and interest, but not willingness to pay (`nekurama.babai.research.md`, “What remains unvalidated”). The immediate commercial proof is a completed paid or deposit-backed pilot with an explicit end date and measured willingness to pay; no conversion threshold beyond the admin packet has been supplied.
+
+## Questions
+
+- [ ] Final packaging/entitlements
+- [ ] Final pricing after pilot
+- [ ] Gross contribution model
+- [ ] CAC and acquisition assumptions
+- [ ] Onboarding/support cost
+- [ ] Expansion/upsell model
+- [ ] Billing and cancellation policy
+- [ ] Pilot fee/deposit amount, refund treatment and end date
+- [ ] Trial/pilot commercial terms and billing instrument
+- [ ] Cost allocation method per restaurant and per order
+- [ ] Failure/refund reserve or remediation policy
+- [ ] Margin target and GST treatment with CA/CS

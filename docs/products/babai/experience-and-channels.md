@@ -1,63 +1,57 @@
 ---
-status: partial
+status: partial — channel principle confirmed; detailed journeys and provider behavior remain open
 owner: BABAI
 last-reviewed: 2026-09-20
 sources:
-  - nekurama.raw.chat.json
-  - nekurama.chatgpt.md
+  - nekurama/Bulb#1
+  - historical ManojVysyaraju/bulb#1
   - nekurama.babai.research.md
+  - nekurama.raw.chat.json (ordered turns 71, 90, 290)
 ---
 
 # Experience & Channels
 
-## Channel principle — confirmed
+## Channel philosophy — confirmed
 
-**WhatsApp-first does not mean WhatsApp-only.**
+BABAI is **WhatsApp-first, not WhatsApp-only**:
 
-- **WhatsApp:** customer conversation, immediate staff attention, actionable exceptions, human takeover and transactional communication.
-- **Web:** dense menu review, configuration, many-order visibility, comparison, bulk actions, analytics, recovery and multi-branch administration.
+> If an operation can reasonably be performed through WhatsApp, the user should not be forced to open our website/app.
 
-The durable rule is:
+**WhatsApp** is the primary conversational and attention surface for customer questions, menu/order interactions, status messages, staff action and human takeover. The customer normally remains on the restaurant's own WhatsApp identity.
+
+**Web** is a supporting productivity surface for dense configuration, menu review, high-density order operations, comparison, bulk actions, analytics, recovery/configuration and multi-branch administration. Web is not a mandatory second product for the first pilot.
+
+Working rule:
 
 > **Web = see everything. WhatsApp = know what needs attention and act immediately.**
 
-[Evidence: `nekurama.raw.chat.json:L47145-L47170`; corroboration: `nekurama.chatgpt.md:L23631-L23656`, `nekurama.chatgpt.md:L27963-L27963`]
+This channel decision is recorded in the founder discussion (`nekurama.raw.chat.json`, ordered turns 90 and 290). The field research also reports existing WhatsApp behavior and staff-management pain (`nekurama.babai.research.md`, “Customer pain observed”).
 
-## Onboarding — partial
+## Pilot experience
 
-Onboarding is a progressive, resumable business workflow rather than a mandatory giant form:
+`Connect business WhatsApp → review/publish menu → customer asks → pickup order → business accepts/rejects → payment recorded/confirmed → staff completes → customer receives status`
 
-`signup/identity → connect WhatsApp → menu upload/extraction → review/publish → configure only real prerequisites → ready → operate`
+The first pilot should keep the experience narrow: one restaurant, one branch, one WhatsApp number, pickup-first, founder-led onboarding, and human fallback. Customers should not need a native app.
 
-Complex setup may move from WhatsApp to web without creating a second account or losing context. Meta/provider complexity should remain behind an integration boundary; failed setup needs an explicit owner and recovery path. [Evidence: `nekurama.chatgpt.md:L23631-L23656`, `nekurama.chatgpt.md:L28378-L28378`; corroboration: `nekurama.raw.chat.json:L79770-L79820`]
+## Working state principles
 
-The direction is settled, but exact Meta handoff, Admin tooling, retention, web information architecture and readiness criteria remain open. [Evidence: `nekurama.chatgpt.md:L28378-L28378`]
-
-## Pilot experience sequence — partial
-
-The first experience must support Stage 0 as a human-supported one-business operation: a resumable setup, reviewed/published menu, pickup order flow, explicit business acceptance, payment recording or confirmation, staff completion and customer status. Stage 1 and Stage 2 should reuse that path rather than add new channel or delivery scope before repeatability is evidenced. [Evidence: `nekurama.raw.chat.json:L79721-L79820`; corroboration: `nekurama.babai.research.md:L118-L163`]
-
-## Human takeover — confirmed principle, detailed UX partial
-
-Human takeover pauses conversational automation for the conversation while order, payment and fulfillment processing continue independently. Staff can act from WhatsApp or web according to density and authorization. [Evidence: `nekurama.raw.chat.json:L21506-L21540`; corroboration: `nekurama.chatgpt.md:L7207-L7450`]
-
-## Channel lifecycle
-
-The conceptual lifecycle remains:
+Channel lifecycle:
 
 `DISCOVERED → AUTHORIZING → CONNECTED → VERIFYING → CONFIGURING → READY`
 
-Failure, suspension and disconnection are explicit states. This is a product model, not a claim that Meta onboarding reliability has been proven. [Evidence: `nekurama.chatgpt.md:L6233-L6446`; unresolved validation: `nekurama.babai.research.md:L104-L116`]
+Failure, suspension and disconnection states are required, but exact provider behavior is not yet fully validated.
 
-## Experience gaps
+Human takeover:
 
-- End-to-end customer journey and exception behavior
-- Owner/manager/staff journey and assignment model
-- Exact MVP web screens and safe bulk operations
-- Notification/template matrix and consent behavior
-- Meta failure/recovery experience
-- Payment confirmation, cancellation, refund and support flows
-- Multilingual staff workflow
-- Web ↔ WhatsApp context handoff details
+`AUTOMATED → HUMAN_REQUESTED → HUMAN_ACTIVE → HUMAN_RELEASED → AUTOMATED`
 
-These are partial/challenge-required, not silently assumed from the channel principle. [Evidence: `nekurama.babai.research.md:L104-L116`, `nekurama.babai.research.md:L145-L163`]
+Human takeover changes conversation ownership; order, payment and fulfillment state continue independently. This is a product principle, while exact multi-device/coexistence behavior remains a Meta integration validation item.
+
+## Partial / unknown
+
+- [ ] End-to-end customer and owner journeys, including exceptions
+- [ ] Minimum web information architecture for the pilot
+- [ ] Staff device/coexistence model and multilingual support
+- [ ] Notification/template matrix and messaging-cost boundaries
+- [ ] Web ↔ WhatsApp context handoff details
+- [ ] Whether customers prefer pickup ordering over calls/manual WhatsApp at meaningful volume

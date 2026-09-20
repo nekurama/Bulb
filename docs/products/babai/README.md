@@ -4,29 +4,26 @@ BABAI is NEKURAMA's first product/brand.
 
 ## Current product truth
 
-**BABAI is a business operating platform built around WhatsApp.** It helps businesses run customer and operational workflows through AI and automation. The current promise is **“Run your business without leaving WhatsApp,”** with the important qualification that WhatsApp-first does not mean WhatsApp-only: web remains the dense configuration, operations and recovery surface. [Evidence: `nekurama.raw.chat.json:L13591-L13630`, `nekurama.raw.chat.json:L47145-L47170`; corroboration: `nekurama.chatgpt.md:L40716-L40825`]
+BABAI is a **B2B business operating platform built around the business's own WhatsApp identity**. It helps restaurants run customer and operational workflows through bounded AI, automation and human intervention. The current promise is:
 
-Initial wedge: restaurants. The buyer is the business/merchant; the end customer is a workflow participant, not the primary SaaS buyer. The long-term local-business direction remains subject to evidence. [Evidence: `nekurama.chatgpt.md:L40500-L40520`, `nekurama.chatgpt.md:L42146-L42232`; corroboration: `nekurama.babai.research.md:L178-L186`]
+> **Run your business without leaving WhatsApp.**
 
-The initial product proof is staged: **Stage 0** is a one-business operational pilot; **Stage 1** is up to three pilots and at least one payer; **Stage 2** is a controlled 10-restaurant beta. These are sequential learning gates, and the detailed numeric success/kill thresholds remain open. [Evidence: `nekurama.raw.chat.json:L79721-L79820`; `nekurama.babai.research.md:L118-L163`, `nekurama.babai.research.md:L176-L186`]
+Restaurants are the initial wedge. The first product proof is a narrow, pickup-first restaurant workflow—not a consumer marketplace, POS/ERP replacement, delivery network or general-purpose AI assistant. Longer-term expansion to other local businesses is a direction, not yet validated scope.
 
-## Sources
+## Current validation boundary
 
-- Primary founder export: `nekurama.raw.chat.json`
-- Corroborating founder export: `nekurama.chatgpt.md`
-- Field research: `nekurama.babai.research.md`
-- Product BRD and gap register: `brd.md`
-- Historical issue/decision logs: `nekurama/Bulb#1`, `ManojVysyaraju/bulb#1`
-- Company context: `nekurama/Bulb#2`
+The MVP is a thin, restaurant-first, pickup-first, WhatsApp-native workflow. The immediate field step is a **paid or deposit-backed pilot with an explicit end date**, beginning with one business and expanding gradually toward **up to 10 restaurants** only when evidence supports the next increment. The fee/deposit amount, refund treatment and end date are not supplied yet and must remain explicit unknowns.
 
-`brd.md` is the durable evidence/status register for this product pass. It
-records raw-conversation message/node anchors, distinguishes confirmed,
-partial, unknown and challenge-required decisions, and inventories thin or
-intentionally untouched product files.
+## Evidence anchors
+
+- `nekurama.babai.research.md` — September 2026 interviews with 19 businesses, proposed three-business pilot, pricing hypotheses and explicit unvalidated risks.
+- `nekurama.raw.chat.json` — ordered founder discussion; useful anchors include turn 290 / mapping `4702681b-d611-4408-af5f-9001d04b6cfa` (behavior/value/payment north star), turn 278 / mapping `04cc446b-3a6d-4c19-adc7-4d94ab17d21b` (pricing hypothesis), turn 70 / mapping `4bbdb489-0a0d-45d5-af27-70535c5d4acc` (direct merchant funds), and turn 385 / mapping `1ba76387-efd1-4d41-8364-8da5568877a9` (BABAI category decision).
+- Admin decision packet (2026-09-20; current task input) — thin MVP, gradual onboarding up to 10, paid/deposit-backed pilot with an end date, direct settlement/no BABAI custody, and required validation metrics.
+- `nekurama.chatgpt.md` — readable historical companion; older Dawat/Tadka/Thali/BOLO and early price points are historical evidence, not current truth.
+- Existing decision references: `nekurama/Bulb#1`, `nekurama/Bulb#2`, `nekurama/Bulb#3`, and historical `ManojVysyaraju/bulb#1`.
 
 ## Knowledge dimensions
 
-- Product BRD and gap register
 - Thesis and positioning
 - Product definition and scope
 - Customer/market
@@ -35,8 +32,5 @@ intentionally untouched product files.
 - Architecture and integrations
 - Business model/commercials
 - Validation/pilot evidence
-- GitHub Pages landing-page scope and web QA
 
-The landing-page scope is documented in [`web-qa-landing-page-scope.md`](web-qa-landing-page-scope.md). It is a partial, source-linked QA/content contract; it does not authorize deployment or public claims beyond the cited evidence.
-
-Partial or unknown areas should be recorded as questions rather than invented.
+Partial, unknown and historical areas must remain labelled as such and should be recorded as questions rather than invented decisions.

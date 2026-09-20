@@ -4,6 +4,7 @@ owner: NEKURAMA / BABAI
 last-reviewed: 2026-09-20
 scope: GitHub Pages landing-page and native mock-demo template; no external deployment
 sources:
+  - ADMIN SCOPE UPDATE — WEBSITE INTERNAL TEMPLATE/QA ONLY (2026-09-21)
   - NEW ADMIN DECISION PACKET (2026-09-20)
   - nekurama.raw.chat.json
   - nekurama.chatgpt.md
@@ -359,6 +360,12 @@ gates rather than become a route to production functionality.
 - Every visible mock record is invented and marked as demo-only in the UI.
 - `site/app.js` exposes `window.__MOCK_TEMPLATE__ = true` as a lightweight QA
   assertion; it does not store, transmit or retrieve user data.
+- `site/index.html` provides explicit `[... PLACEHOLDER]` CTA/content slots;
+  no endpoint, final CTA wording, pricing, testimonial, legal or contact copy
+  is implied.
+- The mock exposes a visible local-state safety bar, a reset control and an
+  `aria-live` announcement region. Reset returns to the Conversation / Notice
+  baseline without persistence.
 - The CTA links intentionally loop to the local `#contact` placeholder until
   an approved destination exists. No live contact route is fabricated.
 
@@ -390,8 +397,12 @@ The implementation and QA checklist must include:
 - interactive demo controls have visible labels, keyboard operation, focus
   management, live-region updates where needed and a non-interactive text
   alternative;
-- demo state is understandable without animation, timing or color alone, and
-  reset/replay controls are available.
+- demo state is understandable without animation, timing or color alone;
+- a visible “local mock state / nothing submits” boundary and reset control
+  are present;
+- tab arrows/Home/End, step buttons and reset can be operated by keyboard, with
+  one active tab stop and `aria-current="step"` on the active flow step;
+- state changes are announced without moving focus unexpectedly.
 
 ## 7. Privacy, security and legal publication constraints
 
@@ -499,6 +510,8 @@ any external deployment.
       external links work without JavaScript where practical.
 - [ ] Mock/demo interactions work with mock fixtures only; reset, replay,
       empty/error and reduced-motion states are tested.
+- [ ] Visible local-state safety text, reset behavior and no-submission
+      boundary remain present after every mock transition.
 - [ ] Demo visibly identifies itself as illustrative and contains no real
       account, payment, customer or production data path.
 - [ ] Mock/demo remains functional with network access blocked.
@@ -508,8 +521,10 @@ any external deployment.
 
 - [ ] Automated accessibility scan has no critical/serious findings.
 - [ ] Manual keyboard-only pass completes the full page and CTA.
+- [ ] Tablist arrow/Home/End behavior, flow-step buttons, Advance and Reset
+      controls are keyboard-tested.
 - [ ] Screen-reader pass covers landmarks, headings, links, images, form labels
-      and status/error text.
+      and mock-state announcement text.
 - [ ] Contrast, focus, zoom/reflow, reduced motion and mobile checks pass.
 - [ ] Accessibility review is repeated after any copy, asset or component
       change.
@@ -542,6 +557,21 @@ any external deployment.
 - [ ] Check page performance and image sizes against an agreed budget; do not
       claim a score or threshold until the product/architecture owner sets it.
 - [ ] Review social preview rendering without exposing private content.
+
+### Current internal QA evidence
+
+The following evidence applies to the native template commit, not to a public
+deployment:
+
+- `node --check site/app.js` passes.
+- Static Python checks cover duplicate IDs, local asset/link boundaries,
+  required accessibility markers, mock-only state and forbidden storage/network
+  APIs.
+- Local browser QA covers initial load, tab activation with ArrowRight, Advance
+  state changes, Reset returning to the baseline, console errors, the local
+  request list and 390px/320px viewport checks with no horizontal overflow.
+- A real browser/device matrix, automated WCAG scan, legal review, proof review,
+  endpoint review and GitHub Pages deployment review remain outstanding.
 
 ## 9. Remaining unknowns and role requests
 
@@ -589,4 +619,6 @@ administrative overrides and additions in this revision come from
 **NEW ADMIN DECISION PACKET (2026-09-20)**: static mock/demo scope, primary and
 secondary routes, minimum public onboarding collection, testimonial conditions,
 `nekurama.com` starting point, company-owned DNS transition, no external
-deployment and explicit provenance/network/secret gates.
+deployment and explicit provenance/network/secret gates. The internal
+behavior and QA refinements in this revision come from **ADMIN SCOPE UPDATE —
+WEBSITE INTERNAL TEMPLATE/QA ONLY (2026-09-21)**.

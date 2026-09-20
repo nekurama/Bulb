@@ -50,14 +50,18 @@
   const visual = document.querySelector("#mock-visual");
   const state = document.querySelector("#mock-state");
   const action = document.querySelector("#mock-action");
+  const reset = document.querySelector("#mock-reset");
+  const announcement = document.querySelector("#mock-announcement");
   const flowSteps = Array.from(document.querySelectorAll(".flow-step"));
 
-  if (!panel || !kicker || !title || !time || !copy || !visual || !state || !action) {
+  if (!panel || !kicker || !title || !time || !copy || !visual || !state || !action || !reset || !announcement) {
     return;
   }
 
-  let activeView = "conversation";
-  let activeStep = 0;
+  const defaultView = "conversation";
+  const defaultStep = 0;
+  let activeView = defaultView;
+  let activeStep = defaultStep;
 
   const renderBubbles = (bubbles) =>
     bubbles
@@ -71,9 +75,8 @@
       )
       .join("");
 
-  const render = () => {
+  const render = ({ announce = false } = {}) => {
     const view = views[activeView];
-    const step = activeStep + 1;
 
     tabs.forEach((tab) => {
       const isActive = tab.dataset.view === activeView;
@@ -85,6 +88,11 @@
     stepButtons.forEach((button) => {
       const isCurrent = Number(button.dataset.step) === activeStep;
       button.closest(".flow-step")?.classList.toggle("is-current", isCurrent);
+      if (isCurrent) {
+        button.setAttribute("aria-current", "step");
+      } else {
+        button.removeAttribute("aria-current");
+      }
     });
 
     panel.setAttribute("aria-labelledby", `tab-${activeView}`);
@@ -95,14 +103,16 @@
     visual.innerHTML = renderBubbles(view.bubbles);
     state.innerHTML = `<span class="state-dot" aria-hidden="true"></span> ${view.state}`;
     action.innerHTML = `Advance mock state <span aria-hidden="true">→</span>`;
-    action.dataset.step = String(step % 3);
+    announcement.textContent = announce
+      ? `${view.title} ${view.state}. This is an invented local mock state.`
+      : "";
   };
 
   const activateView = (viewName) => {
     if (!views[viewName]) return;
     activeView = viewName;
-    activeStep = 0;
-    render();
+    activeStep = defaultStep;
+    render({ announce: true });
   };
 
   tabs.forEach((tab, index) => {
@@ -124,13 +134,20 @@
   stepButtons.forEach((button) => {
     button.addEventListener("click", () => {
       activeStep = Number(button.dataset.step) || 0;
-      render();
+      render({ announce: true });
     });
   });
 
   action.addEventListener("click", () => {
     activeStep = (activeStep + 1) % flowSteps.length;
-    render();
+    render({ announce: true });
+  });
+
+  reset.addEventListener("click", () => {
+    activeView = defaultView;
+    activeStep = defaultStep;
+    tabs[0]?.focus();
+    render({ announce: true });
   });
 
   render();

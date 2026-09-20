@@ -95,7 +95,12 @@
               <span class="demo-pill"><span class="status-dot" aria-hidden="true"></span> DEMO ONLY</span>
             </div>
 
-            <div class="demo-tabs" role="tablist" aria-label="Mock workflow views">
+            <div class="mock-safety" id="mock-safety" role="note">
+              <span><span class="safety-icon" aria-hidden="true">⌁</span> LOCAL MOCK STATE / NOTHING SUBMITS</span>
+              <button class="reset-button" type="button" id="mock-reset">Reset mock</button>
+            </div>
+
+            <div class="demo-tabs" role="tablist" aria-label="Mock workflow views" aria-orientation="horizontal">
               <button class="demo-tab is-active" id="tab-conversation" role="tab" aria-selected="true" aria-controls="mock-panel" tabindex="0" data-view="conversation">
                 <span class="tab-index">01</span> Conversation
               </button>
@@ -107,7 +112,7 @@
               </button>
             </div>
 
-            <div class="mock-panel" id="mock-panel" role="tabpanel" aria-labelledby="tab-conversation" aria-live="polite">
+            <div class="mock-panel" id="mock-panel" role="tabpanel" aria-labelledby="tab-conversation" aria-describedby="mock-safety mock-announcement">
               <div class="mock-sidebar">
                 <div class="sidebar-heading">
                   <span>FLOW MAP</span>
@@ -115,7 +120,7 @@
                 </div>
                 <ol class="flow-list" aria-label="Mock flow steps">
                   <li class="flow-step is-current">
-                    <button type="button" data-step="0">
+                    <button type="button" data-step="0" aria-current="step">
                       <span class="flow-number">01</span>
                       <span><strong>Notice</strong><small>incoming signal</small></span>
                     </button>
@@ -148,6 +153,7 @@
                   A fictional customer message is grouped into a readable,
                   actionable moment. No message leaves this page.
                 </p>
+                <p class="sr-only" id="mock-announcement" role="status" aria-live="polite" aria-atomic="true"></p>
                 <div class="mock-visual" id="mock-visual">
                   <div class="message-bubble message-bubble-in">
                     <span class="bubble-label">FICTIONAL MESSAGE</span>

@@ -366,6 +366,45 @@ prove repository implementation or a demo.
 - **Implementation/demo status:** P0 admin visibility/P1 analytics; complete
   reporting pipeline and retention policy remain partial.
 
+## Web/QA expanded static journey matrix
+
+This matrix is the Product/BRD acceptance companion for the Web/QA static
+journey. It does not replace `docs/web/flow-inventory.md`; it adds authority,
+state and tier boundaries. Every state is mock-only unless the row explicitly
+marks a later pilot gate. No row submits to Meta, payment, delivery, API,
+analytics or customer-data providers.
+
+| Static slice / state | Actor | Authority / permission | Transition | Tier / external boundary | Source citation | Acceptance | Stage |
+|---|---|---|---|---|---|---|---|
+| Admin invite: `INVITED → AWAITING_OWNER_SETUP` | Platform Admin; Owner recipient | Admin may create/invite; Owner may accept only the invited restaurant context | Create invite → send synthetic invite → owner starts | Tier-neutral; no real channel connection | `nekurama.chatgpt.md:L1233-L1318`; Web F01 | State is resettable, visibly mock-only and never creates a real tenant | POC |
+| Owner menu: `RECEIVED → CANDIDATE → REVIEW_REQUIRED → PUBLISHED` | Owner/Staff; AI extractor | Owner/authorized Staff approves; AI cannot publish | Submit fixture → extract → review/correct → publish fixture | All tiers; LITE menu cap remains visible; no file/OCR provider | `nekurama.chatgpt.md:L1321-L1375`, `L23968-L24328`; Web F03/F14 | Candidate and published revisions are visibly distinct; correction is required | POC |
+| Staff setup/handoff: `INVITE_PENDING → ACTIVE`; takeover `HUMAN_REQUESTED → HUMAN_ACTIVE → RELEASED` | Owner/Admin; Staff; Customer | Owner assigns role/scope; Staff acts only in scope; claim is atomic | Invite/accept/assign; request/claim/assign/release | Tier-neutral human control; no auth/account creation in mock | `nekurama.chatgpt.md:L1678-L1737`, `L24618-L24780`; Web F11 | Role/scope denial and handoff ownership are visible; no personal WhatsApp | POC/Pilot |
+| Customer discovery/cart/order review: `DISCOVERED → BROWSING → CART → ORDER_REVIEW` | Customer; Conversation | Customer controls own session/cart; Ordering validates on review | Open restaurant → browse → select → edit cart → review | LITE supports menu/order only; no real customer/address | `nekurama.chatgpt.md:L1478-L1520`, `L22330-L22695`; Web F06 | Synthetic journey is keyboard/reviewable and order review cannot submit externally | POC |
+| Payment: `PAYMENT_PENDING → PAID/FAILED/MANUAL_REVIEW` | Customer; Payment; Staff | Payment facts validated by Payment; Staff records approved manual correction | Initiate → mock result → verify/reconcile | LITE denied; BASE/PRO mock-only and provider-gated; no custody claim | `nekurama.chatgpt.md:L22708-L22839`, `L8318-L8501` | Mock result shows separation from order acceptance and no provider request | POC mock/Pilot gate |
+| Pickup/delivery: `READY → PICKUP_COMPLETED`; delivery `QUOTE → BOOKED → TRACKING` | Staff; Customer; Delivery | Staff verifies pickup; Delivery owns provider state when enabled | Ready → verify/complete or quote → select → mock booking/status | LITE pickup/order only; BASE/PRO delivery remains external-provider gated | `nekurama.chatgpt.md:L23090-L23361`; Web F06 | Pickup works locally; delivery is visibly a mock/placeholder with no external call | POC/Pilot gate |
+| Restaurant order desk: `NEW → ACCEPTED → PREPARING → READY → COMPLETED` | Staff/Owner; Customer notification | Staff with branch scope owns operational transitions | Inspect → accept/reject → prepare → ready → complete | Tier usage shown; payment/delivery side effects are absent in mock | `nekurama.chatgpt.md:L1522-L1667`, `L17547-L17673`; Web F07/F08/F10 | Every action is local, auditable in fixture state and never mutates production data | Pilot |
+| Promotions/combos: `REQUESTED → VALIDATED → ACTIVE → EXPIRED/DENIED` | Owner/authorized Staff; Customer | Policy/entitlement check; AI may suggest but cannot publish | Request → validate cap/window → activate/expire | LITE denied; BASE ≤3 requests/day/limited duration; PRO bounded | Tier scope decision; `product-definition.md` matrix | Cap, expiry, denial and tier leakage are visible in mock state | P1/P2 |
+| Notifications: `REQUESTED → RENDERED → SUBMITTED → DELIVERED/FAILED` | Domain event; Notification; Customer/Staff | Notification policy/consent decides eligibility; domain services do not call WhatsApp | Event → policy → render fixture → mock outcome | Provider rendering is external; mock has no message submission | `nekurama.chatgpt.md:L1615-L1667`, `L25071-L25190`; Web F09 | Accessible state announcement, idempotent fixture and visible failed path | POC/Pilot |
+| Reorder: `HISTORICAL_ORDER → REORDER_REQUESTED → CURRENT_CART → REVIEW` | Customer; Ordering; Menu projection | Customer confirms current price/availability; historical order immutable | Load history → resolve current menu → review new cart | P1; no stale-price resurrection or marketing send | `nekurama.chatgpt.md:L23443-L23850` | Current menu/price review is explicit; no external order creation | P1 |
+| Refund/correction: `CORRECTION_REQUESTED → MANUAL_REVIEW → INVOICE_REVISION → ACKNOWLEDGED` | Staff; Customer; Payment/Invoice | Staff owns item/amount correction; customer acknowledgement required where agreement matters | Request → staff edits → new invoice ID/revision → acknowledgement | Payment/refund provider external; no custody or legal conclusion | `nekurama.chatgpt.md:L17434-L17503`, `L22708-L22839` | Mock shows immutable prior invoice, revised total and acknowledgement requirement | Pilot gate |
+| Exceptions/recovery: `FAILED → RETRYING/DLQ → RECONCILIATION → RECOVERED/IGNORED` | System; Platform Admin; Staff; Customer | System classifies; authorized operator routes/replays/ignores; state engine validates | Fail → classify → retry/replay/reconcile → valid transition | External callbacks mocked; no provider truth asserted | `nekurama.chatgpt.md:L18088-L18110`, `L25810-L25980`; Web recovery states | Retry/DLQ/reconciliation labels and owner/action path are visible; no bypass mutation | POC/Pilot |
+| Admin funnel: `INVITED → ACTIVE/WAITING_MENU/WAITING_TERMS/FAILED` | Platform Admin; Owner | Admin read/triage; cannot silently take ownership of restaurant assets | Filter fixture → inspect → request action | Tier/payment statuses are mock fields only | `nekurama.chatgpt.md:L1233-L1318`, `L1444-L1478`; Web F01/F05/F13 | Funnel counts are synthetic, filterable and non-submitting | POC |
+| Analytics/reporting: `EVENT → PROJECTION_PENDING → AVAILABLE/STALE/REBUILDING` | Admin/Owner; Analytics pipeline | Tenant/branch-scoped read; analytics is never operational authority | Fixture event → project → view/stale/rebuild | P1; no live analytics/customer data or external warehouse | `nekurama.chatgpt.md:L17996-L18064`, `L26370-L26420` | Mock distinguishes operational state, projection state and analytics; stale/rebuild path visible | P1 |
+
+### Shared Web/QA acceptance boundary
+
+- Every screen/state is labelled **MOCK**, **POC**, **PILOT REVIEW** or
+  **LATER / NOT IMPLEMENTED**.
+- Fixtures use invented restaurants, people, menus, orders, timestamps and
+  statuses.
+- No real authentication, form submission, payment, delivery, WhatsApp,
+  provider API, analytics backend or customer record exists.
+- State transitions are deterministic, resettable and keyboard/accessibility
+  reviewable.
+- Permission denials and tier limits are visible states, not hidden UI.
+- Mock payment/delivery/API states do not imply provider feasibility or
+  approval.
+
 ## Cross-flow unresolved decisions
 
 - Exact owner/staff onboarding UI and membership edge cases.

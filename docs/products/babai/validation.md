@@ -13,6 +13,7 @@ sources:
   - e3e4e855ca0214a5c664c07ec5b6513c560a7261 (product scale economics source)
   - "2026-09-21 FOUNDER DECISION PACKET"
   - "2026-09-21 FOUNDER SCALE/COST BASELINE (current task input)"
+  - "2026-09-21 TIER/COST MODEL UPDATE (current task input)"
   - "2026-09-21 FOUNDER ECONOMIC TARGET CLARIFICATION (current task input)"
   - "2026-09-21 FOUNDER NAMING CORRECTION (current task input)"
 ---
@@ -238,6 +239,24 @@ replace the pilot contribution metric. See
 variable-cost-only margin as the decision metric.
 
 The product should be judged on sustained usage, customer and restaurant adoption, and business value, not merely feature completion. The founder north star is:
+
+For the internal provisional tier experiment, also record the LITE/BASE/PRO
+label, before-GST rate and ±15% tolerance, variable/provider/API cost, support
+minutes, AI usage/cost, onboarding, integration-maintenance reserve where
+applicable, shared-infrastructure allocation, restaurant ROI, conversion,
+continuation and cash/economic contribution. The illustrative
+`3 LITE / 4 BASE / 3 PRO` mix is ₹11,499 weighted ARPU/month and ₹3,44,970
+gross 90-day billing before GST; it is not a forecast, approved pricing,
+public tier taxonomy or tax conclusion. Replace all planning assumptions with
+pilot evidence before using the result for a decision.
+
+The evidence sequence is behavior → successful fulfillment → staff adoption →
+business value → retention → willingness to pay → operational readiness, not
+feature completion. Apply it first in Stage 0, repeat it through the paid
+pilot, and use Stage 2 to decide whether materially larger onboarding volumes
+are justified. [Evidence: `nekurama.babai.research.md:L145-L163`;
+corroboration: `nekurama.raw.chat.json:L79721-L79820`,
+`nekurama.chatgpt.md:L39763-L39780`]
 
 `Restaurant activates → customers actually order → staff actually use it → restaurant sees operational value → restaurant keeps using it → restaurant pays`
 

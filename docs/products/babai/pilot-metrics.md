@@ -11,6 +11,7 @@ sources:
   - "2026-09-21 ECONOMICS MODEL REVIEW PACKET"
   - "2026-09-21 FOUNDER NAMING CORRECTION (current task input)"
   - e3e4e855ca0214a5c664c07ec5b6513c560a7261 (product scale economics source)
+  - "2026-09-21 TIER/COST MODEL UPDATE (current task input)"
   - economics-model.md
   - validation.md
 ---
@@ -141,6 +142,31 @@ restaurant ROI does not prove BABAI has positive economic contribution. The
 separate ₹25L monthly operating-profit trigger is not a percentage margin, a
 pilot gate or a forecast; it is an internal scale-planning input that must not
 replace the contribution calculation.
+
+## Internal provisional tier experiment telemetry
+
+Use **LITE, BASE and PRO** only as internal experiment labels in pilot records.
+They are not approved public tiers or a public taxonomy. Rates are before GST
+with a ±15% planning tolerance; Tadka, Thali, Dawat, Feast and similar names
+remain historical/source context only.
+
+For each restaurant-month, record:
+
+| Field | Required record |
+|---|---|
+| Experiment label and rate | LITE ₹4,999, BASE ₹9,999 or PRO ₹19,999 before GST; tolerance and any approved deviation |
+| Scope | Information/menu/basic WhatsApp, pickup/order/human takeover, or advanced API/richer automation scope actually tested |
+| Cost stack | Variable/provider/API, support minutes, AI/model/provider units, onboarding effort, PRO integration-maintenance reserve and shared-infrastructure allocation |
+| Restaurant value | Baseline and observed ROI, avoided channel cost, staff time, errors and incremental gross profit |
+| Commercial outcome | Conversion, objections, continuation/renewal response and reason for non-continuation |
+| Economic outcome | Cash contribution, economic contribution, recognized income treatment and assumptions version |
+
+The shared-infrastructure sensitivity is `₹42,500 / N`, with reference
+allocations of approximately ₹4,250 at `N=10`, ₹850 at `N=50`, ₹425 at
+`N=100`, ₹85 at `N=500` and ₹43 at `N=1,000`. The detailed cost stack and
+3/4/3 cohort arithmetic are in [`economics-model.md`](economics-model.md).
+Unknown provider, AI, infrastructure, tax or accounting values must remain
+explicitly unknown.
 
 ## Proposed onboarding-readiness exit gate
 

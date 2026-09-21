@@ -27,6 +27,8 @@ sources:
   - "2026-09-20 ADMIN DECISION PACKET"
   - "2026-09-21 FOUNDER DECISION PACKET"
   - "2026-09-21 FOUNDER ECONOMIC TARGET CLARIFICATION (current task input)"
+  - "2026-09-21 TIER/COST MODEL UPDATE (current task input)"
+  - "2026-09-21 FOUNDER NAMING CORRECTION (current task input)"
   - "2026-09-21 ECONOMICS MODEL REVIEW PACKET"
   - "2026-09-21 FOUNDER SCALE/COST BASELINE (current task input)"
   - "2026-09-21 FOUNDER NAMING CORRECTION (current task input)"
@@ -60,6 +62,131 @@ Use **90 requests/order** as the heavy-case sensitivity. A restaurant has a
 hard ceiling of **50 completed orders/day** for this internal model. The
 500-restaurant and 1,000-restaurant views below are scale sensitivities, not
 capacity commitments.
+
+## Internal provisional tier/cost model experiment — 2026-09-21
+
+This additive section records an **internal provisional experiment**, not a
+forecast, approved pricing, public tier taxonomy, tax conclusion, vendor quote
+or pilot success threshold. The current working names are **LITE, BASE and
+PRO**. Tadka, Thali, Dawat, Feast and similar labels remain historical/source
+evidence only and are not interchangeable with these experiment labels.
+
+All amounts below are before GST and carry a **±15% planning tolerance** until
+replaced by measured invoices, provider/API exports, AI usage, support-minute
+logs, onboarding records and finance/accounting review.
+
+| Experiment label | Monthly planning rate before GST | ±15% planning range | Internal scope hypothesis |
+|---|---:|---:|---|
+| **LITE** | ₹4,999 | ₹4,249–₹5,749 | Information/menu/basic WhatsApp workflow; advisory AI; no advanced API integration |
+| **BASE** | ₹9,999 | ₹8,499–₹11,499 | Pickup/order workflow; human takeover; standard operational integrations; advisory AI |
+| **PRO** | ₹19,999 | ₹16,999–₹22,999 | Advanced API integrations; richer automation; higher usage/AI allowance; integration-maintenance reserve |
+
+The ranges are rounded display values around `rate × (1 ± 15%)`; the
+unrounded calculation remains the source of truth. Scope, entitlement,
+provider, AI and support assumptions require product, provider and pilot
+validation before any customer-facing use.
+
+### Illustrative tier cost stack before shared infrastructure
+
+The following loaded economic costs are **planning assumptions**, not observed
+costs or quotes. They separate the requested cost drivers so that variable
+provider/API spend, support, AI, onboarding and the PRO integration-maintenance
+reserve can be replaced independently.
+
+| Experiment label | Variable/provider/API | Support | AI | Onboarding | Integration-maintenance reserve | Loaded cost before shared infrastructure |
+|---|---:|---:|---:|---:|---:|---:|
+| **LITE** | ₹250 | ₹350 | ₹300 | ₹800 | ₹0 | **~₹1,700** |
+| **BASE** | ₹600 | ₹700 | ₹600 | ₹1,100 | ₹0 | **~₹3,000** |
+| **PRO** | ₹1,500 | ₹1,500 | ₹2,500 | ₹2,000 | ₹500 | **~₹8,000** |
+
+For this experiment only, use the following shared-infrastructure midpoint as
+a sensitivity allocation:
+
+```text
+shared_infrastructure_per_restaurant = ₹42,500 / N
+loaded_tier_cost = pre_shared_tier_cost + (₹42,500 / N)
+illustrative_economic_contribution = rate_before_GST - loaded_tier_cost
+```
+
+`N` is the active-restaurant count sharing the pool. The midpoint is not an
+invoice and must be replaced with measured hosting, storage, database,
+monitoring, queue and other infrastructure usage.
+
+| Active restaurants `N` | Shared infrastructure allocation per restaurant/month |
+|---:|---:|
+| 10 | ~₹4,250 |
+| 50 | ~₹850 |
+| 100 | ~₹425 |
+| 500 | ~₹85 |
+| 1,000 | ~₹43 |
+
+Illustrative loaded cost and contribution at the list planning rates are
+rounded to the nearest rupee:
+
+| `N` | Shared allocation | LITE loaded cost / contribution | BASE loaded cost / contribution | PRO loaded cost / contribution |
+|---:|---:|---:|---:|---:|
+| 10 | ₹4,250 | ₹5,950 / **-₹951** | ₹7,250 / **₹2,749** | ₹12,250 / **₹7,749** |
+| 50 | ₹850 | ₹2,550 / **₹2,449** | ₹3,850 / **₹6,149** | ₹8,850 / **₹11,149** |
+| 100 | ₹425 | ₹2,125 / **₹2,874** | ₹3,425 / **₹6,574** | ₹8,425 / **₹11,574** |
+| 500 | ₹85 | ₹1,785 / **₹3,214** | ₹3,085 / **₹6,914** | ₹8,085 / **₹11,914** |
+| 1,000 | ~₹43 | ₹1,743 / **₹3,257** | ₹3,043 / **₹6,957** | ₹8,043 / **₹11,957** |
+
+These contribution figures are an illustration at the list rates only. They
+do not include unknown or unmeasured costs, do not infer GST treatment, and do
+not replace the existing `cash_contribution`,
+`economic_contribution` or total-expenditure formulas below. A negative
+illustration is a planning signal, not a pricing decision.
+
+### Illustrative 3 LITE / 4 BASE / 3 PRO cohort
+
+For a ten-restaurant internal planning mix:
+
+```text
+weighted_ARPU
+  = (3 × ₹4,999 + 4 × ₹9,999 + 3 × ₹19,999) / 10
+  = ₹11,499/month
+
+monthly_gross_billing_before_GST
+  = 3 × ₹4,999 + 4 × ₹9,999 + 3 × ₹19,999
+  = ₹1,14,990
+
+gross_90_day_billing_before_GST
+  = ₹1,14,990 × 3
+  = ₹3,44,970
+```
+
+At `N = 10`, the same illustrative mix has approximately ₹83,600/month of
+loaded economic cost and ₹31,390/month of illustrative economic contribution
+before GST, or ₹94,170 over 90 days. This is a derived planning illustration,
+not a forecast, approved commercial package, tax conclusion or evidence of
+customer willingness to pay. The ±15% rate tolerance, actual cost ledger and
+recognized-income treatment must be applied before any decision.
+
+### Experiment validation and ledger
+
+Track each restaurant and tier experiment by:
+
+- support minutes, split into planned, unplanned, recovery and takeover;
+- AI/provider/API units, model/provider identifier, retries, invoices and
+  unknown-rate flags;
+- onboarding minutes and direct onboarding cash;
+- restaurant ROI using the restaurant's own baseline, including avoided
+  channel cost, staff time, errors and incremental gross profit;
+- conversion, continuation/renewal response and objection reason; and
+- cash contribution, economic contribution and the assumptions version used.
+
+Provider rate cards, BSP/API terms, AI/model prices and infrastructure invoices
+are **external validation required**. GST registration, applicability, rate,
+invoice presentation, recoverability and revenue recognition are **qualified
+CA/CS/finance validation required**. Legal agreement, cancellation/refund,
+minimum-paying and entitlement language are **legal/professional validation
+required**. No blank or unsupported cost is zero.
+
+This experiment is intentionally additive. It does not remove the prior
+cash/economic contribution model, the unresolved prior ₹25L income-unit
+sensitivity, or the separate **₹25,00,000 monthly operating-profit target
+after non-founder operating costs** and founder-transition cases documented
+below.
 
 ## Naming correction — current taxonomy
 

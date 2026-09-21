@@ -10,6 +10,7 @@ sources:
   - Founder decision packet (2026-09-21; current task input)
   - "2026-09-21 FOUNDER NAMING CORRECTION (current task input)"
   - economics-model.md (Track 2 v0.5)
+  - "2026-09-21 TIER/COST MODEL UPDATE (current task input)"
 ---
 
 # Business Model
@@ -81,6 +82,33 @@ ranges, actual-rate input register, per-restaurant break-even view and
 unresolved inputs are maintained in
 [`economics-model.md`](economics-model.md). That artifact is a planning model,
 not an approved price or margin decision.
+
+### Internal provisional tier/cost experiment — not public pricing
+
+For internal comparison only, the current working names are **LITE, BASE and
+PRO**. These are provisional experiment labels, not approved public tiers,
+package names, forecasts, tax conclusions or customer-facing commitments.
+Rates are before GST with a **±15% planning tolerance** and must be replaced
+with measured costs and external validation.
+
+| Label | Monthly rate before GST | Internal scope hypothesis |
+|---|---:|---|
+| **LITE** | ₹4,999 | Information/menu/basic WhatsApp workflow; advisory AI; no advanced API integration |
+| **BASE** | ₹9,999 | Pickup/order workflow; human takeover; standard operational integrations; advisory AI |
+| **PRO** | ₹19,999 | Advanced API integrations; richer automation; higher usage/AI allowance; integration-maintenance reserve |
+
+The detailed variable/provider/API, support, AI, onboarding, integration-
+maintenance and shared-infrastructure assumptions are maintained in
+[`economics-model.md`](economics-model.md). Tadka, Thali, Dawat, Feast and
+similar labels remain historical/source evidence only.
+
+The illustrative `3 LITE / 4 BASE / 3 PRO` mix gives weighted ARPU of
+**₹11,499/month** and **₹3,44,970 gross 90-day billing before GST**. This is an
+internal experiment record, not a forecast, approved pricing, public taxonomy
+or tax conclusion. Track support minutes, AI/provider/API costs, onboarding,
+restaurant ROI, conversion, continuation and economic contribution per
+restaurant. Provider, legal, tax and finance/accounting validation remain
+required.
 
 ## Margin, pricing and review cadence
 

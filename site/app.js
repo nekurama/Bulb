@@ -40,7 +40,48 @@
     },
   };
 
+  const tiers = {
+    lite: {
+      kicker: "LITE / MOCK STATE",
+      title: "A smaller starting shape.",
+      copy: "Replace this summary with approved LITE capability language. It is a placeholder, not a product entitlement or public claim.",
+      badge: "REVIEW ONLY",
+      capabilities: [
+        "[CORE WORKFLOW SLOT]",
+        "[SINGLE CONTEXT SLOT]",
+        "[MANUAL REVIEW SLOT]",
+      ],
+      boundary: "[REPLACE WITH APPROVED LITE BOUNDARY]",
+    },
+    base: {
+      kicker: "BASE / MOCK STATE",
+      title: "A broader operating shape.",
+      copy: "Replace this summary with approved BASE capability language. The differences shown here are invented review fixtures.",
+      badge: "REVIEW ONLY",
+      capabilities: [
+        "[CORE WORKFLOW SLOT]",
+        "[TEAM COORDINATION SLOT]",
+        "[EXPANDED WORKSPACE SLOT]",
+      ],
+      boundary: "[REPLACE WITH APPROVED BASE BOUNDARY]",
+    },
+    pro: {
+      kicker: "PRO / MOCK STATE",
+      title: "A more advanced shape.",
+      copy: "Replace this summary with approved PRO capability language. No pricing, entitlement or availability is represented.",
+      badge: "REVIEW ONLY",
+      capabilities: [
+        "[CORE WORKFLOW SLOT]",
+        "[ADVANCED CONTROL SLOT]",
+        "[MULTI-CONTEXT SLOT]",
+        "[REPORTING / GOVERNANCE SLOT]",
+      ],
+      boundary: "[REPLACE WITH APPROVED PRO BOUNDARY]",
+    },
+  };
+
   const tabs = Array.from(document.querySelectorAll("[data-view]"));
+  const tierTabs = Array.from(document.querySelectorAll("[data-tier]"));
   const stepButtons = Array.from(document.querySelectorAll("[data-step]"));
   const panel = document.querySelector("#mock-panel");
   const kicker = document.querySelector("#mock-kicker");
@@ -52,16 +93,45 @@
   const action = document.querySelector("#mock-action");
   const reset = document.querySelector("#mock-reset");
   const announcement = document.querySelector("#mock-announcement");
+  const tierPanel = document.querySelector("#tier-panel");
+  const tierKicker = document.querySelector("#tier-kicker");
+  const tierTitle = document.querySelector("#tier-title");
+  const tierBadge = document.querySelector("#tier-badge");
+  const tierCopy = document.querySelector("#tier-copy");
+  const tierCapabilities = document.querySelector("#tier-capabilities");
+  const tierBoundary = document.querySelector("#tier-boundary");
+  const tierAnnouncement = document.querySelector("#tier-announcement");
   const flowSteps = Array.from(document.querySelectorAll(".flow-step"));
 
-  if (!panel || !kicker || !title || !time || !copy || !visual || !state || !action || !reset || !announcement) {
+  if (
+    !panel ||
+    !kicker ||
+    !title ||
+    !time ||
+    !copy ||
+    !visual ||
+    !state ||
+    !action ||
+    !reset ||
+    !announcement ||
+    !tierPanel ||
+    !tierKicker ||
+    !tierTitle ||
+    !tierBadge ||
+    !tierCopy ||
+    !tierCapabilities ||
+    !tierBoundary ||
+    !tierAnnouncement
+  ) {
     return;
   }
 
   const defaultView = "conversation";
   const defaultStep = 0;
+  const defaultTier = "lite";
   let activeView = defaultView;
   let activeStep = defaultStep;
+  let activeTier = defaultTier;
 
   const renderBubbles = (bubbles) =>
     bubbles
@@ -74,6 +144,30 @@
         `,
       )
       .join("");
+
+  const renderTier = ({ announce = false } = {}) => {
+    const tier = tiers[activeTier];
+
+    tierTabs.forEach((tab) => {
+      const isActive = tab.dataset.tier === activeTier;
+      tab.classList.toggle("is-active", isActive);
+      tab.setAttribute("aria-selected", String(isActive));
+      tab.tabIndex = isActive ? 0 : -1;
+    });
+
+    tierPanel.setAttribute("aria-labelledby", `tier-tab-${activeTier}`);
+    tierKicker.textContent = tier.kicker;
+    tierTitle.textContent = tier.title;
+    tierBadge.textContent = tier.badge;
+    tierCopy.textContent = tier.copy;
+    tierCapabilities.innerHTML = tier.capabilities
+      .map((capability, index) => `<li><span aria-hidden="true">${String(index + 1).padStart(2, "0")}</span>${capability}</li>`)
+      .join("");
+    tierBoundary.textContent = tier.boundary;
+    tierAnnouncement.textContent = announce
+      ? `${tier.kicker}. ${tier.title} This is an invented capability comparison with no pricing or entitlement decision.`
+      : "";
+  };
 
   const render = ({ announce = false } = {}) => {
     const view = views[activeView];
@@ -104,8 +198,9 @@
     state.innerHTML = `<span class="state-dot" aria-hidden="true"></span> ${view.state}`;
     action.innerHTML = `Advance mock state <span aria-hidden="true">→</span>`;
     announcement.textContent = announce
-      ? `${view.title} ${view.state}. This is an invented local mock state.`
+      ? `${view.title} ${view.state}. ${tiers[activeTier].kicker} mock tier. This is an invented local mock state.`
       : "";
+    renderTier({ announce });
   };
 
   const activateView = (viewName) => {
@@ -131,6 +226,30 @@
     });
   });
 
+  tierTabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => {
+      if (!tiers[tab.dataset.tier]) return;
+      activeTier = tab.dataset.tier;
+      render({ announce: true });
+    });
+    tab.addEventListener("keydown", (event) => {
+      if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) return;
+      event.preventDefault();
+      const nextIndex =
+        event.key === "Home"
+          ? 0
+          : event.key === "End"
+            ? tierTabs.length - 1
+            : (index + (event.key === "ArrowRight" ? 1 : -1) + tierTabs.length) % tierTabs.length;
+      const nextTier = tierTabs[nextIndex].dataset.tier;
+      tierTabs[nextIndex].focus();
+      if (tiers[nextTier]) {
+        activeTier = nextTier;
+        render({ announce: true });
+      }
+    });
+  });
+
   stepButtons.forEach((button) => {
     button.addEventListener("click", () => {
       activeStep = Number(button.dataset.step) || 0;
@@ -146,6 +265,7 @@
   reset.addEventListener("click", () => {
     activeView = defaultView;
     activeStep = defaultStep;
+    activeTier = defaultTier;
     tabs[0]?.focus();
     render({ announce: true });
   });

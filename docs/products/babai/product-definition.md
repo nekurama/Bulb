@@ -9,6 +9,7 @@ sources:
   - historical ManojVysyaraju/bulb#1
   - nekurama.raw.chat.json (ordered turns 71, 278, 290; mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `04cc446b-3a6d-4c19-adc7-4d94ab17d21b`, `4702681b-d611-4408-af5f-9001d04b6cfa`)
   - Founder decision packet (2026-09-21; current task input)
+  - Tier scope decision (2026-09-21; current task input)
 ---
 
 # Product Definition
@@ -78,6 +79,30 @@ The initial MVP is intentionally thin and narrower than the long-term business o
 8. **Customer communication**
    - Send transactional/order-status communication through the business's WhatsApp where supported.
    - Keep transactional/support/marketing messaging conceptually separate.
+
+## LITE / BASE / PRO capability matrix — provisional
+
+This matrix is a tier-scope experiment for the paid pilot. It is not a final
+entitlement contract or public price decision. AI remains advisory and bounded
+in every tier; deterministic services and authorized humans own payment,
+order, availability, fulfillment, permissions and other controlled state.
+
+| Capability | LITE | BASE | PRO |
+|---|---|---|---|
+| Product promise | Menu display and ordering only; limited AI/conversational assistance | Select, order, pay and delivery where the provider flow is enabled | Full bounded access across menu, order, payment, delivery and allowed conversational tasks |
+| AI/conversational scope | Limited menu assistance and order capture; does not imply operations automation | AI limited to menu, order, payment and delivery tasks | Broader bounded conversational tasks plus advanced API integrations; never unrestricted AI authority |
+| Payment | **Out of scope** | Included where direct restaurant settlement is validated | Included where direct restaurant settlement is validated |
+| Delivery | **Out of scope** | Included where a validated provider flow exists; pickup remains valid | Included where validated, with advanced integration options |
+| Availability | **Out of scope**; no daily availability automation | Enable/disable item availability through menu/cart controls | Full BASE availability controls plus approved integrations |
+| Promotions and combos | **Out of scope** | Basic promotions/combos: maximum 3 requests/day, each active for one day or a limited time | Advanced bounded promotion/combination workflows subject to policy and entitlement limits |
+| Menu updates | Maximum 3 menu updates/month | Higher limits require measurement and entitlement approval | Higher limits and advanced API-assisted updates require measurement and approval |
+| Operations automation | **Do not imply operations automation** | Limited workflow automation within the listed domains | Broader workflow support, still policy-controlled and human-overridable |
+| Human takeover | Available and first-class | Available and first-class | Available and first-class; required for ambiguity and controlled actions |
+
+LITE must not be marketed as a business-operations automation tier. BASE
+payment/delivery and PRO integrations remain provider-validation items. No tier
+grants AI authority over payment, order state, refunds, permissions, consent
+or other deterministic business state.
 
 ## Initial pilot workflow
 

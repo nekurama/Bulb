@@ -8,6 +8,7 @@ sources:
   - nekurama.babai.research.md
   - nekurama.raw.chat.json (ordered turns 70, 276, 278; mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `04cc446b-3a6d-4c19-adc7-4d94ab17d21b`)
   - Founder decision packet (2026-09-21; current task input)
+  - Tier scope decision (2026-09-21; current task input)
   - economics-model.md (Track 2 v0.5)
 ---
 
@@ -92,6 +93,13 @@ sensitivity is:
 These are internal planning bands with a maximum ±15% variance around each
 midpoint. They are not public prices, quotes or approved tiers. Any amount
 collected below the model floor is recorded as an explicit economic subsidy.
+
+The separate tier-scope experiment uses provisional pre-GST midpoints of
+₹4,999 (LITE), ₹9,999 (BASE) and ₹19,999 (PRO), each with a maximum ±15%
+planning tolerance. The proposed 3/4/3 LITE/BASE/PRO pilot mix is a sensitivity
+view only. Tier economics must be recalculated from actual provider, AI,
+payment, delivery, support, onboarding and failure/refund costs before any
+public packaging decision.
 
 ## Founder decisions versus external validation
 

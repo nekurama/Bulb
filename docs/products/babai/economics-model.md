@@ -5,6 +5,7 @@ last-reviewed: 2026-09-21
 sources:
   - Founder decision packet (2026-09-21; current task input)
   - Founder traffic baseline (2026-09-21; current task input)
+  - Tier scope decision (2026-09-21; current task input)
   - nekurama.babai.research.md (Pricing hypothesis, What remains unvalidated, Success criteria)
   - nekurama.chatgpt.md (historical planning model; explicitly not a forecast)
   - nekurama.raw.chat.json (mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `04cc446b-3a6d-4c19-adc7-4d94ab17d21b`, `4702681b-d611-4408-af5f-9001d04b6cfa`, `f58ce128-39ed-4015-9be9-5b6135a39f20`, `9fbcd0e1-28ba-4ae7-8b44-39d493d2bb0e`, `cedbd365-e584-4306-a499-86a51184cb83`)
@@ -168,6 +169,48 @@ external provider rates.
 The founder-hour rate is a blended internal opportunity-cost assumption for
 calculation only. Record Manoj and Vinay hours separately and replace `r_f`
 with approved `r_M` and `r_V` when available.
+
+## LITE / BASE / PRO internal rate experiment — provisional
+
+These are **internal pre-GST planning estimates**, not public prices, quotes,
+approved tiers or external rates. Each band has a maximum ±15% planning
+tolerance around the stated midpoint.
+
+| Tier | Pre-GST midpoint | ±15% planning band | Capability/cost posture |
+|---|---:|---:|---|
+| LITE | ₹4,999 | ₹4,250–₹5,750 | Menu display/order only; limited AI; no payment, delivery, availability automation, promotions or combos; max 3 menu updates/month |
+| BASE | ₹9,999 | ₹8,500–₹11,500 | Menu/order/payment/delivery where enabled; bounded AI in those domains; availability controls; basic promotions/combos capped at 3 requests/day |
+| PRO | ₹19,999 | ₹17,000–₹23,000 | Full bounded menu/order/payment/delivery and allowed conversational tasks; advanced API integrations; never unrestricted AI authority |
+
+The rounded bands are planning presentation only. The underlying calculation
+is `midpoint × [0.85, 1.15]`; no tier is approved for public publication.
+
+### Tier-specific cost implications
+
+| Cost bucket | LITE | BASE | PRO |
+|---|---|---|---|
+| Infrastructure | Lowest request, storage and state footprint; menu-update cap limits churn | Higher order/payment/availability state and notification footprint | Highest integration, observability, state and support footprint |
+| Provider pass-through | No payment/delivery provider dependency in the tier | Meta/provider plus payment/delivery costs where enabled | Meta/provider plus advanced API/integration provider costs |
+| AI | Limited menu/order assistance; lowest AI-call budget | AI restricted to menu/order/payment/delivery; medium budget | Highest bounded-task/API budget; entitlement and policy caps required |
+| Support/onboarding | Menu setup and constrained update support | Payment/delivery and promotion support | Custom integration, API, exception and higher-touch support |
+| Failure/refund exposure | No customer payment/delivery flow in tier | Payment, delivery and promotion exception exposure | BASE exposure plus integration and higher-complexity remediation |
+
+Track each tier separately for request volume, AI calls, provider charges,
+payment/delivery pass-through, support hours, onboarding hours, failures,
+refunds and contribution. Do not pool PRO usage into an apparently cheap
+LITE/BASE average.
+
+### Pilot 3/4/3 sensitivity — provisional
+
+For a 10-restaurant sensitivity cohort, model **3 LITE / 4 BASE / 3 PRO**.
+At the stated midpoints this is an internal planning income bar of
+approximately **₹1,14,990/month pre-GST** and **₹3,44,970 over 90 days**.
+Applying the per-tier ±15% bands gives an approximate cohort range of
+**₹97,700–₹1,32,300/month pre-GST** and **₹2,93,100–₹3,96,900 over 90 days**.
+
+This is a mix sensitivity, not a required enrollment mix or public revenue
+forecast. The pilot must compare the mix against actual support, provider,
+AI, payment, delivery, onboarding, failure/refund and contribution data.
 
 ## Direct and indirect cost classification
 

@@ -7,6 +7,7 @@ sources:
   - nekurama.chatgpt.md
   - nekurama.babai.research.md
   - Founder decision packet (2026-09-21; current task input)
+  - Tier scope decision (2026-09-21; current task input)
 ---
 
 # BABAI Product BRD
@@ -53,6 +54,12 @@ expansion.
 Assistant recommendations in the raw conversation are not treated as founder
 decisions unless the current issue sources, later explicit direction or field
 evidence supports them.
+
+The Tier Scope Decision (2026-09-21) adds a provisional LITE/BASE/PRO
+capability matrix and pre-GST rate experiment: ₹4,999 / ₹9,999 / ₹19,999
+midpoints with ±15% planning tolerance. The tier matrix is a capability and
+cost experiment, not public pricing; AI remains bounded and deterministic or
+human-controlled state remains authoritative.
 
 ## Confirmed product truth
 
@@ -107,7 +114,8 @@ WhatsApp is the primary conversational/action surface for customer and staff att
 | Pilot sequence | **partial** | Fixed 90-day paid pilot; Stage 0 is one business, then gradual onboarding up to 10 restaurants; day-90 exit requires team-defined readiness evidence. |
 | Dashboard boundary | **partial** | WhatsApp remains first-class; web handles density and recovery. Exact MVP screens and entitlements remain open. |
 | Onboarding | **partial** | Progressive and resumable; exact Meta handoff, Admin tooling, retention and web information architecture remain open. |
-| Pricing / packaging | **challenge-required** | No public price is committed. Internal v0.4 fee bands are calculated from total expenditure and contribution sensitivity; ₹999 / ₹2,499 / ₹4,999 + GST and older prices remain hypotheses only. |
+| Pricing / packaging | **challenge-required** | No public price is committed. Internal v0.4 fee bands and the provisional LITE/BASE/PRO pre-GST rate experiment require evidence and founder approval. |
+| Tier capability scope | **partial / proposed** | LITE is menu/order only; BASE adds bounded payment/delivery/availability/promotions; PRO adds broader bounded tasks and advanced APIs. No tier grants unrestricted AI authority. |
 | Payment verification | **challenge-required** | Direct merchant payment is preferred; gateway/webhook and manual confirmation behavior require pilot testing. |
 | Delivery | **unknown for MVP** | Provider-agnostic delivery is a later capability; no delivery integration is required to prove pickup-first MVP. |
 | ROI / success thresholds | **partial** | Measure activation, orders, fulfillment, repeat use, staff adoption, support, economics and willingness to pay; numeric thresholds are not set. |
@@ -157,7 +165,7 @@ The field research is intentionally not upgraded: it reports strong interest and
 | `customer-market.md` | Previously question-heavy; now retains an evidence-backed ICP and market answer, with segmentation, switching and expansion gates still partial/unknown. |
 | `experience-and-channels.md` | Previously thin; now records the confirmed WhatsApp/web principle, onboarding and takeover direction, with detailed UX still partial. |
 | `business-model.md` | Retained as a partial commercial model; public pricing is withheld while cost, contribution, GST and pilot-term evidence is collected. |
-| `economics-model.md` | Track 2 v0.5 internal planning artifact; provides low/base/high bands, actual-rate register, 90-day plan, traffic/request/storage sensitivities, direct/indirect cost formulas, provisional fee bands and break-even sensitivity without selecting public pricing. |
+| `economics-model.md` | Track 2 v0.5 internal planning artifact; provides low/base/high bands, actual-rate register, 90-day plan, traffic/request/storage sensitivities, LITE/BASE/PRO cost implications, provisional fee bands and break-even sensitivity without selecting public pricing. |
 | `validation.md` | Track 3 metric contract with proposed entry/exit/success/kill thresholds; founder approval and pilot evidence remain required. |
 | `product-definition.md` | Retained as the current MVP boundary; production cut, edge cases and post-pilot scope remain partial. |
 | `thesis-and-positioning.md` | Retained as current positioning; differentiation is explicitly a thesis, not a proven moat, and legal clearance remains separate. |

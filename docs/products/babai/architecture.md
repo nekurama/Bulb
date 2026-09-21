@@ -15,6 +15,7 @@ sources:
   - docs/products/babai/experience-and-channels.md
   - docs/products/babai/architecture-boundaries.md
   - docs/products/babai/architecture-lld.md
+  - docs/products/babai/flow-architecture-matrix.md
   - docs/products/babai/architecture-cost-options.md
   - "Tier scope decision (2026-09-21; current task input)"
 ---
@@ -83,6 +84,11 @@ or legal/security controls have been validated. Logical capability and
 aggregate boundaries remain independent from the modular-monolith deployment
 shape. [Admin Decision Packet (2026-09-20); `architecture-boundaries.md`;
 `architecture-lld.md`; `domain-model.md`]
+
+The flow-by-flow implementation handoff is maintained in
+[`flow-architecture-matrix.md`](flow-architecture-matrix.md). It records
+fourteen flow families, their state ownership, contracts, reliability,
+provider boundaries, tier/pilot gates and current implementation/demo status.
 
 ### Cost-sensitive pilot recommendation
 

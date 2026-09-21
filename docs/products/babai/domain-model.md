@@ -3,6 +3,7 @@ status: partial
 owner: BABAI
 last-reviewed: 2026-09-18
 sources:
+  - "Tier Scope Decision (2026-09-21)"
   - "Admin Decision Packet (2026-09-20)"
   - nekurama.raw.chat.json
   - nekurama/Bulb#1
@@ -54,6 +55,41 @@ These terms prevent a conceptual engine or aggregate from being treated as an au
 - Define audit, sensitive-data access, retention/deletion and recovery semantics.
 
 These are design requirements, not claims that the implementation already exists. See `architecture.md` and `architecture-boundaries.md` for the corresponding system-level handoff.
+
+## Tier, entitlement and integration implications
+
+The **Tier Scope Decision (2026-09-21)** introduces LITE, BASE and PRO as
+provisional entitlement profiles, not new aggregate roots and not separate
+business-state authorities.
+
+- `BillingAccount`/subscription entitlements may gate which commands,
+  provider adapters, quotas and operational surfaces are available.
+- `Tenant`, `Branch`, `Channel`, `Conversation`, `Cart`, `Order`, `Payment`
+  and `Fulfillment` retain the same ownership and invariants at every tier.
+- LITE can expose catalog, availability-aware information and conversation
+  assistance; BASE adds deterministic cart/order, pickup, payment
+  initiation/recording and transactional operations; PRO adds bounded delivery,
+  advanced integrations and higher measured quotas.
+- Menu revisions remain immutable; availability remains separate from content
+  revision and does not become a generic inventory engine.
+- Combos/bundles remain sellable/pricing constructs owned by commercial
+  calculation; promotions remain deterministic tenant capabilities. Promotion
+  stacking, combo composition, tax/rounding and tier-specific benefits remain
+  open design/validation choices.
+- Rate limits, quotas, provider throttles and API entitlements are policy
+  inputs. They cannot mutate authoritative order/payment/consent state or
+  permit cross-tenant access.
+- PRO “full access” is bounded access to configured capabilities and approved
+  integrations. AI remains advisory and cannot commit or alter orders,
+  payments, permissions, consent, refunds or fulfillment without typed,
+  authorized, deterministic commands and required human control.
+
+The pilot 3/4/3 sensitivity (three LITE, four BASE, three PRO) is a cost and
+support experiment, not a committed pricing mix. Measure per-tier provider,
+AI, API, payment, delivery, onboarding, support and failure/remediation cost;
+test sensitivity to moving one restaurant between tiers before treating the
+mix as evidence. [Tier Scope Decision (2026-09-21); `architecture.md`;
+`architecture-lld.md`; `architecture-cost-options.md`]
 
 ## Committed implementation alignment
 

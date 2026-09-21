@@ -3,6 +3,7 @@ status: partial
 owner: BABAI
 last-reviewed: 2026-09-21
 sources:
+  - "Tier Scope Decision (2026-09-21)"
   - "Admin Decision Packet (2026-09-20)"
   - "nekurama.raw.chat.json (conversation_id: 6aa2f947-fce0-83e8-99d0-9a52ab2b15cd)"
   - nekurama.chatgpt.md
@@ -54,6 +55,32 @@ validation before they become stronger commitments.
 No initial microservices or EKS deployment is selected. Logical capabilities
 remain explicit so extraction can be evidence-driven later. [Admin Decision
 Packet (2026-09-20); `architecture.md`; `architecture-boundaries.md`]
+
+## Tier and entitlement enforcement
+
+LITE, BASE and PRO are entitlement/configuration profiles over the same module
+and aggregate graph. The gateway resolves the active billing-account
+entitlements and policy context, then workers and domain modules enforce the
+same decision again before state-changing commands or external effects.
+
+- LITE/BASE/PRO never change aggregate ownership or make billing the source of
+  order, payment, availability, promotion or fulfillment truth.
+- Rate limits, quotas and provider concurrency are enforced at the gateway,
+  queue admission and adapter/worker layers; they are not enforced by
+  trusting an AI suggestion or a client-supplied tier.
+- BASE order/payment flows use deterministic commands, idempotency and human
+  takeover; payment completion remains distinct from order acceptance.
+- PRO integrations use typed provider adapters, scoped secrets, callback
+  verification, retries/DLQ, reconciliation and audit. Higher quotas do not
+  bypass provider throttles, consent, authorization or tenant isolation.
+- AI remains advisory at every tier. PRO may expose more recommendations,
+  drafts and bounded automation, but never direct authority over orders,
+  payments, permissions, consent or business state.
+
+The exact entitlement names, quotas, tier pricing, promotion/combo semantics,
+delivery-provider set and advanced API catalog are provisional experiments.
+[Tier Scope Decision (2026-09-21); `architecture.md`;
+`architecture-cost-options.md`; `domain-model.md`]
 
 ## Module map
 

@@ -3,6 +3,7 @@ status: partial
 owner: BABAI
 last-reviewed: 2026-09-21
 sources:
+  - "Tier Scope Decision (2026-09-21)"
   - "Admin Decision Packet (2026-09-20)"
   - "nekurama.raw.chat.json (conversation_id: 6aa2f947-fce0-83e8-99d0-9a52ab2b15cd)"
   - nekurama.chatgpt.md
@@ -576,6 +577,31 @@ Packet (2026-09-20); `architecture-lld.md`; `architecture-boundaries.md`]
 The cost, provider and founder-support alternatives are recorded in
 [`architecture-cost-options.md`](architecture-cost-options.md). That artifact
 is a comparison and validation aid, not a final provider decision.
+
+## Tiered capability boundary
+
+The **Tier Scope Decision (2026-09-21)** treats LITE, BASE and PRO as
+provisional entitlement experiments over the same deterministic domain
+capabilities. A tier may gate capability, quota, provider integration and
+support level; it must not create a second source of truth or grant AI
+authority over controlled business state.
+
+| Tier | Starting capability envelope | Explicit boundary |
+|---|---|---|
+| **LITE** | Catalog/menu presentation, availability-aware information, basic customer conversation and human escalation | No implied autonomous order/payment/delivery authority; rate limits and provider rules still apply |
+| **BASE** | LITE plus structured cart/order, pickup workflow, direct payment initiation/recording, transactional notifications and staff operations | Order/payment state remains deterministic and staff-controlled; delivery and advanced integrations remain optional/limited |
+| **PRO** | BASE plus bounded delivery/provider integrations, advanced API/webhook integrations, richer operational automation, multi-branch/bulk controls and higher measured quotas | “Full access” means broader configured capabilities and quotas, never unrestricted AI authority or bypass of policy, consent, payment, order or tenant controls |
+
+Availability, price, promotion, combo, payment and fulfillment decisions remain
+owned by their domain capabilities. Rate limits and tier entitlements are
+policy/configuration inputs evaluated before commands; they do not move
+authoritative state into billing, AI or the gateway. Promotions and combos
+remain deterministic and bounded; stacking, tax/rounding and advanced
+promotion semantics remain open. [Tier Scope Decision (2026-09-21); Raw T21
+`bbb21b01-c1d5-42f9-9e1f-702bb346453c`; Raw T35
+`97f25c92-127f-4c8c-bde9-c314010cbef7`; Raw T410
+`bbb21914-7687-4f6e-848a-30e1e7e850f8`; `domain-model.md`;
+`architecture-cost-options.md`]
 
 ## Payment custody boundary
 

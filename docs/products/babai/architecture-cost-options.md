@@ -3,6 +3,7 @@ status: proposed-options
 owner: BABAI Architecture
 last-reviewed: 2026-09-21
 sources:
+  - "Tier Scope Decision (2026-09-21)"
   - "Founder Scale/Cost Baseline (2026-09-21)"
   - "Admin Decision Packet (2026-09-20)"
   - nekurama.raw.chat.json
@@ -76,6 +77,57 @@ features until evidence justifies them. AWS credits may lower cash spend, but
 the true cost model must retain pre-credit cost, founder hours, provider
 pass-throughs and tax. Provider choices, credits, rates, legal approvals and
 production SLOs remain **unresolved/input-required**.
+
+## Tier scope and 3/4/3 pilot sensitivity
+
+LITE, BASE and PRO are **provisional experiments**, not published prices or
+unlimited plans. All tiers share the same modular monolith, deterministic
+domain state, provider adapters, outbox/queue and human-control boundary.
+
+| Tier | Integration/capability implication | Main cost drivers and controls |
+|---|---|---|
+| **LITE** | Catalog/menu, availability-aware information, basic conversation and human escalation | Low Meta/AI/support usage; strict conversation/API quotas; no implied autonomous payment, delivery or unrestricted automation |
+| **BASE** | Structured cart/order, pickup, direct payment initiation/recording, transactional notifications and staff operations | Meta utility traffic, payment gateway/UPI reconciliation, queue/worker load and support interventions; deterministic order/payment state |
+| **PRO** | Bounded delivery/provider integrations, advanced APIs/webhooks, bulk/multi-branch operations, richer automation and higher measured quotas | Provider/API fees, delivery, webhook/retry/DLQ/reconciliation operations, AI usage and support complexity; no bypass of policy, consent or provider throttles |
+
+AI is advisory in every tier. PRO may increase recommendation/draft/bounded
+automation scope, but cannot directly commit orders, payments, permissions,
+consent, refunds, fulfillment or other controlled business state. “Full access”
+means configured product capability, not unrestricted AI or tenant access.
+
+### 3/4/3 sensitivity
+
+For a ten-restaurant pilot, use **3 LITE / 4 BASE / 3 PRO** as one provisional
+scenario. It is not a pricing decision. Instrument:
+
+- infrastructure and queue usage by tier;
+- Meta/BSP and provider messages/webhooks;
+- payment and delivery pass-through/reconciliation;
+- AI calls, latency, fallback and human-review time;
+- onboarding, support, incident, refund and remediation hours;
+- rate-limit hits, throttling, retries and DLQ events.
+
+Sensitivity tests should move one restaurant at a time between tiers and compare
+low/base/high provider, AI, API, support and failure costs. No tier rate is
+treated as a vendor fact until current provider terms and pilot invoices are
+available. [Tier Scope Decision (2026-09-21); `business-model.md`;
+`validation.md`; `domain-model.md`]
+
+### Tier rate-limit and integration guardrails
+
+- LITE receives the lowest request/message/concurrency envelope and can be
+  degraded to information plus human escalation under pressure.
+- BASE receives the normal ordering envelope, but queue admission, payment
+  idempotency and provider throttles remain mandatory.
+- PRO receives higher **configured** quotas only after load and support
+  evidence; advanced API integrations require adapter-specific credentials,
+  scopes, callbacks, retries, DLQ/reconciliation and audit.
+- A tier never overrides tenant isolation, authorization, consent,
+  availability, payment/order separation, provider `Retry-After` or global
+  backpressure.
+
+Exact quotas, integration catalog, tier prices, AI budgets, support SLAs and
+promotion/combo benefits remain unresolved.
 
 ## Founder Decision Packet: recommended now / revisit when
 

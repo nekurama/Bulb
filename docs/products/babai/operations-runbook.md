@@ -152,4 +152,3 @@ Close only when:
 - audit/evidence links exist;
 - root cause, containment and prevention are recorded;
 - any contract, privacy, CA/CS or provider gate is assigned.
-

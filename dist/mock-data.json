@@ -1,0 +1,114 @@
+{
+  "mode": "mock-only",
+  "schemaVersion": 2,
+  "source": "invented deterministic local journey catalog",
+  "runtime": "Checked-in QA fixture; app.js uses inline state and never fetches this file.",
+  "resetBehavior": "Return to the first state of the selected journey; never persist or transmit values.",
+  "journeys": {
+    "admin-onboarding": {
+      "title": "Admin onboarding → owner invite/status",
+      "states": [
+        {"label": "Admin intake", "status": "LOCAL READY"},
+        {"label": "Owner invite sent", "status": "REVIEW"},
+        {"label": "Invite pending", "status": "ATTENTION"},
+        {"label": "Owner acknowledged", "status": "LOCAL READY"},
+        {"label": "Onboarding ready", "status": "DONE"}
+      ]
+    },
+    "menu-ingestion": {
+      "title": "Menu source → extraction review → publish",
+      "states": [
+        {"label": "Source selected · image", "status": "LOCAL READY"},
+        {"label": "Source selected · PDF", "status": "LOCAL READY"},
+        {"label": "Source selected · text", "status": "LOCAL READY"},
+        {"label": "Extraction review", "status": "ATTENTION"},
+        {"label": "Correction needed", "status": "REVIEW"},
+        {"label": "Publish review", "status": "GATED"},
+        {"label": "Published revision", "status": "DONE"}
+      ]
+    },
+    "staff-access": {
+      "title": "Staff roles → permissions → handoff",
+      "states": [
+        {"label": "Role review", "status": "REVIEW"},
+        {"label": "Permission scope", "status": "GATED"},
+        {"label": "Handoff ready", "status": "LOCAL READY"},
+        {"label": "Staff attention", "status": "ATTENTION"}
+      ]
+    },
+    "customer-order": {
+      "title": "Discovery → menu → item/variant → cart → review",
+      "states": [
+        {"label": "Discovery", "status": "LOCAL READY"},
+        {"label": "Menu", "status": "LOCAL READY"},
+        {"label": "Item and variant", "status": "LOCAL READY"},
+        {"label": "Cart", "status": "REVIEW"},
+        {"label": "Order review", "status": "GATED"}
+      ]
+    },
+    "fulfillment": {
+      "title": "Payment/pickup/delivery tiers and recovery",
+      "states": [
+        {"label": "LITE · payment pending", "status": "PENDING"},
+        {"label": "BASE · payment failure", "status": "ATTENTION"},
+        {"label": "BASE · payment retry", "status": "RECOVERABLE"},
+        {"label": "PRO · reconciliation", "status": "GATED"},
+        {"label": "LITE · pickup ready", "status": "READY"},
+        {"label": "BASE · delivery pending", "status": "PENDING"},
+        {"label": "PRO · provider failure", "status": "ATTENTION"},
+        {"label": "Reconciled", "status": "DONE"}
+      ]
+    },
+    "order-desk": {
+      "title": "Order desk lifecycle and attention cues",
+      "states": [
+        {"label": "New", "status": "ATTENTION"},
+        {"label": "Accepted", "status": "LOCAL READY"},
+        {"label": "Preparing", "status": "LOCAL READY"},
+        {"label": "Ready", "status": "ATTENTION"},
+        {"label": "Completed", "status": "DONE"}
+      ]
+    },
+    "takeover": {
+      "title": "Automated → human takeover → automated",
+      "states": [
+        {"label": "Automated", "status": "LOCAL READY"},
+        {"label": "Requested", "status": "ATTENTION"},
+        {"label": "Active", "status": "HUMAN ACTIVE"},
+        {"label": "Released", "status": "LOCAL READY"},
+        {"label": "Automated again", "status": "DONE"}
+      ]
+    },
+    "promo": {
+      "title": "Promo/combo LITE → BASE → PRO gates",
+      "states": [
+        {"label": "LITE · simple offer", "status": "LOCAL READY"},
+        {"label": "BASE · combo review", "status": "REVIEW"},
+        {"label": "BASE · expired", "status": "ATTENTION"},
+        {"label": "PRO · gated capability", "status": "GATED"}
+      ]
+    },
+    "notifications-recovery": {
+      "title": "Notifications, reorder, cancel/refund and recovery",
+      "states": [
+        {"label": "Order-ready notification", "status": "LOCAL READY"},
+        {"label": "Reorder preview", "status": "REVIEW"},
+        {"label": "Cancel request", "status": "ATTENTION"},
+        {"label": "Refund review", "status": "GATED"},
+        {"label": "Provider failure", "status": "ATTENTION"},
+        {"label": "Disconnected channel", "status": "BLOCKED"},
+        {"label": "Recovery review", "status": "DONE"}
+      ]
+    },
+    "analytics": {
+      "title": "Admin funnel and analytics states",
+      "states": [
+        {"label": "Funnel empty", "status": "LOCAL READY"},
+        {"label": "Funnel activity", "status": "REVIEW"},
+        {"label": "Attention queue", "status": "ATTENTION"},
+        {"label": "Scoped analytics", "status": "GATED"},
+        {"label": "Reconciliation", "status": "DONE"}
+      ]
+    }
+  }
+}

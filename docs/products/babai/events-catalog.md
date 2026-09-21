@@ -45,6 +45,11 @@ raw payment credentials or unrestricted message bodies in logs or event
 metadata. A classified payload may contain a secure reference to encrypted
 storage instead.
 
+The TypeScript `EventType`, `EventPayloadMap` and `DomainEvent` definitions in
+[`contracts.ts`](contracts.ts) are the code-facing registry for the critical
+payloads below. Adding an event requires updating both this catalog and the
+typed map.
+
 ## 2. Bounded-context registry
 
 | Context | Events |

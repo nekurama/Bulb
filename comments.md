@@ -152,21 +152,32 @@ The architecture should keep most of these operations lightweight. 54 HTTP opera
 
 ---
 
-## 5. Support model
+## 5. Support and hiring model
 
-Support should be pooled, not budgeted per restaurant.
+### Default assumption: no hiring
 
-Example:
+BABAI should **not assume engineering or support hiring in the 0–100 restaurant model**.
 
-- 5,000 orders/day
-- 0.1% platform failure rate
-- 3% of failures require human intervention
+Current operating assumption:
 
-Then:
+- engineering remains founder/internal work
+- no engineering payroll is added to the model
+- support remains pooled
+- no dedicated support hire is added initially
+- restaurant/order mistakes remain restaurant-side responsibility
+- hiring happens only when support/offline work becomes operationally unmanageable
 
-**5,000 × 0.001 × 0.03 = 0.15 human-intervention cases/day**
+### Support escalation threshold
 
-The 3% must explicitly mean percentage of failures requiring intervention.
+The working trigger is:
+
+> **If offline/support work exceeds roughly 20 unresolved cases/issues and cannot be managed by the existing team, then dedicated support hiring becomes justified.**
+
+Until that threshold is reached, the model carries **₹0 incremental support payroll**.
+
+This is a hiring trigger, not a forecast.
+
+### What BABAI owns
 
 BABAI owns:
 
@@ -183,6 +194,20 @@ Restaurants own:
 - kitchen mistakes
 - fulfillment mistakes
 - restaurant-side operational decisions
+
+### Reliability example
+
+At:
+
+- 5,000 orders/day
+- 0.1% platform failure rate
+- 3% of failures requiring human intervention
+
+the expected human-intervention volume is:
+
+5,000 × 0.001 × 0.03 = 0.15 cases/day
+
+The 3% must explicitly mean percentage of failures requiring intervention.
 
 ---
 
@@ -242,29 +267,36 @@ AI should handle interpretation where it is actually needed.
 
 ## 8. Company-level cash-burn model
 
-This is separate from standard restaurant COGS.
+Do **not** assume a ₹5L/month fixed operating burn.
 
-The company burn formula is:
+The earlier ₹5L figure was an invented planning assumption and is removed from the BABAI burn model.
 
-**Total monthly cash burn = fixed operating burn + infrastructure + variable service COGS**
+There is currently no source-supported basis for adding:
 
-For the working planning model:
+- engineering payroll that does not exist
+- dedicated support payroll that does not exist
+- management payroll that does not exist
+- arbitrary miscellaneous operating payroll
 
-### Fixed operating burn
+### Current hiring assumption
 
-| Expense | Monthly planning budget |
+For the current planning period:
+
+| Cost category | Incremental monthly assumption |
 |---|---:|
-| Engineering | ₹3.00L |
-| Support/operations | ₹0.85L |
-| Founder/management | ₹0.65L |
-| Software/legal/accounting/misc. | ₹0.50L |
-| **Fixed operating burn** | **₹5.00L** |
+| Engineering hiring | **₹0** |
+| Dedicated support hiring | **₹0** |
+| New management hiring | **₹0** |
 
-This ₹5L is a **planning assumption**, not a measured current BABAI expense.
+These remain ₹0 until the business actually decides to hire.
 
-### Infrastructure capacity budget
+The current model therefore focuses on the recurring costs created by serving restaurants.
 
-| Restaurants | Monthly infrastructure budget |
+---
+
+## 9. Infrastructure capacity budget
+
+| Restaurants | Monthly infrastructure planning envelope |
 |---:|---:|
 | 10–50 | ₹30k |
 | 100 | ₹35k |
@@ -275,117 +307,93 @@ This ₹5L is a **planning assumption**, not a measured current BABAI expense.
 | 5,000 | ₹3.50L |
 | 10,000 | ₹6.00L |
 
-This is a conservative planning envelope. It is not a provider invoice.
+These are capacity-planning envelopes, not provider invoices.
 
-### Variable service COGS
-
-Use:
-
-**₹1,920 × active restaurants/month**
-
-until measured production data replaces the assumption.
+They should be replaced by actual production bills once the stack is running.
 
 ---
 
-## 9. Full company burn curve
+## 10. Corrected 0–100 restaurant math
 
 Assumptions:
 
-- 50 orders/restaurant/day
-- 30 days/month
 - 30% LITE / 40% BASE / 30% PRO
 - ₹3,999 / ₹5,999 / ₹9,999
-- ₹1,920 weighted service COGS/restaurant
-- ₹5L fixed operating burn
+- weighted ARPU = **₹6,599**
+- ₹1,920 weighted service COGS/restaurant/month
+- no engineering hiring
+- no support hiring
+- no management hiring
+- no artificial ₹5L fixed operating burn
+- infrastructure uses the planning envelope above
 
-| Restaurants | Orders/day | Revenue/month | Service COGS | Infra | Fixed ops | **Total cash burn** | **Operating surplus** |
-|---:|---:|---:|---:|---:|---:|---:|---:|
-| 10 | 500 | ₹0.66L | ₹0.19L | ₹0.30L | ₹5.00L | **₹5.49L** | **−₹4.83L** |
-| 25 | 1,250 | ₹1.65L | ₹0.48L | ₹0.30L | ₹5.00L | **₹5.78L** | **−₹4.13L** |
-| 50 | 2,500 | ₹3.30L | ₹0.96L | ₹0.30L | ₹5.00L | **₹6.26L** | **−₹2.96L** |
-| 100 | 5,000 | ₹6.60L | ₹1.92L | ₹0.35L | ₹5.00L | **₹7.27L** | **−₹0.67L** |
-| 250 | 12,500 | ₹16.50L | ₹4.80L | ₹0.50L | ₹5.00L | **₹10.30L** | **+₹6.20L** |
-| 500 | 25,000 | ₹33.00L | ₹9.60L | ₹0.70L | ₹5.00L | **₹15.30L** | **+₹17.70L** |
-| 1,000 | 50,000 | ₹65.99L | ₹19.20L | ₹1.20L | ₹5.00L | **₹25.40L** | **+₹40.59L** |
-| 2,500 | 125,000 | ₹164.98L | ₹48.00L | ₹2.00L | ₹5.00L | **₹55.00L** | **+₹109.98L** |
-| 5,000 | 250,000 | ₹329.95L | ₹96.00L | ₹3.50L | ₹5.00L | **₹104.50L** | **+₹225.45L** |
-| 10,000 | 500,000 | ₹659.90L | ₹192.00L | ₹6.00L | ₹5.00L | **₹203.00L** | **+₹456.90L** |
+Formula:
 
-The table is intentionally a **company cash-burn model**, not a per-restaurant fixed-cost allocation.
+**Monthly recurring spend = variable service COGS + infrastructure**
 
----
-
-## 10. The 0–100 restaurant runway
-
-The early-stage problem is fixed company burn.
-
-Using the same assumptions:
-
-| Restaurants | Revenue | Variable service COGS | Infrastructure | Fixed ops | **Net monthly burn** |
+| Restaurants | Revenue | Service COGS | Infra | **Total modeled spend** | **Operating contribution** |
 |---:|---:|---:|---:|---:|---:|
-| 0 | ₹0 | ₹0 | ₹30k | ₹5.00L | **−₹5.30L** |
-| 10 | ₹0.66L | ₹0.19L | ₹30k | ₹5.00L | **−₹4.83L** |
-| 20 | ₹1.32L | ₹0.38L | ₹30k | ₹5.00L | **−₹4.36L** |
-| 30 | ₹1.98L | ₹0.58L | ₹30k | ₹5.00L | **−₹3.90L** |
-| 40 | ₹2.64L | ₹0.77L | ₹30k | ₹5.00L | **−₹3.43L** |
-| 50 | ₹3.30L | ₹0.96L | ₹30k | ₹5.00L | **−₹2.96L** |
-| 60 | ₹3.96L | ₹1.15L | ₹30k | ₹5.00L | **−₹2.49L** |
-| 70 | ₹4.62L | ₹1.34L | ₹30k | ₹5.00L | **−₹2.02L** |
-| 80 | ₹5.28L | ₹1.54L | ₹30k | ₹5.00L | **−₹1.56L** |
-| 90 | ₹5.94L | ₹1.73L | ₹30k | ₹5.00L | **−₹1.09L** |
-| 100 | ₹6.60L | ₹1.92L | ₹35k | ₹5.00L | **−₹0.67L** |
+| 0 | ₹0 | ₹0 | ₹30k | **₹30k** | **−₹30k** |
+| 10 | ₹65,990 | ₹19,200 | ₹30k | **₹49,200** | **₹16,790** |
+| 20 | ₹1,31,980 | ₹38,400 | ₹30k | **₹68,400** | **₹63,580** |
+| 30 | ₹1,97,970 | ₹57,600 | ₹30k | **₹87,600** | **₹1,10,370** |
+| 40 | ₹2,63,960 | ₹76,800 | ₹30k | **₹1,06,800** | **₹1,57,160** |
+| 50 | ₹3,29,950 | ₹96,000 | ₹30k | **₹1,26,000** | **₹2,03,950** |
+| 60 | ₹3,95,940 | ₹1,15,200 | ₹30k | **₹1,45,200** | **₹2,50,740** |
+| 70 | ₹4,61,930 | ₹1,34,400 | ₹30k | **₹1,64,400** | **₹2,97,530** |
+| 80 | ₹5,27,920 | ₹1,53,600 | ₹30k | **₹1,83,600** | **₹3,44,320** |
+| 90 | ₹5,93,910 | ₹1,72,800 | ₹30k | **₹2,02,800** | **₹3,91,110** |
+| 100 | ₹6,59,900 | ₹1,92,000 | ₹35k | **₹2,27,000** | **₹4,32,900** |
 
-### Break-even
+### Important interpretation
 
-At this fixed-cost assumption, break-even occurs at approximately:
+This does **not** mean BABAI's actual bill at 100 restaurants will be exactly ₹2.27L.
 
-**114 restaurants**
+It means:
 
-That's the important early-stage number.
+> Under the current conservative COGS assumption and infrastructure planning envelope, BABAI would model approximately ₹2.27L/month of recurring service + infrastructure spend at 100 restaurants, before future hiring or other company overhead.
 
-The business doesn't need infrastructure to become cheap enough to break even. It needs enough restaurants to absorb the **₹5L fixed company operation**.
+The previous ₹7.27L/month number at 100 restaurants is removed.
 
 ---
 
-## 11. Runway requirement
+## 11. What happens if hiring becomes necessary?
 
-If BABAI starts at zero and grows gradually, the relevant question is cumulative burn rather than the burn at 100 restaurants.
+Hiring should be modeled as a discrete step, not hidden inside restaurant COGS.
 
-For example, if the company averages roughly:
+Before the support threshold:
 
-- 10 restaurants during one phase
-- 25 during the next
-- 50 during the next
-- 75 during the next
-- 100 thereafter
+**Company spend = service COGS + infrastructure + existing actual overhead**
 
-then the capital required to reach operating break-even can easily be several months of the ₹3–5L/month early-stage burn.
+After the threshold:
 
-Therefore:
+**Company spend = service COGS + infrastructure + actual support payroll + other actual overhead**
 
-> **Pilot funding should be sized around runway, not forced into per-restaurant break-even economics.**
+The support hire enters the model only when the operational condition is actually reached.
 
-This is consistent with the pricing principle: do not make early customers carry the company's fixed startup costs.
+Likewise, engineering hiring enters only after a real capacity/product requirement exists.
+
+This prevents the model from pretending BABAI needs a large organization before the workload requires one.
 
 ---
 
 ## 12. What this tells us about pricing
 
-The important conclusions are:
-
 ### ₹999 / ₹2,499 / ₹4,999
 
-Potentially commercially attractive, but **not compatible with the current 60–85% margin target at 50 orders/restaurant/day** unless actual service COGS is dramatically below the current planning assumption.
+Potentially viable if actual production service COGS is low enough.
+
+Under the current conservative ₹1,920 weighted service COGS assumption, the mix only produces approximately **31.4% weighted gross margin**.
+
+So the low-price set should remain a cost-validation scenario, not the 60–85% margin scenario.
 
 ### ₹3,999 / ₹5,999 / ₹9,999
 
-Provides approximately 70% weighted gross margin under the current COGS assumptions and gives the company room to absorb usage variation.
+Produces approximately **70.9% weighted gross margin** under the current conservative COGS assumption.
 
-### Higher pricing
+It is therefore the current financial planning price set.
 
-₹5,999 / ₹8,999 / ₹13,999 and above creates more margin headroom, but should only be adopted if product value and market validation support it.
-
-The financial model should not decide public pricing by itself.
+The company can still choose a lower commercial price if measured COGS proves materially lower.
 
 ---
 
@@ -417,30 +425,47 @@ Once these are measured, the safe price can be recalculated from actual COGS.
 
 ## 14. Final working conclusion
 
-The business should maintain three separate financial numbers:
+BABAI should maintain three separate financial numbers:
 
 ### 1. Standard service COGS
 
-What one normal restaurant adds to BABAI's recurring cost.
+What one normal restaurant adds to BABAI's recurring service cost.
 
-### 2. Company monthly burn
+### 2. Company monthly cash spend
 
-What BABAI actually spends each month, including fixed employees/operations and infrastructure.
+What BABAI actually spends each month.
+
+At the current stage, **do not invent engineering/support payroll that does not exist**.
 
 ### 3. Gross margin
 
 **(Revenue − variable service COGS) / Revenue**
 
-The working target is approximately **70% gross margin**, with 60% as the lower planning floor and 80–85% as the high-margin target range.
+The working target remains approximately **70% gross margin**, with 60% as the lower planning floor and 80–85% as the high-margin target range.
 
-The current planning price set is:
+The current financial planning price set is:
 
 > **LITE ₹3,999 / BASE ₹5,999 / PRO ₹9,999**
 
-The current 0–100 model indicates approximately **₹5.3L/month burn at zero restaurants**, declining to approximately **₹0.67L/month burn at 100 restaurants**, under the stated assumptions.
+The corrected 0–100 model indicates approximately:
 
-Approximate operating break-even is **~114 restaurants**.
+- **0 restaurants:** ₹30k/month modeled recurring spend
+- **10:** ₹49.2k
+- **20:** ₹68.4k
+- **50:** ₹1.26L
+- **75:** ₹1.76L
+- **100:** ₹2.27L
 
-The key strategic principle remains:
+At 100 restaurants, under these assumptions:
 
-> **Do not make the first 100 restaurants pay for the company's fixed startup structure through artificial per-restaurant costs. Keep the service COGS low, keep company burn explicit, and let scale absorb fixed costs.**
+- revenue ≈ **₹6.60L/month**
+- modeled service + infrastructure spend ≈ **₹2.27L/month**
+- operating contribution before unmodeled company overhead ≈ **₹4.33L/month**
+
+There is **no artificial 114-restaurant break-even point** anymore.
+
+The earlier ₹5.3L zero-customer burn and ₹114 break-even were artifacts of the invented ₹5L fixed-cost assumption and should not be used.
+
+The operating principle is:
+
+> **Keep hiring at zero until the workload proves it is necessary. Keep service COGS measurable. Keep infrastructure minimal. Do not make early restaurants pay for hypothetical future employees.**

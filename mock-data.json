@@ -1,30 +1,114 @@
 {
   "mode": "mock-only",
-  "source": "invented local demo scenes",
-  "demo": [
-    {
-      "kicker": "CUSTOMER · MOCK CONVERSATION",
-      "title": "“Is the paneer bowl available for pickup tonight?”",
-      "copy": "A customer question arrives in the restaurant’s own WhatsApp context. The assistant can help interpret it; it does not invent inventory or promise an order.",
-      "detail": "Invented scene; no real customer or menu data is used."
+  "schemaVersion": 2,
+  "source": "invented deterministic local journey catalog",
+  "runtime": "Checked-in QA fixture; app.js uses inline state and never fetches this file.",
+  "resetBehavior": "Return to the first state of the selected journey; never persist or transmit values.",
+  "journeys": {
+    "admin-onboarding": {
+      "title": "Admin onboarding → owner invite/status",
+      "states": [
+        {"label": "Admin intake", "status": "LOCAL READY"},
+        {"label": "Owner invite sent", "status": "REVIEW"},
+        {"label": "Invite pending", "status": "ATTENTION"},
+        {"label": "Owner acknowledged", "status": "LOCAL READY"},
+        {"label": "Onboarding ready", "status": "DONE"}
+      ]
     },
-    {
-      "kicker": "CONTEXT · MOCK MENU",
-      "title": "A reviewed menu gives the conversation useful context.",
-      "copy": "A future controlled setup could provide a validated catalog or menu. This preview uses an invented item and no restaurant data.",
-      "detail": "Invented scene; suggestion ≠ published menu state."
+    "menu-ingestion": {
+      "title": "Menu source → extraction review → publish",
+      "states": [
+        {"label": "Source selected · image", "status": "LOCAL READY"},
+        {"label": "Source selected · PDF", "status": "LOCAL READY"},
+        {"label": "Source selected · text", "status": "LOCAL READY"},
+        {"label": "Extraction review", "status": "ATTENTION"},
+        {"label": "Correction needed", "status": "REVIEW"},
+        {"label": "Publish review", "status": "GATED"},
+        {"label": "Published revision", "status": "DONE"}
+      ]
     },
-    {
-      "kicker": "ORDER · MOCK STATE",
-      "title": "Pickup order drafted for business review.",
-      "copy": "The proposed order is structured so staff can accept, reject or correct it. Payment and order state are not inferred from a chat message.",
-      "detail": "Invented scene; status: needs human review."
+    "staff-access": {
+      "title": "Staff roles → permissions → handoff",
+      "states": [
+        {"label": "Role review", "status": "REVIEW"},
+        {"label": "Permission scope", "status": "GATED"},
+        {"label": "Handoff ready", "status": "LOCAL READY"},
+        {"label": "Staff attention", "status": "ATTENTION"}
+      ]
     },
-    {
-      "kicker": "TAKEOVER · MOCK HANDOFF",
-      "title": "A person can take over when context needs care.",
-      "copy": "Human takeover is part of the intended pilot boundary. Staff remain responsible for controlled business decisions and customer communication.",
-      "detail": "Invented scene; no message is sent from this page."
+    "customer-order": {
+      "title": "Discovery → menu → item/variant → cart → review",
+      "states": [
+        {"label": "Discovery", "status": "LOCAL READY"},
+        {"label": "Menu", "status": "LOCAL READY"},
+        {"label": "Item and variant", "status": "LOCAL READY"},
+        {"label": "Cart", "status": "REVIEW"},
+        {"label": "Order review", "status": "GATED"}
+      ]
+    },
+    "fulfillment": {
+      "title": "Payment/pickup/delivery tiers and recovery",
+      "states": [
+        {"label": "LITE · payment pending", "status": "PENDING"},
+        {"label": "BASE · payment failure", "status": "ATTENTION"},
+        {"label": "BASE · payment retry", "status": "RECOVERABLE"},
+        {"label": "PRO · reconciliation", "status": "GATED"},
+        {"label": "LITE · pickup ready", "status": "READY"},
+        {"label": "BASE · delivery pending", "status": "PENDING"},
+        {"label": "PRO · provider failure", "status": "ATTENTION"},
+        {"label": "Reconciled", "status": "DONE"}
+      ]
+    },
+    "order-desk": {
+      "title": "Order desk lifecycle and attention cues",
+      "states": [
+        {"label": "New", "status": "ATTENTION"},
+        {"label": "Accepted", "status": "LOCAL READY"},
+        {"label": "Preparing", "status": "LOCAL READY"},
+        {"label": "Ready", "status": "ATTENTION"},
+        {"label": "Completed", "status": "DONE"}
+      ]
+    },
+    "takeover": {
+      "title": "Automated → human takeover → automated",
+      "states": [
+        {"label": "Automated", "status": "LOCAL READY"},
+        {"label": "Requested", "status": "ATTENTION"},
+        {"label": "Active", "status": "HUMAN ACTIVE"},
+        {"label": "Released", "status": "LOCAL READY"},
+        {"label": "Automated again", "status": "DONE"}
+      ]
+    },
+    "promo": {
+      "title": "Promo/combo LITE → BASE → PRO gates",
+      "states": [
+        {"label": "LITE · simple offer", "status": "LOCAL READY"},
+        {"label": "BASE · combo review", "status": "REVIEW"},
+        {"label": "BASE · expired", "status": "ATTENTION"},
+        {"label": "PRO · gated capability", "status": "GATED"}
+      ]
+    },
+    "notifications-recovery": {
+      "title": "Notifications, reorder, cancel/refund and recovery",
+      "states": [
+        {"label": "Order-ready notification", "status": "LOCAL READY"},
+        {"label": "Reorder preview", "status": "REVIEW"},
+        {"label": "Cancel request", "status": "ATTENTION"},
+        {"label": "Refund review", "status": "GATED"},
+        {"label": "Provider failure", "status": "ATTENTION"},
+        {"label": "Disconnected channel", "status": "BLOCKED"},
+        {"label": "Recovery review", "status": "DONE"}
+      ]
+    },
+    "analytics": {
+      "title": "Admin funnel and analytics states",
+      "states": [
+        {"label": "Funnel empty", "status": "LOCAL READY"},
+        {"label": "Funnel activity", "status": "REVIEW"},
+        {"label": "Attention queue", "status": "ATTENTION"},
+        {"label": "Scoped analytics", "status": "GATED"},
+        {"label": "Reconciliation", "status": "DONE"}
+      ]
     }
-  ]
+  }
 }

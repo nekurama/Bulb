@@ -23,12 +23,12 @@ availability decision.
 
 | Decision | Implementation boundary |
 |---|---|
-| Static site | Root `index.html`, `styles.css`, `script.js` and `mock-data.json`; no build step, server, auth, payment, analytics, tracker, embed or production backend. |
-| Interactive demo | The demo advances through an invented pickup conversation, menu context, order review and human takeover, with an internal 14-family flow coverage map for QA review. All content is mock data and is labeled in the UI. It must never be described as a product connection or customer result. |
+| Static site | Root `index.html`, `styles.css`, `app.js` and `mock-data.json`; no build step, server, auth, payment, analytics, tracker, embed or production backend. |
+| Interactive demo | The demo runs ten deterministic invented journey families covering onboarding, menu extraction/publish, staff scope, customer order, payment/fulfillment recovery, order desk, takeover, promo tiers, notifications/recovery and analytics. It is a local state prototype, not a product connection or customer result. |
 | Internal capability review | A collapsed, clearly labeled review panel may show provisional LITE/BASE/PRO experiment labels, capability placeholders, the bounded pilot envelope and planning-only usage sensitivities. It is not public packaging, pricing, entitlement, service-level or availability copy; rates remain placeholders. |
-| Primary CTA | `Request a pilot` / `Talk to us` scrolls to the interest panel. The current page prepares a local-only request preview; it does not submit data. |
-| Secondary routes | WhatsApp, email and waitlist are represented as selectable route intents. No phone number, mailbox, form endpoint or waitlist system is fabricated. A route may become live only after company ownership, destination, privacy notice, retention, abuse handling and accountable owner are recorded. |
-| Public onboarding data | The mock asks only for business/restaurant name, role, branch count and preferred route; an optional contact detail field is visibly local-only. It must not ask for menus, customer lists, WhatsApp identifiers, payment details, conversation content or staff credentials. |
+| Primary CTA | No CTA form or destination is wired. The page exposes a boundary-only review card until a company-owned route, notice, retention rule and accountable owner are approved. |
+| Secondary routes | No WhatsApp, email or waitlist route is represented as an action. Any future route may become live only after company ownership, destination, privacy notice, retention, abuse handling and accountable owner are recorded. |
+| Public onboarding data | The mock asks for no business, contact, menu, customer, WhatsApp, payment, conversation or staff data. Controlled setup remains documentation-only. |
 | Private setup | Detailed restaurant setup belongs in a controlled, tenant-scoped onboarding path after privacy, access, retention/deletion, vendor and incident controls are approved. |
 | Evidence | Visible claims are limited to current product/company docs and the field-research signal recorded for September 2026. No pricing, ROI, savings, traction, reliability, launch, availability, customer count or production promise is made. |
 | Testimonials | None are published. Future pilot/design-partner feedback requires genuine source provenance, written approval, attributable identity and an explicit “pilot” or “design partner” label. |
@@ -59,27 +59,26 @@ availability decision.
 |---|---|---|
 | CQA-01 | Claim inventory | Every visible factual claim maps to the citation map; unsupported outcomes are absent. |
 | CQA-02 | Mock-data boundary | Demo copy says mock data; no API keys, production URLs, real phone numbers, customer data or payment details exist. |
-| CQA-03 | CTA validation | Primary and secondary routes are keyboard-operable and visibly local-only until destination, owner, notice and retention are approved. |
-| CQA-04 | Data minimization | Public form contains only minimum business context; detailed setup is explicitly excluded and private. |
+| CQA-03 | CTA validation | No form or route exists; the boundary card visibly says nothing submits until destination, owner, notice and retention are approved. |
+| CQA-04 | Data minimization | No public fields are collected; detailed setup is explicitly excluded and private. |
 | CQA-05 | Evidence/testimonial integrity | September 2026 research is labeled an early signal; no testimonials appear without provenance and written approval. |
 | CQA-06 | Naming boundary | Current-facing HTML, CSS, JS, mock data, candidate labels and template copy use neutral variants or functional scope placeholders; the only LITE/BASE/PRO labels are inside the clearly gated internal capability-review panel and are not public package claims. |
 | FQA-01 | Static entry point | `index.html` loads without a build tool and uses relative local assets suitable for GitHub Pages. |
 | FQA-02 | JSON | `mock-data.json` parses as valid JSON; it is a checked-in fixture and is not fetched at runtime. |
-| FQA-03 | Accessibility structure | One `h1`, logical headings, `header`, `nav`, `main`, `footer`, skip link, labels, focus styles and text status are present. |
+| FQA-03 | Accessibility structure | One `h1`, logical headings, `header`, `nav`, `main`, `footer`, skip link, scenario selector, journey tabs, focus styles and text status are present. |
 | FQA-04 | Responsive/reflow | Layout is designed for 320px, 375px, 768px, 1024px and 1440px widths and 200% zoom without intentional horizontal overflow. |
 | FQA-05 | Reduced motion | `prefers-reduced-motion` removes non-essential motion; the story and controls remain understandable without animation. |
-| FQA-06 | Degraded mode | Without JavaScript, the core story, pilot boundary and CTA text remain available; only the mock controls and local preview are unavailable. |
+| FQA-06 | Degraded mode | Without JavaScript, the core story, boundary copy and coverage documentation remain available; only the journey and coverage controls are unavailable. |
 | DQA-01 | Domain migration | Before any DNS change, confirm registrar ownership, recovery email, MFA, nameserver control, transfer lock, rollback plan and company access inventory. |
 | DQA-02 | Privacy handling | Before enabling collection, approve purpose, minimum fields, notice, owner, retention/deletion, access, vendor and incident handling. |
 
 ## CTA and data-handling gate
 
-The current artifact is intentionally a **non-submitting mock**. The form prevents a network
-request and displays a status explaining that no data was sent or stored. This preserves the
-public informational boundary while allowing QA of labels, route selection, validation and
-keyboard behavior.
+The current artifact is intentionally a **no-form, non-submitting mock**. The boundary card
+states that nothing submits, stores or connects. This preserves the public informational
+boundary while allowing QA of deterministic state labels, recovery cues and keyboard behavior.
 
-Before converting any route into a live WhatsApp, email or waitlist destination, record:
+Before adding any live WhatsApp, email or waitlist destination, record:
 
 1. The company-owned destination and recovery owner.
 2. The exact minimum fields and purpose.
@@ -120,7 +119,7 @@ Run from the repository root:
 ```sh
 git diff --check
 python -m json.tool mock-data.json >/dev/null
-node --check script.js
+node --check app.js
 ```
 
 Additional QA should manually verify keyboard traversal across the mock and 14-family

@@ -52,9 +52,24 @@
   const action = document.querySelector("#mock-action");
   const reset = document.querySelector("#mock-reset");
   const announcement = document.querySelector("#mock-announcement");
+  const contactPreview = document.querySelector("#contact-preview");
+  const contactStatus = document.querySelector("#contact-status");
   const flowSteps = Array.from(document.querySelectorAll(".flow-step"));
 
-  if (!panel || !kicker || !title || !time || !copy || !visual || !state || !action || !reset || !announcement) {
+  if (
+    !panel ||
+    !kicker ||
+    !title ||
+    !time ||
+    !copy ||
+    !visual ||
+    !state ||
+    !action ||
+    !reset ||
+    !announcement ||
+    !contactPreview ||
+    !contactStatus
+  ) {
     return;
   }
 
@@ -148,6 +163,19 @@
     activeStep = defaultStep;
     tabs[0]?.focus();
     render({ announce: true });
+  });
+
+  contactPreview.addEventListener("click", () => {
+    const isPreviewed = contactPreview.getAttribute("aria-pressed") === "true";
+    contactPreview.setAttribute("aria-pressed", String(!isPreviewed));
+    contactPreview.textContent = isPreviewed ? "Preview pilot interest" : "Reset preview state";
+    contactStatus.hidden = isPreviewed;
+    contactStatus.textContent = isPreviewed
+      ? ""
+      : "Preview only: pilot-interest intent is shown in this browser; nothing was sent or stored.";
+    if (!isPreviewed) {
+      contactStatus.focus();
+    }
   });
 
   render();

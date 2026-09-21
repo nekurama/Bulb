@@ -7,6 +7,7 @@ sources:
   - nekurama.babai.research.md
   - "2026-09-21 FOUNDER DECISION PACKET"
   - "2026-09-21 FOUNDER SCALE/COST BASELINE (current task input)"
+  - "2026-09-21 FOUNDER ECONOMIC TARGET CLARIFICATION (current task input)"
   - "2026-09-21 ECONOMICS MODEL REVIEW PACKET"
   - e3e4e855ca0214a5c664c07ec5b6513c560a7261 (product scale economics source)
   - economics-model.md
@@ -93,7 +94,7 @@ baseline”:
 |---|---|---|
 | Stage 0 | 6 flows/order, 9 gateway hits/flow, 54 average requests/order, 90 heavy-case requests/order, order ceiling, request classification, latency/error/retry, support and incident load | Proposed instrumentation |
 | Stage 1 | Per-restaurant orders/day, WhatsApp conversion case, average/heavy requests, P90/P99, provider/Meta and AI cost, storage/logging/queue/DB cost, payment/delivery treatment, support, incidents and CAC/onboarding | Proposed pilot evidence |
-| Stage 2 | 500-restaurant goal, half-total 500 case, supplied 1,000-restaurant reference, ₹25L monthly/annual income sensitivity, support/incident capacity and total expenditure versus recognized income | Proposed readiness evidence |
+| Stage 2 | 500-restaurant goal, half-total 500 case, supplied 1,000-restaurant reference, prior unresolved ₹25L income-unit sensitivity, separate ₹25L monthly operating-profit planning trigger, support/incident capacity and total expenditure versus recognized income | Proposed readiness evidence |
 
 This scorecard does not finalize infrastructure, cloud, provider/Meta/BSP, AI
 model, database, queue, storage or logging choices. Missing rates, unit
@@ -116,7 +117,10 @@ ROI cannot be hidden inside a generic support or provider number:
 
 The pilot must distinguish BABAI's contribution from the restaurant's
 monthly value. A restaurant value estimate is not revenue, and a positive
-restaurant ROI does not prove BABAI has positive economic contribution.
+restaurant ROI does not prove BABAI has positive economic contribution. The
+separate ₹25L monthly operating-profit trigger is not a percentage margin, a
+pilot gate or a forecast; it is an internal scale-planning input that must not
+replace the contribution calculation.
 
 ## Proposed onboarding-readiness exit gate
 
@@ -170,7 +174,7 @@ the readiness gate:
 | Repeat use | ≥20% eligible-customer repeat order rate | ≥10 unique customers and 30-day observation |
 | Staff adoption | ≥80% staff-handled active order sessions | Session ownership events |
 | Support | ≤12 combined founder support hours/restaurant/month; 24 hours is a hard hold | Manoj/Vinay time logs |
-| Economics | Base contribution ≥40% sensitivity and no negative base contribution | End-date true-up with actual rates |
+| Economics | Base contribution ≥40% sensitivity and no negative base contribution; report the separate ₹25L operating-profit planning trigger without using it as a pilot pass/fail threshold | End-date true-up with actual rates |
 | Support telemetry | ≤120 recurring support minutes/restaurant/month at base; category mix and p90 reported | >240 minutes or repeated ceiling breach |
 | AI cost completeness | 100% model/token/unit/retry fields present for AI usage | Any AI-heavy month has unknown cost |
 | Acquisition economics | CAC recorded by source; payback reported and proposed ceiling ≤12 months | CAC missing or payback >12 months after sample |

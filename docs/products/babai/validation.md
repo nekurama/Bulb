@@ -11,6 +11,9 @@ sources:
   - economics-model.md (Track 2 v0.5)
   - architecture-cost-options.md (proposed 15-minute capacity gates)
   - e3e4e855ca0214a5c664c07ec5b6513c560a7261 (product scale economics source)
+  - "2026-09-21 FOUNDER DECISION PACKET"
+  - "2026-09-21 FOUNDER SCALE/COST BASELINE (current task input)"
+  - "2026-09-21 FOUNDER ECONOMIC TARGET CLARIFICATION (current task input)"
 ---
 
 # Validation
@@ -172,6 +175,16 @@ These are proposed safety/economics controls, pending founder approval:
 
 These conditions should stop expansion while the evidence is reviewed; they do
 not authorize refunds, pricing changes, or accounting treatment by themselves.
+The internal capacity reference is maintained in
+[`economics-model.md`](economics-model.md), section “Founder scale and cost
+baseline”. Stage 0 records the six-flow/nine-gateway-hit workload primitives,
+request classification, latency/error/retry, support minutes, incidents and
+cost categories for one business. Stage 1 repeats those measures per
+restaurant across the 10%/25%/50%/100% conversion sensitivities. Stage 2
+reviews the 500-restaurant goal against the supplied 1,000-restaurant
+reference envelope, support/incident load and both economics views: the prior
+unresolved ₹25L income-unit sensitivity and the separate clarified ₹25L
+monthly operating-profit target after non-founder operating costs.
 
 ## Operational capacity evidence gate — proposed
 
@@ -200,6 +213,15 @@ only support is considered invalid for Stage 2 unless a separately approved
 capacity plan demonstrates otherwise.
 
 ## Kill / success signals
+Margin must be reported as recognized income against **total attributable
+expenditure**, including cash costs, onboarding/support effort, tooling,
+failure/refund/remediation cost and other attributable pilot expenditure. The
+clarified ₹25L target is a monthly **business operating-profit** planning
+trigger after non-founder operating costs plus a separately modelled founder
+transition cost; it is not a contribution-margin percentage and does not
+replace the pilot contribution metric. See
+[`economics-model.md`](economics-model.md); do not report a
+variable-cost-only margin as the decision metric.
 
 The product should be judged on sustained usage, customer and restaurant adoption, and business value, not merely feature completion. The founder north star is:
 
@@ -218,7 +240,20 @@ actual-rate register rather than historical price hypotheses.
 
 The pilot is also intended to expose practical workflow, traffic, customer-experience, and data complexities. Findings may lead to changes in the interface, workflows, onboarding, or other product initiatives before broader expansion.
 
-Expansion beyond the initial 10 should be based on evidence from the pilot, with restaurant onboarding increasing progressively rather than switching immediately to aggressive market acquisition.
+The proposed gate requires, together, repeatable activation of at least three
+restaurants, at least 80% live within seven days, at least 90% accepted-order
+completion, no more than 5% missed/duplicate orders, at least 80% staff-led
+active order sessions, recurring combined Manoj/Vinay support of no more than
+12 hours per restaurant per month, complete income/expenditure evidence,
+non-negative base contribution at the proposed 40% sensitivity, and zero
+unresolved safety, privacy or payment-integrity exception. The minimum samples
+and hold conditions are maintained in [`pilot-metrics.md`](pilot-metrics.md).
+The ₹25L monthly operating-profit target is not a Stage 0/1/2 pass threshold;
+the 500/1,000-restaurant table is an internal planning trigger and readiness
+input only.
+Expansion beyond the initial 10 should be based on evidence from the pilot, with
+restaurant onboarding increasing progressively rather than switching immediately
+to aggressive market acquisition.
 
 ## Questions
 

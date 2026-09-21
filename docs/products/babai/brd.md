@@ -8,6 +8,10 @@ sources:
   - nekurama.babai.research.md
   - Founder decision packet (2026-09-21; current task input)
   - e3e4e855ca0214a5c664c07ec5b6513c560a7261 (product scale economics source)
+  - "2026-09-21 FOUNDER DECISION PACKET"
+  - "2026-09-21 ECONOMICS MODEL REVIEW PACKET"
+  - "2026-09-21 FOUNDER SCALE/COST BASELINE (current task input)"
+  - "2026-09-21 FOUNDER ECONOMIC TARGET CLARIFICATION (current task input)"
 ---
 
 # BABAI Product BRD
@@ -129,11 +133,17 @@ requests/order and a hard ceiling of 50 completed orders/day/restaurant. It
 models the 500-restaurant goal (25,000 orders/day and half of the supplied
 1,000-restaurant traffic totals), the supplied 1,000-restaurant reference
 (50,000 orders/day, 2.7M average requests/day and 4.5M heavy-case/day), and
-10%/25%/50%/100% WhatsApp conversion sensitivities. The ₹25L+ income trigger
-is retained with monthly versus annual unit sensitivity because its unit is
-not supplied. See [`economics-model.md`](economics-model.md), section
-“Founder scale and cost baseline”. These are founder inputs and derived
-planning estimates, not a finalized infrastructure or provider choice.
+10%/25%/50%/100% WhatsApp conversion sensitivities. The prior ₹25L+ income
+trigger remains unresolved as to its income unit; it is separate from the
+current internal planning trigger of **₹25,00,000 monthly operating profit
+after non-founder operating costs**, with one-founder ₹5,00,000/month or
+two-founder ₹10,00,000/month transition-cost cases. The economics model shows
+the required revenue and implied price sensitivities without treating them as
+approved pricing, forecasts or guarantees. See
+[`economics-model.md`](economics-model.md), sections “Founder scale and cost
+baseline” and “Founder economic target clarification”. These are founder
+inputs and derived planning estimates, not a finalized infrastructure or
+provider choice.
 
 The ₹999, ₹2,499 and ₹4,999 monthly amounts remain pricing experiments only.
 At `N=10` with advisory AI and base provider inputs, the model shows ₹999 and
@@ -246,10 +256,10 @@ The field research is intentionally not upgraded: it reports strong interest and
 |---|---|
 | `customer-market.md` | Previously question-heavy; now retains an evidence-backed ICP and market answer, with segmentation, switching and expansion gates still partial/unknown. |
 | `experience-and-channels.md` | Previously thin; now records the confirmed WhatsApp/web principle, onboarding and takeover direction, with detailed UX still partial. |
-| `business-model.md` | Retained as a partial commercial model; public pricing is withheld while cost, contribution, GST and pilot-term evidence is collected. |
-| `economics-model.md` | Track 2 v0.5 internal planning artifact; provides low/base/high bands, actual-rate register, 90-day plan, traffic/request/storage sensitivities, direct/indirect cost formulas, provisional fee bands and break-even sensitivity without selecting public pricing. |
-| `validation.md` | Track 3 metric contract with proposed entry/exit/success/kill thresholds; founder approval and pilot evidence remain required. |
-| `pilot-metrics.md` | Added as the proposed scorecard, support-minute telemetry contract, scale/capacity references, AI/CAC/value fields and readiness gate; it is not an approved public metric contract. |
+| `business-model.md` | Retained as the partial commercial model; the fixed 90-day paid pilot is confirmed, while public pricing, agreement terms and contribution-derived pricing remain open. |
+| `economics-model.md` | Retained as the total-expenditure versus income model, now extended with the founder 500/1,000-restaurant scale/cost baseline, conversion sensitivities, the separate ₹25L monthly operating-profit target, founder-transition cases, per-order/per-restaurant formulas, support/incident load, prior income-unit sensitivity and Stage 0/1/2 capacity references. |
+| `validation.md` | Retained as a partial pilot gate and measurement file; it now references the scale baseline for capacity telemetry, while readiness evidence and numeric success/kill thresholds remain proposed. |
+| `pilot-metrics.md` | Added as the proposed scorecard, support-minute telemetry contract, scale/capacity references, AI/CAC/value fields and team-defined readiness evidence gate; it is not an approved public metric contract. |
 | `product-definition.md` | Retained as the current MVP boundary; production cut, edge cases and post-pilot scope remain partial. |
 | `thesis-and-positioning.md` | Retained as current positioning; differentiation is explicitly a thesis, not a proven moat, and legal clearance remains separate. |
 | `domain-model.md` | Reviewed but not changed in this pass; it is a substantial domain artifact with its own remaining battles. |

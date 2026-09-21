@@ -33,7 +33,7 @@ and staff setup, and keeps pickup and delivery in one fulfillment family:
 
 The map is exposed as a collapsed-by-selection internal panel in `index.html`.
 The richer deterministic journey runner is the primary interactive surface;
-the current selected record is rendered locally by `script.js`. Neither
+the current selected record is rendered locally by `app.js`. Neither
 surface submits, persists, fetches, authenticates or calls an endpoint.
 
 ## Raw-chat citation legend

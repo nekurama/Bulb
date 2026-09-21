@@ -23,7 +23,7 @@ availability decision.
 
 | Decision | Implementation boundary |
 |---|---|
-| Static site | Root `index.html`, `styles.css`, `script.js` and `mock-data.json`; no build step, server, auth, payment, analytics, tracker, embed or production backend. |
+| Static site | Root `index.html`, `styles.css`, `app.js` and `mock-data.json`; no build step, server, auth, payment, analytics, tracker, embed or production backend. |
 | Interactive demo | The demo runs ten deterministic invented journey families covering onboarding, menu extraction/publish, staff scope, customer order, payment/fulfillment recovery, order desk, takeover, promo tiers, notifications/recovery and analytics. It is a local state prototype, not a product connection or customer result. |
 | Internal capability review | A collapsed, clearly labeled review panel may show provisional LITE/BASE/PRO experiment labels, capability placeholders, the bounded pilot envelope and planning-only usage sensitivities. It is not public packaging, pricing, entitlement, service-level or availability copy; rates remain placeholders. |
 | Primary CTA | No CTA form or destination is wired. The page exposes a boundary-only review card until a company-owned route, notice, retention rule and accountable owner are approved. |
@@ -119,7 +119,7 @@ Run from the repository root:
 ```sh
 git diff --check
 python -m json.tool mock-data.json >/dev/null
-node --check script.js
+node --check app.js
 ```
 
 Additional QA should manually verify keyboard traversal across the mock and 14-family

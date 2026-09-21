@@ -7,7 +7,7 @@ last-reviewed: 2026-09-21
 # BABAI richer deterministic local-state journey
 
 This record defines the screen/state map behind the static journey runner in
-`index.html` and `script.js`. It deliberately does not reuse `01 / THE MOCK
+`index.html` and `app.js`. It deliberately does not reuse `01 / THE MOCK
 FLOW`; the runner is a local state-machine prototype, not a conversational
 story. Every fixture is invented and every transition is deterministic.
 

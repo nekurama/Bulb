@@ -282,7 +282,7 @@
     if (action === "item") state.item = control.dataset.value;
     if (action === "variant") state.variant = control.dataset.value;
     if (action === "quantity") state.quantity = Math.max(1, Math.min(9, state.quantity + Number(control.dataset.value)));
-    render({ announce: true });
+    moveConversation(1);
   };
 
   body.addEventListener("click", handleLocalAction);
@@ -315,7 +315,7 @@
     next.disabled = state.stage === stages.length - 1 && state.messageStep === conversation.length - 1;
     previous.textContent = state.messageStep === 0 && state.stage > 0 ? "← Previous scenario" : "← Previous message";
     next.textContent = state.messageStep === conversation.length - 1 && state.stage < stages.length - 1 ? "Next scenario →" : "Next message →";
-    const embeddedControls = state.stage === 0 && state.messageStep >= 3 ? `
+    const embeddedControls = state.stage === 0 && state.messageStep === 3 ? `
       <div class="chat-bubble outgoing">
         <span class="chat-meta">BA · MENU REPLY</span>
         <div class="local-controls" aria-label="Menu reply controls">
@@ -327,7 +327,7 @@
           <p class="control-note">Reply stays inside this mock conversation.</p>
         </div>
       </div>
-    ` : state.stage === 1 && state.messageStep >= 1 ? `
+    ` : state.stage === 1 && state.messageStep === 1 ? `
       <div class="chat-bubble outgoing">
         <span class="chat-meta">CU · EDIT ORDER</span>
         <div class="local-controls" aria-label="Order edit controls">
@@ -580,7 +580,8 @@
         [["Create ₹100 voucher", "Apply voucher", "Show last week"], ["Voucher created.", "Voucher applied.", "Weekly statistics opened."]],
       ];
       const options = controls[state.stage];
-      if (!options) return "";
+      const actionSteps = [2, 1, 1, 1, 1, 1, 1, 1];
+      if (!options || state.messageStep !== actionSteps[state.stage]) return "";
       return `
         <div class="chat-bubble outgoing">
           <span class="chat-meta">RESTAURANT · CHAT ACTION</span>
@@ -685,7 +686,7 @@
         ["Voucher created.", "Voucher applied.", "Weekly statistics opened."],
       ][stageIndex][actionIndex];
       state.notice = actionText;
-      render({ announce: true });
+      moveConversation(1);
     });
 
     previous.addEventListener("click", () => moveConversation(-1));

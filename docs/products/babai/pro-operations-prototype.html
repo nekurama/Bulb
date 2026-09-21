@@ -94,16 +94,16 @@
             <button type="button">Bulk actions</button>
           </div>
           <div class="columns">
-            <section class="column" aria-labelledby="new-title">
+            <section class="column" data-queue="new" aria-labelledby="new-title">
               <header><strong id="new-title">NEW</strong><span class="count">3</span></header>
               <div class="order-list">
-                <article class="order selected">
+                <article class="order selected" data-order-id="1048">
                   <div class="order-top"><span class="order-id">#1048</span><span class="order-time">2m</span></div>
                   <strong>2 × Chicken Biryani · 1 × Paneer Tikka</strong>
                   <div class="order-meta"><span>WhatsApp · ₹780 paid</span><span class="chip">DELIVERY</span></div>
                   <div class="actions"><button type="button">Accept</button><button type="button">Reject</button></div>
                 </article>
-                <article class="order">
+                <article class="order" data-order-id="1047">
                   <div class="order-top"><span class="order-id">#1047</span><span class="order-time">4m</span></div>
                   <strong>1 × Family Combo</strong>
                   <div class="order-meta"><span>WhatsApp · payment pending</span><span class="chip warn">PAYMENT</span></div>
@@ -111,10 +111,10 @@
                 </article>
               </div>
             </section>
-            <section class="column" aria-labelledby="support-title">
+            <section class="column" data-queue="support" aria-labelledby="support-title">
               <header><strong id="support-title">NEEDS SUPPORT</strong><span class="count">1</span></header>
               <div class="order-list">
-                <article class="order">
+                <article class="order" data-order-id="1042">
                   <div class="order-top"><span class="order-id">#1042</span><span class="order-time">11m</span></div>
                   <strong>Starter replacement · ₹100 pending</strong>
                   <div class="order-meta"><span>Customer waiting</span><span class="chip warn">STAFF 1</span></div>
@@ -122,10 +122,10 @@
                 </article>
               </div>
             </section>
-            <section class="column" aria-labelledby="prep-title">
+            <section class="column" data-queue="preparing" aria-labelledby="prep-title">
               <header><strong id="prep-title">PREPARING</strong><span class="count">5</span></header>
               <div class="order-list">
-                <article class="order">
+                <article class="order" data-order-id="1039">
                   <div class="order-top"><span class="order-id">#1039</span><span class="order-time">8m</span></div>
                   <strong>3 × Rice Bowl · 2 × Drinks</strong>
                   <div class="order-meta"><span>Kitchen started</span><span class="chip">PAID</span></div>
@@ -133,10 +133,10 @@
                 </article>
               </div>
             </section>
-            <section class="column" aria-labelledby="ready-title">
+            <section class="column" data-queue="ready" aria-labelledby="ready-title">
               <header><strong id="ready-title">READY / DELIVERY</strong><span class="count">3</span></header>
               <div class="order-list">
-                <article class="order">
+                <article class="order" data-order-id="1038">
                   <div class="order-top"><span class="order-id">#1038</span><span class="order-time">3m</span></div>
                   <strong>Pickup code 4821</strong>
                   <div class="order-meta"><span>Partner assigned</span><span class="chip">OUT</span></div>
@@ -200,26 +200,62 @@
         const announce = (message) => {
           if (status) status.textContent = `Local mock: ${message}. Nothing submits.`;
         };
-        const stateFor = (action) => {
-          if (action === "Accept") return "ACCEPTED";
-          if (action === "Reject") return "REJECTED";
-          if (action === "Mark ready") return "READY";
-          if (action === "Verify code") return "PICKUP VERIFIED";
-          if (action === "Track") return "TRACKING";
-          return null;
+        const normalize = (value) => value.toLowerCase().replace(/\s+/g, " ").trim();
+        const queue = (name) => document.querySelector(`[data-queue="${name}"] .order-list`);
+        const setOrderState = (order, state, targetQueue, nextActions) => {
+          const chip = order.querySelector(".chip");
+          if (chip) {
+            chip.textContent = state;
+            chip.classList.toggle("warn", state === "REJECTED" || state === "PAYMENT");
+          }
+          order.dataset.state = state;
+          if (targetQueue) queue(targetQueue)?.append(order);
+          const actions = order.querySelector(".actions");
+          if (actions && nextActions) {
+            actions.innerHTML = nextActions.map((label) => `<button type="button">${label}</button>`).join("");
+          }
         };
-        document.querySelectorAll("button").forEach((button) => {
-          button.addEventListener("click", () => {
-            const action = button.textContent.trim();
-            const state = stateFor(action);
-            const order = button.closest(".order");
-            const chip = order?.querySelector(".chip");
-            if (state && chip) {
-              chip.textContent = state;
-              chip.classList.toggle("warn", state === "REJECTED");
-            }
-            announce(`${action} applied to the local fixture`);
-          });
+        document.addEventListener("click", (event) => {
+          const button = event.target.closest("button");
+          if (!button) return;
+          const action = normalize(button.textContent);
+          const order = button.closest(".order");
+          if (action === "accept" || action === "accept order") {
+            const selected = order || document.querySelector(".order.selected");
+            if (selected) setOrderState(selected, "ACCEPTED", "preparing", ["Mark ready", "Open support"]);
+            announce("order accepted and moved to PREPARING");
+            return;
+          }
+          if (action === "reject") {
+            if (order) setOrderState(order, "REJECTED", "new", ["Open"]);
+            announce("order rejected and retained for audit");
+            return;
+          }
+          if (action === "mark ready") {
+            if (order) setOrderState(order, "READY", "ready", ["Verify code", "Track"]);
+            announce("order marked ready and moved to READY / DELIVERY");
+            return;
+          }
+          if (action === "verify code") {
+            if (order) setOrderState(order, "PICKUP VERIFIED", "ready", ["Track"]);
+            announce("pickup code verified");
+            return;
+          }
+          if (action === "track") {
+            if (order) setOrderState(order, "OUT FOR DELIVERY", "ready", ["Open"]);
+            announce("delivery tracking opened");
+            return;
+          }
+          if (action === "resolve") {
+            if (order) order.remove();
+            announce("support case resolved and removed from NEEDS SUPPORT");
+            return;
+          }
+          if (action === "assign") {
+            announce("staff assignment saved for the local fixture");
+            return;
+          }
+          announce(`${button.textContent.trim()} applied to the local fixture`);
         });
       })();
     </script>

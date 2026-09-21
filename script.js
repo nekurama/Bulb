@@ -1,33 +1,113 @@
 (() => {
   "use strict";
 
-  const initialRoute = "Primary route slot";
-  const demoScenes = [
-    {
-      kicker: "CUSTOMER · MOCK CONVERSATION",
-      title: "“Is the paneer bowl available for pickup tonight?”",
-      copy: "A customer question arrives in the restaurant’s own WhatsApp context. The assistant can help interpret it; it does not invent inventory or promise an order.",
-      detail: "Invented scene; no real customer or menu data is used."
+  const journeyDefinitions = {
+    "admin-onboarding": {
+      title: "Admin onboarding → owner invite/status",
+      states: [
+        ["Admin intake", "ADMIN · ONBOARDING", "Start the invented workspace.", "A synthetic restaurant workspace is queued for controlled setup.", "Internal admin reviewer", "No identity, tenant or invitation exists; fixture only.", "Owner invite draft", "LOCAL READY", "No account or channel is created."],
+        ["Owner invite sent", "ADMIN · OWNER INVITE", "Invite prepared for an invented owner.", "The invitation state is visible without an address, token or send action.", "Internal admin reviewer", "Owner fixture only; no email, phone or auth token.", "Invite pending", "REVIEW", "Confirm destination and scope before any real invite."],
+        ["Invite pending", "OWNER · STATUS", "Waiting for owner acknowledgement.", "A pending state remains explicit instead of implying that access exists.", "Invented owner fixture", "No session, credential or membership is active.", "Owner acknowledgement", "ATTENTION", "No automated escalation or reminder is sent."],
+        ["Owner acknowledged", "OWNER · STATUS", "Owner acknowledgement is represented locally.", "The next setup step can be reviewed without authenticating the owner.", "Invented owner fixture", "Membership is a label; no capability is granted.", "Workspace setup", "LOCAL READY", "Review scope before owner access."],
+        ["Onboarding ready", "ADMIN · READY", "Workspace is ready for the next internal review.", "The setup state is complete only inside this deterministic fixture.", "Admin and owner reviewers", "Tenant and branch data remain invented and local.", "Reset or choose another journey", "DONE", "Ready means demo-ready, not production-ready."]
+      ]
     },
-    {
-      kicker: "CONTEXT · MOCK MENU",
-      title: "A reviewed menu gives the conversation useful context.",
-      copy: "A future controlled setup could provide a validated catalog or menu. This preview uses an invented item and no restaurant data.",
-      detail: "Invented scene; suggestion ≠ published menu state."
+    "menu-ingestion": {
+      title: "Menu source → extraction review → publish",
+      states: [
+        ["Source selected · image", "OWNER · MENU SOURCE", "Review an invented menu image.", "The source type is visible without upload or file access.", "Invented owner", "No image, PDF, text or restaurant catalog is read.", "Extraction review", "LOCAL READY", "Fixture source only."],
+        ["Source selected · PDF", "OWNER · MENU SOURCE", "Review an invented PDF menu path.", "PDF is represented as a source option, not uploaded or parsed.", "Invented owner", "No file picker, document bytes or OCR request.", "Extraction review", "LOCAL READY", "Fixture source only."],
+        ["Source selected · text", "OWNER · MENU SOURCE", "Review an invented text menu path.", "Plain text is represented as a source option for comparison.", "Invented owner", "No pasted content or external parser.", "Extraction review", "LOCAL READY", "Fixture source only."],
+        ["Extraction review", "MENU · EXTRACTION REVIEW", "Candidate items need human verification.", "An invented parser result shows confidence and unresolved fields.", "Owner or menu reviewer", "No canonical menu is changed; uncertain items stay gated.", "Correction needed", "ATTENTION", "Do not publish unverified extraction."],
+        ["Correction needed", "MENU · CORRECTION", "Correct a fictional item, price or availability.", "The correction state is shown without an editable form or persistence.", "Owner or menu reviewer", "No menu data is stored; corrections are display-only.", "Publish review", "REVIEW", "Every correction remains attributable in the imagined flow."],
+        ["Publish review", "MENU · PUBLISH REVIEW", "Review the candidate revision before publish.", "Version, availability and unresolved warnings remain visible.", "Owner with menu permission", "No publish permission is evaluated; no catalog is live.", "Published revision", "GATED", "Publish requires explicit owner review."],
+        ["Published revision", "MENU · PUBLISHED", "A fictional revision is marked published.", "The state demonstrates a stable menuVersion lineage for later cart review.", "Owner and customer read model", "Only invented menu facts exist; no customer menu is served.", "Reset or choose another journey", "DONE", "Published means fixture state only."]
+      ]
     },
-    {
-      kicker: "ORDER · MOCK STATE",
-      title: "Pickup order drafted for business review.",
-      copy: "The proposed order is structured so staff can accept, reject or correct it. Payment and order state are not inferred from a chat message.",
-      detail: "Invented scene; status: needs human review."
+    "staff-access": {
+      title: "Staff roles → permissions → handoff",
+      states: [
+        ["Role review", "STAFF · ROLE", "Review an invented staff role.", "Owner, manager and operator labels are shown as personas.", "Invented owner or manager", "No staff identity, invite or credential exists.", "Permission scope", "REVIEW", "Role is not access."],
+        ["Permission scope", "STAFF · PERMISSION", "Assign a narrow branch/action scope.", "The fixture separates role from branch and action permission.", "Invented owner or manager", "No RBAC decision or token is issued.", "Handoff ready", "GATED", "Scope must be explicit before handoff."],
+        ["Handoff ready", "STAFF · HANDOFF", "Prepare a fictional attention handoff.", "A staff member can be named as the imagined next operator.", "Invented manager", "No staff contact, queue or notification is created.", "Staff attention", "LOCAL READY", "Handoff is a state preview."],
+        ["Staff attention", "STAFF · ATTENTION", "Show a bounded task for review.", "The operator sees the action and branch boundary, not hidden customer data.", "Invented staff operator", "No customer conversation, payment or credential is exposed.", "Complete or return", "ATTENTION", "A human decision is required."]
+      ]
     },
-    {
-      kicker: "TAKEOVER · MOCK HANDOFF",
-      title: "A person can take over when context needs care.",
-      copy: "Human takeover is part of the intended pilot boundary. Staff remain responsible for controlled business decisions and customer communication.",
-      detail: "Invented scene; no message is sent from this page."
+    "customer-order": {
+      title: "Discovery → menu → item/variant → cart → review",
+      states: [
+        ["Discovery", "CUSTOMER · DISCOVERY", "Browse an invented restaurant.", "A fictional branch card leads to a menu without location or identity lookup.", "Invented customer", "No customer profile, location or analytics event leaves the page.", "Menu", "LOCAL READY", "Discovery is not an order."],
+        ["Menu", "CUSTOMER · MENU", "Review the current fictional menu.", "Menu version and availability context are visible.", "Invented customer", "No catalog is fetched; no menu is published.", "Item and variant", "LOCAL READY", "Menu context is not commercial commitment."],
+        ["Item and variant", "CUSTOMER · ITEM", "Choose a fictional item variant.", "A paneer bowl variant is selected with an invented menuVersion.", "Invented customer", "No inventory, allergen, price or customer preference is real.", "Cart", "LOCAL READY", "Selection carries context only."],
+        ["Cart", "CUSTOMER · CART", "Review a mutable local cart.", "Quantity and modifier intent are shown as draft state.", "Invented customer", "No cart ID, address or customer record exists.", "Order review", "REVIEW", "Cart is not submitted."],
+        ["Order review", "CUSTOMER · REVIEW", "Show the last check before an order.", "Freshness, availability and human review cues remain explicit.", "Customer and restaurant reviewer", "No order, invoice or payment action is created.", "Reset or choose another journey", "GATED", "Review does not imply checkout."]
+      ]
+    },
+    "fulfillment": {
+      title: "Payment/pickup/delivery tiers and recovery",
+      states: [
+        ["LITE · payment pending", "LITE · PAYMENT", "Payment intent is pending.", "The basic tier shows a pending boundary without opening checkout.", "Invented customer", "No method, provider, amount or payment intent exists.", "Failure or confirmation review", "PENDING", "Payment does not accept the order."],
+        ["BASE · payment failure", "BASE · PAYMENT", "A fictional payment failure needs review.", "Failure is explicit and does not look like a completed charge.", "Invented customer and staff", "No provider response, card data or retry request.", "Retry", "ATTENTION", "Staff review owns the next action."],
+        ["BASE · payment retry", "BASE · PAYMENT", "Retry is available as a bounded local state.", "The retry path demonstrates idempotent intent without performing it.", "Staff reviewer", "No retry token or provider call is generated.", "Reconciliation", "RECOVERABLE", "Retry is not a charge."],
+        ["PRO · reconciliation", "PRO · PAYMENT", "Reconcile a fictional payment fact.", "A provider mismatch is held for staff reconciliation.", "Payment reviewer", "No webhook, receipt, refund or ledger exists.", "Pickup or delivery choice", "GATED", "PRO API capability remains internal/gated."],
+        ["LITE · pickup ready", "LITE · PICKUP", "Pickup is the local fulfillment path.", "A ready-for-pickup state avoids delivery dependencies.", "Restaurant staff", "No address, pickup code or customer notification.", "Completion", "READY", "Ready means fixture state."],
+        ["BASE · delivery pending", "BASE · DELIVERY", "Delivery is pending provider review.", "A quote/booking boundary is visible without a partner request.", "Restaurant staff and imagined provider", "No address, quote, driver or tracking URL.", "Provider failure", "PENDING", "Booking is not implied."],
+        ["PRO · provider failure", "PRO · DELIVERY", "Provider failure needs recovery.", "The failure is held for retry or alternate fulfillment review.", "Delivery reviewer", "No provider account, callback or real retry.", "Reconciliation", "ATTENTION", "PRO integration remains gated."],
+        ["Reconciled", "FULFILLMENT · RECOVERY", "Pickup/delivery facts are reconciled locally.", "The journey ends with an explicit reviewed state.", "Staff reviewer", "No delivery completion or payment settlement is real.", "Reset or choose another journey", "DONE", "Completion is only a local fixture."]
+      ]
+    },
+    "order-desk": {
+      title: "Order desk lifecycle and attention cues",
+      states: [
+        ["New", "ORDER DESK · NEW", "A new fictional order is visible.", "The desk shows a review queue item without an order record.", "Restaurant staff", "No customer identity, order ID or payment fact exists.", "Accepted", "ATTENTION", "Staff must review."],
+        ["Accepted", "ORDER DESK · ACCEPTED", "Staff accepted the fictional order.", "Acceptance remains separate from payment and fulfillment.", "Restaurant staff", "No kitchen ticket or customer message is sent.", "Preparing", "LOCAL READY", "Acceptance is illustrative."],
+        ["Preparing", "ORDER DESK · PREPARING", "The kitchen state is in progress.", "The desk keeps operational state visible.", "Restaurant staff", "No kitchen system, timing or inventory is connected.", "Ready", "LOCAL READY", "No SLA is implied."],
+        ["Ready", "ORDER DESK · READY", "The order is ready for pickup or handoff.", "An attention cue identifies the next staff action.", "Restaurant staff", "No notification or delivery booking occurs.", "Completed", "ATTENTION", "Human confirmation remains required."],
+        ["Completed", "ORDER DESK · COMPLETED", "The fictional order is completed.", "Completion can lead to reorder or feedback review in another journey.", "Restaurant staff", "No receipt, review or customer history is stored.", "Reset or choose another journey", "DONE", "Completed is local-only."]
+      ]
+    },
+    "takeover": {
+      title: "Automated → human takeover → automated",
+      states: [
+        ["Automated", "CONVERSATION · AUTOMATED", "Automation is the default fixture mode.", "A fictional conversation is shown as awaiting routine handling.", "Invented customer and assistant", "No message, channel, customer or assistant request exists.", "Requested", "LOCAL READY", "Automation is only a label."],
+        ["Requested", "CONVERSATION · REQUESTED", "A human-help request is raised.", "The attention cue pauses conversational automation in the model.", "Invented customer", "No staff alert, message send or customer data exists.", "Active", "ATTENTION", "Claim is required."],
+        ["Active", "CONVERSATION · HUMAN ACTIVE", "A fictional staff member has taken over.", "The handoff is explicit and reversible.", "Invented staff operator", "No staff identity, conversation or personal channel is used.", "Released", "HUMAN ACTIVE", "Human control is local."],
+        ["Released", "CONVERSATION · HUMAN RELEASED", "Staff released the conversation.", "The state records a return path without sending anything.", "Invented staff operator", "No release event or message is emitted.", "Automated", "LOCAL READY", "Return is reviewable."],
+        ["Automated again", "CONVERSATION · AUTOMATED", "Automation is available again in the fixture.", "The takeover loop is complete.", "Invented customer and assistant", "No live automation or channel resumes.", "Reset or choose another journey", "DONE", "Loop complete locally."]
+      ]
+    },
+    "promo": {
+      title: "Promo/combo LITE → BASE → PRO gates",
+      states: [
+        ["LITE · simple offer", "LITE · PROMO", "A simple invented offer is active.", "The fixture shows one basic condition and a visible validity window.", "Invented owner and customer", "No coupon, price, tax or eligibility is real.", "BASE combo review", "LOCAL READY", "LITE limit: one simple offer."],
+        ["BASE · combo review", "BASE · COMBO", "A combo needs deterministic review.", "The combo composition and eligibility are visible before evaluation.", "Invented owner", "No redemption counter, cart mutation or commercial result.", "Expiry check", "REVIEW", "BASE limit: reviewable combo."],
+        ["BASE · expired", "BASE · PROMO EXPIRY", "The fictional offer has expired.", "Expiry blocks application rather than silently changing the cart.", "Invented owner and customer", "No clock, coupon or historical order is consulted.", "PRO capability gate", "ATTENTION", "Expired is explicit."],
+        ["PRO · gated capability", "PRO · PROMO", "Advanced promotion behavior is gated.", "The screen names the capability without exposing an API or entitlement.", "Internal product reviewer", "No API, pricing, entitlement or provider integration.", "Reset or choose another journey", "GATED", "PRO remains internal/gated."]
+      ]
+    },
+    "notifications-recovery": {
+      title: "Notifications, reorder, cancel/refund and recovery",
+      states: [
+        ["Order-ready notification", "NOTIFICATION · READY", "A local notification preview is eligible.", "The message is rendered as a fixture, not sent.", "Notification reviewer", "No phone, template, provider or consent record.", "Reorder preview", "LOCAL READY", "Preview only."],
+        ["Reorder preview", "CUSTOMER · REORDER", "A past fictional order becomes a new-cart preview.", "Current menu context is used instead of cloning old price truth.", "Invented customer", "No order history, loyalty or customer identity exists.", "Cancel request", "REVIEW", "Reorder needs review."],
+        ["Cancel request", "ORDER · CANCEL", "A cancellation request is waiting for staff.", "Staff ownership is visible before any financial change.", "Invented customer and staff", "No cancellation, order or refund is created.", "Refund review", "ATTENTION", "Customer request is not completion."],
+        ["Refund review", "PAYMENT · REFUND", "A fictional refund amount needs agreement.", "The screen distinguishes pending, rejected and reconciled outcomes.", "Staff reviewer", "No payment, invoice, amount or refund provider exists.", "Provider failure", "GATED", "Refund remains manual/reviewable."],
+        ["Provider failure", "RECOVERY · PROVIDER", "A notification or payment provider failed.", "The flow holds the failure for safe retry or manual correction.", "Internal reviewer", "No provider callback, retry or outbound message.", "Disconnected channel", "ATTENTION", "No success-shaped fallback."],
+        ["Disconnected channel", "RECOVERY · CHANNEL", "The channel is disconnected.", "Customer-facing actions are visibly paused.", "Admin reviewer", "No WhatsApp connection, credential or reconnect action.", "Recovery review", "BLOCKED", "Channel recovery is gated."],
+        ["Recovery review", "RECOVERY · REVIEW", "Admin/staff review the next safe action.", "The recovery state closes the loop without hiding the failure.", "Admin and staff reviewer", "No incident record, customer contact or provider mutation.", "Reset or choose another journey", "DONE", "Recovery is local-only."]
+      ]
+    },
+    analytics: {
+      title: "Admin funnel and analytics states",
+      states: [
+        ["Funnel empty", "ADMIN · FUNNEL", "No synthetic activity is present.", "An empty funnel is displayed without invented performance claims.", "Invented admin reviewer", "No tracker, customer cohort or metric source exists.", "Funnel activity", "LOCAL READY", "Empty is a valid state."],
+        ["Funnel activity", "ADMIN · FUNNEL", "Synthetic discovery-to-review steps are visible.", "The funnel uses fixture counts only to demonstrate shape.", "Invented admin reviewer", "No analytics event is sent or retained.", "Attention queue", "REVIEW", "Counts are not evidence."],
+        ["Attention queue", "ADMIN · OPERATIONS", "Open exceptions are grouped for review.", "Payment, channel and order cues are visible by scope.", "Invented owner/admin", "No staff queue, customer data or action is performed.", "Scoped analytics", "ATTENTION", "Review is permission-gated."],
+        ["Scoped analytics", "ADMIN · ANALYTICS", "Branch-scoped summaries are available.", "The state demonstrates comparison and recovery context.", "Invented owner/admin", "No exports, sales, retention or customer metric is real.", "Reconciliation", "GATED", "No public claim."],
+        ["Reconciliation", "ADMIN · RECOVERY", "Analytics and operational state are reconciled locally.", "The journey ends with an explicit unknown/open gate where evidence is absent.", "Invented admin reviewer", "No source system, dashboard or audit record exists.", "Reset or choose another journey", "DONE", "Reconciled means reviewed fixture."]
+      ]
     }
-  ];
+  };
 
   const coverageFlows = [
     {
@@ -242,22 +322,14 @@
     }
   ];
 
-  const state = { step: 0, route: initialRoute };
+  const state = { journeyId: "admin-onboarding", journeyIndex: 0 };
   const elements = {
-    kicker: document.querySelector("#mock-kicker"),
-    title: document.querySelector("#mock-title"),
-    copy: document.querySelector("#mock-copy"),
-    detail: document.querySelector("#mock-detail"),
-    next: document.querySelector("#demo-next"),
-    back: document.querySelector("#demo-back"),
-    resetDemo: document.querySelector("#demo-reset"),
-    steps: [...document.querySelectorAll(".demo-step")],
-    form: document.querySelector("#interest-form"),
-    submit: document.querySelector("#form-preview"),
-    status: document.querySelector("#form-status"),
-    route: document.querySelector("#route"),
-    routes: [...document.querySelectorAll(".route-button")],
-    fields: [...document.querySelectorAll("#interest-form input, #interest-form select")],
+    journeyScenario: document.querySelector("#journey-scenario"),
+    journeyStateTabs: document.querySelector("#journey-state-tabs"),
+    journeyScreen: document.querySelector("#journey-screen"),
+    journeyNext: document.querySelector("#journey-next"),
+    journeyBack: document.querySelector("#journey-back"),
+    journeyReset: document.querySelector("#journey-reset"),
     coverageTabs: [...document.querySelectorAll(".coverage-tab")],
     coveragePanel: document.querySelector("#coverage-panel")
   };
@@ -267,23 +339,58 @@
     if (element) element.textContent = value;
   };
 
-  function renderStep() {
-    const scene = demoScenes[state.step];
-    setText("#mock-kicker", scene.kicker);
-    setText("#mock-title", scene.title);
-    setText("#mock-copy", scene.copy);
-    setText("#mock-detail", scene.detail);
-    if (elements.back) elements.back.disabled = state.step === 0;
-    if (elements.next) elements.next.textContent = state.step === demoScenes.length - 1 ? "Restart scene ↺" : "Next scene →";
-    elements.steps.forEach((button, index) => {
-      const isActive = index === state.step;
-      button.classList.toggle("is-active", isActive);
-      if (isActive) {
-        button.setAttribute("aria-current", "step");
-      } else {
-        button.removeAttribute("aria-current");
-      }
+  function currentJourney() {
+    return journeyDefinitions[state.journeyId] || journeyDefinitions["admin-onboarding"];
+  }
+
+  function selectJourneyState(index) {
+    const journey = currentJourney();
+    state.journeyIndex = Math.min(Math.max(index, 0), journey.states.length - 1);
+    renderJourney();
+  }
+
+  function renderJourney() {
+    const journey = currentJourney();
+    const current = journey.states[state.journeyIndex];
+    const [label, kicker, title, summary, actor, boundary, next, status, attention] = current;
+    elements.journeyStateTabs.replaceChildren();
+    journey.states.forEach((journeyState, index) => {
+      const tab = document.createElement("button");
+      tab.type = "button";
+      tab.className = "journey-state-tab";
+      tab.textContent = `${String(index + 1).padStart(2, "0")} · ${journeyState[0]}`;
+      tab.setAttribute("role", "tab");
+      tab.setAttribute("aria-controls", "journey-screen");
+      tab.setAttribute("aria-selected", String(index === state.journeyIndex));
+      tab.tabIndex = index === state.journeyIndex ? 0 : -1;
+      tab.addEventListener("click", () => selectJourneyState(index));
+      tab.addEventListener("keydown", (event) => {
+        if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return;
+        event.preventDefault();
+        const nextIndex = event.key === "Home"
+          ? 0
+          : event.key === "End"
+            ? journey.states.length - 1
+            : (index + (event.key === "ArrowDown" ? 1 : -1) + journey.states.length) % journey.states.length;
+        selectJourneyState(nextIndex);
+        elements.journeyStateTabs.children[nextIndex].focus();
+      });
+      elements.journeyStateTabs.append(tab);
     });
+    setText("#journey-kicker", kicker);
+    setText("#journey-title", title);
+    setText("#journey-summary", summary);
+    setText("#journey-actor", actor);
+    setText("#journey-boundary", boundary);
+    setText("#journey-next-state", next);
+    setText("#journey-attention-text", attention);
+    setText("#journey-status", status);
+    elements.journeyScreen.setAttribute("aria-label", `${label}: ${title}`);
+    elements.journeyScreen.classList.toggle("is-attention", status === "ATTENTION" || status === "BLOCKED" || status === "FAILED");
+    elements.journeyScreen.classList.toggle("is-gated", status === "GATED");
+    elements.journeyBack.disabled = state.journeyIndex === 0;
+    elements.journeyNext.disabled = state.journeyIndex === journey.states.length - 1;
+    elements.journeyNext.textContent = state.journeyIndex === journey.states.length - 1 ? "Journey complete" : "Advance local state →";
   }
 
   function renderCoverage(flowId, announce = true) {
@@ -313,75 +420,18 @@
     }
   }
 
-  function setRouteSelection(button) {
-    state.route = button.dataset.route || initialRoute;
-    if (elements.route) elements.route.value = state.route;
-    elements.routes.forEach((route) => {
-      const isSelected = route === button;
-      route.classList.toggle("is-selected", isSelected);
-      route.setAttribute("aria-pressed", String(isSelected));
-    });
-  }
-
-  function chooseRoute(button) {
-    setRouteSelection(button);
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    document.querySelector("#pilot-form")?.scrollIntoView({
-      behavior: reduceMotion ? "auto" : "smooth",
-      block: "center"
-    });
-  }
-
-  function setStatus(message, focus = false) {
-    if (!elements.status) return;
-    elements.status.hidden = false;
-    elements.status.textContent = message;
-    if (focus) elements.status.focus();
-  }
-
-  function clearValidationState() {
-    elements.fields.forEach((field) => field.removeAttribute("aria-invalid"));
-  }
-
-  function resetFormState() {
-    state.route = initialRoute;
-    if (elements.route) elements.route.value = initialRoute;
-    const defaultButton = elements.routes.find((button) => button.dataset.route === initialRoute) || elements.routes[0];
-    if (defaultButton) setRouteSelection(defaultButton);
-    clearValidationState();
-    if (elements.status) {
-      elements.status.hidden = true;
-      elements.status.textContent = "";
-    }
-  }
-
-  if (elements.next && elements.back) {
-    elements.next.addEventListener("click", () => {
-      state.step = state.step === demoScenes.length - 1 ? 0 : state.step + 1;
-      renderStep();
-    });
-    elements.back.addEventListener("click", () => {
-      state.step = Math.max(0, state.step - 1);
-      renderStep();
-    });
-  }
-
-  elements.resetDemo?.addEventListener("click", () => {
-    state.step = 0;
-    renderStep();
+  elements.journeyScenario.addEventListener("change", () => {
+    state.journeyId = elements.journeyScenario.value;
+    state.journeyIndex = 0;
+    renderJourney();
   });
 
-  elements.steps.forEach((button) => {
-    button.addEventListener("click", () => {
-      const requestedStep = Number(button.dataset.step);
-      if (Number.isInteger(requestedStep) && requestedStep >= 0 && requestedStep < demoScenes.length) {
-        state.step = requestedStep;
-        renderStep();
-      }
-    });
+  elements.journeyNext.addEventListener("click", () => selectJourneyState(state.journeyIndex + 1));
+  elements.journeyBack.addEventListener("click", () => selectJourneyState(state.journeyIndex - 1));
+  elements.journeyReset.addEventListener("click", () => {
+    state.journeyIndex = 0;
+    renderJourney();
   });
-
-  elements.routes.forEach((button) => button.addEventListener("click", () => chooseRoute(button)));
 
   elements.coverageTabs.forEach((button, index) => {
     button.addEventListener("click", () => renderCoverage(button.dataset.flow));
@@ -399,25 +449,6 @@
     });
   });
 
-  if (elements.form) {
-    if (elements.submit) elements.submit.disabled = false;
-    elements.form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      setStatus(`Demo only: the ${state.route.toLowerCase()} is prepared in this browser, but nothing was sent or stored. A real route requires an approved company-owned destination, privacy notice, retention rule and accountable owner.`, true);
-    });
-    elements.form.addEventListener("invalid", (event) => {
-      event.target.setAttribute("aria-invalid", "true");
-      setStatus("Complete each required field to preview this local-only request. Nothing will be sent or stored.");
-    }, true);
-    elements.fields.forEach((field) => {
-      field.addEventListener("input", () => field.removeAttribute("aria-invalid"));
-      field.addEventListener("change", () => field.removeAttribute("aria-invalid"));
-    });
-    elements.form.addEventListener("reset", () => {
-      window.setTimeout(resetFormState, 0);
-    });
-  }
-
-  renderStep();
+  renderJourney();
   renderCoverage("onboarding", false);
 })();

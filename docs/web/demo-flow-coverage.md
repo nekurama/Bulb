@@ -32,8 +32,9 @@ and staff setup, and keeps pickup and delivery in one fulfillment family:
 14. Admin and analytics
 
 The map is exposed as a collapsed-by-selection internal panel in `index.html`.
-The current selected record is rendered locally by `script.js`; it does not
-submit, persist, fetch, authenticate or call an endpoint.
+The richer deterministic journey runner is the primary interactive surface;
+the current selected record is rendered locally by `script.js`. Neither
+surface submits, persists, fetches, authenticates or calls an endpoint.
 
 ## Raw-chat citation legend
 
@@ -137,8 +138,8 @@ is the corresponding message UUID in `nekurama.raw.chat.json`.
   tracking event leaves the page.
 - **Acceptance check:** Discovery telemetry is distinct from durable order
   state.
-- **Implementation/demo status:** Existing mock scene and coverage state only;
-  no search or analytics service. **Citation:** R1.
+- **Implementation/demo status:** Journey runner plus coverage state; no search
+  or analytics service. **Citation:** R1.
 
 ### 05 — Menu
 
@@ -155,8 +156,8 @@ is the corresponding message UUID in `nekurama.raw.chat.json`.
   image, restaurant record or customer preference.
 - **Acceptance check:** Menu context is visibly different from committed order
   truth.
-- **Implementation/demo status:** Existing menu scene and coverage record only;
-  no catalog ingestion or publish path. **Citation:** R5 and R6.
+- **Implementation/demo status:** Journey runner and coverage record only; no
+  catalog ingestion or publish path. **Citation:** R5 and R6.
 
 ### 06 — Cart and order
 
@@ -172,8 +173,8 @@ is the corresponding message UUID in `nekurama.raw.chat.json`.
   invoice, endpoint or durable event is created.
 - **Acceptance check:** The state says draft/review and never implies an order
   was submitted.
-- **Implementation/demo status:** Existing mock order scene plus coverage state;
-  no ordering service. **Citation:** R1.
+- **Implementation/demo status:** Journey runner plus coverage state; no
+  ordering service. **Citation:** R1.
 
 ### 07 — Payment
 
@@ -243,8 +244,8 @@ is the corresponding message UUID in `nekurama.raw.chat.json`.
   customer conversation or outbound send.
 - **Acceptance check:** Automation is visibly paused for the conversation while
   other state work remains separate.
-- **Implementation/demo status:** Existing takeover scene plus coverage state;
-  no chat service or staff console. **Citation:** R4.
+- **Implementation/demo status:** Journey runner plus coverage state; no chat
+  service or staff console. **Citation:** R4.
 
 ### 11 — Notifications
 

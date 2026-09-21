@@ -7,7 +7,7 @@
     <meta name="description" content="BABAI is a business operating platform built around WhatsApp, starting with a controlled restaurant pilot.">
     <meta name="theme-color" content="#f7f3ea">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=flow-coverage-v2">
+    <link rel="stylesheet" href="styles.css?v=journey-v3">
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -30,7 +30,7 @@
             <a href="#pilot">Pilot boundary</a>
             <a href="#evidence">Evidence</a>
           </div>
-          <a class="nav-cta" href="#pilot-form">CTA slot</a>
+          <a class="nav-cta" href="#boundary">Boundary</a>
           <details class="nav-menu">
             <summary>Menu</summary>
             <div class="nav-menu-panel">
@@ -41,7 +41,7 @@
               <a href="#decision-packet">Decision packet</a>
               <a href="#pilot">Pilot boundary</a>
               <a href="#evidence">Evidence</a>
-              <a href="#pilot-form">CTA slot</a>
+              <a href="#boundary">Boundary</a>
             </div>
           </details>
         </nav>
@@ -55,7 +55,7 @@
           <h1 id="hero-title">Headline slot for the reviewed BABAI promise.</h1>
           <p class="lede">Supporting-copy slot for the approved business operating story. Keep the final wording evidence-backed and distinguish the pilot boundary from a public availability claim.</p>
           <div class="hero-actions" aria-label="Pilot actions">
-            <a class="button button-primary" href="#pilot-form">Primary CTA slot <span aria-hidden="true">↗</span></a>
+            <a class="button button-primary" href="#boundary">Review boundary <span aria-hidden="true">↗</span></a>
             <a class="button button-secondary" href="#mock-demo">Explore mock flow</a>
           </div>
           <p class="microcopy">Pilot-interest preview only. No account, payment, menu upload or production connection is created here.</p>
@@ -280,42 +280,66 @@
       </section>
 
       <section class="section demo-section" id="mock-demo" aria-labelledby="demo-title">
-        <div class="shell demo-grid">
-          <div class="demo-intro">
-            <p class="eyebrow">Interactive concept · invented mock data only</p>
-            <h2 id="demo-title">See the handoff, not a fake product login.</h2>
-            <p>Use the controls to explore one invented pickup conversation. Nothing connects to WhatsApp, a payment provider, a customer, or a production backend.</p>
-            <div class="boundary-note">
-              <strong>Boundary by design</strong>
-              <span>AI may assist with understanding and suggestions. Order, payment, permission and consent state remain controlled and reviewable.</span>
-            </div>
+        <div class="shell">
+          <div class="section-heading journey-heading">
+            <p class="eyebrow">STATIC MOCK · NOTHING SUBMITS</p>
+            <h2 id="demo-title">Run the local BABAI journey.</h2>
+            <p>Choose an invented journey family, then advance through deterministic screens and attention states. There is no login, form, payment, backend, customer record or network request behind these controls.</p>
           </div>
-          <div class="mock-window" aria-live="polite" aria-atomic="true">
-            <div class="mock-topbar"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span><span class="mock-title" id="mock-source-note">BABAI / local mock preview</span></div>
-            <div class="mock-body">
-              <div class="mock-progress" aria-label="Demo progress">
-                <button class="demo-step is-active" type="button" data-step="0" aria-current="step" aria-controls="mock-content">Message</button>
-                <button class="demo-step" type="button" data-step="1" aria-controls="mock-content">Context</button>
-                <button class="demo-step" type="button" data-step="2" aria-controls="mock-content">Order</button>
-                <button class="demo-step" type="button" data-step="3" aria-controls="mock-content">Takeover</button>
+          <div class="journey-boundary" role="note">
+            <strong>Fixture-only operating board</strong>
+            <span>Every name, status, tier, price, permission, event and recovery path is invented. This runner demonstrates state shape, not product availability or operational success.</span>
+          </div>
+          <div class="journey-shell" aria-live="polite" aria-atomic="true">
+            <div class="journey-toolbar">
+              <label for="journey-scenario">Journey family</label>
+              <select id="journey-scenario">
+                <option value="admin-onboarding">Admin onboarding → owner invite/status</option>
+                <option value="menu-ingestion">Menu source → extraction review → publish</option>
+                <option value="staff-access">Staff roles → permissions → handoff</option>
+                <option value="customer-order">Discovery → menu → item/variant → cart → review</option>
+                <option value="fulfillment">Payment/pickup/delivery tiers and recovery</option>
+                <option value="order-desk">Order desk lifecycle and attention cues</option>
+                <option value="takeover">Automated → human takeover → automated</option>
+                <option value="promo">Promo/combo LITE → BASE → PRO gates</option>
+                <option value="notifications-recovery">Notifications, reorder, cancel/refund and recovery</option>
+                <option value="analytics">Admin funnel and analytics states</option>
+              </select>
+              <button class="text-button" type="button" id="journey-reset">Reset journey</button>
+            </div>
+            <div class="journey-body">
+              <div class="journey-rail">
+                <p class="journey-rail-label">State rail</p>
+                <div class="journey-state-tabs" id="journey-state-tabs" role="tablist" aria-label="Journey states" aria-orientation="vertical"></div>
               </div>
-              <div class="mock-content" id="mock-content">
-                <p class="mock-kicker" id="mock-kicker">CUSTOMER · MOCK CONVERSATION</p>
-                <h3 id="mock-title">“Is the paneer bowl available for pickup tonight?”</h3>
-                <p id="mock-copy">A customer question arrives in the restaurant’s own WhatsApp context. The assistant can help interpret it; it does not invent inventory or promise an order.</p>
-                <div class="mock-detail" id="mock-detail">No real customer or menu data is used.</div>
-              </div>
-              <div class="mock-controls">
-                <button class="text-button" type="button" id="demo-back" disabled>← Back</button>
-                <div class="mock-control-actions">
-                  <button class="text-button" type="button" id="demo-reset">Reset demo</button>
-                  <button class="button button-small" type="button" id="demo-next">Next scene →</button>
+              <article class="journey-screen" id="journey-screen" role="tabpanel" tabindex="-1">
+                <div class="journey-screen-top">
+                  <div>
+                    <p class="journey-kicker" id="journey-kicker">ADMIN · STATIC MOCK</p>
+                    <h3 id="journey-title">Start the invented workspace.</h3>
+                  </div>
+                  <span class="journey-status" id="journey-status">LOCAL READY</span>
                 </div>
-              </div>
+                <p class="journey-summary" id="journey-summary">A deterministic state screen for internal review.</p>
+                <div class="journey-cards">
+                  <div><span>Actor</span><strong id="journey-actor"></strong></div>
+                  <div><span>Permission / data boundary</span><strong id="journey-boundary"></strong></div>
+                  <div><span>Next transition</span><strong id="journey-next-state"></strong></div>
+                </div>
+                <div class="journey-attention" id="journey-attention">
+                  <strong>Attention cue</strong>
+                  <span id="journey-attention-text"></span>
+                </div>
+                <div class="journey-actions">
+                  <button class="text-button" type="button" id="journey-back" disabled>← Previous state</button>
+                  <button class="button button-small" type="button" id="journey-next">Advance local state →</button>
+                </div>
+              </article>
             </div>
           </div>
+          <p class="journey-footnote">Keyboard: use the scenario select, then Tab/Arrow keys across the state rail. Reset returns to the first state and clears no external data because none is stored.</p>
         </div>
-        <noscript><p class="shell noscript-note">JavaScript is disabled, so the mock controls are unavailable. The product story and pilot boundary remain available above and below.</p></noscript>
+        <noscript><p class="shell noscript-note">JavaScript is disabled, so the journey controls are unavailable. The static boundary and coverage documentation remain available below.</p></noscript>
       </section>
 
       <section class="section flow-coverage-section" id="flow-coverage" aria-labelledby="flow-coverage-title">
@@ -455,51 +479,17 @@
         </div>
       </section>
 
-      <section class="section contact-section" id="pilot-form" aria-labelledby="contact-title">
-        <div class="shell contact-grid">
+      <section class="section contact-section" id="boundary" aria-labelledby="contact-title">
+        <div class="shell split">
           <div>
-            <p class="eyebrow">CTA slot · no endpoint</p>
-            <h2 id="contact-title">Contact block decision slot.</h2>
-            <p>Share only the minimum business context needed to route a conversation. Do not send menus, customer lists, WhatsApp identifiers, payment information or operational secrets through this public mock.</p>
-            <div class="route-list" role="group" aria-labelledby="route-choice-title">
-              <h3 id="route-choice-title" class="visually-hidden">Unapproved contact route choices</h3>
-              <button type="button" class="route-button is-selected" aria-pressed="true" data-route="Primary route slot">↗ <span><strong>Primary route slot</strong><small>Destination and owner pending review</small></span></button>
-              <button type="button" class="route-button" aria-pressed="false" data-route="WhatsApp route slot">◌ <span><strong>WhatsApp route slot</strong><small>Destination and owner pending review</small></span></button>
-              <button type="button" class="route-button" aria-pressed="false" data-route="Email route slot">✉ <span><strong>Email route slot</strong><small>Destination and owner pending review</small></span></button>
-              <button type="button" class="route-button" aria-pressed="false" data-route="Waitlist route slot">＋ <span><strong>Waitlist route slot</strong><small>No public signup is sent</small></span></button>
-            </div>
+            <p class="eyebrow">STATIC MOCK · NO CTA ROUTE</p>
+            <h2 id="contact-title">Keep the boundary visible.</h2>
           </div>
-          <form class="pilot-form" id="interest-form">
-            <div class="form-header"><span>01</span><p>Minimum public context</p></div>
-            <label for="business-name">Business or restaurant name <span aria-hidden="true">*</span></label>
-            <input id="business-name" name="businessName" autocomplete="organization" aria-describedby="form-help" required>
-            <label for="role">Your role <span aria-hidden="true">*</span></label>
-            <select id="role" name="role" aria-describedby="form-help" required>
-              <option value="">Choose one</option>
-              <option>Owner / founder</option>
-              <option>Manager / admin</option>
-              <option>Staff / operator</option>
-              <option>Design partner / advisor</option>
-            </select>
-            <label for="branches">Number of branches <span aria-hidden="true">*</span></label>
-            <select id="branches" name="branches" aria-describedby="form-help" required>
-              <option value="">Choose one</option>
-              <option>1</option>
-              <option>2–5</option>
-              <option>6+</option>
-            </select>
-            <label for="contact-detail">Preferred contact detail <span class="optional">(optional in this mock)</span></label>
-            <input id="contact-detail" name="contactDetail" autocomplete="off" aria-describedby="contact-help">
-            <p id="contact-help" class="field-help">This static demo never transmits or stores this field.</p>
-            <input type="hidden" id="route" name="route" value="Primary route slot">
-            <div class="form-actions">
-              <button class="button button-primary button-wide" type="submit" id="form-preview" disabled>Preview local-only request <span aria-hidden="true">↗</span></button>
-              <button class="button button-secondary button-wide" type="reset" id="form-reset">Clear fields</button>
-            </div>
-            <p class="form-disclaimer">No live submission, account creation, payment or backend request. Real CTA destinations require company-owned routing, an approved notice, retention rules and an accountable owner.</p>
-            <p class="field-help" id="form-help">Required fields are checked locally. Nothing is transmitted.</p>
-            <div class="form-status" id="form-status" role="status" aria-live="polite" tabindex="-1" hidden></div>
-          </form>
+          <div class="no-route-card">
+            <strong>Nothing to submit</strong>
+            <p>This prototype intentionally has no form, account, auth flow, contact destination, waitlist, payment action or backend request. Any future pilot route requires separate founder, privacy and ownership approval.</p>
+            <span class="no-route-pill">STATIC MOCK / NOTHING SUBMITS</span>
+          </div>
         </div>
       </section>
 
@@ -510,7 +500,7 @@
             <h2 id="privacy-title">Public interest is not private setup.</h2>
           </div>
           <div class="privacy-copy">
-            <p><strong>Public mock:</strong> business name, role, branch count and a preferred route are the maximum context shown here. The demo keeps data in the browser and clears it on refresh.</p>
+            <p><strong>Public mock:</strong> no form or contact field is collected. All journey fixtures remain in the browser and clear on refresh.</p>
             <p><strong>Controlled setup:</strong> menus, WhatsApp identifiers, customer conversations, payment details, staff access and tenant configuration belong in an approved private onboarding path after privacy, retention, deletion, vendor and access controls are decided.</p>
             <p class="unknown-note">Unknowns remain open: final CTA owner and destinations, legal/privacy notices, retention schedule, domain ownership transfer, trademark clearance, pricing, pilot terms and launch status.</p>
           </div>
@@ -521,10 +511,10 @@
     <footer class="site-footer">
       <div class="shell footer-inner">
         <div><strong>BABAI</strong><span> a NEKURAMA product / brand</span></div>
-        <div class="footer-links"><a href="#privacy-title">Data boundary</a><a href="#evidence">Evidence slot</a><a href="#pilot-form">CTA slot</a></div>
+        <div class="footer-links"><a href="#privacy-title">Data boundary</a><a href="#evidence">Evidence slot</a><a href="#boundary">Boundary</a></div>
         <p>Static concept · no deployment or live collection included.</p>
       </div>
     </footer>
-    <script src="script.js?v=flow-coverage-v2" defer></script>
+    <script src="script.js?v=journey-v3" defer></script>
   </body>
 </html>

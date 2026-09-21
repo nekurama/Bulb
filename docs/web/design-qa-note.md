@@ -40,21 +40,19 @@ demo-only behavior and unresolved CTA destinations visible in the interface.
 - `header`, `nav`, `main`, section headings and `footer` provide landmarks; the
   page has one `h1`. The canonical URL was intentionally omitted while domain
   ownership and publication remain unresolved.
-- A skip link, visible `:focus-visible` treatment, native form controls and
+- A skip link, visible `:focus-visible` treatment, native select controls and
   keyboard-operable buttons support keyboard traversal.
 - The mobile navigation uses a native `details`/`summary` disclosure so its
   links remain keyboard-operable without JavaScript.
-- Demo step buttons expose the active step with `aria-current` and
-  `aria-controls`; route choices expose selection with `aria-pressed`.
-- The demo has an explicit reset control. Invalid step indexes are ignored,
-  the four-scene fixture is inline, and the internal 14-family coverage panel
-  uses keyboard-operable tabs with a local state map.
-- The form uses native required-field validation, local-only status text,
-  `aria-invalid` recovery and no submission endpoint. Clear-fields resets the
-  hidden route and status as well as visible values; no values enter storage.
-  The preview submit control stays disabled until the local script initializes,
-  so JavaScript-disabled browsing cannot fall through to a browser form
-  submission.
+- The journey runner exposes a scenario selector, state rail, reset control,
+  previous/advance actions and `aria-selected`/`aria-controls` tab semantics.
+  State rails support Arrow, Home and End keyboard movement.
+- The richer journey contains ten deterministic local-state families covering
+  onboarding, menu extraction/correction/publish, staff scope, customer order,
+  payment/fulfillment recovery, order desk, takeover, promo tiers,
+  notifications/reorder/cancel/refund/provider/channel recovery and analytics.
+- There is no form or submission endpoint. The boundary card explicitly says
+  that nothing submits, stores or connects.
 - `prefers-reduced-motion` disables non-essential smooth scrolling and motion.
 - Responsive rules reflow the process list at tablet and mobile widths instead
   of requiring page-level horizontal scrolling.
@@ -67,16 +65,20 @@ demo-only behavior and unresolved CTA destinations visible in the interface.
   precondition, happy/alternate/error path, state transition, permission/data
   boundary, acceptance check, implementation status and raw-chat citations in
   `docs/web/demo-flow-coverage.md`; it makes no public capability claim.
+- The state-by-state implementation contract is recorded in
+  `docs/web/demo-state-journey.md`; it deliberately does not reuse
+  `01 / THE MOCK FLOW`.
 - The `noscript` message keeps the content boundary available when JavaScript is
-  disabled; only the mock controls and local preview are unavailable.
+  disabled; only the journey and coverage controls are unavailable.
 
 ## Content and data boundaries
 
 This is a content-neutral template. Final headline, product claims, evidence,
 testimonials and exact CTA wording remain placeholders pending Tracks 1–4.
-`mock-data.json` contains invented demo scenes only. The form does not transmit,
-persist or submit business details, menus, customer data, WhatsApp identifiers,
-payment data or staff credentials.
+`mock-data.json` remains a checked-in fixture for static QA only. The journey
+uses inline invented state and does not transmit, persist or submit business
+details, menus, customer data, WhatsApp identifiers, payment data or staff
+credentials.
 
 The page structure follows the current BABAI landing-page and QA contracts:
 
@@ -107,10 +109,10 @@ curl --fail --silent --show-error http://127.0.0.1:4173/ >/dev/null
 The static-server smoke check should load `/` and confirm that no runtime
 network request is made by the page beyond the document's relative stylesheet,
 script and local image references. Basic structural checks
-should confirm one `h1`, `header`, `nav`, `main`, `footer`, the skip link,
-labels for each form control, the native mobile menu, reset controls,
-`aria-controls`/`aria-current` step semantics, the reduced-motion rule and the
-absence of a live form action or canonical domain.
+should confirm one `h1`, `header`, `nav`, `main`, `footer`, the skip link, the
+scenario selector, the native mobile menu, reset controls,
+`aria-controls`/`aria-selected` journey semantics, the reduced-motion rule and
+the absence of forms, live actions or a canonical domain.
 
 ## 2026-09-21 QA evidence
 
@@ -121,21 +123,20 @@ absence of a live form action or canonical domain.
   worktree. Results are recorded in the handoff rather than treated as public
   launch evidence.
 - **Browser smoke:** Chromium loaded the page without console errors; the
-  local mock advanced from scene one to scene two and reset to scene one;
-  local-only form preview exposed its status and clear-fields restored empty
-  values plus the default route; the mobile disclosure opened from a focused
-  `summary` with Enter.
+  local journey changed families, advanced through state rails, reset to the
+  first state, and opened the mobile disclosure from a focused `summary` with
+  Enter.
 - **Media/network:** At 320px, 768px and 1440px CSS widths,
   `body.scrollWidth` matched the viewport width. Reduced-motion emulation
   changed document scrolling to `auto`. The page source contains no fetch,
   XMLHttpRequest, WebSocket, external form action, remote font, tracker or
   embed; only relative stylesheet/script and local image references remain.
 - **Responsive assertions:** the stylesheet includes a 320px-safe shell,
-  mobile disclosure navigation, stacked grids, wrapped CTA/actions and
+  mobile disclosure navigation, stacked grids, wrapped journey controls and
   reduced-motion behavior. A browser-level visual review remains a founder QA
   step before publication.
 - **Privacy boundary:** no remote fonts, analytics, third-party embeds,
-  external form action, canonical domain, secrets or invented customer data
+  forms, external actions, canonical domain, secrets or invented customer data
   are present.
 - **Capability gate:** the LITE/BASE/PRO panel is closed by default, labels
   itself internal-only, uses rate placeholders rather than public pricing, and
@@ -170,8 +171,8 @@ required exit check.
 
 | Month / milestone | Owner and dependencies | Entry checks | Exit checks / evidence |
 | --- | --- | --- | --- |
-| **October — content-neutral mock/template quality, accessibility and CI checks** | **Driver:** web-QA. **Reviewers:** founder/product owner and CI maintainer. Depends on the current static root (`index.html`, `styles.css`, `script.js`, `mock-data.json`), the QA scope, and the asset provenance record. | Content remains slot-based or explicitly source-backed; mock data is synthetic; no live form action or external request exists; candidate assets have provenance and draft alt/contrast/crop notes. | `git diff --check`, JSON parse, `node --check`, SVG parse/shape checks and static HTTP smoke pass. One `h1`, landmarks, skip link, labels, focus treatment, reduced-motion rule and local-only asset loading are evidenced. Open founder/legal/content decisions remain listed rather than filled by assumption. |
-| **November — demo-ready flow with synthetic/mock data** | **Driver:** web-QA. **Reviewers:** founder/product owner; screen-reader reviewer or accessibility partner. Depends on October exit, stable mock-data schema, approved test scenarios and candidate-asset QA. | October static/CI gate passes; four-scene mock flow and reset behavior are deterministic; no fixture contains real identities or operational data; demo script identifies the local-only boundary. | Demo advances and resets without console errors; responsive checks cover 320/375/768/1024/1440 CSS px and 200% zoom; keyboard-only traversal, screen-reader landmarks/names, focus order, contrast and reduced-motion checks are recorded. The demo remains useful with JavaScript disabled except for explicitly marked controls. |
+| **October — content-neutral mock/template quality, accessibility and CI checks** | **Driver:** web-QA. **Reviewers:** founder/product owner and CI maintainer. Depends on the current static root (`index.html`, `styles.css`, `script.js`, `mock-data.json`), the QA scope, and the asset provenance record. | Content remains slot-based or explicitly source-backed; mock data is synthetic; no form or external request exists; candidate assets have provenance and draft alt/contrast/crop notes. | `git diff --check`, JSON parse, `node --check`, SVG parse/shape checks and static HTTP smoke pass. One `h1`, landmarks, skip link, selector/tabs, focus treatment, reduced-motion rule and local-only asset loading are evidenced. Open founder/legal/content decisions remain listed rather than filled by assumption. |
+| **November — demo-ready flow with synthetic/mock data** | **Driver:** web-QA. **Reviewers:** founder/product owner; screen-reader reviewer or accessibility partner. Depends on October exit, stable mock-data schema, approved test scenarios and candidate-asset QA. | October static/CI gate passes; ten-family journey and reset behavior are deterministic; no fixture contains real identities or operational data; demo script identifies the local-only boundary. | Journey advances and resets without console errors; responsive checks cover 320/375/768/1024/1440 CSS px and 200% zoom; keyboard-only traversal, screen-reader landmarks/names, focus order, contrast and reduced-motion checks are recorded. The demo remains useful with JavaScript disabled except for explicitly marked controls. |
 | **December — pilot-hardening evidence and year-end demo gate** | **Driver:** web-QA. **Accountable reviewer:** founder/product owner. **Contributors:** pilot/validation owner for evidence shape only. Depends on November demo exit, synthetic scenario set, the staged validation contract and a decision log for unresolved CTA/legal/brand items. | Demo path is repeatable; evidence template distinguishes observed, synthetic and unknown; any pilot input is redacted/anonymized and stored outside the static page; asset approvals remain gated. | Hardening pack records scenario coverage, regressions, accessibility/browser results, network boundary, provenance/alt/contrast checks and known limitations. Founder/product owner records **year-end demo: pass, hold or fail** with blockers and next evidence; no public-release or deployment decision is implied. |
 
 ### Quality path versus aggressive path
@@ -179,7 +180,7 @@ required exit check.
 | Path | Sequence and acceptable trade-off | Non-skippable guardrail |
 | --- | --- | --- |
 | **Quality (default)** | Keep October as a stabilization gate, run the full November manual accessibility pass, repeat the demo against every supported viewport, then package December evidence after a clean rerun and founder review. | All static, accessibility, provenance, synthetic-data and local-network checks above; unresolved decisions stay visible. |
-| **Aggressive (planning alternative)** | Parallelize asset review, CI/static checks and synthetic scenario authoring; use the existing mock shell for an earlier November rehearsal; defer non-essential visual polish to December. | Do not trade away no-real-form/no-customer-data/no-network boundaries, keyboard and screen-reader coverage, reduced-motion behavior, asset provenance/alt/contrast, or the December founder gate. An incomplete manual check is a hold, not a pass. |
+| **Aggressive (planning alternative)** | Parallelize asset review, CI/static checks and synthetic scenario authoring; use the deterministic journey shell for an earlier November rehearsal; defer non-essential visual polish to December. | Do not trade away no-form/no-customer-data/no-network boundaries, keyboard and screen-reader coverage, reduced-motion behavior, asset provenance/alt/contrast, or the December founder gate. An incomplete manual check is a hold, not a pass. |
 
 ### Planning-only web QA inputs
 

@@ -1,4 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="BABAI">
-  <circle cx="32" cy="32" r="30" fill="#163d35"/>
-  <text x="32" y="45" fill="#fffdf7" font-size="38" text-anchor="middle" font-family="Georgia, serif">B</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>Internal prototype mark</title>
+  <rect width="64" height="64" rx="16" fill="#17221d"/>
+  <circle cx="32" cy="32" r="13" fill="#d8f06b"/>
+  <path d="M32 15v34M15 32h34" stroke="#17221d" stroke-width="4" stroke-linecap="round"/>
 </svg>

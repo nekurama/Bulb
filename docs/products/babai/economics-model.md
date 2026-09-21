@@ -1,12 +1,13 @@
 ---
-status: partial — internal fee recommendation added; all numbers remain provisional and pending founder approval
+status: partial — internal fee and scale baseline added; all numbers remain provisional and pending founder approval
 owner: BABAI Product / BRD
 last-reviewed: 2026-09-21
 sources:
   - Founder decision packet (2026-09-21; current task input)
+  - Founder traffic baseline (2026-09-21; current task input)
   - nekurama.babai.research.md (Pricing hypothesis, What remains unvalidated, Success criteria)
   - nekurama.chatgpt.md (historical planning model; explicitly not a forecast)
-  - nekurama.raw.chat.json (mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `04cc446b-3a6d-4c19-adc7-4d94ab17d21b`, `4702681b-d611-4408-af5f-9001d04b6cfa`, `f58ce128-39ed-4015-9be9-5b6135a39f20`)
+  - nekurama.raw.chat.json (mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `04cc446b-3a6d-4c19-adc7-4d94ab17d21b`, `4702681b-d611-4408-af5f-9001d04b6cfa`, `f58ce128-39ed-4015-9be9-5b6135a39f20`, `9fbcd0e1-28ba-4ae7-8b44-39d493d2bb0e`, `cedbd365-e584-4306-a499-86a51184cb83`)
   - docs/products/babai/brd.md
   - docs/products/babai/business-model.md
   - docs/company/finance-tax-compliance.md
@@ -16,7 +17,7 @@ sources:
 
 ## Purpose and decision posture
 
-This is the **Track 2 planning model v0.4** for the thin restaurant-first,
+This is the **Track 2 planning model v0.5** for the thin restaurant-first,
 pickup-first, WhatsApp-native MVP. The low/base/high planning bands below are
 finalized for internal planning and instrumentation only; every proposed
 number remains provisional and pending founder approval. The model is designed
@@ -27,6 +28,19 @@ It is **not a forecast, approved price list, margin commitment or accounting
 position**. The model deliberately keeps price, order GMV, GST treatment,
 founder valuation rates and contribution targets as inputs. The admin packet
 does not supply those values.
+
+The founder traffic baseline supplied for this update is:
+
+```text
+6 conversational flows/order
+× 9 gateway hits/flow
+= 54 requests/completed order
+```
+
+Use **90 requests/order** as the heavy-case sensitivity. A restaurant has a
+hard ceiling of **50 completed orders/day** for this internal model. The
+500-restaurant and 1,000-restaurant views below are scale sensitivities, not
+capacity commitments.
 
 ## Evidence versus estimates
 
@@ -51,6 +65,10 @@ does not supply those values.
   forecast, and used historical Tadka/Thali/Dawat prices
   (`nekurama.chatgpt.md:L3650-L3760`). Those numbers are retained only as
   historical context.
+- Historical raw discussion also covered 1,000-restaurant scale and Meta
+  message-cost categories, but those are corroboration only; the 6-flow/9-hit,
+  50-order ceiling and 500/1,000 traffic baseline in this update come from
+  the current founder baseline packet.
 
 ### Planning estimates in this artifact
 
@@ -79,6 +97,11 @@ intentional unknowns, not zeroes.
 | Pilot fee/deposit |  | per pilot | Signed pilot terms and receipt | Founder + Product | Blank pending founder approval |
 | Pilot end date |  | calendar date | Signed pilot terms | Founder + Product | Blank pending founder approval |
 | Target contribution margin |  | % of recognized revenue | Founder-approved commercial target | Founder + Product | Blank pending founder approval |
+| Request infrastructure cost |  | per request | Load test, hosting allocation and request ledger | Engineering + Product | Blank pending scale measurement |
+| Provider pass-through cost |  | per request/message | Meta/BSP/provider terms and message ledger | Integrations + Finance | Blank pending provider validation |
+| AI cost |  | per request/token | Model usage export and token ledger | Engineering + Product | Blank pending provider validation |
+| Durable event/log bytes |  | bytes per request | Event schema, retention policy and storage export | Engineering | Blank pending scale measurement |
+| Database bytes |  | bytes per completed order | DB growth report and retention policy | Engineering | Blank pending scale measurement |
 
 ## Model scope and variables
 
@@ -413,6 +436,141 @@ CustomerInvoiceGross =
 income bar or contribution calculation unless the approved accounting
 treatment explicitly requires otherwise.
 
+## Scale and traffic baseline — internal sensitivity
+
+Let:
+
+```text
+Restaurants = 500 or 1,000
+CeilingOrdersPerRestaurantDay = 50
+Utilization = 10%, 25%, 50% or 100%
+RequestsPerOrder = 54 normal or 90 heavy
+
+CompletedOrdersPerDay =
+    Restaurants × CeilingOrdersPerRestaurantDay × Utilization
+
+RequestsPerDay =
+    CompletedOrdersPerDay × RequestsPerOrder
+
+RequestsPer30DayMonth =
+    RequestsPerDay × 30
+```
+
+The resulting traffic sensitivities are:
+
+| Restaurants | Ceiling utilization | Completed orders/day | Normal requests/day | Normal requests/30d | Heavy requests/day | Heavy requests/30d |
+|---:|---:|---:|---:|---:|---:|---:|
+| 500 | 10% | 2,500 | 135,000 | 4,050,000 | 225,000 | 6,750,000 |
+| 500 | 25% | 6,250 | 337,500 | 10,125,000 | 562,500 | 16,875,000 |
+| 500 | 50% | 12,500 | 675,000 | 20,250,000 | 1,125,000 | 33,750,000 |
+| 500 | 100% | 25,000 | 1,350,000 | 40,500,000 | 2,250,000 | 67,500,000 |
+| 1,000 | 10% | 5,000 | 270,000 | 8,100,000 | 450,000 | 13,500,000 |
+| 1,000 | 25% | 12,500 | 675,000 | 20,250,000 | 1,125,000 | 33,750,000 |
+| 1,000 | 50% | 25,000 | 1,350,000 | 40,500,000 | 2,250,000 | 67,500,000 |
+| 1,000 | 100% | 50,000 | 2,700,000 | 81,000,000 | 4,500,000 | 135,000,000 |
+
+The 50-order ceiling is a hard planning ceiling for this model, not a claim
+that each restaurant will achieve it.
+
+## Request-cost and storage-growth sensitivity
+
+The following per-request rates are internal estimates used only to expose
+scale risk. They are not Meta, BSP, AI or cloud-provider rates:
+
+| Cost component | Low | Base | High | Classification |
+|---|---:|---:|---:|---|
+| BABAI compute/network infrastructure | ₹0.003/request | ₹0.010/request | ₹0.030/request | BABAI infrastructure |
+| Storage/logging/queue/DB operations | ₹0.002/request | ₹0.010/request | ₹0.020/request | BABAI infrastructure |
+| Meta/provider pass-through | ₹0.010/request | ₹0.030/request | ₹0.100/request | Provider cost; pass-through decision open |
+| AI inference | ₹0.020/request | ₹0.100/request | ₹0.500/request | AI provider cost |
+| Total request-cost sensitivity | ₹0.035/request | ₹0.150/request | ₹0.650/request | Sum for internal planning only |
+
+Per completed order, the request-cost sensitivity is:
+
+| Case | Low | Base | High |
+|---|---:|---:|---:|
+| Normal 54-request order | ₹1.89 | ₹8.10 | ₹35.10 |
+| Heavy 90-request order | ₹3.15 | ₹13.50 | ₹58.50 |
+
+Component view per completed order:
+
+| Request case / component | Low | Base | High |
+|---|---:|---:|---:|
+| Normal infra compute/network | ₹0.16 | ₹0.54 | ₹1.62 |
+| Normal storage/logging/queue/DB | ₹0.11 | ₹0.54 | ₹1.08 |
+| Normal Meta/provider pass-through | ₹0.54 | ₹1.62 | ₹5.40 |
+| Normal AI | ₹1.08 | ₹5.40 | ₹27.00 |
+| Heavy infra compute/network | ₹0.27 | ₹0.90 | ₹2.70 |
+| Heavy storage/logging/queue/DB | ₹0.18 | ₹0.90 | ₹1.80 |
+| Heavy Meta/provider pass-through | ₹0.90 | ₹2.70 | ₹9.00 |
+| Heavy AI | ₹1.80 | ₹9.00 | ₹45.00 |
+
+Payment fees, delivery fees, CAC, onboarding and support are **not** included
+in these request costs. They remain separate model buckets.
+
+At 100% ceiling utilization, the estimated monthly request-cost totals are:
+
+| Scale | Request case | Low | Base | High |
+|---|---|---:|---:|---:|
+| 500 restaurants | Normal | ₹14,17,500 | ₹60,75,000 | ₹2,63,25,000 |
+| 500 restaurants | Heavy | ₹23,62,500 | ₹1,01,25,000 | ₹4,38,75,000 |
+| 1,000 restaurants | Normal | ₹28,35,000 | ₹1,21,50,000 | ₹5,26,50,000 |
+| 1,000 restaurants | Heavy | ₹47,25,000 | ₹2,02,50,000 | ₹8,77,50,000 |
+
+For 10%, 25% and 50% utilization, multiply the 100% totals by 0.10, 0.25
+and 0.50 respectively.
+
+Storage and operational-growth formulas:
+
+```text
+DurableEventLogStorage =
+    RequestsPer30DayMonth × EventLogBytesPerRequest
+
+DatabaseGrowth =
+    CompletedOrdersPer30DayMonth × DatabaseBytesPerCompletedOrder
+
+QueueCapacity =
+    PeakRequestsPerMinute × QueuePeakMultiplier
+```
+
+Provisional storage sensitivities are **2 KB / 8 KB / 20 KB durable event/log
+bytes per request** and **50 KB / 150 KB / 500 KB database bytes per completed
+order** for low/base/high views. Retention, compression, queue peak
+multiplier, indexing and archival policy remain unknowns. At 500 restaurants
+and 100% normal traffic, for example, the durable event/log estimate is
+approximately 81 GB / 648 GB / 1.62 TB per 30 days before retention and
+compression; at 1,000 restaurants it doubles. These are internal scale
+sensitivities, not capacity guarantees.
+
+## Cost-bucket separation at scale
+
+Keep these ledgers separate:
+
+| Bucket | Included | Excluded from |
+|---|---|---|
+| BABAI infrastructure | Compute, network, queue, DB, storage, logs, observability | Meta/provider, AI, payment, delivery, CAC |
+| Provider pass-through | Meta/BSP/message-provider fees | BABAI infrastructure margin unless absorbed |
+| AI | Model inference and token usage | Provider pass-through unless contractually bundled |
+| Payment | Gateway fee, fixed fee, refund/chargeback handling | Request-cost table |
+| Delivery | Provider fee and delivery exceptions | MVP baseline; pass-through/open |
+| Support | Manoj/Vinay and later support/incident hours | Infrastructure request cost |
+| CAC/onboarding | Acquisition spend, setup, menu ingestion and training | Runtime request cost |
+
+## ₹25L+ income trigger sensitivity
+
+The founder packet supplies **₹25,00,000+** as an income trigger but does not
+specify whether the unit is monthly or annual. Record both sensitivities and
+do not select one:
+
+| Interpretation | Income bar | Equivalent comparison |
+|---|---:|---:|
+| Monthly sensitivity | ₹25,00,000+/month | ₹3,00,00,000+/year annualized |
+| Annual sensitivity | ₹25,00,000+/year | approximately ₹2,08,333/month equivalent |
+
+This is an internal sensitivity, not a tax threshold, legal trigger, revenue
+claim or founder-approved operating target. The actual unit remains an
+unresolved founder choice.
+
 ## Low/base/high interpretation
 
 The first populated model should produce three rows per restaurant:
@@ -444,7 +602,7 @@ failure/refund outcomes, `T`, and the chosen accounting treatment for `D`.
 
 ## Track 3 dependency
 
-Track 3 consumes this v0.4 artifact through the proposed metric contract in
+Track 3 consumes this v0.5 artifact through the proposed metric contract in
 [`validation.md`](validation.md), not as a price decision. The candidate
 thresholds use the base/high founder-time bands, failure/refund sensitivities
 and contribution-margin sensitivities here; they remain pending founder

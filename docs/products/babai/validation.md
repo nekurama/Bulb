@@ -1,5 +1,5 @@
 ---
-status: partial — proposed Track 3 thresholds grounded in economics v0.2; founder approval pending
+status: partial — proposed Track 3 thresholds grounded in economics v0.5; founder approval pending
 owner: BABAI
 last-reviewed: 2026-09-21
 sources:
@@ -8,7 +8,7 @@ sources:
   - nekurama.babai.research.md
   - nekurama.raw.chat.json (ordered turns 70, 290; mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `4702681b-d611-4408-af5f-9001d04b6cfa`, `f58ce128-39ed-4015-9be9-5b6135a39f20`)
   - Founder decision packet (2026-09-21; current task input)
-  - economics-model.md (Track 2 v0.4)
+  - economics-model.md (Track 2 v0.5)
 ---
 
 # Validation
@@ -97,7 +97,7 @@ No numeric success or kill thresholds are yet confirmed. Do not invent them from
 
 The following are **candidate** entry, exit, success and kill thresholds. They
 are not approved decisions. They are derived from the finalized-for-planning
-Track 2 v0.4 bands, internal fee bands and actual-rate register in
+Track 2 v0.5 bands, internal fee bands, scale baseline and actual-rate register in
 [`economics-model.md`](economics-model.md), not from observed BABAI data.
 
 ### Proposed assumptions
@@ -109,13 +109,13 @@ Track 2 v0.4 bands, internal fee bands and actual-rate register in
 - Repeat-use evaluation requires at least **10 unique customers** and a
   proposed **30-day observation window** after first order; the observation
   window is not yet approved.
-- Founder-support thresholds use combined Manoj + Vinay time. The Track 2 v0.3
+- Founder-support thresholds use combined Manoj + Vinay time. The Track 2 v0.5
   base bands are onboarding **8–16 hours** and recurring support **6–12
   hours/restaurant/month**; the high bands are 16–32 and 12–24 hours.
 - Economics thresholds use actual costs where available and the Track 2
   contribution sensitivity; the 40% contribution sensitivity is proposed, not
   an approved target.
-- Cost rates must come from the v0.3 actual-rate register; a blank rate is an
+- Cost rates must come from the v0.5 actual-rate register; a blank rate is an
   unknown and must not be treated as zero.
 
 ### Proposed entry gate
@@ -136,9 +136,10 @@ Track 2 v0.4 bands, internal fee bands and actual-rate register in
 | Repeat use | At least **20%** of eligible customers place a repeat order within the proposed 30-day window, after the 10-customer minimum | 0% repeat after the minimum sample and observation window; otherwise remain unknown |
 | Staff adoption | Staff handle at least **80%** of active order sessions without founder intervention; recurring founder support ≤ **12 hours/restaurant/month** | <60% staff-handled sessions or recurring support > **24 hours/restaurant/month** |
 | Support load | Onboarding and support remain within the Track 2 base bands, with a declining trend after the first restaurant | Support remains in the high band after remediation, or founder effort prevents the next onboarding increment |
+| Incident load | Proposed ≤ **3 operational incidents per 1,000 completed orders**, with zero unresolved critical incidents at review | >5 incidents per 1,000 orders, repeated critical incidents or unresolved customer/payment integrity issue |
 | Economics data completeness | 100% of cost lines used in the end-date true-up have an actual rate/value, source and owner in the v0.2 register; no blanks are treated as zero | Any material cost line remains blank, unsupported or unallocated at true-up |
 | Contribution | Base-case `ContributionAfterOnboarding` is non-negative and reaches the proposed **40% contribution-margin sensitivity**; low/base/high views use income-bar versus total-expenditure margins and record any gap below the internal fee floor as subsidy | Base-case contribution is negative, `P ≤ C`, or the conclusion depends on an unapproved price, missing rate or unapproved GST treatment |
-| Failure/refund economics | Actual failure/refund/remediation cost remains within the v0.4 base sensitivity of **1.5–4% of `G`** when BABAI absorbs it, or is separately evidenced when passed through | Cost exceeds **10% of `G`**, or credits/refunds/remediation are not recorded |
+| Failure/refund economics | Actual failure/refund/remediation cost remains within the v0.5 base sensitivity of **1.5–4% of `G`** when BABAI absorbs it, or is separately evidenced when passed through | Cost exceeds **10% of `G`**, or credits/refunds/remediation are not recorded |
 | Willingness to pay | At least **2 of the first 3 completed pilots** accept paid continuation or renewal terms after the end date | 0 of 3 accept continuation after complete observation; below 3 completed pilots remains inconclusive |
 
 ### Proposed kill or immediate-hold conditions
@@ -157,11 +158,34 @@ These are proposed safety/economics controls, pending founder approval:
   pass-through or corrective plan.
 - Support remains above **24 combined founder hours per restaurant/month** or
   onboarding exceeds **32 combined hours** without a specific corrective plan.
+- Founder-only support becomes invalid when aggregate support exceeds **40
+  combined founder hours/month** across the active cohort, any restaurant
+  exceeds **24 hours/month**, or operational incidents exceed **3 per 1,000
+  completed orders** for two measurement periods.
+- Founder-only support is not an acceptable operating plan for the 500- or
+  1,000-restaurant scenarios without a separately approved support/incident
+  capacity plan.
 - No completed pilot produces a credible paid-continuation signal after the
   stated end date and observation window.
 
 These conditions should stop expansion while the evidence is reviewed; they do
 not authorize refunds, pricing changes, or accounting treatment by themselves.
+
+## Stage 0/1/2 capacity and economics gates — proposed
+
+These are proposed planning gates derived from the founder traffic baseline and
+`economics-model.md` v0.5. They require founder approval and actual load/cost
+evidence.
+
+| Stage | Scope and capacity view | Proposed advance evidence | Proposed hold/invalid condition |
+|---|---|---|---|
+| Stage 0 | 1 restaurant; hard ceiling 50 completed orders/day; 54 normal requests/order and 90 heavy-case sensitivity | Capture 6-flow/order path, request counts, provider/AI/infrastructure split, storage/log/DB growth, founder hours and incident ledger; remain within base founder-support band | Any critical integrity incident, unmeasured request/cost bucket, >24 founder support hours/month or >10% of daily ceiling without a recovery plan |
+| Stage 1 | 3–10 restaurants; test 10%, 25% and 50% of the 50-order ceiling per restaurant | Actual-rate register populated; base-case contribution non-negative; per-restaurant support ≤12 hours/month; aggregate founder support ≤40 hours/month; request and storage growth reconciled | Founder-only support invalid above 40 aggregate hours/month, any restaurant above 24 hours/month, >3 incidents/1,000 orders or missing scale evidence |
+| Stage 2 | 500 and 1,000 restaurant scenarios at 10%, 25%, 50% and 100% ceiling utilization; normal/heavy request cases | Load, queue, DB, storage/logging, provider/AI, payment and support capacity evidence exists for both scales; approved operating/support plan; income-bar and total-expenditure view populated | Do not claim readiness for materially larger onboarding volumes without load evidence, support capacity, cost allocation and incident response coverage |
+
+The 500/1,000 views are scenario analysis, not a launch commitment. Founder-
+only support is considered invalid for Stage 2 unless a separately approved
+capacity plan demonstrates otherwise.
 
 ## Kill / success signals
 
@@ -177,7 +201,7 @@ real restaurant operations, whether managers and staff can use it with
 reasonable effort, whether customers are comfortable ordering through it,
 whether it solves a meaningful problem, and whether restaurants see enough
 value to continue as paying customers. The economics decision must use the
-v0.4 low/base/high views, internal fee bands, income-bar versus total-expenditure margin and
+v0.5 low/base/high views, internal fee bands, scale traffic/request views, income-bar versus total-expenditure margin and
 actual-rate register rather than historical price hypotheses.
 
 The pilot is also intended to expose practical workflow, traffic, customer-experience, and data complexities. Findings may lead to changes in the interface, workflows, onboarding, or other product initiatives before broader expansion.
@@ -200,6 +224,10 @@ Expansion beyond the initial 10 should be based on evidence from the pilot, with
 - [ ] Per-metric numeric thresholds and baseline collection method
 - [ ] Approved repeat-use observation window and sample rules
 - [ ] Actual-rate register completion and cost-allocation sign-off
+- [ ] Traffic baseline validation: 6 flows/order, 54 normal requests/order and 90 heavy-case requests/order
+- [ ] 500/1,000 restaurant load, storage, queue and DB growth evidence
+- [ ] Stage 0/1/2 support-capacity and incident-plan approval
+- [ ] ₹25L+ income-trigger unit selection (monthly versus annual sensitivity)
 - [ ] Team-defined readiness evidence for materially larger onboarding volumes
 - [ ] Signed agreement-template cancellation/refund and minimum-paying terms
 - [ ] Six-month post-pilot pricing review inputs; no automatic increase

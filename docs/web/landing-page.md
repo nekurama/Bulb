@@ -401,6 +401,9 @@ gates rather than become a route to production functionality.
 - The tier mock exposes LITE, BASE and PRO labels with invented capability
   slots only. It contains no pricing, entitlement, availability or final
   feature claim; Reset returns the tier selector to LITE.
+- The source-mapped flow inventory covers 14 founder-flow slices in
+  `docs/web/flow-inventory.md`; each state is labelled POC, PILOT REVIEW or
+  LATER / NOT IMPLEMENTED and carries a source anchor plus acceptance boundary.
 - The CTA links intentionally loop to the local `#contact` placeholder until
   an approved destination exists. No live contact route is fabricated.
 
@@ -439,6 +442,8 @@ The implementation and QA checklist must include:
   one active tab stop and `aria-current="step"` on the active flow step;
 - LITE/BASE/PRO tier tabs support the same ArrowLeft/ArrowRight/Home/End
   behavior, one active tab stop and an announced selection;
+- the 14-flow vertical inventory supports ArrowUp/ArrowDown/Home/End,
+  `aria-selected` and an announced source-mapped detail state;
 - state changes are announced without moving focus unexpectedly.
 
 ## 7. Privacy, security and legal publication constraints
@@ -549,6 +554,8 @@ any external deployment.
       empty/error and reduced-motion states are tested.
 - [ ] LITE/BASE/PRO mock states show distinct placeholder capability sets
       without pricing, entitlement, availability or final feature claims.
+- [ ] All 14 source-mapped flow states are reachable, labelled with maturity,
+      show a screen/source anchor/acceptance boundary and remain mock-only.
 - [ ] Visible local-state safety text, reset behavior and no-submission
       boundary remain present after every mock transition.
 - [ ] Demo visibly identifies itself as illustrative and contains no real
@@ -564,6 +571,8 @@ any external deployment.
       controls are keyboard-tested.
 - [ ] Tier-tab keyboard behavior, active-state semantics and reset-to-LITE
       behavior are keyboard-tested.
+- [ ] Flow-inventory ArrowUp/ArrowDown/Home/End behavior, active-state
+      semantics, detail announcements and reset-to-F01 behavior are tested.
 - [ ] Screen-reader pass covers landmarks, headings, links, images, form labels
       and mock-state announcement text.
 - [ ] Contrast, focus, zoom/reflow, reduced motion and mobile checks pass.
@@ -614,6 +623,12 @@ deployment:
 - Tier browser QA covers LITE → BASE → PRO selection, ArrowRight keyboard
   movement with focus retention, distinct placeholder capability counts, reset
   back to LITE plus Conversation / Notice, and no-pricing announcement text.
+- Flow-inventory QA covers all 14 source-mapped states, POC/PILOT/LATER labels,
+  source/acceptance detail rendering, keyboard selection and reset to F01.
+- Operating-room prototype QA covers six local screens, order lifecycle
+  advance, human takeover, tier/payment/fulfillment/promotion illustrations,
+  care/recovery states, Reset room, ArrowRight navigation, zero console errors,
+  390px/320px responsive checks and a three-asset local network list.
 - A real browser/device matrix, automated WCAG scan, legal review, proof review,
   endpoint review and GitHub Pages deployment review remain outstanding.
 

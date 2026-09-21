@@ -42,6 +42,32 @@ direction that must not be represented as implemented capability.
 | F13 | Admin restaurant oversight | `nekurama.chatgpt.md:L1778-L1818` | Restaurant list / pending state | Pilot | Synthetic restaurants can be filtered by mock status without reminder, payment, cancellation or account actions. |
 | F14 | Menu ingestion and V1 chain | `nekurama.chatgpt.md:L1885-L1949` | Menu → order → notify → accept → complete → confirmation | POC | The prototype can explain the intended chain as labeled mock states while keeping delivery, payment and production integrations out of scope. |
 
+## Prototype screen matrix
+
+The richer local prototype groups the 14 flows into six deterministic screens.
+Screen transitions change only in-memory fixture state; they never submit,
+persist or call an external service.
+
+| Screen | Covers | Local transitions | Source/product matrix anchor |
+| --- | --- | --- | --- |
+| **S01 Launchpad** | F01, F02, F05, F13 | Advance invitation funnel; inspect synthetic counts; reset room | `nekurama.chatgpt.md:L1233-L1309`, `L1444-L1478`, `L1778-L1818`; admin/owner model in `docs/products/babai/product-definition.md` |
+| **S02 Setup room** | F02, F03, F04, F05, F14 | Advance invite/menu/review/correction/publish-held states; hold publish preview | `nekurama.chatgpt.md:L1309-L1478`, `L1885-L1949`; menu and setup boundary in `docs/products/babai/product-definition.md` |
+| **S03 Team and handoff** | F11, F12 | Request/release human handoff; inspect owner/staff/customer role placeholders | `nekurama.chatgpt.md:L1678-L1775`; human takeover and channel direction in `docs/products/babai/experience-and-channels.md` |
+| **S04 Restaurant order desk** | F07, F08, F09, F10 | Advance new/accepted/preparing/ready/completed; request/release takeover | `nekurama.chatgpt.md:L1522-L1674`; order/fulfillment boundaries in `docs/products/babai/product-definition.md` |
+| **S05 Commerce illustration** | F04, F06, F14 | Cycle LITE/BASE/PRO fixture; toggle pickup/delivery; show pending/failure/retry/reconciled payment; expire combo | `nekurama.chatgpt.md:L1478-L1520`, `L1885-L1949`, `L2385-L2422`; tier boundaries in the current tier-scope input |
+| **S06 Care and recovery** | F09, F10 plus recovery extensions | Advance notification/reorder/cancel/refund/provider-failure/disconnected/recovery states | `nekurama.chatgpt.md:L1621-L1674`, `L2295-L2422`; reliability/human-intervention direction in `docs/products/babai/experience-and-channels.md` |
+
+## Prototype QA evidence
+
+- Local Chromium smoke covered all six screen tabs, Orders state advance,
+  human takeover, Commerce payment failure illustration, Care recovery,
+  Reset room and ArrowRight screen navigation.
+- Responsive checks at 390px and 320px reported no horizontal overflow.
+- Browser network contained only local `index.html`, `styles.css` and
+  `app.js`; no fixture file, API, form endpoint or remote asset was requested.
+- The prototype has no real form, auth, payment, customer record, backend,
+  persistence, analytics or notification provider.
+
 ## Shared acceptance gates
 
 - Every screen identifies itself as **MOCK**, **POC**, **PILOT REVIEW** or

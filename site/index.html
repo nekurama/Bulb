@@ -77,101 +77,63 @@
         <section class="experience section-wrap" id="experience" aria-labelledby="experience-title">
           <div class="section-heading reveal">
             <div>
-              <p class="eyebrow">01 / THE MOCK FLOW</p>
-              <h2 id="experience-title">See the shape of the idea.</h2>
+              <p class="eyebrow">01 / OPERATING ROOM MOCK</p>
+              <h2 id="experience-title">Walk the imagined system.</h2>
             </div>
             <p class="section-intro">
-              Switch between invented states to preview how a future product story
-              might move from signal to action.
+              Six local screens turn the founder-flow inventory into a reviewable
+              product shape. Every value here is a synthetic fixture.
             </p>
           </div>
 
-          <div class="demo-shell reveal">
-            <div class="demo-topline">
+          <div class="prototype-shell reveal" id="prototype">
+            <div class="prototype-topline">
               <div class="demo-brand">
                 <span class="demo-brand-mark" aria-hidden="true">✦</span>
-                <span>Example workspace</span>
+                <span>NEKURAMA → BABAI / INTERNAL MOCK</span>
               </div>
-              <span class="demo-pill"><span class="status-dot" aria-hidden="true"></span> DEMO ONLY</span>
+              <div class="prototype-safety">
+                <span class="status-dot" aria-hidden="true"></span>
+                <span>STATIC MOCK / NOTHING SUBMITS</span>
+                <button class="reset-button" type="button" id="prototype-reset">Reset room</button>
+              </div>
             </div>
 
-            <div class="mock-safety" id="mock-safety" role="note">
-              <span><span class="safety-icon" aria-hidden="true">⌁</span> LOCAL MOCK STATE / NOTHING SUBMITS</span>
-              <button class="reset-button" type="button" id="mock-reset">Reset mock</button>
+            <div class="prototype-tabs" role="tablist" aria-label="Operating room mock screens" aria-orientation="horizontal">
+              <button class="prototype-tab is-active" id="prototype-tab-launchpad" role="tab" aria-selected="true" aria-controls="prototype-panel" tabindex="0" data-prototype-screen="launchpad">
+                <span class="tab-index">01</span> Launchpad
+              </button>
+              <button class="prototype-tab" id="prototype-tab-setup" role="tab" aria-selected="false" aria-controls="prototype-panel" tabindex="-1" data-prototype-screen="setup">
+                <span class="tab-index">02</span> Setup
+              </button>
+              <button class="prototype-tab" id="prototype-tab-team" role="tab" aria-selected="false" aria-controls="prototype-panel" tabindex="-1" data-prototype-screen="team">
+                <span class="tab-index">03</span> Team
+              </button>
+              <button class="prototype-tab" id="prototype-tab-orders" role="tab" aria-selected="false" aria-controls="prototype-panel" tabindex="-1" data-prototype-screen="orders">
+                <span class="tab-index">04</span> Orders
+              </button>
+              <button class="prototype-tab" id="prototype-tab-commerce" role="tab" aria-selected="false" aria-controls="prototype-panel" tabindex="-1" data-prototype-screen="commerce">
+                <span class="tab-index">05</span> Commerce
+              </button>
+              <button class="prototype-tab" id="prototype-tab-care" role="tab" aria-selected="false" aria-controls="prototype-panel" tabindex="-1" data-prototype-screen="care">
+                <span class="tab-index">06</span> Care
+              </button>
             </div>
 
-            <div class="demo-tabs" role="tablist" aria-label="Mock workflow views" aria-orientation="horizontal">
-              <button class="demo-tab is-active" id="tab-conversation" role="tab" aria-selected="true" aria-controls="mock-panel" tabindex="0" data-view="conversation">
-                <span class="tab-index">01</span> Conversation
-              </button>
-              <button class="demo-tab" id="tab-order" role="tab" aria-selected="false" aria-controls="mock-panel" tabindex="-1" data-view="order">
-                <span class="tab-index">02</span> Order desk
-              </button>
-              <button class="demo-tab" id="tab-attention" role="tab" aria-selected="false" aria-controls="mock-panel" tabindex="-1" data-view="attention">
-                <span class="tab-index">03</span> Team attention
-              </button>
-            </div>
-
-            <div class="mock-panel" id="mock-panel" role="tabpanel" aria-labelledby="tab-conversation" aria-describedby="mock-safety mock-announcement">
-              <div class="mock-sidebar">
-                <div class="sidebar-heading">
-                  <span>FLOW MAP</span>
-                  <span class="muted">MOCK-001</span>
+            <div class="prototype-panel" id="prototype-panel" role="tabpanel" aria-labelledby="prototype-tab-launchpad" aria-describedby="prototype-safety prototype-announcement">
+              <div class="prototype-panel-heading">
+                <div>
+                  <p class="card-kicker" id="prototype-kicker">S01 / POC / F01 F02 F05 F13</p>
+                  <h3 id="prototype-title">Admin launchpad</h3>
                 </div>
-                <ol class="flow-list" aria-label="Mock flow steps">
-                  <li class="flow-step is-current">
-                    <button type="button" data-step="0" aria-current="step">
-                      <span class="flow-number">01</span>
-                      <span><strong>Notice</strong><small>incoming signal</small></span>
-                    </button>
-                  </li>
-                  <li class="flow-step">
-                    <button type="button" data-step="1">
-                      <span class="flow-number">02</span>
-                      <span><strong>Shape</strong><small>organise the need</small></span>
-                    </button>
-                  </li>
-                  <li class="flow-step">
-                    <button type="button" data-step="2">
-                      <span class="flow-number">03</span>
-                      <span><strong>Hand off</strong><small>invite a human</small></span>
-                    </button>
-                  </li>
-                </ol>
-                <p class="sidebar-footnote">All names, times and records on this screen are fictional fixtures.</p>
+                <span class="prototype-stage" id="prototype-stage">MOCK STATE</span>
               </div>
-
-              <div class="mock-content">
-                <div class="mock-content-top">
-                  <div>
-                    <p class="card-kicker" id="mock-kicker">INCOMING / MOCK SIGNAL</p>
-                    <h3 id="mock-title">A clear signal arrives.</h3>
-                  </div>
-                  <span class="mock-time" id="mock-time">09:41</span>
-                </div>
-                <p class="mock-copy" id="mock-copy">
-                  A fictional customer message is grouped into a readable,
-                  actionable moment. No message leaves this page.
-                </p>
-                <p class="sr-only" id="mock-announcement" role="status" aria-live="polite" aria-atomic="true"></p>
-                <div class="mock-visual" id="mock-visual">
-                  <div class="message-bubble message-bubble-in">
-                    <span class="bubble-label">FICTIONAL MESSAGE</span>
-                    “Can I see today’s options for four?”
-                  </div>
-                  <div class="message-bubble message-bubble-out">
-                    <span class="bubble-label">ILLUSTRATIVE RESPONSE</span>
-                    “Here is a short list. A team member can take over anytime.”
-                  </div>
-                </div>
-                <div class="mock-footer">
-                  <span class="mock-state" id="mock-state"><span class="state-dot" aria-hidden="true"></span> Ready for review</span>
-                  <button class="button button-small" type="button" id="mock-action">Advance mock state <span aria-hidden="true">→</span></button>
-                </div>
-              </div>
+              <p class="prototype-copy" id="prototype-copy">A synthetic platform view for onboarding and funnel review.</p>
+              <p class="sr-only" id="prototype-announcement" role="status" aria-live="polite" aria-atomic="true"></p>
+              <div class="prototype-content" id="prototype-content"></div>
             </div>
           </div>
-          <p class="demo-caption"><span aria-hidden="true">↳</span> Illustrative interaction only. Replace fixture text and states only after provenance review.</p>
+          <p class="demo-caption"><span aria-hidden="true">↳</span> Internal prototype only. The screens illustrate source-mapped states; they do not implement the product.</p>
         </section>
 
         <section class="tiers section-wrap" id="tiers" aria-labelledby="tiers-title">

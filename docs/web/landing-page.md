@@ -625,6 +625,10 @@ deployment:
   back to LITE plus Conversation / Notice, and no-pricing announcement text.
 - Flow-inventory QA covers all 14 source-mapped states, POC/PILOT/LATER labels,
   source/acceptance detail rendering, keyboard selection and reset to F01.
+- Operating-room prototype QA covers six local screens, order lifecycle
+  advance, human takeover, tier/payment/fulfillment/promotion illustrations,
+  care/recovery states, Reset room, ArrowRight navigation, zero console errors,
+  390px/320px responsive checks and a three-asset local network list.
 - A real browser/device matrix, automated WCAG scan, legal review, proof review,
   endpoint review and GitHub Pages deployment review remain outstanding.
 

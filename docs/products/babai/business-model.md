@@ -78,10 +78,11 @@ deposit classification or a refund entitlement.
 
 ## Pricing — challenge-required, contribution-derived
 
-There are no approved public tiers or package names. Historical ₹999 / ₹2,499 /
-₹4,999 amounts and earlier Tadka/Thali/Dawat/Feast packaging remain
-source-evidence history only and must not be presented as current commercial
-truth, pilot variants or a public price ladder.
+There are no approved public tiers or package names. Historical ₹999 / ₹2,499 amounts and earlier package labels remain
+source-evidence history only. ₹4,999 is used only as the internal LITE
+experiment rate below.
+None of these amounts may be presented as approved public pricing or a public
+price ladder.
 
 Pricing is derived from the contribution model:
 
@@ -112,11 +113,11 @@ package names, forecasts, tax conclusions or customer-facing commitments.
 Rates are before GST with a **±15% planning tolerance** and must be replaced
 with measured costs and external validation.
 
-| Label | Monthly rate before GST | Internal scope hypothesis |
+| Label | Monthly rate before GST | Internal scope decision |
 |---|---:|---|
-| **LITE** | ₹4,999 | Information/menu/basic WhatsApp workflow; advisory AI; no advanced API integration |
-| **BASE** | ₹9,999 | Pickup/order workflow; human takeover; standard operational integrations; advisory AI |
-| **PRO** | ₹19,999 | Advanced API integrations; richer automation; higher usage/AI allowance; integration-maintenance reserve |
+| **LITE** | ₹4,999 | Limited AI/conversational assistance; menu display and ordering only; menu updates up to 3/month |
+| **BASE** | ₹9,999 | Users select, order, pay and use delivery; availability controls and basic time-bounded promotions/combos |
+| **PRO** | ₹19,999 | Full bounded user/restaurant access across allowed workflows plus advanced API integrations |
 
 The detailed variable/provider/API, support, AI, onboarding, integration-
 maintenance and shared-infrastructure assumptions are maintained in
@@ -130,6 +131,23 @@ or tax conclusion. Track support minutes, AI/provider/API costs, onboarding,
 restaurant ROI, conversion, continuation and economic contribution per
 restaurant. Provider, legal, tax and finance/accounting validation remain
 required.
+
+### Capability, usage and support implications
+
+The detailed internal capability matrix is maintained in [`brd.md`](brd.md).
+For commercial and support planning, the scope decision has these implications:
+
+| Experiment label | Included operating surface | Usage/cost implication | Support/control implication |
+|---|---|---|---|
+| **LITE** | Menu display and ordering only; limited menu/order assistance; no payment, delivery, cross-checking, daily availability controls, promotions or combos; up to 3 menu updates/month | Lowest message, payment, delivery, AI and API exposure; measure menu-update count and ordering volume separately | Menu corrections and the 3/month update cap are the main support drivers; do not staff or sell it as full automation |
+| **BASE** | Menu, order, payment and delivery; availability toggles in menu/cart UI; up to 3 basic promotion/combo requests/day with one-day or defined limited-time activation | Adds payment/delivery provider fees, state reconciliation, availability events and bounded promotion/API usage; AI remains limited to menu/order/payment/delivery | Support must cover payment/delivery exceptions, kitchen availability and promotion expiry; human approval and deterministic state remain required |
+| **PRO** | Full bounded user/restaurant access across approved menu/order/payment/delivery/conversational tasks plus advanced APIs | Highest message, AI, integration, retry, webhook, monitoring and maintenance exposure; record per-integration usage and failure budgets | Integration onboarding, change management, incident recovery and takeover capacity must be priced/measured; “full” never means unrestricted AI authority |
+
+Across all labels, BABAI subscription economics exclude restaurant customer
+funds and pass-through order charges unless a signed agreement explicitly
+changes that treatment. AI suggestions cannot publish menu state, mutate order,
+payment, delivery or promotion state, or bypass permissions; those transitions
+remain deterministic, auditable and human-controlled.
 
 ## 90-day paid pilot acceptance packet — planning assumptions
 

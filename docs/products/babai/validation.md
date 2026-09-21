@@ -116,15 +116,31 @@ replace the pilot contribution metric. See
 [`economics-model.md`](economics-model.md); do not report a
 variable-cost-only margin as the decision metric.
 
-For the internal provisional tier experiment, also record the LITE/BASE/PRO
-label, before-GST rate and ±15% tolerance, variable/provider/API cost, support
-minutes, AI usage/cost, onboarding, integration-maintenance reserve where
-applicable, shared-infrastructure allocation, restaurant ROI, conversion,
-continuation and cash/economic contribution. The illustrative
-`3 LITE / 4 BASE / 3 PRO` mix is ₹11,499 weighted ARPU/month and ₹3,44,970
-gross 90-day billing before GST; it is not a forecast, approved pricing,
-public tier taxonomy or tax conclusion. Replace all planning assumptions with
-pilot evidence before using the result for a decision.
+For the internal provisional tier experiment, also record the exact capability
+scope exercised:
+
+| Label | Validation boundary |
+|---|---|
+| **LITE** | Menu display and ordering only; limited menu/order assistance; no payment, delivery, cross-checking, daily availability enable/disable, promotions or combos; menu updates capped at 3/month; never describe as full automation |
+| **BASE** | Users select, order, pay and use delivery; AI limited to menu/order/payment/delivery; kitchen availability enable/disable through menu/cart UI; basic promotions/combos requested up to 3/day and active one day or a defined limited time |
+| **PRO** | Full bounded user/restaurant access across menu/order/payment/delivery and allowed conversational tasks, plus advanced API integrations; “full” does not mean unrestricted AI authority |
+
+For every label, record the before-GST rate, ±15% tolerance case,
+variable/provider/API cost, payment/delivery fees where enabled, support
+minutes by category, AI mode/model/tokens/units/retries, onboarding,
+integration-maintenance reserve where applicable, shared-infrastructure
+allocation, restaurant ROI, conversion, continuation and cash/economic
+contribution. The illustrative `3 LITE / 4 BASE / 3 PRO` mix is ₹11,499
+weighted ARPU/month and ₹3,44,970 gross 90-day billing before GST; its
+₹97,740–₹1,32,240 monthly rate sensitivity is not a forecast, approved
+pricing, public tier taxonomy or tax conclusion. Replace all planning
+assumptions with pilot evidence before using the result for a decision.
+
+Validate deterministic policy/state and human control for every tier: AI may
+suggest or classify, but cannot publish menu changes, mutate availability,
+approve promotions, change order/payment/delivery state, invoke a privileged
+API or bypass permissions. Record the policy decision, authoritative state
+transition, actor/approval, audit event and any human takeover.
 
 The evidence sequence is behavior → successful fulfillment → staff adoption →
 business value → retention → willingness to pay → operational readiness, not

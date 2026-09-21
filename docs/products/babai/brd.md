@@ -153,11 +153,12 @@ baseline” and “Founder economic target clarification”. These are founder
 inputs and derived planning estimates, not a finalized infrastructure or
 provider choice.
 
-The ₹999, ₹2,499 and ₹4,999 monthly amounts are historical source-evidence
-price hypotheses only. They are not current pilot prices, package names or
-public pricing. At `N=10`, the economics model retains them only as
-historical sensitivity inputs; current pilot records must use neutral
-**Pilot Variant A/B/C** labels or functional scope descriptions.
+The ₹999 and ₹2,499 monthly amounts remain historical source-evidence price
+hypotheses. ₹4,999 is reused only as the internal LITE experiment rate below.
+None of these amounts are approved public pricing or a customer-facing
+package. The separate `P=₹4,999` sensitivity in the economics model remains
+historical source evidence; records outside the internal tier experiment use
+neutral **Pilot Variant A/B/C** labels or functional scope descriptions.
 Proposed review controls are a negative base contribution for two consecutive
 months, repeated support-ceiling breaches, unpriced AI-heavy routing, or CAC
 payback above 12 months. These controls are internal planning thresholds, not
@@ -171,11 +172,41 @@ challenge-required pricing status, create public tier taxonomy, constitute a
 forecast or establish a tax conclusion. The rates are before GST with a
 **±15% planning tolerance**:
 
-| Label | Rate/month before GST | Scope hypothesis |
+| Label | Rate/month before GST | Scope decision |
 |---|---:|---|
-| **LITE** | ₹4,999 | Information/menu/basic WhatsApp workflow; advisory AI; no advanced API integration |
-| **BASE** | ₹9,999 | Pickup/order workflow; human takeover; standard operational integrations; advisory AI |
-| **PRO** | ₹19,999 | Advanced API integrations; richer automation; higher usage/AI allowance; integration-maintenance reserve |
+| **LITE** | ₹4,999 | Limited AI/conversational assistance; menu display and ordering only; menu updates up to 3/month |
+| **BASE** | ₹9,999 | Users select, order, pay and use delivery; restaurant availability controls and basic time-bounded promotions/combos |
+| **PRO** | ₹19,999 | Full bounded user/restaurant access across allowed workflows plus advanced API integrations |
+
+The rates and labels remain an internal experiment only. They are before GST,
+carry the stated tolerance, and must not be presented as approved public
+pricing, a forecast or a promise of entitlement availability.
+
+### Tier capability matrix — internal scope decision
+
+The matrix below is the concrete scope contract for the experiment. “Full
+access” in PRO means access to the listed bounded capabilities, not unrestricted
+AI authority or permission to bypass policy, state, approvals or human control.
+
+| Capability / control | LITE | BASE | PRO |
+|---|---|---|---|
+| Menu display and customer ordering | **Included** | **Included** | **Included** |
+| Customer payment | **Excluded** | **Included** | **Included** |
+| Delivery workflow | **Excluded** | **Included** through an approved provider; BABAI does not operate a fleet | **Included** through approved providers/integrations |
+| Restaurant item enable/disable by kitchen availability | **Excluded** | **Included** through menu/cart UI | **Included** with bounded UI/API controls |
+| Promotions and combos | **Excluded** | **Basic only**; up to 3 requests/day, active for one day or a defined limited time | **Included within approved policy, limits and audit controls** |
+| Menu updates | Up to **3/month** | Operational updates within approved limits | Full bounded management with auditability |
+| Cross-checking workflows | **Excluded** | Included only where explicitly defined for menu/order/payment/delivery | Included only as an approved, auditable workflow |
+| Conversational assistance | **Limited** to menu and ordering assistance; no full automation claim | Limited to menu, order, payment and delivery tasks | Allowed conversational tasks across listed workflows, still bounded |
+| Advanced API integrations | **Excluded** | Standard/approved operational integrations only | **Included**, with integration scope, rate and failure budgets recorded |
+| Human takeover and deterministic state | Required for any exception; AI cannot publish or mutate controlled state | Required for controlled state, payment, delivery and promotion actions | Required; AI suggestions never override policy, permissions or authoritative state |
+
+LITE must not be described as full automation: it does not include payment,
+delivery, cross-checking, daily availability enable/disable, promotions or
+combos. BASE and PRO do not grant unrestricted AI authority; deterministic
+policy/state, audit trails, explicit transitions and human takeover remain
+mandatory for menu publication, availability, order, payment, delivery,
+promotion and integration actions.
 
 At the illustrative `3 LITE / 4 BASE / 3 PRO` mix, weighted ARPU is
 **₹11,499/month** and gross 90-day billing is **₹3,44,970 before GST**.
@@ -186,8 +217,10 @@ prior cash/economic contribution formulas and the separate ₹25L monthly
 operating-profit planning target; it does not promote either to a forecast or
 approved price decision.
 
-Current pilot records should track the experiment label, support minutes,
-AI/provider/API usage, onboarding effort, restaurant ROI, conversion,
+Current pilot records should track the experiment label, exact capability
+scope exercised, support minutes by category, menu-update and promotion
+counts, order/payment/delivery volume, availability changes, AI/provider/API
+usage, integration failures, onboarding effort, restaurant ROI, conversion,
 continuation and cash/economic contribution. Provider, legal, tax and
 finance/accounting validation labels remain mandatory. Tadka, Thali, Dawat,
 Feast and similar names remain historical/source context only.

@@ -78,6 +78,25 @@ The customer normally interacts with the business's own WhatsApp identity. BABAI
 
 AI may assist with understanding, extraction, recommendations, summarization and suggested actions. It is not authoritative for payment, permissions, order state, refunds, consent or other controlled business state. Menu extraction follows `candidate revision → validation → human review → explicit publish`. Human takeover is a first-class path. [Evidence: `nekurama.chatgpt.md:L6233-L6446`, `nekurama.chatgpt.md:L7207-L7450`; corroboration: `nekurama.babai.research.md:L44-L53`]
 
+### Internal tier scope decision — provisional experiment only
+
+The internal LITE/BASE/PRO capability matrix and rates are maintained in
+[`brd.md`](brd.md). They do not change the narrower Stage 0 pilot boundary or
+create public packages. LITE is limited to menu display and ordering
+assistance, with no payment, delivery, cross-checking, daily availability
+enable/disable, promotions or combos and no more than three menu updates per
+month. BASE adds user payment and delivery, kitchen-availability controls in
+the menu/cart UI, and basic promotions/combos limited to three requests per
+day with one-day or defined limited-time activation. PRO adds full bounded
+access across the listed workflows and approved advanced APIs.
+
+Across all tiers, policy/state remains deterministic and human-controlled:
+AI can suggest, extract, classify or summarize, but cannot bypass permissions,
+publish or mutate controlled state, authorize payment, advance order/delivery
+state, activate promotions or call privileged integrations without the
+approved transition and audit trail. “Full” in PRO means bounded capability
+coverage, never unrestricted AI authority.
+
 ### Payment and fulfillment
 
 Customer-to-business payment is preferred; BABAI subscription billing is separate. Payment and order are separate state machines, and pickup is the first fulfillment mode. Delivery remains provider-agnostic and later. [Evidence: `nekurama.raw.chat.json:L192-L205`; `nekurama.babai.research.md:L56-L63`, `nekurama.babai.research.md:L116-L116`]

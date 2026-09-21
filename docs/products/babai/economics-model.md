@@ -43,8 +43,9 @@ the restaurant and is separate from BABAI subscription billing. [Research:
 internal product decision packet: `2026-09-21 FOUNDER DECISION PACKET`]
 
 Pricing must be derived from contribution economics, not assumed tiers. The
-historical ₹999, ₹2,499 and ₹4,999 figures remain research history only; they
-must not be presented as current packages or used as an implied price ladder.
+historical ₹999 and ₹2,499 figures remain research history; ₹4,999 is used
+only as the internal LITE experiment rate below. None may be presented as
+approved public packages or used as an implied price ladder.
 
 ## Internal provisional tier/cost model experiment — 2026-09-21
 
@@ -58,11 +59,11 @@ All amounts below are before GST and carry a **±15% planning tolerance** until
 replaced by measured invoices, provider/API exports, AI usage, support-minute
 logs, onboarding records and finance/accounting review.
 
-| Experiment label | Monthly planning rate before GST | ±15% planning range | Internal scope hypothesis |
+| Experiment label | Monthly planning rate before GST | ±15% planning range | Internal scope decision |
 |---|---:|---:|---|
-| **LITE** | ₹4,999 | ₹4,249–₹5,749 | Information/menu/basic WhatsApp workflow; advisory AI; no advanced API integration |
-| **BASE** | ₹9,999 | ₹8,499–₹11,499 | Pickup/order workflow; human takeover; standard operational integrations; advisory AI |
-| **PRO** | ₹19,999 | ₹16,999–₹22,999 | Advanced API integrations; richer automation; higher usage/AI allowance; integration-maintenance reserve |
+| **LITE** | ₹4,999 | ₹4,249–₹5,749 | Limited AI/conversational assistance; menu display and ordering only; menu updates up to 3/month |
+| **BASE** | ₹9,999 | ₹8,499–₹11,499 | Users select, order, pay and use delivery; availability controls and basic time-bounded promotions/combos |
+| **PRO** | ₹19,999 | ₹16,999–₹22,999 | Full bounded user/restaurant access across allowed workflows plus advanced API integrations |
 
 The ranges are rounded display values around `rate × (1 ± 15%)`; the
 unrounded calculation remains the source of truth. Scope, entitlement,
@@ -81,6 +82,21 @@ reserve can be replaced independently.
 | **LITE** | ₹250 | ₹350 | ₹300 | ₹800 | ₹0 | **~₹1,700** |
 | **BASE** | ₹600 | ₹700 | ₹600 | ₹1,100 | ₹0 | **~₹3,000** |
 | **PRO** | ₹1,500 | ₹1,500 | ₹2,500 | ₹2,000 | ₹500 | **~₹8,000** |
+
+These cost buckets map to the scope decision rather than an entitlement
+guarantee. LITE's usage exposure is limited to menu/order traffic and at most
+three menu updates per month; BASE adds payment, delivery, availability and
+time-bounded promotion state; PRO adds broader bounded conversational work and
+advanced API integration, which increases request, webhook, retry,
+observability and maintenance exposure. AI remains limited by the matrix for
+LITE and BASE, while PRO's higher allowance is still policy-bounded.
+
+| Cost/usage driver | LITE implication | BASE implication | PRO implication |
+|---|---|---|---|
+| Support | Menu correction and capped update support | Payment/delivery exceptions, availability and promotion expiry | Integration onboarding, change management, recovery and takeover |
+| AI | Limited menu/order assistance; record advisory turns and tokens | Menu/order/payment/delivery assistance only; record mode, tokens and retries | Allowed conversational tasks; record routing, model, tokens, media, jobs and retries |
+| Provider/API | No customer payment, delivery or advanced API exposure | Payment/delivery provider fees and approved operational APIs | Advanced API calls, webhooks, rate limits, retries, monitoring and maintenance reserve |
+| State/control | Deterministic menu/order state and human review | Deterministic payment, delivery, availability and promotion transitions | Same controls plus per-integration permissions, audit and failure budgets |
 
 For this experiment only, use the following shared-infrastructure midpoint as
 a sensitivity allocation:
@@ -145,13 +161,39 @@ not a forecast, approved commercial package, tax conclusion or evidence of
 customer willingness to pay. The ±15% rate tolerance, actual cost ledger and
 recognized-income treatment must be applied before any decision.
 
+The same `3 LITE / 4 BASE / 3 PRO` mix has this rate-tolerance sensitivity
+before GST. It holds the illustrative `N=10` loaded cost stack constant only
+to show price exposure; actual usage, support, AI/API and infrastructure costs
+must be recomputed from telemetry.
+
+| Rate case | Monthly gross billing | Weighted ARPU | Gross 90-day billing | Contribution before GST at illustrative `N=10` cost |
+|---|---:|---:|---:|---:|
+| -15% planning case | ₹97,740 | ₹9,774 | ₹2,93,220 | ₹14,140/month |
+| List planning case | ₹1,14,990 | ₹11,499 | ₹3,44,970 | ₹31,390/month |
+| +15% planning case | ₹1,32,240 | ₹13,224 | ₹3,96,720 | ₹48,640/month |
+
+These figures are sensitivity outputs, not a recommendation or recognized
+revenue. GST, payment collection fees, actual tier usage, provider/API
+charges, support effort, onboarding and integration maintenance can change
+the result.
+
 ### Experiment validation and ledger
 
 Track each restaurant and tier experiment by:
 
+- experiment label, before-GST rate, ±15% tolerance case and exact capability
+  scope exercised;
+- menu updates, availability changes, promotion/combo requests and active
+  durations;
+- order, payment and delivery attempts, accepted/rejected/completed states,
+  provider identifiers, webhook/retry counts and exception reasons;
 - support minutes, split into planned, unplanned, recovery and takeover;
-- AI/provider/API units, model/provider identifier, retries, invoices and
-  unknown-rate flags;
+- AI mode (limited/advisory/allowed task), model/provider identifier,
+  conversations, turns, input/output tokens, embeddings, speech, vision,
+  background jobs, retries, invoices and unknown-rate flags;
+- API integration identifier, endpoint/call count, request/response volume,
+  rate-limit events, webhook latency, failure/recovery minutes and
+  integration-maintenance effort;
 - onboarding minutes and direct onboarding cash;
 - restaurant ROI using the restaurant's own baseline, including avoided
   channel cost, staff time, errors and incremental gross profit;
@@ -834,10 +876,11 @@ from BABAI's own cost and contribution. The separation follows the repository's
 direct-order and commission-value hypothesis
 (`nekurama.babai.research.md:L24-L36`, `L56-L63`).
 
-### Historical/source-evidence price-experiment reference — not current taxonomy
+### Historical/source-evidence price-experiment reference — separate from LITE
 
-This historical sensitivity uses `P = ₹4,999/month` only as a source-evidence
-price-experiment reference, not as a current pilot price or package. It assumes
+This historical sensitivity uses `P = ₹4,999/month` as a source-evidence
+reference separate from the current LITE experiment rate; it is not a current
+pilot price, package or public claim. It assumes
 the base provider/Meta
 inputs, advisory AI mode, 120 recurring support minutes per restaurant/month,
 ₹1,000 founder-value per hour, 240 onboarding minutes amortized over 12 months,

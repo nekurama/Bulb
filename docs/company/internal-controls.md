@@ -10,6 +10,7 @@ sources:
   - nekurama.raw.chat.json#bbb214cb-4959-4878-b6a9-2358ddbf2b07
   - nekurama.raw.chat.json#bbb21d97-c664-432c-9a10-f74d42232df7
   - nekurama.raw.chat.json#bbb212bc-9e87-4d82-beca-b9afe7f68b52
+  - nekurama.raw.chat.json#bbb2132e-759f-45c5-a475-0e0dad831706
 ---
 
 # Internal Company-Control Packet
@@ -41,6 +42,7 @@ not be represented as complete from an internal plan or checklist.
 | Expense approvals | Routine low-value spend may use a written delegation and limit. Founder, related-party, material, non-routine or commitment spend requires explicit approval before payment where practicable. | Invoice/receipt, purpose, approver(s), payment evidence, classification and exception record |
 | Founder support and time | Founder work and support are recorded by person, date, workstream, effort or hours, deliverable and evidence link. Time, expenses, loans, reimbursements, salary and equity remain separate classifications. | Dated time/support log, expense evidence and CA/counsel-reviewed classification where money or ownership is involved |
 | IP clean room | Only new work intentionally created for NEKURAMA/BABAI and properly adopted by the company is in scope. Employer, Qualcomm, customer, third-party, restricted and unrelated personal material is excluded. | Provenance entry, source/rights record, exclusion review and post-incorporation adoption document where applicable |
+| Economics evidence | CAC, founder-time, AI/provider costs, refunds/failures and restaurant-value metrics are recorded as dated management evidence with definitions, source data and allocation assumptions. | Metric record, source artifact, calculation/reconciliation and reviewer or owner sign-off |
 | Evidence ledger | Internal controls are tracked in a ledger with an owner, status, next action and expected evidence; secrets and recovery codes never belong in the ledger. | Ledger row plus linked non-secret evidence artifact |
 
 ## Account migration and recovery plan
@@ -76,6 +78,31 @@ Founder support records should make work and cash legible without changing legal
 - do not convert time, support or unreimbursed expense into equity automatically; and
 - obtain CA/counsel review before relying on a classification for books, payroll, tax or ownership.
 
+## Economics evidence notes
+
+Keep these records in the internal ledger as management evidence. Each record must state the
+period, currency, source system or document, metric definition, owner, calculation or
+reconciliation method, and known assumptions. Do not use a metric record as proof of an external
+approval, tax treatment, company revenue, payment custody or provider completion.
+
+- **Customer-acquisition cost (CAC):** separate restaurant and end-user cohorts; record channel or
+  campaign, directly attributable spend, credits/discounts, attribution window, period and
+  customer denominator. Keep estimated allocations and actual invoices distinguishable.
+- **Founder time:** record founder, date, workstream, effort/hours, deliverable, evidence link and
+  any internal cost-rate assumption used for planning. A planning rate is not salary, payroll,
+  employment status or equity consideration.
+- **AI/provider invoices:** retain the invoice or usage statement, provider/account, service or
+  model, billing period, units or usage, credits, taxes, currency, payment evidence and internal
+  allocation to product, environment or workstream. Keep invoice totals reconcilable to the
+  accounting ledger.
+- **Refunds and failures:** record the event date, transaction or attempt identifier, failure or
+  refund reason, gross amount, fees, net amount, affected party, status, evidence and resolution.
+  Do not infer responsibility, revenue recognition or payment custody from an event record.
+- **Restaurant value:** define the metric before recording it (for example orders, gross order
+  value, savings, time saved, retention or service usage), identify the restaurant cohort or
+  approved identifier, period, source, denominator and gross/net basis. Keep value delivered to
+  restaurants separate from NEKURAMA/BABAI subscription revenue and any restaurant settlement.
+
 ## IP clean-room boundary
 
 The clean-room record must identify the origin and rights basis for code, designs, documents,
@@ -104,6 +131,10 @@ Initial ledger:
 | IC-04 | Expense approvals | partial | Written limit, approver matrix, invoice and payment trail | CA/CS/lawyer review where required |
 | IC-05 | Founder support/time records | partial | Dated work/support log and separate expense/funding classifications | CA/counsel classification and employer-policy review where applicable |
 | IC-06 | IP clean room | partial | Provenance, exclusion review and adoption/assignment evidence | Employer/IP counsel and post-incorporation execution |
+| IC-07 | CAC records | unknown | Cohort, channel, spend, attribution window, denominator and calculation/reconciliation | None for internal planning; accounting/tax treatment remains open |
+| IC-08 | AI/provider invoices | partial | Invoice/usage statement, provider, period, usage, credits, taxes, currency, payment and allocation | Provider terms and CA/accounting review where relied upon |
+| IC-09 | Refunds/failures | unknown | Event, reason, gross/fees/net, affected party, status, evidence and resolution | Payment/regulatory/accounting review where applicable |
+| IC-10 | Restaurant-value records | unknown | Metric definition, cohort, period, source, denominator, gross/net basis and reconciliation | Contract, payment/custody and accounting review where applicable |
 
 ## Non-claims and unresolved gates
 
@@ -114,6 +145,8 @@ This packet does not claim:
 - GST, tax, payroll, audit, incentive or other filing completion;
 - employer-policy, Qualcomm conflict, invention-assignment or confidentiality approval;
 - provider account transfer, MFA, recovery, billing, backup or security completion; or
+- CAC, founder-time, provider-cost, refund/failure or restaurant-value records as revenue, tax,
+  employment, custody or external-approval evidence; or
 - execution of contracts, IP assignments, adoption documents or external approvals.
 
 Those items remain open until the relevant external artifact and professional review are recorded

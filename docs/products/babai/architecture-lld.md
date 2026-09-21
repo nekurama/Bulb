@@ -10,6 +10,7 @@ sources:
   - docs/products/babai/architecture-boundaries.md
   - docs/products/babai/architecture-cost-options.md
   - docs/products/babai/domain-model.md
+  - docs/products/babai/economics-model.md
 ---
 
 # BABAI Architecture LLD
@@ -72,6 +73,42 @@ support envelope is 6 hours/week for Manoj, 8 for Vinay and 14 combined, with
 10 hours/week as the planned-load ceiling and no 24x7 commitment. Detailed
 planning ranges and scale/rollback thresholds are maintained in
 [`architecture-cost-options.md`](architecture-cost-options.md).
+
+## Operational and economics telemetry contract
+
+Operational telemetry must support both incident response and the economics
+model without becoming a second source of business truth. Emit a redacted
+usage or time-log record for each measured interval or completed activity with:
+
+```text
+recordId
+recordedAt
+tenantId / restaurantId
+scaleBand
+assumptionsVersion
+activityOrCostClass
+providerOrModelRef where applicable
+deploymentVersion
+quantity / duration
+outcome
+```
+
+The minimum `activityOrCostClass` values are `runtime`, `database`,
+`queue_outbox`, `object_storage_cdn`, `observability`, `ai_assistance`,
+`external_provider`, `onboarding`, `merchant_support`, `takeover`,
+`incident`, `reconciliation` and `restore`. Runtime records should carry
+request/worker counts and resource time; queue records should carry
+enqueue/receive/ack/retry/DLQ/replay counts; AI records should carry request
+and token-equivalent counts, route, cache and retry data; provider records
+should carry message category/count and delivery/retry outcome; support
+records should carry minutes, reason, severity and manual/automated mode.
+
+Do not record message bodies, credentials, payment secrets or unrestricted PII
+in this ledger. Aggregate by tenant/restaurant and scale band for
+`economics-model.md`; retain the raw operational detail only as long as the
+approved observability/privacy policy permits. Missing rates, provider terms,
+model prices, credits, taxes and founder opportunity value remain unknown
+inputs rather than silently defaulting to zero.
 
 ## Committed starting posture
 

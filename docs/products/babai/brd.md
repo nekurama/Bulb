@@ -7,6 +7,7 @@ sources:
   - nekurama.chatgpt.md
   - nekurama.babai.research.md
   - "2026-09-21 FOUNDER DECISION PACKET"
+  - "2026-09-21 ECONOMICS MODEL REVIEW PACKET"
 ---
 
 # BABAI Product BRD
@@ -95,6 +96,32 @@ safety/privacy/payment exception before materially larger onboarding volumes
 are approved. If the gate is not met or is inconclusive, close the pilot,
 record the gap and hold expansion; do not silently extend or imply scale.
 
+## Economics review packet — proposed operating controls
+
+The economics model now treats recurring support minutes per
+restaurant/month as the lead scale telemetry metric, split into planned,
+unplanned, recovery and takeover minutes; onboarding minutes and the hard
+ceiling remain separate. It also records advisory versus AI-heavy usage,
+model/tokens/embeddings/speech/vision/jobs/retries, acquisition effort and
+CAC, LTV/payback, and a scale sensitivity for `N = 1, 5, 10, 25, 50, 100, 250,
+500`.
+
+BABAI SaaS economics and restaurant value are intentionally separate. BABAI
+contribution is recognized subscription income less BABAI cash and economic
+cost. Restaurant ROI is a separate value calculation based on the restaurant's
+own baseline, avoided channel cost, staff time, errors, incremental gross
+profit and restaurant-side provider costs. A value-based maximum rational
+price is a planning ceiling, not payment evidence.
+
+The ₹999, ₹2,499 and ₹4,999 monthly amounts remain pricing experiments only.
+At `N=10` with advisory AI and base provider inputs, the model shows ₹999 and
+₹2,499 as negative economic-contribution cases after founder time; ₹4,999 is
+positive only in advisory mode and remains negative in the AI-heavy case.
+Proposed review controls are a negative base contribution for two consecutive
+months, repeated support-ceiling breaches, unpriced AI-heavy routing, or CAC
+payback above 12 months. These controls are internal planning thresholds, not
+approved commercial or legal outcomes.
+
 ## Confirmed product truth
 
 ### Identity, buyer and wedge — confirmed
@@ -166,7 +193,7 @@ WhatsApp is the primary conversational/action surface for customer and staff att
 | Pricing / packaging | **challenge-required** | Derive pricing from recognized income versus total attributable expenditure; historical tiers are not current packages. |
 | Payment verification | **challenge-required** | Direct merchant payment is preferred; gateway/webhook and manual confirmation behavior require pilot testing. |
 | Delivery | **unknown for MVP** | Provider-agnostic delivery is a later capability; no delivery integration is required to prove pickup-first MVP. |
-| ROI / success thresholds | **partial** | Measure activation, orders, successful fulfillment, staff adoption, repeat use, total expenditure versus income, willingness to pay and readiness; numeric thresholds remain proposed. |
+| ROI / success thresholds | **partial / proposed** | Measure activation, orders, successful fulfillment, staff adoption, repeat use, support minutes by category, AI cost, CAC/LTV/payback, restaurant value, total expenditure versus income and readiness; numeric thresholds remain proposed. |
 | Competitive moat | **challenge-required** | Operating layer around the business-owned relationship is the differentiation thesis, not a proven moat. |
 | Post-pilot roadmap | **unknown** | Expand only from pilot evidence; no permanent vertical, delivery or broad platform roadmap is locked here. |
 
@@ -196,9 +223,9 @@ The field research is intentionally not upgraded: it reports strong interest and
 | `customer-market.md` | Previously question-heavy; now retains an evidence-backed ICP and market answer, with segmentation, switching and expansion gates still partial/unknown. |
 | `experience-and-channels.md` | Previously thin; now records the confirmed WhatsApp/web principle, onboarding and takeover direction, with detailed UX still partial. |
 | `business-model.md` | Retained as the partial commercial model; fixed 90-day paid pilot is confirmed, while agreement terms and contribution-derived pricing remain open. |
-| `economics-model.md` | Retained as the total-expenditure versus income model; historical price hypotheses are not tiers. |
+| `economics-model.md` | Retained as the total-expenditure versus income model, now extended with support-minute telemetry, AI economics, SaaS-versus-ROI separation, scale curve, CAC/LTV/payback and pricing stress cases. |
 | `validation.md` | Retained as a partial pilot gate and measurement file; readiness evidence and numeric success/kill thresholds remain proposed. |
-| `pilot-metrics.md` | Added as the proposed scorecard and team-defined readiness evidence gate; it is not an approved public metric contract. |
+| `pilot-metrics.md` | Added as the proposed scorecard, support-minute telemetry contract, AI/CAC/value fields and team-defined readiness evidence gate; it is not an approved public metric contract. |
 | `product-definition.md` | Retained as the current MVP boundary; production cut, edge cases and post-pilot scope remain partial. |
 | `thesis-and-positioning.md` | Retained as current positioning; differentiation is explicitly a thesis, not a proven moat, and legal clearance remains separate. |
 | `domain-model.md` | Reviewed but not changed in this pass; it is a substantial domain artifact with its own remaining battles. |
@@ -226,6 +253,6 @@ MVP proof is the staged, pickup-first sequence above. [Evidence:
 - `customer-market.md` — ICP and market evidence
 - `experience-and-channels.md` — WhatsApp/web and onboarding principles
 - `business-model.md` — fixed paid pilot, agreement requirements and contribution-derived pricing
-- `economics-model.md` — total-expenditure versus income model and sensitivity analysis
+- `economics-model.md` — total-expenditure versus income model, AI/support scale economics and sensitivity analysis
 - `validation.md` — pilot evidence, readiness and measurement
-- `pilot-metrics.md` — proposed scorecard and team-defined readiness evidence gate
+- `pilot-metrics.md` — proposed scorecard, support-minute telemetry and team-defined readiness evidence gate

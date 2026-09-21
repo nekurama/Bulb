@@ -266,8 +266,9 @@ BABAI remains the current product under NEKURAMA, and **“BABAI — Business
 Automation by AI”** remains founder-approved wording. Tadka, Thali, Dawat,
 Feast and similar labels are retained only where this model points to
 historical/source evidence; they are not current tiers, packages, entitlements
-or public pricing. For a 10-restaurant pilot, use neutral **Pilot Variant
-A/B/C** labels or functional scope descriptions. These are analytical test
+or public pricing. For the 10-restaurant validation sensitivity, use neutral
+**Pilot Variant A/B/C** labels or functional scope descriptions; do not treat
+the sensitivity as simultaneous founder-supported enrollment. These are analytical test
 labels, not a product taxonomy. [Current founder correction:
 `2026-09-21 FOUNDER NAMING CORRECTION (current task input)`; historical raw
 source: `nekurama.raw.chat.json:L215-L216`; corroboration:
@@ -969,7 +970,7 @@ new unknowns and must be added before relying on those rows.
 ### Historical/source-evidence price hypotheses, CAC and stress cases
 
 The following rows preserve historical arithmetic only. For current
-10-restaurant pilot records, use these neutral analysis labels instead of
+10-restaurant validation-sensitivity records, use these neutral analysis labels instead of
 legacy names or price/package names:
 
 | Neutral analysis label | Functional scope description | Commercial treatment |

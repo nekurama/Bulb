@@ -58,3 +58,22 @@ Expansion beyond the initial 10 should be based on evidence from the pilot, with
 - [ ] Interview/research script
 - [ ] ROI calculation method
 - [ ] Pilot-to-paid conversion criteria
+
+## Founder and research evidence
+
+- `nekurama.babai.research.md`, **Summary**: interviews with 19 businesses (15 restaurants and 4 stores) provide the first meaningful demand signal, but explicitly do not prove willingness to pay.
+- `nekurama.babai.research.md`, **Immediate pilot plan**: the research proposed a narrow workflow of business WhatsApp connection, menu/catalog setup, customer questions, pickup order, business accept/reject, payment recording/confirmation, staff completion, and customer status.
+- `nekurama.babai.research.md`, **Success criteria**: the strongest next proof was three active pilot businesses and at least one paying customer. This is a research target, not a general product threshold or permanent success rule.
+- `nekurama.babai.research.md`, **What remains unvalidated**: paid subscription and onboarding-fee conversion, continued use, automation trust, delivery, payment verification, refunds, message reliability, Meta onboarding, and multilingual staff workflows.
+- `nekurama.raw.chat.json`, message index 125 (mapping order; no separate message-index field): founder/history discussion identifies “First 10 restaurants + ROI/success criteria + competitor benchmark” as a pilot workstream.
+
+## Explicit partial / unknown decisions
+
+No numeric success or kill thresholds have been settled. The following remain to be defined through pilot instrumentation and baseline measurement:
+
+- Activation and time-to-value thresholds.
+- Customer and restaurant adoption thresholds.
+- Acceptable onboarding, support, staff-handling, message-error, and payment-confirmation rates.
+- Repeat-use and owner-reported ROI methodology.
+- Pilot-to-paid conversion criteria.
+- Kill criteria and the evidence required before increasing the restaurant cohort.

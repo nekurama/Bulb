@@ -6,6 +6,7 @@ sources:
   - nekurama.raw.chat.json
   - nekurama.babai.research.md
   - "2026-09-21 FOUNDER DECISION PACKET"
+  - "2026-09-21 FOUNDER SCALE/COST BASELINE (current task input)"
   - "2026-09-21 ECONOMICS MODEL REVIEW PACKET"
   - economics-model.md
   - validation.md
@@ -80,6 +81,23 @@ Report median, p90, category mix and ceiling-breach count. Onboarding is
 one-time and excluded from the recurring total but included in the 90-day
 economic true-up. The exact formulas and low/base/high sensitivity are in
 [`economics-model.md`](economics-model.md).
+
+## Scale/capacity telemetry reference — proposed
+
+For each stage, record the capacity measures defined in
+[`economics-model.md`](economics-model.md), section “Founder scale and cost
+baseline”:
+
+| Stage | Required reference fields | Status |
+|---|---|---|
+| Stage 0 | 6 flows/order, 9 gateway hits/flow, 54 average requests/order, 90 heavy-case requests/order, order ceiling, request classification, latency/error/retry, support and incident load | Proposed instrumentation |
+| Stage 1 | Per-restaurant orders/day, WhatsApp conversion case, average/heavy requests, P90/P99, provider/Meta and AI cost, storage/logging/queue/DB cost, payment/delivery treatment, support, incidents and CAC/onboarding | Proposed pilot evidence |
+| Stage 2 | 500-restaurant goal, half-total 500 case, supplied 1,000-restaurant reference, ₹25L monthly/annual income sensitivity, support/incident capacity and total expenditure versus recognized income | Proposed readiness evidence |
+
+This scorecard does not finalize infrastructure, cloud, provider/Meta/BSP, AI
+model, database, queue, storage or logging choices. Missing rates, unit
+classification, incident frequency or staffing capacity remain **unknown**,
+not zero.
 
 ## AI, acquisition and value telemetry
 

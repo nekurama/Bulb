@@ -17,6 +17,7 @@ sources:
   - "2026-09-20 ADMIN DECISION PACKET"
   - "2026-09-21 FOUNDER DECISION PACKET"
   - "2026-09-21 ECONOMICS MODEL REVIEW PACKET"
+  - "2026-09-21 FOUNDER SCALE/COST BASELINE (current task input)"
 ---
 
 # BABAI Economics Model
@@ -233,6 +234,193 @@ payment, onboarding, support and failure/retry records
 (`nekurama.babai.research.md:L145-L163`); the staged onboarding boundary and
 restaurant-owned money flow remain anchored at
 (`nekurama.raw.chat.json:L192-L205`, `L79721-L79820`).
+
+### Founder scale and cost baseline
+
+This section records the **NEW SCALE/COST BASELINE** supplied by the founder.
+It is an internal planning envelope, not an observed production result, vendor
+quote, capacity guarantee, price list or finalized infrastructure design.
+Where a value is calculated from a founder input, it is labelled **derived
+planning estimate**. Where a rate, allocation or failure frequency is absent,
+it remains **unknown** rather than being treated as zero.
+
+#### Traffic primitives
+
+| Input | Value | Label / treatment |
+|---|---:|---|
+| Conversational flows per completed order | 6 | **Founder input** |
+| Gateway hits per flow | 9 | **Founder input** |
+| Average requests per completed order | `6 × 9 = 54` | **Founder input**; arithmetic check |
+| Heavy-case requests per order | 90 | **Founder input** |
+| Completed-order ceiling per restaurant per day | 50 | **Founder input; hard ceiling** |
+| Average requests per restaurant per day at ceiling | `50 × 54 = 2,700` | **Derived planning estimate** |
+| Heavy-case requests per restaurant per day at ceiling | `50 × 90 = 4,500` | **Derived planning estimate** |
+
+The request counts above are workload units. They are not automatically
+billable Meta messages, AI calls, database operations or payment-gateway
+charges. The ledger must classify each request before assigning a provider or
+AI rate.
+
+#### 500/1,000-restaurant envelope
+
+The 1,000-restaurant row is the supplied reference envelope. The 500-restaurant
+row is exactly one half of the supplied 1,000-restaurant traffic totals, as
+directed by the founder. RPS values shown for the 500-restaurant row are
+derived by halving the supplied 1,000-restaurant planning figures.
+
+| Restaurant cohort | Completed orders/day | Average requests/day | Heavy-case requests/day | 24h average | Six peak hours | P90 | P99 | Label |
+|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| 500 | 25,000 | 1.35M | 2.25M | ~16 RPS | ~47 RPS | 100–125 RPS | 250–375 RPS | **Derived planning estimate; half of supplied 1,000 row** |
+| 1,000 | 50,000 | 2.7M | 4.5M | ~31 RPS | ~94 RPS | 200–250 RPS | 500–750 RPS | **Founder input** for supplied reference envelope, except request totals derived from primitives |
+
+The supplied “six peak hours ~94 RPS” figure is retained as a founder input;
+it is not recomputed from uniform distribution of the 24-hour average. The
+relationship between the six-hour peak definition and the 24-hour average is
+an **unknown reconciliation decision**, not a reason to replace the founder
+figure with a different estimate.
+
+#### WhatsApp conversion sensitivity
+
+The conversion cases below are sensitivities of the 50 completed-order
+ceiling, not a claim that any conversion rate has been observed. Requests and
+RPS are scaled linearly only for planning. P90/P99 values are likewise
+linearized planning sensitivities from the supplied full-envelope figures;
+they are not capacity targets.
+
+| Cohort | WhatsApp conversion of 50-order ceiling | Completed orders/day | Average requests/day | Heavy-case requests/day | 24h average | Six peak hours | P90 sensitivity | P99 sensitivity |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 500 | 10% | 2,500 | 135,000 | 225,000 | ~3.9 RPS | ~4.7 RPS | 10–12.5 RPS | 25–37.5 RPS |
+| 500 | 25% | 6,250 | 337,500 | 562,500 | ~7.8 RPS | ~11.8 RPS | 25–31.25 RPS | 62.5–93.75 RPS |
+| 500 | 50% | 12,500 | 675,000 | 1.125M | ~15.6 RPS | ~23.5 RPS | 50–62.5 RPS | 125–187.5 RPS |
+| 500 | 100% | 25,000 | 1.35M | 2.25M | ~15.6 RPS | ~47 RPS | 100–125 RPS | 250–375 RPS |
+| 1,000 | 10% | 5,000 | 270,000 | 450,000 | ~7.8 RPS | ~9.4 RPS | 20–25 RPS | 50–75 RPS |
+| 1,000 | 25% | 12,500 | 675,000 | 1.125M | ~15.6 RPS | ~23.5 RPS | 50–62.5 RPS | 125–187.5 RPS |
+| 1,000 | 50% | 25,000 | 1.35M | 2.25M | ~15.6 RPS | ~47 RPS | 100–125 RPS | 250–375 RPS |
+| 1,000 | 100% | 50,000 | 2.7M | 4.5M | ~31 RPS | ~94 RPS | 200–250 RPS | 500–750 RPS |
+
+The lower-conversion rows are **derived planning estimates**. The supplied
+six-peak figure is retained at 100% and scaled linearly for sensitivity; its
+distribution convention must be reconciled before infrastructure sizing.
+
+#### Cost stack and unit formulas
+
+The cost stack is deliberately separated so infrastructure, provider/Meta,
+AI, storage/logging/queue/DB, payment, delivery, support, CAC and onboarding
+cannot be hidden in one blended number.
+
+| Cost bucket | Per-request / per-order / per-restaurant treatment | Low/base/high view | Status |
+|---|---|---|---|
+| Infrastructure: compute, network and observability | Fixed monthly allocation plus any usage tier; divide by active restaurants and completed orders | Existing aggregate annual planning range ₹20,000 / ₹40,000 / ₹52,000; sub-allocation at scale unknown | **Planning estimate; not a vendor quote** |
+| Provider / Meta / BSP | `billable_provider_units × verified category rate + BSP add-on`; do not equate all 54/90 workload requests to billable units | Existing message/rate table remains low/base/high; actual billable classification and current rate card unknown | **Research pointer + unknown** |
+| AI/model usage | `request or token units × model rate + media/jobs + retry reserve`; record advisory and AI-heavy modes separately | Advisory ₹185.92 and AI-heavy ₹1,992.60 per restaurant/month are existing planning estimates | **Planning estimate; model/rates unknown** |
+| Storage, logging, queue and database | Bytes/events/jobs/records retained × verified unit price, plus fixed allocation; report separately from compute | Low/base/high values unknown | **Unknown** |
+| Subscription payment | `recognized_income × p_sub`; customer-order payment is separate | 0% / ~2% / 3% planning cases; contract and GST treatment unknown | **Research pointer / planning input** |
+| Delivery | `completed_orders × provider fee` only if BABAI absorbs it; otherwise restaurant pass-through | Low/base/high unknown; delivery is not an MVP dependency | **Unknown / pass-through by default** |
+| Support and incident recovery | `minutes / 60 × founder_value_per_hour`; add cash support or staffing when known | ₹500 / ₹2,000 / ₹10,000 per restaurant/month from 60 / 120 / 300 planning minutes | **Planning estimate; time logs required** |
+| CAC | `paid acquisition + travel/enablement + acquisition hours × founder value` | ₹4,000 cash / ₹7,000 economic reference / ₹10,000 stress case | **Planning estimate; actual CAC unknown** |
+| Onboarding | `direct cash + onboarding minutes / 60 × founder_value_per_hour`; amortization is a separate modelling choice | Low/base/high economic effort is ₹1,000 / ₹4,000 / ₹16,000 before direct cash | **Planning estimate; receipts/time logs required** |
+
+The existing ₹20,000/₹40,000/₹52,000 infrastructure range is an aggregate
+planning estimate, not a decision to combine compute, storage, logging, queue
+or DB. No cloud, database, queue, logging, provider, BSP, model or topology
+choice is finalized by this document.
+
+Use these unit formulas for the ledger:
+
+```text
+orders_month         = completed_orders_per_day × calendar_days
+avg_requests_order   = 54
+heavy_requests_order = 90
+
+variable_cost_order_avg
+  = 54 × provider_cost_per_request
+  + 54 × AI_cost_per_request
+  + payment_cost_absorbed_per_order
+  + delivery_cost_absorbed_per_order
+  + storage_logging_queue_DB_cost_per_order
+
+variable_cost_order_heavy
+  = 90 × provider_cost_per_request
+  + 90 × AI_cost_per_request
+  + payment_cost_absorbed_per_order
+  + delivery_cost_absorbed_per_order
+  + storage_logging_queue_DB_cost_per_order
+
+cost_per_restaurant_month
+  = fixed_monthly_cost / active_restaurants
+  + orders_month × variable_cost_order
+  + support_and_incident_cost
+  + onboarding_amortization
+  + CAC_amortization
+```
+
+`provider_cost_per_request`, `AI_cost_per_request`,
+`storage_logging_queue_DB_cost_per_order`, absorbed payment/delivery cost,
+calendar-day divisor, incident rate and CAC amortization period are
+**unknown** until measured or contracted. Customer-order payment and delivery
+remain pass-through unless an approved agreement says BABAI absorbs them.
+
+#### Income trigger and unit sensitivity
+
+The founder goal is to model progress through **500 restaurants or a ₹25L+
+income trigger**. The unit of the ₹25L trigger was not supplied; monthly and
+annual interpretations are therefore explicit sensitivities, not an invented
+decision. `c` below is the WhatsApp conversion sensitivity and `S` is the
+recognized income per active restaurant in the selected unit. Conversion is a
+traffic sensitivity, not an assumption that the number of active restaurants
+changes.
+
+```text
+cohort_income_month = active_restaurants × S_month
+cohort_income_year  = active_restaurants × S_year
+order_linked_income = orders_per_day × calendar_days × S_order
+restaurants_trigger = ₹25L / S_(selected_unit)
+```
+
+| WhatsApp conversion | Completed orders/day at 500 restaurants | Required `S` if ₹25L is monthly income | Required `S` if ₹25L is annual income | If income is order-linked |
+|---:|---:|---:|---:|---|
+| 10% | 2,500 | ₹5,000 / active restaurant / month | ₹5,000 / active restaurant / year | `₹25L / (2,500 × calendar_days)` |
+| 25% | 6,250 | ₹5,000 / active restaurant / month | ₹5,000 / active restaurant / year | `₹25L / (6,250 × calendar_days)` |
+| 50% | 12,500 | ₹5,000 / active restaurant / month | ₹5,000 / active restaurant / year | `₹25L / (12,500 × calendar_days)` |
+| 100% | 25,000 | ₹5,000 / active restaurant / month | ₹5,000 / active restaurant / year | `₹25L / (25,000 × calendar_days)` |
+
+If the trigger is monthly, ₹25L/month is ₹3Cr/year only under a sustained
+12-month run-rate assumption. If it is annual, the equivalent monthly
+run-rate is approximately ₹2.083L/month. Both are **derived planning
+sensitivities**; the founder must choose the accounting income unit and
+recognition treatment, active-restaurant count and any order-linked pricing
+rule before using the trigger. `calendar_days` and `S_order` are **unknown**.
+
+#### Support and incident load at scale
+
+The support minutes below reuse the existing low/base/high planning inputs.
+They show capacity exposure, not staffing commitments. For an incident rate
+`i` that is still unknown:
+
+```text
+incidents_per_day = completed_orders_per_day × i
+```
+
+| Cohort at 100% ceiling | Low recurring support | Base recurring support | High recurring support | Incident formula |
+|---:|---:|---:|---:|---|
+| 500 restaurants | 30,000 min / 500 h per month | 60,000 min / 1,000 h per month | 150,000 min / 2,500 h per month | `25,000 × i` incidents/day |
+| 1,000 restaurants | 60,000 min / 1,000 h per month | 120,000 min / 2,000 h per month | 300,000 min / 5,000 h per month | `50,000 × i` incidents/day |
+
+`i`, support queue arrival rate, severity mix, recovery time, takeover rate
+and staffing capacity are **unknown**. A repeated support-ceiling breach or
+unresolved customer-impacting incident remains an expansion hold regardless
+of request throughput.
+
+#### Stage capacity references
+
+These references connect the scale baseline to the staged validation plan. They
+do not authorize scale or select infrastructure:
+
+| Stage | Capacity metrics to record | Decision status |
+|---|---|---|
+| Stage 0 | Flow count/order, gateway hits/order, average/heavy request units, order completion, request latency/error/retry, support minutes, incidents, and cost-category attribution for one business | **Reference metrics; no scale threshold** |
+| Stage 1 | Per-restaurant daily orders, 10/25/50/100% conversion case, actual request classification, P90/P99 observations, provider/AI/storage/DB/logging/queue spend, support and incident load, and income versus total expenditure | **Pilot evidence; thresholds proposed/open** |
+| Stage 2 | Readiness evidence against the 500-restaurant goal, the supplied 1,000-restaurant reference envelope, conversion sensitivities, support/incident capacity and ₹25L unit sensitivity | **Proposed gate; infrastructure choices remain open** |
 
 ### Top telemetry metric: support minutes per restaurant per month
 

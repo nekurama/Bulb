@@ -8,6 +8,7 @@ sources:
   - nekurama.babai.research.md
   - "2026-09-21 FOUNDER DECISION PACKET"
   - "2026-09-21 ECONOMICS MODEL REVIEW PACKET"
+  - "2026-09-21 FOUNDER SCALE/COST BASELINE (current task input)"
 ---
 
 # BABAI Product BRD
@@ -112,6 +113,18 @@ cost. Restaurant ROI is a separate value calculation based on the restaurant's
 own baseline, avoided channel cost, staff time, errors, incremental gross
 profit and restaurant-side provider costs. A value-based maximum rational
 price is a planning ceiling, not payment evidence.
+
+The new founder scale baseline records six conversational flows/order, nine
+gateway hits/flow, 54 average requests/completed order, 90 heavy-case
+requests/order and a hard ceiling of 50 completed orders/day/restaurant. It
+models the 500-restaurant goal (25,000 orders/day and half of the supplied
+1,000-restaurant traffic totals), the supplied 1,000-restaurant reference
+(50,000 orders/day, 2.7M average requests/day and 4.5M heavy-case/day), and
+10%/25%/50%/100% WhatsApp conversion sensitivities. The ₹25L+ income trigger
+is retained with monthly versus annual unit sensitivity because its unit is
+not supplied. See [`economics-model.md`](economics-model.md), section
+“Founder scale and cost baseline”. These are founder inputs and derived
+planning estimates, not a finalized infrastructure or provider choice.
 
 The ₹999, ₹2,499 and ₹4,999 monthly amounts remain pricing experiments only.
 At `N=10` with advisory AI and base provider inputs, the model shows ₹999 and
@@ -223,9 +236,9 @@ The field research is intentionally not upgraded: it reports strong interest and
 | `customer-market.md` | Previously question-heavy; now retains an evidence-backed ICP and market answer, with segmentation, switching and expansion gates still partial/unknown. |
 | `experience-and-channels.md` | Previously thin; now records the confirmed WhatsApp/web principle, onboarding and takeover direction, with detailed UX still partial. |
 | `business-model.md` | Retained as the partial commercial model; fixed 90-day paid pilot is confirmed, while agreement terms and contribution-derived pricing remain open. |
-| `economics-model.md` | Retained as the total-expenditure versus income model, now extended with support-minute telemetry, AI economics, SaaS-versus-ROI separation, scale curve, CAC/LTV/payback and pricing stress cases. |
-| `validation.md` | Retained as a partial pilot gate and measurement file; readiness evidence and numeric success/kill thresholds remain proposed. |
-| `pilot-metrics.md` | Added as the proposed scorecard, support-minute telemetry contract, AI/CAC/value fields and team-defined readiness evidence gate; it is not an approved public metric contract. |
+| `economics-model.md` | Retained as the total-expenditure versus income model, now extended with the founder 500/1,000-restaurant scale/cost baseline, conversion sensitivities, per-order/per-restaurant formulas, support/incident load, income-unit sensitivity and Stage 0/1/2 capacity references. |
+| `validation.md` | Retained as a partial pilot gate and measurement file; it now references the scale baseline for capacity telemetry, while readiness evidence and numeric success/kill thresholds remain proposed. |
+| `pilot-metrics.md` | Added as the proposed scorecard, support-minute telemetry contract, scale/capacity references, AI/CAC/value fields and team-defined readiness evidence gate; it is not an approved public metric contract. |
 | `product-definition.md` | Retained as the current MVP boundary; production cut, edge cases and post-pilot scope remain partial. |
 | `thesis-and-positioning.md` | Retained as current positioning; differentiation is explicitly a thesis, not a proven moat, and legal clearance remains separate. |
 | `domain-model.md` | Reviewed but not changed in this pass; it is a substantial domain artifact with its own remaining battles. |

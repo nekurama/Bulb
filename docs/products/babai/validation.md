@@ -7,6 +7,7 @@ sources:
   - nekurama.chatgpt.md
   - nekurama.babai.research.md
   - "2026-09-21 FOUNDER DECISION PACKET"
+  - "2026-09-21 FOUNDER SCALE/COST BASELINE (current task input)"
 ---
 
 # Validation / Pilot
@@ -38,6 +39,22 @@ success/kill and continuation thresholds remain proposed or open. [Evidence:
 Expansion beyond the initial cohort should happen in controlled increments
 based on real-world evidence, not an immediate aggressive acquisition switch.
 [Evidence: `nekurama.babai.research.md:L176-L186`]
+
+## Capacity baseline reference — proposed
+
+The internal capacity reference is maintained in
+[`economics-model.md`](economics-model.md), section “Founder scale and cost
+baseline”. Stage 0 records the six-flow/nine-gateway-hit workload primitives,
+request classification, latency/error/retry, support minutes, incidents and
+cost categories for one business. Stage 1 repeats those measures per
+restaurant across the 10%/25%/50%/100% conversion sensitivities. Stage 2
+reviews the 500-restaurant goal against the supplied 1,000-restaurant
+reference envelope, support/incident load and the ₹25L monthly-versus-annual
+income-unit sensitivity.
+
+These are evidence references only. They do not set an infrastructure,
+provider, Meta/BSP, AI model, queue, database, storage or logging choice.
+Stage 2 remains a proposed readiness gate, not a scale guarantee.
 
 ## Pilot workflow — confirmed
 

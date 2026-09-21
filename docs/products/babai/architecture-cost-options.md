@@ -1,8 +1,9 @@
 ---
-status: partial
+status: proposed-options
 owner: BABAI Architecture
 last-reviewed: 2026-09-21
 sources:
+  - "Founder Scale/Cost Baseline (2026-09-21)"
   - "Admin Decision Packet (2026-09-20)"
   - nekurama.raw.chat.json
   - nekurama.chatgpt.md
@@ -13,7 +14,6 @@ sources:
   - docs/products/babai/brd.md
   - docs/products/babai/business-model.md
   - docs/products/babai/validation.md
-  - docs/products/babai/economics-model.md
   - docs/company/founders-ownership-governance.md
 ---
 
@@ -51,12 +51,13 @@ implemented. [Admin Decision Packet (2026-09-20); `architecture.md`;
 ## Recommended pilot posture and decision record
 
 **Working recommendation:** use a small, containerized TypeScript/Node
-modular monolith with one managed worker capacity model, standard PostgreSQL on
-the smallest managed tier that passes the restore/load tests, and a managed
-queue with a transactional outbox/inbox and DLQ path. Run only the low/base
-infrastructure envelope until measured traffic, recovery or support evidence
-requires more. This is a cost-sensitive pilot posture, not a vendor or
-production-availability commitment.
+modular monolith with a **stateless lightweight gateway** and idempotent
+conversation/state workers, standard PostgreSQL on the smallest managed tier
+that passes the restore/load tests, and a managed queue with a transactional
+outbox/inbox and DLQ path. Run only the low/base infrastructure envelope until
+measured traffic, recovery or support evidence requires more. This is a
+cost-sensitive pilot posture, not a vendor or production-availability
+commitment.
 
 | Decision area | Pilot posture | Input required before commitment |
 |---|---|---|
@@ -76,6 +77,179 @@ the true cost model must retain pre-credit cost, founder hours, provider
 pass-throughs and tax. Provider choices, credits, rates, legal approvals and
 production SLOs remain **unresolved/input-required**.
 
+## Founder Decision Packet: recommended now / revisit when
+
+| Area | Recommended now | Revisit when |
+|---|---|---|
+| Runtime | **ECS/Fargate is the default AWS pilot candidate** after account/credit, region, like-for-like cost and restore checks; keep a portable OCI image and worker contract | App Runner proves a simpler worker path, or EC2's measured all-in cost outweighs its founder operations burden |
+| Database | Small managed standard PostgreSQL tier, initially single-AZ if restore and load evidence pass | Measured recovery, availability or connection/load evidence justifies Multi-AZ, Aurora or another managed PostgreSQL option |
+| Queue/outbox | Managed at-least-once queue plus PostgreSQL outbox/inbox, bounded retries and DLQ/quarantine | Measured ordering, fan-out, throughput or workflow needs justify FIFO/event bus/broker/workflow product |
+| Object storage/CDN | Encrypted private object storage for backups and controlled artefacts; CDN only for public static assets, not private domain data | Public asset traffic, measured transfer, cacheability and access-control evidence justify CDN configuration |
+| Secrets/MFA | Managed secret store candidate, short-lived workload credentials, founder MFA/security keys and audited break-glass access | Rotation, access review, tenant isolation or incident evidence requires stronger controls |
+| CI/CD | Immutable image build, tests, staged smoke, manual promotion and backward-compatible migrations | Deployment frequency and evidence support automated promotion with the same rollback controls |
+| Observability | Redacted structured logs, core metrics, backup/restore signals and actionable alerts; sampled traces only where useful | Pilot incident volume, debugging time or SLO evidence justifies expanded retention/tracing |
+| Support | Founder-only coverage with Stage 0/Stage 1 caps and no 24x7 promise | Support budget, provider escalation and paid-pilot evidence justify a broader operating model |
+| AWS credits | Apply credits to right-sized measured services after account/expiry/eligibility verification | Credit expiry, cash-vs-credit comparison or usage growth changes the economics |
+
+### Proposed cost and capacity stop gates
+
+These are **planning guardrails**, not approved budgets:
+
+- Keep pre-credit monthly infrastructure in the low/base envelopes while
+  learning: **₹0–₹30,000/month**.
+- Require founder review before entering the high infrastructure envelope:
+  **above ₹30,000/month pre-credit** or any commitment to Multi-AZ, Aurora,
+  EKS, Kafka, multi-region or long-retention observability.
+- Require a total-expenditure review when projected monthly pilot cash spend
+  (infrastructure, providers, payment fees, tooling, remediation and any
+  approved founder opportunity-cost view) exceeds **₹50,000/month**. The
+  founder must approve the actual budget before enrollment; this is not a
+  pricing or margin decision.
+- Pause new restaurant enrollment if combined founder support exceeds
+  **24 hours/week**, steady-state support exceeds **2 hours per active
+  restaurant/week**, P1 incidents recur, unresolved P2 work exceeds one
+  business day, or restore/reconciliation work is not current.
+- Do not expand from Stage 0 to Stage 1, or toward the 10-restaurant
+  hypothesis, until cost, support, restore and provider evidence is recorded.
+
+The expenditure trigger includes pre-credit and post-credit views. A credit
+that reduces cash spend but increases pre-credit commitment still requires
+review. Support time must be reported separately from infrastructure so AWS
+savings cannot hide an unsustainable founder operating burden.
+
+## Scale baseline: traffic and staged capacity
+
+The **Founder Scale/Cost Baseline (2026-09-21)** supplies the planning traffic
+inputs below. They are workload scenarios, not observed production load or
+capacity claims:
+
+- Average completed order: **54 requests**.
+- Heavy completed order: **90 requests**.
+- Planning volume: **50 completed orders/day/restaurant**.
+- 500 restaurants: 25,000 orders/day.
+- 1,000 restaurants: 50,000 orders/day.
+
+At an even 24-hour distribution, the request-rate scenarios are:
+
+| Restaurants | 54 requests/order | 90 requests/order | Interpretation |
+|---:|---:|---:|---|
+| 500 | 1.35M requests/day; **15.6 average RPS** | 2.25M requests/day; **26.0 average RPS** | Scale test band, not a launch target |
+| 1,000 | 2.70M requests/day; **31.3 average RPS** | 4.50M requests/day; **52.1 average RPS** | Higher evidence band; requires measured burst distribution |
+
+The even-distribution RPS values are not peak RPS. The load test must replay
+realistic restaurant/daypart bursts, retries, provider callbacks and queue
+redelivery. P90/P99 gateway targets below are **provisional acceptance
+thresholds for internal load testing**, not customer SLOs:
+
+| Signal | Stage 0/1 provisional gate | 500/1,000-restaurant evidence gate |
+|---|---:|---:|
+| Stateless gateway P90, excluding provider latency | ≤300ms | ≤300ms sustained |
+| Stateless gateway P99, excluding provider latency | ≤1s | ≤1s sustained; investigate any >2s |
+| Queue age P90 | ≤30s | ≤30s; no unbounded growth |
+| Oldest outbox record | ≤60s | ≤60s; alert before breach |
+
+### Staged deployment posture
+
+| Stage | Cheapest quality-preserving posture | Entry/exit evidence |
+|---|---|---|
+| **Stage 0 — one restaurant** | Portable OCI gateway + worker on a managed VM/container baseline; managed PostgreSQL; managed queue/outbox; private object storage; basic redacted observability | One complete restore drill, idempotency/retry/DLQ test, provider callback test, and founder support within agreed window |
+| **Stage 1 — up to three restaurants** | Same portable shape or Lightsail/EC2-equivalent fallback if its measured all-in cost is lower and restore/patch burden is accepted; separate gateway/worker capacity model | 15-minute load tests, DB/pool/backpressure evidence, provider throttling test, support ≤24 founder-hours/week |
+| **Stage 2 — higher evidence band** | ECS/Fargate + managed PostgreSQL/queue when traffic, failure isolation, observability or support evidence justifies managed separation | 500/1,000-restaurant scenario test, P90/P99 and queue gates, restore ≤RTO, cost and portability review |
+
+No 2x2-vCPU gateway configuration proves system capacity. PostgreSQL
+contention, worker throughput, provider throttling, AI latency/cost, queue
+age, retries and external callback behavior must be tested together. The
+gateway is only one part of the system.
+
+## Stateless gateway and bottleneck protections
+
+The gateway should authenticate/verify the request, resolve channel and
+tenant context, perform bounded validation, accept an idempotency key and
+enqueue a typed command. Conversation/state work and provider side effects
+run in idempotent workers. The gateway must not hold conversation state in
+process memory, perform long provider calls synchronously, or make a chain of
+per-hit PostgreSQL transactions merely to acknowledge a request.
+
+### PostgreSQL per-hit transaction protections
+
+- Keep one bounded transaction for the authoritative command and outbox write;
+  avoid read-then-write chains that multiply round trips.
+- Use aggregate/version checks and idempotency records to collapse retries.
+- Use indexes and projections for hot reads; do not add cross-module table
+  reads to save one request.
+- Bound gateway and worker connection pools separately; reserve capacity for
+  migrations, admin recovery and reconciliation.
+- Monitor pool exhaustion, wait time, lock time, transaction retries, deadlocks,
+  CPU, I/O and oldest outbox age.
+- Apply per-tenant/branch write limits and queue admission control before the
+  database becomes the backpressure boundary.
+
+### Rate limiting, backpressure and retry
+
+- Apply layered limits: provider/channel, tenant/branch, identity/session and
+  gateway/IP where appropriate.
+- Prefer token-bucket or leaky-bucket limits with explicit `Retry-After`;
+  exact values remain load-test inputs.
+- When queue age or DB pool pressure crosses a provisional gate, return a
+  bounded accepted/deferred response, stop non-critical work and preserve
+  business-critical ordering/payment reconciliation.
+- Retry only transient failures with exponential backoff and jitter; honor
+  provider throttling and `Retry-After`.
+- Use bounded attempts, quarantine/DLQ and human escalation for poison or
+  non-retryable messages. Never retry payment/settlement side effects without
+  an idempotency key and reconciliation record.
+
+### Provider throttling and safe caching
+
+- Keep provider quotas and concurrency limits in adapter policy, not domain
+  modules.
+- Queue outbound Meta/payment/delivery calls and use per-provider,
+  per-tenant/channel throttles.
+- Cache only safe, versioned or immutable data: published menu revisions,
+  tenant configuration and provider metadata with explicit TTL/version keys.
+- Do not cache authoritative order, payment, consent, permission or
+  availability decisions as a source of truth.
+- Invalidate or bypass caches on publication, permission, payment, consent and
+  availability changes; log cache version/provenance for diagnosis.
+
+## 15-minute load-test and migration gates
+
+Every stage must run repeated **15-minute windows** after a warm-up period and
+record both the 95th/99th percentile and worst observed values. The exact
+thresholds are provisional until real pilot distributions are known.
+
+| Gate | Measure every 15 minutes | Provisional action |
+|---|---|---|
+| Gateway | RPS, P90/P99, 5xx/429, event-loop/CPU and memory | Scale gateway only after confirming downstream health; rollback on error or latency regression |
+| PostgreSQL | CPU, active/idle pool, wait time, lock/deadlock rate, transaction retries, I/O and connection saturation | Reduce concurrency/backpressure, tune query/index/pool, or scale database only with evidence |
+| Queue/outbox | oldest outbox age, queue age, depth, worker throughput, retry and DLQ counts | Add worker capacity or slow admission; quarantine poison messages and reconcile |
+| Providers | callback/send latency, throttles, 429/5xx, timeout and retry rate by provider/tenant | Honor throttling, delay/requeue, switch only through the adapter and record reconciliation |
+| AI | latency, failures, cost per accepted interaction and fallback rate | Keep AI advisory; fall back to deterministic/human path, never block authoritative state indefinitely |
+| Recovery | backup age, last success, restore elapsed time, replay/reconciliation result | Block stage advancement if restore cannot meet the 8-hour target or replay is unsafe |
+| Support | Manoj/Vinay hours, incidents, P1/P2 backlog and manual interventions/restaurant | Pause enrollment when founder ceilings or recovery ownership fail |
+
+### Migration trigger
+
+Move from the portable managed-VM/container band toward ECS/Fargate and
+managed PostgreSQL/queue separation only when at least one of these is
+measured and sustained across repeated windows:
+
+- gateway P90/P99 breaches after stateless code and downstream protections;
+- DB CPU/pool/lock saturation or transaction latency remains the bottleneck
+  after query/index/idempotency fixes;
+- queue age/outbox age grows despite bounded worker capacity;
+- provider throttling or callback volume requires independent worker scaling;
+- failure isolation, auditability or restore operations exceed founder-safe
+  handling;
+- the cost model shows the higher managed posture is cheaper than founder
+  operations and recovery risk.
+
+At **500+ restaurants**, founder-only support is an explicit replacement
+trigger: the system must have an approved replacement support/on-call model
+before accepting that scale. This is not a hiring assumption or a commitment
+to reach 500; it is a stop condition against silently scaling founder
+operations.
+
 ## Cost model conventions
 
 All monetary figures in this document are **internal planning envelopes**, not
@@ -94,11 +268,11 @@ actual credit account before enrollment or a provider commitment.
 
 ### Pilot infrastructure envelopes
 
-| Envelope | Assumptions | Planning cash range before credits | Main risk |
-|---|---|---:|---|
-| **Low / learning** | One small API/worker container capacity, one small single-primary managed PostgreSQL tier, managed at-least-once queue + DLQ, short log retention, private object-storage backups and no standby database | **₹8,000–₹20,000/month** | A single failure can require manual recovery; capacity and restore evidence are limited |
-| **Base / controlled pilot** | One or two right-sized API/worker capacities, managed PostgreSQL with automated backup, queue + DLQ, basic alarms, encrypted object storage, measured restore drill and minimal staging | **₹25,000–₹60,000/month** | Higher fixed cost before usage and still not a high-availability guarantee |
-| **High / evidence-backed scale** | Measured higher request/queue volume, larger single-primary database or additional application/worker capacity, more observability and an isolated restore environment; no multi-region default | **₹75,000–₹180,000/month** | Cost and operational load can outgrow founder capacity; still excludes provider pass-through fees |
+| Envelope | Assumptions | Planning cash range before credits | Founder support burden | Scaling/rollback gate |
+|---|---|---:|---|---|
+| **Low / learning** | One small application task or container, one small single-AZ PostgreSQL instance or equivalent pilot tier, managed queue, short log retention, private object-storage backups, no standby database | **₹0–₹10,000/month** | **8–12 founder-hours/week**; manual recovery remains possible | Add capacity only after measured saturation or backlog; restore the last known-good image/configuration and replay safely |
+| **Base / controlled pilot** | One or two right-sized application tasks, managed PostgreSQL with automated backup, queue + DLQ, basic alarms, encrypted object storage, measured restore drill, minimal staging | **₹10,000–₹30,000/month** | **16–24 founder-hours/week** across onboarding, support, incidents and restore drills; no 24x7 promise | Scale app/worker on sustained latency, CPU, queue-age or outbox-age evidence; pause enrollment if support or restore gates fail |
+| **High / evidence-backed resilience** | Redundant application capacity, standby/Multi-AZ database or equivalent, more retention/observability, isolated restore environment and network/transfer overhead where required | **₹30,000–₹100,000+/month** | **Above 24 founder-hours/week is a stop signal**, not an automatic hiring assumption | Revisit architecture only with evidence; rollback requires a tested previous runtime plus database/provider recovery path |
 
 The ranges are a budgeting aid only. They must not be used to publish BABAI
 pricing or margin claims. The product BRD requires actual infrastructure,
@@ -106,66 +280,12 @@ provider, payment, tooling, support, failure and refund costs to be recorded
 per pilot before public pricing is set. [`brd.md`; `business-model.md`;
 `validation.md`]
 
-## Economics integration and N=1–500 scale curve
-
-The economics model needs architecture-owned usage counters rather than a
-linear extrapolation of the low/base/high envelopes. Use this planning
-decomposition:
-
-```text
-C_platform(N)
-  = C_shared
-  + C_runtime(N)
-  + C_database(N)
-  + C_queue(N)
-  + C_object_storage(N)
-  + C_observability(N)
-  + C_ai(N)
-  + C_provider(N)
-```
-
-`C_provider(N)` and `C_ai(N)` remain variable, provider/model-dependent
-inputs. Customer-order payment fees remain pass-through unless a contract
-explicitly makes BABAI absorb them. No value in this decomposition is a quote
-or a final unit-cost assumption.
-
-| Scale band | Architecture sensitivity to model | Required evidence before moving up |
-|---|---|---|
-| **N=1–3** | One API/worker image, one managed PostgreSQL primary, one queue/DLQ path; most cost is shared. Capture per-restaurant request, message, AI and support baselines. | Stage 0/1 time logs, provider exports, queue/outbox metrics and restore evidence |
-| **N=4–10** | Remains a modular monolith; separate API/worker capacity only when thresholds fire. Shared database, queue, object and telemetry costs are allocated by measured usage. | Two-week rolling support telemetry, load sample, retry/DLQ rate and per-restaurant allocation |
-| **N=11–25** | Expect worker concurrency, database connections, queue volume, object retention and log volume to become step-variable. Add capacity only through the existing scale triggers. | Capacity test, connection/lock report, queue age, storage/egress and observability cost |
-| **N=26–50** | Treat API and worker scaling as independently measurable while keeping one codebase and authoritative PostgreSQL. Add AI/provider budgets and tenant-level rate limits if usage warrants. | Sustained throughput, provider limits, AI usage/retry export, incident/support load |
-| **N=51–100** | Re-test database tier, pooling, indexes, backup/restore duration, queue visibility and telemetry retention. A deployment split remains optional and evidence-driven. | Controlled load test, restore drill within RTO, error/reconciliation evidence and support-capacity decision |
-| **N=101–250** | Expect additional runtime/worker capacity and stronger cost attribution. Review read models, archival and provider quotas; do not infer microservices from restaurant count alone. | Measured bottleneck, data-growth/retention review, provider terms and founder/support operating decision |
-| **N=251–500** | Perform an architecture re-baseline before committing to this band: database growth, queue throughput, object/CDN egress, AI spend, provider limits, observability cost and support model. EKS, Kafka and multi-region remain non-default options requiring separate evidence. | Written capacity, continuity, security, provider and staffing evidence; updated cost model and approval packet |
-
-The curve is a **measurement plan**, not a restaurant-capacity promise. The
-current product onboarding ceiling and founder-only support guardrails still
-apply. Do not allocate a high-band cost across N until the corresponding
-runtime, provider and support measurements exist.
-
-### Architecture-owned ledger counters
-
-Emit or export monthly counters keyed by `tenantId`/restaurant and an
-assumptions version. The economics model should receive counts and durations,
-not unrestricted payloads:
-
-| Cost driver | Minimum counters |
-|---|---|
-| Runtime/API/worker | request count, p50/p95 latency, CPU/memory/task-hours, worker concurrency and deploy/restart count |
-| PostgreSQL | allocated storage, backup volume, connection saturation, query/lock pressure, I/O where available and restore duration |
-| Queue/outbox | messages enqueued/received/acknowledged, payload bytes, retries, visibility extensions, DLQ/quarantine count, oldest age and replay count |
-| Object storage/CDN | object count/GB, PUT/GET, signed URL volume, cacheable/public bytes and egress |
-| Observability | log/metric/trace volume, retained GB, sampled trace count and alert/page count |
-| AI assistance | request count, input/output tokens or equivalent units, model route identifier, cache-hit/miss, retries, tool calls and human escalation count |
-| External providers | Meta/provider message count by category, delivery/retry/failure count, channel/provider identifier and invoice/add-on reference |
-| Founder support | onboarding, takeover, merchant support, incident, reconciliation and recovery minutes; severity, reason, restaurant, deployment version and outcome |
-
-Rates, model/provider names, retention, discounts, credits, taxes and
-allocation rules stay unknown until verified. Shared costs must be reported
-separately from per-restaurant variable usage so the economics model can
-compare `N=1`, `N=10`, `N=50`, `N=100`, `N=250` and `N=500` without hiding
-step changes. [`economics-model.md`; `architecture-lld.md`]
+These are internal planning envelopes, not quotes. They exclude Meta/BSP,
+payment, AI, delivery, tax and one-time onboarding costs. Founder-hours are
+capacity assumptions, not labour pricing or a hiring plan. Provisional
+triggers are sustained request/worker saturation, queue or outbox growth,
+database connection pressure, restore failure, or a P1/P2/support-capacity
+breach; exact thresholds must be measured during the pilot.
 
 ## AWS managed deployment options
 
@@ -249,33 +369,7 @@ operations compared with ECS.
 **Cost posture:** potentially between the low and base envelopes, but only
   after a worker and restore proof. It is not selected over ECS.
 
-### Option D — small EC2 host + containers + managed PostgreSQL/SQS
-
-Run the same API and worker images on one small EC2 host, with managed
-PostgreSQL and queue services retained. This is the cost fallback, not the
-default posture.
-
-**Advantages**
-
-- Lowest apparent fixed compute cost for a very small pilot.
-- Preserves the container image, PostgreSQL and queue ports.
-- Useful for a bounded learning stage when managed container overhead is
-  disproportionate to traffic.
-
-**Tradeoffs**
-
-- Founders own host patching, disk/instance recovery, deployment safety,
-  capacity and single-host failure handling.
-- A host outage can exceed the normal support envelope and threaten the RTO
-  unless the recovery runbook is exercised.
-- Security updates and monitoring cannot be deferred because the host is
-  inexpensive.
-
-**Cost posture:** allowed only when the founders explicitly accept the
-single-host and patching risk, with a documented exit trigger to ECS/Fargate
-or the portable managed baseline.
-
-### Option E — Lambda/API Gateway + Aurora Serverless v2 or RDS Proxy
+### Option D — Lambda/API Gateway + Aurora Serverless v2 or RDS Proxy
 
 Split HTTP and queue handlers into functions and use Aurora Serverless v2 or
 RDS through a connection-management layer.
@@ -305,8 +399,7 @@ RDS through a connection-management layer.
 The current recommendation is **not a provider choice**: compare Option A
 and Option B with the same workload, backup retention, queue volume, logs,
 restore drill and support assumptions. Option C is a secondary simplification
-candidate. Option D is a cost fallback with an explicit operations penalty.
-Option E is deferred. Credits are an economic input, not an
+candidate. Option D is deferred. Credits are an economic input, not an
 architecture requirement.
 
 For the pilot decision, Option A is the portability baseline and Option B is
@@ -323,6 +416,20 @@ Record before using credits:
    backup and snapshots.
 4. Exit evidence: container image, PostgreSQL export/restore, queue replay and
    provider-adapter tests outside AWS.
+
+### Runtime scaling and rollback gates
+
+| Runtime | Founder support burden | Scaling trigger | Rollback posture | Packet decision |
+|---|---|---|---|---|
+| **ECS/Fargate** | Low-to-moderate platform burden after networking, logs and task operations are documented | Add task/worker capacity only after measured sustained saturation, queue age/outbox growth or worker lag; resize PostgreSQL after connection/load or restore evidence | Redeploy the last known-good immutable image/configuration; keep migrations backward-compatible and pause risky consumers before replay | **Recommended AWS candidate now**, subject to account, cost and restore validation |
+| **App Runner** | Potentially lower HTTP deployment work, but worker, scheduled work, networking and diagnosis are unproven | Revisit only after a representative worker/outbox test demonstrates stable background processing and acceptable all-in cost | Re-deploy the last known-good service revision and retain an independently runnable worker/container path | **Time-boxed alternative; not default** |
+| **Small EC2 host + containers** | Highest founder burden: patching, host health, emergency access, backup and replacement are manual responsibilities | Leave fallback or add capacity when host maintenance/failure, queue backlog or support load threatens RPO/RTO or founder limits | Restore the previous image/compose configuration or replacement host from tested backups; accept single-host recovery interruption | **Cost fallback only** |
+
+For every runtime, a release that increases error rate, violates domain
+invariants, grows the outbox/DLQ, or creates reconciliation ambiguity must be
+paused or rolled back before more traffic is admitted. Destructive schema
+migrations are incompatible with this rollback posture. These are operating
+gates, not availability promises.
 
 ## PostgreSQL options
 
@@ -372,54 +479,45 @@ is not claimed. [Raw T115 `bbb210cc-a1ef-4ea9-b1a7-7c52f0011721`; Raw T119
 `e472fe3d-22d5-4595-aafd-986683b13a3c`; Raw T264
 `bbb21a7f-4d44-4cc1-8f60-1172bdcc303c`; `architecture-lld.md`]
 
-## Object storage and CDN posture
+## Object storage and CDN
 
-Use private, encrypted S3-compatible object storage for menu imports, media,
-exports, restore artifacts and other large blobs. Keep object identifiers and
-metadata in PostgreSQL, issue short-lived signed access, and apply
-tenant-scoped authorization before issuing a URL. A CDN is optional and
-limited to public/static or explicitly cache-safe content; customer messages,
-payment evidence, private exports and unrestricted tenant data must not be
-publicly cacheable. This keeps the domain portable while avoiding a CDN
-dependency for the core order path.
+Object storage is for encrypted backup exports, restore-test artefacts,
+tenant-controlled uploads and other bounded artefacts that do not belong in
+the transactional database. The default pilot posture is private buckets or
+containers, short-lived signed access where needed, lifecycle rules and
+separate access logs. It is not a second source of truth for orders, payments,
+events or outbox state.
+
+| Option | Pilot use | Tradeoff and decision |
+|---|---|---|
+| **Managed object storage** | Backups, exports, controlled uploads and restore evidence | **Recommended now** behind an object-storage adapter; provider encryption, retention, deletion and egress terms remain to be validated |
+| **CDN for public static assets** | Cache versioned web assets if the pilot has public traffic | **Optional now**; enable only when measured transfer/latency justifies cost and cache invalidation/access controls are tested |
+| **CDN for private business data or APIs** | Not a pilot requirement | **Do not use now**; signed URLs, cache keys, tenant isolation and invalidation errors create avoidable risk |
+
+S3/CloudFront or equivalent services may be used as implementation candidates
+in the AWS comparison, but no provider is selected and no data-location,
+security or legal approval is implied. Keep object keys, metadata and export
+formats documented so a bounded backup or asset set can be copied and
+verified outside the provider.
 
 ## Secrets, MFA and administrative access
 
-Human administration requires MFA, separate named accounts, least privilege,
-audited access and a controlled break-glass account. Workloads should use
-short-lived workload identity or equivalent credentials; long-lived provider
-keys must not be committed, baked into images or copied into ordinary
-environment files. Store secrets in a managed secret facility or an
-equivalent encrypted store, rotate them on a documented schedule and test
-revocation/recovery without exposing values. The exact secret manager, key
-ownership, rotation cadence and break-glass approver remain external security
-gates, not provider approvals made by this packet.
+The pilot must keep credentials out of source control, images, ordinary
+configuration files, logs, events and support tickets. Use a managed secret
+store or an equivalent encrypted mechanism, inject only the minimum secret
+needed by a workload, rotate provider tokens through an explicit runbook, and
+audit reads and changes. Workloads should use short-lived or narrowly scoped
+identities where the runtime supports them; long-lived founder credentials are
+not a service-to-service contract.
 
-## CI/CD and rollback posture
-
-The pipeline should build the OCI image, run unit/integration tests and
-type-check/lint, scan dependencies and the image, produce an SBOM, publish an
-immutable digest, validate database migrations, deploy a smoke check and
-require an explicit production approval. The previous known-good digest must
-remain deployable. Database changes use expand/migrate/contract sequencing;
-destructive schema rollback is not assumed.
-
-Scale the API/worker or database tier only after a measured 15-minute window
-shows at least two of the following, or a single safety-critical failure:
-
-- API p95 above 750 ms or 5xx above 2%;
-- oldest queue message or outbox record above 2 minutes, or a growing DLQ;
-- database CPU or connection use above 70%, or lock contention affecting
-  commands;
-- repeated provider timeouts or reconciliation mismatches that added capacity
-  can demonstrably relieve.
-
-Roll back to the previous image digest when health checks fail, 5xx exceeds
-5% for 5 minutes, queue/outbox age accelerates after deployment, a migration
-violates an invariant, or payment/order reconciliation becomes ambiguous.
-Freeze incompatible consumers, preserve failed payloads, and replay only after
-versioned remediation is tested. Use backup restore for data corruption or a
-destructive migration incident, not as the normal application rollback.
+Founder and administrative access should require MFA, preferably a
+hardware/security key for privileged accounts, with separate named identities,
+least privilege, access review and a documented break-glass path. Break-glass
+use must be time-bound and audited. These are architecture controls and
+operating requirements, not a statement that any provider, legal reviewer or
+security assessor has approved them. Exact secret store, key ownership,
+rotation interval, recovery access and DPDPA/security evidence remain
+unresolved.
 
 ## Meta / WhatsApp provider options
 
@@ -529,15 +627,30 @@ ownership must be validated together. Do not put credentials, payment secrets
 or unrestricted PII in logs, events or traces. [`architecture-lld.md`;
 `docs/company/security-privacy-controls.md`]
 
-For economics integration, every support or recovery activity must also emit a
-small operational record or time-log entry containing restaurant/tenant,
-activity class (`onboarding`, `takeover`, `merchant-support`, `incident`,
-`reconciliation`, `restore`), severity where applicable, start/end or minutes,
-automation/manual mode, provider, deployment version and outcome. Aggregate
-these records weekly by restaurant and scale band; do not infer founder cost
-from alert count alone. The record must exclude message bodies, credentials,
-payment secrets and unrestricted PII. This is the telemetry bridge to
-`economics-model.md`, not a staffing approval or a new customer SLA.
+## CI/CD and release rollback
+
+The pilot delivery path should be the smallest repeatable pipeline that
+protects the domain and recovery boundaries:
+
+1. Build an immutable OCI image from a reviewed commit.
+2. Run formatting, type/build checks, targeted tests and dependency/security
+   checks available in the repository.
+3. Publish the image by digest to a non-production environment and run a
+   smoke test covering the API, worker, queue/outbox and restore-sensitive
+   configuration.
+4. Promote manually to the pilot runtime with a recorded change and
+   backward-compatible database migration.
+5. Monitor error rate, queue/outbox age, callback verification, payment
+   reconciliation and backup signals before declaring success.
+
+GitHub Actions or another CI service may implement this flow, but no CI/CD
+provider, runner, registry, deployment approval or production SLA is selected
+here. Secrets must be supplied through the secret mechanism, not committed
+pipeline variables. A rollback must redeploy the last known-good image and
+configuration, stop or quarantine unsafe consumers, and use an authorized
+replay/reconciliation procedure if external side effects were attempted.
+Schema changes must support old and new application versions during rollback;
+destructive migrations require a separate reviewed recovery plan.
 
 ## Backup, restore and continuity assumptions
 
@@ -607,19 +720,15 @@ Until measured support data exists:
 - **Stage 0:** one active restaurant, one branch and one number.
 - **Stage 1:** no more than three active restaurants concurrently under
   founder-only support.
-- **Manoj hard cap:** 6 hours/week, including technical incidents,
-  deployment/rollback, provider failures, data recovery and security-sensitive
-  engineering. Keep at least 2 hours uncommitted for incidents.
-- **Vinay hard cap:** 8 hours/week, including onboarding, menu/business
-  process support, merchant communication and operational triage. Keep at
-  least 2 hours uncommitted for escalations.
-- **Combined hard cap:** 14 founder-hours/week, with a 10-hour/week planned
-  load ceiling covering onboarding, incidents, reconciliation and restore
-  drills. There is no 24x7 commitment.
-- **Pause enrollment** when either founder's two-week rolling average exceeds
-  their cap, combined planned load exceeds 10 hours/week, a P1 incident
-  remains active beyond the planned coverage window, unresolved P2 backlog
-  exceeds one business day, or restore/reconciliation work is not current.
+- **Combined support budget:** target no more than 24 founder-hours/week,
+  including onboarding, incidents, merchant communication, reconciliation and
+  restore drills.
+- **Steady-state guardrail:** target no more than 2 support hours per active
+  restaurant per week, excluding a one-time onboarding budget of up to 6
+  hours per restaurant.
+- **Pause enrollment** when the combined support budget is exceeded for two
+  consecutive weeks, P1 incidents recur, unresolved P2 backlog exceeds one
+  business day, or restore/reconciliation work is not current.
 - The product's gradual ceiling of up to 10 restaurants is not a promise that
   two founders can support 10 restaurants alone. Reaching that ceiling
   requires measured evidence, reduced manual work, documented provider
@@ -627,34 +736,9 @@ Until measured support data exists:
   founder workload.
 
 These limits protect the validation sequence from turning AWS savings into
-unbounded founder on-call work. Admissible capacity is:
-
-```text
-admissible restaurants
-  <= min(10, floor((10 planned founder-hours/week) /
-                    measured average support-hours/restaurant/week))
-```
-
-They are proposed operating guardrails to validate against Stage 0/Stage 1
-data, not new product thresholds. [`brd.md`; `validation.md`;
-`nekurama.babai.research.md`]
-
-## Internal acceptance disposition
-
-**Accepted for internal planning:** portable OCI container baseline; ECS/Fargate
-as the preferred AWS candidate; App Runner only after worker/network/rollback
-validation; small EC2 as a founder-accepted cost fallback; managed standard
-PostgreSQL; managed queue plus transactional outbox/inbox; private object
-storage with selective CDN; MFA and managed secrets; provider-neutral
-observability; gated CI/CD; export-oriented portability; RPO 24h/RTO 8h; and
-the founder support caps above.
-
-**External/parked gates:** AWS account and credit eligibility, current
-region/service quotes, Meta Tech Provider/BSP approval and coexistence,
-payment-provider approval and rates, legal/privacy/security review,
-subprocessor and data-location terms, production SLO approval, and any
-availability or staffing commitment. AWS credits are a planning sensitivity,
-not an approval or reason to overprovision.
+unbounded founder on-call work. They are proposed assumptions to validate
+against Stage 0/Stage 1 data, not new product thresholds. [`brd.md`;
+`validation.md`; `nekurama.babai.research.md`]
 
 ## Unresolved decisions and required evidence
 
@@ -670,9 +754,11 @@ not an approval or reason to overprovision.
    is assumed.
 6. Obtain merchant payment-provider terms, webhook/refund/reconciliation
    evidence and direct-settlement confirmation.
-7. Measure founder support effort, P1/P2 rates, provider response and actual
+7. Test private object-storage export/restore, signed access, secret rotation,
+   MFA/recovery access and last-known-good CI/CD rollback.
+8. Measure founder support effort, P1/P2 rates, provider response and actual
    per-pilot contribution before expanding beyond three active pilots.
-8. Have legal, privacy and finance owners validate DPDPA roles, notices,
+9. Have legal, privacy and finance owners validate DPDPA roles, notices,
    retention/deletion, subprocessors, GST and payment responsibilities.
 
 ## Source and pricing references
@@ -708,12 +794,20 @@ not an approval or reason to overprovision.
 
 - [AWS Fargate pricing](https://aws.amazon.com/fargate/pricing/) — resource
   dimensions, task duration, storage and additional charges.
+- [Amazon EC2 pricing](https://aws.amazon.com/ec2/pricing/) — instance,
+  storage, transfer and host-operations dimensions for the fallback.
 - [Amazon RDS for PostgreSQL pricing](https://aws.amazon.com/rds/postgresql/pricing/) —
   instance, storage, backup, I/O and transfer dimensions.
 - [Amazon Aurora pricing](https://aws.amazon.com/rds/aurora/pricing/) —
   capacity, storage, I/O and commitment considerations.
 - [Amazon SQS pricing](https://aws.amazon.com/sqs/pricing/) — request-metered
   queue pricing and current free-tier terms.
+- [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/) — storage, requests,
+  lifecycle and transfer dimensions for artefacts and backups.
+- [Amazon CloudFront pricing](https://aws.amazon.com/cloudfront/pricing/) —
+  CDN transfer, request and cache-invalidation dimensions.
+- [AWS Secrets Manager pricing](https://aws.amazon.com/secrets-manager/pricing/) —
+  secret count, API access and rotation cost dimensions.
 - [AWS startup credits](https://aws.amazon.com/startups/credits/) — program
   entry point; actual balance and eligibility remain account-specific.
 - [AWS App Runner pricing](https://aws.amazon.com/apprunner/pricing/) —

@@ -35,7 +35,7 @@ const assertLocalReferences = async (html) => {
     );
 
   for (const reference of references) {
-    const target = path.resolve(outputDir, reference.split("#")[0]);
+    const target = path.resolve(outputDir, reference.split(/[?#]/, 1)[0]);
     assert(target.startsWith(`${outputDir}${path.sep}`), `Unsafe reference: ${reference}`);
     await stat(target);
   }

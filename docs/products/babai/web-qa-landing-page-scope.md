@@ -25,6 +25,7 @@ availability decision.
 |---|---|
 | Static site | Root `index.html`, `styles.css`, `script.js` and `mock-data.json`; no build step, server, auth, payment, analytics, tracker, embed or production backend. |
 | Interactive demo | The demo advances through an invented pickup conversation, menu context, order review and human takeover. All content is mock data and is labeled in the UI. It must never be described as a product connection or customer result. |
+| Internal capability review | A collapsed, clearly labeled review panel may show provisional LITE/BASE/PRO experiment labels, capability placeholders, the bounded pilot envelope and planning-only usage sensitivities. It is not public packaging, pricing, entitlement, service-level or availability copy; rates remain placeholders. |
 | Primary CTA | `Request a pilot` / `Talk to us` scrolls to the interest panel. The current page prepares a local-only request preview; it does not submit data. |
 | Secondary routes | WhatsApp, email and waitlist are represented as selectable route intents. No phone number, mailbox, form endpoint or waitlist system is fabricated. A route may become live only after company ownership, destination, privacy notice, retention, abuse handling and accountable owner are recorded. |
 | Public onboarding data | The mock asks only for business/restaurant name, role, branch count and preferred route; an optional contact detail field is visibly local-only. It must not ask for menus, customer lists, WhatsApp identifiers, payment details, conversation content or staff credentials. |
@@ -61,7 +62,7 @@ availability decision.
 | CQA-03 | CTA validation | Primary and secondary routes are keyboard-operable and visibly local-only until destination, owner, notice and retention are approved. |
 | CQA-04 | Data minimization | Public form contains only minimum business context; detailed setup is explicitly excluded and private. |
 | CQA-05 | Evidence/testimonial integrity | September 2026 research is labeled an early signal; no testimonials appear without provenance and written approval. |
-| CQA-06 | Naming boundary | Current-facing HTML, CSS, JS, mock data, candidate labels and template copy use neutral variants or functional scope placeholders; legacy tier/package names remain only in clearly marked historical or provenance notes. |
+| CQA-06 | Naming boundary | Current-facing HTML, CSS, JS, mock data, candidate labels and template copy use neutral variants or functional scope placeholders; the only LITE/BASE/PRO labels are inside the clearly gated internal capability-review panel and are not public package claims. |
 | FQA-01 | Static entry point | `index.html` loads without a build tool and uses relative local assets suitable for GitHub Pages. |
 | FQA-02 | JSON | `mock-data.json` parses as valid JSON. |
 | FQA-03 | Accessibility structure | One `h1`, logical headings, `header`, `nav`, `main`, `footer`, skip link, labels, focus styles and text status are present. |

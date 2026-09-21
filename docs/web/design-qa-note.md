@@ -56,6 +56,11 @@ demo-only behavior and unresolved CTA destinations visible in the interface.
 - `prefers-reduced-motion` disables non-essential smooth scrolling and motion.
 - Responsive rules reflow the process list at tablet and mobile widths instead
   of requiring page-level horizontal scrolling.
+- The pilot boundary includes a collapsed internal-review panel for provisional
+  LITE/BASE/PRO capability placeholders. It is explicitly marked as non-public
+  packaging, keeps rates as placeholders, records the one-business/one-channel/
+  one-branch pickup-first envelope and planning-only request sensitivities, and
+  states that the static mock performs no live payment, delivery or API work.
 - The `noscript` message keeps the content boundary available when JavaScript is
   disabled; only the mock controls and local preview are unavailable.
 
@@ -127,6 +132,10 @@ absence of a live form action or canonical domain.
 - **Privacy boundary:** no remote fonts, analytics, third-party embeds,
   external form action, canonical domain, secrets or invented customer data
   are present.
+- **Capability gate:** the LITE/BASE/PRO panel is closed by default, labels
+  itself internal-only, uses rate placeholders rather than public pricing, and
+  keeps usage figures explicitly marked as planning sensitivities rather than
+  service limits or capacity claims.
 
 ## Candidate asset review
 

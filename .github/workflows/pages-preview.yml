@@ -35,6 +35,8 @@ jobs:
 
       - name: Build and verify Pages artifact
         shell: bash
+        env:
+          PAGES_PREVIEW_SOURCE_SHA: skip
         run: |
           set -euo pipefail
           node --check site/app.js

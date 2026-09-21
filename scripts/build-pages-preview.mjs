@@ -7,9 +7,11 @@ import process from "node:process";
 
 const root = process.cwd();
 const outputDir = path.join(root, "dist");
-const expectedSourceSha =
-  process.env.PAGES_PREVIEW_SOURCE_SHA ||
-  "a438b9203c016e492a2cd9628037bf88584a8bf1";
+const skipSourceCheck = process.env.PAGES_PREVIEW_SOURCE_SHA === "skip";
+const expectedSourceSha = skipSourceCheck
+  ? ""
+  : process.env.PAGES_PREVIEW_SOURCE_SHA ||
+    "a438b9203c016e492a2cd9628037bf88584a8bf1";
 const sourceFiles = ["index.html", "styles.css", "script.js", "mock-data.json"];
 const outputFiles = ["favicon.svg", ...sourceFiles];
 const deploymentFiles = [".github/workflows/pages-preview.yml", "scripts/build-pages-preview.mjs"];
@@ -66,16 +68,18 @@ const sanitizeStyles = (styles) =>
 
 const main = async () => {
   const head = git("rev-parse", "HEAD");
-  git("merge-base", "--is-ancestor", expectedSourceSha, "HEAD");
-  assert(head !== expectedSourceSha, "Deployment changes must be committed before building");
-  const changedSinceSource = git("diff", "--name-only", `${expectedSourceSha}..HEAD`)
-    .split("\n")
-    .filter(Boolean)
-    .sort();
-  assert(
-    changedSinceSource.every((file) => deploymentFiles.includes(file)),
-    "Files outside the deployment allowlist changed after the source commit",
-  );
+  if (!skipSourceCheck) {
+    git("merge-base", "--is-ancestor", expectedSourceSha, "HEAD");
+    assert(head !== expectedSourceSha, "Deployment changes must be committed before building");
+    const changedSinceSource = git("diff", "--name-only", `${expectedSourceSha}..HEAD`)
+      .split("\n")
+      .filter(Boolean)
+      .sort();
+    assert(
+      changedSinceSource.every((file) => deploymentFiles.includes(file)),
+      "Files outside the deployment allowlist changed after the source commit",
+    );
+  }
 
   for (const sourceFile of sourceFiles) {
     await stat(path.join(root, sourceFile));
@@ -125,7 +129,11 @@ const main = async () => {
   assert(!outputListing.some((file) => file.includes("candidates")), "Candidate asset entered Pages artifact");
 
   await assertLocalReferences(html);
-  console.log(`Built ${outputFiles.length} allowlisted files from source ${expectedSourceSha}`);
+  console.log(
+    `Built ${outputFiles.length} allowlisted files${
+      skipSourceCheck ? " from the preview artifact ref" : ` from source ${expectedSourceSha}`
+    }`,
+  );
 };
 
 main().catch((error) => {

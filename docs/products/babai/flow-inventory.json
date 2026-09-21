@@ -1,0 +1,424 @@
+{
+  "schema_version": "1.0",
+  "document": "docs/products/babai/flow-inventory.md",
+  "source_exclusion": "nekurama.chatgpt.md section titled 01 / THE MOCK FLOW",
+  "citation_method": {
+    "readable_source": "nekurama.chatgpt.md line range",
+    "raw_source": "nekurama.raw.chat.json chronological substantive turn plus mapping UUID",
+    "interpretation": "Founder-authored turns are primary intent evidence; assistant turns document mapped detail and proposals."
+  },
+  "invariants": [
+    "Tenant and branch isolation",
+    "WhatsApp-first but not WhatsApp-only",
+    "Human authority over controlled business state",
+    "Direct merchant settlement; BABAI does not hold customer funds in the initial product",
+    "Order state is separate from payment state",
+    "Provider semantics terminate at adapters",
+    "Recovery re-enters validated policy and state transitions"
+  ],
+  "prototype_journey_matrix": [
+    {
+      "journey": "Admin/owner onboarding",
+      "records": ["admin-owner-onboarding", "owner-onboarding"],
+      "priority": "POC",
+      "tier_scope": {"LITE": "supported", "BASE": "supported", "PRO": "supported"},
+      "boundary": "Complex setup may move from WhatsApp to web; no public tier claim."
+    },
+    {
+      "journey": "Menu extraction/review/publish",
+      "records": ["owner-onboarding", "menu"],
+      "priority": "POC",
+      "tier_scope": {"LITE": "menu/order with update guardrail", "BASE": "bounded availability", "PRO": "bounded advanced integrations"},
+      "boundary": "Candidate revision, human review and explicit publish are mandatory."
+    },
+    {
+      "journey": "Staff permissions",
+      "records": ["owner-staff-setup"],
+      "priority": "POC",
+      "tier_scope": {"LITE": "role/scope enforced", "BASE": "role/scope enforced", "PRO": "role/scope plus approved integrations"},
+      "boundary": "Entitlement never replaces actor permission or branch scope."
+    },
+    {
+      "journey": "Customer discovery/menu/cart/review",
+      "records": ["customer-discovery", "menu", "order"],
+      "priority": "POC",
+      "tier_scope": {"LITE": "supported", "BASE": "supported", "PRO": "supported"},
+      "boundary": "Customer reviews current cart, fulfillment choice and amount before order creation."
+    },
+    {
+      "journey": "Payment",
+      "records": ["payment"],
+      "priority": "POC",
+      "tier_scope": {"LITE": "PAYMENT_NOT_ENTITLED", "BASE": "PAYMENT_ELIGIBLE", "PRO": "PAYMENT_ELIGIBLE_WITH_BOUNDED_INTEGRATIONS"},
+      "boundary": "Entitlement does not bypass provider verification or order acceptance."
+    },
+    {
+      "journey": "Pickup",
+      "records": ["delivery-pickup"],
+      "priority": "POC",
+      "tier_scope": {"LITE": "pickup", "BASE": "pickup", "PRO": "pickup"},
+      "boundary": "Pickup is the Stage 0 fulfillment proof."
+    },
+    {
+      "journey": "Delivery",
+      "records": ["delivery-pickup"],
+      "priority": "Later dependency",
+      "tier_scope": {"LITE": "DELIVERY_NOT_ENTITLED", "BASE": "APPROVED_PROVIDER_REQUIRED", "PRO": "APPROVED_PROVIDER_OR_INTEGRATION_REQUIRED"},
+      "boundary": "Delivery is not required for Stage 0."
+    },
+    {
+      "journey": "Order desk",
+      "records": ["order", "admin-analytics"],
+      "priority": "POC",
+      "tier_scope": {"LITE": "scoped order visibility/actions", "BASE": "order/payment/fulfillment desk", "PRO": "full bounded desk and approved APIs"},
+      "boundary": "WhatsApp for attention; web for density and recovery."
+    },
+    {
+      "journey": "Human takeover",
+      "records": ["human-takeover"],
+      "priority": "POC",
+      "tier_scope": {"LITE": "required", "BASE": "required", "PRO": "required"},
+      "boundary": "Automation pauses; order/payment/fulfillment continue."
+    },
+    {
+      "journey": "Promotions/combos",
+      "records": ["promo-combo", "notifications"],
+      "priority": "Later",
+      "tier_scope": {"LITE": "PROMOTION_NOT_ENTITLED", "BASE": "basic time-bounded", "PRO": "bounded promotion and approved integration"},
+      "boundary": "Deterministic policy, staff authorization and consent remain required."
+    },
+    {
+      "journey": "Notifications",
+      "records": ["notifications"],
+      "priority": "POC transactional; later marketing",
+      "tier_scope": {"LITE": "transactional status", "BASE": "transactional plus approved channels", "PRO": "bounded multi-channel"},
+      "boundary": "Domain event → notification request → template → renderer → provider."
+    },
+    {
+      "journey": "Reorder",
+      "records": ["retention-reorder"],
+      "priority": "Pilot",
+      "tier_scope": {"LITE": "measure behavior", "BASE": "new-cart reorder after review", "PRO": "bounded retention/reorder"},
+      "boundary": "Never clone stale price, offer, availability or delivery state."
+    },
+    {
+      "journey": "Cancel/refund",
+      "records": ["order", "payment", "exceptions-recovery"],
+      "priority": "POC control path",
+      "tier_scope": {"LITE": "staff cancellation; refund not entitled", "BASE": "staff-controlled correction/refund", "PRO": "same with approved integrations"},
+      "boundary": "Customer request is not a state transition; staff and payment policy decide."
+    },
+    {
+      "journey": "Recovery",
+      "records": ["exceptions-recovery"],
+      "priority": "POC baseline",
+      "tier_scope": {"LITE": "same validated recovery", "BASE": "same validated recovery", "PRO": "same plus bounded integration recovery"},
+      "boundary": "DLQ, replay and reconciliation re-enter policy/state machinery."
+    },
+    {
+      "journey": "Admin funnel/analytics",
+      "records": ["admin-analytics"],
+      "priority": "Pilot",
+      "tier_scope": {"LITE": "operational funnel", "BASE": "pilot metrics and cost/usage", "PRO": "bounded advanced analytics"},
+      "boundary": "Derived, privacy-scoped and non-blocking for runtime operations."
+    }
+  ],
+  "flows": [
+    {
+      "id": "admin-owner-onboarding",
+      "family": "ADMIN→OWNER onboarding",
+      "priority": "POC",
+      "actor": ["platform admin", "invited owner", "support operator"],
+      "preconditions": ["Authorized admin identity", "Restaurant and owner contact", "Available invitation channel"],
+      "happy_path": ["Create onboarding record", "Invite owner", "Owner continues in WhatsApp or web", "Track progress", "Reach ready state"],
+      "alternate_error_paths": ["Duplicate tenant", "Expired invitation", "Owner declines", "Channel authorization failure", "Resume partial flow"],
+      "state_transitions": ["DRAFT→INVITED→OWNER_CONNECTED→CONFIGURING→READY", "INVITATION_EXPIRED", "CANCELLED", "BLOCKED_REVIEW"],
+      "data_permission_boundary": "Platform-admin operational scope; owner sees only the invited tenant and onboarding context.",
+      "acceptance_criteria": ["Exactly one resumable record", "Cross-channel continuation", "Explicit failure states", "No premature live claim"],
+      "implementation_demo_status": "Mapped; not implemented or demoed in this repository.",
+      "dependencies": ["Identity", "Tenant/branch", "Invitation workflow", "Channel onboarding", "Audit"],
+      "citations": [
+        "nekurama.chatgpt.md:L1140-L1151",
+        "nekurama.chatgpt.md:L1233-L1474",
+        "Raw T5 (bbb21d44-faca-4e4b-a6e2-9f65f591a4bd)",
+        "Raw T202 (293ad099-4f4c-4e6c-a554-42d55cc8677b)"
+      ]
+    },
+    {
+      "id": "owner-onboarding",
+      "family": "OWNER onboarding",
+      "priority": "POC",
+      "actor": ["owner", "onboarding workflow", "channel provider", "menu review", "billing boundary"],
+      "preconditions": ["Invitation or owner-started session", "Authenticated identity", "Tenant and branch context"],
+      "happy_path": ["Connect restaurant-owned channel", "Submit menu", "Review candidate", "Publish menu", "Configure pickup", "Record readiness"],
+      "alternate_error_paths": ["Extraction uncertainty", "Meta failure", "Menu validation block", "Payment pending", "Expired web handoff"],
+      "state_transitions": ["INVITED→AUTHENTICATED→CHANNEL_CONNECTING→MENU_RECEIVED→MENU_REVIEW→MENU_PUBLISHED→OPERATOR_READY→LIVE"],
+      "data_permission_boundary": "Owner-scoped tenant/branch configuration; AI output is candidate data; restaurant retains channel ownership.",
+      "acceptance_criteria": ["Cross-channel identity continuity", "Review before publish", "Explicit channel failures", "Live gate"],
+      "implementation_demo_status": "Mapped; no production implementation/demo evidence.",
+      "dependencies": ["Identity", "Meta/provider adapter", "Menu model", "Extraction", "Policy", "Billing boundary"],
+      "citations": [
+        "nekurama.chatgpt.md:L1301-L1474",
+        "nekurama.chatgpt.md:L23708-L23740",
+        "Raw T232 (bbb2115f-c170-412d-a6a8-ddb0aa51307f)",
+        "Raw T202 (293ad099-4f4c-4e6c-a554-42d55cc8677b)"
+      ]
+    },
+    {
+      "id": "owner-staff-setup",
+      "family": "OWNER/STAFF setup",
+      "priority": "POC",
+      "actor": ["owner", "manager", "staff"],
+      "preconditions": ["Tenant and branch", "Owner authority", "Role/scope model"],
+      "happy_path": ["Invite", "Authenticate", "Activate membership", "Assign role/scope", "Operate orders and takeover"],
+      "alternate_error_paths": ["Expired invite", "Revocation", "Cross-tenant membership", "Concurrent takeover claim", "Reassignment"],
+      "state_transitions": ["INVITED→ACCEPTED→ACTIVE", "SUSPENDED", "REVOKED", "AUTOMATED→HUMAN_REQUESTED→HUMAN_ACTIVE"],
+      "data_permission_boundary": "Identity is separate from membership; role, permissions and branch scope govern every action.",
+      "acceptance_criteria": ["No authority before activation", "Branch-scoped action enforcement", "Auditable membership and claims"],
+      "implementation_demo_status": "Mapped; not implemented or demoed.",
+      "dependencies": ["Identity", "Membership", "Authorization", "Capability tokens", "Orders", "Takeover", "Audit"],
+      "citations": [
+        "nekurama.chatgpt.md:L1678-L1768",
+        "nekurama.chatgpt.md:L24444-L24550",
+        "Raw T231 (b9268887-30dc-4aae-8605-fbd2dfe383ab)",
+        "Raw T249 (b98b7d38-b56e-4d06-987a-2fb0f00993ee)"
+      ]
+    },
+    {
+      "id": "customer-discovery",
+      "family": "CUSTOMER discovery",
+      "priority": "POC",
+      "actor": ["customer", "restaurant channel", "conversation/read model"],
+      "preconditions": ["Published restaurant information/menu", "Resolvable branch context", "Customer entry point"],
+      "happy_path": ["Open channel", "Welcome", "Choose menu/help/order", "Start session", "Create flow correlation"],
+      "alternate_error_paths": ["Shared-number branch choice", "Closed branch", "Missing data", "Human request", "Unsupported request"],
+      "state_transitions": ["DISCOVERED→SESSION_ACTIVE→FLOW_STARTED", "SESSION_ENDED"],
+      "data_permission_boundary": "Public/relationship-scoped tenant data only; views are telemetry unless a business flow begins.",
+      "acceptance_criteria": ["No consumer app required", "Explicit branch resolution", "Safe fallback", "Session/correlation propagation"],
+      "implementation_demo_status": "Mapped; not implemented or demoed.",
+      "dependencies": ["Channel", "Conversation", "Session/correlation", "Branch resolution", "Menu", "Takeover"],
+      "citations": [
+        "nekurama.chatgpt.md:L201-L288",
+        "nekurama.chatgpt.md:L1478-L1518",
+        "Raw T5 (bbb21d44-faca-4e4b-a6e2-9f65f591a4bd)",
+        "Raw T202 (293ad099-4f4c-4e6c-a554-42d55cc8677b)"
+      ]
+    },
+    {
+      "id": "menu",
+      "family": "MENU",
+      "priority": "POC",
+      "actor": ["owner", "staff", "menu ingestion", "customer", "ordering projection"],
+      "preconditions": ["Branch", "Menu source", "Authorized reviewer"],
+      "happy_path": ["Ingest", "Extract", "Validate", "Diff", "Review", "Publish", "Project"],
+      "alternate_error_paths": ["Malformed source", "Uncertain extraction", "Expired special", "Availability override", "Scheduled publish failure", "Independent branch copy"],
+      "state_transitions": ["SOURCE_RECEIVED→CANDIDATE_REVISION→REVIEW_REQUIRED→APPROVED→PUBLISHED"],
+      "data_permission_boundary": "Branch-owned menus; copy-by-value; immutable revisions; AI is advisory.",
+      "acceptance_criteria": ["No in-place publish mutation", "Semantic diff", "Multiple menus/schedules", "Availability separate", "Freshness recovery"],
+      "implementation_demo_status": "Mapped domain shape; no implementation/demo evidence.",
+      "dependencies": ["Branch", "Extraction", "Schema", "Revision/diff", "Availability", "Ordering projection", "Audit"],
+      "citations": [
+        "nekurama.chatgpt.md:L1321-L1389",
+        "nekurama.chatgpt.md:L23880-L24370",
+        "Raw T240 (bbb21f43-d5b6-4754-97be-157fca0b91b2)",
+        "Raw T249 (b98b7d38-b56e-4d06-987a-2fb0f00993ee)"
+      ]
+    },
+    {
+      "id": "order",
+      "family": "ORDER",
+      "priority": "POC",
+      "actor": ["customer", "conversation/BFF", "ordering", "staff"],
+      "preconditions": ["Session/branch", "Fresh menu projection", "Valid cart", "Relationship scope"],
+      "happy_path": ["Browse", "Cart", "Checkout validation", "OrderCreated", "Payment", "Staff acceptance", "Preparation", "Completion"],
+      "alternate_error_paths": ["Stale menu", "Unavailable item", "Staff correction", "Cancellation", "Invoice revision", "Manual settlement"],
+      "state_transitions": ["NEW→PAYMENT_PENDING→PAID→ACCEPTED→PREPARING→READY→COMPLETED", "REJECTED", "CANCELLED", "HUMAN_REVIEW"],
+      "data_permission_boundary": "Ordering owns order state/read model; cart is mutable; order snapshot is immutable; staff owns controlled corrections.",
+      "acceptance_criteria": ["Order before payment", "Snapshot provenance", "Staff correction", "New invoice ID per commercial change", "Acknowledgement"],
+      "implementation_demo_status": "Golden flow mapped; no implementation/demo evidence.",
+      "dependencies": ["Discovery", "Menu", "Cart", "Payment", "Staff", "Invoice", "Pickup", "Notification", "Audit"],
+      "citations": [
+        "nekurama.chatgpt.md:L1478-L1672",
+        "nekurama.chatgpt.md:L22696-L23080",
+        "Raw T208 (5ec0497b-76d4-4977-bc62-179f63f51edc)",
+        "Raw T223 (3d343ca8-c4e9-4a06-9735-27a084e41064)",
+        "product-definition.md:L81-L104"
+      ]
+    },
+    {
+      "id": "payment",
+      "family": "PAYMENT",
+      "priority": "POC",
+      "actor": ["customer", "payment capability", "provider/manual settlement", "staff"],
+      "preconditions": ["Order/invoice", "Direct merchant settlement", "Payment method or manual policy"],
+      "happy_path": ["Initiate", "Verify callback/manual fact", "Mark payment state", "Ordering evaluates acceptance", "Notify"],
+      "alternate_error_paths": ["Pending", "Failed", "Expired", "Duplicate", "Partial", "Refund", "Manual correction", "Reconciliation"],
+      "state_transitions": ["PAYMENT_PENDING→INITIATED→PROVIDER_PENDING→PAID|FAILED|EXPIRED→REFUND_PENDING→REFUNDED"],
+      "data_permission_boundary": "Payment owns payment state; ordering owns acceptance; BABAI does not custody customer funds.",
+      "acceptance_criteria": ["Pre-acceptance payment", "No auto-accept", "Verified/idempotent callbacks", "Manual settlement distinction", "Immutable financial history"],
+      "implementation_demo_status": "Mapped; verification/refunds remain pilot validation; no implementation/demo evidence.",
+      "dependencies": ["Order", "Invoice", "Provider adapter", "Webhook trust", "Staff", "Reconciliation", "Audit"],
+      "citations": [
+        "nekurama.chatgpt.md:L255-L272",
+        "nekurama.chatgpt.md:L22696-L23080",
+        "Raw T208 (5ec0497b-76d4-4977-bc62-179f63f51edc)",
+        "Raw T223 (3d343ca8-c4e9-4a06-9735-27a084e41064)",
+        "product-definition.md:L81-L104",
+        "validation.md:L119-L141",
+        "pilot-metrics.md:L145-L165"
+      ]
+    },
+    {
+      "id": "delivery-pickup",
+      "family": "DELIVERY/PICKUP",
+      "priority": "POC for pickup; later for delivery",
+      "actor": ["customer", "staff", "ordering", "delivery provider"],
+      "preconditions": ["Accepted order", "Pickup policy", "Delivery config/entitlement when applicable"],
+      "happy_path": ["Pickup prepare/ready/handoff/complete", "Later: quote, book async, track, complete"],
+      "alternate_error_paths": ["Closed branch", "Quote expiry", "No coverage", "Provider failure", "Unknown status", "Expired tracking"],
+      "state_transitions": ["ACCEPTED→PREPARING→READY_FOR_PICKUP→HANDED_OVER→COMPLETED", "QUOTE_PENDING→QUOTED→BOOKING_PENDING→ASSIGNED→IN_TRANSIT→DELIVERED"],
+      "data_permission_boundary": "Pickup is MVP; delivery owns normalized provider state; tracking URL is scoped and opaque.",
+      "acceptance_criteria": ["Pickup proves first pilot", "Quote separate from booking", "Async delivery", "Provider normalization", "Safe tracking URL"],
+      "implementation_demo_status": "Pickup is current pilot boundary; delivery unvalidated and not a dependency.",
+      "dependencies": ["Order", "Branch policies", "Delivery config", "Provider adapter", "Notification", "Reconciliation"],
+      "citations": [
+        "nekurama.chatgpt.md:L1022-L1045",
+        "nekurama.chatgpt.md:L23088-L23374",
+        "Raw T19 (bbb216eb-b95f-4255-b182-0b9e8dc39288)",
+        "Raw T231 (b9268887-30dc-4aae-8605-fbd2dfe383ab)",
+        "product-definition.md:L81-L104",
+        "validation.md:L119-L141",
+        "pilot-metrics.md:L145-L165"
+      ]
+    },
+    {
+      "id": "promo-combo",
+      "family": "PROMO/COMBO",
+      "priority": "Later",
+      "actor": ["owner", "staff", "promotion capability", "customer", "notification/consent"],
+      "preconditions": ["Menu/price model", "Offer scope/eligibility/validity", "Consent for promotion"],
+      "happy_path": ["Define", "Validate", "Schedule/activate", "Display", "Evaluate at checkout", "Snapshot applied benefit"],
+      "alternate_error_paths": ["Expired", "Overlap", "Unavailable item", "Branch scope", "No marketing consent", "Old offer in reorder"],
+      "state_transitions": ["DRAFT→VALIDATING→SCHEDULED→ACTIVE→EXPIRED|CANCELLED", "APPLIED|NOT_APPLICABLE|REJECTED"],
+      "data_permission_boundary": "Offer, base price, tax, availability and order snapshot remain separate; consent is scoped.",
+      "acceptance_criteria": ["No base-price overwrite", "Validity/scope enforcement", "No expired reuse", "Consent-aware messaging", "Reproducible history"],
+      "implementation_demo_status": "Historical/domain discussion only; no approved tier or promotion implementation/demo.",
+      "dependencies": ["Menu", "Price/tax", "Order snapshot", "Consent", "Templates", "Policy", "Analytics"],
+      "citations": [
+        "nekurama.chatgpt.md:L221-L245",
+        "nekurama.chatgpt.md:L8970-L9180",
+        "Raw T21 (bbb21b01-c1d5-42f9-9e1f-702bb346453c)",
+        "Raw T202 (293ad099-4f4c-4e6c-a554-42d55cc8677b)",
+        "product-definition.md:L81-L104",
+        "validation.md:L119-L141",
+        "pilot-metrics.md:L145-L165"
+      ]
+    },
+    {
+      "id": "human-takeover",
+      "family": "HUMAN TAKEOVER",
+      "priority": "POC",
+      "actor": ["customer", "automation", "authorized staff/owner"],
+      "preconditions": ["Tenant-scoped conversation", "Human reason", "Available authorized staff"],
+      "happy_path": ["Request/detect", "Notify", "Atomic claim/assign", "Pause automation", "Staff handles", "Release"],
+      "alternate_error_paths": ["No staff", "Concurrent claim", "Session expiry", "Operational issue", "Delayed release", "Reassignment"],
+      "state_transitions": ["AUTOMATED→HUMAN_REQUESTED→HUMAN_ACTIVE→HUMAN_RELEASED→AUTOMATED"],
+      "data_permission_boundary": "Conversation-wide in MVP; staff uses restaurant channel; order/payment/fulfillment continue independently.",
+      "acceptance_criteria": ["Immediate acknowledgement", "No conflicting automation", "Atomic claim", "Reassignment", "Audit"],
+      "implementation_demo_status": "First-class mapped MVP path; no implementation/demo evidence.",
+      "dependencies": ["Conversation", "Membership/scope", "Notification", "Order/payment independence", "Audit", "Recovery"],
+      "citations": [
+        "nekurama.chatgpt.md:L522-L557",
+        "nekurama.chatgpt.md:L23688-L23704",
+        "nekurama.chatgpt.md:L24612-L24710",
+        "Raw T231 (b9268887-30dc-4aae-8605-fbd2dfe383ab)",
+        "Raw T251 (1ea8f19f-6750-4943-b202-0fe845b9dd7a)"
+      ]
+    },
+    {
+      "id": "notifications",
+      "family": "NOTIFICATIONS",
+      "priority": "POC for transactional status; later for broad marketing",
+      "actor": ["domain producer", "notification workflow", "template store", "channel renderer", "provider"],
+      "preconditions": ["Qualifying event", "Recipient/context", "Consent/purpose policy", "Provider setup when required"],
+      "happy_path": ["Domain event", "NotificationRequested", "Policy/consent", "Template", "Render", "Submit", "Provider facts"],
+      "alternate_error_paths": ["Unapproved template", "Window restriction", "Opt-out", "Timeout", "4xx/5xx", "Duplicate", "Locale/variable error"],
+      "state_transitions": ["TRIGGERED→REQUESTED→RENDERED→SUBMITTED→PROVIDER_ACCEPTED→DELIVERED", "FAILED", "SUPPRESSED", "DLQ_ACTION_REQUIRED"],
+      "data_permission_boundary": "Transactional and marketing separate; provider IDs stay in adapter; consent is tenant/purpose/channel scoped.",
+      "acceptance_criteria": ["Domain-neutral notification event", "Provider-neutral templates", "No implied marketing opt-in", "Classified failures", "Context propagation"],
+      "implementation_demo_status": "Architecture mapped; no implementation/demo evidence.",
+      "dependencies": ["Events", "Consent", "Templates", "Channel adapter", "Webhook/reconciliation", "Retry/DLQ", "Audit"],
+      "citations": [
+        "nekurama.chatgpt.md:L1615-L1672",
+        "nekurama.chatgpt.md:L25004-L25571",
+        "Raw T256 (bbb2153a-cef9-4c8b-bd34-b42af53dde75)",
+        "Raw T251 (1ea8f19f-6750-4943-b202-0fe845b9dd7a)",
+        "product-definition.md:L79-L104"
+      ]
+    },
+    {
+      "id": "retention-reorder",
+      "family": "RETENTION/reorder",
+      "priority": "Pilot",
+      "actor": ["returning customer", "ordering", "menu/price/offer projections", "consent/notification"],
+      "preconditions": ["Completed order", "Privacy-safe relationship linkage", "Current menu", "Permitted purpose"],
+      "happy_path": ["Request/prompt", "Load historical intent", "Resolve current commercial facts", "Create cart", "Review", "New order"],
+      "alternate_error_paths": ["Deleted item", "Price change", "Modifier change", "Fee/address change", "Expired offer", "Ambiguous identity", "Opt-out"],
+      "state_transitions": ["COMPLETED_ORDER→REORDER_REQUESTED→CURRENT_CART_REBUILT→CUSTOMER_REVIEW→NEW_ORDER|ABANDONED"],
+      "data_permission_boundary": "New cart only; tenant-scoped relationship and privacy-safe repeat measurement; marketing separate.",
+      "acceptance_criteria": ["Current review", "No stale discount", "Privacy-safe repeat metrics", "Opt-out respected"],
+      "implementation_demo_status": "Mapped and measurable in pilot; no first-pilot automation/demo evidence.",
+      "dependencies": ["Order snapshot", "Customer relationship", "Menu/price/offer", "Consent/retention", "Cart", "Notification"],
+      "citations": [
+        "nekurama.chatgpt.md:L587-L611",
+        "nekurama.chatgpt.md:L23376-L23487",
+        "Raw T231 (b9268887-30dc-4aae-8605-fbd2dfe383ab)",
+        "Raw T5 (bbb21d44-faca-4e4b-a6e2-9f65f591a4bd)"
+      ]
+    },
+    {
+      "id": "exceptions-recovery",
+      "family": "EXCEPTIONS/recovery",
+      "priority": "POC baseline",
+      "actor": ["workflow/state engine", "domain owner", "provider adapter", "platform admin", "staff", "customer"],
+      "preconditions": ["Authoritative state", "Session/correlation", "Idempotency", "Recovery policy", "Outbox/audit"],
+      "happy_path": ["Validate transition", "Commit state/outbox", "At-least-once consume", "Retry transient", "Actionable DLQ", "Replay/suppress/escalate/reconcile"],
+      "alternate_error_paths": ["Duplicate", "Out-of-order", "Lost webhook", "Provider divergence", "Template rejection", "Unknown outcome", "Context mismatch"],
+      "state_transitions": ["RECEIVED→VALIDATING→APPLIED", "RETRY_SCHEDULED→RETRYING", "DLQ_ACTION_REQUIRED→SUPPRESS|REPLAY|ESCALATE|RECONCILE"],
+      "data_permission_boundary": "Recovery is privileged/audited; signed flow context binds context but is not authorization.",
+      "acceptance_criteria": ["Idempotent effects", "Classified failures", "Actionable DLQ", "Reconciliation through transitions", "No unhandled 5xx target", "Integrity alerts"],
+      "implementation_demo_status": "Principles mapped and partially documented; no implementation/demo evidence.",
+      "dependencies": ["State engine", "Outbox/inbox", "Broker", "Idempotency", "Adapters", "Signed context candidate", "Audit", "Support"],
+      "citations": [
+        "nekurama.chatgpt.md:L25601-L26121",
+        "nekurama.chatgpt.md:L26174-L27130",
+        "Raw T264 (bbb21a7f-4d44-4cc1-8f60-1172bdcc303c)",
+        "Raw T261 (ea5a2b92-1c8e-44bb-9c32-a1ee80e16c5a)",
+        "Raw T267 (6b051ce4-9033-4501-afff-e4bfd2d54679)"
+      ]
+    },
+    {
+      "id": "admin-analytics",
+      "family": "ADMIN/analytics",
+      "priority": "Pilot",
+      "actor": ["platform admin", "owner", "manager", "staff", "analytics/read-model consumers"],
+      "preconditions": ["Scoped identities", "Stable event IDs/timestamps", "Metric/privacy policy"],
+      "happy_path": ["Monitor onboarding/operations", "Serve scoped dashboards/alerts", "Project events", "Aggregate pilot metrics", "Review evidence"],
+      "alternate_error_paths": ["Projection lag", "Rebuild", "Denied cross-tenant query", "Not-evaluable metric", "Incomplete ledger", "PII-sensitive support view"],
+      "state_transitions": ["EVENT_RECEIVED→PROJECTED→QUERYABLE", "PROVISIONAL", "EVALUABLE", "NOT_EVALUABLE", "RETIRED"],
+      "data_permission_boundary": "Platform admin cross-tenant views require explicit audited policy; restaurant users remain tenant/branch scoped; analytics is derived.",
+      "acceptance_criteria": ["Actionable onboarding view", "No cross-tenant leakage", "Rebuildable projections", "Explicit metric quality", "No runtime dependency"],
+      "implementation_demo_status": "Pilot metrics and channel boundaries documented; no implementation/demo evidence.",
+      "dependencies": ["Event history", "Projections", "Analytics", "Authorization", "Support", "Economics ledger", "Retention/privacy"],
+      "citations": [
+        "nekurama.chatgpt.md:L1576-L1615",
+        "nekurama.chatgpt.md:L1774-L1825",
+        "nekurama.chatgpt.md:L26174-L27130",
+        "Raw T201 (bbb21dde-e359-4e19-b211-634eb6b5d917)",
+        "Raw T267 (6b051ce4-9033-4501-afff-e4bfd2d54679)",
+        "pilot-metrics.md:L145-L165",
+        "validation.md:L119-L141"
+      ]
+    }
+  ]
+}

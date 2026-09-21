@@ -85,6 +85,7 @@ Partial or unknown areas should be recorded as questions rather than invented.
 - [`events-catalog.md`](events-catalog.md) — bounded-context event registry, envelope, idempotency and replay rules
 - [`runtime-and-ai-architecture.md`](runtime-and-ai-architecture.md) — runtime topology, cost model, AI routing and workflow-engine decision
 - [`pro-operations-ux.md`](pro-operations-ux.md) — WhatsApp card rules and high-volume Pro operations UX
+- [`pro-operations-prototype.html`](pro-operations-prototype.html) — standalone HTML cockpit prototype for dense restaurant operations
 - [`sdlc-standard.md`](sdlc-standard.md) — human/bot coding, review, testing and release standard
 - [`contract-controls.md`](contract-controls.md) — restaurant/business e-contract control surface and professional gates
 - [`../../execution/oct-dec-plan.md`](../../execution/oct-dec-plan.md) — October–December quality-first execution plan

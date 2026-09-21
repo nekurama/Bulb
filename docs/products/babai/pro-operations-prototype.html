@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BABAI Pro operations cockpit — static UX prototype</title>
+    <style>
+      :root { color-scheme: light; --ink: #17221d; --paper: #f5efe4; --card: #fffdf7; --line: rgba(23,34,29,.16); --lime: #d8f06b; --red: #f3654b; --muted: #667169; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--paper); color: var(--ink); font: 15px/1.45 system-ui, sans-serif; }
+      main { width: min(1500px, calc(100% - 32px)); margin: 0 auto; padding: 24px 0 48px; }
+      header, .toolbar, .queue, .detail, .panel { border: 1px solid var(--line); background: var(--card); }
+      header { display: flex; justify-content: space-between; gap: 20px; align-items: start; padding: 22px; }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 { max-width: 14ch; margin-bottom: 8px; font: 500 clamp(2rem, 5vw, 4rem)/.95 Georgia, serif; letter-spacing: -.05em; }
+      h2 { margin-bottom: 8px; font: 500 1.5rem/1 Georgia, serif; }
+      h3 { margin-bottom: 8px; font-size: 1rem; }
+      .eyebrow, .label { color: #9d3525; font-size: .7rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+      .eyebrow { margin-bottom: 12px; }
+      .note { max-width: 480px; color: var(--muted); }
+      .health { display: grid; gap: 6px; min-width: 220px; padding: 12px; background: rgba(216,240,107,.34); }
+      .health strong { font-size: .78rem; letter-spacing: .08em; }
+      .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 12px; margin-top: 14px; }
+      button, input, select { min-height: 40px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--ink); padding: 8px 11px; font: inherit; }
+      button { cursor: pointer; font-weight: 700; }
+      button.primary { background: var(--ink); color: var(--card); }
+      button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #536bff; outline-offset: 2px; }
+      .toolbar input { flex: 1 1 220px; }
+      .toolbar .spacer { flex: 1; }
+      .freshness { color: var(--muted); font-size: .78rem; }
+      .workspace { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(320px, .7fr); gap: 14px; margin-top: 14px; }
+      .queue { overflow: hidden; }
+      .queue-header { display: flex; justify-content: space-between; padding: 16px; border-bottom: 1px solid var(--line); }
+      .columns { display: grid; grid-template-columns: repeat(4, minmax(210px, 1fr)); gap: 1px; overflow-x: auto; background: var(--line); }
+      .column { min-height: 520px; background: var(--paper); }
+      .column > header { display: flex; align-items: center; justify-content: space-between; padding: 12px; border: 0; border-bottom: 1px solid var(--line); background: transparent; }
+      .count { display: inline-grid; min-width: 26px; min-height: 26px; place-items: center; border-radius: 50%; background: var(--lime); font-size: .75rem; font-weight: 800; }
+      .order-list { display: grid; gap: 10px; padding: 10px; }
+      .order { display: grid; gap: 8px; padding: 13px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); box-shadow: 0 4px 12px rgba(23,34,29,.05); }
+      .order.selected { border: 2px solid var(--ink); }
+      .order-top, .order-meta, .actions { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+      .order-id { font-weight: 850; }
+      .order-time, .order-meta, .muted { color: var(--muted); font-size: .78rem; }
+      .chip { display: inline-flex; align-items: center; min-height: 24px; padding: 3px 7px; border-radius: 999px; background: rgba(216,240,107,.6); font-size: .7rem; font-weight: 800; }
+      .chip.warn { background: #ffe1d7; color: #8e3122; }
+      .detail { min-width: 0; padding: 18px; }
+      .detail-header { display: flex; justify-content: space-between; gap: 10px; align-items: start; }
+      .detail-section { padding: 16px 0; border-bottom: 1px solid var(--line); }
+      .detail-section:last-child { border-bottom: 0; }
+      .timeline { display: grid; gap: 10px; }
+      .timeline-item { display: grid; grid-template-columns: 80px 1fr; gap: 10px; font-size: .84rem; }
+      .timeline-item time { color: var(--muted); }
+      .assignment { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+      .state-box { padding: 12px; border-left: 4px solid var(--red); background: #fff8e8; }
+      .state-box.stale { border-color: #b27700; }
+      .state-box.error { border-color: #a4261b; background: #ffe9e4; }
+      .empty { padding: 28px 14px; color: var(--muted); text-align: center; }
+      .panel-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; }
+      .panel { padding: 16px; }
+      @media (max-width: 980px) { .workspace { grid-template-columns: 1fr; } .columns { grid-template-columns: repeat(4, 250px); } }
+      @media (max-width: 620px) { main { width: min(100% - 20px, 1500px); } header { flex-direction: column; } .panel-row { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <p class="eyebrow">BABAI PRO / STATIC UX PROTOTYPE</p>
+          <h1>Run the rush without losing the thread.</h1>
+          <p class="note">A dense restaurant operations surface for queues, staff assignment, payment reconciliation and recovery. Fixtures are invented and no action submits.</p>
+        </div>
+        <div class="health" role="status">
+          <strong>GREEN BOWL / HYDERABAD</strong>
+          <span>WhatsApp connected · queue healthy</span>
+          <span>12 active orders · 1 support case</span>
+        </div>
+      </header>
+
+      <section class="toolbar" aria-label="Order filters and actions">
+        <input type="search" aria-label="Search order or customer" placeholder="Search order, customer or phone">
+        <select aria-label="Filter by channel"><option>All channels</option><option>WhatsApp</option><option>Web</option></select>
+        <select aria-label="Filter by branch"><option>Hyderabad / branch 1</option></select>
+        <button class="primary" type="button">Claim next support case</button>
+        <span class="spacer"></span>
+        <span class="freshness">Projection updated 12 seconds ago</span>
+      </section>
+
+      <div class="workspace">
+        <section class="queue" aria-labelledby="queue-title">
+          <div class="queue-header">
+            <div><p class="eyebrow">LIVE QUEUE</p><h2 id="queue-title">Orders needing attention</h2></div>
+            <button type="button">Bulk actions</button>
+          </div>
+          <div class="columns">
+            <section class="column" aria-labelledby="new-title">
+              <header><strong id="new-title">NEW</strong><span class="count">3</span></header>
+              <div class="order-list">
+                <article class="order selected">
+                  <div class="order-top"><span class="order-id">#1048</span><span class="order-time">2m</span></div>
+                  <strong>2 × Chicken Biryani · 1 × Paneer Tikka</strong>
+                  <div class="order-meta"><span>WhatsApp · ₹780 paid</span><span class="chip">DELIVERY</span></div>
+                  <div class="actions"><button type="button">Accept</button><button type="button">Reject</button></div>
+                </article>
+                <article class="order">
+                  <div class="order-top"><span class="order-id">#1047</span><span class="order-time">4m</span></div>
+                  <strong>1 × Family Combo</strong>
+                  <div class="order-meta"><span>WhatsApp · payment pending</span><span class="chip warn">PAYMENT</span></div>
+                  <div class="actions"><button type="button">Open</button><button type="button">Assign</button></div>
+                </article>
+              </div>
+            </section>
+            <section class="column" aria-labelledby="support-title">
+              <header><strong id="support-title">NEEDS SUPPORT</strong><span class="count">1</span></header>
+              <div class="order-list">
+                <article class="order">
+                  <div class="order-top"><span class="order-id">#1042</span><span class="order-time">11m</span></div>
+                  <strong>Starter replacement · ₹100 pending</strong>
+                  <div class="order-meta"><span>Customer waiting</span><span class="chip warn">STAFF 1</span></div>
+                  <div class="actions"><button type="button">Open chat</button><button type="button">Resolve</button></div>
+                </article>
+              </div>
+            </section>
+            <section class="column" aria-labelledby="prep-title">
+              <header><strong id="prep-title">PREPARING</strong><span class="count">5</span></header>
+              <div class="order-list">
+                <article class="order">
+                  <div class="order-top"><span class="order-id">#1039</span><span class="order-time">8m</span></div>
+                  <strong>3 × Rice Bowl · 2 × Drinks</strong>
+                  <div class="order-meta"><span>Kitchen started</span><span class="chip">PAID</span></div>
+                  <div class="actions"><button type="button">Mark ready</button></div>
+                </article>
+              </div>
+            </section>
+            <section class="column" aria-labelledby="ready-title">
+              <header><strong id="ready-title">READY / DELIVERY</strong><span class="count">3</span></header>
+              <div class="order-list">
+                <article class="order">
+                  <div class="order-top"><span class="order-id">#1038</span><span class="order-time">3m</span></div>
+                  <strong>Pickup code 4821</strong>
+                  <div class="order-meta"><span>Partner assigned</span><span class="chip">OUT</span></div>
+                  <div class="actions"><button type="button">Verify code</button><button type="button">Track</button></div>
+                </article>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <aside class="detail" aria-labelledby="detail-title">
+          <div class="detail-header">
+            <div><p class="eyebrow">ORDER DETAIL</p><h2 id="detail-title">#1048 · Delivery</h2></div>
+            <span class="chip">NEW</span>
+          </div>
+          <div class="detail-section">
+            <h3>Customer conversation</h3>
+            <p>“Babai, make it medium spicy and add extra raita.”</p>
+            <p class="muted">WhatsApp · customer relationship scoped to Green Bowl</p>
+          </div>
+          <div class="detail-section">
+            <h3>Order snapshot</h3>
+            <p>2 × Chicken Biryani · 1 × Paneer Tikka · medium spicy · extra raita</p>
+            <p><strong>₹780 · PAID</strong> · delivery · ETA 35–45 minutes</p>
+          </div>
+          <div class="detail-section">
+            <h3>Staff assignment</h3>
+            <div class="assignment"><select aria-label="Assign staff"><option>Owner / cashier</option><option>Staff 1</option><option>Staff 2</option><option>Staff 3</option></select><button type="button">Assign</button></div>
+          </div>
+          <div class="detail-section">
+            <h3>Available actions</h3>
+            <div class="actions"><button class="primary" type="button">Accept order</button><button type="button">Open support</button><button type="button">Request correction</button></div>
+          </div>
+          <div class="detail-section state-box stale">
+            <strong>Projection freshness</strong>
+            <p class="muted">This view is 12 seconds old. Writes re-check authoritative order version before applying.</p>
+          </div>
+        </aside>
+      </div>
+
+      <div class="panel-row">
+        <section class="panel state-box error" aria-label="Provider error example">
+          <h3>Provider failure</h3>
+          <p>Payment callback delayed. Order remains pending reconciliation; no false paid state is shown.</p>
+          <button type="button">Open reconciliation</button>
+        </section>
+        <section class="panel state-box" aria-label="Support assignment example">
+          <h3>Human support</h3>
+          <p>Customer asks for a replacement. Staff 1 owns the scoped conversation; the main order channel receives resolution events.</p>
+          <button type="button">View staff thread</button>
+        </section>
+        <section class="panel" aria-label="Empty state example">
+          <h3>Empty / permission states</h3>
+          <p class="empty">No orders match the current filter. A denied action must explain the role or branch scope required.</p>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

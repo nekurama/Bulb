@@ -10,6 +10,7 @@ sources:
   - Founder decision packet (2026-09-21; current task input)
   - Tier scope decision (2026-09-21; current task input)
   - economics-model.md (Track 2 v0.5)
+  - tier-feasibility.md
 ---
 
 # Validation
@@ -235,6 +236,7 @@ Expansion beyond the initial 10 should be based on evidence from the pilot, with
 - [ ] ₹25L+ income-trigger unit selection (monthly versus annual sensitivity)
 - [ ] LITE/BASE/PRO pilot mix and rate-experiment approval
 - [ ] Tier-specific entitlement, usage and support thresholds
+- [ ] Tier-feasibility.md Stage 0/1/2 rollout gates and external dependency evidence
 - [ ] Team-defined readiness evidence for materially larger onboarding volumes
 - [ ] Signed agreement-template cancellation/refund and minimum-paying terms
 - [ ] Six-month post-pilot pricing review inputs; no automatic increase

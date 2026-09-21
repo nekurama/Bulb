@@ -200,6 +200,11 @@ payment/delivery pass-through, support hours, onboarding hours, failures,
 refunds and contribution. Do not pool PRO usage into an apparently cheap
 LITE/BASE average.
 
+The role-owned feasibility and rollout matrix is maintained in
+[`tier-feasibility.md`](tier-feasibility.md). It separates deterministic
+entitlements from external Meta, payment, delivery and advanced-API
+dependencies; it does not claim provider feasibility or approval.
+
 ### Pilot 3/4/3 sensitivity — provisional
 
 For a 10-restaurant sensitivity cohort, model **3 LITE / 4 BASE / 3 PRO**.

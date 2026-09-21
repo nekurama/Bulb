@@ -124,6 +124,7 @@ The content must also preserve the product's channel boundary: the page may expl
 | CQA-04 | Evidence integrity | Research numbers show “September 2026” and “early signal, not paid validation”; no invented logos, testimonials or traction. |
 | CQA-05 | Boundary accuracy | Copy does not call BABAI a marketplace, POS/ERP replacement, API wrapper or generic chatbot. |
 | CQA-06 | CTA safety | CTA destination, data collected, notice, owner and response behavior are documented before enabling it. |
+| CQA-07 | Naming boundary | Current-facing HTML, CSS, JS, mock data, candidate labels and template copy use neutral variants or functional scope placeholders; legacy tier/package names remain only in clearly marked historical or provenance notes. |
 
 ### Functional and visual tests
 

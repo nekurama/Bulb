@@ -13,6 +13,15 @@ It distinguishes the current NEKURAMA/BABAI intent story from historical
 naming exploration and public copy. Web/QA may use it only for internal
 storytelling and visual exploration until public copy is approved.
 
+**Naming correction:** BABAI remains the current product under NEKURAMA.
+Tadka, Thali, Dawat, Feast and similar labels are historical/source-evidence
+names only, not current tiers, packages or pilot taxonomy. For a 10-restaurant
+pilot, use **Pilot Variant A/B/C** or functional scope descriptions; these are
+evidence labels, not public pricing. [Current founder correction:
+`2026-09-21 FOUNDER NAMING CORRECTION (current task input)`; historical raw
+source: `nekurama.raw.chat.json:L215-L216`; corroboration:
+`nekurama.chatgpt.md:L2432-L2685`]
+
 ## Current product truth
 
 **BABAI is a business operating platform built around WhatsApp.** It helps businesses run customer and operational workflows through AI and automation. The current promise is **“Run your business without leaving WhatsApp,”** with the important qualification that WhatsApp-first does not mean WhatsApp-only: web remains the dense configuration, operations and recovery surface. [Evidence: `nekurama.raw.chat.json:L13591-L13630`, `nekurama.raw.chat.json:L47145-L47170`; corroboration: `nekurama.chatgpt.md:L40716-L40825`]

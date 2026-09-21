@@ -8,10 +8,23 @@ sources:
   - nekurama.babai.research.md
   - nekurama.raw.chat.json (ordered turns 70, 276, 278; mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `04cc446b-3a6d-4c19-adc7-4d94ab17d21b`)
   - Founder decision packet (2026-09-21; current task input)
+  - "2026-09-21 FOUNDER NAMING CORRECTION (current task input)"
   - economics-model.md (Track 2 v0.5)
 ---
 
 # Business Model
+
+## Naming correction — current taxonomy
+
+BABAI remains the current product under NEKURAMA, and **“BABAI — Business
+Automation by AI”** remains founder-approved wording. Historical Tadka, Thali,
+Dawat, Feast or similar labels are source evidence only; they are not current
+tiers, packages, entitlements or pilot variants. For a 10-restaurant pilot,
+use neutral **Pilot Variant A/B/C** labels or functional scope descriptions.
+These are internal test labels, not public pricing. [Current founder
+correction: `2026-09-21 FOUNDER NAMING CORRECTION (current task input)`; raw
+history: `nekurama.raw.chat.json:L215-L216`; corroboration:
+`nekurama.chatgpt.md:L2432-L2685`]
 
 ## Current answer
 
@@ -26,9 +39,16 @@ pilot closes at the 90-day review when team-defined readiness evidence shows
 BABAI is operationally ready for materially larger onboarding volumes. Paid
 continuation remains a validation hypothesis, not an assumption of success.
 
-There is **no committed public price** in the current BRD. The previously discussed ₹999 / ₹2,499 / ₹4,999 + GST levels remain historical pricing hypotheses to test, not published tiers or current commercial truth (`nekurama.raw.chat.json`, ordered turns 276 and 278; mapping `04cc446b-3a6d-4c19-adc7-4d94ab17d21b`).
+There is **no committed public price or package name** in the current BRD. The
+previously discussed ₹999 / ₹2,499 / ₹4,999 + GST levels remain historical
+pricing hypotheses to test, not published tiers, pilot variants or current
+commercial truth (`nekurama.raw.chat.json`, ordered turns 276 and 278; mapping
+`04cc446b-3a6d-4c19-adc7-4d94ab17d21b`).
 
-The earlier ₹499/month, ₹1,499–₹2,499/month, ₹999 setup and Tadka/Thali/Feast package ideas in `nekurama.chatgpt.md` are historical experiments and are not current commercial commitments.
+The earlier ₹499/month, ₹1,499–₹2,499/month, ₹999 setup and
+Tadka/Thali/Feast package ideas in `nekurama.chatgpt.md` are historical
+source-evidence experiments and are not current commercial commitments,
+entitlements or pilot taxonomy.
 
 ## Unit economics
 
@@ -80,8 +100,10 @@ evidence, not assumed tiers. The first pricing review is scheduled for **six
 months after the 90-day pilot**, subject to founder approval and evidence. The
 cadence is a review point, not an automatic price increase.
 
+### Internal contribution-analysis bands (not public pricing)
+
 The current internal planning output at the proposed 40% contribution
-sensitivity is:
+sensitivity is not a quote, tier or package:
 
 | Cost posture | 90-day paid pilot, full-cost `N=1` view | Post-pilot monthly plan, shared-cost `N=10` view |
 |---|---:|---:|

@@ -29,6 +29,7 @@ sources:
   - "2026-09-21 FOUNDER ECONOMIC TARGET CLARIFICATION (current task input)"
   - "2026-09-21 ECONOMICS MODEL REVIEW PACKET"
   - "2026-09-21 FOUNDER SCALE/COST BASELINE (current task input)"
+  - "2026-09-21 FOUNDER NAMING CORRECTION (current task input)"
 ---
 
 # BABAI Economics Model
@@ -59,6 +60,19 @@ Use **90 requests/order** as the heavy-case sensitivity. A restaurant has a
 hard ceiling of **50 completed orders/day** for this internal model. The
 500-restaurant and 1,000-restaurant views below are scale sensitivities, not
 capacity commitments.
+
+## Naming correction — current taxonomy
+
+BABAI remains the current product under NEKURAMA, and **“BABAI — Business
+Automation by AI”** remains founder-approved wording. Tadka, Thali, Dawat,
+Feast and similar labels are retained only where this model points to
+historical/source evidence; they are not current tiers, packages, entitlements
+or public pricing. For a 10-restaurant pilot, use neutral **Pilot Variant
+A/B/C** labels or functional scope descriptions. These are analytical test
+labels, not a product taxonomy. [Current founder correction:
+`2026-09-21 FOUNDER NAMING CORRECTION (current task input)`; historical raw
+source: `nekurama.raw.chat.json:L215-L216`; corroboration:
+`nekurama.chatgpt.md:L2432-L2685`]
 
 ## Evidence versus estimates
 
@@ -1112,10 +1126,11 @@ from BABAI's own cost and contribution. The separation follows the repository's
 direct-order and commission-value hypothesis
 (`nekurama.babai.research.md:L24-L36`, `L56-L63`).
 
-### Scale curve: advisory reference case
+### Historical/source-evidence price-experiment reference — not current taxonomy
 
-This curve uses `P = ₹4,999/month` only as the middle pricing experiment
-reference, not as an approved package. It assumes the base provider/Meta
+This historical sensitivity uses `P = ₹4,999/month` only as a source-evidence
+price-experiment reference, not as a current pilot price or package. It assumes
+the base provider/Meta
 inputs, advisory AI mode, 120 recurring support minutes per restaurant/month,
 ₹1,000 founder-value per hour, 240 onboarding minutes amortized over 12 months,
 ₹70,000 annual shared hosting/tooling, 2% subscription collection, 2% refund
@@ -1153,7 +1168,20 @@ economic rupees per month and cannot be treated as free founder capacity.
 Staffing, management overhead, support tooling and service-level costs become
 new unknowns and must be added before relying on those rows.
 
-### Pricing experiments, CAC and stress cases
+### Historical/source-evidence price hypotheses, CAC and stress cases
+
+The following rows preserve historical arithmetic only. For current
+10-restaurant pilot records, use these neutral analysis labels instead of
+legacy names or price/package names:
+
+| Neutral analysis label | Functional scope description | Commercial treatment |
+|---|---|---|
+| **Pilot Variant A** | Pickup-first workflow, one WhatsApp number, one branch and manual takeover | Pilot amount remains unknown until the signed agreement |
+| **Pilot Variant B** | The same MVP boundary with advisory AI measured separately | Not a tier or entitlement; measure actual usage and cost |
+| **Pilot Variant C** | The same MVP boundary with AI-heavy routing treated as a stress case | Not a tier or entitlement; do not infer a price |
+
+These labels do not authorize a package, public price, scope expansion or
+continuation decision.
 
 The three historical price hypotheses are retained as experiments only. At
 `N=10`, with base provider inputs and 120 support minutes per month:

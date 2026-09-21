@@ -9,6 +9,7 @@ sources:
   - "2026-09-21 FOUNDER SCALE/COST BASELINE (current task input)"
   - "2026-09-21 FOUNDER ECONOMIC TARGET CLARIFICATION (current task input)"
   - "2026-09-21 ECONOMICS MODEL REVIEW PACKET"
+  - "2026-09-21 FOUNDER NAMING CORRECTION (current task input)"
   - e3e4e855ca0214a5c664c07ec5b6513c560a7261 (product scale economics source)
   - economics-model.md
   - validation.md
@@ -26,6 +27,25 @@ The pilot is paid and fixed at 90 days, with the agreed payment or deposit
 received before the pilot starts. Cancellation/refund handling is controlled
 by the signed agreement and its minimum-paying terms; this file does not draft
 those terms.
+
+## Neutral pilot labels
+
+BABAI remains the current product under NEKURAMA, and **“BABAI — Business
+Automation by AI”** remains founder-approved wording. Do not use Tadka, Thali,
+Dawat, Feast or similar historical names as current pilot labels. For any
+10-restaurant record, use neutral labels or functional scope descriptions:
+
+| Label | Functional scope | Taxonomy status |
+|---|---|---|
+| **Pilot Variant A** | Pickup-first workflow with one WhatsApp number, one branch and manual takeover | Evidence label only; not a tier |
+| **Pilot Variant B** | Same MVP boundary with advisory AI measured separately | Evidence label only; not a tier |
+| **Pilot Variant C** | Same MVP boundary with AI-heavy routing measured as a stress case | Evidence label only; not a tier |
+
+These labels do not define packages, entitlements, public pricing or a
+continuation decision. [Current founder correction:
+`2026-09-21 FOUNDER NAMING CORRECTION (current task input)`; historical raw
+source: `nekurama.raw.chat.json:L215-L216`; corroboration:
+`nekurama.chatgpt.md:L2432-L2685`]
 
 ## Required pilot record
 

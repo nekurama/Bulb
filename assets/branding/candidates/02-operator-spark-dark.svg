@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">Candidate 02: Friendly operator spark, dark variant</title>
+  <desc id="desc">A friendly rounded operator badge with a serving-tray gesture, spark and BABAI lockup for dark surfaces.</desc>
+  <g fill="none" stroke="#F4EFE4" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="52" y="48" width="264" height="264" rx="76" stroke-width="12"/>
+    <path d="M111 172c10-62 47-92 73-92s63 30 73 92" stroke-width="12"/>
+    <path d="M116 178c0 67 25 103 68 103s68-36 68-103" stroke-width="12"/>
+    <circle cx="157" cy="174" r="9" fill="#F4EFE4" stroke="none"/>
+    <circle cx="211" cy="174" r="9" fill="#F4EFE4" stroke="none"/>
+    <path d="M158 223c17 15 35 15 52 0M108 250h176" stroke="#F3654B" stroke-width="12"/>
+    <path d="m238 78 10 25 25 10-25 10-10 26-10-26-25-10 25-10z" fill="#D8F06B" stroke="#F4EFE4" stroke-width="7"/>
+  </g>
+  <text x="385" y="116" fill="#BFC8BE" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" letter-spacing="8">NEKURAMA / PRODUCT CANDIDATE</text>
+  <text x="378" y="230" fill="#F4EFE4" font-family="Arial, Helvetica, sans-serif" font-size="126" font-weight="800" letter-spacing="-7">BABAI</text>
+  <text x="388" y="280" fill="#D8F06B" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" letter-spacing="4">BUSINESS AUTOMATION BY AI</text>
+</svg>

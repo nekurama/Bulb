@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">Candidate 03: Menu signal lockup, dark variant</title>
+  <desc id="desc">An abstract menu card, conversational signal lines and spark suggest an operator workflow without fixing a permanent vertical, for dark surfaces.</desc>
+  <g fill="none" stroke="#F4EFE4" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="62" y="52" width="250" height="250" rx="34" stroke-width="12"/>
+    <path d="M105 120h118M105 158h78M105 196h140" stroke-width="13"/>
+    <path d="M105 250h70" stroke="#F3654B" stroke-width="13"/>
+    <path d="M250 106c30 18 42 46 37 76M268 235c31-18 43-46 38-76" stroke="#8E9BFF" stroke-width="10"/>
+    <path d="m270 84 10 24 24 10-24 10-10 25-10-25-24-10 24-10z" fill="#D8F06B" stroke="#F4EFE4" stroke-width="7"/>
+  </g>
+  <text x="385" y="116" fill="#BFC8BE" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" letter-spacing="8">NEKURAMA / PRODUCT CANDIDATE</text>
+  <text x="378" y="230" fill="#F4EFE4" font-family="Arial, Helvetica, sans-serif" font-size="126" font-weight="800" letter-spacing="-7">BABAI</text>
+  <text x="388" y="280" fill="#D8F06B" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" letter-spacing="4">BUSINESS AUTOMATION BY AI</text>
+</svg>

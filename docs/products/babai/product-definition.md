@@ -1,170 +1,116 @@
 ---
 status: partial
 owner: BABAI
-last-reviewed: 2026-09-18
+last-reviewed: 2026-09-20
 sources:
-  - nekurama/Bulb#1
-  - nekurama/Bulb#3
+  - nekurama.raw.chat.json
+  - nekurama.chatgpt.md
   - nekurama.babai.research.md
-  - historical ManojVysyaraju/bulb#1
 ---
 
 # Product Definition
 
-## Current answer
+## Current answer — confirmed
 
-**BABAI is a business operating platform built around WhatsApp.** For the initial product, it is a restaurant-first operating layer that turns customer conversations into orders and coordinated restaurant work while keeping the customer relationship with the business.
+**BABAI is a business operating platform built around WhatsApp.** For the initial product, it is a restaurant-first operating layer that turns customer conversations into orders and coordinated restaurant work while keeping the customer relationship with the business. [Evidence: `nekurama.raw.chat.json:L13591-L13630`, `nekurama.raw.chat.json:L21506-L21540`; corroboration: `nekurama.babai.research.md:L42-L63`]
 
-Core product flow:
+Core flow:
 
-`Business WhatsApp → Customer Conversation → Catalog/Menu → Order → Payment → Restaurant Operations → Fulfillment → Completion → Feedback / Repeat`
+`Business WhatsApp → customer conversation → catalog/menu → order → payment → restaurant operations → fulfillment → completion → feedback/repeat`
 
-The product is **WhatsApp-first, not WhatsApp-only**:
+WhatsApp is primary, not exclusive. Web is the dense configuration, operations and recovery surface. [Evidence: `nekurama.raw.chat.json:L47145-L47170`; corroboration: `nekurama.chatgpt.md:L23631-L23656`]
 
-- **WhatsApp** is the primary conversational/action surface for customers and staff.
-- **Web** is the surface for dense configuration, high-density operations, comparison, bulk actions, analytics, recovery and multi-branch administration.
-- Context and identity should move between WhatsApp and web without creating a second account or losing context.
+## MVP boundary — confirmed, production cut partial
 
-This follows the operating principle:
+### In scope for the narrow pilot
 
-> **Web = see everything. WhatsApp = know what needs attention and act immediately.**
+1. Connect one participating restaurant's business-owned WhatsApp identity.
+2. Upload, review and explicitly publish a menu/catalog.
+3. Answer routine customer questions using menu context, with human takeover available.
+4. Convert conversational intent into a structured pickup cart/order.
+5. Let the business accept/reject and progress the order through preparation, ready and completion.
+6. Record or confirm payment without making BABAI the customer-funds custodian.
+7. Surface actionable orders to staff through WhatsApp and a deliberately small web surface where density requires it.
+8. Send supported transactional/order-status communication.
 
-## MVP boundary
+The narrow pilot starts with one business, one WhatsApp number, one branch, pickup-first, manual takeover and no delivery dependency. [Evidence: `nekurama.babai.research.md:L118-L143`; corroboration: `nekurama.chatgpt.md:L27072-L27263`]
 
-The initial MVP is intentionally narrower than the long-term business operating platform.
-
-### In scope
-
-1. **Business / channel setup**
-   - Connect the restaurant's business-owned WhatsApp identity.
-   - Support the planned Meta-native connection path, with BSP fallback/adapter where required.
-   - Establish one restaurant/tenant, one branch and one WhatsApp channel per participating restaurant for the initial pilot.
-
-2. **Catalog / menu**
-   - Upload, review and publish a restaurant menu/catalog.
-   - Maintain explicit published menu state and availability.
-   - Preserve the menu context used by an order.
-
-3. **Customer conversation**
-   - Receive customer conversations on the business's WhatsApp.
-   - Answer routine customer questions using the catalog/menu context.
-   - Recognize the customer/business relationship where available.
-   - Allow human takeover when automation cannot or should not complete the interaction.
-
-4. **Ordering**
-   - Convert conversational intent into a structured cart/order.
-   - Confirm the order with the customer.
-   - Support restaurant accept/reject and operational order states.
-   - Keep order state authoritative and deterministic rather than AI-controlled.
-
-5. **Payment**
-   - Support payment initiation/recording through supported flows.
-   - Customer funds go directly to the restaurant/business; BABAI does not hold or settle customer funds in the initial product.
-   - Payment remains a separate state machine from the order.
-
-6. **Restaurant operations**
-   - Surface actionable incoming orders to staff.
-   - Support accept/reject, preparation/ready/completion progression and relevant exceptions.
-   - Support staff roles/permissions and scoped actions.
-   - Allow staff to take over a conversation without stopping the underlying order/payment/fulfillment processing.
-
-7. **Initial fulfillment**
-   - **Pickup-first** is the first validated workflow.
-   - Provider-agnostic fulfillment remains the product abstraction so delivery can be added where useful.
-   - The initial pilot should not depend on a delivery integration.
-
-8. **Customer communication**
-   - Send transactional/order-status communication through the business's WhatsApp where supported.
-   - Keep transactional/support/marketing messaging conceptually separate.
-
-## Initial pilot workflow
-
-The initial real-world pilot is a **10-restaurant controlled beta**. The cohort is intentionally large enough to expose practical operational variation while remaining small enough for close founder-led observation and iteration.
-
-`Connect business WhatsApp`
-`→ upload/review/publish menu`
-`→ customer asks questions`
-`→ customer places pickup order`
-`→ business accepts/rejects`
-`→ payment is recorded/confirmed`
-`→ staff completes order`
-`→ customer receives status`
-
-Pilot operating boundary:
-
-- 10 restaurants in the initial cohort
-- one WhatsApp number/channel per restaurant
-- one branch per restaurant for the initial pilot
-- pickup-first
-- manual human takeover available
-- no delivery dependency
-- founder-led onboarding
-
-The 10-restaurant pilot is the current business decision for the initial beta. It is not a fixed endpoint for the product's validation. After practical complexities are identified and the product becomes sufficiently stable, additional restaurants can be onboarded continuously in controlled increments based on evidence from real-world usage.
-
-## Explicit pilot out of scope
-
-The following are not required to prove the initial product thesis and should not expand the first pilot unnecessarily:
+### Explicitly outside the first proof
 
 - Consumer marketplace/discovery network
 - Customer native app
-- POS replacement
-- Full ERP
-- Full restaurant inventory-management suite
-- Fleet management / owning a delivery network
-- Advanced loyalty programme
-- Sophisticated marketing automation
-- Advanced BI/data warehouse product
-- Broad multi-country complexity
-- ONDC integration as an MVP workstream
-- General-purpose AI assistant outside the business workflow
+- POS/ERP replacement
+- Full inventory suite
+- Fleet ownership or delivery-network operation
+- Advanced loyalty/marketing/BI
+- ONDC as an MVP workstream
+- General-purpose AI outside the business workflow
 
-This does not permanently prohibit these capabilities. It keeps the first validation focused on the core workflow and business value.
+These exclusions preserve the restaurant/pickup proof; they do not permanently prohibit later capabilities. [Evidence: `nekurama.raw.chat.json:L79770-L79820`; corroboration: `nekurama.babai.research.md:L178-L186`]
 
-## Product boundaries / non-negotiables
+## Pilot sequence — partial, explicitly staged
+
+The founder source frames the product work as a constrained MVP/pilot battle: define the smallest real product, then measure activation, orders, successful fulfillment, repeat use, staff adoption, economics, retention and willingness to pay. [Evidence: `nekurama.raw.chat.json:L66495-L66540`, `nekurama.raw.chat.json:L79721-L79820`]
+
+The reconciled operating sequence is:
+
+1. **Stage 0 — one-business operational pilot:** run the narrow pickup-first flow with one business, one WhatsApp number and one branch, with manual takeover and no delivery dependency.
+2. **Stage 1 — fixed 90-day paid pilot:** run the agreed term under signed minimum-paying terms; it is not a free trial.
+3. **Stage 2 — readiness decision:** close the pilot at the day-90 decision point when the team-defined evidence gate supports materially larger onboarding volumes; hold expansion if it does not.
+
+The stages are sequential learning gates. Stage 0 is confirmed as the initial
+operating boundary; the readiness evidence, support model, numeric success/kill
+thresholds and post-pilot plan remain partial or proposed. [Evidence:
+`nekurama.raw.chat.json:L79721-L79820`; corroboration:
+`nekurama.babai.research.md:L118-L163`,
+`nekurama.babai.research.md:L176-L186`; current decision source:
+`2026-09-21 FOUNDER DECISION PACKET`]
+
+The final production feature cut, launch blockers, post-pilot roadmap and expansion criteria remain open. [Evidence: `nekurama.raw.chat.json:L66495-L66540`; corroboration: `nekurama.chatgpt.md:L27050-L27263`]
+
+## Product boundaries — confirmed
 
 ### Business relationship
 
-The customer normally interacts with the **business's own WhatsApp identity**. The business owns the customer relationship; BABAI supplies the operating layer.
+The customer normally interacts with the business's own WhatsApp identity. BABAI supplies the operating layer; it does not become the marketplace intermediary. [Evidence: `nekurama.raw.chat.json:L21506-L21540`, `nekurama.raw.chat.json:L48598-L48630`]
 
-### AI boundary
+### AI and human control
 
-AI may assist with understanding, answering, extraction, recommendations, summarization and suggested actions. AI is not authoritative for payment state, permissions, order state, refunds, consent or other controlled business state.
+AI may assist with understanding, extraction, recommendations, summarization and suggested actions. It is not authoritative for payment, permissions, order state, refunds, consent or other controlled business state. Menu extraction follows `candidate revision → validation → human review → explicit publish`. Human takeover is a first-class path. [Evidence: `nekurama.chatgpt.md:L6233-L6446`, `nekurama.chatgpt.md:L7207-L7450`; corroboration: `nekurama.babai.research.md:L44-L53`]
 
-### Human boundary
+### Internal tier scope decision — provisional experiment only
 
-Automation is not intended to eliminate staff. Human takeover is a first-class path. The conversation can move between automated and human handling while order/payment/fulfillment state continues independently.
+The internal LITE/BASE/PRO capability matrix and rates are maintained in
+[`brd.md`](brd.md). They do not change the narrower Stage 0 pilot boundary or
+create public packages. LITE is limited to menu display and ordering
+assistance, with no payment, delivery, cross-checking, daily availability
+enable/disable, promotions or combos and no more than three menu updates per
+month. BASE adds user payment and delivery, kitchen-availability controls in
+the menu/cart UI, and basic promotions/combos limited to three requests per
+day with one-day or defined limited-time activation. PRO adds full bounded
+access across the listed workflows and approved advanced APIs.
 
-### Payment boundary
+Across all tiers, policy/state remains deterministic and human-controlled:
+AI can suggest, extract, classify or summarize, but cannot bypass permissions,
+publish or mutate controlled state, authorize payment, advance order/delivery
+state, activate promotions or call privileged integrations without the
+approved transition and audit trail. “Full” in PRO means bounded capability
+coverage, never unrestricted AI authority.
 
-Customer-to-business money flow is preferred. BABAI subscription billing is separate from customer order payment. BABAI should not become the merchant-of-record or customer-funds custodian for the initial product.
+### Payment and fulfillment
 
-### Integration boundary
+Customer-to-business payment is preferred; BABAI subscription billing is separate. Payment and order are separate state machines, and pickup is the first fulfillment mode. Delivery remains provider-agnostic and later. [Evidence: `nekurama.raw.chat.json:L192-L205`; `nekurama.babai.research.md:L56-L63`, `nekurama.babai.research.md:L116-L116`]
 
-BABAI should integrate with existing business infrastructure where appropriate rather than define itself as a POS/ERP replacement.
+## Current open questions
 
-## What the field research changes
+- Exact production feature cut and launch blockers
+- End-to-end customer and owner/staff journeys, including cancellations, refunds and exceptions
+- Minimal web screens, bulk operations and tier entitlements
+- Meta onboarding/coexistence reliability and recovery
+- Payment verification, reconciliation and refund behavior
+- Notification/template matrix
+- Pilot instrumentation, baseline and numeric success/kill thresholds
+- Paid-pilot terms, pricing and post-beta continuation
+- Post-pilot roadmap and vertical-expansion gates
 
-The September 2026 field research covers 19 businesses: 15 restaurants and 4 stores. It reports strong interest in direct customer relationships, dissatisfaction with aggregator economics, existing WhatsApp ordering behavior and difficulty managing conversations. It also reports positive reaction to a proposition centered on the business's own WhatsApp, direct payment, no marketplace commission and no customer app installation.
-
-The research supports the problem and initial workflow, but explicitly does **not** yet prove willingness to pay, sustained usage, operational trust, Meta onboarding reliability, payment verification, refunds, delivery or multilingual staff workflows. Therefore the product definition should be treated as **partial/committed for the MVP boundary, with validation still required before broadening scope**.
-
-## Current questions
-
-- [ ] Exact production feature cut after pilot instrumentation
-- [ ] Detailed customer journey and edge cases
-- [ ] Detailed owner/manager/staff journey and dashboard information architecture
-- [ ] Notification/template matrix
-- [ ] Detailed onboarding flow
-- [ ] Post-pilot roadmap and vertical expansion gates
-- [ ] Final pilot success/kill thresholds
-
-## Related durable truth
-
-- `docs/products/babai/thesis-and-positioning.md` — thesis, ICP, buyer, differentiation and positioning
-- `docs/products/babai/domain-model.md` — entity and state principles
-- `docs/products/babai/architecture.md` — architecture constraints
-- `docs/products/babai/experience-and-channels.md` — channel principles
-- `docs/products/babai/validation.md` — validation gate and metrics
-- `nekurama.babai.research.md` — September 2026 field research
-- `nekurama/Bulb#1` — detailed decision history and evidence
+These are deliberately retained as partial/challenge-required items, not inferred decisions. [Evidence: `nekurama.babai.research.md:L104-L116`, `nekurama.babai.research.md:L145-L163`; corroboration: `nekurama.chatgpt.md:L27963-L28378`]

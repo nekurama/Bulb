@@ -3,10 +3,127 @@ status: partial
 owner: BABAI
 last-reviewed: 2026-09-18
 sources:
+  - "Admin Decision Packet (2026-09-20)"
+  - nekurama.raw.chat.json
   - nekurama/Bulb#1
   - historical ManojVysyaraju/bulb#1
+---
 
 # Domain Model
+
+## Evidence-backed additions
+
+The raw founder discussion confirms the following domain constraints and fills several cross-cutting gaps. Raw turn numbers below use the chronological substantive-message index defined in `architecture.md`.
+
+## Decision status and boundary vocabulary
+
+Use the following status vocabulary throughout the domain and architecture documents:
+
+- **Confirmed** — source-backed domain constraint or explicit invariant.
+- **Proposed** — useful candidate model that still needs design validation.
+- **Unresolved** — requirement or question is known, but the implementation or final boundary is not selected.
+- **Non-goal** — intentionally outside the current MVP.
+
+Boundary terms are distinct:
+
+- **Aggregate boundary** — transactional ownership, invariants and validated state transitions.
+- **Capability/engine boundary** — cohesive responsibility for commands, calculations or policy that may span aggregates.
+- **State/workflow boundary** — authoritative domain state and transitions versus durable orchestration of timers, retries, waits and recovery.
+- **Integration boundary** — provider-facing adapter and external identity/transport semantics.
+- **Trust/policy boundary** — authentication, authorization, tenant/branch scope and policy decisions before a state-changing command.
+- **Deployment boundary** — an independently operated runtime; it is a candidate only when ownership, security, data, scaling or lifecycle evidence justifies it.
+
+These terms prevent a conceptual engine or aggregate from being treated as an automatic microservice, database or workflow-product decision.
+
+## Architecture handoff requirements (HLD/LLD)
+
+### HLD requirements
+
+- Preserve the `Tenant → Branch → Channel` context and tenant-scoped customer relationship.
+- Keep aggregate ownership, capability ownership, provider adapters and deployment candidates explicit and separate.
+- Keep authoritative domain state distinct from events, workflow records, audit history and telemetry.
+- Enforce identity, authorization, policy and tenant/branch scope at trusted boundaries.
+- Keep payment, fulfillment, conversation automation and human takeover as independent lifecycle concerns.
+- Treat future extraction shapes as partial hypotheses; the committed starting posture is a modular monolith, TypeScript/Node, PostgreSQL, managed queue/outbox and provider adapters. Do not select a cloud service, queue vendor, workflow product, AI provider or future microservice topology here.
+
+### LLD requirements
+
+- Define typed commands, queries, state transitions, preconditions and event envelopes.
+- Define correlation/causation, flow scope, schema versioning, idempotency, outbox/inbox, retries, quarantine/DLQ and reconciliation.
+- Define monetary, promotion, tax, availability and order-snapshot invariants before implementation.
+- Define provider callback verification and adapter lifecycle contracts.
+- Define audit, sensitive-data access, retention/deletion and recovery semantics.
+
+These are design requirements, not claims that the implementation already exists. See `architecture.md` and `architecture-boundaries.md` for the corresponding system-level handoff.
+
+## Committed implementation alignment
+
+The **Admin Decision Packet (2026-09-20)** records the starting implementation
+posture without changing domain ownership:
+
+- Domain capabilities and aggregates remain logical boundaries inside a
+  TypeScript/Node modular monolith; no initial microservices or EKS.
+- PostgreSQL is the starting authoritative persistence choice.
+- Managed queue/outbox/inbox processing, idempotency, retries, DLQ/quarantine,
+  reconciliation and auditability are baseline reliability mechanisms.
+- AI remains advisory; deterministic domain services own orders, payments,
+  permissions, consent and other controlled business state.
+- Customer settlement is direct to the merchant through UPI/gateway flows;
+  BABAI does not introduce a wallet or escrow.
+- DPDPA-ready minimisation, consent, retention, deletion, access, subprocessors
+  and incident controls are implementation/privacy requirements, not new
+  aggregates.
+
+Initial RPO 24 hours, RTO 8 hours, daily backups and tested restore are
+continuity baselines. AWS credits may be evaluated without making the domain
+AWS-specific or overprovisioned. Exact cloud services, queue vendor, workflow
+implementation, SLOs and legal/security evidence remain open. [Admin Decision
+Packet (2026-09-20); `architecture.md`; `architecture-lld.md`;
+`architecture-boundaries.md`]
+
+## State engine and workflow unknowns
+
+**Confirmed requirement:** the product needs a state engine for business flows, not only payments. The founder then asked for a general state-engine evaluation and named idempotency, transactions, automatic retries, timers, human waits/interventions, audit history and recovery as required behavior. [Raw T115 `bbb210cc-a1ef-4ea9-b1a7-7c52f0011721`; Raw T117 `bbb216ed-0269-4c6c-8e28-f17031c1fa93`; Raw T119 `bbb211c0-c142-4837-aca7-b67a21454ec8`]
+
+The domain implication is that every stateful aggregate keeps authoritative state and validates transitions, while a workflow layer may coordinate long-running work around those transitions. It must not become a substitute for aggregate state or silently invent successful outcomes.
+
+Still unresolved:
+
+- generic state machine versus flow-specific state machines;
+- custom state handling versus open-source or managed workflow execution;
+- Temporal, n8n, Jenkins, GitHub Actions or any other implementation;
+- timer, human-wait, retry, compensation, recovery and replay semantics per flow;
+- event-history/workflow-record persistence and retention;
+- exact command/event/workflow ownership for onboarding, conversation, ordering, payment, fulfillment and delivery.
+
+The raw mapping records the research-stage instruction to define the State Engine contract and compare options before selecting an implementation; it explicitly does not lock Temporal or another product. [Raw T122 `0011555d-10c7-4dbc-aca8-2bf7c55d324b`; Raw T136 `09c90c51-c4ae-40a6-9bd8-aea16eaf3339`]
+
+### Tenant-scoped privacy and deletion
+
+- The canonical customer identity may be global, but the relationship, consent, conversation, order and operational data exposed to a business are always scoped through `TenantCustomer`.
+- A deletion request received in a restaurant conversation defaults to that tenant relationship. It must not silently delete the customer's relationship with another tenant.
+- Platform-wide identity deletion, legal/financial retention and audit retention are separate policy decisions; they must not be inferred from a tenant-scoped request.
+- Customer phone/WhatsApp identifiers are resolution keys, not immutable domain identity.
+
+This preserves future cross-business capabilities without exposing one business's customer relationship to another. [Raw T99 `bbb21fb5-8f72-4a7f-b42b-333101d4a900`; Raw T102 `fa5fecac-d416-4c7e-aa77-f3d9d77978bd`; Raw T149 `bbb2129e-e9fa-43bf-adca-b0bc7a956664`]
+
+### Event and transition discipline
+
+- Events have explicit identity, type/schema version and correlation/causation context; related events may also carry session/flow context.
+- Event type is derived from trusted flow context, not accepted as an authority from the client.
+- Events coordinate side effects and integration; aggregate state and validated transitions remain authoritative.
+- At-least-once delivery, deduplication/idempotency, retry/DLQ handling, replay controls and reconciliation are reliability requirements, not domain substitutes.
+- The exact event-code registry, event-history retention and transport remain open battles.
+
+[Raw T125 `bbb21b98-7460-45d5-a616-418ffbf47484`; Raw T137 `bbb21f78-6e9b-4ef8-9a07-60fe2273e772`; Raw T139 `bbb213b8-d58c-403e-b858-bdaa1ac750b8`; Raw T264 `bbb21a7f-4d44-4cc1-8f60-1172bdcc303c`; Raw T268 `bbb21426-5f7e-4c38-82e4-e288b9aae01c`]
+
+### Staff-owned order corrections
+
+Order modification and cancellation are requests for restaurant intervention, not automatic customer/AI mutations. Staff decide the correction; Ordering validates authorization, scope, policy and legal state transitions. A resulting order/invoice/payment correction is auditable and may require customer acknowledgement, pending payment or refund handling. [Raw T209 `bbb21545-4598-4ecd-a1fa-af977810bd5b`; Raw T216 `bbb216f2-0ccd-4871-a670-e02f94100750`; Raw T218 `bbb21ee2-2265-4c8a-ba89-82249c36e181`]
+
+### Channel and branch context
+
+The domain must keep `Channel` distinct from `Tenant`, `Branch`, subscription and provider account. A restaurant-owned WhatsApp number is a channel endpoint; a shared number may require an explicit branch selection, while a branch-specific number can resolve branch context directly. The provider's account identifiers are integration references, not the permanent business identity. [Raw T33 `ded20a72-7392-4785-8983-b6e7d75eae3b`; Raw T34 `bbb21cdc-296c-4806-af69-c1b7f40c4cf8`; Raw T65 `31e96409-07af-4d5c-a00c-fbe2a55c0433`]
 
 ## Core hierarchy
 

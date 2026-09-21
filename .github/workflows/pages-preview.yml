@@ -1,0 +1,62 @@
+name: Deploy static site preview
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-preview-babai-template
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/nekurama/babai-feature'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Check out the committed preview source
+        uses: actions/checkout@v4
+        with:
+          ref: nekurama/babai-feature
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build and verify Pages artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check site/app.js
+          node -e "JSON.parse(require('fs').readFileSync('mock-data.json', 'utf8'))"
+          node scripts/build-pages-preview.mjs
+
+      - name: Verify static boundary and artifact allowlist
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(find dist -type f -printf '%P\n' | sort)" = "$(printf '%s\n' favicon.svg index.html mock-data.json script.js styles.css)"
+          ! grep -RInE 'https?://|XMLHttpRequest|WebSocket|sendBeacon|EventSource|localStorage|sessionStorage|document\.cookie|assets/candidates|candidate-only|provenance\.json' dist \
+            --include='*.html' --include='*.css' --include='*.js' --include='*.json'
+          ! find dist -type f -path '*candidates*' | grep .
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload only the verified static artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+      - name: Deploy Pages artifact
+        id: deployment
+        uses: actions/deploy-pages@v4

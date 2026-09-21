@@ -1,7 +1,7 @@
 ---
-status: partial
+status: partial — core thesis confirmed; market proof, copy and expansion remain open
 owner: BABAI
-last-reviewed: 2026-09-16
+last-reviewed: 2026-09-21
 sources:
   - nekurama/Bulb#1
   - nekurama/Bulb#2
@@ -9,6 +9,8 @@ sources:
   - historical ManojVysyaraju/bulb#1
   - nekurama/Bulb: nekurama.md (exported ChatGPT research/conversation)
   - nekurama/Bulb: nekurama.mht (archived ChatGPT export)
+  - nekurama.raw.chat.json
+  - Founder decision packet (2026-09-21; current task input)
 ---
 
 # Thesis & Positioning
@@ -145,7 +147,7 @@ This is a **differentiation thesis**, not a proven moat. A moat must be earned t
 
 > **Turn customer conversations into business operations.**
 
-The message should lead with business outcome and operating transformation; WhatsApp and AI are enablers.
+The message should lead with business outcome and operating transformation; WhatsApp and AI are enablers. This is a positioning decision, not proof of a durable moat or of customer willingness to pay.
 
 ## 15. Messaging hierarchy — committed structure, copy deferred
 
@@ -191,6 +193,12 @@ BABAI had the strongest restaurant signal. Professional trademark clearance rema
 
 BABAI is a product brand of NEKURAMA, not a separate company in the current architecture.
 
+Founder-approved wording: **“Business Automation by AI.”** This may be used
+as a product descriptor or intent line. The raw naming/intent anchor is founder
+turn 386 / mapping `bbb21347-433a-45d7-b022-6a9a210f8a4c`; the source phrase is
+at mapping `078f95a4-5e81-4488-ad45-5de38830c874`. This is not an invented
+etymology, legal expansion, originality claim or architectural constraint.
+
 ## 20. Historical decisions not carried forward
 
 - Tadka / Thali / Dawat as active packaging or identity.
@@ -209,6 +217,14 @@ BABAI is a product brand of NEKURAMA, not a separate company in the current arch
 4. Deeper competitive proof/validation of the differentiation thesis.
 
 These refinements do not block progression to Step 2 unless new evidence materially contradicts the core thesis.
+
+## 22. Evidence status — durable versus still to prove
+
+**Confirmed decisions:** B2B buyer, business-owned WhatsApp relationship, restaurant-first wedge, WhatsApp-first/not-WhatsApp-only channel philosophy, bounded AI with human takeover, direct customer-to-business money flow, and explicit non-marketplace/non-POS boundaries. These are consistent with the founder decision sequence in `nekurama.raw.chat.json` (ordered turns 71, 278, 290 and 385) and the current product decision log.
+
+**Supported but not proven:** the September 2026 field research (`nekurama.babai.research.md`, “What this validates”) supports the pain around aggregator economics, direct relationships and WhatsApp operations. It does not yet prove sustained usage, trust, willingness to pay, retention, or a moat.
+
+**Still unknown:** the final tagline and voice, competitive superiority, quantitative expansion gate, paid conversion rate, and the economic contribution after Meta messaging, AI, support and infrastructure costs.
 
 ## Sources / decision history
 

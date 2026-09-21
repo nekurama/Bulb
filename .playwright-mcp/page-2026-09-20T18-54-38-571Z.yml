@@ -1,0 +1,224 @@
+- generic [active] [ref=f1e1]:
+  - link "Skip to content" [ref=f1e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f1e3]:
+    - note [ref=f1e4]:
+      - generic [ref=f1e5]: Prototype shell · approved copy, evidence and CTA destinations are still founder decisions.
+    - generic [ref=f1e6]:
+      - link "BABAI home" [ref=f1e7] [cursor=pointer]:
+        - /url: "#top"
+        - generic [aria-hidden] [ref=f1e8]: B
+        - generic [ref=f1e9]:
+          - strong [ref=f1e10]: BABAI
+          - generic [ref=f1e11]: by NEKURAMA
+      - navigation "Primary navigation" [ref=f1e12]:
+        - group [ref=f1e13]:
+          - generic "Menu ↓" [ref=f1e14] [cursor=pointer]
+  - main [ref=f1e15]:
+    - region [ref=f1e16]:
+      - generic [ref=f1e17]:
+        - paragraph [ref=f1e18]: Approved headline slot · restaurant-first concept
+        - heading "Headline slot for the reviewed BABAI promise." [level=1] [ref=f1e19]
+        - paragraph [ref=f1e20]: Supporting-copy slot for the approved business operating story. Keep the final wording evidence-backed and distinguish the pilot boundary from a public availability claim.
+        - generic "Pilot actions" [ref=f1e21]:
+          - link "Primary CTA slot" [ref=f1e22] [cursor=pointer]:
+            - /url: "#pilot-form"
+            - text: Primary CTA slot
+            - generic [aria-hidden] [ref=f1e23]: ↗
+          - link "Explore mock flow" [ref=f1e24] [cursor=pointer]:
+            - /url: "#mock-demo"
+        - paragraph [ref=f1e25]: Pilot-interest preview only. No account, payment, menu upload or production connection is created here.
+      - img "Illustration of a business conversation becoming an order" [ref=f1e26]:
+        - generic [ref=f1e29]:
+          - generic [ref=f1e30]: CUSTOMER MESSAGE
+          - strong [ref=f1e31]: “Can I pick up at 7?”
+        - generic [ref=f1e32]:
+          - generic [ref=f1e33]: CONTROLLED STATE
+          - strong [ref=f1e34]: Pickup order · needs review
+        - generic [ref=f1e35]:
+          - text: Conversation
+          - generic [ref=f1e37]: →
+          - text: operation
+    - region [ref=f1e38]:
+      - generic [ref=f1e39]:
+        - generic [ref=f1e40]:
+          - paragraph [ref=f1e41]: Problem framing slot
+          - heading "Observed problem statement slot." [level=2] [ref=f1e42]
+        - generic [ref=f1e43]:
+          - paragraph [ref=f1e44]: Use this area for sourced restaurant-operator pain points. Do not turn a research signal into a market-size, traction or outcome claim without an approved citation.
+          - paragraph [ref=f1e45]:
+            - strong [ref=f1e46]: Evidence gate.
+            - text: No research result, outcome, testimonial or traction claim is published in this template.
+    - region [ref=f1e47]:
+      - generic [ref=f1e48]:
+        - generic [ref=f1e49]:
+          - paragraph [ref=f1e50]: Flow copy slot
+          - heading "How the reviewed pilot flow could work." [level=2] [ref=f1e51]
+          - paragraph [ref=f1e52]: These steps are an invented, non-production illustration. Replace labels with approved product language without implying autonomous or error-free behavior.
+        - list [ref=f1e53]:
+          - listitem [ref=f1e54]:
+            - generic [ref=f1e55]: "01"
+            - strong [ref=f1e56]: Conversation
+            - generic [ref=f1e57]: Customer asks a question in the business’s channel.
+          - listitem [ref=f1e58]:
+            - generic [ref=f1e59]: "02"
+            - strong [ref=f1e60]: Catalog / menu
+            - generic [ref=f1e61]: Answers use the restaurant’s reviewed context.
+          - listitem [ref=f1e62]:
+            - generic [ref=f1e63]: "03"
+            - strong [ref=f1e64]: Pickup order
+            - generic [ref=f1e65]: Intent becomes a structured order for review.
+          - listitem [ref=f1e66]:
+            - generic [ref=f1e67]: "04"
+            - strong [ref=f1e68]: Staff action
+            - generic [ref=f1e69]: Business accepts, prepares and completes it.
+          - listitem [ref=f1e70]:
+            - generic [ref=f1e71]: "05"
+            - strong [ref=f1e72]: Feedback / repeat
+            - generic [ref=f1e73]: Customer relationship stays with the business.
+    - region [ref=f1e74]:
+      - generic [ref=f1e75]:
+        - generic [ref=f1e76]:
+          - paragraph [ref=f1e77]: Interactive concept · invented mock data only
+          - heading "See the handoff, not a fake product login." [level=2] [ref=f1e78]
+          - paragraph [ref=f1e79]: Use the controls to explore one invented pickup conversation. Nothing connects to WhatsApp, a payment provider, a customer, or a production backend.
+          - generic [ref=f1e80]:
+            - strong [ref=f1e81]: Boundary by design
+            - generic [ref=f1e82]: AI may assist with understanding and suggestions. Order, payment, permission and consent state remain controlled and reviewable.
+        - generic [ref=f1e83]:
+          - generic [ref=f1e84]: BABAI / local mock data
+          - generic [ref=f1e89]:
+            - generic "Demo progress" [ref=f1e90]:
+              - button "Message" [ref=f1e91] [cursor=pointer]
+              - button "Context" [ref=f1e92] [cursor=pointer]
+              - button "Order" [ref=f1e93] [cursor=pointer]
+              - button "Takeover" [ref=f1e94] [cursor=pointer]
+            - generic [ref=f1e95]:
+              - paragraph [ref=f1e96]: CUSTOMER · MOCK CONVERSATION
+              - heading "“Is the paneer bowl available for pickup tonight?”" [level=3] [ref=f1e97]
+              - paragraph [ref=f1e98]: A customer question arrives in the restaurant’s own WhatsApp context. The assistant can help interpret it; it does not invent inventory or promise an order.
+              - generic [ref=f1e99]: Invented scene; no real customer or menu data is used.
+            - generic [ref=f1e100]:
+              - button "← Back" [disabled] [ref=f1e101]
+              - generic [ref=f1e102]:
+                - button "Reset demo" [ref=f1e103] [cursor=pointer]
+                - button "Next scene →" [ref=f1e104] [cursor=pointer]
+    - region [ref=f1e105]:
+      - generic [ref=f1e106]:
+        - generic [ref=f1e107]:
+          - paragraph [ref=f1e108]: Pilot boundary slot
+          - heading "Pilot scope decision slot." [level=2] [ref=f1e109]
+          - paragraph [ref=f1e110]: Use this area for the approved pilot boundary and validation gate. The current page intentionally does not make a production-availability promise.
+        - generic [ref=f1e111]:
+          - generic [ref=f1e112]:
+            - generic [ref=f1e113]: "01"
+            - strong [ref=f1e114]: Tenant scope slot
+            - paragraph [ref=f1e115]: Replace with the approved participating-business scope.
+          - generic [ref=f1e116]:
+            - generic [ref=f1e117]: "01"
+            - strong [ref=f1e118]: Channel scope slot
+            - paragraph [ref=f1e119]: Replace with the approved channel and ownership language.
+          - generic [ref=f1e120]:
+            - generic [ref=f1e121]: "N"
+            - strong [ref=f1e122]: Validation gate slot
+            - paragraph [ref=f1e123]: Replace with a sourced learning gate, if approved.
+          - generic [ref=f1e124]:
+            - generic [ref=f1e125]: ∞
+            - strong [ref=f1e126]: Human takeover
+            - paragraph [ref=f1e127]: Staff remain in control when context or state needs review.
+    - region [ref=f1e128]:
+      - generic [ref=f1e129]:
+        - generic [ref=f1e130]:
+          - paragraph [ref=f1e131]: Evidence slot
+          - heading "Proof block decision slot." [level=2] [ref=f1e132]
+          - paragraph [ref=f1e133]: No customer logos, testimonials, case studies, research totals or outcome claims are published in this template. Add only sourced, permissioned and clearly labeled evidence after review.
+        - generic [ref=f1e134]:
+          - generic [ref=f1e135]: SOURCE / DATE SLOT
+          - strong [ref=f1e136]: Evidence metric slot
+          - generic [ref=f1e137]:
+            - generic [ref=f1e138]: Source pending
+            - generic [ref=f1e139]: Approval pending
+          - generic [ref=f1e140]: Replace only after provenance, permission and claim review are complete.
+    - region [ref=f1e141]:
+      - generic [ref=f1e142]:
+        - generic [ref=f1e143]:
+          - paragraph [ref=f1e144]: CTA slot · no endpoint
+          - heading "Contact block decision slot." [level=2] [ref=f1e145]
+          - paragraph [ref=f1e146]: Share only the minimum business context needed to route a conversation. Do not send menus, customer lists, WhatsApp identifiers, payment information or operational secrets through this public mock.
+          - group [ref=f1e147]:
+            - heading "Unapproved contact route choices" [level=3] [ref=f1e148]
+            - button "↗ Primary route slot Destination and owner pending review" [pressed] [ref=f1e149] [cursor=pointer]:
+              - text: ↗
+              - generic [ref=f1e150]:
+                - strong [ref=f1e151]: Primary route slot
+                - generic [ref=f1e152]: Destination and owner pending review
+            - button "◌ WhatsApp route slot Destination and owner pending review" [ref=f1e153] [cursor=pointer]:
+              - text: ◌
+              - generic [ref=f1e154]:
+                - strong [ref=f1e155]: WhatsApp route slot
+                - generic [ref=f1e156]: Destination and owner pending review
+            - button "✉ Email route slot Destination and owner pending review" [ref=f1e157] [cursor=pointer]:
+              - text: ✉
+              - generic [ref=f1e158]:
+                - strong [ref=f1e159]: Email route slot
+                - generic [ref=f1e160]: Destination and owner pending review
+            - button "＋ Waitlist route slot No public signup is sent" [ref=f1e161] [cursor=pointer]:
+              - text: ＋
+              - generic [ref=f1e162]:
+                - strong [ref=f1e163]: Waitlist route slot
+                - generic [ref=f1e164]: No public signup is sent
+        - generic [ref=f1e165]:
+          - generic [ref=f1e166]:
+            - generic [ref=f1e167]: "01"
+            - paragraph [ref=f1e168]: Minimum public context
+          - generic [ref=f1e169]: Business or restaurant name *
+          - textbox "Business or restaurant name" [ref=f1e170]
+          - generic [ref=f1e171]: Your role *
+          - combobox "Your role" [ref=f1e172]:
+            - option "Choose one" [selected]
+            - option "Owner / founder"
+            - option "Manager / admin"
+            - option "Staff / operator"
+            - option "Design partner / advisor"
+          - generic [ref=f1e173]: Number of branches *
+          - combobox "Number of branches" [ref=f1e174]:
+            - option "Choose one" [selected]
+            - option "1"
+            - option "2–5"
+            - option "6+"
+          - generic [ref=f1e175]: Preferred contact detail (optional in this mock)
+          - textbox "Preferred contact detail (optional in this mock)" [ref=f1e176]
+          - paragraph [ref=f1e177]: This static demo never transmits or stores this field.
+          - generic [ref=f1e178]:
+            - button "Preview local-only request" [ref=f1e179] [cursor=pointer]:
+              - text: Preview local-only request
+              - generic [aria-hidden] [ref=f1e180]: ↗
+            - button "Clear fields" [ref=f1e181] [cursor=pointer]
+          - paragraph [ref=f1e182]: No live submission, account creation, payment or backend request. Real CTA destinations require company-owned routing, an approved notice, retention rules and an accountable owner.
+          - paragraph [ref=f1e183]: Required fields are checked locally. Nothing is transmitted.
+    - region [ref=f1e184]:
+      - generic [ref=f1e185]:
+        - generic [ref=f1e186]:
+          - paragraph [ref=f1e187]: Data boundary slot
+          - heading "Public interest is not private setup." [level=2] [ref=f1e188]
+        - generic [ref=f1e189]:
+          - paragraph [ref=f1e190]:
+            - strong [ref=f1e191]: "Public mock:"
+            - text: business name, role, branch count and a preferred route are the maximum context shown here. The demo keeps data in the browser and clears it on refresh.
+          - paragraph [ref=f1e192]:
+            - strong [ref=f1e193]: "Controlled setup:"
+            - text: menus, WhatsApp identifiers, customer conversations, payment details, staff access and tenant configuration belong in an approved private onboarding path after privacy, retention, deletion, vendor and access controls are decided.
+          - paragraph [ref=f1e194]: "Unknowns remain open: final CTA owner and destinations, legal/privacy notices, retention schedule, domain ownership transfer, trademark clearance, pricing, pilot terms and launch status."
+  - contentinfo [ref=f1e195]:
+    - generic [ref=f1e196]:
+      - generic [ref=f1e197]:
+        - strong [ref=f1e198]: BABAI
+        - text: a NEKURAMA product / brand
+      - generic [ref=f1e199]:
+        - link "Data boundary" [ref=f1e200] [cursor=pointer]:
+          - /url: "#privacy-title"
+        - link "Evidence slot" [ref=f1e201] [cursor=pointer]:
+          - /url: "#evidence"
+        - link "CTA slot" [ref=f1e202] [cursor=pointer]:
+          - /url: "#pilot-form"
+      - paragraph [ref=f1e203]: Static concept · no deployment or live collection included.

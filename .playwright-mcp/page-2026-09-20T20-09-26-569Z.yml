@@ -1,0 +1,312 @@
+- generic [active] [ref=f3e1]:
+  - link "Skip to content" [ref=f3e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f3e3]:
+    - note [ref=f3e4]:
+      - generic [ref=f3e5]: Track 5 template · final copy, claims and CTA wording remain placeholders pending Tracks 1–4.
+    - generic [ref=f3e6]:
+      - link "BABAI home" [ref=f3e7] [cursor=pointer]:
+        - /url: "#top"
+        - generic [aria-hidden] [ref=f3e8]: B
+        - generic [ref=f3e9]:
+          - strong [ref=f3e10]: BABAI
+          - generic [ref=f3e11]: by NEKURAMA
+      - navigation "Primary navigation" [ref=f3e12]:
+        - link "How it works" [ref=f3e13] [cursor=pointer]:
+          - /url: "#how-it-works"
+        - link "Mock flow" [ref=f3e14] [cursor=pointer]:
+          - /url: "#mock-demo"
+        - link "Asset review" [ref=f3e15] [cursor=pointer]:
+          - /url: "#asset-review"
+        - link "Pilot boundary" [ref=f3e16] [cursor=pointer]:
+          - /url: "#pilot"
+        - link "Evidence" [ref=f3e17] [cursor=pointer]:
+          - /url: "#evidence"
+        - link "CTA placeholder" [ref=f3e18] [cursor=pointer]:
+          - /url: "#pilot-form"
+  - main [ref=f3e19]:
+    - region [ref=f3e20]:
+      - generic [ref=f3e21]:
+        - paragraph [ref=f3e22]: Hero copy placeholder · restaurant-first concept
+        - heading "Hero headline placeholder." [level=1] [ref=f3e23]
+        - paragraph [ref=f3e24]: Placeholder supporting copy for a business operating concept built around customer conversations. Final positioning and proof claims remain pending Tracks 1–4.
+        - generic "Pilot actions" [ref=f3e25]:
+          - link "Primary CTA placeholder" [ref=f3e26] [cursor=pointer]:
+            - /url: "#pilot-form"
+            - text: Primary CTA placeholder
+            - generic [aria-hidden] [ref=f3e27]: ↗
+          - link "Explore mock flow" [ref=f3e28] [cursor=pointer]:
+            - /url: "#mock-demo"
+        - paragraph [ref=f3e29]: Pilot interest only. No account, payment, menu upload or production connection is created here.
+      - img "Illustration of a business conversation becoming an order" [ref=f3e30]:
+        - generic [ref=f3e33]:
+          - generic [ref=f3e34]: CUSTOMER MESSAGE
+          - strong [ref=f3e35]: “Can I pick up at 7?”
+        - generic [ref=f3e36]:
+          - generic [ref=f3e37]: CONTROLLED STATE
+          - strong [ref=f3e38]: Pickup order · needs review
+        - generic [ref=f3e39]:
+          - text: Conversation
+          - generic [ref=f3e41]: →
+          - text: operation
+    - region [ref=f3e42]:
+      - generic [ref=f3e43]:
+        - generic [ref=f3e44]:
+          - paragraph [ref=f3e45]: Internal QA · candidate assets only
+          - heading "Review the marks before any brand decision." [level=2] [ref=f3e46]
+          - paragraph [ref=f3e47]: These local specimens are user-supplied candidates, not approved logos. Each is shown as an opaque square JPEG on light and dark surfaces so background, contrast, crop and responsive risks stay visible during review.
+        - generic [ref=f3e48]:
+          - figure [ref=f3e49]:
+            - generic [ref=f3e50]:
+              - generic [ref=f3e51]:
+                - text: Candidate · NEKURAMA
+                - heading "Cat + orange wordmark" [level=3] [ref=f3e52]
+              - generic [ref=f3e53]: ff2a1341
+            - generic [ref=f3e54]:
+              - generic [ref=f3e55]:
+                - generic [ref=f3e56]: Light surface
+                - img "NEKURAMA cat illustration with orange wordmark on a black background, candidate asset" [ref=f3e57]
+              - generic [ref=f3e58]: Dark surface
+            - generic [ref=f3e61]:
+              - strong [ref=f3e62]: Review note.
+              - text: Orange reads, but the dark linework is weak on dark surfaces. The black JPEG field is not transparent and becomes a hard square on light surfaces.
+          - figure [ref=f3e63]:
+            - generic [ref=f3e64]:
+              - generic [ref=f3e65]:
+                - text: Candidate · NEKURAMA
+                - heading "Winged cat + checkerboard" [level=3] [ref=f3e66]
+              - generic [ref=f3e67]: 1993d66a
+            - generic [ref=f3e68]:
+              - generic [ref=f3e69]:
+                - generic [ref=f3e70]: Light surface
+                - img "NEKURAMA winged cat illustration and wordmark over a visible checkerboard background, candidate asset" [ref=f3e71]
+              - generic [ref=f3e72]: Dark surface
+            - generic [ref=f3e75]:
+              - strong [ref=f3e76]: Review note.
+              - text: The checkerboard is baked into the JPEG, not transparency. It reads as noise on both surfaces and should not be used as a transparent logo source.
+          - figure [ref=f3e77]:
+            - generic [ref=f3e78]:
+              - generic [ref=f3e79]:
+                - text: Candidate · BABAI
+                - heading "Character + wordmark" [level=3] [ref=f3e80]
+              - generic [ref=f3e81]: 0989a5df
+            - generic [ref=f3e82]:
+              - generic [ref=f3e83]:
+                - generic [ref=f3e84]: Light surface
+                - img "BABAI character with laptop, light bulb and wordmark on a black background, candidate asset" [ref=f3e85]
+              - generic [ref=f3e86]: Dark surface
+            - generic [ref=f3e89]:
+              - strong [ref=f3e90]: Review note.
+              - text: The character and light wordmark read best against light surfaces. On dark surfaces the black field blends into the card, so contain it and do not crop the character, bulb or wordmark.
+          - figure [ref=f3e91]:
+            - generic [ref=f3e92]:
+              - generic [ref=f3e93]:
+                - text: Candidate · NEKURAMA
+                - heading "Cat + keyhole pendant" [level=3] [ref=f3e94]
+              - generic [ref=f3e95]: 5d3e1c56
+            - generic [ref=f3e96]:
+              - generic [ref=f3e97]:
+                - generic [ref=f3e98]: Light surface
+                - img "Minimal NEKURAMA cat and wordmark with a yellow keyhole pendant on a black background, candidate asset" [ref=f3e99]
+              - generic [ref=f3e100]: Dark surface
+            - generic [ref=f3e103]:
+              - strong [ref=f3e104]: Review note.
+              - text: The dark linework disappears on dark surfaces and becomes indistinct when reduced. The yellow pendant is an accent, not enough contrast for the full mark.
+          - figure [ref=f3e105]:
+            - generic [ref=f3e106]:
+              - generic [ref=f3e107]:
+                - text: Candidate · NEKURAMA
+                - heading "Winged cat + orange wordmark" [level=3] [ref=f3e108]
+              - generic [ref=f3e109]: 5008760d
+            - generic [ref=f3e110]:
+              - generic [ref=f3e111]:
+                - generic [ref=f3e112]: Light surface
+                - img "NEKURAMA winged cat illustration with orange wordmark on a black background, candidate asset" [ref=f3e113]
+              - generic [ref=f3e114]: Dark surface
+            - generic [ref=f3e117]:
+              - strong [ref=f3e118]: Review note.
+              - text: The orange wordmark has useful contrast, but the dark illustration loses detail on dark surfaces. Keep the square contained; do not use
+              - code [ref=f3e119]: "object-fit: cover"
+              - text: for a logo.
+        - paragraph [ref=f3e120]:
+          - text: Source files and SHA-256 provenance are recorded in
+          - code [ref=f3e121]: assets/candidates/provenance.json
+          - text: . This board is a mock review surface only; founder decisions on selection, licensing, clearance and public use remain open.
+    - region [ref=f3e122]:
+      - generic [ref=f3e123]:
+        - generic [ref=f3e124]:
+          - paragraph [ref=f3e125]: Problem framing placeholder
+          - heading "Problem statement placeholder." [level=2] [ref=f3e126]
+        - generic [ref=f3e127]:
+          - paragraph [ref=f3e128]: Placeholder body copy for the observed operating problem. Replace with approved, sourced language after Tracks 1–4 review.
+          - paragraph [ref=f3e129]:
+            - strong [ref=f3e130]: Evidence placeholder.
+            - text: No research result, outcome, testimonial or traction claim is published in this template.
+    - region [ref=f3e131]:
+      - generic [ref=f3e132]:
+        - generic [ref=f3e133]:
+          - paragraph [ref=f3e134]: Flow copy placeholder
+          - heading "How the concept could work." [level=2] [ref=f3e135]
+          - paragraph [ref=f3e136]: These steps are a neutral interaction placeholder. Replace labels and claims with approved product language after Tracks 1–4 review.
+        - list [ref=f3e137]:
+          - listitem [ref=f3e138]:
+            - generic [ref=f3e139]: "01"
+            - strong [ref=f3e140]: Conversation
+            - generic [ref=f3e141]: Customer asks a question in the business’s channel.
+          - listitem [ref=f3e142]:
+            - generic [ref=f3e143]: "02"
+            - strong [ref=f3e144]: Catalog / menu
+            - generic [ref=f3e145]: Answers use the restaurant’s reviewed context.
+          - listitem [ref=f3e146]:
+            - generic [ref=f3e147]: "03"
+            - strong [ref=f3e148]: Pickup order
+            - generic [ref=f3e149]: Intent becomes a structured order for review.
+          - listitem [ref=f3e150]:
+            - generic [ref=f3e151]: "04"
+            - strong [ref=f3e152]: Staff action
+            - generic [ref=f3e153]: Business accepts, prepares and completes it.
+          - listitem [ref=f3e154]:
+            - generic [ref=f3e155]: "05"
+            - strong [ref=f3e156]: Feedback / repeat
+            - generic [ref=f3e157]: Customer relationship stays with the business.
+    - region [ref=f3e158]:
+      - generic [ref=f3e159]:
+        - generic [ref=f3e160]:
+          - paragraph [ref=f3e161]: Interactive concept · mock data only
+          - heading "See the handoff, not a fake product login." [level=2] [ref=f3e162]
+          - paragraph [ref=f3e163]: Use the controls to explore one invented pickup conversation. Nothing connects to WhatsApp, a payment provider, a customer, or a production backend.
+          - generic [ref=f3e164]:
+            - strong [ref=f3e165]: Boundary by design
+            - generic [ref=f3e166]: AI may assist with understanding and suggestions. Order, payment, permission and consent state remain controlled and reviewable.
+        - generic [ref=f3e167]:
+          - generic [ref=f3e168]: BABAI / local mock data
+          - generic [ref=f3e173]:
+            - generic "Demo progress" [ref=f3e174]:
+              - button "Message" [ref=f3e175] [cursor=pointer]
+              - button "Context" [ref=f3e176] [cursor=pointer]
+              - button "Order" [ref=f3e177] [cursor=pointer]
+              - button "Takeover" [ref=f3e178] [cursor=pointer]
+            - generic [ref=f3e179]:
+              - paragraph [ref=f3e180]: CUSTOMER · MOCK CONVERSATION
+              - heading "“Is the paneer bowl available for pickup tonight?”" [level=3] [ref=f3e181]
+              - paragraph [ref=f3e182]: A customer question arrives in the restaurant’s own WhatsApp context. The assistant can help interpret it; it does not invent inventory or promise an order.
+              - generic [ref=f3e183]: Invented scene; no real customer or menu data is used.
+            - generic [ref=f3e184]:
+              - button "← Back" [disabled] [ref=f3e185]
+              - button "Next scene →" [ref=f3e186] [cursor=pointer]
+    - region [ref=f3e187]:
+      - generic [ref=f3e188]:
+        - generic [ref=f3e189]:
+          - paragraph [ref=f3e190]: Pilot boundary placeholder
+          - heading "Pilot scope placeholder." [level=2] [ref=f3e191]
+          - paragraph [ref=f3e192]: Draft boundary content only. Final pilot scope and validation language remain unresolved.
+        - generic [ref=f3e193]:
+          - generic [ref=f3e194]:
+            - generic [ref=f3e195]: "01"
+            - strong [ref=f3e196]: Boundary placeholder
+            - paragraph [ref=f3e197]: Replace with the approved participating-business scope.
+          - generic [ref=f3e198]:
+            - generic [ref=f3e199]: "01"
+            - strong [ref=f3e200]: Channel placeholder
+            - paragraph [ref=f3e201]: Replace with the approved channel and ownership language.
+          - generic [ref=f3e202]:
+            - generic [ref=f3e203]: "N"
+            - strong [ref=f3e204]: Validation placeholder
+            - paragraph [ref=f3e205]: Replace with a sourced learning gate, if approved.
+          - generic [ref=f3e206]:
+            - generic [ref=f3e207]: ∞
+            - strong [ref=f3e208]: Human takeover
+            - paragraph [ref=f3e209]: Staff remain in control when context or state needs review.
+    - region [ref=f3e210]:
+      - generic [ref=f3e211]:
+        - generic [ref=f3e212]:
+          - paragraph [ref=f3e213]: Evidence placeholder
+          - heading "Proof block placeholder." [level=2] [ref=f3e214]
+          - paragraph [ref=f3e215]: No customer logos, testimonials, case studies, research totals or outcome claims are published in this template. Add only sourced, permissioned and clearly labeled evidence after review.
+        - generic [ref=f3e216]:
+          - generic [ref=f3e217]: SOURCE / DATE PLACEHOLDER
+          - strong [ref=f3e218]: Evidence metric placeholder
+          - generic [ref=f3e219]:
+            - generic [ref=f3e220]: Source pending
+            - generic [ref=f3e221]: Approval pending
+          - generic [ref=f3e222]: Replace only after provenance, permission and claim review are complete.
+    - region [ref=f3e223]:
+      - generic [ref=f3e224]:
+        - generic [ref=f3e225]:
+          - paragraph [ref=f3e226]: CTA placeholder
+          - heading "Contact block placeholder." [level=2] [ref=f3e227]
+          - paragraph [ref=f3e228]: Share only the minimum business context needed to route a conversation. Do not send menus, customer lists, WhatsApp identifiers, payment information or operational secrets through this public mock.
+          - generic "Contact route choices" [ref=f3e229]:
+            - button "↗ Primary route placeholder Destination and owner pending review" [pressed] [ref=f3e230] [cursor=pointer]:
+              - text: ↗
+              - generic [ref=f3e231]:
+                - strong [ref=f3e232]: Primary route placeholder
+                - generic [ref=f3e233]: Destination and owner pending review
+            - button "◌ WhatsApp route placeholder Destination and owner pending review" [ref=f3e234] [cursor=pointer]:
+              - text: ◌
+              - generic [ref=f3e235]:
+                - strong [ref=f3e236]: WhatsApp route placeholder
+                - generic [ref=f3e237]: Destination and owner pending review
+            - button "✉ Email route placeholder Destination and owner pending review" [ref=f3e238] [cursor=pointer]:
+              - text: ✉
+              - generic [ref=f3e239]:
+                - strong [ref=f3e240]: Email route placeholder
+                - generic [ref=f3e241]: Destination and owner pending review
+            - button "＋ Waitlist route placeholder No public signup is sent" [ref=f3e242] [cursor=pointer]:
+              - text: ＋
+              - generic [ref=f3e243]:
+                - strong [ref=f3e244]: Waitlist route placeholder
+                - generic [ref=f3e245]: No public signup is sent
+        - generic [ref=f3e246]:
+          - generic [ref=f3e247]:
+            - generic [ref=f3e248]: "01"
+            - paragraph [ref=f3e249]: Minimum public context
+          - generic [ref=f3e250]: Business or restaurant name *
+          - textbox "Business or restaurant name" [ref=f3e251]
+          - generic [ref=f3e252]: Your role *
+          - combobox "Your role" [ref=f3e253]:
+            - option "Choose one" [selected]
+            - option "Owner / founder"
+            - option "Manager / admin"
+            - option "Staff / operator"
+            - option "Design partner / advisor"
+          - generic [ref=f3e254]: Number of branches *
+          - combobox "Number of branches" [ref=f3e255]:
+            - option "Choose one" [selected]
+            - option "1"
+            - option "2–5"
+            - option "6+"
+          - generic [ref=f3e256]: Preferred contact detail (optional in this mock)
+          - textbox "Preferred contact detail (optional in this mock)" [ref=f3e257]
+          - paragraph [ref=f3e258]: This static demo never transmits or stores this field.
+          - button "Submit placeholder preview" [ref=f3e259] [cursor=pointer]:
+            - text: Submit placeholder preview
+            - generic [aria-hidden] [ref=f3e260]: ↗
+          - paragraph [ref=f3e261]: No live submission, account creation, payment or backend request. Real CTA destinations require company-owned routing, an approved notice, retention rules and an accountable owner.
+          - paragraph [ref=f3e262]: Required fields are checked locally. Nothing is transmitted.
+    - region [ref=f3e263]:
+      - generic [ref=f3e264]:
+        - generic [ref=f3e265]:
+          - paragraph [ref=f3e266]: Data boundary placeholder
+          - heading "Public interest is not private setup." [level=2] [ref=f3e267]
+        - generic [ref=f3e268]:
+          - paragraph [ref=f3e269]:
+            - strong [ref=f3e270]: "Public mock:"
+            - text: business name, role, branch count and a preferred route are the maximum context shown here. The demo keeps data in the browser and clears it on refresh.
+          - paragraph [ref=f3e271]:
+            - strong [ref=f3e272]: "Controlled setup:"
+            - text: menus, WhatsApp identifiers, customer conversations, payment details, staff access and tenant configuration belong in an approved private onboarding path after privacy, retention, deletion, vendor and access controls are decided.
+          - paragraph [ref=f3e273]: "Unknowns remain open: final CTA owner and destinations, legal/privacy notices, retention schedule, domain ownership transfer, trademark clearance, pricing, pilot terms and launch status."
+  - contentinfo [ref=f3e274]:
+    - generic [ref=f3e275]:
+      - generic [ref=f3e276]:
+        - strong [ref=f3e277]: BABAI
+        - text: a NEKURAMA product / brand
+      - generic [ref=f3e278]:
+        - link "Data boundary" [ref=f3e279] [cursor=pointer]:
+          - /url: "#privacy-title"
+        - link "Evidence placeholder" [ref=f3e280] [cursor=pointer]:
+          - /url: "#evidence"
+        - link "CTA placeholder" [ref=f3e281] [cursor=pointer]:
+          - /url: "#pilot-form"
+      - paragraph [ref=f3e282]: Static concept for nekurama.com · no deployment or live collection included.

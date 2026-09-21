@@ -1,0 +1,4 @@
+[      40ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:4173/assets/candidates/claudecomm-att-1993d66a-07bd-479b-861e-e2fe898115aa.jpg:0
+[      40ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:4173/assets/candidates/claudecomm-att-ff2a1341-cee1-49ed-9029-4d0c336d524e.jpg:0
+[      41ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:4173/assets/candidates/claudecomm-att-0989a5df-98da-415d-a4bf-da29c909f64f.jpg:0
+[      48ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:4173/assets/candidates/claudecomm-att-5d3e1c56-4f3a-42c5-906e-97d6b07601f8.jpg:0

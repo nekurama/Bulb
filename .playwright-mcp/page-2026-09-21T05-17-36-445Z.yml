@@ -1,0 +1,188 @@
+- generic [active] [ref=f2e1]:
+  - link "Skip to content" [ref=f2e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f2e3]:
+    - banner "Site header" [ref=f2e4]:
+      - link "Return to top" [ref=f2e5] [cursor=pointer]:
+        - /url: "#top"
+        - generic [aria-hidden] [ref=f2e6]: ∴
+        - generic [ref=f2e7]: BABAI
+      - paragraph [ref=f2e8]: NEKURAMA PRODUCT / INTERNAL PREVIEW
+      - link "PILOT INTEREST PREVIEW" [ref=f2e9] [cursor=pointer]:
+        - /url: "#contact"
+    - main [ref=f2e10]:
+      - region [ref=f2e11]:
+        - generic [ref=f2e12]:
+          - paragraph [ref=f2e13]: BABAI / NEKURAMA PRODUCT
+          - heading "Restaurant work, in one readable flow." [level=1] [ref=f2e15]
+          - paragraph [ref=f2e16]: BABAI is a restaurant-first concept for a WhatsApp-built operating platform. “Business Automation by AI” is the founder-approved descriptor. This page is a static mock for internal review; it does not provide production access.
+          - generic "Primary actions" [ref=f2e17]:
+            - link "Preview pilot interest" [ref=f2e18] [cursor=pointer]:
+              - /url: "#contact"
+            - link "Explore the mock flow" [ref=f2e19] [cursor=pointer]:
+              - /url: "#experience"
+              - text: Explore the mock flow ↘
+          - paragraph [ref=f2e20]: No account. No payment. No customer data. No live WhatsApp connection. Concept only.
+        - generic "Illustrative signal board" [ref=f2e21]:
+          - generic [ref=f2e24]:
+            - generic [ref=f2e25]: RESTAURANT-FIRST CONCEPT
+            - strong [ref=f2e26]: Conversation meets the workday.
+          - generic [ref=f2e27]:
+            - generic [aria-hidden] [ref=f2e28]: ↗
+            - generic [ref=f2e29]: BABAIMOCK
+          - generic [ref=f2e31]:
+            - generic [ref=f2e32]: WHATSAPP-BUILT CONCEPT
+            - strong [ref=f2e33]: Start with a clear handoff.
+          - generic [ref=f2e34]: restaurant
+          - generic [ref=f2e35]: handoff
+      - region "Internal boundary" [ref=f2e36]:
+        - generic [ref=f2e37]:
+          - generic [ref=f2e38]: INTERNAL CONCEPT
+          - generic [aria-hidden] [ref=f2e39]: ✳
+          - generic [ref=f2e40]: NO PRODUCTION ACCESS
+          - generic [aria-hidden] [ref=f2e41]: ✳
+          - generic [ref=f2e42]: MOCK DATA ONLY
+          - generic [aria-hidden] [ref=f2e43]: ✳
+          - generic [ref=f2e44]: INTERNAL CONCEPT
+          - generic [aria-hidden] [ref=f2e45]: ✳
+          - generic [ref=f2e46]: NO PRODUCTION ACCESS
+          - generic [aria-hidden] [ref=f2e47]: ✳
+          - generic [ref=f2e48]: MOCK DATA ONLY
+          - generic [aria-hidden] [ref=f2e49]: ✳
+      - region [ref=f2e50]:
+        - generic [ref=f2e51]:
+          - generic [ref=f2e52]:
+            - paragraph [ref=f2e53]: 01 / THE MOCK FLOW
+            - heading "See the shape of BABAI." [level=2] [ref=f2e54]
+          - paragraph [ref=f2e55]: Switch between invented restaurant states to preview how a future product story might move from conversation to handoff.
+        - generic [ref=f2e56]:
+          - generic [ref=f2e57]:
+            - generic [ref=f2e58]:
+              - generic [aria-hidden] [ref=f2e59]: ✦
+              - generic [ref=f2e60]: BABAI / Example restaurant workspace
+            - generic [ref=f2e61]: DEMO ONLY
+          - note [ref=f2e63]:
+            - generic [ref=f2e64]:
+              - generic [aria-hidden] [ref=f2e65]: ⌁
+              - text: LOCAL MOCK STATE / NOTHING SUBMITS
+            - button "Reset mock" [ref=f2e66] [cursor=pointer]
+          - tablist "Mock workflow views" [ref=f2e67]:
+            - tab "01 Conversation" [selected] [ref=f2e68] [cursor=pointer]:
+              - generic [ref=f2e69]: "01"
+              - text: Conversation
+            - tab "02 Order desk" [ref=f2e70] [cursor=pointer]:
+              - generic [ref=f2e71]: "02"
+              - text: Order desk
+            - tab "03 Team attention" [ref=f2e72] [cursor=pointer]:
+              - generic [ref=f2e73]: "03"
+              - text: Team attention
+          - tabpanel "01 Conversation" [ref=f2e74]:
+            - generic [ref=f2e75]:
+              - generic [ref=f2e76]:
+                - generic [ref=f2e77]: RESTAURANT FLOW MAP
+                - generic [ref=f2e78]: INTERNAL MOCK
+              - list "Mock flow steps" [ref=f2e79]:
+                - listitem [ref=f2e80]:
+                  - button "01 Notice incoming signal" [ref=f2e81] [cursor=pointer]:
+                    - generic [ref=f2e82]: "01"
+                    - generic [ref=f2e83]:
+                      - strong [ref=f2e84]: Notice
+                      - generic [ref=f2e85]: incoming signal
+                - listitem [ref=f2e86]:
+                  - button "02 Shape organise the need" [ref=f2e87] [cursor=pointer]:
+                    - generic [ref=f2e88]: "02"
+                    - generic [ref=f2e89]:
+                      - strong [ref=f2e90]: Shape
+                      - generic [ref=f2e91]: organise the need
+                - listitem [ref=f2e92]:
+                  - button "03 Hand off invite a human" [ref=f2e93] [cursor=pointer]:
+                    - generic [ref=f2e94]: "03"
+                    - generic [ref=f2e95]:
+                      - strong [ref=f2e96]: Hand off
+                      - generic [ref=f2e97]: invite a human
+              - paragraph [ref=f2e98]: All names, times and records on this screen are fictional fixtures. No restaurant or customer data is connected.
+            - generic [ref=f2e99]:
+              - generic [ref=f2e100]:
+                - generic [ref=f2e101]:
+                  - paragraph [ref=f2e102]: INCOMING / MOCK SIGNAL
+                  - heading "A clear signal arrives." [level=3] [ref=f2e103]
+                - generic [ref=f2e104]: 09:41
+              - paragraph [ref=f2e105]: A fictional customer message is grouped into a readable, actionable moment. No message leaves this page.
+              - status [ref=f2e106]
+              - generic [ref=f2e107]:
+                - generic [ref=f2e108]:
+                  - generic [ref=f2e109]: FICTIONAL MESSAGE
+                  - text: “Can I see today’s options for four?”
+                - generic [ref=f2e110]:
+                  - generic [ref=f2e111]: ILLUSTRATIVE RESPONSE
+                  - text: “Here is a short list. A team member can take over anytime.”
+              - generic [ref=f2e112]:
+                - generic [ref=f2e113]: Ready for review
+                - button "Advance mock state" [ref=f2e115] [cursor=pointer]:
+                  - text: Advance mock state
+                  - generic [aria-hidden] [ref=f2e116]: →
+        - paragraph [ref=f2e117]: ↳ Illustrative interaction only. Fixture text and states remain subject to provenance review.
+      - region [ref=f2e118]:
+        - generic [ref=f2e119]:
+          - generic [ref=f2e120]:
+            - paragraph [ref=f2e121]: 02 / THE BOUNDARY
+            - heading "Designed to stay honest." [level=2] [ref=f2e122]
+          - paragraph [ref=f2e123]: BABAI is shown here as a product concept. Keep the boundary visible while product, evidence and legal decisions mature.
+        - generic [ref=f2e124]:
+          - article [ref=f2e125]:
+            - generic [ref=f2e126]: A
+            - heading "Restaurant first" [level=3] [ref=f2e127]
+            - paragraph [ref=f2e128]: The initial concept keeps restaurant conversations, requests and team handoffs in view.
+          - article [ref=f2e129]:
+            - generic [ref=f2e130]: B
+            - heading "WhatsApp-built" [level=3] [ref=f2e131]
+            - paragraph [ref=f2e132]: Conversation is the starting surface in this concept. No real WhatsApp connection exists here.
+          - article [ref=f2e133]:
+            - generic [ref=f2e134]: C
+            - heading "Mock means mock" [level=3] [ref=f2e135]
+            - paragraph [ref=f2e136]: No auth, payment, customer record, production API or hidden network request belongs in this preview.
+      - region [ref=f2e137]:
+        - generic [ref=f2e138]:
+          - generic [ref=f2e139]:
+            - paragraph [ref=f2e140]: 03 / INTERNAL CONCEPTS
+            - heading "Three shapes, no pricing." [level=2] [ref=f2e141]
+          - paragraph [ref=f2e142]: LITE, BASE and PRO are internal product concepts for discussion, not packages, prices or availability commitments.
+        - generic [ref=f2e143]:
+          - article [ref=f2e144]:
+            - generic [ref=f2e145]: LITE / INTERNAL CONCEPT
+            - heading "Conversation outline" [level=3] [ref=f2e146]
+            - paragraph [ref=f2e147]: A lightweight mock of restaurant requests, prompts and human handoffs.
+            - generic [ref=f2e148]: Concept only
+          - article [ref=f2e149]:
+            - generic [ref=f2e150]: BASE / INTERNAL CONCEPT
+            - heading "Operating board" [level=3] [ref=f2e151]
+            - paragraph [ref=f2e152]: A fuller mock of restaurant work moving from conversation into a visible team queue.
+            - generic [ref=f2e153]: Concept only
+          - article [ref=f2e154]:
+            - generic [ref=f2e155]: PRO / INTERNAL CONCEPT
+            - heading "Future integration gate" [level=3] [ref=f2e156]
+            - paragraph [ref=f2e157]: API integrations are future and gated. No integration is available or connected in this preview.
+            - generic [ref=f2e158]: Future / gated
+      - region [ref=f2e159]:
+        - generic [ref=f2e160]:
+          - generic [ref=f2e161]:
+            - paragraph [ref=f2e162]: 04 / PILOT-INTEREST PREVIEW
+            - heading [level=2] [ref=f2e163]:
+              - text: Interested in the mock?
+              - emphasis [ref=f2e164]: Keep the next step simple.
+          - generic [ref=f2e165]:
+            - paragraph [ref=f2e166]: Use the preview control to show pilot-interest intent in this browser. It does not submit, send or store anything.
+            - generic "Pilot-interest preview actions" [ref=f2e167]:
+              - button "Preview pilot interest" [ref=f2e168] [cursor=pointer]
+              - link "Review mock flow" [ref=f2e169] [cursor=pointer]:
+                - /url: "#experience"
+            - paragraph [ref=f2e170]: Preview/request-intent only. No endpoint, form, account, customer record or production access is wired.
+    - contentinfo [ref=f2e171]:
+      - generic [ref=f2e172]:
+        - generic [ref=f2e173]:
+          - generic [aria-hidden] [ref=f2e174]: ∴
+          - text: BABAI
+        - text: A NEKURAMA product concept / static mock
+      - generic [ref=f2e175]:
+        - generic [ref=f2e176]: NEKURAMA product concept
+        - generic [ref=f2e177]: No public availability claim

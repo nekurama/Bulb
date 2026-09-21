@@ -1,0 +1,134 @@
+- generic [active] [ref=f15e1]:
+  - link "Skip to content" [ref=f15e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f15e3]:
+    - note [ref=f15e4]:
+      - generic [ref=f15e5]:
+        - strong [ref=f15e6]: STATIC MOCK / NOTHING SUBMITS
+        - generic [ref=f15e7]: Invented fixtures only · no account, customer record, backend or network connection
+    - generic [ref=f15e8]:
+      - link "BABAI static mock home" [ref=f15e9] [cursor=pointer]:
+        - /url: "#top"
+        - generic [aria-hidden] [ref=f15e10]: B
+        - generic [ref=f15e11]:
+          - strong [ref=f15e12]: BABAI
+          - generic [ref=f15e13]: NEKURAMA / INTERNAL REVIEW
+      - navigation "Primary navigation" [ref=f15e14]:
+        - link "Coverage lab" [ref=f15e15] [cursor=pointer]:
+          - /url: "#coverage"
+        - link "Boundaries" [ref=f15e16] [cursor=pointer]:
+          - /url: "#boundaries"
+        - link "Review states" [ref=f15e17] [cursor=pointer]:
+          - /url: "#coverage"
+  - main [ref=f15e18]:
+    - region [ref=f15e19]:
+      - generic [ref=f15e20]:
+        - paragraph [ref=f15e21]: INTERNAL QA / INVENTED DATA
+        - heading "Restaurant work, mapped as safe local states." [level=1] [ref=f15e22]
+        - paragraph [ref=f15e23]: This browser-only mock makes the BABAI flow legible from admin onboarding through menu review, ordering, operations, recovery and analytics. Every name, count, status and transition is invented for review.
+        - generic "Mock navigation" [ref=f15e24]:
+          - link "Open coverage lab" [ref=f15e25] [cursor=pointer]:
+            - /url: "#coverage"
+            - text: Open coverage lab
+            - generic [aria-hidden] [ref=f15e26]: ↓
+          - link "Read boundaries" [ref=f15e27] [cursor=pointer]:
+            - /url: "#boundaries"
+        - paragraph [ref=f15e28]: No login. No upload. No payment. No customer profile. No provider call. Controls change only local in-memory mock state.
+      - img "Illustration of a reviewed restaurant workflow" [ref=f15e29]:
+        - generic [ref=f15e32]:
+          - generic [ref=f15e33]: INVENTED FIXTURE
+          - strong [ref=f15e34]: Menu review → order desk
+        - generic [ref=f15e35]:
+          - generic [ref=f15e36]: SAFE HANDOFF
+          - strong [ref=f15e37]: Human review stays visible
+        - generic [ref=f15e38]:
+          - text: STATIC
+          - generic [ref=f15e40]: MOCK
+    - region [ref=f15e41]:
+      - generic [ref=f15e42]:
+        - generic [ref=f15e43]:
+          - paragraph [ref=f15e44]: 14 FAMILY COVERAGE LAB
+          - heading "Select a state family. Advance a fixture." [level=2] [ref=f15e45]
+          - paragraph [ref=f15e46]: Use the tab list to inspect deterministic invented states. “Advance state” never submits, stores, authenticates or contacts a service.
+        - note [ref=f15e47]:
+          - strong [ref=f15e48]: STATIC MOCK / NOTHING SUBMITS
+          - generic [ref=f15e49]: State is local to this page and resets safely.
+          - button "Reset all mock state" [ref=f15e50] [cursor=pointer]
+        - generic [ref=f15e51]:
+          - generic [ref=f15e52]:
+            - paragraph [ref=f15e53]: Choose a family
+            - tablist "BABAI mock coverage families" [ref=f15e54]:
+              - tab "01 · Admin onboarding" [selected] [ref=f15e55] [cursor=pointer]
+              - tab "02 · Owner menu setup" [ref=f15e56] [cursor=pointer]
+              - tab "03 · Staff permissions" [ref=f15e57] [cursor=pointer]
+              - tab "04 · Customer discovery" [ref=f15e58] [cursor=pointer]
+              - tab "05 · Menu and variants" [ref=f15e59] [cursor=pointer]
+              - tab "06 · Cart and order review" [ref=f15e60] [cursor=pointer]
+              - tab "07 · Payment recovery" [ref=f15e61] [cursor=pointer]
+              - tab "08 · Pickup and delivery" [ref=f15e62] [cursor=pointer]
+              - tab "09 · Promotions and combos" [ref=f15e63] [cursor=pointer]
+              - tab "10 · Order desk cues" [ref=f15e64] [cursor=pointer]
+              - tab "11 · Human takeover" [ref=f15e65] [cursor=pointer]
+              - tab "12 · Notifications and reorder" [ref=f15e66] [cursor=pointer]
+              - tab "13 · Exceptions and recovery" [ref=f15e67] [cursor=pointer]
+              - tab "14 · Admin funnel and analytics" [ref=f15e68] [cursor=pointer]
+          - tabpanel "01 · Admin onboarding" [ref=f15e69]:
+            - generic [ref=f15e70]:
+              - generic [ref=f15e71]:
+                - paragraph [ref=f15e72]: FAMILY 01 · ADMIN ONBOARDING
+                - heading "Invite an invented owner without creating a tenant." [level=3] [ref=f15e73]
+              - generic [ref=f15e74]: INVITED
+            - paragraph [ref=f15e75]: An invented restaurant invite is staged for review.
+            - generic "State sequence" [ref=f15e76]:
+              - generic [ref=f15e77]: INVITED
+              - generic [ref=f15e78]: AWAITING OWNER SETUP
+              - generic [ref=f15e79]: OWNER SETUP
+              - generic [ref=f15e80]: BLOCKED / EXPIRED
+            - generic [ref=f15e81]:
+              - generic [ref=f15e82]:
+                - term [ref=f15e83]: Actor
+                - definition [ref=f15e84]: Invented platform admin
+              - generic [ref=f15e85]:
+                - term [ref=f15e86]: Attention cue
+                - definition [ref=f15e87]: Confirm the owner start path.
+              - generic [ref=f15e88]:
+                - term [ref=f15e89]: Boundary
+                - definition [ref=f15e90]: Restaurant, branch and owner labels are display-only; no identity, phone number, invite or tenant record exists.
+              - generic [ref=f15e91]:
+                - term [ref=f15e92]: Next review
+                - definition [ref=f15e93]: AWAITING OWNER SETUP
+            - generic [ref=f15e94]:
+              - button "Advance mock state" [ref=f15e95] [cursor=pointer]:
+                - text: Advance mock state
+                - generic [aria-hidden] [ref=f15e96]: →
+              - button "Reset selected family" [ref=f15e97] [cursor=pointer]
+            - status [ref=f15e98]
+        - paragraph [ref=f15e99]: All 14 families are review fixtures, not product availability. State changes are reversible and disappear when the page is refreshed.
+    - region [ref=f15e100]:
+      - generic [ref=f15e101]:
+        - generic [ref=f15e102]:
+          - paragraph [ref=f15e103]: EXPLICIT SAFETY BOUNDARY
+          - heading "Readable by design. Connected to nothing." [level=2] [ref=f15e104]
+        - generic [ref=f15e105]:
+          - article [ref=f15e106]:
+            - generic [ref=f15e107]: "01"
+            - heading "Invented fixtures" [level=3] [ref=f15e108]
+            - paragraph [ref=f15e109]: Names, menu items, variants, order states, counts, amounts and timestamps are deterministic examples.
+          - article [ref=f15e110]:
+            - generic [ref=f15e111]: "02"
+            - heading "No submission surface" [level=3] [ref=f15e112]
+            - paragraph [ref=f15e113]: No form, upload control, login, auth flow, customer record, payment method or backend route exists here.
+          - article [ref=f15e114]:
+            - generic [ref=f15e115]: "03"
+            - heading "Human decisions stay explicit" [level=3] [ref=f15e116]
+            - paragraph [ref=f15e117]: Failure, retry, reconciliation, correction, refund, cancellation and takeover states never become silent success.
+          - article [ref=f15e118]:
+            - generic [ref=f15e119]: "04"
+            - heading "Keyboard-safe and responsive" [level=3] [ref=f15e120]
+            - paragraph [ref=f15e121]: Visible focus, roving tab stops, live announcements, reset controls and narrow-width reflow are part of this mock.
+  - contentinfo [ref=f15e122]:
+    - generic [ref=f15e123]:
+      - generic [ref=f15e124]:
+        - strong [ref=f15e125]: BABAI
+        - text: / NEKURAMA internal static mock
+      - paragraph [ref=f15e126]: STATIC MOCK / NOTHING SUBMITS · No deployment or live collection included.

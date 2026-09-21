@@ -1,0 +1,227 @@
+- generic [active] [ref=f10e1]:
+  - link "Skip to content" [ref=f10e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f10e3]:
+    - note [ref=f10e4]:
+      - generic [ref=f10e5]: Track 5 template · final copy, claims and CTA wording remain placeholders pending Tracks 1–4.
+    - generic [ref=f10e6]:
+      - link "BABAI home" [ref=f10e7] [cursor=pointer]:
+        - /url: "#top"
+        - generic [aria-hidden] [ref=f10e8]: B
+        - generic [ref=f10e9]:
+          - strong [ref=f10e10]: BABAI
+          - generic [ref=f10e11]: by NEKURAMA
+      - navigation "Primary navigation" [ref=f10e12]:
+        - link "How it works" [ref=f10e13] [cursor=pointer]:
+          - /url: "#how-it-works"
+        - link "Mock flow" [ref=f10e14] [cursor=pointer]:
+          - /url: "#mock-demo"
+        - link "Pilot boundary" [ref=f10e15] [cursor=pointer]:
+          - /url: "#pilot"
+        - link "Evidence" [ref=f10e16] [cursor=pointer]:
+          - /url: "#evidence"
+        - link "CTA placeholder" [ref=f10e17] [cursor=pointer]:
+          - /url: "#pilot-form"
+  - main [ref=f10e18]:
+    - region [ref=f10e19]:
+      - generic [ref=f10e20]:
+        - paragraph [ref=f10e21]: Hero copy placeholder · restaurant-first concept
+        - heading "Hero headline placeholder." [level=1] [ref=f10e22]
+        - paragraph [ref=f10e23]: Placeholder supporting copy for a business operating concept built around customer conversations. Final positioning and proof claims remain pending Tracks 1–4.
+        - generic "Pilot actions" [ref=f10e24]:
+          - link "Primary CTA placeholder" [ref=f10e25] [cursor=pointer]:
+            - /url: "#pilot-form"
+            - text: Primary CTA placeholder
+            - generic [aria-hidden] [ref=f10e26]: ↗
+          - link "Explore mock flow" [ref=f10e27] [cursor=pointer]:
+            - /url: "#mock-demo"
+        - paragraph [ref=f10e28]: Pilot interest only. No account, payment, menu upload or production connection is created here.
+      - img "Illustration of a business conversation becoming an order" [ref=f10e29]:
+        - generic [ref=f10e32]:
+          - generic [ref=f10e33]: CUSTOMER MESSAGE
+          - strong [ref=f10e34]: “Can I pick up at 7?”
+        - generic [ref=f10e35]:
+          - generic [ref=f10e36]: CONTROLLED STATE
+          - strong [ref=f10e37]: Pickup order · needs review
+        - generic [ref=f10e38]:
+          - text: Conversation
+          - generic [ref=f10e40]: →
+          - text: operation
+    - region [ref=f10e41]:
+      - generic [ref=f10e42]:
+        - generic [ref=f10e43]:
+          - paragraph [ref=f10e44]: Problem framing placeholder
+          - heading "Problem statement placeholder." [level=2] [ref=f10e45]
+        - generic [ref=f10e46]:
+          - paragraph [ref=f10e47]: Placeholder body copy for the observed operating problem. Replace with approved, sourced language after Tracks 1–4 review.
+          - paragraph [ref=f10e48]:
+            - strong [ref=f10e49]: Evidence placeholder.
+            - text: No research result, outcome, testimonial or traction claim is published in this template.
+    - region [ref=f10e50]:
+      - generic [ref=f10e51]:
+        - generic [ref=f10e52]:
+          - paragraph [ref=f10e53]: Flow copy placeholder
+          - heading "How the concept could work." [level=2] [ref=f10e54]
+          - paragraph [ref=f10e55]: These steps are a neutral interaction placeholder. Replace labels and claims with approved product language after Tracks 1–4 review.
+        - list [ref=f10e56]:
+          - listitem [ref=f10e57]:
+            - generic [ref=f10e58]: "01"
+            - strong [ref=f10e59]: Conversation
+            - generic [ref=f10e60]: Customer asks a question in the business’s channel.
+          - listitem [ref=f10e61]:
+            - generic [ref=f10e62]: "02"
+            - strong [ref=f10e63]: Catalog / menu
+            - generic [ref=f10e64]: Answers use the restaurant’s reviewed context.
+          - listitem [ref=f10e65]:
+            - generic [ref=f10e66]: "03"
+            - strong [ref=f10e67]: Pickup order
+            - generic [ref=f10e68]: Intent becomes a structured order for review.
+          - listitem [ref=f10e69]:
+            - generic [ref=f10e70]: "04"
+            - strong [ref=f10e71]: Staff action
+            - generic [ref=f10e72]: Business accepts, prepares and completes it.
+          - listitem [ref=f10e73]:
+            - generic [ref=f10e74]: "05"
+            - strong [ref=f10e75]: Feedback / repeat
+            - generic [ref=f10e76]: Customer relationship stays with the business.
+    - region [ref=f10e77]:
+      - generic [ref=f10e78]:
+        - generic [ref=f10e79]:
+          - paragraph [ref=f10e80]: Interactive concept · mock data only
+          - heading "See the handoff, not a fake product login." [level=2] [ref=f10e81]
+          - paragraph [ref=f10e82]: Use the controls to explore one invented pickup conversation. Nothing connects to WhatsApp, a payment provider, a customer, or a production backend.
+          - generic [ref=f10e83]:
+            - strong [ref=f10e84]: Boundary by design
+            - generic [ref=f10e85]: AI may assist with understanding and suggestions. Order, payment, permission and consent state remain controlled and reviewable.
+        - generic [ref=f10e86]:
+          - generic [ref=f10e87]: BABAI / local mock preview
+          - generic [ref=f10e92]:
+            - generic "Demo progress" [ref=f10e93]:
+              - button "Message" [ref=f10e94] [cursor=pointer]
+              - button "Context" [ref=f10e95] [cursor=pointer]
+              - button "Order" [ref=f10e96] [cursor=pointer]
+              - button "Takeover" [ref=f10e97] [cursor=pointer]
+            - generic [ref=f10e98]:
+              - paragraph [ref=f10e99]: CUSTOMER · MOCK CONVERSATION
+              - heading "“Is the paneer bowl available for pickup tonight?”" [level=3] [ref=f10e100]
+              - paragraph [ref=f10e101]: A customer question arrives in the restaurant’s own WhatsApp context. The assistant can help interpret it; it does not invent inventory or promise an order.
+              - generic [ref=f10e102]: Invented scene; no real customer or menu data is used.
+            - generic [ref=f10e103]:
+              - button "← Back" [disabled] [ref=f10e104]
+              - button "Next scene →" [ref=f10e105] [cursor=pointer]
+    - region [ref=f10e106]:
+      - generic [ref=f10e107]:
+        - generic [ref=f10e108]:
+          - paragraph [ref=f10e109]: Pilot boundary placeholder
+          - heading "Pilot scope placeholder." [level=2] [ref=f10e110]
+          - paragraph [ref=f10e111]: Draft boundary content only. Final pilot scope and validation language remain unresolved.
+        - generic [ref=f10e112]:
+          - generic [ref=f10e113]:
+            - generic [ref=f10e114]: "01"
+            - strong [ref=f10e115]: Boundary placeholder
+            - paragraph [ref=f10e116]: Replace with the approved participating-business scope.
+          - generic [ref=f10e117]:
+            - generic [ref=f10e118]: "01"
+            - strong [ref=f10e119]: Channel placeholder
+            - paragraph [ref=f10e120]: Replace with the approved channel and ownership language.
+          - generic [ref=f10e121]:
+            - generic [ref=f10e122]: "N"
+            - strong [ref=f10e123]: Validation placeholder
+            - paragraph [ref=f10e124]: Replace with a sourced learning gate, if approved.
+          - generic [ref=f10e125]:
+            - generic [ref=f10e126]: ∞
+            - strong [ref=f10e127]: Human takeover
+            - paragraph [ref=f10e128]: Staff remain in control when context or state needs review.
+    - region [ref=f10e129]:
+      - generic [ref=f10e130]:
+        - generic [ref=f10e131]:
+          - paragraph [ref=f10e132]: Evidence placeholder
+          - heading "Proof block placeholder." [level=2] [ref=f10e133]
+          - paragraph [ref=f10e134]: No customer logos, testimonials, case studies, research totals or outcome claims are published in this template. Add only sourced, permissioned and clearly labeled evidence after review.
+        - generic [ref=f10e135]:
+          - generic [ref=f10e136]: SOURCE / DATE PLACEHOLDER
+          - strong [ref=f10e137]: Evidence metric placeholder
+          - generic [ref=f10e138]:
+            - generic [ref=f10e139]: Source pending
+            - generic [ref=f10e140]: Approval pending
+          - generic [ref=f10e141]: Replace only after provenance, permission and claim review are complete.
+    - region [ref=f10e142]:
+      - generic [ref=f10e143]:
+        - generic [ref=f10e144]:
+          - paragraph [ref=f10e145]: CTA placeholder
+          - heading "Contact block placeholder." [level=2] [ref=f10e146]
+          - paragraph [ref=f10e147]: Share only the minimum business context needed to route a conversation. Do not send menus, customer lists, WhatsApp identifiers, payment information or operational secrets through this public mock.
+          - generic "Contact route choices" [ref=f10e148]:
+            - button "↗ Primary route placeholder Destination and owner pending review" [pressed] [ref=f10e149] [cursor=pointer]:
+              - text: ↗
+              - generic [ref=f10e150]:
+                - strong [ref=f10e151]: Primary route placeholder
+                - generic [ref=f10e152]: Destination and owner pending review
+            - button "◌ WhatsApp route placeholder Destination and owner pending review" [ref=f10e153] [cursor=pointer]:
+              - text: ◌
+              - generic [ref=f10e154]:
+                - strong [ref=f10e155]: WhatsApp route placeholder
+                - generic [ref=f10e156]: Destination and owner pending review
+            - button "✉ Email route placeholder Destination and owner pending review" [ref=f10e157] [cursor=pointer]:
+              - text: ✉
+              - generic [ref=f10e158]:
+                - strong [ref=f10e159]: Email route placeholder
+                - generic [ref=f10e160]: Destination and owner pending review
+            - button "＋ Waitlist route placeholder No public signup is sent" [ref=f10e161] [cursor=pointer]:
+              - text: ＋
+              - generic [ref=f10e162]:
+                - strong [ref=f10e163]: Waitlist route placeholder
+                - generic [ref=f10e164]: No public signup is sent
+        - generic [ref=f10e165]:
+          - generic [ref=f10e166]:
+            - generic [ref=f10e167]: "01"
+            - paragraph [ref=f10e168]: Minimum public context
+          - generic [ref=f10e169]: Business or restaurant name *
+          - textbox "Business or restaurant name" [ref=f10e170]
+          - generic [ref=f10e171]: Your role *
+          - combobox "Your role" [ref=f10e172]:
+            - option "Choose one" [selected]
+            - option "Owner / founder"
+            - option "Manager / admin"
+            - option "Staff / operator"
+            - option "Design partner / advisor"
+          - generic [ref=f10e173]: Number of branches *
+          - combobox "Number of branches" [ref=f10e174]:
+            - option "Choose one" [selected]
+            - option "1"
+            - option "2–5"
+            - option "6+"
+          - generic [ref=f10e175]: Preferred contact detail (optional in this mock)
+          - textbox "Preferred contact detail (optional in this mock)" [ref=f10e176]
+          - paragraph [ref=f10e177]: This static demo never transmits or stores this field.
+          - button "Submit placeholder preview" [ref=f10e178] [cursor=pointer]:
+            - text: Submit placeholder preview
+            - generic [aria-hidden] [ref=f10e179]: ↗
+          - paragraph [ref=f10e180]: No live submission, account creation, payment or backend request. Real CTA destinations require company-owned routing, an approved notice, retention rules and an accountable owner.
+          - paragraph [ref=f10e181]: Required fields are checked locally. Nothing is transmitted.
+    - region [ref=f10e182]:
+      - generic [ref=f10e183]:
+        - generic [ref=f10e184]:
+          - paragraph [ref=f10e185]: Data boundary placeholder
+          - heading "Public interest is not private setup." [level=2] [ref=f10e186]
+        - generic [ref=f10e187]:
+          - paragraph [ref=f10e188]:
+            - strong [ref=f10e189]: "Public mock:"
+            - text: business name, role, branch count and a preferred route are the maximum context shown here. The demo keeps data in the browser and clears it on refresh.
+          - paragraph [ref=f10e190]:
+            - strong [ref=f10e191]: "Controlled setup:"
+            - text: menus, WhatsApp identifiers, customer conversations, payment details, staff access and tenant configuration belong in an approved private onboarding path after privacy, retention, deletion, vendor and access controls are decided.
+          - paragraph [ref=f10e192]: "Unknowns remain open: final CTA owner and destinations, legal/privacy notices, retention schedule, domain ownership transfer, trademark clearance, pricing, pilot terms and launch status."
+  - contentinfo [ref=f10e193]:
+    - generic [ref=f10e194]:
+      - generic [ref=f10e195]:
+        - strong [ref=f10e196]: BABAI
+        - text: a NEKURAMA product / brand
+      - generic [ref=f10e197]:
+        - link "Data boundary" [ref=f10e198] [cursor=pointer]:
+          - /url: "#privacy-title"
+        - link "Evidence placeholder" [ref=f10e199] [cursor=pointer]:
+          - /url: "#evidence"
+        - link "CTA placeholder" [ref=f10e200] [cursor=pointer]:
+          - /url: "#pilot-form"
+      - paragraph [ref=f10e201]: Static concept for nekurama.com · no deployment or live collection included.

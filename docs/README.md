@@ -86,6 +86,7 @@ A historical `RESOLVED` label is not automatically authoritative. Later evidence
 - [ ] **5.3 IP, brand & legal** → `company/ip-brand-legal.md`
 - [ ] **5.4 Finance, tax & compliance** → `company/finance-tax-compliance.md`
 - [ ] **5.5 Security, privacy & company controls** → `company/security-privacy-controls.md`
+- [ ] **5.6 October–December company/control execution plan** → `company/oct-dec-execution-plan.md` — planning-only reserve, cash/economic-cost and evidence-ledger treatment; external gates remain open
 
 ### Phase 6 — Remaining dimensions
 

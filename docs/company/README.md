@@ -55,7 +55,7 @@ No row above means that incorporation, ownership issuance, trademark registratio
 
 Primary decision/history: `nekurama/Bulb#2` and current company specification `nekurama/Bulb#5`; supporting product/company decisions may reference `nekurama/Bulb#1` and historical `ManojVysyaraju/bulb#1`.
 
-Conversation evidence is anchored in `nekurama.raw.chat.json` by message UUID, including:
+The cross-dimension sequence and owners are maintained in [`e-setup-checklist.md`](e-setup-checklist.md). The [`oct-dec-execution-plan.md`](oct-dec-execution-plan.md) adds the October–December reserve, cash/economic-cost, founder-time and internal-evidence-ledger controls without closing any external gate. The [`external-entity-register.json`](external-entity-register.json) file is the evidence register for certificates, professional reviews, clearances, registrations, programme decisions and provider approvals. The five dimension files retain durable truth and detailed checklists. Conversation evidence is anchored in `nekurama.raw.chat.json` by message UUID, including:
 
 - `bbb2179b-ab78-4f20-98ef-1bf49a0702f7` — Pvt Ltd vs LLP costs, roles and founder participation questions
 - `bbb21d97-c664-432c-9a10-f74d42232df7` — spouse funding as loan versus equity

@@ -12,6 +12,7 @@ sources:
   - economics-model.md (Track 2 v0.5)
   - tier-feasibility.md
   - execution-plan.md
+  - flow-inventory.md
 ---
 
 # Validation
@@ -239,6 +240,7 @@ Expansion beyond the initial 10 should be based on evidence from the pilot, with
 - [ ] Tier-specific entitlement, usage and support thresholds
 - [ ] Tier-feasibility.md Stage 0/1/2 rollout gates and external dependency evidence
 - [ ] October–December execution-plan.md milestone entry/exit and bot-health gates
+- [ ] flow-inventory.md implementation/demo status for all 14 requested flows
 - [ ] Team-defined readiness evidence for materially larger onboarding volumes
 - [ ] Signed agreement-template cancellation/refund and minimum-paying terms
 - [ ] Six-month post-pilot pricing review inputs; no automatic increase

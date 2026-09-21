@@ -220,5 +220,6 @@ The research supports the problem and initial workflow, but explicitly does **no
 - `docs/products/babai/experience-and-channels.md` — channel principles
 - `docs/products/babai/validation.md` — validation gate and metrics
 - `docs/products/babai/tier-feasibility.md` — tier feasibility, entitlement boundaries and rollout sequence
+- `docs/products/babai/flow-inventory.md` — source-linked product flow requirements and acceptance boundaries
 - `nekurama.babai.research.md` — September 2026 field research
 - `nekurama/Bulb#1` — detailed decision history and evidence

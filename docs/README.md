@@ -54,6 +54,17 @@ A historical `RESOLVED` label is not automatically authoritative. Later evidence
 - `challenge-required` — an existing decision needs another battle before becoming durable truth.
 - `living` — continuously maintained current truth.
 
+## Overnight architecture packet
+
+The current BABAI end-to-end review is split into focused artifacts:
+
+- `products/babai/end-to-end-architecture.md`
+- `products/babai/events-catalog.md`
+- `products/babai/runtime-and-ai-architecture.md`
+- `products/babai/pro-operations-ux.md`
+- `products/babai/sdlc-standard.md`
+- `products/babai/contract-controls.md`
+
 ## Step-by-step roadmap
 
 ### Phase 1 — Product truth

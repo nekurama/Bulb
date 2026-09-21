@@ -61,6 +61,7 @@ availability decision.
 | CQA-03 | CTA validation | Primary and secondary routes are keyboard-operable and visibly local-only until destination, owner, notice and retention are approved. |
 | CQA-04 | Data minimization | Public form contains only minimum business context; detailed setup is explicitly excluded and private. |
 | CQA-05 | Evidence/testimonial integrity | September 2026 research is labeled an early signal; no testimonials appear without provenance and written approval. |
+| CQA-06 | Naming boundary | Current-facing HTML, CSS, JS, mock data, candidate labels and template copy use neutral variants or functional scope placeholders; legacy tier/package names remain only in clearly marked historical or provenance notes. |
 | FQA-01 | Static entry point | `index.html` loads without a build tool and uses relative local assets suitable for GitHub Pages. |
 | FQA-02 | JSON | `mock-data.json` parses as valid JSON. |
 | FQA-03 | Accessibility structure | One `h1`, logical headings, `header`, `nav`, `main`, `footer`, skip link, labels, focus styles and text status are present. |
@@ -118,6 +119,7 @@ Run from the repository root:
 ```sh
 git diff --check
 python -m json.tool mock-data.json >/dev/null
+node --check script.js
 ```
 
 Additional QA should manually verify keyboard traversal, accessible names, reduced motion,

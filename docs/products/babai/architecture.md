@@ -268,6 +268,34 @@ App Runner and small EC2/container comparison, monthly planning envelopes,
 founder-support gates and rollback triggers are maintained in
 [`architecture-cost-options.md`](architecture-cost-options.md).
 
+### New scale baseline and runtime split
+
+The scale model uses the founder inputs of 54 average requests/order, 90
+heavy-case requests/order, 50 orders/day/restaurant, 500 and 1,000
+restaurants, and 10/25/50/100% conversion sensitivities. The canonical
+formulas, 1x/5x/10x RPS bands, cost comparison and Stage 0/1/2 15-minute
+capacity gates are in
+[`architecture-cost-options.md`](architecture-cost-options.md).
+
+The gateway is intentionally stateless and lightweight: authenticate and
+verify, rate-limit, classify, enqueue and acknowledge only after durable queue
+acceptance. Conversation/state processing, provider fan-out, retries,
+reconciliation and workflow execution belong to idempotent workers behind the
+outbox/inbox and queue boundary. PostgreSQL is protected from per-hit gateway
+transactions through queue admission, cacheable published revisions, bounded
+worker concurrency and short module-scoped transactions; authoritative order,
+payment, permission, consent and reconciliation decisions still use
+PostgreSQL.
+
+Rate limits, backpressure, provider token buckets, retry/DLQ rules, connection
+pool allocation, safe-cache restrictions, restore gates and founder support
+replacement triggers are operating guardrails rather than production SLO
+claims. A two-gateway or 2x2-vCPU setup does not prove capacity; only the
+specified load tests and 15-minute signals can do that. Founder-only support
+fails at 500+ restaurants by default under the 24-hour/week ceiling unless
+automation or replacement support reduces manual work to the measured
+per-restaurant minute budget.
+
 ### LLD boundary
 
 The first implementation should make these contracts explicit inside the

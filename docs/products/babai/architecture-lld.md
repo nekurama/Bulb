@@ -91,13 +91,26 @@ commands, records idempotency context and hands conversation/state work to
 workers through the outbox/managed-queue path. Workers own durable
 conversation/state processing and external side effects; the gateway does not
 hold conversation state in memory or wait synchronously on provider chains.
+The gateway acknowledges a webhook only after durable queue acceptance and
+returns a provider-appropriate retry response when queue acceptance fails.
+Queue envelopes carry provider event ID, tenant/channel scope,
+correlation/causation IDs and a bounded classified payload; secrets and
+unrestricted message bodies do not enter logs. Workers deduplicate by provider
+event ID plus tenant/channel scope, classify noise/read/state-changing work,
+and acknowledge only after the durable effect.
+
+Published menu/configuration revisions may use a tenant-scoped versioned cache
+with explicit TTL and invalidation. Order, payment, permission, consent,
+availability and reconciliation truth must use authoritative state or a
+validated projection; the cache is never a second source of truth.
 
 The gateway alone is not a capacity proof. PostgreSQL transactions and
 connection pools, worker throughput, queue age, provider throttling, AI
 latency/cost and retry/DLQ behavior must be tested together. The 54-request
 average and 90-request heavy order scenarios at 50 orders/day/restaurant are
 planning inputs; 2x2-vCPU gateways do not establish system capacity.
-[Founder Scale/Cost Baseline (2026-09-21); `architecture-cost-options.md`]
+[User-provided founder scale baseline (2026-09-21);
+`architecture-cost-options.md`]
 
 ## Request and command path
 
@@ -139,10 +152,46 @@ authorized and validated by the owning module. [Raw T139
   high-contention usage limits require explicit domain rules before production.
 - Read models and analytics may be eventually consistent and must not replace
   authoritative state.
+- Never hold a database transaction while calling Meta, payment, delivery or
+  AI providers.
+- Keep worker transactions short and bounded to one logical module transition;
+  batch outbox publication and non-authoritative telemetry, but never combine
+  unrelated aggregate transitions merely to reduce transaction count.
+- Reserve at least 20% of the database connection ceiling for migrations,
+  administration and recovery. Application pools use at most 60% of the
+  provider ceiling, distributed as
+  `floor(0.60 * db_max_connections / (api_replicas + worker_replicas))`.
+- Alert when pool usage reaches 60% or p95 pool wait reaches 100 ms; apply
+  backpressure before connection exhaustion rather than increasing worker
+  concurrency blindly.
 
 The exact PostgreSQL schema layout, migration strategy, projection mechanism,
 partitioning, indexing, retention and archival remain unresolved. [Raw T206
 `128e9fdc-9032-4a5d-b627-4f0118fc3ba3`; `domain-model.md`]
+
+## Rate limits, backpressure and provider retry contract
+
+Initial planning defaults are 2 requests/s sustained and 10 requests/s for
+30 seconds per restaurant/channel, with provider-account and gateway-fleet
+limits configured separately. These are load-test guardrails, not provider
+quotas or customer promises. The gateway returns 429 with `Retry-After` for
+tenant admission limits and 503 for global overload; it must not allow
+overload to exhaust PostgreSQL connections.
+
+Every provider adapter has an independent token bucket, concurrency cap,
+timeout, `Retry-After` handling and circuit/open-backpressure state. Provider
+throttling causes queued work to slow; it does not justify higher database
+concurrency. Transient failures retry at most five times with jittered delays
+of `1s, 5s, 30s, 5m, 30m`. Validation, authentication, policy and other
+non-retryable failures go directly to quarantine/DLQ. Side-effecting calls
+carry an adapter-recognized idempotency key.
+
+The canonical 500/1,000 restaurant traffic formulas, 10/25/50/100%
+sensitivities, 1x/5x/10x RPS bands and Stage 0/1/2 gates are maintained in
+[`architecture-cost-options.md`](architecture-cost-options.md). A two-gateway
+or 2x2-vCPU setup is not capacity evidence without a repeatable test using
+the real request mix, queue, database pool, provider limits and failure
+injection.
 
 ## Observability contract
 
@@ -351,6 +400,12 @@ support comparison. It does not select a vendor or claim approval.
 - Exercise payment webhook, manual confirmation, refund and reconciliation
   paths with a pilot merchant.
 - Prove outbox/inbox, retry, DLQ, reconciliation and replay behavior.
+- Run the Stage 0/1/2 load tests from
+  [`architecture-cost-options.md`](architecture-cost-options.md), recording
+  15-minute gateway, PostgreSQL, queue/outbox, provider, retry/DLQ and
+  founder-support signals for each conversion and request-mix band.
+- Demonstrate that the gateway remains stateless, that conversation/state work
+  is worker-owned, and that cache use does not become authoritative truth.
 - Define and test state/workflow contracts before selecting a workflow product.
 - Run daily backup restore tests and record RPO/RTO evidence.
 - Test private object-storage export/restore, signed access and any CDN cache

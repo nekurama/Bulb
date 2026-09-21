@@ -229,6 +229,32 @@ export type EventType =
   | 'ReplayCompleted'
   | 'RollbackCompleted';
 
+export interface EventPayloadMap {
+  OrderCreated: { orderId: string; cartId: string; menuRevisionId: string };
+  OrderAccepted: { orderId: string; acceptedBy: string };
+  OrderCancellationRequested: { orderId: string; requestedBy: string; reason: string };
+  OrderCancelled: { orderId: string; cancelledBy: string; reason: string };
+  PaymentRequested: { paymentId: string; orderId: string; amount: Money };
+  PaymentConfirmed: { paymentId: string; orderId: string; providerReference: string; amount: Money };
+  PaymentMismatchDetected: { paymentId: string; orderId: string; reason: string };
+  RefundRequested: { refundId: string; paymentId: string; amount: Money; reason: string };
+  RefundReconciled: { refundId: string; status: 'refunded' | 'failed' };
+  DeliveryAssigned: { fulfillmentId: string; providerReference: string };
+  PickupCodeIssued: { fulfillmentId: string; expiresAt: string };
+  Delivered: { fulfillmentId: string; deliveredAt: string };
+  SupportCaseAssigned: { caseId: string; assigneeId: string };
+  SupportPaymentConfirmed: { caseId: string; paymentId: string };
+  EntitlementActivated: { tenantId: string; entitlementVersion: string };
+  ContractSigned: { contractId: string; documentVersion: string; contentHash: string };
+  DataDeletionCompleted: { tenantId: string; scope: 'relationship' | 'tenant' | 'platform' };
+  ReplayAuthorized: { eventId: string; authorizedBy: string; reason: string };
+  Reconciled: { aggregateType: string; aggregateId: string; result: 'matched' | 'corrected' | 'blocked' };
+}
+
+export type EventPayload<TType extends EventType> = TType extends keyof EventPayloadMap
+  ? EventPayloadMap[TType]
+  : Record<string, unknown>;
+
 export type CommandResult =
   | {
       accepted: true;
@@ -254,9 +280,9 @@ export type CommandResult =
       };
     };
 
-export interface DomainEvent<TPayload = unknown> {
+export interface DomainEvent<TType extends EventType = EventType> {
   eventId: string;
-  eventType: EventType;
+  eventType: TType;
   schemaVersion: number;
   occurredAt: string;
   recordedAt: string;
@@ -275,7 +301,7 @@ export interface DomainEvent<TPayload = unknown> {
   producer: string;
   deploymentVersion: string;
   classification: 'public' | 'internal' | 'confidential' | 'restricted';
-  payload: TPayload;
+  payload: EventPayload<TType>;
 }
 
 export interface ProviderAdapter<TRequest, TResult> {

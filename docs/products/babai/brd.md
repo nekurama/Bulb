@@ -153,11 +153,12 @@ baseline” and “Founder economic target clarification”. These are founder
 inputs and derived planning estimates, not a finalized infrastructure or
 provider choice.
 
-The ₹999 and ₹2,499 monthly amounts remain historical source-evidence price
-hypotheses. ₹4,999 is reused only as the internal LITE experiment rate below.
-None of these amounts are approved public pricing or a customer-facing
-package. The separate `P=₹4,999` sensitivity in the economics model remains
-historical source evidence; records outside the internal tier experiment use
+The ₹999 and historical ₹2,499 monthly amounts remain source-evidence price
+hypotheses. The founder-approved internal commercial direction is now
+₹1,999/₹5,999/₹12,999 for the paid pilot and ₹2,499/₹7,499/₹14,999 as
+post-pilot review targets. These are not public packages or entitlement
+guarantees. The founder-rate set remains a controlled premium test for
+documented high-complexity scope; records outside the tier experiment use
 neutral **Pilot Variant A/B/C** labels or functional scope descriptions.
 Proposed review controls are a negative base contribution for two consecutive
 months, repeated support-ceiling breaches, unpriced AI-heavy routing, or CAC
@@ -172,15 +173,16 @@ challenge-required pricing status, create public tier taxonomy, constitute a
 forecast or establish a tax conclusion. The rates are before GST with a
 **±15% planning tolerance**:
 
-| Label | Rate/month before GST | Scope decision |
+| Label | Pilot rate/month before GST | Post-pilot target | Scope decision |
 |---|---:|---|
-| **LITE** | ₹4,999 | Limited AI/conversational assistance; menu display and ordering only; menu updates up to 3/month |
-| **BASE** | ₹9,999 | Users select, order, pay and use delivery; restaurant availability controls and basic time-bounded promotions/combos |
-| **PRO** | ₹19,999 | Full bounded user/restaurant access across allowed workflows plus advanced API integrations |
+| **LITE** | ₹1,999 | ₹2,499 | Menu, basic pickup ordering and confirmations; no payment/POS integration |
+| **BASE** | ₹5,999 | ₹7,499 | Payments, modifiers, pickup slots, status updates, promotions, agents and human takeover |
+| **PRO** | ₹12,999 | ₹14,999 | Multi-outlet routing, bounded POS/KDS/API integrations, advanced automation and defined support |
 
 The rates and labels remain an internal experiment only. They are before GST,
-carry the stated tolerance, and must not be presented as approved public
-pricing, a forecast or a promise of entitlement availability.
+carry the stated tolerance, and must not be presented as a public price list,
+forecast or promise of entitlement availability. PRO may be quoted at ₹19,999
+per month only for documented integration-heavy or multi-outlet scope.
 
 ### Tier capability matrix — internal scope decision
 

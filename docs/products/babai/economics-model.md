@@ -42,10 +42,50 @@ the restaurant and is separate from BABAI subscription billing. [Research:
 `nekurama.babai.research.md:L65-L81`, `nekurama.raw.chat.json:L192-L205`;
 internal product decision packet: `2026-09-21 FOUNDER DECISION PACKET`]
 
-Pricing must be derived from contribution economics, not assumed tiers. The
-historical ₹999 and ₹2,499 figures remain research history; ₹4,999 is used
-only as the internal LITE experiment rate below. None may be presented as
-approved public packages or used as an implied price ladder.
+Pricing must be derived from contribution economics and competitor value, not
+assumed tiers. The historical ₹999 and ₹2,499 figures remain research history.
+The founder-rate set of ₹4,999 / ₹9,999 / ₹19,999 is retained only as a
+controlled premium test for high-complexity accounts; it is not the default
+pilot or post-pilot ladder.
+
+## Approved commercial direction — 2026-09-21
+
+This is the founder-approved internal commercial direction for the paid pilot
+and the post-pilot review. It is not a public price list, tax conclusion,
+vendor quote or automatic increase. Amounts are monthly, before GST, and
+exclude pass-through Meta messaging, payment-gateway, delivery and
+customer-specific integration costs.
+
+| Tier | 90-day paid-pilot price | Post-pilot target | One-time onboarding target | Intended boundary |
+|---|---:|---:|---:|---|
+| **LITE** | **₹1,999/month** | **₹2,499/month** | **₹2,500** | One WhatsApp number, menu, basic pickup ordering, confirmations and limited human inbox; no payment/POS integration |
+| **BASE** | **₹5,999/month** | **₹7,499/month** | **₹5,000** | Payments, modifiers, pickup slots, status updates, promotions, multiple agents, human takeover and analytics |
+| **PRO** | **₹12,999/month** | **₹14,999/month** | **₹10,000** | Multi-outlet routing, bounded POS/KDS/API integrations, advanced automation and defined support/SLA |
+
+The post-pilot target is a review anchor, not a guaranteed increase. Review it
+after 90 days and then every six months using measured customer ROI,
+conversion, renewal, support minutes, provider/API cost, contribution and
+operational readiness. PRO may be quoted at **₹19,999/month** only when
+multi-outlet or integration-heavy scope is documented and the setup/support
+economics justify it.
+
+The pilot should test willingness to pay without changing both price and scope
+silently. Record the quoted price, collected price, concessions, exact scope,
+onboarding effort, provider costs, support minutes and continuation response
+for every restaurant. The 3/4/3 mix remains a planning sensitivity, not a
+required enrollment mix.
+
+### Competitive grounding
+
+Public competitor research indicates that generic WhatsApp automation is
+available from approximately ₹999–₹6,500/month, restaurant ordering can be
+free or low-cost before add-ons, and Indian restaurant POS/operations products
+start around ₹9,000–₹12,000+ depending on scope. BABAI therefore needs a
+low-friction LITE entry point and must reserve premium pricing for the
+restaurant-specific workflow it can prove: WhatsApp menu and cart, payment,
+pickup scheduling, order-status updates, POS/KDS handoff and
+context-preserving human takeover. This comparison is directional; vendor
+taxes, Meta fees, payment MDR, hardware, onboarding and quote-only terms vary.
 
 ## Internal provisional tier/cost model experiment — 2026-09-21
 
@@ -61,14 +101,15 @@ logs, onboarding records and finance/accounting review.
 
 | Experiment label | Monthly planning rate before GST | ±15% planning range | Internal scope decision |
 |---|---:|---:|---|
-| **LITE** | ₹4,999 | ₹4,249–₹5,749 | Limited AI/conversational assistance; menu display and ordering only; menu updates up to 3/month |
-| **BASE** | ₹9,999 | ₹8,499–₹11,499 | Users select, order, pay and use delivery; availability controls and basic time-bounded promotions/combos |
-| **PRO** | ₹19,999 | ₹16,999–₹22,999 | Full bounded user/restaurant access across allowed workflows plus advanced API integrations |
+| **LITE** | ₹1,999 pilot / ₹2,499 post-pilot | ₹1,699–₹2,299 pilot | Limited AI/conversational assistance; menu, basic pickup ordering and confirmations; no payment/POS integration |
+| **BASE** | ₹5,999 pilot / ₹7,499 post-pilot | ₹5,099–₹6,899 pilot | Users select, order and pay; pickup slots, availability controls, status updates and basic promotions |
+| **PRO** | ₹12,999 pilot / ₹14,999 post-pilot | ₹11,049–₹14,949 pilot | Full bounded workflow access, multi-outlet routing and approved advanced API integrations |
 
-The ranges are rounded display values around `rate × (1 ± 15%)`; the
-unrounded calculation remains the source of truth. Scope, entitlement,
+The pilot ranges are rounded display values around `pilot rate × (1 ± 15%)`;
+the unrounded calculation remains the source of truth. Scope, entitlement,
 provider, AI and support assumptions require product, provider and pilot
-validation before any customer-facing use.
+validation before any customer-facing use. The one-time onboarding targets
+are separate from monthly subscription pricing.
 
 ### Illustrative tier cost stack before shared infrastructure
 
@@ -138,28 +179,29 @@ illustration is a planning signal, not a pricing decision.
 
 ### Illustrative 3 LITE / 4 BASE / 3 PRO cohort
 
-For a ten-restaurant internal planning mix:
+For a ten-restaurant internal planning mix using the approved pilot prices:
 
 ```text
 weighted_ARPU
-  = (3 × ₹4,999 + 4 × ₹9,999 + 3 × ₹19,999) / 10
-  = ₹11,499/month
+  = (3 × ₹1,999 + 4 × ₹5,999 + 3 × ₹12,999) / 10
+  = ₹6,599/month
 
 monthly_gross_billing_before_GST
-  = 3 × ₹4,999 + 4 × ₹9,999 + 3 × ₹19,999
-  = ₹1,14,990
+  = 3 × ₹1,999 + 4 × ₹5,999 + 3 × ₹12,999
+  = ₹65,990
 
 gross_90_day_billing_before_GST
-  = ₹1,14,990 × 3
-  = ₹3,44,970
+  = ₹65,990 × 3
+  = ₹1,97,970
 ```
 
 At `N = 10`, the same illustrative mix has approximately ₹83,600/month of
-loaded economic cost and ₹31,390/month of illustrative economic contribution
-before GST, or ₹94,170 over 90 days. This is a derived planning illustration,
-not a forecast, approved commercial package, tax conclusion or evidence of
-customer willingness to pay. The ±15% rate tolerance, actual cost ledger and
-recognized-income treatment must be applied before any decision.
+loaded economic cost before onboarding and a negative monthly contribution
+under the current broad shared-cost sensitivity. This is an explicit signal
+that pilot infrastructure/support must be measured separately from recurring
+service COGS and that the onboarding targets are not optional. It is not a
+forecast, tax conclusion or evidence that the approved pilot prices should be
+raised before customer and cost data are collected.
 
 The same `3 LITE / 4 BASE / 3 PRO` mix has this rate-tolerance sensitivity
 before GST. It holds the illustrative `N=10` loaded cost stack constant only
@@ -168,9 +210,9 @@ must be recomputed from telemetry.
 
 | Rate case | Monthly gross billing | Weighted ARPU | Gross 90-day billing | Contribution before GST at illustrative `N=10` cost |
 |---|---:|---:|---:|---:|
-| -15% planning case | ₹97,740 | ₹9,774 | ₹2,93,220 | ₹14,140/month |
-| List planning case | ₹1,14,990 | ₹11,499 | ₹3,44,970 | ₹31,390/month |
-| +15% planning case | ₹1,32,240 | ₹13,224 | ₹3,96,720 | ₹48,640/month |
+| -15% planning case | ₹56,090 | ₹5,609 | ₹1,68,270 | negative under current `N=10` loaded-cost sensitivity |
+| List pilot case | ₹65,990 | ₹6,599 | ₹1,97,970 | negative under current `N=10` loaded-cost sensitivity |
+| +15% planning case | ₹75,890 | ₹7,589 | ₹2,27,670 | negative under current `N=10` loaded-cost sensitivity |
 
 These figures are sensitivity outputs, not a recommendation or recognized
 revenue. GST, payment collection fees, actual tier usage, provider/API
@@ -206,6 +248,11 @@ invoice presentation, recoverability and revenue recognition are **qualified
 CA/CS/finance validation required**. Legal agreement, cancellation/refund,
 minimum-paying and entitlement language are **legal/professional validation
 required**. No blank or unsupported cost is zero.
+
+The earlier ₹4,999 / ₹9,999 / ₹19,999 set remains only as a controlled
+premium-price hypothesis for high-value or integration-heavy accounts. It must
+be reported separately from the approved pilot ladder so that pilot learning
+is not distorted by undisclosed scope or discounting.
 
 This experiment is intentionally additive. It does not remove the prior
 cash/economic contribution model, the unresolved prior ₹25L income-unit

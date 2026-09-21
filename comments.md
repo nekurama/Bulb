@@ -4,6 +4,27 @@
 > Last reviewed: 2026-09-21
 > All ₹ figures are INR and are planning targets unless explicitly marked as sourced/current provider pricing.
 
+## Decision addendum — 2026-09-21
+
+The comments below remain the underlying cost and pricing debate. The founder
+decision after competitor research is to use a lower-friction paid pilot and a
+measured post-pilot target rather than make the comments.md planning ladder the
+default customer quote:
+
+| Tier | 90-day paid pilot | Post-pilot target | One-time onboarding target |
+|---|---:|---:|---:|
+| LITE | ₹1,999/month | ₹2,499/month | ₹2,500 |
+| BASE | ₹5,999/month | ₹7,499/month | ₹5,000 |
+| PRO | ₹12,999/month | ₹14,999/month | ₹10,000 |
+
+These amounts are before GST and exclude pass-through Meta, payment, delivery
+and customer-specific integration costs. The post-pilot values are review
+anchors, not automatic increases. PRO may reach ₹19,999/month only for
+documented multi-outlet or integration-heavy scope. The earlier
+₹3,999/₹5,999/₹9,999 comments.md ladder and the founder
+₹4,999/₹9,999/₹19,999 ladder remain analytical comparison scenarios, not the
+default approved pilot ladder.
+
 ## 1. The costing principle
 
 The purpose of this model is **not** to make the pilot or the first 10 restaurants break even.

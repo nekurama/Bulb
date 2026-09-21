@@ -187,14 +187,14 @@ The current tier experiment is provisional pre-GST pricing:
 
 | Tier | Midpoint | ±15% internal planning band | 3/4/3 sensitivity count |
 |---|---:|---:|---:|
-| LITE | ₹4,999 | ₹4,250–₹5,750 | 3 |
-| BASE | ₹9,999 | ₹8,500–₹11,500 | 4 |
-| PRO | ₹19,999 | ₹17,000–₹23,000 | 3 |
+| LITE | ₹1,999 pilot / ₹2,499 post-pilot | ₹1,700–₹2,300 pilot | 3 |
+| BASE | ₹5,999 pilot / ₹7,499 post-pilot | ₹5,100–₹6,900 pilot | 4 |
+| PRO | ₹12,999 pilot / ₹14,999 post-pilot | ₹11,050–₹14,950 pilot | 3 |
 
-At midpoint rates, the 3/4/3 sensitivity is approximately ₹1,14,990/month
-pre-GST and ₹3,44,970 over 90 days. With the ±15% tier bands, the internal
-cohort sensitivity is approximately ₹97,700–₹1,32,300/month and
-₹2,93,100–₹3,96,900 over 90 days.
+At pilot rates, the 3/4/3 sensitivity is approximately ₹65,990/month
+pre-GST and ₹1,97,970 over 90 days. With the ±15% pilot bands, the internal
+cohort sensitivity is approximately ₹56,090–₹75,890/month and
+₹1,68,270–₹2,27,670 over 90 days.
 
 These are **internal planning estimates, not public pricing or quotes**.
 Contribution remains:

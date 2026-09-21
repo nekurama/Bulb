@@ -467,9 +467,9 @@ claim until the commercial, tax, payment and approval gates are closed:
 
 | Internal label | Provisional monthly subscription |
 | --- | ---: |
-| LITE | ₹4,999 |
-| BASE | ₹9,999 |
-| PRO | ₹19,999 |
+| LITE | ₹1,999 pilot / ₹2,499 post-pilot |
+| BASE | ₹5,999 pilot / ₹7,499 post-pilot |
+| PRO | ₹12,999 pilot / ₹14,999 post-pilot |
 
 The requested **3 / 4 / 3 sensitivity** means three LITE, four BASE and three
 PRO subscriptions (10 restaurants) held for three months. Before discounts,

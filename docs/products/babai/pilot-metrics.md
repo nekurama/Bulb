@@ -154,7 +154,7 @@ For each restaurant-month, record:
 
 | Field | Required record |
 |---|---|
-| Experiment label and rate | LITE ₹4,999, BASE ₹9,999 or PRO ₹19,999 before GST; ±15% planning tolerance, tolerance case and any approved deviation |
+| Experiment label and rate | Approved pilot prices: LITE ₹1,999, BASE ₹5,999 or PRO ₹12,999 before GST; record ±15% tolerance, post-pilot target and any approved deviation |
 | Scope | Exact capability matrix row exercised: LITE menu/order only; BASE menu/order/payment/delivery with availability and basic time-bounded promotions; PRO full bounded access plus approved advanced APIs |
 | Entitlement guardrails | LITE menu updates (≤3/month) and excluded workflows; BASE promotion/combo requests (≤3/day) and active duration; PRO integration permissions, rate/failure budgets and audit references |
 | Usage/state | Menu updates, availability toggles, promotion requests/active windows, order/payment/delivery attempts and deterministic state transitions |
@@ -247,11 +247,29 @@ These thresholds are planning assumptions for internal acceptance, pending
 founder/team approval. They do not authorize refunds, pricing changes,
 accounting treatment or a claim that expansion will succeed.
 
-## Post-pilot pricing review
+## Approved pilot and post-pilot pricing direction
 
-If BABAI continues after the pilot, review pricing every **six months** using
-observed contribution economics, customer value and operating readiness. This
-is a review cadence, not an automatic increase.
+Use the following internal commercial direction for the 90-day paid pilot.
+Amounts are monthly, before GST, and exclude pass-through Meta messaging,
+payment-gateway, delivery and customer-specific integration costs.
+
+| Tier | Pilot price | Post-pilot target | One-time onboarding target | Core scope |
+|---|---:|---:|---:|---|
+| **LITE** | **₹1,999** | **₹2,499** | **₹2,500** | Menu, basic pickup ordering, confirmations and limited human inbox |
+| **BASE** | **₹5,999** | **₹7,499** | **₹5,000** | Payments, modifiers, pickup slots, status, promotions, agents and human takeover |
+| **PRO** | **₹12,999** | **₹14,999** | **₹10,000** | Multi-outlet routing, bounded POS/KDS/API integrations, advanced automation and defined support |
+
+The post-pilot target is a review anchor, not an automatic increase. PRO may
+be quoted at **₹19,999/month** only for documented multi-outlet or
+integration-heavy scope. The founder-rate set is a controlled premium
+experiment, not the default pilot ladder.
+
+Record the quoted price, collected price, concessions, exact scope, onboarding
+effort, provider/API costs, support minutes, customer ROI and continuation
+response for each restaurant. Do not vary price and scope together without
+recording the difference. Review pricing after the 90-day pilot and every six
+months thereafter using observed contribution economics, customer value and
+operating readiness.
 
 ## Open decisions
 

@@ -76,13 +76,13 @@ refund treatment to the minimum-paying terms actually approved for the pilot.
 This page intentionally does not invent legal wording, statutory rights, a
 deposit classification or a refund entitlement.
 
-## Pricing — challenge-required, contribution-derived
+## Pricing — approved internal pilot direction
 
-There are no approved public tiers or package names. Historical ₹999 / ₹2,499 amounts and earlier package labels remain
-source-evidence history only. ₹4,999 is used only as the internal LITE
-experiment rate below.
-None of these amounts may be presented as approved public pricing or a public
-price ladder.
+There are no approved public tiers or package names. The following is the
+founder-approved internal direction for the paid pilot and post-pilot review.
+It is not a public price list, tax conclusion, vendor quote or automatic
+increase. Historical ₹999 / ₹2,499 amounts and earlier package labels remain
+source-evidence history only.
 
 Pricing is derived from the contribution model:
 
@@ -105,31 +105,21 @@ After the pilot, review pricing every **six months** against observed
 contribution economics, customer value and operating readiness. The cadence is
 a review point, not an automatic increase.
 
-### Internal provisional tier/cost experiment — not public pricing
+| Label | 90-day paid-pilot rate | Post-pilot target | One-time onboarding target | Internal scope decision |
+|---|---:|---:|---:|---|
+| **LITE** | ₹1,999 | ₹2,499 | ₹2,500 | Menu, basic pickup ordering, confirmations and limited human inbox; no payment/POS integration |
+| **BASE** | ₹5,999 | ₹7,499 | ₹5,000 | Payments, modifiers, pickup slots, status updates, promotions, multiple agents and human takeover |
+| **PRO** | ₹12,999 | ₹14,999 | ₹10,000 | Multi-outlet routing, bounded POS/KDS/API integrations, advanced automation and defined support |
 
-For internal comparison only, the current working names are **LITE, BASE and
-PRO**. These are provisional experiment labels, not approved public tiers,
-package names, forecasts, tax conclusions or customer-facing commitments.
-Rates are before GST with a **±15% planning tolerance** and must be replaced
-with measured costs and external validation.
-
-| Label | Monthly rate before GST | Internal scope decision |
-|---|---:|---|
-| **LITE** | ₹4,999 | Limited AI/conversational assistance; menu display and ordering only; menu updates up to 3/month |
-| **BASE** | ₹9,999 | Users select, order, pay and use delivery; availability controls and basic time-bounded promotions/combos |
-| **PRO** | ₹19,999 | Full bounded user/restaurant access across allowed workflows plus advanced API integrations |
-
-The detailed variable/provider/API, support, AI, onboarding, integration-
-maintenance and shared-infrastructure assumptions are maintained in
-[`economics-model.md`](economics-model.md). Tadka, Thali, Dawat, Feast and
-similar labels remain historical/source evidence only.
-
-The illustrative `3 LITE / 4 BASE / 3 PRO` mix gives weighted ARPU of
-**₹11,499/month** and **₹3,44,970 gross 90-day billing before GST**. This is an
-internal experiment record, not a forecast, approved pricing, public taxonomy
-or tax conclusion. Track support minutes, AI/provider/API costs, onboarding,
-restaurant ROI, conversion, continuation and economic contribution per
-restaurant. Provider, legal, tax and finance/accounting validation remain
+Rates are before GST, exclude pass-through provider costs and carry the
+planning tolerance documented in [`economics-model.md`](economics-model.md).
+PRO may be quoted at ₹19,999/month only for documented integration-heavy or
+multi-outlet scope. The illustrative `3 LITE / 4 BASE / 3 PRO` mix at pilot
+rates gives weighted ARPU of **₹6,599/month** and **₹1,97,970 gross 90-day
+billing before GST**. This is a planning sensitivity, not a forecast or
+required enrollment mix. Track support minutes, AI/provider/API costs,
+onboarding, restaurant ROI, conversion, continuation and economic contribution
+per restaurant. Provider, legal, tax and finance/accounting validation remain
 required.
 
 ### Capability, usage and support implications

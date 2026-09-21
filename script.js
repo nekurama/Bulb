@@ -6,27 +6,33 @@
   const tiers = {
     lite: {
       name: "LITE",
-      price: "₹4,999",
-      description: "A smaller pilot shape for review.",
-      allow: ["Menu review", "Order capture", "Human escalation"],
-      deny: ["Payment flow disabled", "Delivery flow disabled"],
-      gated: ["Pricing/entitlement approval"],
+      pilotPrice: "₹1,999",
+      postPilotPrice: "₹2,499",
+      onboarding: "₹2,500",
+      description: "Low-friction entry for a single-location pickup workflow.",
+      allow: ["WhatsApp menu", "Basic pickup ordering", "Confirmations", "Limited human inbox"],
+      deny: ["Payment/POS integration", "Delivery workflow"],
+      gated: ["Volume limits", "Pricing/entitlement approval"],
     },
     base: {
       name: "BASE",
-      price: "₹9,999",
-      description: "A broader pilot shape for review.",
-      allow: ["Menu + order review", "Pickup workflow illustration", "Team coordination"],
+      pilotPrice: "₹5,999",
+      postPilotPrice: "₹7,499",
+      onboarding: "₹5,000",
+      description: "The core restaurant workflow for meaningful WhatsApp order volume.",
+      allow: ["Payments", "Modifiers", "Pickup slots", "Status updates", "Human takeover", "Analytics"],
       deny: ["Unrestricted AI action"],
-      gated: ["Payment/provider path", "Delivery provider path"],
+      gated: ["Provider fees", "One standard integration"],
     },
     pro: {
       name: "PRO",
-      price: "₹19,999",
-      description: "An advanced experiment shape for review.",
-      allow: ["Advanced control review", "Governance placeholder", "Provider recovery illustration"],
+      pilotPrice: "₹12,999",
+      postPilotPrice: "₹14,999",
+      onboarding: "₹10,000",
+      description: "Integration-ready scope for multi-outlet or operationally complex restaurants.",
+      allow: ["Multi-outlet routing", "Bounded POS/KDS/API integrations", "Advanced automation", "Defined support/SLA"],
       deny: ["Unrestricted AI action", "Unbounded automation"],
-      gated: ["Payment/reconciliation provider", "Delivery/API provider"],
+      gated: ["Integration scope", "Provider fees", "₹19,999 premium quote"],
     },
   };
 
@@ -93,8 +99,8 @@
         ["MO", "MOCK PAYMENT", "BASE · payment pending → retry → reconcile.", "12:10"],
         ["MO", "FULFILLMENT", "Pickup ready · delivery pending · provider failure.", "12:10"],
       ],
-      cards: [["TIER", "BASE / ₹9,999 mock"], ["PAYMENT", "Pending / failure / retry"], ["FULFILLMENT", "Pickup / delivery"] ],
-      note: "Proposed pilot pricing is internal experiment data only; no money moves.",
+      cards: [["TIER", "BASE / ₹5,999 pilot"], ["PAYMENT", "Pending / failure / retry"], ["FULFILLMENT", "Pickup slots / provider-gated"] ],
+      note: "Pilot and post-pilot pricing are internal direction only; no money moves.",
     },
     {
       kicker: "S06 / RESTAURANT ORDER DESK · MOCK",
@@ -192,10 +198,10 @@
       : stage.bubbles;
     const stageCards = state.stage === 4
       ? state.tier === "lite"
-        ? [["TIER", "LITE / ₹4,999 mock"], ["PAYMENT", "DISABLED"], ["FULFILLMENT", "PICKUP ONLY"]]
+      ? [["TIER", "LITE / ₹1,999 pilot"], ["PAYMENT", "DISABLED"], ["FULFILLMENT", "PICKUP ONLY"]]
         : state.tier === "base"
-          ? [["TIER", "BASE / ₹9,999 mock"], ["PAYMENT", "PROVIDER-GATED"], ["FULFILLMENT", "DELIVERY-GATED"]]
-          : [["TIER", "PRO / ₹19,999 mock"], ["PAYMENT", "RECONCILIATION-GATED"], ["AUTHORITY", "NO UNRESTRICTED AI"]]
+        ? [["TIER", "BASE / ₹5,999 pilot"], ["PAYMENT", "PROVIDER-GATED"], ["FULFILLMENT", "PICKUP SLOTS"]]
+        : [["TIER", "PRO / ₹12,999 pilot"], ["PAYMENT", "RECONCILIATION-GATED"], ["AUTHORITY", "NO UNRESTRICTED AI"]]
       : stage.cards;
     stageButtons.forEach((button, index) => {
       const active = index === state.stage;
@@ -255,9 +261,9 @@
       </div>
       ${localControls}
     `;
-    document.querySelector("#journey-tier-callout").textContent = `${tier.name} · ${tier.price} pre-GST mock / ±15% tolerance · ${tier.description} Allow: ${tier.allow.join(" · ")}. Deny: ${tier.deny.join(" · ")}. Gated: ${tier.gated.join(" · ")}.`;
+    document.querySelector("#journey-tier-callout").textContent = `${tier.name} · ${tier.pilotPrice} pilot / ${tier.postPilotPrice} post-pilot target · ${tier.description} Onboarding: ${tier.onboarding}. Allow: ${tier.allow.join(" · ")}. Deny: ${tier.deny.join(" · ")}. Gated: ${tier.gated.join(" · ")}.`;
     tierDetail.innerHTML = `
-      <div><p class="eyebrow">SELECTED MOCK TIER</p><h3>${tier.name} · ${tier.price}</h3><p>${tier.description} Proposed pilot pricing / internal experiment only.</p></div>
+      <div><p class="eyebrow">SELECTED INTERNAL DIRECTION</p><h3>${tier.name} · ${tier.pilotPrice} pilot</h3><p>${tier.description} Post-pilot target: ${tier.postPilotPrice}/month. One-time onboarding target: ${tier.onboarding}. Pre-GST mock; no payment action.</p></div>
       <div class="tier-groups">
         <strong>ALLOW</strong><ul>${tier.allow.map((capability) => `<li>${capability}</li>`).join("")}</ul>
         <strong>DENY</strong><ul>${tier.deny.map((capability) => `<li>${capability}</li>`).join("")}</ul>

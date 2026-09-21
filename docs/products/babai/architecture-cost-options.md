@@ -3,6 +3,7 @@ status: proposed-options
 owner: BABAI Architecture
 last-reviewed: 2026-09-21
 sources:
+  - "Founder Scale/Cost Baseline (2026-09-21)"
   - "Admin Decision Packet (2026-09-20)"
   - nekurama.raw.chat.json
   - nekurama.chatgpt.md
@@ -50,12 +51,13 @@ implemented. [Admin Decision Packet (2026-09-20); `architecture.md`;
 ## Recommended pilot posture and decision record
 
 **Working recommendation:** use a small, containerized TypeScript/Node
-modular monolith with one managed worker capacity model, standard PostgreSQL on
-the smallest managed tier that passes the restore/load tests, and a managed
-queue with a transactional outbox/inbox and DLQ path. Run only the low/base
-infrastructure envelope until measured traffic, recovery or support evidence
-requires more. This is a cost-sensitive pilot posture, not a vendor or
-production-availability commitment.
+modular monolith with a **stateless lightweight gateway** and idempotent
+conversation/state workers, standard PostgreSQL on the smallest managed tier
+that passes the restore/load tests, and a managed queue with a transactional
+outbox/inbox and DLQ path. Run only the low/base infrastructure envelope until
+measured traffic, recovery or support evidence requires more. This is a
+cost-sensitive pilot posture, not a vendor or production-availability
+commitment.
 
 | Decision area | Pilot posture | Input required before commitment |
 |---|---|---|
@@ -114,6 +116,139 @@ The expenditure trigger includes pre-credit and post-credit views. A credit
 that reduces cash spend but increases pre-credit commitment still requires
 review. Support time must be reported separately from infrastructure so AWS
 savings cannot hide an unsustainable founder operating burden.
+
+## Scale baseline: traffic and staged capacity
+
+The **Founder Scale/Cost Baseline (2026-09-21)** supplies the planning traffic
+inputs below. They are workload scenarios, not observed production load or
+capacity claims:
+
+- Average completed order: **54 requests**.
+- Heavy completed order: **90 requests**.
+- Planning volume: **50 completed orders/day/restaurant**.
+- 500 restaurants: 25,000 orders/day.
+- 1,000 restaurants: 50,000 orders/day.
+
+At an even 24-hour distribution, the request-rate scenarios are:
+
+| Restaurants | 54 requests/order | 90 requests/order | Interpretation |
+|---:|---:|---:|---|
+| 500 | 1.35M requests/day; **15.6 average RPS** | 2.25M requests/day; **26.0 average RPS** | Scale test band, not a launch target |
+| 1,000 | 2.70M requests/day; **31.3 average RPS** | 4.50M requests/day; **52.1 average RPS** | Higher evidence band; requires measured burst distribution |
+
+The even-distribution RPS values are not peak RPS. The load test must replay
+realistic restaurant/daypart bursts, retries, provider callbacks and queue
+redelivery. P90/P99 gateway targets below are **provisional acceptance
+thresholds for internal load testing**, not customer SLOs:
+
+| Signal | Stage 0/1 provisional gate | 500/1,000-restaurant evidence gate |
+|---|---:|---:|
+| Stateless gateway P90, excluding provider latency | ≤300ms | ≤300ms sustained |
+| Stateless gateway P99, excluding provider latency | ≤1s | ≤1s sustained; investigate any >2s |
+| Queue age P90 | ≤30s | ≤30s; no unbounded growth |
+| Oldest outbox record | ≤60s | ≤60s; alert before breach |
+
+### Staged deployment posture
+
+| Stage | Cheapest quality-preserving posture | Entry/exit evidence |
+|---|---|---|
+| **Stage 0 — one restaurant** | Portable OCI gateway + worker on a managed VM/container baseline; managed PostgreSQL; managed queue/outbox; private object storage; basic redacted observability | One complete restore drill, idempotency/retry/DLQ test, provider callback test, and founder support within agreed window |
+| **Stage 1 — up to three restaurants** | Same portable shape or Lightsail/EC2-equivalent fallback if its measured all-in cost is lower and restore/patch burden is accepted; separate gateway/worker capacity model | 15-minute load tests, DB/pool/backpressure evidence, provider throttling test, support ≤24 founder-hours/week |
+| **Stage 2 — higher evidence band** | ECS/Fargate + managed PostgreSQL/queue when traffic, failure isolation, observability or support evidence justifies managed separation | 500/1,000-restaurant scenario test, P90/P99 and queue gates, restore ≤RTO, cost and portability review |
+
+No 2x2-vCPU gateway configuration proves system capacity. PostgreSQL
+contention, worker throughput, provider throttling, AI latency/cost, queue
+age, retries and external callback behavior must be tested together. The
+gateway is only one part of the system.
+
+## Stateless gateway and bottleneck protections
+
+The gateway should authenticate/verify the request, resolve channel and
+tenant context, perform bounded validation, accept an idempotency key and
+enqueue a typed command. Conversation/state work and provider side effects
+run in idempotent workers. The gateway must not hold conversation state in
+process memory, perform long provider calls synchronously, or make a chain of
+per-hit PostgreSQL transactions merely to acknowledge a request.
+
+### PostgreSQL per-hit transaction protections
+
+- Keep one bounded transaction for the authoritative command and outbox write;
+  avoid read-then-write chains that multiply round trips.
+- Use aggregate/version checks and idempotency records to collapse retries.
+- Use indexes and projections for hot reads; do not add cross-module table
+  reads to save one request.
+- Bound gateway and worker connection pools separately; reserve capacity for
+  migrations, admin recovery and reconciliation.
+- Monitor pool exhaustion, wait time, lock time, transaction retries, deadlocks,
+  CPU, I/O and oldest outbox age.
+- Apply per-tenant/branch write limits and queue admission control before the
+  database becomes the backpressure boundary.
+
+### Rate limiting, backpressure and retry
+
+- Apply layered limits: provider/channel, tenant/branch, identity/session and
+  gateway/IP where appropriate.
+- Prefer token-bucket or leaky-bucket limits with explicit `Retry-After`;
+  exact values remain load-test inputs.
+- When queue age or DB pool pressure crosses a provisional gate, return a
+  bounded accepted/deferred response, stop non-critical work and preserve
+  business-critical ordering/payment reconciliation.
+- Retry only transient failures with exponential backoff and jitter; honor
+  provider throttling and `Retry-After`.
+- Use bounded attempts, quarantine/DLQ and human escalation for poison or
+  non-retryable messages. Never retry payment/settlement side effects without
+  an idempotency key and reconciliation record.
+
+### Provider throttling and safe caching
+
+- Keep provider quotas and concurrency limits in adapter policy, not domain
+  modules.
+- Queue outbound Meta/payment/delivery calls and use per-provider,
+  per-tenant/channel throttles.
+- Cache only safe, versioned or immutable data: published menu revisions,
+  tenant configuration and provider metadata with explicit TTL/version keys.
+- Do not cache authoritative order, payment, consent, permission or
+  availability decisions as a source of truth.
+- Invalidate or bypass caches on publication, permission, payment, consent and
+  availability changes; log cache version/provenance for diagnosis.
+
+## 15-minute load-test and migration gates
+
+Every stage must run repeated **15-minute windows** after a warm-up period and
+record both the 95th/99th percentile and worst observed values. The exact
+thresholds are provisional until real pilot distributions are known.
+
+| Gate | Measure every 15 minutes | Provisional action |
+|---|---|---|
+| Gateway | RPS, P90/P99, 5xx/429, event-loop/CPU and memory | Scale gateway only after confirming downstream health; rollback on error or latency regression |
+| PostgreSQL | CPU, active/idle pool, wait time, lock/deadlock rate, transaction retries, I/O and connection saturation | Reduce concurrency/backpressure, tune query/index/pool, or scale database only with evidence |
+| Queue/outbox | oldest outbox age, queue age, depth, worker throughput, retry and DLQ counts | Add worker capacity or slow admission; quarantine poison messages and reconcile |
+| Providers | callback/send latency, throttles, 429/5xx, timeout and retry rate by provider/tenant | Honor throttling, delay/requeue, switch only through the adapter and record reconciliation |
+| AI | latency, failures, cost per accepted interaction and fallback rate | Keep AI advisory; fall back to deterministic/human path, never block authoritative state indefinitely |
+| Recovery | backup age, last success, restore elapsed time, replay/reconciliation result | Block stage advancement if restore cannot meet the 8-hour target or replay is unsafe |
+| Support | Manoj/Vinay hours, incidents, P1/P2 backlog and manual interventions/restaurant | Pause enrollment when founder ceilings or recovery ownership fail |
+
+### Migration trigger
+
+Move from the portable managed-VM/container band toward ECS/Fargate and
+managed PostgreSQL/queue separation only when at least one of these is
+measured and sustained across repeated windows:
+
+- gateway P90/P99 breaches after stateless code and downstream protections;
+- DB CPU/pool/lock saturation or transaction latency remains the bottleneck
+  after query/index/idempotency fixes;
+- queue age/outbox age grows despite bounded worker capacity;
+- provider throttling or callback volume requires independent worker scaling;
+- failure isolation, auditability or restore operations exceed founder-safe
+  handling;
+- the cost model shows the higher managed posture is cheaper than founder
+  operations and recovery risk.
+
+At **500+ restaurants**, founder-only support is an explicit replacement
+trigger: the system must have an approved replacement support/on-call model
+before accepting that scale. This is not a hiring assumption or a commitment
+to reach 500; it is a stop condition against silently scaling founder
+operations.
 
 ## Cost model conventions
 

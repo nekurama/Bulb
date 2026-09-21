@@ -83,6 +83,22 @@ The module map follows the aggregate and capability boundaries in
 `1764f643-59fd-4cf5-be14-6aee32fc973a`; Raw T157
 `bbb21f46-ddff-464d-bb6c-8a47d4188b9a`; `domain-model.md`]
 
+## Stateless gateway and worker execution
+
+The gateway is intentionally lightweight and stateless. It verifies the
+provider/request, resolves channel and tenant context, validates bounded
+commands, records idempotency context and hands conversation/state work to
+workers through the outbox/managed-queue path. Workers own durable
+conversation/state processing and external side effects; the gateway does not
+hold conversation state in memory or wait synchronously on provider chains.
+
+The gateway alone is not a capacity proof. PostgreSQL transactions and
+connection pools, worker throughput, queue age, provider throttling, AI
+latency/cost and retry/DLQ behavior must be tested together. The 54-request
+average and 90-request heavy order scenarios at 50 orders/day/restaurant are
+planning inputs; 2x2-vCPU gateways do not establish system capacity.
+[Founder Scale/Cost Baseline (2026-09-21); `architecture-cost-options.md`]
+
 ## Request and command path
 
 ```text

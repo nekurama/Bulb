@@ -171,4 +171,3 @@ Retention must distinguish:
 | Provider retries | Adapter isolation and reconciliation | Domain service split |
 | Projection lag | Separate projection worker/read store | Event-sourced rewrite |
 | Security/data isolation | Separate schema/runtime or service | Broad unrestricted access |
-

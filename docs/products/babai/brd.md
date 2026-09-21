@@ -8,6 +8,7 @@ sources:
   - nekurama.babai.research.md
   - Founder decision packet (2026-09-21; current task input)
   - Tier scope decision (2026-09-21; current task input)
+  - Execution plan input (2026-09-21; current task input)
 ---
 
 # BABAI Product BRD
@@ -167,6 +168,7 @@ The field research is intentionally not upgraded: it reports strong interest and
 | `business-model.md` | Retained as a partial commercial model; public pricing is withheld while cost, contribution, GST and pilot-term evidence is collected. |
 | `economics-model.md` | Track 2 v0.5 internal planning artifact; provides low/base/high bands, actual-rate register, 90-day plan, traffic/request/storage sensitivities, LITE/BASE/PRO cost implications, provisional fee bands and break-even sensitivity without selecting public pricing. |
 | `tier-feasibility.md` | Role-owned LITE/BASE/PRO feasibility matrix and Stage 0/1/2 rollout sequence; external provider feasibility remains open. |
+| `execution-plan.md` | October–December quality-first execution plan, milestones, bot-health, gates, pipeline and internal budget views. |
 | `validation.md` | Track 3 metric contract with proposed entry/exit/success/kill thresholds; founder approval and pilot evidence remain required. |
 | `product-definition.md` | Retained as the current MVP boundary; production cut, edge cases and post-pilot scope remain partial. |
 | `thesis-and-positioning.md` | Retained as current positioning; differentiation is explicitly a thesis, not a proven moat, and legal clearance remains separate. |

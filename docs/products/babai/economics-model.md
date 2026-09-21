@@ -205,6 +205,11 @@ The role-owned feasibility and rollout matrix is maintained in
 entitlements from external Meta, payment, delivery and advanced-API
 dependencies; it does not claim provider feasibility or approval.
 
+The October–December quality-first execution budget, founder-time view,
+onboarding/cohort cost and milestone gates are maintained in
+[`execution-plan.md`](execution-plan.md). Those figures are internal planning
+estimates with 15% contingency, not approved cash budgets.
+
 ### Pilot 3/4/3 sensitivity — provisional
 
 For a 10-restaurant sensitivity cohort, model **3 LITE / 4 BASE / 3 PRO**.

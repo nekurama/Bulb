@@ -94,6 +94,10 @@ A historical `RESOLVED` label is not automatically authoritative. Later evidence
 - [ ] **6.3 Additional product dimensions** — create only when a new dimension becomes material
 - [ ] **6.4 Additional company dimensions** — create only when a new dimension becomes material
 
+### Execution
+
+- [`execution/oct-dec-plan.md`](execution/oct-dec-plan.md) — October–December quality-first execution plan, gates, paths and budget views
+
 ## File rules
 
 - Keep files focused and reasonably small.

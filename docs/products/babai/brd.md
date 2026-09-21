@@ -11,6 +11,7 @@ sources:
   - "2026-09-21 ECONOMICS MODEL REVIEW PACKET"
   - "2026-09-21 FOUNDER SCALE/COST BASELINE (current task input)"
   - "2026-09-21 FOUNDER ECONOMIC TARGET CLARIFICATION (current task input)"
+  - "2026-09-21 TIER/COST MODEL UPDATE (current task input)"
 ---
 
 # BABAI Product BRD
@@ -161,6 +162,35 @@ Proposed review controls are a negative base contribution for two consecutive
 months, repeated support-ceiling breaches, unpriced AI-heavy routing, or CAC
 payback above 12 months. These controls are internal planning thresholds, not
 approved commercial or legal outcomes.
+
+### Internal provisional tier/cost model update — experiment record
+
+The current internal working names are **LITE, BASE and PRO**. They are
+provisional experiment labels only and do not replace the BRD's
+challenge-required pricing status, create public tier taxonomy, constitute a
+forecast or establish a tax conclusion. The rates are before GST with a
+**±15% planning tolerance**:
+
+| Label | Rate/month before GST | Scope hypothesis |
+|---|---:|---|
+| **LITE** | ₹4,999 | Information/menu/basic WhatsApp workflow; advisory AI; no advanced API integration |
+| **BASE** | ₹9,999 | Pickup/order workflow; human takeover; standard operational integrations; advisory AI |
+| **PRO** | ₹19,999 | Advanced API integrations; richer automation; higher usage/AI allowance; integration-maintenance reserve |
+
+At the illustrative `3 LITE / 4 BASE / 3 PRO` mix, weighted ARPU is
+**₹11,499/month** and gross 90-day billing is **₹3,44,970 before GST**.
+The per-tier variable/provider/API, support, AI, onboarding, integration-
+maintenance and ₹42,500/month shared-infrastructure sensitivity is in
+[`economics-model.md`](economics-model.md). This update is additive to the
+prior cash/economic contribution formulas and the separate ₹25L monthly
+operating-profit planning target; it does not promote either to a forecast or
+approved price decision.
+
+Current pilot records should track the experiment label, support minutes,
+AI/provider/API usage, onboarding effort, restaurant ROI, conversion,
+continuation and cash/economic contribution. Provider, legal, tax and
+finance/accounting validation labels remain mandatory. Tadka, Thali, Dawat,
+Feast and similar names remain historical/source context only.
 
 ## Confirmed product truth
 

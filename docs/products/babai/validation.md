@@ -8,6 +8,7 @@ sources:
   - nekurama.babai.research.md
   - "2026-09-21 FOUNDER DECISION PACKET"
   - "2026-09-21 FOUNDER SCALE/COST BASELINE (current task input)"
+  - "2026-09-21 TIER/COST MODEL UPDATE (current task input)"
   - "2026-09-21 FOUNDER ECONOMIC TARGET CLARIFICATION (current task input)"
   - "2026-09-21 FOUNDER NAMING CORRECTION (current task input)"
 ---
@@ -114,6 +115,16 @@ transition cost; it is not a contribution-margin percentage and does not
 replace the pilot contribution metric. See
 [`economics-model.md`](economics-model.md); do not report a
 variable-cost-only margin as the decision metric.
+
+For the internal provisional tier experiment, also record the LITE/BASE/PRO
+label, before-GST rate and ±15% tolerance, variable/provider/API cost, support
+minutes, AI usage/cost, onboarding, integration-maintenance reserve where
+applicable, shared-infrastructure allocation, restaurant ROI, conversion,
+continuation and cash/economic contribution. The illustrative
+`3 LITE / 4 BASE / 3 PRO` mix is ₹11,499 weighted ARPU/month and ₹3,44,970
+gross 90-day billing before GST; it is not a forecast, approved pricing,
+public tier taxonomy or tax conclusion. Replace all planning assumptions with
+pilot evidence before using the result for a decision.
 
 The evidence sequence is behavior → successful fulfillment → staff adoption →
 business value → retention → willingness to pay → operational readiness, not

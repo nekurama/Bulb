@@ -33,8 +33,8 @@ prove repository implementation or a demo.
 
 ## 1. ADMIN → OWNER onboarding
 
-**Priority:** P0 POC/pilot  
-**Actors:** Platform Admin, Owner, restaurant/branch, WhatsApp channel  
+**Priority:** P0 POC/pilot
+**Actors:** Platform Admin, Owner, restaurant/branch, WhatsApp channel
 **Source:** `nekurama.chatgpt.md:L1233-L1318`, `L28016-L28345`
 
 - **Preconditions:** Authorized platform admin; restaurant name, WhatsApp
@@ -55,8 +55,8 @@ prove repository implementation or a demo.
 
 ## 2. Owner onboarding
 
-**Priority:** P0 POC/pilot  
-**Actors:** Owner, onboarding workflow, Menu, Billing/entitlement, channel  
+**Priority:** P0 POC/pilot
+**Actors:** Owner, onboarding workflow, Menu, Billing/entitlement, channel
 **Source:** `nekurama.chatgpt.md:L1321-L1415`, `L6263-L6355`,
 `L23635-L24328`
 
@@ -80,8 +80,8 @@ prove repository implementation or a demo.
 
 ## 3. Owner/staff setup
 
-**Priority:** P0 POC; P1 expansion  
-**Actors:** Owner/Admin, Staff, Identity, Membership, Role/Scope  
+**Priority:** P0 POC; P1 expansion
+**Actors:** Owner/Admin, Staff, Identity, Membership, Role/Scope
 **Source:** `nekurama.chatgpt.md:L1678-L1715`,
 `L24423-L24500`, `L11464-L11925`
 
@@ -101,9 +101,9 @@ prove repository implementation or a demo.
 
 ## 4. Customer discovery
 
-**Priority:** P0 POC/pilot  
+**Priority:** P0 POC/pilot
 **Actors:** Customer, business-owned WhatsApp/channel, Conversation/BFF,
-  restaurant read model  
+  restaurant read model
 **Source:** `nekurama.chatgpt.md:L1478-L1515`,
 `L22330-L22420`
 
@@ -125,9 +125,9 @@ prove repository implementation or a demo.
 
 ## 5. Menu
 
-**Priority:** P0 POC/pilot  
+**Priority:** P0 POC/pilot
 **Actors:** Owner/Staff, Menu service/workflow, AI extraction, Validator,
-  Published Menu, Customer  
+  Published Menu, Customer
 **Source:** `nekurama.chatgpt.md:L23968-L24328`,
 `L9025-L9595`, `L24101-L24328`
 
@@ -149,8 +149,8 @@ prove repository implementation or a demo.
 
 ## 6. Order
 
-**Priority:** P0 POC/pilot  
-**Actors:** Customer, Conversation/BFF, Ordering, Menu projection, Staff  
+**Priority:** P0 POC/pilot
+**Actors:** Customer, Conversation/BFF, Ordering, Menu projection, Staff
 **Source:** `nekurama.chatgpt.md:L22330-L22695`,
 `L17205-L17609`
 
@@ -174,9 +174,9 @@ prove repository implementation or a demo.
 
 ## 7. Payment
 
-**Priority:** P0 boundary/P1 externally validated pilot  
+**Priority:** P0 boundary/P1 externally validated pilot
 **Actors:** Customer, Payment, Ordering, direct-settlement provider, Staff,
-  customer acknowledgement  
+  customer acknowledgement
 **Source:** `nekurama.chatgpt.md:L22708-L22839`,
 `L8318-L8501`, `L17499-L17547`
 
@@ -198,8 +198,8 @@ prove repository implementation or a demo.
 
 ## 8. Delivery / pickup
 
-**Priority:** P0 pickup; P1 delivery/provider validation  
-**Actors:** Staff, Customer, Ordering, Delivery, provider, Notification  
+**Priority:** P0 pickup; P1 delivery/provider validation
+**Actors:** Staff, Customer, Ordering, Delivery, provider, Notification
 **Source:** `nekurama.chatgpt.md:L23090-L23361`,
 `L8638-L9025`
 
@@ -221,9 +221,9 @@ prove repository implementation or a demo.
 
 ## 9. Promo/combo
 
-**Priority:** P1 BASE; P2 PRO  
+**Priority:** P1 BASE; P2 PRO
 **Actors:** Owner/authorized staff, Promotion/Combo policy, Customer,
-  Conversation, Ordering  
+  Conversation, Ordering
 **Source:** Tier scope decision (2026-09-21); `product-definition.md`
   LITE/BASE/PRO matrix; no complete founder-companion flow is evidenced.
 
@@ -245,9 +245,9 @@ prove repository implementation or a demo.
 
 ## 10. Human takeover
 
-**Priority:** P0 POC/pilot  
+**Priority:** P0 POC/pilot
 **Actors:** Customer, Conversation, Staff, Notification, Ordering/Payment/
-  Delivery workflows  
+  Delivery workflows
 **Source:** `nekurama.chatgpt.md:L9895-L10514`,
 `L23361-L23850`, `L24618-L24780`
 
@@ -268,9 +268,9 @@ prove repository implementation or a demo.
 
 ## 11. Notifications
 
-**Priority:** P0 POC/pilot  
+**Priority:** P0 POC/pilot
 **Actors:** Domain event producer, Notification service, policy/consent,
-  template renderer, WhatsApp/provider, Customer/Staff  
+  template renderer, WhatsApp/provider, Customer/Staff
 **Source:** `nekurama.chatgpt.md:L1615-L1665`,
 `L23090-L23361`, `L25071-L25190`,
 `L17673-L17781`
@@ -293,9 +293,9 @@ prove repository implementation or a demo.
 
 ## 12. Retention / reorder
 
-**Priority:** P1 pilot hardening  
+**Priority:** P1 pilot hardening
 **Actors:** Customer, Ordering, current Menu projection, Customer/Order read
-  model, Notification/Consent  
+  model, Notification/Consent
 **Source:** `nekurama.chatgpt.md:L23443-L23850`,
 `L611-L635`
 
@@ -317,9 +317,9 @@ prove repository implementation or a demo.
 
 ## 13. Exceptions / recovery
 
-**Priority:** P0 reliability baseline; P1 hardening  
+**Priority:** P0 reliability baseline; P1 hardening
 **Actors:** Workflow/state engine, event bus, provider adapters, DLQ/replay
-  operator, Platform Admin, Staff, Customer  
+  operator, Platform Admin, Staff, Customer
 **Source:** `nekurama.chatgpt.md:L18088-L18110`,
 `L25810-L25980`, `L22330-L22420`
 
@@ -343,8 +343,8 @@ prove repository implementation or a demo.
 
 ## 14. Admin / analytics
 
-**Priority:** P0 admin visibility; P1 analytics/reporting  
-**Actors:** Platform Admin, Owner/Admin, Staff, Analytics pipeline, read models  
+**Priority:** P0 admin visibility; P1 analytics/reporting
+**Actors:** Platform Admin, Owner/Admin, Staff, Analytics pipeline, read models
 **Source:** `nekurama.chatgpt.md:L1233-L1318`,
 `L1774-L1885`, `L17996-L18064`, `L26370-L26420`
 

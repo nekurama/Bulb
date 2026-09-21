@@ -52,6 +52,7 @@ intentionally untouched product files.
 
 ## Knowledge dimensions
 
+- Flow inventory and implementation handoff
 - Product BRD and gap register
 - Thesis and positioning
 - Product definition and scope
@@ -69,6 +70,10 @@ Partial or unknown areas should be recorded as questions rather than invented.
 ## Related product artifacts
 
 - [`brd.md`](brd.md) — durable decision/status register and founder packet
+- [`flow-inventory.md`](flow-inventory.md) — durable 14-family flow inventory,
+  citations, boundaries, acceptance criteria and implementation/demo status
+- [`flow-inventory.json`](flow-inventory.json) — machine-readable companion
+  validated against the source-citation convention
 - [`business-model.md`](business-model.md) — paid-pilot agreement requirements and contribution-derived pricing
 - [`economics-model.md`](economics-model.md) — total-expenditure versus income model
 - [`validation.md`](validation.md) — pilot evidence and external-validation boundary

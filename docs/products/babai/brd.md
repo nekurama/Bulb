@@ -353,6 +353,8 @@ staged, pickup-first sequence above. [Historical source evidence:
 
 ## Related files
 
+- `flow-inventory.md` — 14-family flow inventory with source citations,
+  boundaries, acceptance criteria and implementation/demo status
 - `thesis-and-positioning.md` — identity, buyer, positioning and differentiation thesis
 - `product-definition.md` — MVP boundary and initial pilot workflow
 - `customer-market.md` — ICP and market evidence

@@ -6,7 +6,8 @@
  */
 
 export type ActorRole = 'customer' | 'owner' | 'cashier' | 'staff' | 'platform-admin';
-export type ProviderKind = 'meta-whatsapp' | 'bsp' | 'web';
+export type ChannelSurface = 'whatsapp' | 'web';
+export type ProviderKind = 'meta-whatsapp' | 'bsp';
 
 export interface Money {
   currency: 'INR';
@@ -17,7 +18,8 @@ export interface ChannelContext {
   tenantId: string;
   branchId?: string;
   channelId: string;
-  provider: ProviderKind;
+  surface: ChannelSurface;
+  provider?: ProviderKind;
   actorId: string;
   actorRole: ActorRole;
   correlationId: string;

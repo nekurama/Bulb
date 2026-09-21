@@ -46,7 +46,7 @@ fashion alone.
 
 Existing [`architecture.md`](architecture.md), [`architecture-lld.md`](architecture-lld.md), [`domain-model.md`](domain-model.md),
 [`flow-architecture.md`](flow-architecture.md), [`flow-inventory.md`](flow-inventory.md), [`experience-and-channels.md`](experience-and-channels.md),
-[`economics-model.md`](economics-model.md) and [`pilot-metrics.md`](pilot-metrics.md) remain source documents. The new
+[`business-model.md`](business-model.md), [`economics-model.md`](economics-model.md) and [`pilot-metrics.md`](pilot-metrics.md) remain source documents. The new
 packet cross-references rather than silently rewriting their historical
 evidence.
 

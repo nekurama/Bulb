@@ -58,6 +58,19 @@ These can begin as separate worker deployables using the same repository and
 contracts. A domain service extraction is justified only by measured
 throughput, security, failure-isolation or ownership pressure.
 
+These are separate responsibility classes even when they share one worker
+runtime at first:
+
+- **provider adapters** translate external APIs and own external IDs/callbacks;
+- **workflow workers** run retries, timers, reconciliation and human waits;
+- **AI workers** run bounded model tasks and return validated proposals;
+- **projection workers** build read models and reports;
+- **notification workers** render/send templates and track delivery.
+
+Combining them in one process is a deployment optimization, not a change in
+authority or ownership. Their queues, metrics, failure classes and cost
+attribution remain distinct.
+
 ## 3. Least-cost runtime stack
 
 ### Pilot candidate

@@ -47,6 +47,7 @@ integration-heavy/multi-outlet exception.
 | LLD/events | [`events-catalog.md`](events-catalog.md) | Event names, envelopes, idempotency, replay and projections |
 | Runtime/AI | [`runtime-and-ai-architecture.md`](runtime-and-ai-architecture.md) | Topology options, cost model, model routing and workflow choice |
 | UX | [`pro-operations-ux.md`](pro-operations-ux.md) | WhatsApp cards and high-volume Pro operations surface |
+| UX prototype | [`pro-operations-prototype.html`](pro-operations-prototype.html) | Standalone HTML cockpit design for queue/detail/recovery review |
 | SDLC | [`sdlc-standard.md`](sdlc-standard.md) | Human/bot coding, review, validation and release rules |
 | Legal controls | [`contract-controls.md`](contract-controls.md) | Contract packet, evidence ledger and professional gates |
 | Code contracts | [`contracts.ts`](contracts.ts) | TypeScript command/event/port shapes for implementation |

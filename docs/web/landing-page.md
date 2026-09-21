@@ -4,6 +4,7 @@ owner: NEKURAMA / BABAI
 last-reviewed: 2026-09-21
 scope: GitHub Pages landing-page and native mock-demo template; no external deployment
 sources:
+  - EXECUTION PLAN INPUT — WEB/QA (2026-09-21)
   - ADMIN SCOPE UPDATE — WEBSITE INTERNAL TEMPLATE/QA ONLY (2026-09-21)
   - NEW ADMIN DECISION PACKET (2026-09-20)
   - nekurama.raw.chat.json
@@ -616,7 +617,55 @@ deployment:
 - A real browser/device matrix, automated WCAG scan, legal review, proof review,
   endpoint review and GitHub Pages deployment review remain outstanding.
 
-## 9. Remaining unknowns and role requests
+## 9. October–December web/demo plan
+
+This is an internal execution plan for the static template and mock/demo. It
+does not authorize public claims, pricing publication, testimonials, legal
+copy, contact endpoints, DNS changes or deployment.
+
+| Window | Owner | Dependencies | Entry check | Scope and QA gate | Exit check |
+| --- | --- | --- | --- | --- | --- |
+| **October — content-neutral template and accessibility baseline** | Web/QA; product/brand review for placeholders | Existing native `site/` template; current landing-page scope; no external approval required | Native HTML/CSS/JS exists; all product copy, CTA, proof and legal text remain placeholders | Keep semantic landmarks, one `h1`, skip link, focus states, reduced motion, responsive shell, local mock safety and LITE/BASE/PRO placeholder states; verify no forms, customer data, backend, payment, pricing or runtime network | Static syntax/boundary checks pass; keyboard traversal works; 320px/390px layouts have no horizontal overflow; fixture/provenance inventory exists; no unapproved public claim is present |
+| **November — demo-ready synthetic flow** | Web/QA; architecture review for static/runtime boundary | October exit; synthetic fixture schema and approved internal review scenarios | October checklist passes and mock reset/state semantics are stable | Exercise workflow tabs, tier selector, Advance, Reset, screen-reader announcements, responsive layouts and blocked-network behavior with invented fixtures only; run browser smoke and document unsupported browser/device gaps | Chromium smoke has no console errors; keyboard Arrow/Home/End behavior, focus retention, `aria-selected`, `aria-current` and live announcements pass; network contains only local assets; no real form/customer/auth/payment path exists |
+| **December — demo/pilot hardening and claim gates** | Web/QA with product and company/legal review inputs | November demo evidence; current claim/provenance register; pilot/evidence owners for any future proof | Synthetic demo is reproducible and all November checks are recorded | Harden empty/error/reset/reduced-motion states; reconcile placeholders against approved claim register; require provenance and written approval before any proof, testimonial, logo, pricing or contact slot changes; keep legal/privacy/DNS/publication gates closed | Internal demo/pilot-review package is reproducible, rollback/unpublish notes are current, every visible claim is approved or visibly placeholder, and no public release occurs without separate authorization |
+
+### Cross-month entry and exit gates
+
+- **Entry:** work begins from the committed native template and current
+  internal QA scope; no candidate JPEG, root-site file or deployment artifact
+  is an input to this plan.
+- **Synthetic fixture gate:** every mock name, message, capability slot,
+  status, timestamp and tier difference is invented, locally defined and
+  provenance-labelled; no customer, restaurant, staff, payment or credential
+  data is permitted.
+- **Accessibility gate:** semantic structure, keyboard operation, focus order,
+  screen-reader announcements, contrast, reduced motion, zoom/reflow and
+  mobile behavior are checked at each milestone.
+- **Network/security gate:** no backend, auth, payment, analytics, cookie,
+  third-party asset, external runtime request or secret enters the template.
+- **Content gate:** final category, promise, pricing, testimonials, claims,
+  legal/privacy wording, contact endpoints and DNS/publication settings remain
+  gated behind the relevant product/company/legal decisions.
+- **Exit:** a milestone is complete only when its checks are recorded and any
+  failed or unknown item is carried forward as an explicit blocker; feature
+  completion alone is not evidence of readiness.
+
+### Source anchors
+
+- **Execution input:** **EXECUTION PLAN INPUT — WEB/QA (2026-09-21)**.
+- **Template and publication boundary:** `docs/web/landing-page.md`,
+  `docs/web/design-qa-note.md` and the admin scope packet
+  **ADMIN SCOPE UPDATE — WEBSITE INTERNAL TEMPLATE/QA ONLY (2026-09-21)**.
+- **Tier labels and capability boundary:** current **TIER SCOPE DECISION —
+  WEB/QA** input and `docs/products/babai/product-definition.md`.
+- **Positioning and audience context:** `docs/products/babai/thesis-and-positioning.md`.
+- **Pilot/evidence caution:** `nekurama.babai.research.md` and
+  `docs/products/babai/validation.md`.
+- **Privacy/security and legal gates:**
+  `docs/company/security-privacy-controls.md` and
+  `docs/company/ip-brand-legal.md`.
+
+## 10. Remaining unknowns and role requests
 
 ### Product role
 
@@ -664,4 +713,6 @@ secondary routes, minimum public onboarding collection, testimonial conditions,
 `nekurama.com` starting point, company-owned DNS transition, no external
 deployment and explicit provenance/network/secret gates. The internal
 behavior and QA refinements in this revision come from **ADMIN SCOPE UPDATE —
-WEBSITE INTERNAL TEMPLATE/QA ONLY (2026-09-21)**.
+WEBSITE INTERNAL TEMPLATE/QA ONLY (2026-09-21)**, the tier mock boundary from
+**TIER SCOPE DECISION — WEB/QA**, and the October–December sequencing from
+**EXECUTION PLAN INPUT — WEB/QA (2026-09-21)**.

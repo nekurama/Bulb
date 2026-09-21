@@ -10,29 +10,10 @@ sources:
   - Founder decision packet (2026-09-21; current task input)
   - Tier scope decision (2026-09-21; current task input)
   - economics-model.md (Track 2 v0.5)
-  - architecture-cost-options.md (proposed 15-minute capacity gates)
-  - e3e4e855ca0214a5c664c07ec5b6513c560a7261 (product scale economics source)
-  - "2026-09-21 FOUNDER DECISION PACKET"
-  - "2026-09-21 FOUNDER SCALE/COST BASELINE (current task input)"
-  - "2026-09-21 TIER/COST MODEL UPDATE (current task input)"
-  - "2026-09-21 FOUNDER ECONOMIC TARGET CLARIFICATION (current task input)"
-  - "2026-09-21 FOUNDER NAMING CORRECTION (current task input)"
+  - tier-feasibility.md
 ---
 
 # Validation
-
-## Naming correction — pilot records
-
-The current product remains BABAI under NEKURAMA, with **“BABAI — Business
-Automation by AI”** as founder-approved wording. Legacy Tadka, Thali, Dawat,
-Feast or similar labels belong only in historical/source-evidence citations;
-they are not current pilot taxonomy. For the 10-restaurant pilot, identify
-records with **Pilot Variant A/B/C** or a functional scope description. These
-labels are for evidence collection only and do not define packages, tiers or
-public pricing. [Current founder correction:
-`2026-09-21 FOUNDER NAMING CORRECTION (current task input)`; historical raw
-source: `nekurama.raw.chat.json:L215-L216`; corroboration:
-`nekurama.chatgpt.md:L2432-L2685`]
 
 ## Primary gate — staged
 
@@ -195,26 +176,6 @@ These are proposed safety/economics controls, pending founder approval:
 
 These conditions should stop expansion while the evidence is reviewed; they do
 not authorize refunds, pricing changes, or accounting treatment by themselves.
-The internal capacity reference is maintained in
-[`economics-model.md`](economics-model.md), section “Founder scale and cost
-baseline”. Stage 0 records the six-flow/nine-gateway-hit workload primitives,
-request classification, latency/error/retry, support minutes, incidents and
-cost categories for one business. Stage 1 repeats those measures per
-restaurant across the 10%/25%/50%/100% conversion sensitivities. Stage 2
-reviews the 500-restaurant goal against the supplied 1,000-restaurant
-reference envelope, support/incident load and both economics views: the prior
-unresolved ₹25L income-unit sensitivity and the separate clarified ₹25L
-monthly operating-profit target after non-founder operating costs.
-
-## Operational capacity evidence gate — proposed
-
-The architecture capacity gate is evaluated over a rolling **15-minute**
-window for the relevant 10%/25%/50%/100% traffic sensitivity and normal/heavy
-request mix. The gateway, workers, PostgreSQL pool, queue/outbox age, provider
-throttling, retry/DLQ and restore signals must be green before advancing; amber
-requires correction and a repeat, and red holds expansion or rolls back. The
-thresholds are internal evidence guardrails, not production SLO commitments.
-See [`architecture-cost-options.md`](architecture-cost-options.md).
 
 ## Stage 0/1/2 capacity and economics gates — proposed
 
@@ -233,35 +194,8 @@ only support is considered invalid for Stage 2 unless a separately approved
 capacity plan demonstrates otherwise.
 
 ## Kill / success signals
-Margin must be reported as recognized income against **total attributable
-expenditure**, including cash costs, onboarding/support effort, tooling,
-failure/refund/remediation cost and other attributable pilot expenditure. The
-clarified ₹25L target is a monthly **business operating-profit** planning
-trigger after non-founder operating costs plus a separately modelled founder
-transition cost; it is not a contribution-margin percentage and does not
-replace the pilot contribution metric. See
-[`economics-model.md`](economics-model.md); do not report a
-variable-cost-only margin as the decision metric.
 
 The product should be judged on sustained usage, customer and restaurant adoption, and business value, not merely feature completion. The founder north star is:
-
-For the internal provisional tier experiment, also record the LITE/BASE/PRO
-label, before-GST rate and ±15% tolerance, variable/provider/API cost, support
-minutes, AI usage/cost, onboarding, integration-maintenance reserve where
-applicable, shared-infrastructure allocation, restaurant ROI, conversion,
-continuation and cash/economic contribution. The illustrative
-`3 LITE / 4 BASE / 3 PRO` mix is ₹11,499 weighted ARPU/month and ₹3,44,970
-gross 90-day billing before GST; it is not a forecast, approved pricing,
-public tier taxonomy or tax conclusion. Replace all planning assumptions with
-pilot evidence before using the result for a decision.
-
-The evidence sequence is behavior → successful fulfillment → staff adoption →
-business value → retention → willingness to pay → operational readiness, not
-feature completion. Apply it first in Stage 0, repeat it through the paid
-pilot, and use Stage 2 to decide whether materially larger onboarding volumes
-are justified. [Evidence: `nekurama.babai.research.md:L145-L163`;
-corroboration: `nekurama.raw.chat.json:L79721-L79820`,
-`nekurama.chatgpt.md:L39763-L39780`]
 
 `Restaurant activates → customers actually order → staff actually use it → restaurant sees operational value → restaurant keeps using it → restaurant pays`
 
@@ -278,20 +212,7 @@ actual-rate register rather than historical price hypotheses.
 
 The pilot is also intended to expose practical workflow, traffic, customer-experience, and data complexities. Findings may lead to changes in the interface, workflows, onboarding, or other product initiatives before broader expansion.
 
-The proposed gate requires, together, repeatable activation of at least three
-restaurants, at least 80% live within seven days, at least 90% accepted-order
-completion, no more than 5% missed/duplicate orders, at least 80% staff-led
-active order sessions, recurring combined Manoj/Vinay support of no more than
-12 hours per restaurant per month, complete income/expenditure evidence,
-non-negative base contribution at the proposed 40% sensitivity, and zero
-unresolved safety, privacy or payment-integrity exception. The minimum samples
-and hold conditions are maintained in [`pilot-metrics.md`](pilot-metrics.md).
-The ₹25L monthly operating-profit target is not a Stage 0/1/2 pass threshold;
-the 500/1,000-restaurant table is an internal planning trigger and readiness
-input only.
-Expansion beyond the initial 10 should be based on evidence from the pilot, with
-restaurant onboarding increasing progressively rather than switching immediately
-to aggressive market acquisition.
+Expansion beyond the initial 10 should be based on evidence from the pilot, with restaurant onboarding increasing progressively rather than switching immediately to aggressive market acquisition.
 
 ## Questions
 
@@ -315,6 +236,7 @@ to aggressive market acquisition.
 - [ ] ₹25L+ income-trigger unit selection (monthly versus annual sensitivity)
 - [ ] LITE/BASE/PRO pilot mix and rate-experiment approval
 - [ ] Tier-specific entitlement, usage and support thresholds
+- [ ] Tier-feasibility.md Stage 0/1/2 rollout gates and external dependency evidence
 - [ ] Team-defined readiness evidence for materially larger onboarding volumes
 - [ ] Signed agreement-template cancellation/refund and minimum-paying terms
 - [ ] Six-month post-pilot pricing review inputs; no automatic increase

@@ -129,6 +129,26 @@ the true cost model must retain pre-credit cost, founder hours, provider
 pass-throughs and tax. Provider choices, credits, rates, legal approvals and
 production SLOs remain **unresolved/input-required**.
 
+### Cost-minimal alternative for evaluation
+
+The overnight public-pricing research adds a lower-cash-cost candidate:
+
+| Component | Candidate | Public planning reference |
+|---|---|---:|
+| Always-on application host | AWS Lightsail Linux | ~$5/month |
+| Managed Postgres | Neon Launch 0.25–0.5 CU | ~$22–$41/month with small storage/restore |
+| Durable queue | SQS Standard | ~$0–$2/month at low request volume |
+| Cache/rate limits | Upstash Redis PAYG | ~$0–$10/month initially |
+| Object storage | Cloudflare R2 | ~$0.015/GB-month plus operations |
+| Observability | Better Stack/Grafana free tier | $0 initially |
+
+This yields a rough **$27–$45/month** small-production baseline before Meta,
+AI, domain, taxes and unusual egress. It is not a replacement decision for
+the AWS ECS/Fargate candidate: a single Lightsail host is a single-host
+failure risk, Neon connection/wake behavior needs validation, and migration to
+two hosts or independently scaled ECS/Fargate workers must be rehearsed.
+Rebuild automation, external backups and restore testing are mandatory.
+
 ## Founder Decision Packet: recommended now / revisit when
 
 | Area | Recommended now | Revisit when |

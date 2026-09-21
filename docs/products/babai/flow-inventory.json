@@ -16,6 +16,113 @@
     "Provider semantics terminate at adapters",
     "Recovery re-enters validated policy and state transitions"
   ],
+  "prototype_journey_matrix": [
+    {
+      "journey": "Admin/owner onboarding",
+      "records": ["admin-owner-onboarding", "owner-onboarding"],
+      "priority": "POC",
+      "tier_scope": {"LITE": "supported", "BASE": "supported", "PRO": "supported"},
+      "boundary": "Complex setup may move from WhatsApp to web; no public tier claim."
+    },
+    {
+      "journey": "Menu extraction/review/publish",
+      "records": ["owner-onboarding", "menu"],
+      "priority": "POC",
+      "tier_scope": {"LITE": "menu/order with update guardrail", "BASE": "bounded availability", "PRO": "bounded advanced integrations"},
+      "boundary": "Candidate revision, human review and explicit publish are mandatory."
+    },
+    {
+      "journey": "Staff permissions",
+      "records": ["owner-staff-setup"],
+      "priority": "POC",
+      "tier_scope": {"LITE": "role/scope enforced", "BASE": "role/scope enforced", "PRO": "role/scope plus approved integrations"},
+      "boundary": "Entitlement never replaces actor permission or branch scope."
+    },
+    {
+      "journey": "Customer discovery/menu/cart/review",
+      "records": ["customer-discovery", "menu", "order"],
+      "priority": "POC",
+      "tier_scope": {"LITE": "supported", "BASE": "supported", "PRO": "supported"},
+      "boundary": "Customer reviews current cart, fulfillment choice and amount before order creation."
+    },
+    {
+      "journey": "Payment",
+      "records": ["payment"],
+      "priority": "POC",
+      "tier_scope": {"LITE": "PAYMENT_NOT_ENTITLED", "BASE": "PAYMENT_ELIGIBLE", "PRO": "PAYMENT_ELIGIBLE_WITH_BOUNDED_INTEGRATIONS"},
+      "boundary": "Entitlement does not bypass provider verification or order acceptance."
+    },
+    {
+      "journey": "Pickup",
+      "records": ["delivery-pickup"],
+      "priority": "POC",
+      "tier_scope": {"LITE": "pickup", "BASE": "pickup", "PRO": "pickup"},
+      "boundary": "Pickup is the Stage 0 fulfillment proof."
+    },
+    {
+      "journey": "Delivery",
+      "records": ["delivery-pickup"],
+      "priority": "Later dependency",
+      "tier_scope": {"LITE": "DELIVERY_NOT_ENTITLED", "BASE": "APPROVED_PROVIDER_REQUIRED", "PRO": "APPROVED_PROVIDER_OR_INTEGRATION_REQUIRED"},
+      "boundary": "Delivery is not required for Stage 0."
+    },
+    {
+      "journey": "Order desk",
+      "records": ["order", "admin-analytics"],
+      "priority": "POC",
+      "tier_scope": {"LITE": "scoped order visibility/actions", "BASE": "order/payment/fulfillment desk", "PRO": "full bounded desk and approved APIs"},
+      "boundary": "WhatsApp for attention; web for density and recovery."
+    },
+    {
+      "journey": "Human takeover",
+      "records": ["human-takeover"],
+      "priority": "POC",
+      "tier_scope": {"LITE": "required", "BASE": "required", "PRO": "required"},
+      "boundary": "Automation pauses; order/payment/fulfillment continue."
+    },
+    {
+      "journey": "Promotions/combos",
+      "records": ["promo-combo", "notifications"],
+      "priority": "Later",
+      "tier_scope": {"LITE": "PROMOTION_NOT_ENTITLED", "BASE": "basic time-bounded", "PRO": "bounded promotion and approved integration"},
+      "boundary": "Deterministic policy, staff authorization and consent remain required."
+    },
+    {
+      "journey": "Notifications",
+      "records": ["notifications"],
+      "priority": "POC transactional; later marketing",
+      "tier_scope": {"LITE": "transactional status", "BASE": "transactional plus approved channels", "PRO": "bounded multi-channel"},
+      "boundary": "Domain event → notification request → template → renderer → provider."
+    },
+    {
+      "journey": "Reorder",
+      "records": ["retention-reorder"],
+      "priority": "Pilot",
+      "tier_scope": {"LITE": "measure behavior", "BASE": "new-cart reorder after review", "PRO": "bounded retention/reorder"},
+      "boundary": "Never clone stale price, offer, availability or delivery state."
+    },
+    {
+      "journey": "Cancel/refund",
+      "records": ["order", "payment", "exceptions-recovery"],
+      "priority": "POC control path",
+      "tier_scope": {"LITE": "staff cancellation; refund not entitled", "BASE": "staff-controlled correction/refund", "PRO": "same with approved integrations"},
+      "boundary": "Customer request is not a state transition; staff and payment policy decide."
+    },
+    {
+      "journey": "Recovery",
+      "records": ["exceptions-recovery"],
+      "priority": "POC baseline",
+      "tier_scope": {"LITE": "same validated recovery", "BASE": "same validated recovery", "PRO": "same plus bounded integration recovery"},
+      "boundary": "DLQ, replay and reconciliation re-enter policy/state machinery."
+    },
+    {
+      "journey": "Admin funnel/analytics",
+      "records": ["admin-analytics"],
+      "priority": "Pilot",
+      "tier_scope": {"LITE": "operational funnel", "BASE": "pilot metrics and cost/usage", "PRO": "bounded advanced analytics"},
+      "boundary": "Derived, privacy-scoped and non-blocking for runtime operations."
+    }
+  ],
   "flows": [
     {
       "id": "admin-owner-onboarding",
@@ -134,7 +241,8 @@
         "nekurama.chatgpt.md:L1478-L1672",
         "nekurama.chatgpt.md:L22696-L23080",
         "Raw T208 (5ec0497b-76d4-4977-bc62-179f63f51edc)",
-        "Raw T223 (3d343ca8-c4e9-4a06-9735-27a084e41064)"
+        "Raw T223 (3d343ca8-c4e9-4a06-9735-27a084e41064)",
+        "product-definition.md:L81-L104"
       ]
     },
     {
@@ -154,7 +262,10 @@
         "nekurama.chatgpt.md:L255-L272",
         "nekurama.chatgpt.md:L22696-L23080",
         "Raw T208 (5ec0497b-76d4-4977-bc62-179f63f51edc)",
-        "Raw T223 (3d343ca8-c4e9-4a06-9735-27a084e41064)"
+        "Raw T223 (3d343ca8-c4e9-4a06-9735-27a084e41064)",
+        "product-definition.md:L81-L104",
+        "validation.md:L119-L141",
+        "pilot-metrics.md:L145-L165"
       ]
     },
     {
@@ -174,7 +285,10 @@
         "nekurama.chatgpt.md:L1022-L1045",
         "nekurama.chatgpt.md:L23088-L23374",
         "Raw T19 (bbb216eb-b95f-4255-b182-0b9e8dc39288)",
-        "Raw T231 (b9268887-30dc-4aae-8605-fbd2dfe383ab)"
+        "Raw T231 (b9268887-30dc-4aae-8605-fbd2dfe383ab)",
+        "product-definition.md:L81-L104",
+        "validation.md:L119-L141",
+        "pilot-metrics.md:L145-L165"
       ]
     },
     {
@@ -194,7 +308,10 @@
         "nekurama.chatgpt.md:L221-L245",
         "nekurama.chatgpt.md:L8970-L9180",
         "Raw T21 (bbb21b01-c1d5-42f9-9e1f-702bb346453c)",
-        "Raw T202 (293ad099-4f4c-4e6c-a554-42d55cc8677b)"
+        "Raw T202 (293ad099-4f4c-4e6c-a554-42d55cc8677b)",
+        "product-definition.md:L81-L104",
+        "validation.md:L119-L141",
+        "pilot-metrics.md:L145-L165"
       ]
     },
     {
@@ -235,7 +352,8 @@
         "nekurama.chatgpt.md:L1615-L1672",
         "nekurama.chatgpt.md:L25004-L25571",
         "Raw T256 (bbb2153a-cef9-4c8b-bd34-b42af53dde75)",
-        "Raw T251 (1ea8f19f-6750-4943-b202-0fe845b9dd7a)"
+        "Raw T251 (1ea8f19f-6750-4943-b202-0fe845b9dd7a)",
+        "product-definition.md:L79-L104"
       ]
     },
     {
@@ -297,7 +415,9 @@
         "nekurama.chatgpt.md:L1774-L1825",
         "nekurama.chatgpt.md:L26174-L27130",
         "Raw T201 (bbb21dde-e359-4e19-b211-634eb6b5d917)",
-        "Raw T267 (6b051ce4-9033-4501-afff-e4bfd2d54679)"
+        "Raw T267 (6b051ce4-9033-4501-afff-e4bfd2d54679)",
+        "pilot-metrics.md:L145-L165",
+        "validation.md:L119-L141"
       ]
     }
   ]

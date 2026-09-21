@@ -84,6 +84,7 @@
         <button class="primary" type="button">Claim next support case</button>
         <span class="spacer"></span>
         <span class="freshness">Projection updated 12 seconds ago</span>
+        <span id="action-status" class="freshness" role="status" aria-live="polite">Local mock: no action submitted.</span>
       </section>
 
       <div class="workspace">
@@ -193,5 +194,34 @@
         </section>
       </div>
     </main>
+    <script>
+      (() => {
+        const status = document.querySelector("#action-status");
+        const announce = (message) => {
+          if (status) status.textContent = `Local mock: ${message}. Nothing submits.`;
+        };
+        const stateFor = (action) => {
+          if (action === "Accept") return "ACCEPTED";
+          if (action === "Reject") return "REJECTED";
+          if (action === "Mark ready") return "READY";
+          if (action === "Verify code") return "PICKUP VERIFIED";
+          if (action === "Track") return "TRACKING";
+          return null;
+        };
+        document.querySelectorAll("button").forEach((button) => {
+          button.addEventListener("click", () => {
+            const action = button.textContent.trim();
+            const state = stateFor(action);
+            const order = button.closest(".order");
+            const chip = order?.querySelector(".chip");
+            if (state && chip) {
+              chip.textContent = state;
+              chip.classList.toggle("warn", state === "REJECTED");
+            }
+            announce(`${action} applied to the local fixture`);
+          });
+        });
+      })();
+    </script>
   </body>
 </html>

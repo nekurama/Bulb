@@ -18,7 +18,8 @@ last-reviewed: 2026-09-22
 | AI | Extraction, grounding, schema, injection, handoff, cost | Versioned eval dataset |
 | Browser | Conversation/card UX, Pro queue, focus, responsive, offline/error | Playwright/browser checks |
 | Runtime | Latency, queue age, DB pool, burst and failure behavior | Load/recovery test report |
-| Pilot smoke | Onboarding → menu → order → payment → kitchen → delivery | Synthetic/approved pilot rehearsal |
+| Pilot smoke | Onboarding → menu → order → payment → kitchen → pickup → completion | Synthetic/approved pilot rehearsal |
+| Delivery rehearsal | Optional provider-gated adapter scenario; cannot block pickup-first readiness | Provider sandbox/reconciliation evidence |
 
 ## 2. Contract parity cases
 

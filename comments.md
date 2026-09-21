@@ -1,6 +1,6 @@
-# BABAI — Costing & Infrastructure Review
+# BABAI — Costing, Safe Pricing & Company Burn Review
 
-> Working note for BABAI economics and pricing.
+> Working note for BABAI economics, pricing, infrastructure, and company-level cash burn.
 > Last reviewed: 2026-09-21
 > All ₹ figures are INR and are planning targets unless explicitly marked as sourced/current provider pricing.
 
@@ -8,44 +8,31 @@
 
 The purpose of this model is **not** to make the pilot or the first 10 restaurants break even.
 
-Doing that would distort the apparent cost of serving a restaurant and create pricing cliffs:
-
-- early customers look artificially expensive
-- pricing gets set around temporary low-scale infrastructure absorption
-- prices then become difficult to lower as volume grows
-- customers can be rejected simply because the business has not yet reached efficient scale
+Doing that would distort the apparent cost of serving a restaurant and create pricing cliffs.
 
 The standard we need is:
 
 > **What should it normally cost BABAI to serve one restaurant once the platform is operating at a sensible scale?**
 
-That is the number that should guide pricing discipline.
-
 Pilot economics and company-level cash burn are separate questions.
 
-### Therefore:
+Therefore:
 
-1. **Do not load the pilot with all fixed company costs.**
-2. **Do not divide a fixed infrastructure bill by a tiny customer count and call that the restaurant's cost.**
-3. **Do not use N=10 economics to decide the long-term price floor.**
-4. **Track true marginal / semi-variable service cost per restaurant.**
-5. **Track total monthly company infrastructure spend separately.**
-6. **Allow infrastructure cost per restaurant to fall as the platform scales.**
-7. **Do not create pricing cliffs just because the first few customers are expensive to support.**
-
-This is a unit-cost model, not a break-even model.
+1. Do not load the pilot with all fixed company costs.
+2. Do not divide a fixed infrastructure bill by a tiny customer count and call that the restaurant's cost.
+3. Do not use N=10 economics to decide the long-term price floor.
+4. Track true marginal / semi-variable service cost per restaurant.
+5. Track total monthly company spend separately.
+6. Allow infrastructure cost per restaurant to fall as the platform scales.
+7. Do not create pricing cliffs because the first few customers are expensive to support.
 
 ---
 
-## 2. What we are actually trying to cost
+## 2. Separate service COGS from company burn
 
-The earlier economics model mixes several different kinds of cost.
+### Service COGS
 
-They should remain separate.
-
-### A. Service COGS
-
-Costs that are caused by serving restaurant/order volume:
+Costs caused by serving restaurant/order volume:
 
 - WhatsApp/provider fees
 - AI usage
@@ -58,202 +45,118 @@ Costs that are caused by serving restaurant/order volume:
 - storage
 - bandwidth
 - logs/observability
+- normal pooled service operations
 
-These are the main inputs to the **standard restaurant service cost**.
+### Customer-specific operating cost
 
-### B. Customer-specific operating cost
-
-Costs that happen because a particular restaurant requires additional work:
+Keep these separate:
 
 - exceptional onboarding
-- custom configuration
 - bespoke integration
 - unusual support
 - restaurant-specific engineering
 
-These should not silently become part of the standard cost of every restaurant.
+### Company fixed/operating cost
 
-### C. Shared operating cost
+These belong in company P&L rather than standard restaurant COGS:
 
-Costs that support the BABAI service as a whole:
-
-- pooled support
-- common monitoring
-- platform operations
 - engineering
 - product
-- management
+- founder/management
+- sales
 - legal/accounting
-- sales
 - general software
-
-These are company costs.
-
-They are important for company profitability, but they should not be blindly converted into a per-restaurant COGS number.
-
-### D. One-time implementation cost
-
-Work required to get a restaurant live.
-
-This should be measured separately from recurring service cost.
-
----
-
-## 3. Current BABAI commercial model
-
-The current working model contains these tier names/prices:
-
-| Tier | Monthly price (pre-GST) | Model description |
-|---|---:|---|
-| LITE | ₹4,999 | Limited AI/conversational assistance; menu display/order only; menu updates up to 3/month |
-| BASE | ₹9,999 | Users select/order/pay/use delivery; availability controls/basic time-bounded promos/combos |
-| PRO | ₹19,999 | Full bounded user/restaurant access across allowed workflows + advanced API integrations |
-
-The economics model currently gives illustrative loaded costs before shared infrastructure of:
-
-- LITE: ~₹1,700
-- BASE: ~₹3,000
-- PRO: ~₹8,000
-
-Those numbers should now be treated as **historical planning assumptions**, not as the standard cost floor.
-
-The older **₹42,500 / N shared-infrastructure allocation should not be used to determine customer pricing**.
-
----
-
-## 4. The key distinction: monthly company spend vs standard restaurant cost
-
-We need two different views.
-
-### View 1 — Total monthly infrastructure spend
-
-This answers:
-
-> "How much money will BABAI actually pay AWS/Cloudflare/etc. this month?"
-
-This is a company cash-burn question.
-
-It will increase in steps as capacity is added.
-
-### View 2 — Standard service cost per restaurant
-
-This answers:
-
-> "At normal scale, what does one restaurant add to BABAI's monthly operating cost?"
-
-This is the number that matters for pricing discipline.
-
-These are related, but they are not the same number.
-
-For example, if BABAI keeps a ₹20,000/month base infrastructure stack:
-
-- 10 restaurants may make the platform look expensive
-- 100 restaurants absorb the same base stack much better
-- 1,000 restaurants may require additional capacity
-
-The first case should **not** permanently define the standard cost of serving one restaurant.
-
----
-
-## 5. Standard-cost formula
-
-The working formula should be:
-
-**Standard restaurant service cost = marginal usage COGS + normal semi-variable infrastructure + normal pooled operations allocation**
-
-Where:
-
-### Marginal usage COGS
-
-Costs directly driven by restaurant activity:
-
-- orders
-- WhatsApp conversations/messages
-- AI turns/tokens
-- payments
-- delivery
-- API calls
-
-### Semi-variable infrastructure
-
-Infrastructure that grows with platform volume:
-
-- compute
-- DB capacity
-- cache capacity
-- storage
-- logs
-- queues
-- bandwidth
-
-### Pooled operations
-
-Only the normal service-level portion should be included here:
-
-- support tooling
-- monitoring
-- routine operations
-
-Do **not** include:
-
-- founder salary
-- product development
-- sales
-- company management
+- company administration
 - acquisition spend
 - one-off engineering
-- temporary pilot inefficiency
-
-in the standard service-cost number.
-
-Those belong in the company P&L.
 
 ---
 
-## 6. Traffic model
+## 3. Working safe-price framework
+
+The target is to build toward a **60–85% gross-margin SaaS model**, while keeping the actual cost assumptions measurable.
+
+Formula:
+
+**Safe price = service COGS / (1 − target gross margin)**
+
+For the current planning model, use the following conservative target service COGS:
+
+| Tier | Target service COGS |
+|---|---:|
+| LITE | ₹1,200 |
+| BASE | ₹1,800 |
+| PRO | ₹2,800 |
+
+### Price sensitivity
+
+| Target gross margin | LITE | BASE | PRO |
+|---|---:|---:|---:|
+| 60% floor | ₹2,999 | ₹4,499 | ₹6,999 |
+| **70% target** | **₹3,999** | **₹5,999** | **₹9,999** |
+| 80% target | ₹5,999 | ₹8,999 | ₹13,999 |
+| 85% target | ₹7,999 | ₹11,999 | ₹19,999 |
+
+### Current financial planning price
+
+> **LITE ₹3,999 / BASE ₹5,999 / PRO ₹9,999 per month, before GST**
+
+At the working 30% LITE / 40% BASE / 30% PRO mix:
+
+- weighted ARPU = **₹6,599/month**
+- weighted service COGS = **₹1,920/month**
+- weighted gross margin = **~70.9%**
+
+These are **financial planning prices**, not a final public commercial decision.
+
+### What about ₹999 / ₹2,499 / ₹4,999?
+
+At the same 30/40/30 mix, weighted ARPU is only **₹2,799/month**.
+
+Against the current conservative ₹1,920 weighted service COGS, that is only:
+
+**~31.4% gross margin**
+
+Therefore ₹999 / ₹2,499 / ₹4,999 should not be treated as the safe 60–85% margin price set unless production measurements demonstrate substantially lower COGS.
+
+---
+
+## 4. Traffic model
 
 Working high-volume scenario:
 
 - 1,000 restaurants
 - 50 orders/restaurant/day
-- **50,000 orders/day**
+- 50,000 orders/day
 - 6 conversational flows/order
 - 3–15 gateway hits/flow
-- average: **9 gateway hits/flow**
-- average: **54 requests/order**
-- heavy case: **~90 requests/order**
+- average 9 gateway hits/flow
+- average 54 requests/order
+- heavy case ~90 requests/order
 
 At 54 requests/order:
 
 **50,000 × 54 = 2.7M requests/day**
 
-Approximate monthly volume:
+Approximately:
 
-**~81M requests/month**
+**81M requests/month**
 
 24-hour average:
 
 **~31 RPS**
 
-Peak traffic is concentrated into operational hours. A working burst envelope of roughly **500–750 RPS** is still modest for modern managed HTTP gateways/serverless ingress.
+Peak traffic remains concentrated in operational hours, with a working burst envelope of roughly 500–750 RPS.
 
-The important architectural distinction remains:
-
-> **54 lightweight state/cache/API operations per order is not the same as 54 heavy database transactions per order.**
-
-The system should be designed so that most conversational operations remain cheap.
+The architecture should keep most of these operations lightweight. 54 HTTP operations/order is not equivalent to 54 heavy database transactions or 54 LLM calls.
 
 ---
 
-## 7. Support should be pooled
+## 5. Support model
 
-Support should not be modeled as:
+Support should be pooled, not budgeted per restaurant.
 
-> "Every restaurant requires its own support budget."
-
-The operating model should assume centralized support.
-
-Example planning case:
+Example:
 
 - 5,000 orders/day
 - 0.1% platform failure rate
@@ -263,15 +166,9 @@ Then:
 
 **5,000 × 0.001 × 0.03 = 0.15 human-intervention cases/day**
 
-If a planning window uses 40 operating days:
+The 3% must explicitly mean percentage of failures requiring intervention.
 
-**0.15 × 40 = 6 cases**
-
-The arithmetic is only useful if the 3% is explicitly the percentage of failures requiring human intervention.
-
-Operational responsibility should remain clear:
-
-### BABAI owns
+BABAI owns:
 
 - platform failures
 - integration failures
@@ -279,30 +176,21 @@ Operational responsibility should remain clear:
 - WhatsApp/provider technical failures
 - system reliability
 
-### Restaurant owns
+Restaurants own:
 
 - wrong menu configuration
-- wrong prices configured by the restaurant
-- accepting an incorrect item
+- wrong prices entered by restaurant
 - kitchen mistakes
 - fulfillment mistakes
 - restaurant-side operational decisions
 
-This keeps the support model centralized and prevents normal restaurant operations from becoming BABAI's recurring per-customer COGS.
-
 ---
 
-## 8. Hosting philosophy
-
-BABAI should start with the smallest architecture that comfortably handles the expected load.
-
-The goal is not:
-
-> "How much infrastructure can we afford?"
+## 6. Minimal hosting philosophy
 
 The goal is:
 
-> **"What is the smallest reliable infrastructure that handles the workload without creating operational fragility?"**
+> **Use the smallest reliable infrastructure that comfortably handles the workload.**
 
 Recommended baseline:
 
@@ -310,41 +198,35 @@ Recommended baseline:
 - Postgres for durable transactional state
 - Redis/KV for session/cache/menu state
 - queue/event bus for asynchronous work
-- object storage for backups/assets where appropriate
+- object storage for backups/assets
 - centralized monitoring
 - automated backups
 
-Avoid unnecessary complexity:
+Avoid premature:
 
 - service-per-function decomposition
 - large always-on clusters
 - synchronous fan-out
-- heavy DB transactions for every conversational event
+- heavy DB transactions for conversational events
 - excessive logging
 - premature multi-region infrastructure
 
-Scale the stateless layer first.
-
-Keep the stateful core small, indexed, and measurable.
+Scale stateless capacity first and keep the stateful core small and measurable.
 
 ---
 
-## 9. AI is not the primary cost risk
+## 7. AI is not the primary cost risk
 
-AI calls should be measured by:
+Measure:
 
 - AI turns/order
 - input tokens/turn
 - output tokens/turn
 - model used
 
-They should **not** be inferred from total gateway requests.
+Do not infer AI spend from gateway requests.
 
-For example:
-
-> 54 HTTP requests/order does not mean 54 LLM calls/order.
-
-Most restaurant-ordering operations should be deterministic:
+Most restaurant-ordering operations should remain deterministic:
 
 - menu lookup
 - availability lookup
@@ -354,315 +236,162 @@ Most restaurant-ordering operations should be deterministic:
 - payment status
 - order status
 
-AI should be used where conversational interpretation is actually needed.
-
-This makes AI cost controllable.
+AI should handle interpretation where it is actually needed.
 
 ---
 
-## 10. Standard cost targets
+## 8. Company-level cash-burn model
 
-The following should be treated as **target recurring service costs**, not fully loaded company costs.
+This is separate from standard restaurant COGS.
 
-They are intended to answer:
+The company burn formula is:
 
-> "What should it normally cost us to serve this restaurant?"
+**Total monthly cash burn = fixed operating burn + infrastructure + variable service COGS**
 
-### LITE
+For the working planning model:
 
-Target standard cost:
+### Fixed operating burn
 
-**~₹600–₹1,000/month**
-
-Planning midpoint:
-
-**~₹800/month**
-
-Typical drivers:
-
-| Component | Target |
+| Expense | Monthly planning budget |
 |---|---:|
-| Compute + gateway | ₹100–₹200 |
-| Postgres + cache | ₹150–₹250 |
-| AI | ₹50–₹150 |
-| Messaging/API | ₹100–₹250 |
-| Monitoring/backups/storage | ₹50–₹100 |
-| Normal pooled operations | ₹100–₹200 |
-| **Target range** | **₹550–₹1,150** |
+| Engineering | ₹3.00L |
+| Support/operations | ₹0.85L |
+| Founder/management | ₹0.65L |
+| Software/legal/accounting/misc. | ₹0.50L |
+| **Fixed operating burn** | **₹5.00L** |
 
-The exact number should ultimately come from measured production usage.
+This ₹5L is a **planning assumption**, not a measured current BABAI expense.
 
-### BASE
+### Infrastructure capacity budget
 
-Target standard cost:
+| Restaurants | Monthly infrastructure budget |
+|---:|---:|
+| 10–50 | ₹30k |
+| 100 | ₹35k |
+| 250 | ₹50k |
+| 500 | ₹70k |
+| 1,000 | ₹1.20L |
+| 2,500 | ₹2.00L |
+| 5,000 | ₹3.50L |
+| 10,000 | ₹6.00L |
 
-**~₹1,000–₹1,800/month**
+This is a conservative planning envelope. It is not a provider invoice.
 
-Planning midpoint:
+### Variable service COGS
 
-**~₹1,400/month**
+Use:
 
-Typical drivers:
+**₹1,920 × active restaurants/month**
 
-| Component | Target |
-|---|---:|
-| Compute + gateway | ₹150–₹300 |
-| Postgres + cache | ₹250–₹350 |
-| AI | ₹100–₹250 |
-| Messaging/API | ₹200–₹400 |
-| Payment-related variable cost | ₹100–₹250 |
-| Monitoring/backups/storage | ₹50–₹100 |
-| Normal pooled operations | ₹150–₹250 |
-| **Target range** | **₹1,000–₹1,900** |
-
-### PRO
-
-Target standard cost:
-
-**~₹2,500–₹4,500/month**
-
-Planning midpoint:
-
-**~₹3,250/month**
-
-Typical drivers:
-
-| Component | Target |
-|---|---:|
-| Compute + gateway | ₹300–₹600 |
-| Postgres + cache | ₹400–₹700 |
-| AI | ₹250–₹600 |
-| Messaging/API | ₹400–₹800 |
-| Payment/integration variable cost | ₹300–₹700 |
-| Monitoring/backups/storage | ₹150–₹300 |
-| Normal pooled operations | ₹300–₹800 |
-| **Target range** | **₹2,100–₹4,500** |
-
-These targets should be revisited after real traffic measurements.
+until measured production data replaces the assumption.
 
 ---
 
-## 11. Pricing-cliff rule
+## 9. Full company burn curve
 
-A core rule for BABAI:
+Assumptions:
 
-> **Do not increase the standard price simply because the current customer count is too small to absorb fixed infrastructure.**
+- 50 orders/restaurant/day
+- 30 days/month
+- 30% LITE / 40% BASE / 30% PRO
+- ₹3,999 / ₹5,999 / ₹9,999
+- ₹1,920 weighted service COGS/restaurant
+- ₹5L fixed operating burn
 
-If the platform costs ₹X/month to keep alive, that does not mean each of the first 10 restaurants has an incremental cost of ₹X/10.
+| Restaurants | Orders/day | Revenue/month | Service COGS | Infra | Fixed ops | **Total cash burn** | **Operating surplus** |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 10 | 500 | ₹0.66L | ₹0.19L | ₹0.30L | ₹5.00L | **₹5.49L** | **−₹4.83L** |
+| 25 | 1,250 | ₹1.65L | ₹0.48L | ₹0.30L | ₹5.00L | **₹5.78L** | **−₹4.13L** |
+| 50 | 2,500 | ₹3.30L | ₹0.96L | ₹0.30L | ₹5.00L | **₹6.26L** | **−₹2.96L** |
+| 100 | 5,000 | ₹6.60L | ₹1.92L | ₹0.35L | ₹5.00L | **₹7.27L** | **−₹0.67L** |
+| 250 | 12,500 | ₹16.50L | ₹4.80L | ₹0.50L | ₹5.00L | **₹10.30L** | **+₹6.20L** |
+| 500 | 25,000 | ₹33.00L | ₹9.60L | ₹0.70L | ₹5.00L | **₹15.30L** | **+₹17.70L** |
+| 1,000 | 50,000 | ₹65.99L | ₹19.20L | ₹1.20L | ₹5.00L | **₹25.40L** | **+₹40.59L** |
+| 2,500 | 125,000 | ₹164.98L | ₹48.00L | ₹2.00L | ₹5.00L | **₹55.00L** | **+₹109.98L** |
+| 5,000 | 250,000 | ₹329.95L | ₹96.00L | ₹3.50L | ₹5.00L | **₹104.50L** | **+₹225.45L** |
+| 10,000 | 500,000 | ₹659.90L | ₹192.00L | ₹6.00L | ₹5.00L | **₹203.00L** | **+₹456.90L** |
 
-Instead:
-
-- keep the platform lean
-- absorb early fixed cost at the company level
-- measure actual service COGS
-- improve utilization as the customer base grows
-- revisit pricing only when the underlying service cost changes
-
-This avoids a common SaaS failure mode:
-
-**low scale → high allocated cost → high price → slower adoption → low scale**
-
-The business should not create that loop artificially.
-
----
-
-## 12. Cost should fall with scale — until capacity steps up
-
-Infrastructure is not perfectly linear.
-
-A better model is:
-
-**Monthly infrastructure spend = base platform cost + usage cost + capacity steps**
-
-And:
-
-**Standard restaurant cost = total recurring service COGS / normal active restaurant volume**
-
-The second number should be calculated at representative scale, not at the first few customers.
-
-### Example
-
-Suppose a platform stack costs:
-
-**₹20,000/month**
-
-At 10 restaurants:
-
-**₹2,000 apparent infrastructure allocation/restaurant**
-
-At 100 restaurants:
-
-**₹200 apparent allocation/restaurant**
-
-At 1,000 restaurants:
-
-**₹20 apparent allocation/restaurant**
-
-But eventually capacity may need to increase.
-
-For example:
-
-**₹20k → ₹30k → ₹50k → ₹80k**
-
-The cost curve is therefore stepwise, not linear.
-
-The important point is that **customer count and infrastructure bill should be modeled separately**.
+The table is intentionally a **company cash-burn model**, not a per-restaurant fixed-cost allocation.
 
 ---
 
-## 13. What could actually increase standard cost
+## 10. The 0–100 restaurant runway
 
-The major risks are not raw HTTP throughput.
+The early-stage problem is fixed company burn.
 
-### 1. WhatsApp/provider fees
+Using the same assumptions:
 
-Message/conversation pricing can become significant at volume.
+| Restaurants | Revenue | Variable service COGS | Infrastructure | Fixed ops | **Net monthly burn** |
+|---:|---:|---:|---:|---:|---:|
+| 0 | ₹0 | ₹0 | ₹30k | ₹5.00L | **−₹5.30L** |
+| 10 | ₹0.66L | ₹0.19L | ₹30k | ₹5.00L | **−₹4.83L** |
+| 20 | ₹1.32L | ₹0.38L | ₹30k | ₹5.00L | **−₹4.36L** |
+| 30 | ₹1.98L | ₹0.58L | ₹30k | ₹5.00L | **−₹3.90L** |
+| 40 | ₹2.64L | ₹0.77L | ₹30k | ₹5.00L | **−₹3.43L** |
+| 50 | ₹3.30L | ₹0.96L | ₹30k | ₹5.00L | **−₹2.96L** |
+| 60 | ₹3.96L | ₹1.15L | ₹30k | ₹5.00L | **−₹2.49L** |
+| 70 | ₹4.62L | ₹1.34L | ₹30k | ₹5.00L | **−₹2.02L** |
+| 80 | ₹5.28L | ₹1.54L | ₹30k | ₹5.00L | **−₹1.56L** |
+| 90 | ₹5.94L | ₹1.73L | ₹30k | ₹5.00L | **−₹1.09L** |
+| 100 | ₹6.60L | ₹1.92L | ₹35k | ₹5.00L | **−₹0.67L** |
 
-### 2. Payment processing
+### Break-even
 
-If BABAI absorbs payment costs, they scale with transaction volume/GMV.
+At this fixed-cost assumption, break-even occurs at approximately:
 
-### 3. Delivery
+**114 restaurants**
 
-Per-order delivery/API charges can dominate infrastructure costs.
+That's the important early-stage number.
 
-### 4. Database architecture
-
-If every conversational step becomes a heavy transactional DB operation, DB capacity can grow unnecessarily.
-
-### 5. Observability
-
-Millions of requests/day with verbose logs can create a large storage and ingestion bill.
-
-### 6. AI context size
-
-Large conversation histories sent repeatedly to the model can turn an otherwise cheap AI workflow into a material variable cost.
-
-### 7. Custom integrations
-
-Restaurant-specific engineering is a much bigger risk to economics than basic compute.
-
-A bespoke integration should be treated as a customer-specific cost, not hidden inside the standard restaurant COGS.
+The business doesn't need infrastructure to become cheap enough to break even. It needs enough restaurants to absorb the **₹5L fixed company operation**.
 
 ---
 
-## 14. Cost-accounting structure
+## 11. Runway requirement
 
-Future economics updates should keep these columns separate:
+If BABAI starts at zero and grows gradually, the relevant question is cumulative burn rather than the burn at 100 restaurants.
 
-| Cost class | Example | Standard restaurant cost? |
-|---|---|---|
-| Message COGS | WhatsApp/provider | Yes |
-| AI COGS | LLM tokens | Yes |
-| Payment COGS | payment fees | Yes where BABAI absorbs them |
-| Delivery COGS | logistics/API | Yes where BABAI absorbs them |
-| Compute | API/workers/containers | Yes |
-| Database | Postgres | Yes, on a usage/capacity basis |
-| Cache | Redis/KV | Yes |
-| Storage | object storage | Yes |
-| Logging | observability | Yes, normal usage only |
-| Pooled support | shared support | Partially / as normal service overhead |
-| One-time onboarding | merchant setup | No — separate |
-| Custom integration | bespoke engineering | No — customer-specific |
-| Product engineering | platform development | No — company fixed cost |
-| Sales | acquisition | No |
-| G&A | legal/accounting/admin | No |
-| Founder time | management/company building | No |
+For example, if the company averages roughly:
+
+- 10 restaurants during one phase
+- 25 during the next
+- 50 during the next
+- 75 during the next
+- 100 thereafter
+
+then the capital required to reach operating break-even can easily be several months of the ₹3–5L/month early-stage burn.
+
+Therefore:
+
+> **Pilot funding should be sized around runway, not forced into per-restaurant break-even economics.**
+
+This is consistent with the pricing principle: do not make early customers carry the company's fixed startup costs.
 
 ---
 
-## 15. Company cash-burn model
+## 12. What this tells us about pricing
 
-A separate sheet/model should answer:
+The important conclusions are:
 
-> "How much will BABAI actually spend each month?"
+### ₹999 / ₹2,499 / ₹4,999
 
-This should be modeled independently from standard restaurant cost.
+Potentially commercially attractive, but **not compatible with the current 60–85% margin target at 50 orders/restaurant/day** unless actual service COGS is dramatically below the current planning assumption.
 
-At each scale, calculate:
+### ₹3,999 / ₹5,999 / ₹9,999
 
-### Fixed platform spend
+Provides approximately 70% weighted gross margin under the current COGS assumptions and gives the company room to absorb usage variation.
 
-- minimum compute
-- database base instance
-- cache base instance
-- monitoring
-- backups
-- storage
-- gateway minimums
+### Higher pricing
 
-### Usage spend
+₹5,999 / ₹8,999 / ₹13,999 and above creates more margin headroom, but should only be adopted if product value and market validation support it.
 
-- requests
-- compute time
-- database storage/IO
-- cache operations
-- AI
-- WhatsApp/provider
-- payment
-- delivery
-- logs
-
-### Capacity steps
-
-When a component crosses a practical limit:
-
-- larger DB
-- additional compute
-- larger cache
-- additional queue workers
-- higher monitoring/logging volume
-
-The resulting monthly bill is the **actual company infrastructure cash burn**.
-
-It should not be divided by N and then used as the standard restaurant price.
+The financial model should not decide public pricing by itself.
 
 ---
 
-## 16. Recommended architecture
+## 13. What must be measured before locking pricing
 
-```
-WhatsApp / Web
-      |
-      v
-Stateless API / Gateway
-      |
-      +----> Redis/KV
-      |       - session
-      |       - menu cache
-      |       - temporary state
-      |
-      +----> Postgres
-      |       - restaurants
-      |       - menus
-      |       - orders
-      |       - payments
-      |       - durable state
-      |
-      +----> Queue/Event Bus
-                  |
-                  +--> notifications
-                  +--> kitchen/POS events
-                  +--> delivery events
-                  +--> analytics
-```
-
-Guidelines:
-
-- cache menus/configuration
-- make order creation transactional
-- use idempotency for order/payment actions
-- make downstream integrations asynchronous where possible
-- keep conversational state lightweight
-- cap AI context
-- batch analytics
-- keep logs useful rather than exhaustive
-
----
-
-## 17. What we should measure before changing the targets
-
-The next version should replace estimates with actual production measurements:
+Replace assumptions with production data:
 
 1. requests/order
 2. DB reads/order
@@ -682,36 +411,36 @@ The next version should replace estimates with actual production measurements:
 16. onboarding hours/restaurant
 17. custom integration hours/restaurant
 
-Once these are measured, the standard cost becomes empirical.
+Once these are measured, the safe price can be recalculated from actual COGS.
 
 ---
 
-## 18. Final working conclusion
+## 14. Final working conclusion
 
-The economics model should **not** be optimized around pilot break-even.
+The business should maintain three separate financial numbers:
 
-The pilot is a learning and validation phase.
+### 1. Standard service COGS
 
-The recurring pricing discipline should instead be based on the **normal standard cost of serving a restaurant**.
+What one normal restaurant adds to BABAI's recurring cost.
 
-Current working targets:
+### 2. Company monthly burn
 
-- **LITE:** ~₹800/month
-- **BASE:** ~₹1,400/month
-- **PRO:** ~₹3,250/month
+What BABAI actually spends each month, including fixed employees/operations and infrastructure.
 
-These are service-cost targets, not fully loaded company costs.
+### 3. Gross margin
 
-The old ₹42,500/N allocation is useful for understanding company-level cost absorption, but it should **not** define the standard restaurant cost or force pricing upward during the pilot.
+**(Revenue − variable service COGS) / Revenue**
 
-The operating principle is:
+The working target is approximately **70% gross margin**, with 60% as the lower planning floor and 80–85% as the high-margin target range.
 
-> **Keep the standard cost low, let shared infrastructure amortize naturally with scale, and keep temporary low-scale inefficiency at the company level rather than passing it through as a pricing cliff.**
+The current planning price set is:
 
-That gives BABAI a stable cost standard for pricing while preserving the ability to improve margins as volume grows.
+> **LITE ₹3,999 / BASE ₹5,999 / PRO ₹9,999**
 
-The separate company-level question remains:
+The current 0–100 model indicates approximately **₹5.3L/month burn at zero restaurants**, declining to approximately **₹0.67L/month burn at 100 restaurants**, under the stated assumptions.
 
-> **How much will BABAI spend per month at 10, 50, 100, 500, 1,000, 5,000 and 10,000 restaurants?**
+Approximate operating break-even is **~114 restaurants**.
 
-That should be modeled as a separate infrastructure cash-burn curve, using actual provider prices and capacity thresholds.
+The key strategic principle remains:
+
+> **Do not make the first 100 restaurants pay for the company's fixed startup structure through artificial per-restaurant costs. Keep the service COGS low, keep company burn explicit, and let scale absorb fixed costs.**

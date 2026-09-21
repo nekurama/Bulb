@@ -139,6 +139,10 @@ This recommendation does not claim provider, legal, security, Meta, payment
 or external approval. Those decisions remain parked until their stated
 validation evidence exists.
 
+The dated implementation sequence, DevOps gates, test plan, rollback posture,
+internal reserves and controlled onboarding checks are maintained in
+[`architecture-plan-oct-dec-2026.md`](architecture-plan-oct-dec-2026.md).
+
 ### Key HLD/LLD decision citation index
 
 The following index is the review handoff for the decisions most likely to be

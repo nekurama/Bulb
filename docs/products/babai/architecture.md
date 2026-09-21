@@ -15,6 +15,7 @@ sources:
   - docs/products/babai/architecture-boundaries.md
   - docs/products/babai/architecture-lld.md
   - docs/products/babai/architecture-cost-options.md
+  - docs/products/babai/economics-model.md
 ---
 
 # Architecture
@@ -128,6 +129,25 @@ AWS spend or justify unused capacity. Founder-only support is capped at
 planned-load ceiling and no 24x7 promise. Scale and rollback triggers,
 assumptions and parked provider gates are maintained in
 [`architecture-cost-options.md`](architecture-cost-options.md).
+
+### Architecture inputs to the economics model
+
+The economics model must not linearly extrapolate the pilot envelopes from
+N=1 to N=500. Architecture-owned inputs are the shared/step-variable runtime,
+PostgreSQL, queue/outbox, object-storage/CDN, observability, AI and provider
+usage counters, plus founder support and recovery minutes. Emit them by
+tenant/restaurant and assumptions version without unrestricted payloads.
+
+Use N=1–3, 4–10, 11–25, 26–50, 51–100, 101–250 and 251–500 as measurement
+bands. The modular monolith remains the default through the bands; runtime
+splitting, database changes, stronger provider limits, AI budgets or staffing
+changes require measured bottleneck, continuity, security or support evidence.
+N=500 is an architecture re-baseline trigger, not a capacity promise. EKS,
+Kafka and multi-region remain non-default options requiring separate evidence.
+The detailed counter contract and support-telemetry bridge are in
+[`architecture-cost-options.md`](architecture-cost-options.md) and
+[`architecture-lld.md`](architecture-lld.md), with
+[`economics-model.md`](economics-model.md) as the receiving financial model.
 
 ### Key HLD/LLD decision citation index
 

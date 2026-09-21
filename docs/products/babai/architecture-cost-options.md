@@ -13,6 +13,7 @@ sources:
   - docs/products/babai/brd.md
   - docs/products/babai/business-model.md
   - docs/products/babai/validation.md
+  - docs/products/babai/economics-model.md
   - docs/company/founders-ownership-governance.md
 ---
 
@@ -104,6 +105,67 @@ pricing or margin claims. The product BRD requires actual infrastructure,
 provider, payment, tooling, support, failure and refund costs to be recorded
 per pilot before public pricing is set. [`brd.md`; `business-model.md`;
 `validation.md`]
+
+## Economics integration and N=1–500 scale curve
+
+The economics model needs architecture-owned usage counters rather than a
+linear extrapolation of the low/base/high envelopes. Use this planning
+decomposition:
+
+```text
+C_platform(N)
+  = C_shared
+  + C_runtime(N)
+  + C_database(N)
+  + C_queue(N)
+  + C_object_storage(N)
+  + C_observability(N)
+  + C_ai(N)
+  + C_provider(N)
+```
+
+`C_provider(N)` and `C_ai(N)` remain variable, provider/model-dependent
+inputs. Customer-order payment fees remain pass-through unless a contract
+explicitly makes BABAI absorb them. No value in this decomposition is a quote
+or a final unit-cost assumption.
+
+| Scale band | Architecture sensitivity to model | Required evidence before moving up |
+|---|---|---|
+| **N=1–3** | One API/worker image, one managed PostgreSQL primary, one queue/DLQ path; most cost is shared. Capture per-restaurant request, message, AI and support baselines. | Stage 0/1 time logs, provider exports, queue/outbox metrics and restore evidence |
+| **N=4–10** | Remains a modular monolith; separate API/worker capacity only when thresholds fire. Shared database, queue, object and telemetry costs are allocated by measured usage. | Two-week rolling support telemetry, load sample, retry/DLQ rate and per-restaurant allocation |
+| **N=11–25** | Expect worker concurrency, database connections, queue volume, object retention and log volume to become step-variable. Add capacity only through the existing scale triggers. | Capacity test, connection/lock report, queue age, storage/egress and observability cost |
+| **N=26–50** | Treat API and worker scaling as independently measurable while keeping one codebase and authoritative PostgreSQL. Add AI/provider budgets and tenant-level rate limits if usage warrants. | Sustained throughput, provider limits, AI usage/retry export, incident/support load |
+| **N=51–100** | Re-test database tier, pooling, indexes, backup/restore duration, queue visibility and telemetry retention. A deployment split remains optional and evidence-driven. | Controlled load test, restore drill within RTO, error/reconciliation evidence and support-capacity decision |
+| **N=101–250** | Expect additional runtime/worker capacity and stronger cost attribution. Review read models, archival and provider quotas; do not infer microservices from restaurant count alone. | Measured bottleneck, data-growth/retention review, provider terms and founder/support operating decision |
+| **N=251–500** | Perform an architecture re-baseline before committing to this band: database growth, queue throughput, object/CDN egress, AI spend, provider limits, observability cost and support model. EKS, Kafka and multi-region remain non-default options requiring separate evidence. | Written capacity, continuity, security, provider and staffing evidence; updated cost model and approval packet |
+
+The curve is a **measurement plan**, not a restaurant-capacity promise. The
+current product onboarding ceiling and founder-only support guardrails still
+apply. Do not allocate a high-band cost across N until the corresponding
+runtime, provider and support measurements exist.
+
+### Architecture-owned ledger counters
+
+Emit or export monthly counters keyed by `tenantId`/restaurant and an
+assumptions version. The economics model should receive counts and durations,
+not unrestricted payloads:
+
+| Cost driver | Minimum counters |
+|---|---|
+| Runtime/API/worker | request count, p50/p95 latency, CPU/memory/task-hours, worker concurrency and deploy/restart count |
+| PostgreSQL | allocated storage, backup volume, connection saturation, query/lock pressure, I/O where available and restore duration |
+| Queue/outbox | messages enqueued/received/acknowledged, payload bytes, retries, visibility extensions, DLQ/quarantine count, oldest age and replay count |
+| Object storage/CDN | object count/GB, PUT/GET, signed URL volume, cacheable/public bytes and egress |
+| Observability | log/metric/trace volume, retained GB, sampled trace count and alert/page count |
+| AI assistance | request count, input/output tokens or equivalent units, model route identifier, cache-hit/miss, retries, tool calls and human escalation count |
+| External providers | Meta/provider message count by category, delivery/retry/failure count, channel/provider identifier and invoice/add-on reference |
+| Founder support | onboarding, takeover, merchant support, incident, reconciliation and recovery minutes; severity, reason, restaurant, deployment version and outcome |
+
+Rates, model/provider names, retention, discounts, credits, taxes and
+allocation rules stay unknown until verified. Shared costs must be reported
+separately from per-restaurant variable usage so the economics model can
+compare `N=1`, `N=10`, `N=50`, `N=100`, `N=250` and `N=500` without hiding
+step changes. [`economics-model.md`; `architecture-lld.md`]
 
 ## AWS managed deployment options
 
@@ -466,6 +528,16 @@ data location, access review, alert routing, pricing and Manoj/Vinay
 ownership must be validated together. Do not put credentials, payment secrets
 or unrestricted PII in logs, events or traces. [`architecture-lld.md`;
 `docs/company/security-privacy-controls.md`]
+
+For economics integration, every support or recovery activity must also emit a
+small operational record or time-log entry containing restaurant/tenant,
+activity class (`onboarding`, `takeover`, `merchant-support`, `incident`,
+`reconciliation`, `restore`), severity where applicable, start/end or minutes,
+automation/manual mode, provider, deployment version and outcome. Aggregate
+these records weekly by restaurant and scale band; do not infer founder cost
+from alert count alone. The record must exclude message bodies, credentials,
+payment secrets and unrestricted PII. This is the telemetry bridge to
+`economics-model.md`, not a staffing approval or a new customer SLA.
 
 ## Backup, restore and continuity assumptions
 

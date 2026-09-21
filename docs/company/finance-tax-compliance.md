@@ -36,6 +36,11 @@ reimbursements. The internal control packet defines the minimum time/support rec
 evidence in [`internal-controls.md`](internal-controls.md); it does not set tax, payroll or
 employment treatment.
 
+The same packet defines internal economics evidence for CAC, AI/provider invoices,
+refunds/failures and restaurant-value metrics. These are management records with explicit
+definitions, source artifacts and calculation assumptions; they do not by themselves establish
+revenue, payment custody, tax treatment, provider completion or an external approval.
+
 DPIIT, T-Hub and incubator eligibility must be validated against the company's actual
 incorporation, registered address, operations, GST position and each programme's current rules.
 No benefit is assumed from founder residence, a portal listing or AI usage alone.
@@ -71,6 +76,7 @@ Evidence: founder history [250] separates BABAI subscription billing from restau
 - [ ] **Approval evidence:** retain approver, invoice/receipt, purpose, payment evidence and any related-party or material-spend approval.
 - [ ] **Professional validation:** obtain CA advice on GST/tax setup and CA/CS advice on TDS, professional tax, Shops & Establishments, audit, ROC filings, invoicing, refunds and revenue recognition before relying on a filing position.
 - [ ] **Operating controls:** adopt founder compensation, reimbursement, payment approval, evidence-retention and month-end close policies with named approvers.
+- [ ] **Economics evidence:** retain defined CAC, founder-time, AI/provider invoice, refund/failure and restaurant-value records with source, period, denominator, calculation and reconciliation evidence.
 - [ ] **Settlement boundary:** keep restaurant funds outside NEKURAMA custody unless a separately reviewed payment/regulatory design makes the company a collection or settlement party.
 - [ ] **Opportunity register:** validate DPIIT, SIPP/IPR, DeepTech, 80-IAC, T-Hub, incubators, Udyam/MSME, Telangana opportunities and GeM eligibility; record legal basis, date, owner, evidence and expiry/reassessment date.
 - [ ] **Compliance calendar:** track owner, deadline, filing evidence, reviewer, payment, escalation and dependencies; do not infer a deadline from a consultant quote.

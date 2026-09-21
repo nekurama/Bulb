@@ -7,6 +7,7 @@ sources:
   - nekurama.chatgpt.md
   - nekurama.babai.research.md
   - "2026-09-21 FOUNDER DECISION PACKET"
+  - "2026-09-21 FOUNDER NAMING CORRECTION (current task input)"
   - "2026-09-21 ECONOMICS MODEL REVIEW PACKET"
   - "2026-09-21 FOUNDER SCALE/COST BASELINE (current task input)"
   - "2026-09-21 FOUNDER ECONOMIC TARGET CLARIFICATION (current task input)"
@@ -46,6 +47,24 @@ heading. Key anchors for this BRD are:
 Assistant recommendations in the raw conversation are not treated as founder
 decisions unless the current issue sources, later explicit direction or field
 evidence supports them.
+
+## Naming correction — current taxonomy
+
+The current founder correction preserves the product identity: **BABAI remains
+the product under NEKURAMA**, and **“BABAI — Business Automation by AI”**
+remains founder-approved wording. This records internal wording and intent; it
+does not assert an invented etymology, public pricing, package taxonomy or
+legal/trademark clearance. [Current founder correction: `2026-09-21 FOUNDER
+NAMING CORRECTION (current task input)`; raw identity evidence:
+`nekurama.raw.chat.json:L13591-L13630`, `L616-L618`; corroboration:
+`nekurama.chatgpt.md:L42026-L42050`]
+
+Tadka, Thali, Dawat, Feast and similar labels may appear only in clearly
+marked historical or source-evidence sections. They are not current product
+names, tiers, packages, entitlements or pilot variants. For any
+10-restaurant pilot analysis, use neutral labels such as **Pilot Variant A/B/C**
+or describe the functional scope directly. Those labels are test-record
+labels, not public taxonomy or pricing.
 
 ## Founder decision packet — 2026-09-21
 
@@ -133,10 +152,11 @@ baseline” and “Founder economic target clarification”. These are founder
 inputs and derived planning estimates, not a finalized infrastructure or
 provider choice.
 
-The ₹999, ₹2,499 and ₹4,999 monthly amounts remain pricing experiments only.
-At `N=10` with advisory AI and base provider inputs, the model shows ₹999 and
-₹2,499 as negative economic-contribution cases after founder time; ₹4,999 is
-positive only in advisory mode and remains negative in the AI-heavy case.
+The ₹999, ₹2,499 and ₹4,999 monthly amounts are historical source-evidence
+price hypotheses only. They are not current pilot prices, package names or
+public pricing. At `N=10`, the economics model retains them only as
+historical sensitivity inputs; current pilot records must use neutral
+**Pilot Variant A/B/C** labels or functional scope descriptions.
 Proposed review controls are a negative base contribution for two consecutive
 months, repeated support-ceiling breaches, unpriced AI-heavy routing, or CAC
 payback above 12 months. These controls are internal planning thresholds, not
@@ -255,16 +275,18 @@ The field research is intentionally not upgraded: it reports strong interest and
 Company docs, landing-page material, secrets, deployment state and unrelated
 working-tree files were not part of this pass.
 
-## Historical context retained
+## Historical/source evidence retained — not current taxonomy
 
-Early discussions used Dawat and proposed Tadka/Thali/Dawat tiers, low pilot
-pricing and broader delivery ambitions. Those are preserved as history in the
-exports; they are not current product truth. There is no approved current
-price ladder: pricing must be derived from contribution economics, and current
-MVP proof is the staged, pickup-first sequence above. [Evidence:
-`nekurama.raw.chat.json:L192-L205`; corroboration:
+Early discussions used Dawat and proposed Tadka/Thali/Dawat/Feast tiers, low
+pilot pricing and broader delivery ambitions. Those labels and amounts are
+preserved only as source history in the exports; they are not current product
+truth or current taxonomy. There is no approved current price ladder: pricing
+must be derived from contribution economics, and current MVP proof is the
+staged, pickup-first sequence above. [Historical source evidence:
+`nekurama.raw.chat.json:L215-L216`; corroboration:
 `nekurama.chatgpt.md:L2432-L2685`,
-`nekurama.chatgpt.md:L27598-L27598`]
+`nekurama.chatgpt.md:L27598-L27598`; current correction:
+`2026-09-21 FOUNDER NAMING CORRECTION (current task input)`]
 
 ## Related files
 

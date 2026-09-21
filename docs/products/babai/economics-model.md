@@ -17,6 +17,7 @@ sources:
   - "2026-09-20 ADMIN DECISION PACKET"
   - "2026-09-21 FOUNDER DECISION PACKET"
   - "2026-09-21 FOUNDER ECONOMIC TARGET CLARIFICATION (current task input)"
+  - "2026-09-21 FOUNDER NAMING CORRECTION (current task input)"
   - "2026-09-21 ECONOMICS MODEL REVIEW PACKET"
   - "2026-09-21 FOUNDER SCALE/COST BASELINE (current task input)"
 ---
@@ -43,6 +44,19 @@ internal product decision packet: `2026-09-21 FOUNDER DECISION PACKET`]
 Pricing must be derived from contribution economics, not assumed tiers. The
 historical ₹999, ₹2,499 and ₹4,999 figures remain research history only; they
 must not be presented as current packages or used as an implied price ladder.
+
+## Naming correction — current taxonomy
+
+BABAI remains the current product under NEKURAMA, and **“BABAI — Business
+Automation by AI”** remains founder-approved wording. Tadka, Thali, Dawat,
+Feast and similar labels are retained only where this model points to
+historical/source evidence; they are not current tiers, packages, entitlements
+or public pricing. For a 10-restaurant pilot, use neutral **Pilot Variant
+A/B/C** labels or functional scope descriptions. These are analytical test
+labels, not a product taxonomy. [Current founder correction:
+`2026-09-21 FOUNDER NAMING CORRECTION (current task input)`; historical raw
+source: `nekurama.raw.chat.json:L215-L216`; corroboration:
+`nekurama.chatgpt.md:L2432-L2685`]
 
 ## Accounting boundaries
 
@@ -694,10 +708,11 @@ from BABAI's own cost and contribution. The separation follows the repository's
 direct-order and commission-value hypothesis
 (`nekurama.babai.research.md:L24-L36`, `L56-L63`).
 
-### Scale curve: advisory reference case
+### Historical/source-evidence price-experiment reference — not current taxonomy
 
-This curve uses `P = ₹4,999/month` only as the middle pricing experiment
-reference, not as an approved package. It assumes the base provider/Meta
+This historical sensitivity uses `P = ₹4,999/month` only as a source-evidence
+price-experiment reference, not as a current pilot price or package. It assumes
+the base provider/Meta
 inputs, advisory AI mode, 120 recurring support minutes per restaurant/month,
 ₹1,000 founder-value per hour, 240 onboarding minutes amortized over 12 months,
 ₹70,000 annual shared hosting/tooling, 2% subscription collection, 2% refund
@@ -735,7 +750,20 @@ economic rupees per month and cannot be treated as free founder capacity.
 Staffing, management overhead, support tooling and service-level costs become
 new unknowns and must be added before relying on those rows.
 
-### Pricing experiments, CAC and stress cases
+### Historical/source-evidence price hypotheses, CAC and stress cases
+
+The following rows preserve historical arithmetic only. For current
+10-restaurant pilot records, use these neutral analysis labels instead of
+legacy names or price/package names:
+
+| Neutral analysis label | Functional scope description | Commercial treatment |
+|---|---|---|
+| **Pilot Variant A** | Pickup-first workflow, one WhatsApp number, one branch and manual takeover | Pilot amount remains unknown until the signed agreement |
+| **Pilot Variant B** | The same MVP boundary with advisory AI measured separately | Not a tier or entitlement; measure actual usage and cost |
+| **Pilot Variant C** | The same MVP boundary with AI-heavy routing treated as a stress case | Not a tier or entitlement; do not infer a price |
+
+These labels do not authorize a package, public price, scope expansion or
+continuation decision.
 
 The three historical price hypotheses are retained as experiments only. At
 `N=10`, with base provider inputs and 120 support minutes per month:
@@ -883,12 +911,12 @@ variance around that center, not a promise to discount or an approved price.
 | Base | ₹19,345 | ₹20,151 | ₹34,544 (`t=40%`) | **₹29,362–₹39,727** | ₹20,727 | ₹13,818 (40%) |
 | High stress | ₹62,848 | ₹68,313 | ₹196,400 (`t=60%`) | **₹166,940–₹225,860** | ₹78,560 | ₹117,840 (60%) |
 
-The base band is the recommended planning band for founder discussion; the low
-band is a floor only when actual support and provider costs validate the low
-case. The high band is a stress-test income bar, not a customer quote. If the
-high case is approached, reduce support intensity, narrow scope or separately
-approve a materially different commercial design instead of silently
-subsidizing the gap.
+The base band is an internal planning case only; the low band is a floor only
+when actual support and provider costs validate the low case. The high band is
+a stress-test income bar, not a customer quote. None of these bands is a
+current package, pilot variant or public price. If the high case is approached,
+reduce support intensity, narrow scope or separately approve a materially
+different commercial design instead of silently subsidizing the gap.
 
 At the base center, the GST cash input changes the customer-facing bar to
 ₹34,544 at `g=0%`, ₹36,271 at `g=5%`, or ₹40,762 at `g=18%`; it does not change

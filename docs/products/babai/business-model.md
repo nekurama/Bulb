@@ -7,9 +7,22 @@ sources:
   - nekurama.chatgpt.md
   - nekurama.babai.research.md
   - "2026-09-21 FOUNDER DECISION PACKET"
+  - "2026-09-21 FOUNDER NAMING CORRECTION (current task input)"
 ---
 
 # Business Model
+
+## Naming correction — current taxonomy
+
+BABAI remains the current product under NEKURAMA, and **“BABAI — Business
+Automation by AI”** remains founder-approved wording. Historical Tadka, Thali,
+Dawat, Feast or similar labels are source evidence only; they are not current
+tiers, packages, entitlements or pilot variants. For a 10-restaurant pilot,
+use neutral **Pilot Variant A/B/C** labels or functional scope descriptions.
+These are internal test labels, not public pricing. [Current founder
+correction: `2026-09-21 FOUNDER NAMING CORRECTION (current task input)`; raw
+history: `nekurama.raw.chat.json:L215-L216`; corroboration:
+`nekurama.chatgpt.md:L2432-L2685`]
 
 ## Current answer — confirmed direction
 
@@ -64,9 +77,10 @@ deposit classification or a refund entitlement.
 
 ## Pricing — challenge-required, contribution-derived
 
-There are no approved public tiers. Historical ₹999 / ₹2,499 / ₹4,999
-amounts, and earlier Tadka/Thali/Dawat packaging, remain research history and
-must not be presented as current commercial truth.
+There are no approved public tiers or package names. Historical ₹999 / ₹2,499 /
+₹4,999 amounts and earlier Tadka/Thali/Dawat/Feast packaging remain
+source-evidence history only and must not be presented as current commercial
+truth, pilot variants or a public price ladder.
 
 Pricing is derived from the contribution model:
 
@@ -112,7 +126,7 @@ accounting treatment or dispute handling. Do not promise cancellation or refund
 outcomes to a restaurant until the signed agreement and professional review are
 complete.
 
-### Planning fee bands
+### Internal contribution-analysis bands (not public pricing)
 
 The economics model produces the following **90-day, before-GST planning
 bands** per restaurant. They are income bars derived from total expenditure,
@@ -122,7 +136,7 @@ not approved public tiers.
 | Scenario | Planning fee band before GST | Use |
 |---|---:|---|
 | Low-cost floor | ₹6,075–₹8,219 | Only when actual onboarding/support and provider usage validate the low case |
-| **Base recommendation** | **₹29,362–₹39,727** | Default founder discussion band for a three-restaurant planning cohort |
+| **Base planning case** | **₹29,362–₹39,727** | Internal sensitivity for a three-restaurant planning cohort; not a quote |
 | High-cost stress bar | ₹166,940–₹225,860 | Stress-test only; do not quote without a separately approved scope/capacity decision |
 
 Each band is limited to ±15% around its calculated center. GST is an input to

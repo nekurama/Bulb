@@ -9,9 +9,23 @@ sources:
   - "2026-09-21 FOUNDER DECISION PACKET"
   - "2026-09-21 FOUNDER SCALE/COST BASELINE (current task input)"
   - "2026-09-21 FOUNDER ECONOMIC TARGET CLARIFICATION (current task input)"
+  - "2026-09-21 FOUNDER NAMING CORRECTION (current task input)"
 ---
 
 # Validation / Pilot
+
+## Naming correction — pilot records
+
+The current product remains BABAI under NEKURAMA, with **“BABAI — Business
+Automation by AI”** as founder-approved wording. Legacy Tadka, Thali, Dawat,
+Feast or similar labels belong only in historical/source-evidence citations;
+they are not current pilot taxonomy. For the 10-restaurant pilot, identify
+records with **Pilot Variant A/B/C** or a functional scope description. These
+labels are for evidence collection only and do not define packages, tiers or
+public pricing. [Current founder correction:
+`2026-09-21 FOUNDER NAMING CORRECTION (current task input)`; historical raw
+source: `nekurama.raw.chat.json:L215-L216`; corroboration:
+`nekurama.chatgpt.md:L2432-L2685`]
 
 ## Validation gate — staged, with detail partial
 

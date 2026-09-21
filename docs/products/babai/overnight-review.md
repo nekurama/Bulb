@@ -52,6 +52,7 @@ integration-heavy/multi-outlet exception.
 | Legal controls | [`contract-controls.md`](contract-controls.md) | Contract packet, evidence ledger and professional gates |
 | Code contracts | [`contracts.ts`](contracts.ts) | TypeScript command/event/port shapes for implementation |
 | Validation | [`test-and-validation-plan.md`](test-and-validation-plan.md) | Domain, provider, AI, recovery, load, browser and pilot evidence |
+| Operations | [`operations-runbook.md`](operations-runbook.md) | Incident, recovery, reconciliation, restore and cost/enrollment controls |
 
 Existing [`architecture.md`](architecture.md), [`architecture-lld.md`](architecture-lld.md), [`domain-model.md`](domain-model.md),
 [`flow-architecture.md`](flow-architecture.md), [`flow-inventory.md`](flow-inventory.md), [`experience-and-channels.md`](experience-and-channels.md),

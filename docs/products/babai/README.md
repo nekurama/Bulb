@@ -82,6 +82,7 @@ Partial or unknown areas should be recorded as questions rather than invented.
 - [`technical-requirements.md`](technical-requirements.md) — technical requirements, non-functional requirements, capacity, security and acceptance gates
 - [`overnight-review.md`](overnight-review.md) — overnight packet index, hybrid decision, open gaps and review checklist
 - [`test-and-validation-plan.md`](test-and-validation-plan.md) — state, provider, AI, recovery, load, browser and pilot validation plan
+- [`operations-runbook.md`](operations-runbook.md) — incident, recovery, reconciliation, restore and cost/enrollment controls
 - [`events-catalog.md`](events-catalog.md) — bounded-context event registry, envelope, idempotency and replay rules
 - [`runtime-and-ai-architecture.md`](runtime-and-ai-architecture.md) — runtime topology, cost model, AI routing and workflow-engine decision
 - [`pro-operations-ux.md`](pro-operations-ux.md) — WhatsApp card rules and high-volume Pro operations UX

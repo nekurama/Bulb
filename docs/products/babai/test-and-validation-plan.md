@@ -206,4 +206,3 @@ owner and approval
 
 No test report is a provider/legal/tax approval. External gates remain in
 `contract-controls.md` and the company external-entity register.
-

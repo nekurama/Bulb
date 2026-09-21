@@ -7,6 +7,8 @@ sources:
   - FLOW INVENTORY — WEB/QA PROTOTYPE (2026-09-21)
   - nekurama.chatgpt.md
   - docs/web/landing-page.md
+  - docs/products/babai/flow-inventory.md
+  - docs/products/babai/flow-architecture.md
   - docs/products/babai/product-definition.md
   - docs/products/babai/experience-and-channels.md
   - docs/products/babai/validation.md
@@ -83,6 +85,20 @@ persist or call an external service.
   page overflow and a text alternative for visual-only concepts.
 - Source line references remain attached to the inventory; they do not convert
   founder discussion into approved product behavior.
+
+## Raw mapping evidence
+
+The product flow artifacts preserve the stable raw mapping anchors for the
+founder batches that informed this prototype:
+
+- Batch 1–5: `5ec0497b-76d4-4977-bc62-179f63f51edc`
+- Batch 11–15: `8b7cbb46-22d7-473e-bdd8-99805b36d04f`
+- Batch 26–30: `b98b7d38-b56e-4d06-987a-2fb0f00993ee`
+- Batch 31–35: `b34f216d-8e98-4285-83f8-fad2046415a8`
+- Batch 36–40: `8063fb78-1b4a-4762-a196-aafc52fb721f`
+
+These UUIDs and the line ranges in the coverage matrix are evidence anchors,
+not implementation authorization or proof of product validation.
 
 ## Gaps and deferrals
 

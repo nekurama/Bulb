@@ -7,13 +7,7 @@ sources:
   - nekurama.chatgpt.md
   - nekurama.babai.research.md
   - Founder decision packet (2026-09-21; current task input)
-  - e3e4e855ca0214a5c664c07ec5b6513c560a7261 (product scale economics source)
-  - "2026-09-21 FOUNDER DECISION PACKET"
-  - "2026-09-21 FOUNDER NAMING CORRECTION (current task input)"
-  - "2026-09-21 ECONOMICS MODEL REVIEW PACKET"
-  - "2026-09-21 FOUNDER SCALE/COST BASELINE (current task input)"
-  - "2026-09-21 FOUNDER ECONOMIC TARGET CLARIFICATION (current task input)"
-  - "2026-09-21 TIER/COST MODEL UPDATE (current task input)"
+  - Tier scope decision (2026-09-21; current task input)
 ---
 
 # BABAI Product BRD
@@ -61,148 +55,11 @@ Assistant recommendations in the raw conversation are not treated as founder
 decisions unless the current issue sources, later explicit direction or field
 evidence supports them.
 
-## Naming correction — current taxonomy
-
-The current founder correction preserves the product identity: **BABAI remains
-the product under NEKURAMA**, and **“BABAI — Business Automation by AI”**
-remains founder-approved wording. This records internal wording and intent; it
-does not assert an invented etymology, public pricing, package taxonomy or
-legal/trademark clearance. [Current founder correction: `2026-09-21 FOUNDER
-NAMING CORRECTION (current task input)`; raw identity evidence:
-`nekurama.raw.chat.json:L13591-L13630`, `L616-L618`; corroboration:
-`nekurama.chatgpt.md:L42026-L42050`]
-
-Tadka, Thali, Dawat, Feast and similar labels may appear only in clearly
-marked historical or source-evidence sections. They are not current product
-names, tiers, packages, entitlements or pilot variants. For any
-10-restaurant pilot analysis, use neutral labels such as **Pilot Variant A/B/C**
-or describe the functional scope directly. Those labels are test-record
-labels, not public taxonomy or pricing.
-
-## Founder decision packet — 2026-09-21
-
-The following are internal product/company decisions for this BRD pass. They
-are not legal wording, tax conclusions, public claims or evidence that the
-pilot has succeeded.
-
-| Decision | Status | Durable treatment |
-|---|---|---|
-| Pilot term | **confirmed** | Fixed **90-day paid pilot**; not a free trial |
-| Payment/start gate | **confirmed internal gate; treatment open** | Collect the agreed payment or deposit before the pilot starts; exact amount, classification and refund treatment require the signed agreement and professional validation |
-| Cancellation/refund | **partial / challenge-required** | Terms must be tied to a signed agreement and explicit minimum-paying terms; use the open requirements template in `business-model.md`, not invented legal language |
-| Pilot completion | **partial / proposed gate** | The pilot closes at the 90-day decision point when the team-defined readiness evidence gate supports materially larger onboarding volumes; no silent extension or public scale claim |
-| Margin | **confirmed calculation / open threshold** | Compare recognized income against total attributable expenditure; target contribution/margin remains open |
-| Pricing | **challenge-required** | Derive from observed contribution economics, not assumed tiers or historical price ladders |
-| Post-pilot pricing | **confirmed cadence** | Review every six months; no automatic increase |
-| Company/product identity | **confirmed direction** | NEKURAMA is the company identity; BABAI is the product identity |
-| BABAI wording | **confirmed internal wording / legal validation pending** | Record **“BABAI — Business Automation by AI”** as founder-approved internal wording; make no etymology claim and do not treat it as cleared public/trademark language |
-
-External/legal, tax and accounting validation remains separate: signed
-agreement language, cancellation/refund enforceability, minimum-paying
-obligations, GST/invoicing/revenue treatment, entity/IP ownership and
-trademark/brand clearance are not decided by this BRD.
-
-## Internal acceptance packet — proposed operating assumptions
-
-For the 90-day paid pilot, the internal planning packet assumes a full
-90-calendar-day minimum-paying commitment, a default 50%/50% collection split
-at activation and before day 31, no discretionary pro-rata refund after
-activation, and exception-only credits/refunds for a documented service or
-inability-to-start case. These are business assumptions for founder approval,
-not legal wording or a promise of statutory treatment. The signed agreement
-must state the approved cancellation trigger, notice, balance, refund/credit
-authority and timing.
-
-The contribution-derived 90-day planning bands are ₹6,075–₹8,219 for the low
-case, **₹29,362–₹39,727 as the base planning recommendation**, and
-₹166,940–₹225,860 for the high stress case, all before GST. Each is capped at
-±15% around its calculated center. These figures are estimates based on the
-three-restaurant allocation case and must be replaced by actual provider
-invoices, payment exports and founder time logs before being treated as a
-commercial quote. See [`economics-model.md`](economics-model.md) for the
-income bars, formulas, GST sensitivity and break-even table.
-
-The pilot closes at day 90. The proposed onboarding-readiness exit gate in
-[`pilot-metrics.md`](pilot-metrics.md) must show repeatable onboarding,
-reliable order/payment operations, staff-led operation, support capacity,
-complete expenditure evidence, positive base contribution and no unresolved
-safety/privacy/payment exception before materially larger onboarding volumes
-are approved. If the gate is not met or is inconclusive, close the pilot,
-record the gap and hold expansion; do not silently extend or imply scale.
-
-## Economics review packet — proposed operating controls
-
-The economics model now treats recurring support minutes per
-restaurant/month as the lead scale telemetry metric, split into planned,
-unplanned, recovery and takeover minutes; onboarding minutes and the hard
-ceiling remain separate. It also records advisory versus AI-heavy usage,
-model/tokens/embeddings/speech/vision/jobs/retries, acquisition effort and
-CAC, LTV/payback, and a scale sensitivity for `N = 1, 5, 10, 25, 50, 100, 250,
-500`.
-
-BABAI SaaS economics and restaurant value are intentionally separate. BABAI
-contribution is recognized subscription income less BABAI cash and economic
-cost. Restaurant ROI is a separate value calculation based on the restaurant's
-own baseline, avoided channel cost, staff time, errors, incremental gross
-profit and restaurant-side provider costs. A value-based maximum rational
-price is a planning ceiling, not payment evidence.
-
-The new founder scale baseline records six conversational flows/order, nine
-gateway hits/flow, 54 average requests/completed order, 90 heavy-case
-requests/order and a hard ceiling of 50 completed orders/day/restaurant. It
-models the 500-restaurant goal (25,000 orders/day and half of the supplied
-1,000-restaurant traffic totals), the supplied 1,000-restaurant reference
-(50,000 orders/day, 2.7M average requests/day and 4.5M heavy-case/day), and
-10%/25%/50%/100% WhatsApp conversion sensitivities. The prior ₹25L+ income
-trigger remains unresolved as to its income unit; it is separate from the
-current internal planning trigger of **₹25,00,000 monthly operating profit
-after non-founder operating costs**, with one-founder ₹5,00,000/month or
-two-founder ₹10,00,000/month transition-cost cases. The economics model shows
-the required revenue and implied price sensitivities without treating them as
-approved pricing, forecasts or guarantees. See
-[`economics-model.md`](economics-model.md), sections “Founder scale and cost
-baseline” and “Founder economic target clarification”. These are founder
-inputs and derived planning estimates, not a finalized infrastructure or
-provider choice.
-
-The ₹999, ₹2,499 and ₹4,999 monthly amounts are historical source-evidence
-price hypotheses only. They are not current pilot prices, package names or
-public pricing. At `N=10` with advisory AI and base provider inputs, the model
-retains them only as historical sensitivity inputs; current pilot records must
-use neutral **Pilot Variant A/B/C** labels or functional scope descriptions.
-Proposed review controls are a negative base contribution for two consecutive
-months, repeated support-ceiling breaches, unpriced AI-heavy routing, or CAC
-payback above 12 months. These controls are internal planning thresholds, not
-approved commercial or legal outcomes.
-
-### Internal provisional tier/cost model update — experiment record
-
-The current internal working names are **LITE, BASE and PRO**. They are
-provisional experiment labels only and do not replace the BRD's
-challenge-required pricing status, create public tier taxonomy, constitute a
-forecast or establish a tax conclusion. The rates are before GST with a
-**±15% planning tolerance**:
-
-| Label | Rate/month before GST | Scope hypothesis |
-|---|---:|---|
-| **LITE** | ₹4,999 | Information/menu/basic WhatsApp workflow; advisory AI; no advanced API integration |
-| **BASE** | ₹9,999 | Pickup/order workflow; human takeover; standard operational integrations; advisory AI |
-| **PRO** | ₹19,999 | Advanced API integrations; richer automation; higher usage/AI allowance; integration-maintenance reserve |
-
-At the illustrative `3 LITE / 4 BASE / 3 PRO` mix, weighted ARPU is
-**₹11,499/month** and gross 90-day billing is **₹3,44,970 before GST**.
-The per-tier variable/provider/API, support, AI, onboarding, integration-
-maintenance and ₹42,500/month shared-infrastructure sensitivity is in
-[`economics-model.md`](economics-model.md). This update is additive to the
-prior cash/economic contribution formulas and the separate ₹25L monthly
-operating-profit planning target; it does not promote either to a forecast or
-approved price decision.
-
-Current pilot records should track the experiment label, support minutes,
-AI/provider/API usage, onboarding effort, restaurant ROI, conversion,
-continuation and cash/economic contribution. Provider, legal, tax and
-finance/accounting validation labels remain mandatory. Tadka, Thali, Dawat,
-Feast and similar names remain historical/source context only.
+The Tier Scope Decision (2026-09-21) adds a provisional LITE/BASE/PRO
+capability matrix and pre-GST rate experiment: ₹4,999 / ₹9,999 / ₹19,999
+midpoints with ±15% planning tolerance. The tier matrix is a capability and
+cost experiment, not public pricing; AI remains bounded and deterministic or
+human-controlled state remains authoritative.
 
 ## Confirmed product truth
 
@@ -257,7 +114,8 @@ WhatsApp is the primary conversational/action surface for customer and staff att
 | Pilot sequence | **partial** | Fixed 90-day paid pilot; Stage 0 is one business, then gradual onboarding up to 10 restaurants; day-90 exit requires team-defined readiness evidence. |
 | Dashboard boundary | **partial** | WhatsApp remains first-class; web handles density and recovery. Exact MVP screens and entitlements remain open. |
 | Onboarding | **partial** | Progressive and resumable; exact Meta handoff, Admin tooling, retention and web information architecture remain open. |
-| Pricing / packaging | **challenge-required** | No public price is committed. Internal v0.4 fee bands are calculated from total expenditure and contribution sensitivity; ₹999 / ₹2,499 / ₹4,999 + GST and older prices remain hypotheses only. |
+| Pricing / packaging | **challenge-required** | No public price is committed. Internal v0.4 fee bands and the provisional LITE/BASE/PRO pre-GST rate experiment require evidence and founder approval. |
+| Tier capability scope | **partial / proposed** | LITE is menu/order only; BASE adds bounded payment/delivery/availability/promotions; PRO adds broader bounded tasks and advanced APIs. No tier grants unrestricted AI authority. |
 | Payment verification | **challenge-required** | Direct merchant payment is preferred; gateway/webhook and manual confirmation behavior require pilot testing. |
 | Delivery | **unknown for MVP** | Provider-agnostic delivery is a later capability; no delivery integration is required to prove pickup-first MVP. |
 | ROI / success thresholds | **partial** | Measure activation, orders, fulfillment, repeat use, staff adoption, support, economics and willingness to pay; numeric thresholds are not set. |
@@ -306,31 +164,21 @@ The field research is intentionally not upgraded: it reports strong interest and
 |---|---|
 | `customer-market.md` | Previously question-heavy; now retains an evidence-backed ICP and market answer, with segmentation, switching and expansion gates still partial/unknown. |
 | `experience-and-channels.md` | Previously thin; now records the confirmed WhatsApp/web principle, onboarding and takeover direction, with detailed UX still partial. |
-| `business-model.md` | Retained as the partial commercial model; the fixed 90-day paid pilot is confirmed, while public pricing, agreement terms and contribution-derived pricing remain open. |
-| `economics-model.md` | Retained as the total-expenditure versus income model, now extended with the founder 500/1,000-restaurant scale/cost baseline, conversion sensitivities, the separate ₹25L monthly operating-profit target, founder-transition cases, per-order/per-restaurant formulas, support/incident load, prior income-unit sensitivity and Stage 0/1/2 capacity references. |
-| `validation.md` | Retained as a partial pilot gate and measurement file; it now references the scale baseline for capacity telemetry, while readiness evidence and numeric success/kill thresholds remain proposed. |
-| `pilot-metrics.md` | Added as the proposed scorecard, support-minute telemetry contract, scale/capacity references, AI/CAC/value fields and team-defined readiness evidence gate; it is not an approved public metric contract. |
+| `business-model.md` | Retained as a partial commercial model; public pricing is withheld while cost, contribution, GST and pilot-term evidence is collected. |
+| `economics-model.md` | Track 2 v0.5 internal planning artifact; provides low/base/high bands, actual-rate register, 90-day plan, traffic/request/storage sensitivities, LITE/BASE/PRO cost implications, provisional fee bands and break-even sensitivity without selecting public pricing. |
+| `validation.md` | Track 3 metric contract with proposed entry/exit/success/kill thresholds; founder approval and pilot evidence remain required. |
 | `product-definition.md` | Retained as the current MVP boundary; production cut, edge cases and post-pilot scope remain partial. |
 | `thesis-and-positioning.md` | Retained as current positioning; differentiation is explicitly a thesis, not a proven moat, and legal clearance remains separate. |
 | `domain-model.md` | Reviewed but not changed in this pass; it is a substantial domain artifact with its own remaining battles. |
-| `architecture.md`, `architecture-lld.md` and `architecture-cost-options.md` | Retained as internal architecture artifacts; the scale posture, 15-minute gates, stateless gateway/worker split and support replacement trigger remain proposed and evidence-gated. |
+| `architecture.md` and `architecture-boundaries.md` | Reviewed but not changed; architecture work is outside this product-intent pass and existing working-tree changes were left untouched. |
 | `README.md` | Retained as the product index; this BRD is the evidence/status register it points to. |
 
 Company docs, landing-page material, secrets, deployment state and unrelated
 working-tree files were not part of this pass.
 
-## Historical/source evidence retained — not current taxonomy
+## Historical context retained
 
-Early discussions used Dawat and proposed Tadka/Thali/Dawat/Feast tiers, low
-pilot pricing and broader delivery ambitions. Those labels and amounts are
-preserved only as source history in the exports; they are not current product
-truth or current taxonomy. There is no approved current price ladder: pricing
-must be derived from contribution economics, and current MVP proof is the
-staged, pickup-first sequence above. [Historical source evidence:
-`nekurama.raw.chat.json:L215-L216`; corroboration:
-`nekurama.chatgpt.md:L2432-L2685`,
-`nekurama.chatgpt.md:L27598-L27598`; current correction:
-`2026-09-21 FOUNDER NAMING CORRECTION (current task input)`]
+Early discussions used Dawat and proposed Tadka/Thali/Dawat tiers, low pilot pricing and broader delivery ambitions. Those are preserved as history in the exports; they are not current product truth. No public price is currently committed; ₹999 / ₹2,499 / ₹4,999 + GST and earlier levels remain hypotheses. Current MVP proof is the fixed 90-day paid, pickup-first sequence with a readiness-gated exit. [Evidence: `nekurama.raw.chat.json:L192-L205`; corroboration: `nekurama.chatgpt.md:L2432-L2685`, `nekurama.chatgpt.md:L27598-L27598`; current input: founder packet 2026-09-21]
 
 ## Related files
 

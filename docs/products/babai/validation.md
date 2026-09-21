@@ -8,6 +8,7 @@ sources:
   - nekurama.babai.research.md
   - nekurama.raw.chat.json (ordered turns 70, 290; mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `4702681b-d611-4408-af5f-9001d04b6cfa`, `f58ce128-39ed-4015-9be9-5b6135a39f20`)
   - Founder decision packet (2026-09-21; current task input)
+  - Tier scope decision (2026-09-21; current task input)
   - economics-model.md (Track 2 v0.5)
   - architecture-cost-options.md (proposed 15-minute capacity gates)
   - e3e4e855ca0214a5c664c07ec5b6513c560a7261 (product scale economics source)
@@ -96,6 +97,7 @@ Record baseline, observed value and evidence for each pilot. Numeric thresholds 
 | Support | Onboarding effort, training, interventions, incidents and time to resolution |
 | Economics | Infrastructure, provider/payment fees, onboarding/support, tooling, failure/refund cost, pilot revenue/deposit treatment, contribution and GST treatment |
 | Willingness to pay | Paid/deposit commitment, objections, continuation intent and conversion after the pilot end date |
+| Tier economics | LITE/BASE/PRO assignment, request volume, AI calls, provider/API charges, payment/delivery pass-through, support hours, failures/refunds and contribution by tier |
 
 ## Required pilot evidence
 
@@ -137,6 +139,8 @@ Track 2 v0.5 bands, internal fee bands, scale baseline and actual-rate register 
   an approved target.
 - Cost rates must come from the v0.5 actual-rate register; a blank rate is an
   unknown and must not be treated as zero.
+- The proposed pilot mix is **3 LITE / 4 BASE / 3 PRO** for sensitivity only;
+  actual enrollment mix remains a founder decision.
 
 ### Proposed entry gate
 
@@ -161,6 +165,7 @@ Track 2 v0.5 bands, internal fee bands, scale baseline and actual-rate register 
 | Contribution | Base-case `ContributionAfterOnboarding` is non-negative and reaches the proposed **40% contribution-margin sensitivity**; low/base/high views use income-bar versus total-expenditure margins and record any gap below the internal fee floor as subsidy | Base-case contribution is negative, `P ≤ C`, or the conclusion depends on an unapproved price, missing rate or unapproved GST treatment |
 | Failure/refund economics | Actual failure/refund/remediation cost remains within the v0.5 base sensitivity of **1.5–4% of `G`** when BABAI absorbs it, or is separately evidenced when passed through | Cost exceeds **10% of `G`**, or credits/refunds/remediation are not recorded |
 | Willingness to pay | At least **2 of the first 3 completed pilots** accept paid continuation or renewal terms after the end date | 0 of 3 accept continuation after complete observation; below 3 completed pilots remains inconclusive |
+| Tier adherence | 100% of enrolled restaurants operate only within their assigned capability boundaries; LITE has no payment/delivery usage and PRO remains policy-bounded | Any unapproved cross-tier capability, unrestricted AI action or tier leakage in billing/usage records |
 
 ### Proposed kill or immediate-hold conditions
 
@@ -308,6 +313,8 @@ to aggressive market acquisition.
 - [ ] 500/1,000 restaurant load, storage, queue and DB growth evidence
 - [ ] Stage 0/1/2 support-capacity and incident-plan approval
 - [ ] ₹25L+ income-trigger unit selection (monthly versus annual sensitivity)
+- [ ] LITE/BASE/PRO pilot mix and rate-experiment approval
+- [ ] Tier-specific entitlement, usage and support thresholds
 - [ ] Team-defined readiness evidence for materially larger onboarding volumes
 - [ ] Signed agreement-template cancellation/refund and minimum-paying terms
 - [ ] Six-month post-pilot pricing review inputs; no automatic increase

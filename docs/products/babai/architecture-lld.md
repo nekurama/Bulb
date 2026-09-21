@@ -11,6 +11,8 @@ sources:
   - docs/products/babai/architecture-boundaries.md
   - docs/products/babai/architecture-cost-options.md
   - docs/products/babai/domain-model.md
+  - docs/products/babai/tier-feasibility-matrix.md
+  - "Tier scope decision (2026-09-21; current task input)"
 ---
 
 # BABAI Architecture LLD
@@ -26,11 +28,102 @@ and founder-only support capacity, see `architecture-cost-options.md`. That file
 contains options and validation gates rather than additional implementation
 commitments.
 
+The focused LITE/BASE/PRO feasibility matrix is
+[`tier-feasibility-matrix.md`](tier-feasibility-matrix.md). It is a rollout
+and evidence artifact, not a provider approval or public entitlement contract.
+
 The **Admin Decision Packet (2026-09-20)** is the current administrative
 decision source for the starting implementation posture. Founder evidence
 continues to govern product intent and domain constraints. Items marked
 **unresolved** require design, pilot, provider, operational or legal/security
 validation before they become stronger commitments.
+
+## Tier entitlement, integration and state contract
+
+The LITE/BASE/PRO matrix is a provisional internal scope decision recorded in
+[`product-definition.md`](product-definition.md). Implement it as a
+tenant/branch entitlement and policy projection inside the modular monolith;
+do not fork domain state, provider credentials or deployments by tier.
+
+### Trusted command gate
+
+Every state-changing command follows this order:
+
+```text
+authenticate/verify provider context
+  -> resolve tenant, branch, channel and actor
+  -> load entitlement and policy version
+  -> reject unavailable capability or exhausted quota
+  -> validate deterministic aggregate transition
+  -> write authoritative state + outbox + audit atomically
+```
+
+The gate must return an explicit non-success outcome for an unavailable
+capability or exhausted quota. It must not silently downgrade a payment,
+delivery, promotion, combo or availability request into a success-shaped
+response. Entitlements are evaluated server-side; AI, clients and provider
+callbacks cannot select or elevate a tier.
+
+| Port/capability | LITE | BASE | PRO |
+|---|---|---|---|
+| `CatalogPort` / menu update | Menu read and bounded capture; maximum 3 menu updates/month | Menu read/update subject to measured entitlement limits | Higher/advanced API-assisted updates only after approval and measured limits |
+| `PaymentPort` | Not registered for tenant workflows | Direct merchant settlement; webhook, refund and reconciliation path required | Same payment truth plus approved additional provider/API paths |
+| `FulfillmentPort` | Pickup status only; no delivery provider workflow | Pickup and validated delivery provider flow | Validated delivery plus approved advanced integrations |
+| `AvailabilityPort` | Not registered; no availability workflow | Item availability controls used by cart/order validation | BASE controls plus approved external availability integration |
+| `PromotionPort` / `ComboPort` | Not registered | Basic bounded controls; max 3 promotion/combo requests/day with short-lived activation | Advanced bounded controls with explicit policy/quota evaluation |
+| `ConversationTaskPort` | Menu assistance and order capture | Menu/order/payment/delivery tasks | Allowlisted advanced tasks and APIs only; AI remains advisory |
+
+Ports own external identity, credentials, callbacks, throttling and failure
+semantics. Domain modules own the resulting state. Meta/WhatsApp, payment and
+delivery providers remain replaceable adapters; this matrix does not approve a
+provider, Meta onboarding path, SDK, cloud service or final deployment choice.
+
+### Deterministic state and reliability rules
+
+Order, payment and fulfillment are separate authoritative state machines.
+Typical transitions are:
+
+```text
+Order:      DRAFT -> SUBMITTED -> ACCEPTED/REJECTED
+            ACCEPTED -> PREPARING -> READY -> COMPLETED
+Payment:    NOT_APPLICABLE (LITE)
+            PENDING -> AUTHORIZED/PAID -> FAILED
+            PAID -> REFUND_PENDING -> REFUNDED
+Fulfillment: NOT_APPLICABLE (LITE)
+             PICKUP: READY_FOR_PICKUP -> COMPLETED
+             DELIVERY: REQUESTED -> ASSIGNED -> IN_TRANSIT -> DELIVERED
+```
+
+The owning module validates current state, tier entitlement, actor scope,
+preconditions and transition version. Payment completion never accepts an
+order; a delivery callback never changes payment state; and absent LITE
+workflows are represented as unavailable/not applicable rather than
+successful. Every accepted transition writes an outbox record and required
+audit evidence in the same PostgreSQL transaction. Provider callbacks use a
+provider-event id plus tenant/channel scope as an idempotency key, and
+side-effecting requests use an adapter-recognized idempotency key.
+
+Human takeover is available in every tier. It pauses conversational automation
+only; it does not bypass authorization, quotas, deterministic transitions,
+outbox/inbox processing or reconciliation. PRO “full access” is therefore
+bounded access to the allowlisted command/task set, never authoritative AI.
+
+### Quotas, rate limits and cost attribution
+
+Apply layered limits at provider/channel, tenant/branch, actor/session and
+gateway/API levels. Track menu updates, promotion/combo requests, provider
+calls, AI calls and human takeover separately. A quota record should include
+tenant/branch, capability, period, limit, consumed, policy version, actor and
+outcome; concurrent requests must consume quota atomically or fail explicitly.
+Provider `Retry-After`, adapter concurrency caps and global backpressure remain
+binding regardless of plan.
+
+Operational/economics records must attribute `tier`, `tenantId`,
+`capability`, `providerOrModelRef`, `automationMode`, `humanTakeover`,
+`quantity/duration`, `outcome`, `deploymentVersion` and `assumptionsVersion`.
+At minimum, report infrastructure/API, provider, AI, support/takeover,
+reconciliation and failure/recovery cost separately. Do not treat a plan
+entitlement as a price, margin, provider commitment or staffing approval.
 
 ## Committed starting posture
 

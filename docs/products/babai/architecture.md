@@ -16,6 +16,7 @@ sources:
   - docs/products/babai/architecture-boundaries.md
   - docs/products/babai/architecture-lld.md
   - docs/products/babai/architecture-cost-options.md
+  - "Tier scope decision (2026-09-21; current task input)"
 ---
 
 # Architecture
@@ -582,26 +583,65 @@ is a comparison and validation aid, not a final provider decision.
 
 The **Tier Scope Decision (2026-09-21)** treats LITE, BASE and PRO as
 provisional entitlement experiments over the same deterministic domain
-capabilities. A tier may gate capability, quota, provider integration and
-support level; it must not create a second source of truth or grant AI
-authority over controlled business state.
+capabilities. A tier gates commands, quotas, provider integrations and
+support cost; it must not create a second source of truth, a separate
+deployment, or AI authority over controlled business state.
 
-| Tier | Starting capability envelope | Explicit boundary |
-|---|---|---|
-| **LITE** | Catalog/menu presentation, availability-aware information, basic customer conversation and human escalation | No implied autonomous order/payment/delivery authority; rate limits and provider rules still apply |
-| **BASE** | LITE plus structured cart/order, pickup workflow, direct payment initiation/recording, transactional notifications and staff operations | Order/payment state remains deterministic and staff-controlled; delivery and advanced integrations remain optional/limited |
-| **PRO** | BASE plus bounded delivery/provider integrations, advanced API/webhook integrations, richer operational automation, multi-branch/bulk controls and higher measured quotas | “Full access” means broader configured capabilities and quotas, never unrestricted AI authority or bypass of policy, consent, payment, order or tenant controls |
+| Capability boundary | LITE | BASE | PRO |
+|---|---|---|---|
+| Core ordering | Menu display, bounded menu assistance and deterministic order capture/status | LITE plus validated cart/order and staff workflow | BASE plus approved advanced workflow/API surfaces |
+| Payment | **Out of scope**; no payment workflow or provider adapter | Direct merchant settlement through a validated payment adapter | Same settlement boundary plus approved advanced provider/API paths |
+| Fulfillment/delivery | **Out of scope**; no delivery workflow | Pickup plus delivery where a validated provider flow exists | BASE plus approved advanced delivery integrations |
+| Availability | **Out of scope**; no item-availability workflow or daily automation | Deterministic item availability controls in menu/cart/order validation | BASE plus approved availability integrations |
+| Promotions/combos | **Out of scope** | Basic bounded controls; maximum 3 requests/day with short-lived activation | Advanced bounded workflows under policy and measured quota |
+| Conversational scope | Limited menu assistance and order capture; no operations automation claim | Bounded menu, order, payment and delivery tasks | Broader bounded conversational tasks and advanced API integrations; never unrestricted AI authority |
 
-Availability, price, promotion, combo, payment and fulfillment decisions remain
-owned by their domain capabilities. Rate limits and tier entitlements are
-policy/configuration inputs evaluated before commands; they do not move
-authoritative state into billing, AI or the gateway. Promotions and combos
-remain deterministic and bounded; stacking, tax/rounding and advanced
-promotion semantics remain open. [Tier Scope Decision (2026-09-21); Raw T21
+The tier is an authorization/entitlement input at the trusted command
+boundary, not a hint to the model. LITE absence means the corresponding
+commands, state transitions, provider calls and UI actions are unavailable,
+not merely hidden. BASE and PRO still require provider capability, tenant
+configuration, policy approval and operational evidence before activation.
+“Full access” in PRO means full access to the explicitly allowed product
+surface only: AI remains non-authoritative and cannot commit order, payment,
+refund, delivery, availability, promotion, combo, permission or consent state.
+
+All tiers use deterministic, separately owned state machines. Order state is
+never inferred from payment or delivery state:
+
+```text
+Order:      DRAFT -> SUBMITTED -> ACCEPTED/REJECTED
+            ACCEPTED -> PREPARING -> READY -> COMPLETED
+Payment:    NOT_APPLICABLE (LITE)
+            PENDING -> AUTHORIZED/PAID -> FAILED
+            PAID -> REFUND_PENDING -> REFUNDED
+Fulfillment: NOT_APPLICABLE (LITE)
+             PICKUP: READY_FOR_PICKUP -> COMPLETED
+             DELIVERY: REQUESTED -> ASSIGNED -> IN_TRANSIT -> DELIVERED
+```
+
+Each transition is authorized, policy-checked, idempotent and recorded with
+tenant/branch, tier, actor/mode, correlation and causation context. Delivery
+and payment states may be absent in LITE; they must not be represented as
+successful, and payment completion never implies order acceptance. Human
+takeover is first-class in every tier and pauses conversational automation
+without pausing authoritative order, payment or fulfillment processing.
+
+Menu updates, promotion/combo requests and API calls are policy inputs rather
+than client claims: LITE permits at most three menu updates per month and no
+promotion/combo workflow; BASE permits basic promotion/combo requests up to
+three per day, each active for one day or another configured short period;
+PRO uses approved measured limits. Provider/account limits, rate limits and
+backpressure remain binding even when a tier quota is higher. Promotions,
+combos, payment, fulfillment and availability remain owned by their domain
+capabilities, not billing, AI or the gateway.
+
+This is an internal architecture implication of the provisional matrix, not a
+provider approval, payment/delivery contract, final deployment choice or
+public pricing decision. [Tier Scope Decision (2026-09-21); Raw T21
 `bbb21b01-c1d5-42f9-9e1f-702bb346453c`; Raw T35
 `97f25c92-127f-4c8c-bde9-c314010cbef7`; Raw T410
-`bbb21914-7687-4f6e-848a-30e1e7e850f8`; `domain-model.md`;
-`architecture-cost-options.md`]
+`bbb21914-7687-4f6e-848a-30e1e7e850f8`; `product-definition.md`;
+`domain-model.md`; `architecture-cost-options.md`]
 
 ## Payment custody boundary
 

@@ -23,6 +23,7 @@
           <a href="#products">PRODUCTS</a> ·
           <a href="#babai">BABAI</a> ·
           <a href="#journey">JOURNEY</a> ·
+          <a href="#restaurant-operations">RESTAURANT OPS</a> ·
           <a href="#pricing">PRICING</a> ·
           <a href="#contact">CONTACT</a>
         </nav>
@@ -104,10 +105,10 @@
         <div class="shell">
           <div class="section-heading">
             <div>
-              <p class="eyebrow">01 / THE STORY RAIL</p>
-              <h2 id="journey-title">Walk the imagined operation.</h2>
+              <p class="eyebrow">01 / THE SCENARIO RAIL</p>
+              <h2 id="journey-title">Choose a scenario. Play the conversation.</h2>
             </div>
-            <p>Click a stage or use the keyboard. Every screen is a local fixture with a visible handoff, boundary or recovery state.</p>
+            <p>Choose an operation, then play the WhatsApp-style conversation message by message. Every screen is a local fixture with a visible handoff, boundary or recovery state.</p>
           </div>
 
           <div class="journey-shell">
@@ -116,30 +117,30 @@
               <span class="safety-detail">Fictional names · statuses · timestamps · prices</span>
               <span class="pilot-marker">90-DAY PAID PILOT / READINESS REVIEW · INTERNAL MOCK</span>
             </div>
-            <nav class="story-rail" aria-label="Prototype journey stages" role="tablist" aria-orientation="horizontal">
+            <nav class="story-rail" aria-label="Conversation scenarios" role="tablist" aria-orientation="horizontal">
               <button class="story-step is-active" type="button" role="tab" aria-selected="true" aria-controls="journey-panel" tabindex="0" data-stage="0">
-                <span class="step-number">01</span><span><strong>Invite</strong><small>admin → owner</small></span>
+                <span class="step-number">01</span><span><strong>Discover</strong><small>menu → item</small></span>
               </button>
               <button class="story-step" type="button" role="tab" aria-selected="false" aria-controls="journey-panel" tabindex="-1" data-stage="1">
-                <span class="step-number">02</span><span><strong>Set up</strong><small>menu → publish</small></span>
+                <span class="step-number">02</span><span><strong>Customize</strong><small>items → delivery</small></span>
               </button>
               <button class="story-step" type="button" role="tab" aria-selected="false" aria-controls="journey-panel" tabindex="-1" data-stage="2">
-                <span class="step-number">03</span><span><strong>Discover</strong><small>menu → item</small></span>
+                <span class="step-number">03</span><span><strong>Cart</strong><small>review → confirm</small></span>
               </button>
               <button class="story-step" type="button" role="tab" aria-selected="false" aria-controls="journey-panel" tabindex="-1" data-stage="3">
-                <span class="step-number">04</span><span><strong>Cart</strong><small>variant → review</small></span>
+                <span class="step-number">04</span><span><strong>Pay</strong><small>link → paid</small></span>
               </button>
               <button class="story-step" type="button" role="tab" aria-selected="false" aria-controls="journey-panel" tabindex="-1" data-stage="4">
-                <span class="step-number">05</span><span><strong>Pay</strong><small>tier → fulfillment</small></span>
+                <span class="step-number">05</span><span><strong>Kitchen</strong><small>paid → processing</small></span>
               </button>
               <button class="story-step" type="button" role="tab" aria-selected="false" aria-controls="journey-panel" tabindex="-1" data-stage="5">
-                <span class="step-number">06</span><span><strong>Desk</strong><small>new → ready</small></span>
+                <span class="step-number">06</span><span><strong>Delivery</strong><small>assigned → en route</small></span>
               </button>
               <button class="story-step" type="button" role="tab" aria-selected="false" aria-controls="journey-panel" tabindex="-1" data-stage="6">
-                <span class="step-number">07</span><span><strong>Human takeover</strong><small>pause → release</small></span>
+                <span class="step-number">07</span><span><strong>Feedback</strong><small>arrived → review</small></span>
               </button>
               <button class="story-step" type="button" role="tab" aria-selected="false" aria-controls="journey-panel" tabindex="-1" data-stage="7">
-                <span class="step-number">08</span><span><strong>Recover</strong><small>review → recover</small></span>
+                <span class="step-number">08</span><span><strong>Reorder</strong><small>repeat → change</small></span>
               </button>
             </nav>
 
@@ -152,12 +153,49 @@
                 <span class="journey-state" id="journey-state">LOCAL READY</span>
               </div>
               <p class="sr-only" id="journey-announcement" role="status" aria-live="polite" aria-atomic="true"></p>
-              <div class="journey-body" id="journey-body"></div>
-              <div class="journey-tier-callout" id="journey-tier-callout"></div>
+              <div class="journey-body" id="journey-body" style="height: 360px; overflow-y: auto;"></div>
               <div class="journey-controls">
-                <button class="button button-secondary" type="button" id="previous-stage">← Previous</button>
-                <span class="journey-progress" id="journey-progress">01 / 08</span>
-                <button class="button button-primary" type="button" id="next-stage">Next stage →</button>
+                <button class="button button-secondary" type="button" id="previous-stage">← Previous message</button>
+                <span class="journey-progress" id="journey-progress">MESSAGE 01 / 04</span>
+                <button class="button button-primary" type="button" id="next-stage">Next message →</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="journey-section" id="restaurant-operations" aria-labelledby="restaurant-journey-title">
+        <div class="shell">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">02 / RESTAURANT OPERATIONS</p>
+              <h2 id="restaurant-journey-title">The restaurant runs the business in chat.</h2>
+            </div>
+            <p>One dedicated operations conversation moves from onboarding to menu changes, orders, staff support, delivery handoff, vouchers and weekly insight.</p>
+          </div>
+
+          <div class="journey-shell">
+            <div class="journey-safety" role="note">
+              <span><span class="status-dot" aria-hidden="true"></span> STATIC MOCK / NOTHING SUBMITS</span>
+              <span class="safety-detail">Restaurant owner · cashier · staff · delivery partner fixtures</span>
+              <span class="pilot-marker">RESTAURANT OPERATIONS / INTERNAL MOCK</span>
+            </div>
+            <nav class="story-rail" id="restaurant-story-rail" aria-label="Restaurant operation scenarios" role="tablist" aria-orientation="horizontal"></nav>
+
+            <article class="journey-panel" id="restaurant-panel" role="tabpanel">
+              <div class="journey-header">
+                <div>
+                  <p class="journey-kicker" id="restaurant-kicker">R01 / ONBOARDING · MOCK</p>
+                  <h3 id="restaurant-title">A restaurant starts with a conversation.</h3>
+                </div>
+                <span class="journey-state" id="restaurant-state">ONBOARDING</span>
+              </div>
+              <p class="sr-only" id="restaurant-announcement" role="status" aria-live="polite" aria-atomic="true"></p>
+              <div class="journey-body" id="restaurant-body" style="height: 360px; overflow-y: auto;"></div>
+              <div class="journey-controls">
+                <button class="button button-secondary" type="button" id="restaurant-previous">← Previous message</button>
+                <span class="journey-progress" id="restaurant-progress">SCENARIO 01 / 08 · MESSAGE 01 / 06</span>
+                <button class="button button-primary" type="button" id="restaurant-next">Next message →</button>
               </div>
             </article>
           </div>

@@ -48,16 +48,19 @@ const sanitizeHtml = (html) =>
       /(\s*<meta name="theme-color" content="[^"]+">\s*)/,
       '$1    <link rel="icon" href="favicon.svg" type="image/svg+xml">\n',
     )
-    .replace(/\s*<a href="#asset-review">Asset review<\/a>\s*/, "\n")
+    .replace(/\s*<a href="#(?:asset-review|decision-packet)">[^<]+<\/a>\s*/g, "\n")
     .replace(
-      /\s*<section class="section candidate-assets-section" id="asset-review"[\s\S]*?<\/section>\s*/,
+      /\s*<section class="section (?:candidate-assets-section|decision-packet-section)"[^>]*>[\s\S]*?<\/section>\s*/g,
       "\n",
     );
 
 const sanitizeStyles = (styles) =>
   styles
     .split("\n")
-    .filter((line) => !line.includes("candidate-"))
+    .filter(
+      (line) =>
+        !/candidate-|decision-packet|packet-intent|decision-treatment|evaluation-|lockup-/.test(line),
+    )
     .join("\n");
 
 const main = async () => {

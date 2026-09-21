@@ -1,0 +1,169 @@
+- generic [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e3]:
+    - banner "Site header" [ref=e4]:
+      - link "Return to top" [ref=e5] [cursor=pointer]:
+        - /url: "#top"
+        - generic [aria-hidden] [ref=e6]: ∴
+        - generic [ref=e7]: "[PRODUCT NAME]"
+      - paragraph [ref=e8]: "[PARENT COMPANY] / TEMPLATE 01"
+      - link "[PRIMARY CTA PLACEHOLDER]" [ref=e9] [cursor=pointer]:
+        - /url: "#contact"
+    - main [ref=e10]:
+      - region [ref=e11]:
+        - generic [ref=e12]:
+          - paragraph [ref=e13]: STATIC MOCK / INVENTED DATA
+          - heading "A business workflow, made visible." [level=1] [ref=e15]
+          - paragraph [ref=e16]: Replace this paragraph with approved category, promise and audience copy from Tracks 1–4. This template is deliberately content-neutral.
+          - generic "Primary actions" [ref=e17]:
+            - link "[PRIMARY CTA PLACEHOLDER]" [ref=e18] [cursor=pointer]:
+              - /url: "#contact"
+            - link "Explore the mock flow" [ref=e19] [cursor=pointer]:
+              - /url: "#experience"
+              - text: Explore the mock flow ↘
+          - paragraph [ref=e20]: No account. No payment. No live connection. This is a visual concept only.
+        - generic "Illustrative signal board" [ref=e21]:
+          - generic [ref=e24]:
+            - generic [ref=e25]: SIGNAL / 09:41
+            - strong [ref=e26]: Attention is a workflow.
+          - generic [ref=e27]:
+            - generic [aria-hidden] [ref=e28]: ↗
+            - generic [ref=e29]: DEMOONLY
+          - generic [ref=e31]:
+            - generic [ref=e32]: MOCK STATE
+            - strong [ref=e33]: Human-ready, always.
+          - generic [ref=e34]: conversation
+          - generic [ref=e35]: operations
+      - region "Template boundary" [ref=e36]:
+        - generic [ref=e37]:
+          - generic [ref=e38]: INVENTED DATA ONLY
+          - generic [aria-hidden] [ref=e39]: ✳
+          - generic [ref=e40]: NO PRODUCTION BACKEND
+          - generic [aria-hidden] [ref=e41]: ✳
+          - generic [ref=e42]: CONTENT GATED
+          - generic [aria-hidden] [ref=e43]: ✳
+          - generic [ref=e44]: INVENTED DATA ONLY
+          - generic [aria-hidden] [ref=e45]: ✳
+          - generic [ref=e46]: NO PRODUCTION BACKEND
+          - generic [aria-hidden] [ref=e47]: ✳
+          - generic [ref=e48]: CONTENT GATED
+          - generic [aria-hidden] [ref=e49]: ✳
+      - region [ref=e50]:
+        - generic [ref=e51]:
+          - generic [ref=e52]:
+            - paragraph [ref=e53]: 01 / THE MOCK FLOW
+            - heading "See the shape of the idea." [level=2] [ref=e54]
+          - paragraph [ref=e55]: Switch between invented states to preview how a future product story might move from signal to action.
+        - generic [ref=e56]:
+          - generic [ref=e57]:
+            - generic [ref=e58]:
+              - generic [aria-hidden] [ref=e59]: ✦
+              - generic [ref=e60]: Example workspace
+            - generic [ref=e61]: DEMO ONLY
+          - note [ref=e63]:
+            - generic [ref=e64]:
+              - generic [aria-hidden] [ref=e65]: ⌁
+              - text: LOCAL MOCK STATE / NOTHING SUBMITS
+            - button "Reset mock" [ref=e66] [cursor=pointer]
+          - tablist "Mock workflow views" [ref=e67]:
+            - tab "01 Conversation" [ref=e68] [cursor=pointer]:
+              - generic [ref=e69]: "01"
+              - text: Conversation
+            - tab "02 Order desk" [ref=e70] [cursor=pointer]:
+              - generic [ref=e71]: "02"
+              - text: Order desk
+            - tab "03 Team attention" [selected] [ref=e72] [cursor=pointer]:
+              - generic [ref=e73]: "03"
+              - text: Team attention
+          - tabpanel "03 Team attention" [ref=e165]:
+            - generic [ref=e75]:
+              - generic [ref=e76]:
+                - generic [ref=e77]: FLOW MAP
+                - generic [ref=e78]: MOCK-001
+              - list "Mock flow steps" [ref=e79]:
+                - listitem [ref=e80]:
+                  - button "01 Notice incoming signal" [ref=e81] [cursor=pointer]:
+                    - generic [ref=e82]: "01"
+                    - generic [ref=e83]:
+                      - strong [ref=e84]: Notice
+                      - generic [ref=e85]: incoming signal
+                - listitem [ref=e86]:
+                  - button "02 Shape organise the need" [ref=e87] [cursor=pointer]:
+                    - generic [ref=e88]: "02"
+                    - generic [ref=e89]:
+                      - strong [ref=e90]: Shape
+                      - generic [ref=e91]: organise the need
+                - listitem [ref=e92]:
+                  - button "03 Hand off invite a human" [ref=e93] [cursor=pointer]:
+                    - generic [ref=e94]: "03"
+                    - generic [ref=e95]:
+                      - strong [ref=e96]: Hand off
+                      - generic [ref=e97]: invite a human
+              - paragraph [ref=e98]: All names, times and records on this screen are fictional fixtures.
+            - generic [ref=e99]:
+              - generic [ref=e100]:
+                - generic [ref=e101]:
+                  - paragraph [ref=e102]: TEAM ATTENTION / MOCK STATE
+                  - heading "A human can step in." [level=3] [ref=e166]
+                - generic [ref=e104]: 09:46
+              - paragraph [ref=e105]: The handoff is explicit, reversible and easy to understand. This interaction is a visual concept, not an operational control.
+              - status [ref=e106]: A human can step in. Human review suggested. This is an invented local mock state.
+              - generic [ref=e107]:
+                - generic [ref=e173]:
+                  - generic [ref=e174]: ATTENTION FLAG
+                  - text: One detail needs a person’s judgment.
+                - generic [ref=e175]:
+                  - generic [ref=e176]: HANDOFF NOTE
+                  - text: Assign → review → return to the imagined flow.
+              - generic [ref=e112]:
+                - generic [ref=e113]: Human review suggested
+                - button "Advance mock state" [active] [ref=e115] [cursor=pointer]:
+                  - text: Advance mock state
+                  - generic [aria-hidden] [ref=e178]: →
+        - paragraph [ref=e117]: ↳ Illustrative interaction only. Replace fixture text and states only after provenance review.
+      - region [ref=e118]:
+        - generic [ref=e119]:
+          - generic [ref=e120]:
+            - paragraph [ref=e121]: 02 / THE GUARDRAILS
+            - heading "Designed to stay honest." [level=2] [ref=e122]
+          - paragraph [ref=e123]: A polished surface is not proof. Keep the boundary visible while product, evidence and legal decisions mature.
+        - generic [ref=e124]:
+          - article [ref=e125]:
+            - generic [ref=e126]: A
+            - heading "Human in control" [level=3] [ref=e127]
+            - paragraph [ref=e128]: Replace this with an approved operating principle. Avoid capability claims until the evidence exists.
+          - article [ref=e129]:
+            - generic [ref=e130]: B
+            - heading "Proof has a paper trail" [level=3] [ref=e131]
+            - paragraph [ref=e132]: Every statistic, quote, logo and screenshot needs a source, approval and an accurate label.
+          - article [ref=e133]:
+            - generic [ref=e134]: C
+            - heading "Mock means mock" [level=3] [ref=e135]
+            - paragraph [ref=e136]: No auth, payment, customer record, production API or hidden network request belongs in this template.
+      - region [ref=e137]:
+        - generic [ref=e138]:
+          - generic [ref=e139]:
+            - paragraph [ref=e140]: 03 / THE HANDOFF
+            - heading [level=2] [ref=e141]:
+              - text: Leave the door open.
+              - emphasis [ref=e142]: Keep the words honest.
+          - generic [ref=e143]:
+            - paragraph [ref=e144]: Replace this block with approved conversion copy and a real, company-owned destination.
+            - generic "Contact placeholders" [ref=e145]:
+              - link "[PRIMARY CTA PLACEHOLDER]" [ref=e146] [cursor=pointer]:
+                - /url: "#contact"
+                - text: "[PRIMARY CTA PLACEHOLDER]"
+                - generic [aria-hidden] [ref=e147]: ↗
+              - link "[WHATSAPP / EMAIL / WAITLIST]" [ref=e148] [cursor=pointer]:
+                - /url: "#contact"
+            - paragraph [ref=e149]: No form is wired in this template. Minimum public onboarding fields remain a gated decision.
+    - contentinfo [ref=e150]:
+      - generic [ref=e151]:
+        - generic [ref=e152]:
+          - generic [aria-hidden] [ref=e153]: ∴
+          - text: "[PRODUCT NAME]"
+        - text: A static landing-page template / mock state
+      - generic [ref=e154]:
+        - generic [ref=e155]: © [YEAR PLACEHOLDER] [PARENT COMPANY]
+        - generic [ref=e156]: "[LEGAL LINKS PLACEHOLDER]"

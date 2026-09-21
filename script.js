@@ -182,42 +182,42 @@
       messages: [
         ["BA", "BABAI", "Here is the secure payment link for the delivery order.", "12:13"],
         ["CU", "CUSTOMER", "Paid.", "12:14"],
-        ["BA", "BABAI", "Payment received. I’m sending the paid order to the restaurant.", "12:14"],
+        ["BA", "BABAI", "Payment received. I’m sending the paid order to our kitchen now.", "12:14"],
         ["CU", "CUSTOMER", "Please let me know when the food starts processing.", "12:15"],
-        ["BA", "BABAI", "The restaurant has the order and payment confirmation.", "12:15"],
+        ["BA", "BABAI", "Our kitchen has the paid order and is starting it.", "12:15"],
         ["CU", "CUSTOMER", "Okay, I’ll wait for the status.", "12:16"],
       ],
     },
     {
-      participant: "RESTAURANT + BABAI",
+      participant: "CUSTOMER + BABAI",
       messages: [
-        ["RE", "RESTAURANT", "Payment confirmed. We’re processing the order now.", "12:17"],
-        ["BA", "BABAI", "Your order is accepted and food preparation has started.", "12:17"],
-        ["CU", "CUSTOMER", "How long until it leaves the restaurant?", "12:20"],
-        ["RE", "RESTAURANT", "Food is being packed for delivery.", "12:22"],
-        ["BA", "BABAI", "Status changed: preparing → packed.", "12:22"],
+        ["BA", "BABAI · RESTAURANT", "Payment confirmed. Our kitchen is processing the order now.", "12:17"],
+        ["BA", "BABAI · RESTAURANT", "Your order is accepted and preparation has started.", "12:17"],
+        ["CU", "CUSTOMER", "How long until it leaves the kitchen?", "12:20"],
+        ["BA", "BABAI · RESTAURANT", "Your food is packed and ready for delivery pickup.", "12:22"],
+        ["BA", "BABAI · RESTAURANT", "Status changed: preparing → packed.", "12:22"],
         ["CU", "CUSTOMER", "Thanks for the update.", "12:23"],
       ],
     },
     {
-      participant: "CUSTOMER + DELIVERY",
+      participant: "CUSTOMER + BABAI",
       messages: [
-        ["BA", "BABAI", "A delivery partner has been assigned to your order.", "12:25"],
-        ["DP", "DELIVERY PARTNER", "I’m on the way to collect your order.", "12:26"],
+        ["BA", "BABAI · DELIVERY", "A delivery partner has been assigned to your order.", "12:25"],
+        ["BA", "BABAI · DELIVERY", "Your delivery partner is on the way to collect it.", "12:26"],
         ["CU", "CUSTOMER", "Can I see the delivery status?", "12:27"],
-        ["BA", "BABAI", "Your order is out for delivery. Estimated arrival: 12 minutes.", "12:27"],
-        ["DP", "DELIVERY PARTNER", "Collected the order and heading to your address.", "12:29"],
+        ["BA", "BABAI · DELIVERY", "Your order is out for delivery. Estimated arrival: 12 minutes.", "12:27"],
+        ["BA", "BABAI · DELIVERY", "Order collected and heading to your address.", "12:29"],
         ["CU", "CUSTOMER", "I’ll be ready.", "12:30"],
       ],
     },
     {
-      participant: "CUSTOMER + DELIVERY",
+      participant: "CUSTOMER + BABAI",
       messages: [
-        ["DP", "DELIVERY PARTNER", "I’m at your door with the order.", "12:42"],
+        ["BA", "BABAI · DELIVERY", "Your order is at the door.", "12:42"],
         ["CU", "CUSTOMER", "Received. Everything arrived.", "12:43"],
         ["BA", "BABAI", "Order delivered. How was your meal?", "12:44"],
         ["CU", "CUSTOMER", "Great. The biryani was exactly right.", "12:46"],
-        ["BA", "BABAI", "Thanks. Your feedback has been shared with the restaurant.", "12:46"],
+        ["BA", "BABAI", "Thanks. Your feedback has been shared with our kitchen team.", "12:46"],
         ["CU", "CUSTOMER", "I’ll order again next week.", "12:47"],
       ],
     },
@@ -239,7 +239,7 @@
     ["S02 / CUSTOMIZE · MOCK", "The order becomes specific.", "CUSTOMIZING"],
     ["S03 / CART REVIEW · MOCK", "The cart is confirmed before payment.", "CART READY"],
     ["S04 / PAYMENT · MOCK", "Payment stays in the same thread.", "PAYMENT"],
-    ["S05 / RESTAURANT PROCESSING · MOCK", "The restaurant starts the order.", "PROCESSING"],
+    ["S05 / KITCHEN PROCESSING · MOCK", "Our kitchen starts the order.", "PROCESSING"],
     ["S06 / DELIVERY · MOCK", "The order moves through delivery.", "OUT FOR DELIVERY"],
     ["S07 / DELIVERED + FEEDBACK · MOCK", "Delivery ends with a useful follow-up.", "DELIVERED"],
     ["S08 / REORDER LOOP · MOCK", "A reorder starts with one change.", "REORDER"],
@@ -617,7 +617,7 @@
         <div class="chat-stack">
           ${visibleMessages.map(([avatar, label, message, time], index) => `
             <div class="chat-bubble ${index % 2 ? "outgoing" : ""}">
-              <span class="chat-meta">${avatar} · ${label} · ${time}</span>
+              <span class="chat-meta">${avatar} · ${label === "BABAI" ? "BABAI · NEKURAMA" : label} · ${time}</span>
               <p>${message}</p>
             </div>
           `).join("")}

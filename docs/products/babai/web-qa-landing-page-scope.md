@@ -24,7 +24,7 @@ availability decision.
 | Decision | Implementation boundary |
 |---|---|
 | Static site | Root `index.html`, `styles.css`, `script.js` and `mock-data.json`; no build step, server, auth, payment, analytics, tracker, embed or production backend. |
-| Interactive demo | The demo advances through an invented pickup conversation, menu context, order review and human takeover. All content is mock data and is labeled in the UI. It must never be described as a product connection or customer result. |
+| Interactive demo | The demo advances through an invented pickup conversation, menu context, order review and human takeover, with an internal 14-family flow coverage map for QA review. All content is mock data and is labeled in the UI. It must never be described as a product connection or customer result. |
 | Internal capability review | A collapsed, clearly labeled review panel may show provisional LITE/BASE/PRO experiment labels, capability placeholders, the bounded pilot envelope and planning-only usage sensitivities. It is not public packaging, pricing, entitlement, service-level or availability copy; rates remain placeholders. |
 | Primary CTA | `Request a pilot` / `Talk to us` scrolls to the interest panel. The current page prepares a local-only request preview; it does not submit data. |
 | Secondary routes | WhatsApp, email and waitlist are represented as selectable route intents. No phone number, mailbox, form endpoint or waitlist system is fabricated. A route may become live only after company ownership, destination, privacy notice, retention, abuse handling and accountable owner are recorded. |
@@ -64,7 +64,7 @@ availability decision.
 | CQA-05 | Evidence/testimonial integrity | September 2026 research is labeled an early signal; no testimonials appear without provenance and written approval. |
 | CQA-06 | Naming boundary | Current-facing HTML, CSS, JS, mock data, candidate labels and template copy use neutral variants or functional scope placeholders; the only LITE/BASE/PRO labels are inside the clearly gated internal capability-review panel and are not public package claims. |
 | FQA-01 | Static entry point | `index.html` loads without a build tool and uses relative local assets suitable for GitHub Pages. |
-| FQA-02 | JSON | `mock-data.json` parses as valid JSON. |
+| FQA-02 | JSON | `mock-data.json` parses as valid JSON; it is a checked-in fixture and is not fetched at runtime. |
 | FQA-03 | Accessibility structure | One `h1`, logical headings, `header`, `nav`, `main`, `footer`, skip link, labels, focus styles and text status are present. |
 | FQA-04 | Responsive/reflow | Layout is designed for 320px, 375px, 768px, 1024px and 1440px widths and 200% zoom without intentional horizontal overflow. |
 | FQA-05 | Reduced motion | `prefers-reduced-motion` removes non-essential motion; the story and controls remain understandable without animation. |
@@ -123,6 +123,8 @@ python -m json.tool mock-data.json >/dev/null
 node --check script.js
 ```
 
-Additional QA should manually verify keyboard traversal, accessible names, reduced motion,
-contrast, 200% zoom, narrow viewport reflow, direct asset loading and absence of unexpected
-network requests before publication. No deployment is part of this change.
+Additional QA should manually verify keyboard traversal across the mock and 14-family
+coverage map, accessible names, reduced motion, contrast, 200% zoom, narrow viewport
+reflow, direct asset loading and absence of unexpected network requests before publication.
+Scenario details and raw-chat citations are recorded in `docs/web/demo-flow-coverage.md`.
+No deployment is part of this change.

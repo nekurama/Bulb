@@ -11,9 +11,9 @@ last-reviewed: 2026-09-21
 Track 5 uses native HTML, CSS and JavaScript rather than React. The page is a
 GitHub Pages-compatible static entry point with no build step, package manager,
 runtime dependency, backend, analytics, third-party embed or external asset
-request. The only runtime data request is the repository-local
-`mock-data.json`; an inline fallback keeps the mock understandable if that file
-is unavailable.
+request. `mock-data.json` is retained as a checked-in fixture for static QA,
+but it is not fetched at runtime. The browser demo uses inline, invented state
+so the page makes no network request.
 
 | Option | Benefits | Costs |
 | --- | --- | --- |
@@ -29,7 +29,9 @@ client-side routing. This template does not make that commitment.
 The visual direction is editorial and tactile: warm paper, deep green, burnt
 orange annotation accents, serif display type and an asymmetric
 conversation-to-order illustration made entirely from CSS. It intentionally
-uses no generated images, stock photography or remote fonts. The template
+uses no content images or stock photography; the only added visual asset is the
+local generated favicon at `/local/mnt/workspace/personal/bulb/.worktrees/web-qa/favicon.svg`.
+It uses no remote fonts. The template
 banner, slot labels and repeated boundary notes make provisional content,
 demo-only behavior and unresolved CTA destinations visible in the interface.
 
@@ -44,9 +46,9 @@ demo-only behavior and unresolved CTA destinations visible in the interface.
   links remain keyboard-operable without JavaScript.
 - Demo step buttons expose the active step with `aria-current` and
   `aria-controls`; route choices expose selection with `aria-pressed`.
-- The demo has an explicit reset control. Mock data is schema-checked, scene
-  count is matched to the controls, invalid step indexes are ignored, and the
-  four-scene inline fallback keeps controls safe if the JSON request fails.
+- The demo has an explicit reset control. Invalid step indexes are ignored,
+  the four-scene fixture is inline, and the internal 14-family coverage panel
+  uses keyboard-operable tabs with a local state map.
 - The form uses native required-field validation, local-only status text,
   `aria-invalid` recovery and no submission endpoint. Clear-fields resets the
   hidden route and status as well as visible values; no values enter storage.
@@ -61,6 +63,10 @@ demo-only behavior and unresolved CTA destinations visible in the interface.
   packaging, keeps rates as placeholders, records the one-business/one-channel/
   one-branch pickup-first envelope and planning-only request sensitivities, and
   states that the static mock performs no live payment, delivery or API work.
+- The flow coverage panel is an internal QA aid. It documents actor,
+  precondition, happy/alternate/error path, state transition, permission/data
+  boundary, acceptance check, implementation status and raw-chat citations in
+  `docs/web/demo-flow-coverage.md`; it makes no public capability claim.
 - The `noscript` message keeps the content boundary available when JavaScript is
   disabled; only the mock controls and local preview are unavailable.
 
@@ -98,8 +104,9 @@ python -m http.server 4173
 curl --fail --silent --show-error http://127.0.0.1:4173/ >/dev/null
 ```
 
-The static-server smoke check should load `/` and confirm local requests only
-for `styles.css`, `script.js` and `mock-data.json`. Basic structural checks
+The static-server smoke check should load `/` and confirm that no runtime
+network request is made by the page beyond the document's relative stylesheet,
+script and local image references. Basic structural checks
 should confirm one `h1`, `header`, `nav`, `main`, `footer`, the skip link,
 labels for each form control, the native mobile menu, reset controls,
 `aria-controls`/`aria-current` step semantics, the reduced-motion rule and the
@@ -120,11 +127,9 @@ absence of a live form action or canonical domain.
   `summary` with Enter.
 - **Media/network:** At 320px, 768px and 1440px CSS widths,
   `body.scrollWidth` matched the viewport width. Reduced-motion emulation
-  changed document scrolling to `auto`. The local server requests were the
-  page, `styles.css`, `script.js`, `mock-data.json`, the five candidate JPEGs
-  and the four candidate SVGs; there were no remote fonts, trackers, embeds or
-  external form destinations. The inline favicon produced no additional
-  request.
+  changed document scrolling to `auto`. The page source contains no fetch,
+  XMLHttpRequest, WebSocket, external form action, remote font, tracker or
+  embed; only relative stylesheet/script and local image references remain.
 - **Responsive assertions:** the stylesheet includes a 320px-safe shell,
   mobile disclosure navigation, stacked grids, wrapped CTA/actions and
   reduced-motion behavior. A browser-level visual review remains a founder QA

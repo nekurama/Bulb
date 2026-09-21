@@ -6,8 +6,8 @@
     <title>BABAI — Run your business without leaving WhatsApp</title>
     <meta name="description" content="BABAI is a business operating platform built around WhatsApp, starting with a controlled restaurant pilot.">
     <meta name="theme-color" content="#f7f3ea">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23163d35'/%3E%3Ctext x='32' y='44' fill='%23fffdf7' font-size='38' text-anchor='middle' font-family='Georgia,serif'%3EB%3C/text%3E%3C/svg%3E">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css?v=flow-coverage-v2">
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -24,6 +24,7 @@
           <div class="nav-links">
             <a href="#how-it-works">How it works</a>
             <a href="#mock-demo">Mock flow</a>
+            <a href="#flow-coverage">Flow coverage</a>
             <a href="#asset-review">Asset review</a>
             <a href="#decision-packet">Decision packet</a>
             <a href="#pilot">Pilot boundary</a>
@@ -35,6 +36,7 @@
             <div class="nav-menu-panel">
               <a href="#how-it-works">How it works</a>
               <a href="#mock-demo">Mock flow</a>
+              <a href="#flow-coverage">Flow coverage</a>
               <a href="#asset-review">Asset review</a>
               <a href="#decision-packet">Decision packet</a>
               <a href="#pilot">Pilot boundary</a>
@@ -316,6 +318,67 @@
         <noscript><p class="shell noscript-note">JavaScript is disabled, so the mock controls are unavailable. The product story and pilot boundary remain available above and below.</p></noscript>
       </section>
 
+      <section class="section flow-coverage-section" id="flow-coverage" aria-labelledby="flow-coverage-title">
+        <div class="shell">
+          <div class="section-heading">
+            <p class="eyebrow">Internal QA · 14 demo families</p>
+            <h2 id="flow-coverage-title">A map for review, not a product claim.</h2>
+            <p>
+              Select an invented state family to inspect its actor, boundary and acceptance check.
+              This coverage map is a prototype aid; it has no live account, customer, payment,
+              delivery, API or network behavior.
+            </p>
+          </div>
+          <div class="coverage-boundary" role="note">
+            <strong>Local fixture boundary</strong>
+            <span>All names, identifiers, prices, statuses and transitions below are synthetic. LITE, BASE and PRO remain internal gated concepts elsewhere on this page.</span>
+          </div>
+          <div class="flow-coverage-shell">
+            <div class="coverage-index">
+              <p class="coverage-index-label">Choose a family</p>
+              <div class="coverage-tabs" role="tablist" aria-label="Internal demo flow families" aria-orientation="vertical">
+                <button class="coverage-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="coverage-panel" tabindex="0" data-flow="onboarding">01 · Restaurant onboarding</button>
+                <button class="coverage-tab" type="button" role="tab" aria-selected="false" aria-controls="coverage-panel" tabindex="-1" data-flow="owner-setup">02 · Owner setup</button>
+                <button class="coverage-tab" type="button" role="tab" aria-selected="false" aria-controls="coverage-panel" tabindex="-1" data-flow="staff-setup">03 · Staff setup</button>
+                <button class="coverage-tab" type="button" role="tab" aria-selected="false" aria-controls="coverage-panel" tabindex="-1" data-flow="discovery">04 · Customer discovery</button>
+                <button class="coverage-tab" type="button" role="tab" aria-selected="false" aria-controls="coverage-panel" tabindex="-1" data-flow="menu">05 · Menu</button>
+                <button class="coverage-tab" type="button" role="tab" aria-selected="false" aria-controls="coverage-panel" tabindex="-1" data-flow="order">06 · Cart and order</button>
+                <button class="coverage-tab" type="button" role="tab" aria-selected="false" aria-controls="coverage-panel" tabindex="-1" data-flow="payment">07 · Payment</button>
+                <button class="coverage-tab" type="button" role="tab" aria-selected="false" aria-controls="coverage-panel" tabindex="-1" data-flow="fulfillment">08 · Pickup and delivery</button>
+                <button class="coverage-tab" type="button" role="tab" aria-selected="false" aria-controls="coverage-panel" tabindex="-1" data-flow="promo">09 · Promo and combo</button>
+                <button class="coverage-tab" type="button" role="tab" aria-selected="false" aria-controls="coverage-panel" tabindex="-1" data-flow="takeover">10 · Human takeover</button>
+                <button class="coverage-tab" type="button" role="tab" aria-selected="false" aria-controls="coverage-panel" tabindex="-1" data-flow="notifications">11 · Notifications</button>
+                <button class="coverage-tab" type="button" role="tab" aria-selected="false" aria-controls="coverage-panel" tabindex="-1" data-flow="reorder">12 · Feedback and reorder</button>
+                <button class="coverage-tab" type="button" role="tab" aria-selected="false" aria-controls="coverage-panel" tabindex="-1" data-flow="exceptions">13 · Exceptions and recovery</button>
+                <button class="coverage-tab" type="button" role="tab" aria-selected="false" aria-controls="coverage-panel" tabindex="-1" data-flow="admin">14 · Admin and analytics</button>
+              </div>
+            </div>
+            <article class="coverage-panel" id="coverage-panel" role="tabpanel" aria-live="polite" aria-atomic="true" tabindex="-1">
+              <div class="coverage-panel-heading">
+                <div>
+                  <p class="coverage-kicker" id="coverage-kicker">FLOW 01 · RESTAURANT ONBOARDING</p>
+                  <h3 id="coverage-title">Connect an invented restaurant workspace.</h3>
+                </div>
+                <span class="coverage-status" id="coverage-status">Demo ready</span>
+              </div>
+              <p class="coverage-summary" id="coverage-summary">A controlled setup path establishes a fictional tenant and branch without creating an account or connecting a channel.</p>
+              <dl class="coverage-facts">
+                <div><dt>Actor</dt><dd id="coverage-actor"></dd></div>
+                <div><dt>Precondition</dt><dd id="coverage-precondition"></dd></div>
+                <div><dt>Happy path</dt><dd id="coverage-happy"></dd></div>
+                <div><dt>Alternate / error</dt><dd id="coverage-alternate"></dd></div>
+                <div><dt>State transition</dt><dd id="coverage-transition"></dd></div>
+                <div><dt>Permission / data boundary</dt><dd id="coverage-boundary"></dd></div>
+                <div><dt>Acceptance check</dt><dd id="coverage-acceptance"></dd></div>
+                <div><dt>Implementation status</dt><dd id="coverage-implementation"></dd></div>
+              </dl>
+              <p class="coverage-citation"><strong>Founder source.</strong> <span id="coverage-citation"></span></p>
+            </article>
+          </div>
+          <p class="coverage-footnote">The family count intentionally combines feedback with reorder, separates owner/staff setup, and keeps pickup and delivery in one fulfillment family. Full scenario records and raw-chat citations are committed in <code>docs/web/demo-flow-coverage.md</code>.</p>
+        </div>
+      </section>
+
       <section class="section" id="pilot" aria-labelledby="pilot-title">
         <div class="shell split pilot-split">
           <div>
@@ -462,6 +525,6 @@
         <p>Static concept · no deployment or live collection included.</p>
       </div>
     </footer>
-    <script src="script.js" defer></script>
+    <script src="script.js?v=flow-coverage-v2" defer></script>
   </body>
 </html>

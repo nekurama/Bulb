@@ -135,6 +135,85 @@ absence of a live form action or canonical domain.
   keeps usage figures explicitly marked as planning sensitivities rather than
   service limits or capacity claims.
 
+## October-December web/QA execution plan
+
+This is an internal delivery plan for the static mock/template and later
+founder-led demo review. It is not a launch plan, a public claim register, a
+pricing plan or an authorization to collect data, connect services, change
+DNS or deploy. The quality path is the default; the aggressive path may reduce
+polish or parallelize work, but it may not relax the safety boundary or skip a
+required exit check.
+
+### Non-negotiable boundary for every month
+
+- No real form submission, `action` endpoint, email/WhatsApp destination,
+  analytics, tracker, embed, remote font, API call or production integration.
+- No customer, restaurant, menu, payment, WhatsApp, staff or pilot data. Use
+  invented fixtures only; if pilot evidence is later reviewed, use a
+  redacted/anonymized evidence record outside the public/static artifact.
+- No public claims, final testimonials, pricing, CTA endpoints, canonical
+  domain, DNS mutation or deployment. Candidate logos and wording remain
+  internal review material.
+- Every asset must have source/provenance, hash or repository origin, draft
+  alt treatment, crop/fit guidance and contrast notes before it enters a demo
+  surface. Informative images get useful alt text; duplicate specimens are
+  hidden from assistive technology; decorative artwork is not a text carrier.
+
+### Milestones and gates
+
+| Month / milestone | Owner and dependencies | Entry checks | Exit checks / evidence |
+| --- | --- | --- | --- |
+| **October — content-neutral mock/template quality, accessibility and CI checks** | **Driver:** web-QA. **Reviewers:** founder/product owner and CI maintainer. Depends on the current static root (`index.html`, `styles.css`, `script.js`, `mock-data.json`), the QA scope, and the asset provenance record. | Content remains slot-based or explicitly source-backed; mock data is synthetic; no live form action or external request exists; candidate assets have provenance and draft alt/contrast/crop notes. | `git diff --check`, JSON parse, `node --check`, SVG parse/shape checks and static HTTP smoke pass. One `h1`, landmarks, skip link, labels, focus treatment, reduced-motion rule and local-only asset loading are evidenced. Open founder/legal/content decisions remain listed rather than filled by assumption. |
+| **November — demo-ready flow with synthetic/mock data** | **Driver:** web-QA. **Reviewers:** founder/product owner; screen-reader reviewer or accessibility partner. Depends on October exit, stable mock-data schema, approved test scenarios and candidate-asset QA. | October static/CI gate passes; four-scene mock flow and reset behavior are deterministic; no fixture contains real identities or operational data; demo script identifies the local-only boundary. | Demo advances and resets without console errors; responsive checks cover 320/375/768/1024/1440 CSS px and 200% zoom; keyboard-only traversal, screen-reader landmarks/names, focus order, contrast and reduced-motion checks are recorded. The demo remains useful with JavaScript disabled except for explicitly marked controls. |
+| **December — pilot-hardening evidence and year-end demo gate** | **Driver:** web-QA. **Accountable reviewer:** founder/product owner. **Contributors:** pilot/validation owner for evidence shape only. Depends on November demo exit, synthetic scenario set, the staged validation contract and a decision log for unresolved CTA/legal/brand items. | Demo path is repeatable; evidence template distinguishes observed, synthetic and unknown; any pilot input is redacted/anonymized and stored outside the static page; asset approvals remain gated. | Hardening pack records scenario coverage, regressions, accessibility/browser results, network boundary, provenance/alt/contrast checks and known limitations. Founder/product owner records **year-end demo: pass, hold or fail** with blockers and next evidence; no public-release or deployment decision is implied. |
+
+### Quality path versus aggressive path
+
+| Path | Sequence and acceptable trade-off | Non-skippable guardrail |
+| --- | --- | --- |
+| **Quality (default)** | Keep October as a stabilization gate, run the full November manual accessibility pass, repeat the demo against every supported viewport, then package December evidence after a clean rerun and founder review. | All static, accessibility, provenance, synthetic-data and local-network checks above; unresolved decisions stay visible. |
+| **Aggressive (planning alternative)** | Parallelize asset review, CI/static checks and synthetic scenario authoring; use the existing mock shell for an earlier November rehearsal; defer non-essential visual polish to December. | Do not trade away no-real-form/no-customer-data/no-network boundaries, keyboard and screen-reader coverage, reduced-motion behavior, asset provenance/alt/contrast, or the December founder gate. An incomplete manual check is a hold, not a pass. |
+
+### Planning-only web QA inputs
+
+The following are rough internal planning inputs, not approved spend, pricing,
+quotes or public commercial terms. They assume existing repository/browser
+tooling and no paid service is introduced. Apply a **15% contingency** to the
+base estimate; replace these placeholders with founder-approved quotes before
+any commitment.
+
+| Input | Base planning estimate | 15% contingency view | Owner / dependency |
+| --- | ---: | ---: | --- |
+| QA onboarding, repository walkthrough and fixture/test-matrix setup | 12–16 person-hours | 14–19 person-hours | web-QA; depends on the current static artifact and QA scope |
+| Accessibility/browser pass, evidence capture and CI/static maintenance | 20–32 person-hours | 23–37 person-hours | web-QA + accessibility reviewer; depends on October gate |
+| Founder/operator demo rehearsal and December evidence packaging | 8–12 person-hours | 9–14 person-hours | founder/product owner + web-QA; depends on synthetic scenarios |
+| Optional local travel for an in-person founder/demo review | 0 required; provisionally 1 trip at ₹8,000–₹20,000 | ₹0 required; ₹9,200–₹23,000 if approved | founder/product owner; only if remote review is insufficient |
+
+Travel is optional and not a prerequisite for any gate. These inputs exclude
+deployment, DNS, customer onboarding, real pilot operations, paid
+infrastructure and public communications. They are planning estimates only and
+must not be presented as product pricing or a customer cost.
+
+### Source and founder-input map
+
+- Current implementation/QA evidence: this note (`docs/web/design-qa-note.md`),
+  especially **QA commands**, **2026-09-21 QA evidence**, **Candidate asset
+  review** and **SVG QA record**.
+- QA acceptance and data boundary: `docs/products/babai/web-qa-landing-page-scope.md`,
+  **QA acceptance matrix** and **CTA and data-handling gate**.
+- Landing-page scope and founder-source hierarchy:
+  `docs/web/landing-page.md`, **Source-of-truth and evidence rules** and
+  **Static page scope**.
+- Founder execution input: the 2026-09-20 admin decision packet summarized in
+  `docs/web/landing-page.md` and
+  `docs/products/babai/web-qa-landing-page-scope.md`; it selects a static
+  mock/demo, keeps external deployment out of scope and requires synthetic
+  boundaries.
+- Validation/onboarding input: `docs/products/babai/validation.md`, **Primary
+  gate — staged**, and `nekurama.babai.research.md`, **Immediate pilot plan**
+  and **Success criteria**. The founder north-star mapping is retained in
+  `nekurama.raw.chat.json` (`4702681b-d611-4408-af5f-9001d04b6cfa`).
+
 ## Candidate asset review
 
 No user-supplied JPEG is retained in this worktree. Earlier candidate-photo

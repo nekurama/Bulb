@@ -95,6 +95,10 @@ A historical `RESOLVED` label is not automatically authoritative. Later evidence
 - [ ] **6.4 Additional company dimensions** — create only when a new dimension becomes material
 - [ ] **6.5 Web publication** → `web/landing-page.md` — GitHub Pages landing-page scope, claim gates, publication constraints and static-site QA plan; implementation remains out of scope
 
+### Execution
+
+- [`execution/oct-dec-plan.md`](execution/oct-dec-plan.md) — October–December quality-first execution plan, gates, paths and budget views
+
 ## File rules
 
 - Keep files focused and reasonably small.

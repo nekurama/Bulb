@@ -78,3 +78,4 @@ Partial or unknown areas should be recorded as questions rather than invented.
 - [`economics-model.md`](economics-model.md) — total-expenditure versus income model
 - [`validation.md`](validation.md) — pilot evidence and external-validation boundary
 - [`pilot-metrics.md`](pilot-metrics.md) — proposed scorecard and team-defined readiness evidence gate
+- [`../../execution/oct-dec-plan.md`](../../execution/oct-dec-plan.md) — October–December quality-first execution plan

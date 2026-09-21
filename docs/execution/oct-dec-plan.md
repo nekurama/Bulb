@@ -29,6 +29,18 @@ input into sequenced work, evidence gates and budget views. It is not a public
 roadmap, price list, capacity guarantee, hiring plan or production
 architecture decision.
 
+This file is the canonical execution plan. The role-specific evidence remains
+linked rather than duplicated:
+
+- [Architecture execution plan](../products/babai/architecture-plan-oct-dec-2026.md)
+  owns stack, load, cost, recovery and technical dependency detail.
+- [Web/QA execution note](../web/design-qa-note.md) owns demo design,
+  accessibility and static-smoke evidence.
+- [Company controls execution plan](../company/oct-dec-execution-plan.md) owns
+  internal controls, evidence ledger and parked external dependencies.
+- [Product BRD and economics](../products/babai/brd.md) owns requirements,
+  internal tier scope and economics inputs.
+
 The plan deliberately preserves two December outcomes without selecting one:
 
 | Path | 31 December 2026 outcome | January implication |
@@ -40,7 +52,28 @@ The default operating principle is **quality before count**. The aggressive path
 remains recorded for explicit trade-off review rather than being silently
 selected by schedule pressure.
 
-## 1. Outcomes, boundaries and evidence posture
+## 1. Executive assumptions, decision boundaries and evidence posture
+
+### Executive assumptions and decision boundaries
+
+- The October–December window is an internal planning artifact. No date,
+  estimate, price, provider choice, capacity figure or interest count is a
+  public claim, quote, approval or forecast.
+- Product owns requirements, economics, customer selection and pilot decisions;
+  Architecture owns stack, load, cost and recovery evidence; Web/QA owns demo
+  design and accessibility; Company owns internal controls and parked
+  dependencies.
+- No incorporation, professional review, provider approval, payment custody
+  approval, trademark clearance or other external gate is implied by this plan.
+  Evidence must be added to the appropriate register before a status changes.
+- Customer funds remain restaurant-owned and separate from BABAI subscription
+  income. No live payment or delivery integration is assumed until the
+  applicable boundary, provider and reconciliation evidence is accepted.
+- Quality-first is the operating default. The aggressive path is retained for
+  explicit review and cannot bypass security, payment, privacy, accessibility,
+  restore, support or rollback gates.
+- No hiring, deployment, secret creation, main-branch change or external
+  register change is part of this integration.
 
 ### Outcomes by 31 December
 
@@ -151,6 +184,17 @@ material safety, payment-integrity or privacy exception.
 | Nov 20–26 | Security/accessibility: authorization matrix, tenant isolation, secret/config review, payment boundary, keyboard/focus/labels/contrast and reduced-motion checks | Security/privacy + QA | POC UI and state contracts | Threat/test checklist approved | No unresolved high-severity issue; accessibility checks pass for demo surfaces |
 | Nov 27–30 | Demo-ready flow and readiness review | Founder/Product + QA/Release | All November evidence | Evidence packet complete | G2 passed: demo script, known limitations and release candidate identified |
 
+**Demo acceptance and November go/no-go**
+
+Accept the demo only when a clean-data run completes the reviewed-menu,
+customer-question, pickup-order, accept/reject, payment-status, staff-completion
+and customer-status flow; takeover, audit, telemetry, error handling and
+known-limitations evidence are visible; and Web/QA accessibility checks pass
+for the demonstrated surfaces. The November **go** decision permits only
+controlled December readiness work. A **no-go** decision holds customer
+exposure, records the missing evidence or defect owner, and reruns the gate;
+demo polish or pipeline interest cannot override it.
+
 **November load interpretation**
 
 The 50-order/day figure is a hard per-restaurant ceiling for the synthetic
@@ -175,6 +219,29 @@ They are not automatically Meta messages, billable AI calls or payment charges.
 | Dec 14–18 | Controlled go-live for one or two restaurants on quality path; reduced-scope five-live rehearsal only for aggressive path | Operations/Pilot + Tech lead | G3a; payment-before-start; named rollback owner | Smoke, support and incident checks green | G3b live gate passed per restaurant |
 | Dec 19–23 | Observe real workflow, reconcile orders/payment state, log support minutes and cost, remediate before adding count | Operations/Pilot + Finance | Live evidence | Daily review cadence active | No unresolved customer-funds, privacy, authorization or data-integrity blocker |
 | Dec 24–31 | Year-end demo, pilot close/target decision and January handoff | Founder/Product | G3b and commercial review | Demo script and evidence packet complete | Demo delivered; paid-pilot target recorded as achieved, pending or blocked; January cohort plan |
+
+**December onboarding sequence — 1 → 2 → 5**
+
+1. **One controlled restaurant:** configure and train the first candidate,
+   verify menu/channel/access, run the smoke workflow, and review support,
+   incident and reconciliation evidence before adding count.
+2. **Two controlled restaurants:** add the second only after the first passes
+   its review; compare operator minutes, order outcomes, provider signals,
+   restore/rollback readiness and customer-impact evidence.
+3. **Five configured/onboarded restaurants:** sequence the remaining three from
+   the 10 ready / 25 interested pipeline only when each meets the onboarded
+   definition below. Five configured is the quality-path year-end target; five
+   live remains an aggressive-path experiment requiring an explicit decision.
+
+The quality path is therefore **1 live → 2 live only after evidence → 5
+configured**, with live status independently gated per restaurant. The
+aggressive path is **1 live → 2 live → 5 live** only after the same per-
+restaurant gates and an explicit founder/product decision; the plan does not
+silently select it. Training covers operator takeover, menu correction, order
+accept/reject, payment-status interpretation, incident escalation and rollback
+contact. Signed paid terms or deposit must be recorded before live use; support rota,
+incident owner, daily measurement and demo evidence are required for every
+configured restaurant.
 
 **December gate G3 — controlled expansion**
 
@@ -205,6 +272,27 @@ completion, no more than 5% missed/duplicate orders, at least 80% staff-handled
 sessions, support within the proposed ceiling, complete economics evidence and
 zero unresolved safety/privacy/payment exceptions. These are internal planning
 thresholds pending owner/team approval, not product claims.
+
+### Capacity and continuation gate
+
+The following table is the operating gate for each restaurant and for cohort
+expansion. Numeric values marked proposed are internal thresholds, not claims:
+
+| Signal | Capacity/quality gate | Continue when | Hold, reduce scope or rollback when |
+| --- | --- | --- | --- |
+| Support minutes | Log planned, unplanned, recovery and takeover minutes; proposed ceiling is no more than 240 recurring support minutes or 24 founder hours per restaurant/month | Actual minutes are within the approved ceiling and trend is understood | Ceiling is exceeded, support owner is unavailable or repeated work is not being removed |
+| Onboarding | Record menu corrections, training minutes, access checks, operator readiness and direct cash | Onboarded definition is complete and operator can execute the runbook | Missing access/menu/operator evidence or onboarding effort is unbounded |
+| Orders and requests | Synthetic ceiling is 50 orders/day/restaurant with 54 average or 90 heavy requests/order; classify requests before rate application | Ceiling evidence is green and real traffic remains below the approved envelope | Ceiling is exceeded, request class is unknown, or latency/error cost is not attributable |
+| Queue/DB/provider | Observe queue lag/depth, DB saturation/connection errors, provider latency/rate limits, callback delay and reconciliation age | Alerts exist, owner is named and signals remain within the measured baseline | Alerting is absent, provider limits are approached without a plan, or reconciliation is stale |
+| RPO/RTO/restore | Record approved RPO/RTO before live; rehearse backup restore, replay/idempotency and integrity comparison | Restore evidence meets the recorded objective and rollback owner signs off | RPO/RTO is unknown, restore differs, or rollback cannot be executed |
+| Errors, retries and DLQ | Track error class, retry count, duplicate effects and DLQ age/ownership | No unresolved critical error; retries are bounded and DLQ is empty or actively owned | Retry loop, unowned DLQ, duplicate order/payment effect or unresolved critical error |
+| ROI / subsidy | Compare recognized BABAI income with cash and economic cost; name founder/company subsidy | Contribution is positive or an explicit, time-bounded subsidy is approved | Negative contribution is hidden, subsidy is indefinite or pass-through funds are mixed in |
+| Continuation | Use proposed pilot measures: ≥80% live within seven days, ≥90% accepted pickup completion, ≤5% missed/duplicate orders, ≥80% staff-handled sessions | Measures and evidence support the next restaurant decision | Any safety/payment/privacy exception or multiple proposed measures fail |
+| Rollback | Maintain per-restaurant feature/config rollback and incident contact; rehearse before live | Rollback is tested, observable and reversible without data loss | Rollback owner/evidence is missing or a failed change cannot be isolated |
+
+No threshold in this table authorizes a live launch by itself. G3a and G3b,
+commercial prerequisites, and the explicit quality/aggressive path decision
+remain mandatory.
 
 ## 5. CI, telemetry, cost ledger and test plan
 
@@ -291,6 +379,42 @@ Known cash inputs are not a complete budget: provider/API, AI, storage/logging/
 queue/DB usage, payment, delivery, refunds and tax treatment remain unknown
 until measured or contracted.
 
+### Detailed October–December monthly expense model
+
+This is the required working model, not a quote. `TBD` is deliberately
+different from zero. October establishes meters and rate evidence; November
+captures dogfood and synthetic-load usage; December replaces planning inputs
+with invoices, provider exports, receipts and time logs where available.
+
+| Expense line | October | November | December | Cash view | Economic view / allocation rule |
+| --- | --- | --- | --- | --- | --- |
+| Infrastructure: hosting, storage, DB and queue | Annual planning range divided by 12: ₹1,667 / ₹3,333 / ₹4,333 low/base/high | Same range, replace with measured usage | Same range, replace with invoice | Paid hosting/storage/DB/queue | Add shared allocation by restaurant and retain idle/shared reserve |
+| AI/model usage | TBD; instrument units, model, retries and media | TBD from dogfood and 50-order ceiling | TBD from live telemetry | Provider invoice or prepaid usage | Units × observed rate + retry/support attribution; no invented rate |
+| Meta/BSP/provider | 250 / 750 / 2,000 billable-unit planning sensitivity; rate TBD | Meter actual categories and failures | Replace with export/invoice | Paid message/provider/API lines | Attribute by restaurant and classify non-billable retries separately |
+| Payment and delivery pass-through | Restaurant-owned; BABAI cost TBD unless agreement says otherwise | Reconcile callbacks and pass-through ledger | Reconcile actuals and refunds | Cash collected/remitted is not BABAI revenue | Show pass-through separately; only approved BABAI subsidy enters cost |
+| Tooling, development and admin | Annual planning range divided by 12: ₹1,250 / ₹2,500 / ₹3,250 low/base/high | Same range, replace with invoices | Same range, replace with invoices | Paid tools and admin | Include allocated shared tooling and any founder setup time |
+| QA and synthetic load testing | TBD direct spend plus logged test hours | TBD direct spend plus measured run hours | TBD regression/rehearsal spend | Test vendors, environments and direct materials | Add QA/load hours at the approved internal economic rate |
+| Observability, alerting and evidence retention | TBD; define event/retention meters | TBD from load and dogfood | TBD from live retention and incidents | Paid monitoring/logging/export | Allocate by restaurant, environment and incident burden |
+| Onboarding and menu setup | ₹1,000 / ₹4,000 / ₹16,000 economic sensitivity per configured restaurant | Actual minutes × internal rate; cash direct items separate | Actual minutes × internal rate; cohort true-up | Direct setup cash only | Founder/operator time remains economic cost |
+| Travel and other direct onboarding | TBD from receipts; no assumed travel | TBD from receipts | TBD from receipts | Cash receipts only | Add time and direct cost without hiding either |
+| Company / brand / legal reserve | TBD pending internal control and professional evidence | TBD; retain parked dependency status | TBD; do not infer approval | Paid reserve lines only | Economic reserve remains visible even if unspent |
+| Contingency | 15% of known modeled lines; unknowns remain unknown | 15% of known modeled lines | 15% of known modeled lines | Cash contingency only when funded | Apply to economic subtotal too, without converting TBD to zero |
+| Founder economic time | Logged hours × ₹500 / ₹1,000 / ₹2,000 sensitivity | Same, using support, QA, onboarding and recovery logs | Same, with live support and reconciliation logs | Usually ₹0 cash | Always included in economic view; never treated as free capacity |
+
+For month `m`, maintain separate subtotals:
+
+`cash_m = paid infrastructure + AI + Meta/provider + approved BABAI payment/
+delivery subsidy + tooling + QA/load + observability + direct onboarding +
+travel/direct + paid company/brand reserve`
+
+`economic_m = cash_m + founder/team time + unpaid onboarding/support/recovery +
+integration-maintenance reserve + funded contingency`
+
+The 90-day model is `cash_Oct + cash_Nov + cash_Dec` and
+`economic_Oct + economic_Nov + economic_Dec`; pass-through restaurant funds
+are excluded from BABAI income and cost. Each subtotal must carry an
+assumptions version and evidence link.
+
 ### Per-customer onboarding and five-customer cohort
 
 The table below isolates one-time onboarding economic effort. It excludes direct
@@ -336,18 +460,61 @@ trigger remains unresolved as to unit; the separate ₹25,00,000 monthly
 operating-profit planning target after non-founder operating costs is a scale
 planning input, not an October–December gate or forecast.
 
+### Provisional revenue and pricing sensitivity
+
+These are internal planning inputs only and must not appear as a public price
+claim until the commercial, tax, payment and approval gates are closed:
+
+| Internal label | Provisional monthly subscription |
+| --- | ---: |
+| LITE | ₹4,999 |
+| BASE | ₹9,999 |
+| PRO | ₹19,999 |
+
+The requested **3 / 4 / 3 sensitivity** means three LITE, four BASE and three
+PRO subscriptions (10 restaurants) held for three months. Before discounts,
+GST treatment, refunds or subsidies:
+
+| Scenario | Monthly revenue | 90-day revenue | ±15% realization/volume variance |
+| --- | ---: | ---: | ---: |
+| 3 LITE + 4 BASE + 3 PRO | ₹1,14,990 | ₹3,44,970 | ₹2,93,225 to ₹3,96,716 |
+
+The 90-day range is rounded to the nearest rupee from `₹3,44,970 × 0.85` and
+`₹3,44,970 × 1.15`. It is a sensitivity, not a forecast and not a commitment
+to sell ten restaurants; the December onboarding target remains five
+configured/onboarded restaurants.
+
+For each cohort, record:
+
+- gross subscription invoice, discounts/refunds and recognized BABAI income;
+- GST/tax treatment only after finance validation;
+- cash cost and economic cost from the monthly model;
+- restaurant-funded pass-through amounts separately;
+- any approved subsidy (cash waived, provider fee absorbed or founder time);
+  and
+- `economic contribution = recognized BABAI income - attributable economic
+  cost`, with `cash contribution` shown separately.
+
+If economic contribution is negative, the gap is a founder/company subsidy and
+must be named, approved internally and time-bounded; it must not be presented
+as margin or product-market proof.
+
 ## 7. Risks and mitigations
 
 | Risk | Trigger | Mitigation | Owner |
 | --- | --- | --- | --- |
+| Schedule compression | October gate slips or November evidence is incomplete | Freeze scope, carry only safety/reliability work, and move the live decision rather than bypassing gates | Founder/Product + QA/Release |
 | Scope expands after freeze | New tier capability or integration added without gate | Put request in decision log; defer unless safety/reliability blocker | Founder/Product |
 | Meta/channel onboarding fails | Number, webhook or coexistence cannot be verified | Keep mock channel and manual takeover; validate one controlled channel before count expansion | Tech lead + Operations |
+| External approval remains pending | Provider, payment, legal, tax, brand or professional evidence is absent | Park the dependency, keep the feature/mock path bounded and do not describe it as approved | Company + Founder/Product |
 | Payment integrity or custody breach | BABAI would hold funds or state is advanced on an unverified callback | Stop live release; keep payment separate; reconcile provider reference and audit trail | Security/privacy + Finance |
 | Delivery distracts from MVP | Delivery becomes a December dependency | Keep pickup-first; use mock/approved adapter only; no fleet operation | Founder/Product |
 | Founder support ceiling is exceeded | Repeated >240 recurring support minutes or >24 hours/restaurant/month | Hold next restaurant, remediate and remeasure; no hiring assumption | Operations/Pilot |
 | AI cost or behavior is unbounded | AI-heavy usage lacks model/unit/retry or mutates controlled state | Record mode/cost; enforce deterministic policy and human approval; hold expansion | Tech lead |
 | Restore or rollback is unproven | Restore rehearsal fails or data integrity differs | Block live status; fix runbook and repeat from clean backup | Tech lead + QA |
 | Pipeline is overstated | “Interested” cannot produce access, menu or signed terms | Maintain candidate evidence ledger; treat ten as reserveable, not committed | Operations/Pilot |
+| Customer readiness is weak | Owner, menu, channel, operator or paid prerequisite is missing | Use the next evidenced candidate; keep the restaurant configured but not live | Operations/Pilot |
+| Test evidence is incomplete | Load, restore, accessibility or failure-injection result is missing | Hold G2/G3, record the gap and rerun from a clean fixture; never substitute demo polish for evidence | QA/Release |
 | Aggressive path creates unsafe load | Five-live date pressure overrides G3b | Keep quality path as default operating posture; aggressive path needs explicit reduced-scope review | Founder/Product |
 | Cash/economic confusion | Founder time or pass-through funds omitted | Maintain both views and assumptions version; finance review before commercial claim | Finance/ledger |
 
@@ -366,7 +533,102 @@ planning input, not an October–December gate or forecast.
   ledger.
 - Meaning and timing of the historical ₹25L income trigger.
 
-## 9. Source anchors and link map
+## 9. Final recommendation, milestones, dependencies and source anchors
+
+### Quality-first recommendation
+
+Proceed with the quality path: complete the POC and evidence gates, onboard one
+controlled restaurant, expand to two only after measured review, and finish
+with five configured/onboarded restaurants rather than treating five live as a
+deadline. Keep the aggressive 1→2→5-live path available for an explicit
+decision after G3a/G3b, but do not select it in this plan. A demo is ready only
+when it is repeatable from clean data, limitations are disclosed internally,
+the web/QA accessibility evidence is present, and the payment/privacy/
+authorization/restore/rollback gates are green.
+
+### Exact internal milestones
+
+| Milestone | Evidence required | Decision |
+| --- | --- | --- |
+| Oct 3 scope boundary | Versioned LITE/BASE/PRO matrix, assumptions, owner/dependency list and out-of-scope log | Freeze or defer scope |
+| Oct 31 G1 | Contract, state, authorization, audit, idempotency, mock-adapter and CI evidence | Lock November POC backlog or hold |
+| Nov 30 G2 | Dogfood, 50-order/day synthetic ceiling, 54/90 request classification, restore, security, accessibility and demo packet | Demo-ready or no customer exposure |
+| Dec 5 G3a | Hardening, observability, RPO/RTO/restore, rollback and release evidence | Permit controlled restaurant review |
+| Dec 18 G3b review | Per-restaurant smoke, signed/payment prerequisite, trained operator, support rota and rollback owner | Continue 1→2 or hold |
+| Dec 31 year-end | Demo, actual cash/economic ledger, incidents, support minutes and explicit path decision | Close target as achieved, pending or blocked |
+
+### Partial known budget range
+
+Using the unrounded annual planning inputs in this document, five-customer
+October–December infrastructure, tooling and onboarding economic costs are
+**₹13,750–₹1,02,750 before contingency** and **₹15,813–₹1,18,163 with 15%
+contingency**, rounded to the nearest rupee. This is a partial planning
+envelope, not a total budget: AI, Meta/provider, payment/delivery subsidy,
+QA/load testing, observability, travel/direct, company/brand reserve and
+founder support/recovery time remain `TBD` until evidence is captured.
+
+### Definition of five customers onboarded
+
+The status **onboarded/configured** requires all of the following for each of
+five restaurants:
+
+1. Candidate owner and operating contact are recorded; channel/menu access is
+   verified.
+2. Commercial terms are signed or the approved paid-term/deposit prerequisite
+   is recorded before any live use.
+3. Menu is imported, corrected, reviewed and published for the intended
+   branch/channel.
+4. Named operator completes training for takeover, accept/reject, payment
+   status, incident escalation and rollback.
+5. A clean-data smoke order reaches the intended terminal status with audit,
+   telemetry and reconciliation evidence.
+6. Support rota, incident contact, restore/rollback owner and daily measurement
+   fields are present.
+7. No unresolved critical security, privacy, authorization, payment,
+   data-integrity or accessibility blocker remains.
+
+Onboarded does not mean live, profitable, externally approved or a public
+customer reference.
+
+### Role bot-health and evidence table
+
+| Role | State | Commit / evidence | Blocker | Next action |
+| --- | --- | --- | --- | --- |
+| Product / BRD | approved and integrated | `fb1c1e059f4bba82f032b3171f0d6121c5ace4ee`; this canonical plan and `docs/products/babai/brd.md` | Pricing, tier labels and pipeline remain internal/provisional | Product owner records scope/pricing decision and reconciles candidate ledger |
+| Architecture | approved and integrated | `0c49a095cc71bbbda95252b3e501053577281216`; `architecture-plan-oct-dec-2026.md` | Runtime/provider choices and RPO/RTO values remain open | Architecture records measured load/recovery evidence and parked choices |
+| Web / QA | approved and integrated | `5db1f2d40f672c4eba7e0f4113d8e0b4d05d2de9`; `docs/web/design-qa-note.md` | Demo/static smoke evidence must be rerun after integration | QA runs accessibility, JS/SVG/static smoke and attaches evidence |
+| Company internal controls | approved and integrated | `a11cad5`; `docs/company/oct-dec-execution-plan.md` and `internal-controls.md` | External/professional approvals and register evidence remain parked | Company maintains internal ledger; do not alter external register |
+
+### Dependency map
+
+| Dependency | Producer | Consumer / gate | State |
+| --- | --- | --- | --- |
+| Requirements, tier scope and economics | Product / BRD | Architecture contracts, onboarding and commercial review | Integrated; provisional decisions remain explicit |
+| Modular state, adapters, load, cost and recovery | Architecture | POC, G2, G3a and rollback decisions | Integrated; runtime/provider/RPO/RTO open |
+| Demo flow, design and accessibility | Web / QA | November G2, December demo and per-restaurant smoke | Integrated; validation evidence pending |
+| Evidence ledger, approvals boundary and internal controls | Company | Commercial, payment, privacy and year-end decision | Integrated; external dependencies parked |
+| Candidate access, signed terms, payment/deposit and operator | Operations/Product | December 1→2→5 onboarding and G3b | Not yet evidenced in this repository |
+
+### Next internal actions
+
+1. Product: version the internal scope/pricing decision, reconcile 25+/10+
+   pipeline counts and select candidates without calling interest commitment.
+2. Architecture: attach the 50-order/day, 54/90-request, restore, retry/DLQ
+   and cost evidence to the G1/G2/G3a packets.
+3. Web/QA: run the integrated demo accessibility and static-smoke checks and
+   link results to G2.
+4. Company: maintain the internal cash/economic ledger and parked-dependency
+   controls; leave `docs/company/external-entity-register.json` unchanged.
+5. Manager: run the repository checks listed below, then commit this
+   integration on `nekurama/babai-feature`.
+
+### Integration record
+
+The four approved source commits are integrated without modifying main,
+secrets, deployment or the external register. The feature branch rollback
+parent before this integration is `2609ce942f02476855384733d0b2d58894134811`.
+
+### Source anchors and link map
 
 The following anchors are the evidence base for this planning artifact:
 

@@ -14,6 +14,13 @@ sources:
 
 # BABAI October–December Execution Plan
 
+The integrated, canonical plan is
+[`../../execution/oct-dec-plan.md`](../../execution/oct-dec-plan.md). This
+product-role packet is supporting detail for the Product/BRD workstream; where
+it differs from the canonical plan, the canonical plan and current evidence
+control. Architecture, Web/QA and Company controls are linked from the
+canonical plan rather than duplicated here.
+
 ## 1. Executive assumptions and decision boundaries
 
 This is a **quality-first internal execution plan**, not a launch promise,

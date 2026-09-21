@@ -34,19 +34,19 @@ fashion alone.
 
 | Layer | Artifact | Review purpose |
 |---|---|---|
-| BRD | `brd.md` | Product truth, scope, buyer, pilot and open decisions |
-| TRD | `technical-requirements.md` | Functional/non-functional/capacity/security requirements |
-| HLD/LLD | `end-to-end-architecture.md` | System context, modules, paths, state, persistence and evolution |
-| LLD/events | `events-catalog.md` | Event names, envelopes, idempotency, replay and projections |
-| Runtime/AI | `runtime-and-ai-architecture.md` | Topology options, cost model, model routing and workflow choice |
-| UX | `pro-operations-ux.md` | WhatsApp cards and high-volume Pro operations surface |
-| SDLC | `sdlc-standard.md` | Human/bot coding, review, validation and release rules |
-| Legal controls | `contract-controls.md` | Contract packet, evidence ledger and professional gates |
-| Code contracts | `contracts.ts` | TypeScript command/event/port shapes for implementation |
+| BRD | [`brd.md`](brd.md) | Product truth, scope, buyer, pilot and open decisions |
+| TRD | [`technical-requirements.md`](technical-requirements.md) | Functional/non-functional/capacity/security requirements |
+| HLD/LLD | [`end-to-end-architecture.md`](end-to-end-architecture.md) | System context, modules, paths, state, persistence and evolution |
+| LLD/events | [`events-catalog.md`](events-catalog.md) | Event names, envelopes, idempotency, replay and projections |
+| Runtime/AI | [`runtime-and-ai-architecture.md`](runtime-and-ai-architecture.md) | Topology options, cost model, model routing and workflow choice |
+| UX | [`pro-operations-ux.md`](pro-operations-ux.md) | WhatsApp cards and high-volume Pro operations surface |
+| SDLC | [`sdlc-standard.md`](sdlc-standard.md) | Human/bot coding, review, validation and release rules |
+| Legal controls | [`contract-controls.md`](contract-controls.md) | Contract packet, evidence ledger and professional gates |
+| Code contracts | [`contracts.ts`](contracts.ts) | TypeScript command/event/port shapes for implementation |
 
-Existing `architecture.md`, `architecture-lld.md`, `domain-model.md`,
-`flow-architecture.md`, `flow-inventory.md`, `experience-and-channels.md`,
-`economics-model.md` and `pilot-metrics.md` remain source documents. The new
+Existing [`architecture.md`](architecture.md), [`architecture-lld.md`](architecture-lld.md), [`domain-model.md`](domain-model.md),
+[`flow-architecture.md`](flow-architecture.md), [`flow-inventory.md`](flow-inventory.md), [`experience-and-channels.md`](experience-and-channels.md),
+[`economics-model.md`](economics-model.md) and [`pilot-metrics.md`](pilot-metrics.md) remain source documents. The new
 packet cross-references rather than silently rewriting their historical
 evidence.
 
@@ -79,4 +79,3 @@ These are explicit validation gates, not silent assumptions.
 All overnight work belongs on `feat/overnight`. It must not be deployed or
 merged to `main` until the next review explicitly approves the packet and the
 validation checklist passes.
-

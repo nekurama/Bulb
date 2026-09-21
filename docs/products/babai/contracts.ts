@@ -26,7 +26,6 @@ export interface ChannelContext {
 export interface CommandMeta {
   commandId: string;
   idempotencyKey: string;
-  expectedVersion?: number;
   actorId: string;
   tenantId: string;
   branchId?: string;
@@ -34,32 +33,90 @@ export interface CommandMeta {
   causationId?: string;
 }
 
+export interface MutationMeta extends CommandMeta {
+  expectedVersion: number;
+}
+
 export type OrderCommand =
-  | { type: 'SubmitOrder'; meta: CommandMeta; cartId: string }
-  | { type: 'AcceptOrder'; meta: CommandMeta; orderId: string }
-  | { type: 'RejectOrder'; meta: CommandMeta; orderId: string; reason: string }
-  | { type: 'StartPreparation'; meta: CommandMeta; orderId: string }
-  | { type: 'MarkReady'; meta: CommandMeta; orderId: string }
-  | { type: 'CompleteOrder'; meta: CommandMeta; orderId: string }
+  | { type: 'SubmitOrder'; meta: MutationMeta; cartId: string }
+  | { type: 'AcceptOrder'; meta: MutationMeta; orderId: string }
+  | { type: 'RejectOrder'; meta: MutationMeta; orderId: string; reason: string }
+  | { type: 'StartPreparation'; meta: MutationMeta; orderId: string }
+  | { type: 'MarkReady'; meta: MutationMeta; orderId: string }
+  | { type: 'CompleteOrder'; meta: MutationMeta; orderId: string }
+  | { type: 'RequestCancellation'; meta: MutationMeta; orderId: string; reason: string }
+  | { type: 'CancelOrder'; meta: MutationMeta; orderId: string; reason: string }
   | {
       type: 'RequestOrderCorrection';
-      meta: CommandMeta;
+      meta: MutationMeta;
       orderId: string;
       reason: string;
     };
 
-export type SupportCommand =
-  | { type: 'OpenSupportCase'; meta: CommandMeta; orderId: string; reason: string }
-  | { type: 'AssignSupportCase'; meta: CommandMeta; caseId: string; assigneeId: string }
-  | { type: 'RequestPaymentCorrection'; meta: CommandMeta; caseId: string; amount: Money }
-  | { type: 'ResolveSupportCase'; meta: CommandMeta; caseId: string; resolution: string };
+export type CatalogCommand =
+  | { type: 'ChangeAvailability'; meta: MutationMeta; itemId: string; available: boolean; reason?: string }
+  | { type: 'CreateCombo'; meta: MutationMeta; comboId: string }
+  | { type: 'CreatePromotion'; meta: MutationMeta; promotionId: string }
+  | { type: 'ActivatePromotion'; meta: MutationMeta; promotionId: string }
+  | { type: 'ExpirePromotion'; meta: MutationMeta; promotionId: string };
 
-export interface CommandResult {
-  accepted: boolean;
-  aggregateId: string;
-  aggregateVersion: number;
-  emittedEventIds: string[];
-  failure?: {
+export type PaymentCommand =
+  | { type: 'CreatePaymentIntent'; meta: MutationMeta; orderId: string; amount: Money }
+  | { type: 'RecordProviderCallback'; meta: MutationMeta; paymentId: string; providerEventId: string; payload: unknown }
+  | { type: 'RecordManualConfirmation'; meta: MutationMeta; paymentId: string; evidenceId: string }
+  | { type: 'RequestRefund'; meta: MutationMeta; paymentId: string; amount: Money; reason: string }
+  | { type: 'ConfirmRefund'; meta: MutationMeta; refundId: string }
+  | { type: 'ReconcilePayment'; meta: MutationMeta; paymentId: string };
+
+export type FulfillmentCommand =
+  | { type: 'RequestFulfillment'; meta: MutationMeta; orderId: string; mode: 'pickup' | 'delivery' }
+  | { type: 'AssignDelivery'; meta: MutationMeta; fulfillmentId: string }
+  | { type: 'VerifyPickup'; meta: MutationMeta; fulfillmentId: string; code: string }
+  | { type: 'MarkDelivered'; meta: MutationMeta; fulfillmentId: string };
+
+export type NotificationCommand =
+  | { type: 'RetryNotification'; meta: MutationMeta; notificationId: string }
+  | { type: 'CreateNotification'; meta: MutationMeta; templateId: string; recipientId: string }
+  | { type: 'ResolveConsent'; meta: MutationMeta; customerId: string; decision: 'opt-in' | 'opt-out' }
+  | { type: 'SendTemplate'; meta: MutationMeta; notificationId: string }
+  | { type: 'QuarantineNotification'; meta: MutationMeta; notificationId: string; reason: string };
+
+export type SupportCommand =
+  | { type: 'OpenSupportCase'; meta: MutationMeta; orderId: string; reason: string }
+  | { type: 'AssignSupportCase'; meta: MutationMeta; caseId: string; assigneeId: string }
+  | { type: 'RequestPaymentCorrection'; meta: MutationMeta; caseId: string; amount: Money }
+  | { type: 'IssueVoucher'; meta: MutationMeta; caseId: string; amount: Money; expiry: string }
+  | { type: 'ResolveSupportCase'; meta: MutationMeta; caseId: string; resolution: string };
+
+export type RecoveryCommand =
+  | { type: 'OpenReconciliationCase'; meta: MutationMeta; aggregateId: string; reason: string }
+  | { type: 'CreateRecoveryTask'; meta: MutationMeta; aggregateId: string; reason: string }
+  | { type: 'AcknowledgeException'; meta: MutationMeta; caseId: string }
+  | { type: 'ResolveDLQ'; meta: MutationMeta; caseId: string; resolution: string }
+  | { type: 'AuthorizeReplay'; meta: MutationMeta; eventId: string; reason: string };
+
+export type DomainCommand =
+  | OrderCommand
+  | CatalogCommand
+  | PaymentCommand
+  | FulfillmentCommand
+  | NotificationCommand
+  | SupportCommand
+  | RecoveryCommand;
+
+export type CommandResult =
+  | {
+      accepted: true;
+      aggregateId: string;
+      aggregateVersion: number;
+      emittedEventIds: string[];
+    }
+  | {
+      accepted: false;
+      aggregateId: string;
+      aggregateVersion: number;
+      emittedEventIds: string[];
+      failure: {
     code:
       | 'FORBIDDEN'
       | 'CONFLICT'
@@ -69,8 +126,8 @@ export interface CommandResult {
       | 'RECONCILIATION_REQUIRED';
     message: string;
     retryable: boolean;
-  };
-}
+      };
+    };
 
 export interface DomainEvent<TPayload = unknown> {
   eventId: string;
@@ -118,4 +175,3 @@ export interface ProjectionPolicy {
   maxStalenessMs: number;
   requireRefreshBeforeWrite: boolean;
 }
-

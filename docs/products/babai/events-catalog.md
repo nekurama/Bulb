@@ -53,12 +53,13 @@ storage instead.
 | **catalog** | `MenuReceived`, `MenuCandidateCreated`, `MenuReviewRequired`, `MenuPublished`, `MenuRejected`, `MenuScheduled`, `MenuRolledBack`, `AvailabilityChanged` |
 | **commercial** | `PriceCalculated`, `PromotionCreated`, `PromotionPublished`, `PromotionExpired`, `PromotionCancelled`, `TaxCalculated`, `CommercialSnapshotCreated` |
 | **cart** | `CartStarted`, `CartItemAdded`, `CartItemChanged`, `CartItemRemoved`, `CartValidated`, `CartExpired` |
-| **order** | `OrderCreated`, `OrderSubmitted`, `OrderAccepted`, `OrderRejected`, `OrderStartedPreparation`, `OrderReady`, `OrderCompleted`, `OrderCancelled`, `OrderCorrectionRequested`, `OrderCorrected` |
+| **order** | `OrderCreated`, `OrderSubmitted`, `OrderAccepted`, `OrderRejected`, `OrderStartedPreparation`, `OrderReady`, `OrderCompleted`, `OrderCancellationRequested`, `OrderCancelled`, `OrderCorrectionRequested`, `OrderCorrected` |
 | **payment** | `PaymentRequested`, `PaymentPending`, `PaymentAuthorized`, `PaymentConfirmed`, `PaymentFailed`, `PaymentReconciled`, `PaymentCorrectionRequested`, `RefundRequested`, `RefundReconciled`, `PaymentMismatchDetected` |
 | **fulfillment** | `FulfillmentRequested`, `PickupScheduled`, `ReadyForPickup`, `PickupCodeIssued`, `PickupVerified`, `DeliveryQuoted`, `DeliveryBooked`, `DeliveryAssigned`, `OutForDelivery`, `Delivered`, `Fulfilled` |
 | **notification** | `NotificationRequested`, `NotificationQueued`, `NotificationRendered`, `NotificationSubmitted`, `NotificationAccepted`, `NotificationDelivered`, `NotificationFailed`, `NotificationQuarantined`, `NotificationRetryRequested` |
 | **support** | `SupportCaseOpened`, `SupportCaseAssigned`, `SupportCaseEscalated`, `SupportCaseResolved`, `SupportCaseReopened`, `SupportPaymentRequested`, `SupportPaymentConfirmed`, `VoucherIssued`, `VoucherRedeemed` |
-| **billing** | `EntitlementSelected`, `ActivationRequested`, `ActivationHeld`, `EntitlementActivated`, `InvoiceIssued`, `InvoiceRevised`, `SubscriptionPaused`, `SubscriptionCancelled` |
+| **billing** | `EntitlementSelected`, `ActivationRequested`, `ActivationHeld`, `EntitlementActivated`, `InvoiceIssued`, `InvoiceRevised`, `SubscriptionPaymentRecorded`, `SubscriptionPaused`, `SubscriptionCancelled` |
+| **contract** | `ContractDrafted`, `ContractApproved`, `ContractSent`, `ContractSigned`, `ContractAmended`, `ContractSuspended`, `ContractTerminated`, `DataExportRequested`, `DataDeletionCompleted` |
 | **tenant** | `TenantCreated`, `BranchCreated`, `ChannelConnected`, `ChannelDisconnected`, `TenantSuspended`, `TenantReactivated`, `StaffInvited`, `RoleAssigned`, `RoleRevoked` |
 | **analytics** | `ProjectionQueued`, `ProjectionBuilt`, `ProjectionStale`, `ProjectionRebuilt`, `MetricCaptured`, `ReportRequested`, `ReportGenerated` |
 | **recovery** | `FailureDetected`, `RetryScheduled`, `RetryExhausted`, `DeadLetterQueued`, `ReconciliationRequested`, `Reconciled`, `ReplayAuthorized`, `ReplayCompleted`, `RollbackCompleted` |
@@ -166,4 +167,3 @@ Every projection exposes:
 Pro writes always re-read authoritative aggregate state and use an expected
 version. A stale projection may be displayed with a warning but cannot silently
 authorize a state mutation.
-

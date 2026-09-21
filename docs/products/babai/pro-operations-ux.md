@@ -12,12 +12,15 @@ last-reviewed: 2026-09-22
 |---|---|---|
 | Customer WhatsApp | Browse, cart, payment link, status, delivery and feedback | A dense order-management console |
 | Restaurant WhatsApp | Onboarding, menu/promotion changes, lightweight order actions, support assignment | The only tool for high-volume operations |
-| Pro web UI | More than 10 orders/minute, multiple staff, queues, bulk actions, reconciliation, analytics and recovery | A second source of truth |
+| Pro web UI | High-volume conditions: simultaneous queues, multiple staff/branches, bulk actions, reconciliation, analytics and recovery | A second source of truth |
 | BABAI/NEKURAMA admin UI | Tenant support, DLQ/reconciliation, audit and platform operations | A restaurant-facing shortcut around authorization |
 
-The threshold of **more than 10 orders/minute** is a product trigger, not a
-hard infrastructure limit. A restaurant may buy the Pro UI earlier if staff
-need simultaneous queues, audit, bulk actions or multiple branches.
+The previously discussed **more than 10 orders/minute** threshold is a
+proposed UX hypothesis, not an approved cutoff or capacity claim. The actual
+Pro trigger should be measured from simultaneous queues, staff count, branch
+complexity, support/reconciliation load, bulk-action need and operator
+response time. A restaurant may buy the Pro UI earlier when those conditions
+appear.
 
 ## 2. WhatsApp card/message rules
 
@@ -83,6 +86,7 @@ RejectOrder
 StartPreparation
 MarkReady
 CompleteOrder
+RequestCancellation
 RequestOrderCorrection
 AssignSupportCase
 RequestPaymentCorrection
@@ -155,4 +159,3 @@ The current static prototype should remain mock-only:
 - show stale projection/conflict states explicitly;
 - do not expose phone numbers, payment secrets or full customer data in
   screenshots, logs or fixtures.
-

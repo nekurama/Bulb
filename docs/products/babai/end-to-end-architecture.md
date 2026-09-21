@@ -214,68 +214,10 @@ does not imply payment, order acceptance or fulfillment completion.
 
 ## 6. Code-ready contracts
 
-```ts
-export type ActorRole =
-  | 'customer'
-  | 'owner'
-  | 'cashier'
-  | 'staff'
-  | 'platform-admin';
-
-export interface ChannelContext {
-  tenantId: string;
-  branchId?: string;
-  channelId: string;
-  provider: 'meta-whatsapp' | 'bsp' | 'web';
-  actorId: string;
-  actorRole: ActorRole;
-  correlationId: string;
-}
-
-export interface CommandMeta {
-  commandId: string;
-  idempotencyKey: string;
-  expectedVersion?: number;
-  actorId: string;
-  tenantId: string;
-  branchId?: string;
-  correlationId: string;
-  causationId?: string;
-}
-
-export type OrderCommand =
-  | { type: 'SubmitOrder'; meta: CommandMeta; cartId: string }
-  | { type: 'AcceptOrder'; meta: CommandMeta; orderId: string }
-  | { type: 'RejectOrder'; meta: CommandMeta; orderId: string; reason: string }
-  | { type: 'StartPreparation'; meta: CommandMeta; orderId: string }
-  | { type: 'MarkReady'; meta: CommandMeta; orderId: string }
-  | { type: 'CompleteOrder'; meta: CommandMeta; orderId: string }
-  | { type: 'RequestOrderCorrection'; meta: CommandMeta; orderId: string; reason: string };
-
-export interface CommandResult {
-  accepted: boolean;
-  aggregateId: string;
-  aggregateVersion: number;
-  emittedEventIds: string[];
-  failure?: {
-    code: 'FORBIDDEN' | 'CONFLICT' | 'INVALID_TRANSITION' | 'UNAVAILABLE' | 'QUOTA';
-    message: string;
-    retryable: boolean;
-  };
-}
-
-export interface WorkflowPort {
-  schedule(input: {
-    workflowType: string;
-    aggregateId: string;
-    dueAt?: string;
-    idempotencyKey: string;
-    payload: unknown;
-  }): Promise<{ workflowId: string }>;
-  signal(workflowId: string, signal: string, payload: unknown): Promise<void>;
-  cancel(workflowId: string, reason: string): Promise<void>;
-}
-```
+The canonical TypeScript command, event and adapter contracts live in
+[`contracts.ts`](contracts.ts). All WhatsApp cards, restaurant WhatsApp
+actions, Pro UI buttons, provider callbacks and recovery tools must compile
+against those contracts rather than copying a smaller inline variant.
 
 ## 7. Persistence and transaction rules
 
@@ -354,7 +296,7 @@ analytics projection workers, not the order aggregate.
 | Stage | Runtime | Product surface | Evidence gate |
 |---|---|---|---|
 | 0 | Local/static mock + contract tests | WhatsApp conversation and HTML UX rehearsal | State transitions, accessibility, no-network boundary |
-| 1 | Modular monolith + queue + Postgres | Paid 10-restaurant pilot, human takeover, direct payment boundary | Positive base contribution, support ceiling, reliable reconciliation |
+| 1 | Modular monolith + queue + Postgres | Fixed 90-day paid pilot with controlled one-to-three-restaurant enrollment | Non-negative proposed base contribution, support ceiling, reliable reconciliation |
 | 2 | Hardened modular monolith + Pro UI | Higher volume, staff roles, delivery, reporting | Queue age, DB, provider, support and restore evidence |
 | 3 | Selective worker/module extraction | 500/1,000 restaurant scale and integration catalog | Measured isolation/scaling need; no architecture-by-fashion |
 
@@ -367,4 +309,3 @@ analytics projection workers, not the order aggregate.
 - Exact Pro UI SLO, projection freshness budget and role matrix.
 - DPDPA notice/processor/e-contract language and retention schedule.
 - Provider/model rate cards, regional data handling and AI evaluation set.
-

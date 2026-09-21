@@ -63,11 +63,15 @@ The detailed review packet is split into focused artifacts:
 - [`runtime-and-ai-architecture.md`](runtime-and-ai-architecture.md) —
   modular-monolith, hybrid and microservice comparison, runtime cost model,
   AI routing and workflow-engine decision.
+- [`technical-requirements.md`](technical-requirements.md) — functional,
+  non-functional, capacity, security and acceptance requirements.
 - [`pro-operations-ux.md`](pro-operations-ux.md) — WhatsApp and
   high-throughput Pro operations UX.
 - [`sdlc-standard.md`](sdlc-standard.md) and
   [`contract-controls.md`](contract-controls.md) — coding/review standards
   and contract/e-contract controls.
+- [`contracts.ts`](contracts.ts) and [`overnight-review.md`](overnight-review.md)
+  — code-ready command/event/port shapes and the review handoff.
 
 The architecture target is **hybrid evolution**, not “monolith forever”:
 keep domain transactions together initially, isolate workers/provider

@@ -102,8 +102,8 @@ ContractDrafted
 ContractApproved
 ContractSent
 ContractSigned
-PlanActivated
-PaymentReceived
+EntitlementActivated
+SubscriptionPaymentRecorded
 ContractAmended
 ContractSuspended
 ContractTerminated
@@ -113,4 +113,3 @@ DataDeletionCompleted
 
 These events do not replace legal records; they connect commercial state to
 operational entitlements and audit evidence.
-

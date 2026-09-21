@@ -1,7 +1,7 @@
 ---
 status: partial
 owner: NEKURAMA / BABAI
-last-reviewed: 2026-09-20
+last-reviewed: 2026-09-21
 scope: GitHub Pages landing-page and native mock-demo template; no external deployment
 sources:
   - ADMIN SCOPE UPDATE — WEBSITE INTERNAL TEMPLATE/QA ONLY (2026-09-21)
@@ -378,8 +378,9 @@ revision. This role-branch correction does not push, enable or deploy Pages.
 | Native HTML/CSS/JS | Zero dependency surface; direct GitHub Pages compatibility; no build or bundling gate; easy network/provenance inspection; resilient no-JavaScript content shell. | State and templating remain intentionally small; richer product-like flows would need a deliberate component boundary. | **Selected for this template.** |
 | React | Reusable components, typed state and a clearer path if the mock becomes a multi-screen product prototype. | Adds package/build/dependency/license and deployment complexity before product copy, evidence and CTA decisions are settled. | **Deferred.** Reconsider only when reusable state/components justify the added surface. |
 
-The current interaction has three tabs, three fixture-only steps and one
-resettable state path, which does not justify React. A future React migration
+The current interaction has three workflow tabs, three fixture-only steps and
+one LITE/BASE/PRO capability selector with resettable state, which does not
+justify React. A future React migration
 must preserve the same no-backend, mock-only, provenance and accessibility
 gates rather than become a route to production functionality.
 
@@ -396,6 +397,9 @@ gates rather than become a route to production functionality.
 - The mock exposes a visible local-state safety bar, a reset control and an
   `aria-live` announcement region. Reset returns to the Conversation / Notice
   baseline without persistence.
+- The tier mock exposes LITE, BASE and PRO labels with invented capability
+  slots only. It contains no pricing, entitlement, availability or final
+  feature claim; Reset returns the tier selector to LITE.
 - The CTA links intentionally loop to the local `#contact` placeholder until
   an approved destination exists. No live contact route is fabricated.
 
@@ -432,6 +436,8 @@ The implementation and QA checklist must include:
   are present;
 - tab arrows/Home/End, step buttons and reset can be operated by keyboard, with
   one active tab stop and `aria-current="step"` on the active flow step;
+- LITE/BASE/PRO tier tabs support the same ArrowLeft/ArrowRight/Home/End
+  behavior, one active tab stop and an announced selection;
 - state changes are announced without moving focus unexpectedly.
 
 ## 7. Privacy, security and legal publication constraints
@@ -540,6 +546,8 @@ any external deployment.
       external links work without JavaScript where practical.
 - [ ] Mock/demo interactions work with mock fixtures only; reset, replay,
       empty/error and reduced-motion states are tested.
+- [ ] LITE/BASE/PRO mock states show distinct placeholder capability sets
+      without pricing, entitlement, availability or final feature claims.
 - [ ] Visible local-state safety text, reset behavior and no-submission
       boundary remain present after every mock transition.
 - [ ] Demo visibly identifies itself as illustrative and contains no real
@@ -553,6 +561,8 @@ any external deployment.
 - [ ] Manual keyboard-only pass completes the full page and CTA.
 - [ ] Tablist arrow/Home/End behavior, flow-step buttons, Advance and Reset
       controls are keyboard-tested.
+- [ ] Tier-tab keyboard behavior, active-state semantics and reset-to-LITE
+      behavior are keyboard-tested.
 - [ ] Screen-reader pass covers landmarks, headings, links, images, form labels
       and mock-state announcement text.
 - [ ] Contrast, focus, zoom/reflow, reduced motion and mobile checks pass.
@@ -600,6 +610,9 @@ deployment:
 - Local browser QA covers initial load, tab activation with ArrowRight, Advance
   state changes, Reset returning to the baseline, console errors, the local
   request list and 390px/320px viewport checks with no horizontal overflow.
+- Tier browser QA covers LITE → BASE → PRO selection, ArrowRight keyboard
+  movement with focus retention, distinct placeholder capability counts, reset
+  back to LITE plus Conversation / Notice, and no-pricing announcement text.
 - A real browser/device matrix, automated WCAG scan, legal review, proof review,
   endpoint review and GitHub Pages deployment review remain outstanding.
 

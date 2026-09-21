@@ -174,10 +174,72 @@
           <p class="demo-caption"><span aria-hidden="true">↳</span> Illustrative interaction only. Replace fixture text and states only after provenance review.</p>
         </section>
 
+        <section class="tiers section-wrap" id="tiers" aria-labelledby="tiers-title">
+          <div class="section-heading reveal">
+            <div>
+              <p class="eyebrow">02 / THE MOCK TIERS</p>
+              <h2 id="tiers-title">Three shapes, no price tag.</h2>
+            </div>
+            <p class="section-intro">
+              Use these invented states to review capability boundaries before
+              product, pricing and copy decisions are approved.
+            </p>
+          </div>
+
+          <div class="tier-safety" id="tier-safety" role="note">
+            <span><span class="safety-icon" aria-hidden="true">⌁</span> MOCK CAPABILITY SLOTS / NO PRICING OR ENTITLEMENTS</span>
+          </div>
+
+          <div class="tier-tabs" role="tablist" aria-label="Mock capability tiers" aria-orientation="horizontal">
+            <button class="tier-tab is-active" id="tier-tab-lite" role="tab" aria-selected="true" aria-controls="tier-panel" tabindex="0" data-tier="lite">
+              <span class="tier-code">LITE</span>
+              <span class="tier-tab-note">smaller shape</span>
+            </button>
+            <button class="tier-tab" id="tier-tab-base" role="tab" aria-selected="false" aria-controls="tier-panel" tabindex="-1" data-tier="base">
+              <span class="tier-code">BASE</span>
+              <span class="tier-tab-note">expanded shape</span>
+            </button>
+            <button class="tier-tab" id="tier-tab-pro" role="tab" aria-selected="false" aria-controls="tier-panel" tabindex="-1" data-tier="pro">
+              <span class="tier-code">PRO</span>
+              <span class="tier-tab-note">advanced shape</span>
+            </button>
+          </div>
+
+          <div class="tier-panel" id="tier-panel" role="tabpanel" aria-labelledby="tier-tab-lite" aria-describedby="tier-safety tier-announcement">
+            <div class="tier-panel-heading">
+              <div>
+                <p class="card-kicker" id="tier-kicker">LITE / MOCK STATE</p>
+                <h3 id="tier-title">A smaller starting shape.</h3>
+              </div>
+              <span class="tier-badge" id="tier-badge">REVIEW ONLY</span>
+            </div>
+            <p class="tier-copy" id="tier-copy">
+              Replace this summary with approved LITE capability language. It is
+              a placeholder, not a product entitlement or public claim.
+            </p>
+            <p class="sr-only" id="tier-announcement" role="status" aria-live="polite" aria-atomic="true"></p>
+            <div class="tier-capability-grid">
+              <div>
+                <p class="card-kicker">MOCK CAPABILITY SLOTS</p>
+                <ul class="tier-capabilities" id="tier-capabilities">
+                  <li><span aria-hidden="true">01</span>[CORE CAPABILITY PLACEHOLDER]</li>
+                  <li><span aria-hidden="true">02</span>[REVIEW / SUPPORT SLOT]</li>
+                  <li><span aria-hidden="true">03</span>[WORKSPACE BOUNDARY SLOT]</li>
+                </ul>
+              </div>
+              <div class="tier-boundary">
+                <p class="card-kicker">MOCK BOUNDARY</p>
+                <p id="tier-boundary">[REPLACE WITH APPROVED LITE BOUNDARY]</p>
+              </div>
+            </div>
+          </div>
+          <p class="demo-caption"><span aria-hidden="true">↳</span> LITE / BASE / PRO are internal mock labels only. Do not add pricing, feature promises or entitlement language without approval.</p>
+        </section>
+
         <section class="principles section-wrap" id="principles" aria-labelledby="principles-title">
           <div class="section-heading reveal">
             <div>
-              <p class="eyebrow">02 / THE GUARDRAILS</p>
+              <p class="eyebrow">03 / THE GUARDRAILS</p>
               <h2 id="principles-title">Designed to stay honest.</h2>
             </div>
             <p class="section-intro">
@@ -207,7 +269,7 @@
         <section class="contact section-wrap" id="contact" aria-labelledby="contact-title">
           <div class="contact-panel reveal">
             <div>
-              <p class="eyebrow">03 / THE HANDOFF</p>
+              <p class="eyebrow">04 / THE HANDOFF</p>
               <h2 id="contact-title">Leave the door open.<br /><em>Keep the words honest.</em></h2>
             </div>
             <div class="contact-copy">

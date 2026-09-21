@@ -676,6 +676,10 @@ copy, contact endpoints, DNS changes or deployment.
 - **Positioning and audience context:** `docs/products/babai/thesis-and-positioning.md`.
 - **Pilot/evidence caution:** `nekurama.babai.research.md` and
   `docs/products/babai/validation.md`.
+- **Flow contracts and product matrix:** `docs/products/babai/flow-inventory.md`
+  and `docs/products/babai/flow-architecture.md`, with committed
+  `nekurama.chatgpt.md` line ranges and raw mapping UUIDs preserved in
+  `docs/web/flow-inventory.md`.
 - **Privacy/security and legal gates:**
   `docs/company/security-privacy-controls.md` and
   `docs/company/ip-brand-legal.md`.

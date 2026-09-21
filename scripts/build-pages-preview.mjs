@@ -48,9 +48,13 @@ const sanitizeHtml = (html) =>
       /(\s*<meta name="theme-color" content="[^"]+">\s*)/,
       '$1    <link rel="icon" href="favicon.svg" type="image/svg+xml">\n',
     )
-    .replace(/\s*<a href="#asset-review">Asset review<\/a>\s*/, "\n")
+    .replace(/\s*<a href="#(?:asset-review|decision-packet)">(?:Asset review|Decision packet)<\/a>\s*/g, "\n")
     .replace(
       /\s*<section class="section candidate-assets-section" id="asset-review"[\s\S]*?<\/section>\s*/,
+      "\n",
+    )
+    .replace(
+      /\s*<section class="section decision-packet-section" id="decision-packet"[\s\S]*?<\/section>\s*/,
       "\n",
     );
 

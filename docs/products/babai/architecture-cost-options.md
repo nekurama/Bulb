@@ -51,6 +51,19 @@ selection, a production SLO, or a claim that any control is already
 implemented. [Admin Decision Packet (2026-09-20); `architecture.md`;
 `architecture-lld.md`; `architecture-boundaries.md`]
 
+### Overnight topology clarification
+
+The modular monolith remains the **pilot domain-transaction starting posture**.
+The target evolution is hybrid: keep domain modules and authoritative
+PostgreSQL transactions together while independently scaling or isolating the
+API/BFF, provider/notification workers, workflow/reconciliation workers,
+AI-task workers and projection/report workers. A domain microservice is a
+later extraction only when measured security, data ownership, independent
+scaling, provider-failure containment, lifecycle or operational ownership
+evidence justifies the added distributed-systems cost. See
+[`runtime-and-ai-architecture.md`](runtime-and-ai-architecture.md) and
+[`end-to-end-architecture.md`](end-to-end-architecture.md).
+
 ## Provisional LITE / BASE / PRO cost and operating implications
 
 The tier matrix is an internal scope experiment, not a public price or final

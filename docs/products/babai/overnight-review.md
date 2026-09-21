@@ -30,6 +30,13 @@ Microservices remain a valid later option, not a default. EKS/Kubernetes,
 Kafka, multi-region and workflow SaaS are not justified by architecture
 fashion alone.
 
+The approved commercial ladder is unchanged by this packet:
+LITE **₹1,999 → ₹2,499**, BASE **₹5,999 → ₹7,499**, and PRO
+**₹12,999 → ₹14,999**, before GST, with the approved onboarding targets.
+Runtime/Meta/AI costs are modeled separately and do not create an automatic
+price change. The ₹19,999 PRO amount remains only a documented
+integration-heavy/multi-outlet exception.
+
 ## 2. Artifact map
 
 | Layer | Artifact | Review purpose |

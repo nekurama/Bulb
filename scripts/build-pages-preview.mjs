@@ -9,7 +9,7 @@ const root = process.cwd();
 const outputDir = path.join(root, "dist");
 const expectedSourceSha =
   process.env.PAGES_PREVIEW_SOURCE_SHA ||
-  "c93b13e2f7fa12af837e77b897b5439676d8d88a";
+  "a438b9203c016e492a2cd9628037bf88584a8bf1";
 const sourceFiles = ["index.html", "styles.css", "script.js", "mock-data.json"];
 const outputFiles = ["favicon.svg", ...sourceFiles];
 const deploymentFiles = [".github/workflows/pages-preview.yml", "scripts/build-pages-preview.mjs"];

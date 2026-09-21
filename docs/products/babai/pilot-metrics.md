@@ -6,6 +6,7 @@ sources:
   - nekurama.raw.chat.json
   - nekurama.babai.research.md
   - "2026-09-21 FOUNDER DECISION PACKET"
+  - "2026-09-21 ECONOMICS MODEL REVIEW PACKET"
   - economics-model.md
   - validation.md
 ---
@@ -59,6 +60,45 @@ source, observation window and threshold. A blank is unknown, not zero.
 | Willingness to pay | Continuation response after the stated end date and objections | Founder/commercial owner | Proposed |
 | Readiness | Evidence that materially larger onboarding volumes can be supported | Team decision owner | Proposed |
 
+## Top telemetry metric — support minutes
+
+The primary operating metric is **recurring support minutes per restaurant per
+month**. Record it for every restaurant and split it into the categories below;
+do not report a single blended support number.
+
+| Field | Definition | Proposed base target | Hold / ceiling |
+|---|---|---:|---:|
+| Onboarding minutes | One-time menu/configuration/training effort | ≤240 minutes/restaurant | >480 minutes/restaurant |
+| Planned minutes | Scheduled check-ins, configuration and proactive review | 30 minutes/month | >60 minutes/month |
+| Unplanned minutes | Ad hoc questions and non-incident fixes | 30 minutes/month | >90 minutes/month |
+| Recovery minutes | Failed messages, data correction, retry and incident recovery | 30 minutes/month | >60 minutes/month |
+| Takeover minutes | Founder intervention in a live workflow | 30 minutes/month | >90 minutes/month |
+| **Recurring support total** | `planned + unplanned + recovery + takeover` | **≤120 minutes/month** | **240-minute hard ceiling** |
+| Ceiling breaches | Count of restaurant-months above the recurring ceiling | 0 | Any repeated breach holds expansion |
+
+Report median, p90, category mix and ceiling-breach count. Onboarding is
+one-time and excluded from the recurring total but included in the 90-day
+economic true-up. The exact formulas and low/base/high sensitivity are in
+[`economics-model.md`](economics-model.md).
+
+## AI, acquisition and value telemetry
+
+Record these fields per restaurant-month so AI economics, CAC and restaurant
+ROI cannot be hidden inside a generic support or provider number:
+
+| Dimension | Required fields | Status |
+|---|---|---|
+| AI usage | Advisory/AI-heavy mode, model identifier/version, conversations, turns, input/output tokens, embeddings, speech minutes, vision items, jobs, retries and unit rates | Proposed; unknown rates are not zero |
+| BABAI SaaS economics | Subscription income, GST input/treatment, cash cost, founder/support economic cost, economic contribution and total cohort contribution | Proposed |
+| Acquisition | Source, paid cash, travel/enablement cash, founder acquisition hours and economic CAC | Proposed; actual CAC unknown |
+| Retention economics | Monthly churn, observed lifetime, LTV, contribution payback and cohort size | Proposed; actual LTV/payback unknown |
+| Restaurant value | Baseline GMV, avoided channel cost, staff time saved, errors avoided, incremental gross profit and restaurant-side provider cost | Proposed; value must be measured separately |
+| Pricing experiment | Price hypothesis, mode, scope, conversion, objection, continuation and contribution result | Proposed |
+
+The pilot must distinguish BABAI's contribution from the restaurant's
+monthly value. A restaurant value estimate is not revenue, and a positive
+restaurant ROI does not prove BABAI has positive economic contribution.
+
 ## Proposed onboarding-readiness exit gate
 
 This is the proposed internal gate for the day-90 decision. It is not an
@@ -75,6 +115,8 @@ zero.
 | Support capacity | Recurring combined founder support ≤12 hours/restaurant/month; no restaurant >24 hours/month; next onboarding can start without displacing committed support | High-band support persists after remediation or the next onboarding increment cannot be staffed | Pilot operator | Manoj/Vinay time logs and support queue | Proposed |
 | Economics completeness | 100% of material income/expenditure lines have actual value, source, owner and allocation; GST input and treatment recorded separately | Any material line is blank, unsupported, unallocated or treated as zero | Finance/product | Pilot ledger and rate register | Proposed |
 | Contribution outcome | Base-case recognized income less total expenditure is non-negative and reaches the proposed 40% contribution sensitivity; low/base/high views are populated | Base contribution is negative, price is below break-even, or result depends on missing rate or unapproved GST treatment | Finance/product | `economics-model.md` output and true-up | Proposed |
+| AI economics | 100% of AI-heavy or advisory usage has model, token/unit, retry and cost records; mode is known for each restaurant-month | AI-heavy usage is unpriced, unknown or silently treated as advisory | Product/engineering | AI usage ledger | Proposed |
+| CAC/LTV/payback | Acquisition source and economic CAC recorded for every enrolled restaurant; observed payback is reported without imputing missing retention | CAC is missing, payback is >12 months after minimum sample, or LTV depends on an assumed lifetime only | Founder/commercial owner | Acquisition and cohort ledger | Proposed |
 | Safety/payment/privacy | Zero unresolved customer-funds custody, authorization, privacy or payment-integrity exception | Any unresolved material safety, privacy or payment exception | Operations/finance | Incident review and payment reconciliation | Proposed |
 
 The gate should be judged against measured evidence, not feature completion.
@@ -110,6 +152,9 @@ the readiness gate:
 | Staff adoption | ≥80% staff-handled active order sessions | Session ownership events |
 | Support | ≤12 combined founder support hours/restaurant/month; 24 hours is a hard hold | Manoj/Vinay time logs |
 | Economics | Base contribution ≥40% sensitivity and no negative base contribution | End-date true-up with actual rates |
+| Support telemetry | ≤120 recurring support minutes/restaurant/month at base; category mix and p90 reported | >240 minutes or repeated ceiling breach |
+| AI cost completeness | 100% model/token/unit/retry fields present for AI usage | Any AI-heavy month has unknown cost |
+| Acquisition economics | CAC recorded by source; payback reported and proposed ceiling ≤12 months | CAC missing or payback >12 months after sample |
 | Continuation signal | At least 2 of the first 3 completed pilots accept continuation terms | Complete end-date decision records |
 
 These thresholds are planning assumptions for internal acceptance, pending
@@ -129,5 +174,9 @@ is a review cadence, not an automatic increase.
 - Signed agreement cancellation/refund fields and professional wording
 - Owners, observation windows and thresholds for the readiness evidence gate
 - Founder-approved contribution target or continuation rule
+- Support-minute category ownership, ceiling response and scale staffing plan
+- AI routing mode, model/rate register and AI-heavy price treatment
+- Acquisition-channel CAC, observed churn/lifetime, LTV and payback method
+- Restaurant ROI baseline and value-capture factor
 - Post-pilot packaging and entitlements
 - Accounting, GST and invoice treatment

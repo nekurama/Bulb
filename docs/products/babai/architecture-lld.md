@@ -9,6 +9,7 @@ sources:
   - docs/products/babai/architecture.md
   - docs/products/babai/architecture-boundaries.md
   - docs/products/babai/architecture-cost-options.md
+  - b1a957fadf597d6d58623fd3baf146d8b43533c4 (architecture scale/capacity source)
   - docs/products/babai/domain-model.md
   - docs/products/babai/economics-model.md
 ---
@@ -222,6 +223,30 @@ authorized and validated by the owning module. [Raw T139
 The exact PostgreSQL schema layout, migration strategy, projection mechanism,
 partitioning, indexing, retention and archival remain unresolved. [Raw T206
 `128e9fdc-9032-4a5d-b627-4f0118fc3ba3`; `domain-model.md`]
+
+## Rate limits, backpressure and provider retry contract
+
+Initial planning defaults are 2 requests/s sustained and 10 requests/s for
+30 seconds per restaurant/channel, with provider-account and gateway-fleet
+limits configured separately. These are load-test guardrails, not provider
+quotas or customer promises. The gateway returns 429 with `Retry-After` for
+tenant admission limits and 503 for global overload; it must not allow
+overload to exhaust PostgreSQL connections.
+
+Every provider adapter has an independent token bucket, concurrency cap,
+timeout, `Retry-After` handling and circuit/open-backpressure state. Provider
+throttling causes queued work to slow; it does not justify higher database
+concurrency. Transient failures retry at most five times with jittered delays
+of `1s, 5s, 30s, 5m, 30m`. Validation, authentication, policy and other
+non-retryable failures go directly to quarantine/DLQ. Side-effecting calls
+carry an adapter-recognized idempotency key.
+
+The canonical 500/1,000 restaurant traffic formulas, 10/25/50/100%
+sensitivities, 1x/5x/10x RPS bands and Stage 0/1/2 gates are maintained in
+[`architecture-cost-options.md`](architecture-cost-options.md). A two-gateway
+or 2x2-vCPU setup is not capacity evidence without a repeatable test using
+the real request mix, queue, database pool, provider limits and failure
+injection.
 
 ## Observability contract
 

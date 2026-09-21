@@ -4,6 +4,7 @@ owner: BABAI Architecture
 last-reviewed: 2026-09-21
 sources:
   - "Founder Scale/Cost Baseline (2026-09-21)"
+  - b1a957fadf597d6d58623fd3baf146d8b43533c4 (architecture scale/capacity source)
   - "Admin Decision Packet (2026-09-20)"
   - nekurama.raw.chat.json
   - nekurama.chatgpt.md
@@ -265,6 +266,232 @@ architecture and storage; RDS PostgreSQL adds instance hours, storage,
 backup, I/O and transfer; SQS is request-metered; and AWS credits are
 account/program-specific. Recalculate with the target AWS region and the
 actual credit account before enrollment or a provider commitment.
+
+## New scale and cost baseline
+
+This section is the canonical planning model for the next capacity and cost
+review. It uses the founder inputs exactly:
+
+- **54 average gateway/application requests per order**;
+- **90 requests per heavy-case order**;
+- **50 orders per day per restaurant**;
+- modeled populations of **500 and 1,000 restaurants**; and
+- conversion sensitivities of **10%, 25%, 50% and 100%**.
+
+Here, `conversion` is a traffic/order-conversion sensitivity applied to the
+50-orders-per-restaurant daily baseline. It is not a paid-subscription,
+revenue or customer-conversion claim. No request volume below is observed
+production traffic.
+
+### Traffic formulas and modeled RPS bands
+
+For `N` restaurants, conversion `c`, and `q` requests/order:
+
+```text
+orders_per_day       = N * 50 * c
+requests_per_day(q)  = orders_per_day * q
+mean_rps(q)          = requests_per_day(q) / 86,400
+busy_rps(q)          = 5 * mean_rps(q)
+stress_rps(q)        = 10 * mean_rps(q)
+```
+
+The 1x, 5x and 10x bands are load-test bands, not a claim about observed
+peaks. The 5x band is a busy-period test and the 10x band is a burst/backlog
+test. Capacity is accepted only after the gateway, worker, database and
+provider signals stay within the stage gates below for the specified
+15-minute window.
+
+| Restaurants | Conversion | Orders/day | Avg requests/day | Avg mean RPS | Heavy requests/day | Heavy mean RPS |
+|---:|---:|---:|---:|---:|---:|---:|
+| 500 | 10% | 2,500 | 135,000 | 1.563 | 225,000 | 2.604 |
+| 500 | 25% | 6,250 | 337,500 | 3.906 | 562,500 | 6.510 |
+| 500 | 50% | 12,500 | 675,000 | 7.813 | 1,125,000 | 13.021 |
+| 500 | 100% | 25,000 | 1,350,000 | 15.625 | 2,250,000 | 26.042 |
+| 1,000 | 10% | 5,000 | 270,000 | 3.125 | 450,000 | 5.208 |
+| 1,000 | 25% | 12,500 | 675,000 | 7.813 | 1,125,000 | 13.021 |
+| 1,000 | 50% | 25,000 | 1,350,000 | 15.625 | 2,250,000 | 26.042 |
+| 1,000 | 100% | 50,000 | 2,700,000 | 31.250 | 4,500,000 | 52.083 |
+
+For example, the 1,000-restaurant, 100%-conversion heavy case is 52.083
+mean RPS, 260.417 RPS at 5x, and 520.833 RPS at 10x. These are planning
+inputs for a test harness and admission controller, not a throughput promise.
+**A two-gateway or 2x2-vCPU gateway setup does not prove any of these bands.**
+Only a repeatable load test with the real request mix, provider stubs/rate
+limits, queue, PostgreSQL pool and failure injection can establish capacity.
+
+### Cheapest quality-preserving staged options
+
+The comparison keeps the same OCI image, queue port, PostgreSQL schema and
+backup/restore contract. It changes the amount of platform automation, not
+the domain architecture.
+
+| Stage/evidence band | Runtime option | Quality-preserving boundary | Why it is cheapest at this band | Do not accept without |
+|---|---|---|---|---|
+| Stage 0 / learning | **Managed VM or managed container baseline** (one OCI API/worker image, managed PostgreSQL, managed queue, private object storage) | Keep the gateway stateless; do not self-manage authoritative PostgreSQL; preserve outbox/inbox and tested restore | Lowest operational surface while traffic and support are unknown | Queue replay, backup restore, pool limits, worker idempotency and a measured 15-minute smoke/load test |
+| Stage 0 / low-cost AWS comparison | **AWS Lightsail or small EC2 + containers**, with managed PostgreSQL and managed queue | Host is replaceable and disposable; no domain state or queue durability on local disk | Lower apparent compute cost than a fully managed container platform | Patch/replacement runbook, host failure drill, monitoring, encrypted backups, restore within RTO and founder time budget |
+| Stage 1 / evidence-backed growth | **ECS/Fargate + managed PostgreSQL + managed queue** | Same OCI boundary and adapter ports; separate API and worker scaling; no EKS requirement | Higher platform cost buys less host toil, repeatable worker capacity and clearer scaling signals | Like-for-like cost, 500-restaurant load bands, provider throttling test, restore drill and support automation/replacement plan |
+| Stage 2 / higher evidence | **ECS/Fargate with independently scaled gateway/workers + managed PostgreSQL/queue** | Add redundancy or database tier only when measured gates require it; retain portable exports | Quality-preserving way to handle the 1,000-restaurant model without premature microservices | 1,000-restaurant stress bands, queue/DLQ replay, pool saturation test, provider contract limits and an approved operating budget |
+
+Lightsail/EC2 is a cost fallback, not permission to run PostgreSQL or a durable
+queue on the host. ECS/Fargate is the higher-evidence candidate because it
+preserves OCI portability while reducing host replacement work. The exact
+provider, region, instance/task sizes, credit eligibility, tax and monthly
+price remain unresolved until a like-for-like quote and test are recorded.
+
+### Gateway, worker and PostgreSQL protection rules
+
+The gateway is a **stateless, lightweight admission layer**. It authenticates
+and verifies provider signatures, validates payload shape, applies rate limits,
+assigns correlation/idempotency metadata, acknowledges only after durable queue
+acceptance, and returns bounded responses. It does not hold conversation
+state, perform provider fan-out, run workflow transitions, or load an
+aggregate on every hit. No sticky sessions are required.
+
+Conversation/state work runs in idempotent workers:
+
+1. accept the raw inbound event into the managed queue;
+2. deduplicate by provider event ID plus tenant/channel scope;
+3. resolve context and execute only the required domain transition;
+4. commit authoritative state, outbox and audit rows atomically when a
+   transition is needed; and
+5. acknowledge the queue message only after the effect is durable.
+
+This means **not every gateway hit creates a PostgreSQL transaction**. Read
+only menu/configuration responses may use a tenant-scoped, versioned cache.
+Typing/presence and duplicate webhook noise may be coalesced or dropped
+according to policy. Orders, payments, permissions, consent, inventory-like
+availability and reconciliation truth are never served from an unvalidated
+cache. A cache key must include tenant/branch/channel and schema or revision;
+short TTLs, explicit invalidation and fail-closed behavior are required.
+
+Protect PostgreSQL with the following planning rules:
+
+- reserve at least 20% of database connections for migrations, admin and
+  recovery; application pools use at most 60% of the provider's advertised
+  connection ceiling;
+- distribute the application pool as
+  `floor(0.60 * db_max_connections / (api_replicas + worker_replicas))`;
+- alert at 60% pool usage or 100 ms p95 pool wait; stop admission or add
+  worker capacity before connection exhaustion;
+- batch outbox publishing and non-authoritative telemetry, and bound worker
+  concurrency; batching must not combine unrelated aggregate transitions;
+- keep transactions short and scoped to one owning module plus outbox/audit;
+  never hold a transaction while calling Meta, payment, delivery or an AI
+  provider; and
+- use projections or cacheable published revisions for read-heavy paths
+  instead of per-hit authoritative reads.
+
+### Rate limits, backpressure and provider throttling
+
+These are initial admission-control defaults to validate in load tests, not
+provider or customer promises:
+
+| Scope | Sustained limit | Burst limit | Backpressure action |
+|---|---:|---:|---|
+| One restaurant/channel | 2 requests/s | 10 requests/s for 30 s | Return 429 with `Retry-After`; preserve provider webhook acknowledgement rules |
+| One provider account | 100 requests/s | 250 requests/s for 30 s | Token-bucket throttle; queue accepted work and stop non-essential sends |
+| Gateway fleet | Stage-specific tested ceiling | 2x the tested 15-minute ceiling only during a controlled test | Return 429 for tenant overload and 503 for global overload; never let overload exhaust PostgreSQL |
+
+The provider account limits are placeholders until Meta/payment/delivery
+contracts supply actual quotas. Each adapter must have its own token bucket,
+concurrency cap, timeout and `Retry-After` handling. Provider throttling is
+not a reason to increase database concurrency.
+
+Transient work retries at most five times with jittered delays of
+`1s, 5s, 30s, 5m, 30m`; validation, authentication, policy and other
+non-retryable failures go directly to quarantine/DLQ. A side-effecting
+request must carry an idempotency key recognized by the adapter. After the
+retry budget, retain the original event, error class, attempt history and
+tenant scope for authorized replay. DLQ age and retry rate are admission
+signals, not merely dashboard metrics.
+
+### Stage 0/1/2 capacity gates
+
+These are **infrastructure capacity stages**, distinct from the commercial
+pilot onboarding stages in `brd.md` and `validation.md` (which cap early
+founder-supported enrollment at one, three and then up to ten restaurants).
+Commercial onboarding must not jump to the scale evidence stage merely
+because a synthetic load test passes.
+
+Each row is evaluated over a rolling **15-minute** window at the relevant
+load-test band. Green permits the stage; amber requires correction and a
+repeat; red blocks expansion or rolls back. Thresholds are guardrails for
+evidence, not production SLO commitments.
+
+| Signal | Green | Amber | Red / action |
+|---|---|---|---|
+| Gateway latency and errors | p95 <= 300 ms, p99 <= 750 ms, 5xx < 0.5% | p95 300-500 ms, p99 750-1,000 ms, or 5xx 0.5-1% | p95 > 500 ms, p99 > 1 s, or 5xx >= 1%; shed load/rollback |
+| PostgreSQL CPU/connections | CPU < 60%; pool usage < 60%; pool-wait p95 < 100 ms | CPU 60-70%; pool 60-70%; wait 100-250 ms | CPU > 70% or pool > 70% for 15 min; stop traffic growth, reduce concurrency or resize |
+| Queue age/outbox age | oldest queue item < 30 s; oldest outbox < 60 s | 30-120 s or outbox 60-300 s | queue > 120 s or outbox > 300 s; pause enrollment and drain workers |
+| Provider latency/throttling | p95 < 2 s; throttling < 1%; adapter timeout < 0.5% | p95 2-5 s; throttling 1-5% | p95 > 5 s, throttling > 5%, or repeated auth failure; stop non-essential sends and escalate |
+| Retry/DLQ | retry < 2%; DLQ < 0.1% of messages and no growing poison cohort | retry 2-5% or DLQ 0.1-0.5% | retry > 5%, DLQ > 0.5%, or any unresolved settlement/order-safety poison cohort; quarantine and investigate |
+| Restore evidence | latest drill completes < 4 h and RPO evidence <= 24 h | 4-8 h or evidence is incomplete | > 8 h, failed restore, or missing required state; block expansion |
+| Founder support | <= 16 combined h/week and <= 2 min/restaurant/week at scale | 16-24 h/week or support trend rising for two windows | > 24 h/week, P1 recurrence, unresolved P2 > 1 business day, or support is not automatable; stop onboarding |
+
+Stage entry is cumulative:
+
+- **Stage 0:** one-to-ten-restaurant pilot; prove gateway admission,
+  worker idempotency, outbox/inbox, cache safety, restore and the above
+  signals at 10% and 25% sensitivity. Existing founder-only support may be
+  used only inside the documented 24-hour/week ceiling.
+- **Stage 1:** 500-restaurant model; test 10/25/50/100% sensitivities at
+  average and heavy request mixes, including the 5x busy and 10x stress bands.
+  Do not proceed unless worker automation, provider quotas and replacement or
+  staffed support are approved. Founder-only support is not assumed to scale.
+- **Stage 2:** 1,000-restaurant model; repeat the same evidence with
+  independently scalable gateway/worker capacity and managed PostgreSQL/queue.
+  Add redundancy or a larger database only when red/amber evidence requires
+  it, not because the modeled population is large.
+
+### Founder-only support failure and replacement trigger
+
+The hard founder ceiling is 24 combined support hours/week. The maximum
+restaurant count supportable at a measured steady-state burden `s` is:
+
+```text
+founder_supported_restaurants = floor(24 hours/week / s hours/restaurant/week)
+```
+
+At the existing 2-hours/restaurant/week guardrail, the ceiling is 12
+restaurants, not 500 or 1,000. Even if automation reduces the burden to the
+absolute founder ceiling, 500 restaurants allow only **2.88 minutes per
+restaurant per week**, and 1,000 allow only **1.44 minutes**. Therefore
+founder-only support **fails at 500+ by default**. Before Stage 1, common
+onboarding, menu, reconciliation and incident work must be automated or
+replaced by documented support capacity; otherwise enrollment stops. A scale
+trigger is any forecast above 24 founder-hours/week, support above the
+per-restaurant minute budget, two consecutive amber support windows, or a P1
+recurrence. No hiring, outsourcing or 24x7 coverage is silently assumed.
+
+### ₹25L+ income-trigger unit sensitivity
+
+The income trigger is unresolved as **₹25,00,000+ per month or per year**.
+Do not choose a pricing, margin or staffing conclusion until the period is
+decided. For a sensitivity with `N` restaurants and conversion `c`, the
+required income per active/converting restaurant is:
+
+```text
+required_unit_income = income_trigger / (N * c)
+```
+
+The table shows the unit amount if the trigger is allocated across the
+converting restaurant population. It intentionally does not claim that the
+traffic conversion `c` equals paid subscription conversion.
+
+| Restaurants | Sensitivity | Converting units | If ₹25L is monthly | If ₹25L is annual (monthly equivalent) |
+|---:|---:|---:|---:|---:|
+| 500 | 10% | 50 | ₹50,000/unit/month | ₹4,167/unit/month |
+| 500 | 25% | 125 | ₹20,000/unit/month | ₹1,667/unit/month |
+| 500 | 50% | 250 | ₹10,000/unit/month | ₹833/unit/month |
+| 500 | 100% | 500 | ₹5,000/unit/month | ₹417/unit/month |
+| 1,000 | 10% | 100 | ₹25,000/unit/month | ₹2,083/unit/month |
+| 1,000 | 25% | 250 | ₹10,000/unit/month | ₹1,000/unit/month |
+| 1,000 | 50% | 500 | ₹5,000/unit/month | ₹417/unit/month |
+| 1,000 | 100% | 1,000 | ₹2,500/unit/month | ₹208/unit/month |
+
+This is a unit-sensitivity formula, not an income forecast. Infrastructure,
+provider, payment, AI, support, tax, refunds and founder opportunity cost
+remain separate cost lines.
 
 ### Pilot infrastructure envelopes
 

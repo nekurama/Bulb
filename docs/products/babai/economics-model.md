@@ -5,6 +5,8 @@ last-reviewed: 2026-09-21
 sources:
   - Founder decision packet (2026-09-21; current task input)
   - Founder traffic baseline (2026-09-21; current task input)
+  - 2026-09-21 economics model review packet
+  - e3e4e855ca0214a5c664c07ec5b6513c560a7261 (product scale economics source)
   - nekurama.babai.research.md (Pricing hypothesis, What remains unvalidated, Success criteria)
   - nekurama.chatgpt.md (historical planning model; explicitly not a forecast)
   - nekurama.raw.chat.json (mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `04cc446b-3a6d-4c19-adc7-4d94ab17d21b`, `4702681b-d611-4408-af5f-9001d04b6cfa`, `f58ce128-39ed-4015-9be9-5b6135a39f20`, `9fbcd0e1-28ba-4ae7-8b44-39d493d2bb0e`, `cedbd365-e584-4306-a499-86a51184cb83`)
@@ -436,18 +438,18 @@ CustomerInvoiceGross =
 income bar or contribution calculation unless the approved accounting
 treatment explicitly requires otherwise.
 
-## Scale and traffic baseline — internal sensitivity
+## Founder scale and cost baseline — internal sensitivity
 
 Let:
 
 ```text
 Restaurants = 500 or 1,000
 CeilingOrdersPerRestaurantDay = 50
-Utilization = 10%, 25%, 50% or 100%
+ConversionSensitivity = 10%, 25%, 50% or 100%
 RequestsPerOrder = 54 normal or 90 heavy
 
 CompletedOrdersPerDay =
-    Restaurants × CeilingOrdersPerRestaurantDay × Utilization
+    Restaurants × CeilingOrdersPerRestaurantDay × ConversionSensitivity
 
 RequestsPerDay =
     CompletedOrdersPerDay × RequestsPerOrder
@@ -458,7 +460,7 @@ RequestsPer30DayMonth =
 
 The resulting traffic sensitivities are:
 
-| Restaurants | Ceiling utilization | Completed orders/day | Normal requests/day | Normal requests/30d | Heavy requests/day | Heavy requests/30d |
+| Restaurants | WhatsApp conversion of 50-order ceiling | Completed orders/day | Normal requests/day | Normal requests/30d | Heavy requests/day | Heavy requests/30d |
 |---:|---:|---:|---:|---:|---:|---:|
 | 500 | 10% | 2,500 | 135,000 | 4,050,000 | 225,000 | 6,750,000 |
 | 500 | 25% | 6,250 | 337,500 | 10,125,000 | 562,500 | 16,875,000 |
@@ -471,6 +473,23 @@ The resulting traffic sensitivities are:
 
 The 50-order ceiling is a hard planning ceiling for this model, not a claim
 that each restaurant will achieve it.
+
+The request table is a workload view. For capacity testing, derive mean
+RPS from the same inputs and keep the supplied six-hour peak reference
+separate from the uniform 24-hour calculation:
+
+```text
+mean_rps = requests_per_day / 86,400
+busy_rps = 5 × mean_rps
+stress_rps = 10 × mean_rps
+```
+
+At the 100% ceiling, the derived mean request rates are 15.625 RPS (500
+restaurants, normal), 26.042 RPS (500, heavy), 31.250 RPS (1,000, normal),
+and 52.083 RPS (1,000, heavy). These are **derived planning estimates**, not
+capacity claims. Six-hour peak, P90 and P99 values must remain labelled as
+founder-supplied or linearized sensitivities until their distribution is
+reconciled and a 15-minute load test is passed.
 
 ## Request-cost and storage-growth sensitivity
 
@@ -508,7 +527,7 @@ Component view per completed order:
 Payment fees, delivery fees, CAC, onboarding and support are **not** included
 in these request costs. They remain separate model buckets.
 
-At 100% ceiling utilization, the estimated monthly request-cost totals are:
+At 100% conversion sensitivity, the estimated monthly request-cost totals are:
 
 | Scale | Request case | Low | Base | High |
 |---|---|---:|---:|---:|
@@ -517,7 +536,7 @@ At 100% ceiling utilization, the estimated monthly request-cost totals are:
 | 1,000 restaurants | Normal | ₹28,35,000 | ₹1,21,50,000 | ₹5,26,50,000 |
 | 1,000 restaurants | Heavy | ₹47,25,000 | ₹2,02,50,000 | ₹8,77,50,000 |
 
-For 10%, 25% and 50% utilization, multiply the 100% totals by 0.10, 0.25
+For 10%, 25% and 50% conversion sensitivity, multiply the 100% totals by 0.10, 0.25
 and 0.50 respectively.
 
 Storage and operational-growth formulas:
@@ -542,6 +561,263 @@ approximately 81 GB / 648 GB / 1.62 TB per 30 days before retention and
 compression; at 1,000 restaurants it doubles. These are internal scale
 sensitivities, not capacity guarantees.
 
+Contribution views:
+
+```text
+cash_cost
+  = C_hosting + C_tooling + C_provider + C_retry_cash
+  + C_payment_sub + C_refund_credit + C_onb_cash
+
+cash_contribution
+  = S_net_revenue - cash_cost
+
+economic_cost
+  = cash_cost + (h_support × V) + (h_fail × V) + ((h_onb × V) / L)
+    # the last term is the steady-state amortized onboarding effort
+
+economic_contribution
+  = S_net_revenue - economic_cost
+
+economic_contribution_rate
+  = economic_contribution / S_net_revenue
+```
+
+## Income-bar and total-expenditure margin
+
+The margin view is an income bar against **total expenditure**, not a
+variable-cost-only view:
+
+```text
+total_expenditure
+  = cash_cost
+  + founder/support/onboarding economic cost
+  + absorbed failure, refund, credit and remediation cost
+  + any other attributable pilot expenditure
+
+contribution_amount
+  = recognized_income - total_expenditure
+
+contribution_margin
+  = contribution_amount / recognized_income
+```
+
+`recognized_income` is the pilot or subscription income treated as revenue
+under the confirmed accounting treatment. A separately collected GST
+component is not income until qualified finance advice says otherwise. A
+blank, unsupported or unallocated expenditure line is an unknown, not zero.
+No contribution percentage is approved by this artifact.
+
+The price decision should therefore be derived by testing the signed pilot or
+continuation amount against the measured total-expenditure ledger and a
+founder-approved contribution case. The model does not select plans or
+automatic increases.
+
+Merchant-order payment cost is shown separately:
+
+```text
+BABAI pass-through order cost = B × p_order
+BABAI contribution impact     = 0 unless BABAI contractually absorbs it
+```
+
+This prevents customer funds and merchant payment fees from being mistaken
+for BABAI revenue or an unpriced BABAI subsidy.
+
+## Economics review packet v0.4 — telemetry, scale and price experiments
+
+### Top telemetry metric: support minutes per restaurant per month
+
+The lead operating metric is recurring **support minutes per restaurant per
+month**. It must be reported as a total and as separate categories so a falling
+total cannot hide a takeover or recovery problem:
+
+| Category | What counts | Low planning input | Base planning input | High planning input |
+|---|---|---:|---:|---:|
+| Onboarding (one-time) | Menu/configuration, training and launch assistance; not part of recurring support | 120 min | 240 min | 480 min |
+| Planned | Scheduled check-ins, configuration and proactive review | 15 min/mo | 30 min/mo | 60 min/mo |
+| Unplanned | Questions, ad hoc fixes and non-incident help | 15 min/mo | 30 min/mo | 90 min/mo |
+| Recovery | Failed messages, data correction, retries and incident recovery | 10 min/mo | 30 min/mo | 60 min/mo |
+| Takeover | Founder intervention in a live customer/staff workflow | 20 min/mo | 30 min/mo | 90 min/mo |
+| **Recurring support total** | `planned + unplanned + recovery + takeover` | **60 min/mo** | **120 min/mo** | **300 min/mo** |
+| **Ceiling** | Hard operating limit before an expansion hold | **120 min/mo** | **240 min/mo** | **360 min/mo** |
+
+The telemetry contract is:
+
+```text
+support_minutes_per_restaurant_month
+  = planned + unplanned + recovery + takeover
+support_minutes_90_day_total
+  = onboarding + sum(monthly recurring support)
+support_ceiling_breach
+  = support_minutes_per_restaurant_month > ceiling
+founder_support_economic_cost
+  = support_minutes_per_restaurant_month / 60 × founder_value_per_hour
+```
+
+Onboarding is retained as a separate one-time field. Report median, p90 and
+ceiling-breach count by restaurant and month. A support total without all four
+recurring categories is incomplete and remains **unknown**, not zero.
+
+### Explicit AI economics
+
+AI cost must be recorded by restaurant and month, not buried in a generic
+provider line. The following are internal rate placeholders with no external
+quote:
+
+| AI input | Planning rate |
+|---|---:|
+| Input tokens | ₹0.10 / 1,000 tokens |
+| Output tokens | ₹0.30 / 1,000 tokens |
+| Embeddings | ₹0.05 / 1,000 tokens |
+| Speech | ₹1.00 / minute |
+| Vision | ₹0.50 / image or equivalent item |
+| Background job | ₹0.20 / job |
+
+| Mode | Model/routing assumption | Conversations/mo | Turns/conversation | Input tokens/turn | Output tokens/turn | Embedding tokens/mo | Speech min/mo | Vision items/mo | Jobs/mo | Retry |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Advisory | Small/general model; larger fallback only for exceptions | 300 | 4 | 600 | 250 | 50,000 | 5 | 10 | 30 | 3% |
+| AI-heavy | Larger reasoning model on most turns plus richer jobs/media | 1,000 | 8 | 900 | 400 | 300,000 | 60 | 100 | 200 | 8% |
+
+```text
+AI_cost
+  = ((conversations × turns × input_tokens_per_turn / 1,000)
+      × input_rate)
+  + ((conversations × turns × output_tokens_per_turn / 1,000)
+      × output_rate)
+  + (embedding_tokens / 1,000 × embedding_rate)
+  + (speech_minutes × speech_rate)
+  + (vision_items × vision_rate)
+  + (background_jobs × job_rate)
+AI_cost_with_retries
+  = AI_cost × (1 + retry_rate)
+```
+
+| Mode | Token cost | Embeddings | Speech | Vision | Jobs | Retry reserve | AI cost / restaurant / month |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Advisory | ₹162.00 | ₹2.50 | ₹5.00 | ₹5.00 | ₹6.00 | ₹5.42 | **₹185.92** |
+| AI-heavy | ₹1,680.00 | ₹15.00 | ₹60.00 | ₹50.00 | ₹40.00 | ₹147.60 | **₹1,992.60** |
+
+The AI-heavy planning delta is **₹1,806.69 per restaurant per month**. The
+ledger must additionally record model identifier/version, prompt or workflow
+type, input/output token counts, embedding volume, speech/vision units,
+background jobs, retry count and failed-job cost. Unknown model or unit rates
+must not be treated as zero.
+
+### BABAI SaaS economics versus restaurant value/ROI
+
+BABAI contribution and restaurant value are separate decisions:
+
+```text
+BABAI_economic_contribution
+  = BABAI recognized subscription income
+  - BABAI cash cost
+  - founder/support/onboarding economic cost
+
+restaurant_monthly_value
+  = avoided commission or channel cost
+  + staff time saved × restaurant labour value
+  + error/recovery cost avoided
+  + incremental gross profit
+  - restaurant-side provider/payment cost
+
+max_rational_BABAI_price
+  = validated restaurant_monthly_value × value_capture_factor
+```
+
+The following is an internal value-sensitivity illustration only. It does not
+claim that restaurants currently pay the stated rates or receive the stated
+benefit.
+
+| Restaurant value case | Monthly direct-order GMV | Avoided channel rate | Staff hours saved × value | Error cost avoided | Incremental gross profit | Restaurant-side provider cost | Net monthly restaurant value | Max rational price at 50% capture |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Low | ₹75,000 | 10% | ₹600 | ₹500 | ₹0 | ₹500 | **₹8,100** | **₹4,050** |
+| Base | ₹1,50,000 | 15% | ₹1,200 | ₹1,500 | ₹1,500 | ₹1,000 | **₹25,700** | **₹12,850** |
+| High | ₹3,00,000 | 20% | ₹2,400 | ₹4,000 | ₹5,000 | ₹3,000 | **₹68,400** | **₹34,200** |
+
+The value-capture factor, GMV, avoided rate, staff value and incremental
+profit are all planning inputs. The maximum rational price is a customer-value
+ceiling, not willingness-to-pay evidence and not an authorization to charge
+that amount. The paid pilot must measure the restaurant baseline separately
+from BABAI's own cost and contribution. The separation follows the repository's
+direct-order and commission-value hypothesis
+(`nekurama.babai.research.md:L24-L36`, `L56-L63`).
+
+### Scale curve: advisory reference case
+
+This curve uses `P = ₹4,999/month` only as the middle pricing experiment
+reference, not as an approved package. It assumes the base provider/Meta
+inputs, advisory AI mode, 120 recurring support minutes per restaurant/month,
+₹1,000 founder-value per hour, 240 onboarding minutes amortized over 12 months,
+₹70,000 annual shared hosting/tooling, 2% subscription collection, 2% refund
+reserve, 8.33% monthly churn (12-month planning lifetime), and `₹7,000`
+economic CAC. The scale curve is arithmetic sensitivity, not a forecast.
+
+```text
+base_cash_variable_per_restaurant
+  = Meta ₹170.41 + provider ₹318.75 + retry ₹14.67
+  + advisory_AI ₹185.92 + collection/refund (4% × ₹4,999)
+  = ₹889.80
+shared_cost_per_restaurant = ₹70,000 / 12 / N
+founder_support_per_restaurant = 120 / 60 × ₹1,000 = ₹2,000
+onboarding_amortization = 240 / 60 × ₹1,000 / 12 = ₹333.33
+economic_contribution_per_restaurant
+  = ₹4,999 - cash_cost_per_restaurant
+  - founder_support_per_restaurant - onboarding_amortization
+LTV = positive_monthly_economic_contribution × 12
+payback_months = economic_CAC / positive_monthly_economic_contribution
+```
+
+| N restaurants | Revenue/mo | Cash cost/mo | Founder support cost/mo | Economic contribution / restaurant / mo | Total contribution / cohort / mo | Support min / restaurant / mo | Economic CAC / restaurant | LTV / restaurant | Payback |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1 | ₹4,999 | ₹6,723 | ₹2,000 | -₹4,057 | -₹4,057 | 120 | ₹7,000 | N/M | N/M |
+| 5 | ₹24,995 | ₹10,282 | ₹10,000 | ₹609 | ₹3,046 | 120 | ₹7,000 | ₹7,311 | 11.5 mo |
+| 10 | ₹49,990 | ₹14,730 | ₹20,000 | ₹1,193 | ₹11,926 | 120 | ₹7,000 | ₹14,311 | 5.9 mo |
+| 25 | ₹1,24,975 | ₹28,076 | ₹50,000 | ₹1,543 | ₹38,566 | 120 | ₹7,000 | ₹18,511 | 4.5 mo |
+| 50 | ₹2,49,950 | ₹50,319 | ₹1,00,000 | ₹1,659 | ₹82,964 | 120 | ₹7,000 | ₹19,911 | 4.2 mo |
+| 100 | ₹4,99,900 | ₹94,804 | ₹2,00,000 | ₹1,718 | ₹1,71,762 | 120 | ₹7,000 | ₹20,611 | 4.1 mo |
+| 250 | ₹12,49,750 | ₹2,28,261 | ₹5,00,000 | ₹1,753 | ₹4,38,156 | 120 | ₹7,000 | ₹21,031 | 4.0 mo |
+| 500 | ₹24,99,500 | ₹4,50,689 | ₹10,00,000 | ₹1,764 | ₹8,82,144 | 120 | ₹7,000 | ₹21,171 | 4.0 mo |
+
+At `N ≥ 100`, the table's founder-support column represents 200,000 or more
+economic rupees per month and cannot be treated as free founder capacity.
+Staffing, management overhead, support tooling and service-level costs become
+new unknowns and must be added before relying on those rows.
+
+### Pricing experiments, CAC and stress cases
+
+The three historical price hypotheses are retained as experiments only. At
+`N=10`, with base provider inputs and 120 support minutes per month:
+
+| Monthly price hypothesis | Advisory cash contribution | Advisory economic contribution | AI-heavy economic contribution | Planning interpretation |
+|---:|---:|---:|---:|---|
+| ₹999 | -₹314 | -₹2,647 | -₹4,454 | Kill candidate after founder time |
+| ₹2,499 | ₹1,126 | -₹1,207 | -₹3,014 | Cash-positive illusion; fails economic contribution |
+| ₹4,999 | ₹3,526 | ₹1,193 | -₹614 | Clears advisory case only; AI-heavy mode remains negative |
+
+CAC is a separate acquisition-effort ledger:
+
+```text
+CAC_cash = paid acquisition, sales, travel and enablement cash
+CAC_economic = CAC_cash + acquisition founder hours × founder value/hour
+LTV = positive monthly economic contribution / monthly churn
+payback_months = CAC_economic / positive monthly economic contribution
+```
+
+The reference case uses `CAC_cash = ₹4,000`, three founder acquisition hours at
+₹1,000/hour, and 8.33% monthly churn. Actual CAC, churn, retention and
+payback are **unknown** until measured.
+
+| Case | Inputs | Outcome / proposed decision |
+|---|---|---|
+| Kill stress | `N=10`, `P=₹2,499`, AI-heavy, 240 support minutes/month, `CAC_economic=₹10,000` | Economic contribution is below zero; hold acquisition and reduce AI/support scope |
+| Base reference | `N=10`, `P=₹4,999`, advisory, 120 support minutes/month, `CAC_economic=₹7,000` | ₹1,193 monthly economic contribution; payback about 5.9 months |
+| Favorable | `N=50`, `P=₹4,999`, advisory, 60 support minutes/month, `CAC_economic=₹7,000` | Approximately ₹2,659 monthly economic contribution; payback about 2.6 months |
+
+Proposed internal kill controls are negative base economic contribution for two
+consecutive measured months, support above the hard ceiling, AI-heavy routing
+becoming the default without a pricing decision, or CAC payback above 12
+months after the minimum retention sample. These are proposed review controls,
+not approved refunds, price changes or accounting treatment.
+
 ## Cost-bucket separation at scale
 
 Keep these ledgers separate:
@@ -560,16 +836,29 @@ Keep these ledgers separate:
 
 The founder packet supplies **₹25,00,000+** as an income trigger but does not
 specify whether the unit is monthly or annual. Record both sensitivities and
-do not select one:
+do not select one. For active restaurant count `N` and traffic sensitivity
+`c`, keep traffic conversion separate from paid subscription conversion:
 
-| Interpretation | Income bar | Equivalent comparison |
-|---|---:|---:|
-| Monthly sensitivity | ₹25,00,000+/month | ₹3,00,00,000+/year annualized |
-| Annual sensitivity | ₹25,00,000+/year | approximately ₹2,08,333/month equivalent |
+```text
+required_unit_income = income_trigger / (N × c)
+```
 
-This is an internal sensitivity, not a tax threshold, legal trigger, revenue
-claim or founder-approved operating target. The actual unit remains an
-unresolved founder choice.
+| Restaurants | Sensitivity | Converting units | If ₹25L is monthly | If ₹25L is annual (monthly equivalent) |
+|---:|---:|---:|---:|---:|
+| 500 | 10% | 50 | ₹50,000/unit/month | ₹4,167/unit/month |
+| 500 | 25% | 125 | ₹20,000/unit/month | ₹1,667/unit/month |
+| 500 | 50% | 250 | ₹10,000/unit/month | ₹833/unit/month |
+| 500 | 100% | 500 | ₹5,000/unit/month | ₹417/unit/month |
+| 1,000 | 10% | 100 | ₹25,000/unit/month | ₹2,083/unit/month |
+| 1,000 | 25% | 250 | ₹10,000/unit/month | ₹1,000/unit/month |
+| 1,000 | 50% | 500 | ₹5,000/unit/month | ₹417/unit/month |
+| 1,000 | 100% | 1,000 | ₹2,500/unit/month | ₹208/unit/month |
+
+If the trigger is monthly, ₹25L/month is ₹3Cr/year only under a sustained
+12-month run-rate assumption. If it is annual, the equivalent monthly
+run-rate is approximately ₹2.083L/month. This is an internal sensitivity, not
+a tax threshold, legal trigger, revenue claim or founder-approved operating
+target. The actual unit remains an unresolved founder choice.
 
 ## Low/base/high interpretation
 

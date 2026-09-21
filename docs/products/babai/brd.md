@@ -7,6 +7,7 @@ sources:
   - nekurama.chatgpt.md
   - nekurama.babai.research.md
   - Founder decision packet (2026-09-21; current task input)
+  - e3e4e855ca0214a5c664c07ec5b6513c560a7261 (product scale economics source)
 ---
 
 # BABAI Product BRD
@@ -53,6 +54,95 @@ expansion.
 Assistant recommendations in the raw conversation are not treated as founder
 decisions unless the current issue sources, later explicit direction or field
 evidence supports them.
+
+## Founder decision packet — 2026-09-21
+
+The following are internal product/company decisions for this BRD pass. They
+are not legal wording, tax conclusions, public claims or evidence that the
+pilot has succeeded.
+
+| Decision | Status | Durable treatment |
+|---|---|---|
+| Pilot term | **confirmed** | Fixed **90-day paid pilot**; not a free trial |
+| Payment/start gate | **confirmed internal gate; treatment open** | Collect the agreed payment or deposit before the pilot starts; exact amount, classification and refund treatment require the signed agreement and professional validation |
+| Cancellation/refund | **partial / challenge-required** | Terms must be tied to a signed agreement and explicit minimum-paying terms; use the open requirements template in `business-model.md`, not invented legal language |
+| Pilot completion | **partial / proposed gate** | The pilot closes at the 90-day decision point when the team-defined readiness evidence gate supports materially larger onboarding volumes; no silent extension or public scale claim |
+| Margin | **confirmed calculation / open threshold** | Compare recognized income against total attributable expenditure; target contribution/margin remains open |
+| Pricing | **challenge-required** | Derive from observed contribution economics, not assumed tiers or historical price ladders |
+| Post-pilot pricing | **confirmed cadence** | Review every six months; no automatic increase |
+| Company/product identity | **confirmed direction** | NEKURAMA is the company identity; BABAI is the product identity |
+| BABAI wording | **confirmed internal wording / legal validation pending** | Record **“BABAI — Business Automation by AI”** as founder-approved internal wording; make no etymology claim and do not treat it as cleared public/trademark language |
+
+External/legal, tax and accounting validation remains separate: signed
+agreement language, cancellation/refund enforceability, minimum-paying
+obligations, GST/invoicing/revenue treatment, entity/IP ownership and
+trademark/brand clearance are not decided by this BRD.
+
+## Internal acceptance packet — proposed operating assumptions
+
+For the 90-day paid pilot, the internal planning packet assumes a full
+90-calendar-day minimum-paying commitment, a default 50%/50% collection split
+at activation and before day 31, no discretionary pro-rata refund after
+activation, and exception-only credits/refunds for a documented service or
+inability-to-start case. These are business assumptions for founder approval,
+not legal wording or a promise of statutory treatment. The signed agreement
+must state the approved cancellation trigger, notice, balance, refund/credit
+authority and timing.
+
+The contribution-derived 90-day planning bands are ₹6,075–₹8,219 for the low
+case, **₹29,362–₹39,727 as the base planning recommendation**, and
+₹166,940–₹225,860 for the high stress case, all before GST. Each is capped at
+±15% around its calculated center. These figures are estimates based on the
+three-restaurant allocation case and must be replaced by actual provider
+invoices, payment exports and founder time logs before being treated as a
+commercial quote. See [`economics-model.md`](economics-model.md) for the
+income bars, formulas, GST sensitivity and break-even table.
+
+The pilot closes at day 90. The proposed onboarding-readiness exit gate in
+[`pilot-metrics.md`](pilot-metrics.md) must show repeatable onboarding,
+reliable order/payment operations, staff-led operation, support capacity,
+complete expenditure evidence, positive base contribution and no unresolved
+safety/privacy/payment exception before materially larger onboarding volumes
+are approved. If the gate is not met or is inconclusive, close the pilot,
+record the gap and hold expansion; do not silently extend or imply scale.
+
+## Economics review packet — proposed operating controls
+
+The economics model now treats recurring support minutes per
+restaurant/month as the lead scale telemetry metric, split into planned,
+unplanned, recovery and takeover minutes; onboarding minutes and the hard
+ceiling remain separate. It also records advisory versus AI-heavy usage,
+model/tokens/embeddings/speech/vision/jobs/retries, acquisition effort and
+CAC, LTV/payback, and a scale sensitivity for `N = 1, 5, 10, 25, 50, 100, 250,
+500`.
+
+BABAI SaaS economics and restaurant value are intentionally separate. BABAI
+contribution is recognized subscription income less BABAI cash and economic
+cost. Restaurant ROI is a separate value calculation based on the restaurant's
+own baseline, avoided channel cost, staff time, errors, incremental gross
+profit and restaurant-side provider costs. A value-based maximum rational
+price is a planning ceiling, not payment evidence.
+
+The new founder scale baseline records six conversational flows/order, nine
+gateway hits/flow, 54 average requests/completed order, 90 heavy-case
+requests/order and a hard ceiling of 50 completed orders/day/restaurant. It
+models the 500-restaurant goal (25,000 orders/day and half of the supplied
+1,000-restaurant traffic totals), the supplied 1,000-restaurant reference
+(50,000 orders/day, 2.7M average requests/day and 4.5M heavy-case/day), and
+10%/25%/50%/100% WhatsApp conversion sensitivities. The ₹25L+ income trigger
+is retained with monthly versus annual unit sensitivity because its unit is
+not supplied. See [`economics-model.md`](economics-model.md), section
+“Founder scale and cost baseline”. These are founder inputs and derived
+planning estimates, not a finalized infrastructure or provider choice.
+
+The ₹999, ₹2,499 and ₹4,999 monthly amounts remain pricing experiments only.
+At `N=10` with advisory AI and base provider inputs, the model shows ₹999 and
+₹2,499 as negative economic-contribution cases after founder time; ₹4,999 is
+positive only in advisory mode and remains negative in the AI-heavy case.
+Proposed review controls are a negative base contribution for two consecutive
+months, repeated support-ceiling breaches, unpriced AI-heavy routing, or CAC
+payback above 12 months. These controls are internal planning thresholds, not
+approved commercial or legal outcomes.
 
 ## Confirmed product truth
 
@@ -159,10 +249,11 @@ The field research is intentionally not upgraded: it reports strong interest and
 | `business-model.md` | Retained as a partial commercial model; public pricing is withheld while cost, contribution, GST and pilot-term evidence is collected. |
 | `economics-model.md` | Track 2 v0.5 internal planning artifact; provides low/base/high bands, actual-rate register, 90-day plan, traffic/request/storage sensitivities, direct/indirect cost formulas, provisional fee bands and break-even sensitivity without selecting public pricing. |
 | `validation.md` | Track 3 metric contract with proposed entry/exit/success/kill thresholds; founder approval and pilot evidence remain required. |
+| `pilot-metrics.md` | Added as the proposed scorecard, support-minute telemetry contract, scale/capacity references, AI/CAC/value fields and readiness gate; it is not an approved public metric contract. |
 | `product-definition.md` | Retained as the current MVP boundary; production cut, edge cases and post-pilot scope remain partial. |
 | `thesis-and-positioning.md` | Retained as current positioning; differentiation is explicitly a thesis, not a proven moat, and legal clearance remains separate. |
 | `domain-model.md` | Reviewed but not changed in this pass; it is a substantial domain artifact with its own remaining battles. |
-| `architecture.md` and `architecture-boundaries.md` | Reviewed but not changed; architecture work is outside this product-intent pass and existing working-tree changes were left untouched. |
+| `architecture.md`, `architecture-lld.md` and `architecture-cost-options.md` | Retained as internal architecture artifacts; the scale posture, 15-minute gates, stateless gateway/worker split and support replacement trigger remain proposed and evidence-gated. |
 | `README.md` | Retained as the product index; this BRD is the evidence/status register it points to. |
 
 Company docs, landing-page material, secrets, deployment state and unrelated

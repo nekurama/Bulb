@@ -14,6 +14,7 @@ sources:
   - docs/products/babai/experience-and-channels.md
   - docs/products/babai/architecture-boundaries.md
   - docs/products/babai/architecture-lld.md
+  - b1a957fadf597d6d58623fd3baf146d8b43533c4 (architecture scale/capacity source)
   - docs/products/babai/architecture-cost-options.md
   - docs/products/babai/economics-model.md
 ---
@@ -125,8 +126,10 @@ Planning envelopes are ₹8,000–₹20,000 low, ₹25,000–₹60,000 base and
 estimates, not quotes. AWS credits are a planning sensitivity that can reduce
 cash outlay only after external eligibility is confirmed; they do not approve
 AWS spend or justify unused capacity. Founder-only support is capped at
-6 hours/week for Manoj, 8 for Vinay and 14 combined, with a 10-hour/week
-planned-load ceiling and no 24x7 promise. Scale and rollback triggers,
+6 hours/week for Manoj, 8 for Vinay and 14 combined for the pilot planned-load
+ceiling, with a 10-hour/week planned-load ceiling and no 24x7 promise. The
+separate 24-hour/week absolute support stop is an infrastructure scale gate,
+not a pilot staffing commitment. Scale and rollback triggers,
 assumptions and parked provider gates are maintained in
 [`architecture-cost-options.md`](architecture-cost-options.md).
 
@@ -148,6 +151,55 @@ The detailed counter contract and support-telemetry bridge are in
 [`architecture-cost-options.md`](architecture-cost-options.md) and
 [`architecture-lld.md`](architecture-lld.md), with
 [`economics-model.md`](economics-model.md) as the receiving financial model.
+
+### Pilot platform support boundaries
+
+The deployment shape must keep these concerns replaceable and operationally
+small:
+
+- private object storage holds backups, exports and controlled artefacts;
+  public static assets may use a CDN only after measured need;
+- secrets are retrieved from a managed or equivalent encrypted store, never
+  from source control or general telemetry; founder/admin access uses MFA and
+  audited break-glass procedures;
+- CI/CD produces immutable container images, runs tests and smoke checks,
+  promotes manually during the pilot, and supports last-known-good rollback
+  with backward-compatible migrations;
+- logs and metrics are redacted, correlated and alertable without becoming
+  business-state authority.
+
+These are architectural boundaries, not provider selections. The ECS/Fargate,
+App Runner and small EC2/container comparison, monthly planning envelopes,
+founder-support gates and rollback triggers are maintained in
+[`architecture-cost-options.md`](architecture-cost-options.md).
+
+### New scale baseline and runtime split
+
+The scale model uses the founder inputs of 54 average requests/order, 90
+heavy-case requests/order, 50 orders/day/restaurant, 500 and 1,000
+restaurants, and 10/25/50/100% conversion sensitivities. The canonical
+formulas, 1x/5x/10x RPS bands, cost comparison and Stage 0/1/2 15-minute
+capacity gates are in
+[`architecture-cost-options.md`](architecture-cost-options.md).
+
+The gateway is intentionally stateless and lightweight: authenticate and
+verify, rate-limit, classify, enqueue and acknowledge only after durable queue
+acceptance. Conversation/state processing, provider fan-out, retries,
+reconciliation and workflow execution belong to idempotent workers behind the
+outbox/inbox and queue boundary. PostgreSQL is protected from per-hit gateway
+transactions through queue admission, cacheable published revisions, bounded
+worker concurrency and short module-scoped transactions; authoritative order,
+payment, permission, consent and reconciliation decisions still use
+PostgreSQL.
+
+Rate limits, backpressure, provider token buckets, retry/DLQ rules, connection
+pool allocation, safe-cache restrictions, restore gates and founder support
+replacement triggers are operating guardrails rather than production SLO
+claims. A two-gateway or 2x2-vCPU setup does not prove capacity; only the
+specified load tests and 15-minute signals can do that. Founder-only support
+fails at 500+ restaurants by default under the 24-hour/week ceiling unless
+automation or replacement support reduces manual work to the measured
+per-restaurant minute budget.
 
 ### Key HLD/LLD decision citation index
 

@@ -9,6 +9,8 @@ sources:
   - nekurama.raw.chat.json (ordered turns 70, 290; mappings `4bbdb489-0a0d-45d5-af27-70535c5d4acc`, `4702681b-d611-4408-af5f-9001d04b6cfa`, `f58ce128-39ed-4015-9be9-5b6135a39f20`)
   - Founder decision packet (2026-09-21; current task input)
   - economics-model.md (Track 2 v0.5)
+  - architecture-cost-options.md (proposed 15-minute capacity gates)
+  - e3e4e855ca0214a5c664c07ec5b6513c560a7261 (product scale economics source)
 ---
 
 # Validation
@@ -170,6 +172,16 @@ These are proposed safety/economics controls, pending founder approval:
 
 These conditions should stop expansion while the evidence is reviewed; they do
 not authorize refunds, pricing changes, or accounting treatment by themselves.
+
+## Operational capacity evidence gate — proposed
+
+The architecture capacity gate is evaluated over a rolling **15-minute**
+window for the relevant 10%/25%/50%/100% traffic sensitivity and normal/heavy
+request mix. The gateway, workers, PostgreSQL pool, queue/outbox age, provider
+throttling, retry/DLQ and restore signals must be green before advancing; amber
+requires correction and a repeat, and red holds expansion or rolls back. The
+thresholds are internal evidence guardrails, not production SLO commitments.
+See [`architecture-cost-options.md`](architecture-cost-options.md).
 
 ## Stage 0/1/2 capacity and economics gates — proposed
 

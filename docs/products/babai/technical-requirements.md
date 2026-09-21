@@ -129,4 +129,3 @@ Do not move from pilot to materially larger onboarding unless:
 - support and queue/recovery limits are measured;
 - restore and replay drills are evidenced;
 - external provider/legal/tax approvals are separately recorded.
-

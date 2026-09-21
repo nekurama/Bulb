@@ -116,4 +116,3 @@ A change is done only when:
 - observability/audit fields exist for production paths;
 - rollback or feature-gate behavior is known;
 - branch diff is reviewed and unrelated files remain untouched.
-

@@ -3,15 +3,16 @@ status: partial
 owner: BABAI
 last-reviewed: 2026-09-21
 sources:
+  - "Tier Scope Decision (2026-09-21)"
   - "Admin Decision Packet (2026-09-20)"
   - "nekurama.raw.chat.json (conversation_id: 6aa2f947-fce0-83e8-99d0-9a52ab2b15cd)"
   - nekurama.chatgpt.md
   - docs/products/babai/architecture.md
   - docs/products/babai/architecture-boundaries.md
   - docs/products/babai/architecture-cost-options.md
-  - b1a957fadf597d6d58623fd3baf146d8b43533c4 (architecture scale/capacity source)
   - docs/products/babai/domain-model.md
-  - docs/products/babai/economics-model.md
+  - docs/products/babai/tier-feasibility-matrix.md
+  - "Tier scope decision (2026-09-21; current task input)"
 ---
 
 # BABAI Architecture LLD
@@ -27,89 +28,102 @@ and founder-only support capacity, see `architecture-cost-options.md`. That file
 contains options and validation gates rather than additional implementation
 commitments.
 
+The focused LITE/BASE/PRO feasibility matrix is
+[`tier-feasibility-matrix.md`](tier-feasibility-matrix.md). It is a rollout
+and evidence artifact, not a provider approval or public entitlement contract.
+
 The **Admin Decision Packet (2026-09-20)** is the current administrative
 decision source for the starting implementation posture. Founder evidence
 continues to govern product intent and domain constraints. Items marked
 **unresolved** require design, pilot, provider, operational or legal/security
 validation before they become stronger commitments.
 
-## Internal platform acceptance contract
+## Tier entitlement, integration and state contract
 
-The first implementation should satisfy this contract while remaining
-deployable outside AWS:
+The LITE/BASE/PRO matrix is a provisional internal scope decision recorded in
+[`product-definition.md`](product-definition.md). Implement it as a
+tenant/branch entitlement and policy projection inside the modular monolith;
+do not fork domain state, provider credentials or deployments by tier.
 
-1. Build one OCI-compatible image containing API and worker entry points; run
-   as non-root, expose health/readiness checks and deploy by immutable digest.
-2. Keep configuration in environment/config providers and credentials in a
-   managed secret facility or equivalent encrypted store. Human administration
-   requires MFA, named accounts, least privilege and a separately audited
-   break-glass path.
-3. Treat managed standard PostgreSQL as authoritative. Use transactional
-   migrations, bounded connection pools, encrypted automated backups and an
-   export/restore path. Prefer expand/migrate/contract changes so application
-   rollback does not require destructive schema reversal.
-4. Write domain state, outbox rows and required audit records in one
-   transaction. Publish to a managed at-least-once queue; consumers persist
-   inbox/idempotency state, use bounded retries and quarantine poison or
-   human-action messages. The queue is replaceable and is not Kafka.
-5. Store large imports, media, exports and backup artifacts in private
-   S3-compatible object storage. Use short-lived signed access and add a CDN
-   only for content classified as public/cache-safe.
-6. Emit redacted structured logs and metrics, plus sampled traces where useful,
-   with correlation/causation, tenant/branch/flow and provider references.
-   Telemetry never authorizes a business transition.
-7. CI/CD must test, type-check/lint, scan dependencies and images, produce an
-   SBOM, publish an immutable artifact, validate migrations, deploy a smoke
-   check and require explicit production approval. Keep the previous digest
-   available for rollback.
-8. Portability evidence must include PostgreSQL export/restore, object export,
-   configuration reconstruction and safe queue replay. No multi-region or
-   zero-data-loss claim is part of this contract.
+### Trusted command gate
 
-The platform mapping is ECS/Fargate as the preferred AWS candidate, App Runner
-only after worker/network/rollback validation, and a small EC2 host as a
-founder-accepted cost fallback. Provider service names, regions, tiers,
-quotes, credits and approval terms remain unresolved external inputs. The
-support envelope is 6 hours/week for Manoj, 8 for Vinay and 14 combined, with
-10 hours/week as the planned-load ceiling and no 24x7 commitment. Detailed
-planning ranges and scale/rollback thresholds are maintained in
-[`architecture-cost-options.md`](architecture-cost-options.md).
-
-## Operational and economics telemetry contract
-
-Operational telemetry must support both incident response and the economics
-model without becoming a second source of business truth. Emit a redacted
-usage or time-log record for each measured interval or completed activity with:
+Every state-changing command follows this order:
 
 ```text
-recordId
-recordedAt
-tenantId / restaurantId
-scaleBand
-assumptionsVersion
-activityOrCostClass
-providerOrModelRef where applicable
-deploymentVersion
-quantity / duration
-outcome
+authenticate/verify provider context
+  -> resolve tenant, branch, channel and actor
+  -> load entitlement and policy version
+  -> reject unavailable capability or exhausted quota
+  -> validate deterministic aggregate transition
+  -> write authoritative state + outbox + audit atomically
 ```
 
-The minimum `activityOrCostClass` values are `runtime`, `database`,
-`queue_outbox`, `object_storage_cdn`, `observability`, `ai_assistance`,
-`external_provider`, `onboarding`, `merchant_support`, `takeover`,
-`incident`, `reconciliation` and `restore`. Runtime records should carry
-request/worker counts and resource time; queue records should carry
-enqueue/receive/ack/retry/DLQ/replay counts; AI records should carry request
-and token-equivalent counts, route, cache and retry data; provider records
-should carry message category/count and delivery/retry outcome; support
-records should carry minutes, reason, severity and manual/automated mode.
+The gate must return an explicit non-success outcome for an unavailable
+capability or exhausted quota. It must not silently downgrade a payment,
+delivery, promotion, combo or availability request into a success-shaped
+response. Entitlements are evaluated server-side; AI, clients and provider
+callbacks cannot select or elevate a tier.
 
-Do not record message bodies, credentials, payment secrets or unrestricted PII
-in this ledger. Aggregate by tenant/restaurant and scale band for
-`economics-model.md`; retain the raw operational detail only as long as the
-approved observability/privacy policy permits. Missing rates, provider terms,
-model prices, credits, taxes and founder opportunity value remain unknown
-inputs rather than silently defaulting to zero.
+| Port/capability | LITE | BASE | PRO |
+|---|---|---|---|
+| `CatalogPort` / menu update | Menu read and bounded capture; maximum 3 menu updates/month | Menu read/update subject to measured entitlement limits | Higher/advanced API-assisted updates only after approval and measured limits |
+| `PaymentPort` | Not registered for tenant workflows | Direct merchant settlement; webhook, refund and reconciliation path required | Same payment truth plus approved additional provider/API paths |
+| `FulfillmentPort` | Pickup status only; no delivery provider workflow | Pickup and validated delivery provider flow | Validated delivery plus approved advanced integrations |
+| `AvailabilityPort` | Not registered; no availability workflow | Item availability controls used by cart/order validation | BASE controls plus approved external availability integration |
+| `PromotionPort` / `ComboPort` | Not registered | Basic bounded controls; max 3 promotion/combo requests/day with short-lived activation | Advanced bounded controls with explicit policy/quota evaluation |
+| `ConversationTaskPort` | Menu assistance and order capture | Menu/order/payment/delivery tasks | Allowlisted advanced tasks and APIs only; AI remains advisory |
+
+Ports own external identity, credentials, callbacks, throttling and failure
+semantics. Domain modules own the resulting state. Meta/WhatsApp, payment and
+delivery providers remain replaceable adapters; this matrix does not approve a
+provider, Meta onboarding path, SDK, cloud service or final deployment choice.
+
+### Deterministic state and reliability rules
+
+Order, payment and fulfillment are separate authoritative state machines.
+Typical transitions are:
+
+```text
+Order:      DRAFT -> SUBMITTED -> ACCEPTED/REJECTED
+            ACCEPTED -> PREPARING -> READY -> COMPLETED
+Payment:    NOT_APPLICABLE (LITE)
+            PENDING -> AUTHORIZED/PAID -> FAILED
+            PAID -> REFUND_PENDING -> REFUNDED
+Fulfillment: NOT_APPLICABLE (LITE)
+             PICKUP: READY_FOR_PICKUP -> COMPLETED
+             DELIVERY: REQUESTED -> ASSIGNED -> IN_TRANSIT -> DELIVERED
+```
+
+The owning module validates current state, tier entitlement, actor scope,
+preconditions and transition version. Payment completion never accepts an
+order; a delivery callback never changes payment state; and absent LITE
+workflows are represented as unavailable/not applicable rather than
+successful. Every accepted transition writes an outbox record and required
+audit evidence in the same PostgreSQL transaction. Provider callbacks use a
+provider-event id plus tenant/channel scope as an idempotency key, and
+side-effecting requests use an adapter-recognized idempotency key.
+
+Human takeover is available in every tier. It pauses conversational automation
+only; it does not bypass authorization, quotas, deterministic transitions,
+outbox/inbox processing or reconciliation. PRO “full access” is therefore
+bounded access to the allowlisted command/task set, never authoritative AI.
+
+### Quotas, rate limits and cost attribution
+
+Apply layered limits at provider/channel, tenant/branch, actor/session and
+gateway/API levels. Track menu updates, promotion/combo requests, provider
+calls, AI calls and human takeover separately. A quota record should include
+tenant/branch, capability, period, limit, consumed, policy version, actor and
+outcome; concurrent requests must consume quota atomically or fail explicitly.
+Provider `Retry-After`, adapter concurrency caps and global backpressure remain
+binding regardless of plan.
+
+Operational/economics records must attribute `tier`, `tenantId`,
+`capability`, `providerOrModelRef`, `automationMode`, `humanTakeover`,
+`quantity/duration`, `outcome`, `deploymentVersion` and `assumptionsVersion`.
+At minimum, report infrastructure/API, provider, AI, support/takeover,
+reconciliation and failure/recovery cost separately. Do not treat a plan
+entitlement as a price, margin, provider commitment or staffing approval.
 
 ## Committed starting posture
 
@@ -134,6 +148,32 @@ inputs rather than silently defaulting to zero.
 No initial microservices or EKS deployment is selected. Logical capabilities
 remain explicit so extraction can be evidence-driven later. [Admin Decision
 Packet (2026-09-20); `architecture.md`; `architecture-boundaries.md`]
+
+## Tier and entitlement enforcement
+
+LITE, BASE and PRO are entitlement/configuration profiles over the same module
+and aggregate graph. The gateway resolves the active billing-account
+entitlements and policy context, then workers and domain modules enforce the
+same decision again before state-changing commands or external effects.
+
+- LITE/BASE/PRO never change aggregate ownership or make billing the source of
+  order, payment, availability, promotion or fulfillment truth.
+- Rate limits, quotas and provider concurrency are enforced at the gateway,
+  queue admission and adapter/worker layers; they are not enforced by
+  trusting an AI suggestion or a client-supplied tier.
+- BASE order/payment flows use deterministic commands, idempotency and human
+  takeover; payment completion remains distinct from order acceptance.
+- PRO integrations use typed provider adapters, scoped secrets, callback
+  verification, retries/DLQ, reconciliation and audit. Higher quotas do not
+  bypass provider throttles, consent, authorization or tenant isolation.
+- AI remains advisory at every tier. PRO may expose more recommendations,
+  drafts and bounded automation, but never direct authority over orders,
+  payments, permissions, consent or business state.
+
+The exact entitlement names, quotas, tier pricing, promotion/combo semantics,
+delivery-provider set and advanced API catalog are provisional experiments.
+[Tier Scope Decision (2026-09-21); `architecture.md`;
+`architecture-cost-options.md`; `domain-model.md`]
 
 ## Module map
 
@@ -171,13 +211,26 @@ commands, records idempotency context and hands conversation/state work to
 workers through the outbox/managed-queue path. Workers own durable
 conversation/state processing and external side effects; the gateway does not
 hold conversation state in memory or wait synchronously on provider chains.
+The gateway acknowledges a webhook only after durable queue acceptance and
+returns a provider-appropriate retry response when queue acceptance fails.
+Queue envelopes carry provider event ID, tenant/channel scope,
+correlation/causation IDs and a bounded classified payload; secrets and
+unrestricted message bodies do not enter logs. Workers deduplicate by provider
+event ID plus tenant/channel scope, classify noise/read/state-changing work,
+and acknowledge only after the durable effect.
+
+Published menu/configuration revisions may use a tenant-scoped versioned cache
+with explicit TTL and invalidation. Order, payment, permission, consent,
+availability and reconciliation truth must use authoritative state or a
+validated projection; the cache is never a second source of truth.
 
 The gateway alone is not a capacity proof. PostgreSQL transactions and
 connection pools, worker throughput, queue age, provider throttling, AI
 latency/cost and retry/DLQ behavior must be tested together. The 54-request
 average and 90-request heavy order scenarios at 50 orders/day/restaurant are
 planning inputs; 2x2-vCPU gateways do not establish system capacity.
-[Founder Scale/Cost Baseline (2026-09-21); `architecture-cost-options.md`]
+[User-provided founder scale baseline (2026-09-21);
+`architecture-cost-options.md`]
 
 ## Request and command path
 
@@ -219,6 +272,18 @@ authorized and validated by the owning module. [Raw T139
   high-contention usage limits require explicit domain rules before production.
 - Read models and analytics may be eventually consistent and must not replace
   authoritative state.
+- Never hold a database transaction while calling Meta, payment, delivery or
+  AI providers.
+- Keep worker transactions short and bounded to one logical module transition;
+  batch outbox publication and non-authoritative telemetry, but never combine
+  unrelated aggregate transitions merely to reduce transaction count.
+- Reserve at least 20% of the database connection ceiling for migrations,
+  administration and recovery. Application pools use at most 60% of the
+  provider ceiling, distributed as
+  `floor(0.60 * db_max_connections / (api_replicas + worker_replicas))`.
+- Alert when pool usage reaches 60% or p95 pool wait reaches 100 ms; apply
+  backpressure before connection exhaustion rather than increasing worker
+  concurrency blindly.
 
 The exact PostgreSQL schema layout, migration strategy, projection mechanism,
 partitioning, indexing, retention and archival remain unresolved. [Raw T206
@@ -455,6 +520,12 @@ support comparison. It does not select a vendor or claim approval.
 - Exercise payment webhook, manual confirmation, refund and reconciliation
   paths with a pilot merchant.
 - Prove outbox/inbox, retry, DLQ, reconciliation and replay behavior.
+- Run the Stage 0/1/2 load tests from
+  [`architecture-cost-options.md`](architecture-cost-options.md), recording
+  15-minute gateway, PostgreSQL, queue/outbox, provider, retry/DLQ and
+  founder-support signals for each conversion and request-mix band.
+- Demonstrate that the gateway remains stateless, that conversation/state work
+  is worker-owned, and that cache use does not become authoritative truth.
 - Define and test state/workflow contracts before selecting a workflow product.
 - Run daily backup restore tests and record RPO/RTO evidence.
 - Test private object-storage export/restore, signed access and any CDN cache

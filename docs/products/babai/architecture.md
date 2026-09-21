@@ -3,6 +3,7 @@ status: partial
 owner: BABAI
 last-reviewed: 2026-09-21
 sources:
+  - "Tier Scope Decision (2026-09-21)"
   - "Admin Decision Packet (2026-09-20)"
   - "nekurama.raw.chat.json (conversation_id: 6aa2f947-fce0-83e8-99d0-9a52ab2b15cd)"
   - nekurama.chatgpt.md
@@ -14,9 +15,8 @@ sources:
   - docs/products/babai/experience-and-channels.md
   - docs/products/babai/architecture-boundaries.md
   - docs/products/babai/architecture-lld.md
-  - b1a957fadf597d6d58623fd3baf146d8b43533c4 (architecture scale/capacity source)
   - docs/products/babai/architecture-cost-options.md
-  - docs/products/babai/economics-model.md
+  - "Tier scope decision (2026-09-21; current task input)"
 ---
 
 # Architecture
@@ -88,9 +88,11 @@ shape. [Admin Decision Packet (2026-09-20); `architecture-boundaries.md`;
 
 The proposed pilot posture is one small containerized modular-monolith runtime
 plus a managed worker capacity model, managed standard PostgreSQL, a managed
-at-least-once queue behind a port, and provider adapters. Compare a portable
-OCI baseline with AWS ECS/Fargate using the same workload, backup/restore,
-queue, observability and founder-support assumptions. Start with the
+at-least-once queue behind a port, and provider adapters. **ECS/Fargate is the
+default AWS pilot candidate** after a like-for-like cost and restore check;
+retain a portable OCI baseline and keep App Runner as a time-boxed worker
+proof alternative. A small EC2/container host is a cost fallback only because
+its patching and recovery work transfers to the founders. Start with the
 low/base cost envelope; do not add EKS, Aurora, Multi-AZ, Kafka, multi-region
 recovery or long-retention telemetry merely to consume credits.
 
@@ -103,103 +105,39 @@ deterministic business-state ownership remain unchanged. See
 [`architecture-cost-options.md`](architecture-cost-options.md) for the
 comparison, assumptions and validation gates.
 
-### Internal platform acceptance
+### Founder Decision Packet operating posture
 
-The internal planning acceptance is now explicit: use one portable
-OCI-compatible image for API and worker processes, deploy by immutable digest,
-and keep PostgreSQL, queue, object storage and provider behavior behind
-replaceable ports. ECS/Fargate is the preferred AWS candidate; App Runner is
-only a bounded API alternative after worker/network/rollback validation; and
-small EC2 is a founder-accepted cost fallback with a single-host recovery
-penalty.
+The internal recommendation is to keep the first pilot intentionally small:
 
-The accepted platform baseline is managed standard PostgreSQL, a managed
-at-least-once queue with transactional outbox/inbox, private object storage
-with selective CDN use, MFA plus managed secrets/workload identity where
-available, provider-neutral redacted telemetry, and CI/CD with tests,
-security checks, migration gates, smoke checks and explicit production
-approval. The previous image remains deployable for rollback, and database
-changes use expand/migrate/contract sequencing.
+- **Runtime:** one right-sized API task/container and one worker capacity
+  model; scale only from measured request, queue, outbox or database pressure.
+- **Data and async:** managed standard PostgreSQL as authoritative state,
+  transactional outbox/inbox, managed at-least-once queue, DLQ/quarantine and
+  authorized replay.
+- **Artefacts:** private encrypted object storage for backups/exports and
+  controlled uploads; CDN only for measured public static-asset traffic.
+- **Access:** managed secret storage candidate, least-privilege workload
+  identities, MFA/security keys for founder/admin access, and audited
+  break-glass access.
+- **Delivery:** immutable image builds, tests, staged smoke, manual promotion,
+  backward-compatible migrations and last-known-good rollback.
+- **Operations:** redacted logs, core metrics, actionable alerts and
+  correlation IDs; no 24x7 or hiring assumption.
 
-Planning envelopes are ₹8,000–₹20,000 low, ₹25,000–₹60,000 base and
-₹75,000–₹180,000 high per month for cloud/platform costs only. These are
-estimates, not quotes. AWS credits are a planning sensitivity that can reduce
-cash outlay only after external eligibility is confirmed; they do not approve
-AWS spend or justify unused capacity. Founder-only support is capped at
-6 hours/week for Manoj, 8 for Vinay and 14 combined for the pilot planned-load
-ceiling, with a 10-hour/week planned-load ceiling and no 24x7 promise. The
-separate 24-hour/week absolute support stop is an infrastructure scale gate,
-not a pilot staffing commitment. Scale and rollback triggers,
-assumptions and parked provider gates are maintained in
-[`architecture-cost-options.md`](architecture-cost-options.md).
+The monthly infrastructure planning envelopes are **₹0–₹10,000 low,
+₹10,000–₹30,000 base and ₹30,000–₹100,000+ high before credits**. These are
+internal estimates, not quotes, and exclude provider pass-throughs, tax,
+support labour and one-time onboarding. Pause enrollment when the proposed
+founder support envelope (24 hours/week, 2 hours per active restaurant/week,
+recurring P1s, unresolved P2s or overdue restore/reconciliation work) is
+exceeded. Revisit the posture only with measured scaling, recovery,
+provider-failure or support evidence. See
+[`architecture-cost-options.md`](architecture-cost-options.md) for the
+comparison, gates and rollback posture.
 
-### Architecture inputs to the economics model
-
-The economics model must not linearly extrapolate the pilot envelopes from
-N=1 to N=500. Architecture-owned inputs are the shared/step-variable runtime,
-PostgreSQL, queue/outbox, object-storage/CDN, observability, AI and provider
-usage counters, plus founder support and recovery minutes. Emit them by
-tenant/restaurant and assumptions version without unrestricted payloads.
-
-Use N=1–3, 4–10, 11–25, 26–50, 51–100, 101–250 and 251–500 as measurement
-bands. The modular monolith remains the default through the bands; runtime
-splitting, database changes, stronger provider limits, AI budgets or staffing
-changes require measured bottleneck, continuity, security or support evidence.
-N=500 is an architecture re-baseline trigger, not a capacity promise. EKS,
-Kafka and multi-region remain non-default options requiring separate evidence.
-The detailed counter contract and support-telemetry bridge are in
-[`architecture-cost-options.md`](architecture-cost-options.md) and
-[`architecture-lld.md`](architecture-lld.md), with
-[`economics-model.md`](economics-model.md) as the receiving financial model.
-
-### Pilot platform support boundaries
-
-The deployment shape must keep these concerns replaceable and operationally
-small:
-
-- private object storage holds backups, exports and controlled artefacts;
-  public static assets may use a CDN only after measured need;
-- secrets are retrieved from a managed or equivalent encrypted store, never
-  from source control or general telemetry; founder/admin access uses MFA and
-  audited break-glass procedures;
-- CI/CD produces immutable container images, runs tests and smoke checks,
-  promotes manually during the pilot, and supports last-known-good rollback
-  with backward-compatible migrations;
-- logs and metrics are redacted, correlated and alertable without becoming
-  business-state authority.
-
-These are architectural boundaries, not provider selections. The ECS/Fargate,
-App Runner and small EC2/container comparison, monthly planning envelopes,
-founder-support gates and rollback triggers are maintained in
-[`architecture-cost-options.md`](architecture-cost-options.md).
-
-### New scale baseline and runtime split
-
-The scale model uses the founder inputs of 54 average requests/order, 90
-heavy-case requests/order, 50 orders/day/restaurant, 500 and 1,000
-restaurants, and 10/25/50/100% conversion sensitivities. The canonical
-formulas, 1x/5x/10x RPS bands, cost comparison and Stage 0/1/2 15-minute
-capacity gates are in
-[`architecture-cost-options.md`](architecture-cost-options.md).
-
-The gateway is intentionally stateless and lightweight: authenticate and
-verify, rate-limit, classify, enqueue and acknowledge only after durable queue
-acceptance. Conversation/state processing, provider fan-out, retries,
-reconciliation and workflow execution belong to idempotent workers behind the
-outbox/inbox and queue boundary. PostgreSQL is protected from per-hit gateway
-transactions through queue admission, cacheable published revisions, bounded
-worker concurrency and short module-scoped transactions; authoritative order,
-payment, permission, consent and reconciliation decisions still use
-PostgreSQL.
-
-Rate limits, backpressure, provider token buckets, retry/DLQ rules, connection
-pool allocation, safe-cache restrictions, restore gates and founder support
-replacement triggers are operating guardrails rather than production SLO
-claims. A two-gateway or 2x2-vCPU setup does not prove capacity; only the
-specified load tests and 15-minute signals can do that. Founder-only support
-fails at 500+ restaurants by default under the 24-hour/week ceiling unless
-automation or replacement support reduces manual work to the measured
-per-restaurant minute budget.
+This recommendation does not claim provider, legal, security, Meta, payment
+or external approval. Those decisions remain parked until their stated
+validation evidence exists.
 
 ### Key HLD/LLD decision citation index
 
@@ -310,6 +248,55 @@ Decision Packet (2026-09-20); Raw T153
 `bbb21941-90d7-47d8-b4e0-671c6caecb09`; Raw T154
 `1764f643-59fd-4cf5-be14-6aee32fc973a`; `architecture-lld.md`;
 `architecture-boundaries.md`]
+
+### Pilot platform support boundaries
+
+The deployment shape must keep these concerns replaceable and operationally
+small:
+
+- private object storage holds backups, exports and controlled artefacts;
+  public static assets may use a CDN only after measured need;
+- secrets are retrieved from a managed or equivalent encrypted store, never
+  from source control or general telemetry; founder/admin access uses MFA and
+  audited break-glass procedures;
+- CI/CD produces immutable container images, runs tests and smoke checks,
+  promotes manually during the pilot, and supports last-known-good rollback
+  with backward-compatible migrations;
+- logs and metrics are redacted, correlated and alertable without becoming
+  business-state authority.
+
+These are architectural boundaries, not provider selections. The ECS/Fargate,
+App Runner and small EC2/container comparison, monthly planning envelopes,
+founder-support gates and rollback triggers are maintained in
+[`architecture-cost-options.md`](architecture-cost-options.md).
+
+### New scale baseline and runtime split
+
+The scale model uses the founder inputs of 54 average requests/order, 90
+heavy-case requests/order, 50 orders/day/restaurant, 500 and 1,000
+restaurants, and 10/25/50/100% conversion sensitivities. The canonical
+formulas, 1x/5x/10x RPS bands, cost comparison and Stage 0/1/2 15-minute
+capacity gates are in
+[`architecture-cost-options.md`](architecture-cost-options.md).
+
+The gateway is intentionally stateless and lightweight: authenticate and
+verify, rate-limit, classify, enqueue and acknowledge only after durable queue
+acceptance. Conversation/state processing, provider fan-out, retries,
+reconciliation and workflow execution belong to idempotent workers behind the
+outbox/inbox and queue boundary. PostgreSQL is protected from per-hit gateway
+transactions through queue admission, cacheable published revisions, bounded
+worker concurrency and short module-scoped transactions; authoritative order,
+payment, permission, consent and reconciliation decisions still use
+PostgreSQL.
+
+Rate limits, backpressure, provider token buckets, retry/DLQ rules, connection
+pool allocation, safe-cache restrictions, restore gates and founder support
+replacement triggers are operating guardrails rather than production SLO
+claims. A two-gateway or 2x2-vCPU setup does not prove capacity; only the
+specified load tests and 15-minute signals can do that. Founder-only support
+fails at 500+ restaurants by default under the 24-hour/week ceiling unless
+automation or replacement support reduces manual work to the measured
+per-restaurant minute budget.
 
 ### LLD boundary
 
@@ -592,6 +579,70 @@ The cost, provider and founder-support alternatives are recorded in
 [`architecture-cost-options.md`](architecture-cost-options.md). That artifact
 is a comparison and validation aid, not a final provider decision.
 
+## Tiered capability boundary
+
+The **Tier Scope Decision (2026-09-21)** treats LITE, BASE and PRO as
+provisional entitlement experiments over the same deterministic domain
+capabilities. A tier gates commands, quotas, provider integrations and
+support cost; it must not create a second source of truth, a separate
+deployment, or AI authority over controlled business state.
+
+| Capability boundary | LITE | BASE | PRO |
+|---|---|---|---|
+| Core ordering | Menu display, bounded menu assistance and deterministic order capture/status | LITE plus validated cart/order and staff workflow | BASE plus approved advanced workflow/API surfaces |
+| Payment | **Out of scope**; no payment workflow or provider adapter | Direct merchant settlement through a validated payment adapter | Same settlement boundary plus approved advanced provider/API paths |
+| Fulfillment/delivery | **Out of scope**; no delivery workflow | Pickup plus delivery where a validated provider flow exists | BASE plus approved advanced delivery integrations |
+| Availability | **Out of scope**; no item-availability workflow or daily automation | Deterministic item availability controls in menu/cart/order validation | BASE plus approved availability integrations |
+| Promotions/combos | **Out of scope** | Basic bounded controls; maximum 3 requests/day with short-lived activation | Advanced bounded workflows under policy and measured quota |
+| Conversational scope | Limited menu assistance and order capture; no operations automation claim | Bounded menu, order, payment and delivery tasks | Broader bounded conversational tasks and advanced API integrations; never unrestricted AI authority |
+
+The tier is an authorization/entitlement input at the trusted command
+boundary, not a hint to the model. LITE absence means the corresponding
+commands, state transitions, provider calls and UI actions are unavailable,
+not merely hidden. BASE and PRO still require provider capability, tenant
+configuration, policy approval and operational evidence before activation.
+“Full access” in PRO means full access to the explicitly allowed product
+surface only: AI remains non-authoritative and cannot commit order, payment,
+refund, delivery, availability, promotion, combo, permission or consent state.
+
+All tiers use deterministic, separately owned state machines. Order state is
+never inferred from payment or delivery state:
+
+```text
+Order:      DRAFT -> SUBMITTED -> ACCEPTED/REJECTED
+            ACCEPTED -> PREPARING -> READY -> COMPLETED
+Payment:    NOT_APPLICABLE (LITE)
+            PENDING -> AUTHORIZED/PAID -> FAILED
+            PAID -> REFUND_PENDING -> REFUNDED
+Fulfillment: NOT_APPLICABLE (LITE)
+             PICKUP: READY_FOR_PICKUP -> COMPLETED
+             DELIVERY: REQUESTED -> ASSIGNED -> IN_TRANSIT -> DELIVERED
+```
+
+Each transition is authorized, policy-checked, idempotent and recorded with
+tenant/branch, tier, actor/mode, correlation and causation context. Delivery
+and payment states may be absent in LITE; they must not be represented as
+successful, and payment completion never implies order acceptance. Human
+takeover is first-class in every tier and pauses conversational automation
+without pausing authoritative order, payment or fulfillment processing.
+
+Menu updates, promotion/combo requests and API calls are policy inputs rather
+than client claims: LITE permits at most three menu updates per month and no
+promotion/combo workflow; BASE permits basic promotion/combo requests up to
+three per day, each active for one day or another configured short period;
+PRO uses approved measured limits. Provider/account limits, rate limits and
+backpressure remain binding even when a tier quota is higher. Promotions,
+combos, payment, fulfillment and availability remain owned by their domain
+capabilities, not billing, AI or the gateway.
+
+This is an internal architecture implication of the provisional matrix, not a
+provider approval, payment/delivery contract, final deployment choice or
+public pricing decision. [Tier Scope Decision (2026-09-21); Raw T21
+`bbb21b01-c1d5-42f9-9e1f-702bb346453c`; Raw T35
+`97f25c92-127f-4c8c-bde9-c314010cbef7`; Raw T410
+`bbb21914-7687-4f6e-848a-30e1e7e850f8`; `product-definition.md`;
+`domain-model.md`; `architecture-cost-options.md`]
+
 ## Payment custody boundary
 
 Customer order money should flow directly to the business through supported
@@ -651,6 +702,10 @@ These align with the MVP boundary and the founder's explicit intent that the pro
 - production SLOs, capacity thresholds, disaster recovery and cost model;
 - observability signal ownership, telemetry retention/sampling and support
   alert thresholds;
+- object-storage retention/export format, CDN use and access-control
+  boundaries;
+- secret-store/key ownership, MFA/recovery access, CI/CD promotion controls
+  and rollback evidence;
 - exact AWS credits, service rates, Meta/BSP/payment rates, tax treatment and
   legal approvals;
 - exact promotion stacking, tax/rounding, delivery/tracking and reconciliation rules;

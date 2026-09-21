@@ -154,12 +154,29 @@ For each restaurant-month, record:
 
 | Field | Required record |
 |---|---|
-| Experiment label and rate | LITE ₹4,999, BASE ₹9,999 or PRO ₹19,999 before GST; tolerance and any approved deviation |
-| Scope | Information/menu/basic WhatsApp, pickup/order/human takeover, or advanced API/richer automation scope actually tested |
-| Cost stack | Variable/provider/API, support minutes, AI/model/provider units, onboarding effort, PRO integration-maintenance reserve and shared-infrastructure allocation |
+| Experiment label and rate | LITE ₹4,999, BASE ₹9,999 or PRO ₹19,999 before GST; ±15% planning tolerance, tolerance case and any approved deviation |
+| Scope | Exact capability matrix row exercised: LITE menu/order only; BASE menu/order/payment/delivery with availability and basic time-bounded promotions; PRO full bounded access plus approved advanced APIs |
+| Entitlement guardrails | LITE menu updates (≤3/month) and excluded workflows; BASE promotion/combo requests (≤3/day) and active duration; PRO integration permissions, rate/failure budgets and audit references |
+| Usage/state | Menu updates, availability toggles, promotion requests/active windows, order/payment/delivery attempts and deterministic state transitions |
+| Cost stack | Variable/provider/API, payment/delivery fees where enabled, support minutes by category, AI/model/provider units, onboarding effort, integration-maintenance reserve and shared-infrastructure allocation |
 | Restaurant value | Baseline and observed ROI, avoided channel cost, staff time, errors and incremental gross profit |
 | Commercial outcome | Conversion, objections, continuation/renewal response and reason for non-continuation |
 | Economic outcome | Cash contribution, economic contribution, recognized income treatment and assumptions version |
+
+The `3 LITE / 4 BASE / 3 PRO` pilot sensitivity is an internal experiment
+allocation, not a required enrollment mix or a public package decision:
+
+| Cohort field | Sensitivity |
+|---|---:|
+| LITE / BASE / PRO count | 3 / 4 / 3 |
+| Monthly gross billing before GST at list rates | ₹1,14,990 |
+| Weighted ARPU before GST | ₹11,499 |
+| Gross 90-day billing before GST | ₹3,44,970 |
+| -15% / +15% monthly gross billing sensitivity | ₹97,740 / ₹1,32,240 |
+
+Report the sensitivity alongside actual enrollment, actual scope, usage,
+support, AI/API cost and contribution. Do not infer performance from the
+allocation or treat a missing usage/rate field as zero.
 
 The shared-infrastructure sensitivity is `₹42,500 / N`, with reference
 allocations of approximately ₹4,250 at `N=10`, ₹850 at `N=50`, ₹425 at

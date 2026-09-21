@@ -13,9 +13,11 @@ sources:
   - docs/products/babai/architecture-lld.md
   - docs/products/babai/architecture-boundaries.md
   - docs/products/babai/brd.md
+  - docs/products/babai/tier-feasibility-matrix.md
   - docs/products/babai/business-model.md
   - docs/products/babai/validation.md
   - docs/company/founders-ownership-governance.md
+  - "Tier scope decision (2026-09-21; current task input)"
 ---
 
 # BABAI Architecture Cost Options
@@ -48,6 +50,42 @@ No table below constitutes vendor approval, Meta approval, a payment-provider
 selection, a production SLO, or a claim that any control is already
 implemented. [Admin Decision Packet (2026-09-20); `architecture.md`;
 `architecture-lld.md`; `architecture-boundaries.md`]
+
+## Provisional LITE / BASE / PRO cost and operating implications
+
+The tier matrix is an internal scope experiment, not a public price or final
+entitlement contract. It must be implemented through policy and adapter
+boundaries in the modular monolith; it must not create one deployment,
+database or provider account per tier.
+
+| Cost/operating surface | LITE | BASE | PRO |
+|---|---|---|---|
+| Provider pass-through | WhatsApp/channel and any enabled menu transport only; no payment/delivery provider workflow | Payment and delivery fees only where validated; direct merchant settlement remains separate from BABAI billing | Same plus approved advanced API/provider pass-throughs |
+| Menu/promotion/combo usage | Menu updates capped at 3/month; no promotion/combo usage | Basic promotion/combo requests capped at 3/day, each active one day or a configured short period; menu limits measured and approved | Higher limits only with measured provider/API/support capacity and approval |
+| AI/API cost | Limited menu/order assistance, attributed per tenant and interaction | Bounded menu/order/payment/delivery assistance, with API and provider calls attributed separately | Advanced allowlisted conversational/API tasks; model, API, provider and human-review cost must be separately attributed |
+| Support cost | Human takeover available; no operations-automation promise | Takeover, payment/delivery exceptions and reconciliation are explicit support drivers | Integration failures, advanced task review, quotas and reconciliation require additional support attribution |
+
+Cost attribution must retain pre-credit and post-credit infrastructure views
+and separate shared platform cost from tenant/tier-variable usage. Emit
+records keyed by `tenantId`, `branchId`, `tier`, `capability`,
+`providerOrModelRef`, `automationMode`, `humanTakeover`, quantity/duration,
+outcome, deployment version and assumptions version. At minimum, report
+runtime/database/queue, provider, payment, delivery, AI/API, support/takeover,
+reconciliation, refund/failure and restore/recovery classes separately.
+Provider throttling, quota rejection, retries, DLQ and human intervention are
+cost-bearing outcomes, not zeros.
+
+“Full access” in PRO must not be translated into unrestricted AI or unlimited
+provider usage. AI remains a non-authoritative proposer; deterministic order,
+payment, fulfillment, availability, promotion, combo, permission and consent
+services plus authorized humans own controlled state. Outbox/inbox,
+idempotency and reconciliation remain required for every enabled external
+workflow, including BASE payment/delivery and PRO advanced integrations.
+
+No tier row approves a provider, Meta onboarding, payment contract, delivery
+contract, model, rate, AWS service or final deployment topology. Revisit limits
+after measured pilot usage, provider terms, support effort, failure/recovery
+evidence and legal/accounting review.
 
 ## Recommended pilot posture and decision record
 

@@ -8,6 +8,7 @@ sources:
   - nekurama.babai.research.md
   - "2026-09-21 FOUNDER DECISION PACKET"
   - "2026-09-21 FOUNDER SCALE/COST BASELINE (current task input)"
+  - "2026-09-21 FOUNDER ECONOMIC TARGET CLARIFICATION (current task input)"
 ---
 
 # Validation / Pilot
@@ -49,8 +50,9 @@ request classification, latency/error/retry, support minutes, incidents and
 cost categories for one business. Stage 1 repeats those measures per
 restaurant across the 10%/25%/50%/100% conversion sensitivities. Stage 2
 reviews the 500-restaurant goal against the supplied 1,000-restaurant
-reference envelope, support/incident load and the ₹25L monthly-versus-annual
-income-unit sensitivity.
+reference envelope, support/incident load and both economics views: the prior
+unresolved ₹25L income-unit sensitivity and the separate clarified ₹25L
+monthly operating-profit target after non-founder operating costs.
 
 These are evidence references only. They do not set an infrastructure,
 provider, Meta/BSP, AI model, queue, database, storage or logging choice.
@@ -91,7 +93,11 @@ fulfillment, manual human takeover and no delivery dependency. [Evidence:
 
 Margin must be reported as recognized income against **total attributable
 expenditure**, including cash costs, onboarding/support effort, tooling,
-failure/refund/remediation cost and other attributable pilot expenditure. See
+failure/refund/remediation cost and other attributable pilot expenditure. The
+clarified ₹25L target is a monthly **business operating-profit** planning
+trigger after non-founder operating costs plus a separately modelled founder
+transition cost; it is not a contribution-margin percentage and does not
+replace the pilot contribution metric. See
 [`economics-model.md`](economics-model.md); do not report a
 variable-cost-only margin as the decision metric.
 
@@ -128,6 +134,9 @@ active order sessions, recurring combined Manoj/Vinay support of no more than
 non-negative base contribution at the proposed 40% sensitivity, and zero
 unresolved safety, privacy or payment-integrity exception. The minimum samples
 and hold conditions are maintained in [`pilot-metrics.md`](pilot-metrics.md).
+The ₹25L monthly operating-profit target is not a Stage 0/1/2 pass threshold;
+the 500/1,000-restaurant table is an internal planning trigger and readiness
+input only.
 
 ## Success / kill criteria — proposed, pending founder/team approval
 

@@ -16,6 +16,7 @@ sources:
   - nekurama.chatgpt.md:L48218-L48228
   - "2026-09-20 ADMIN DECISION PACKET"
   - "2026-09-21 FOUNDER DECISION PACKET"
+  - "2026-09-21 FOUNDER ECONOMIC TARGET CLARIFICATION (current task input)"
   - "2026-09-21 ECONOMICS MODEL REVIEW PACKET"
   - "2026-09-21 FOUNDER SCALE/COST BASELINE (current task input)"
 ---
@@ -360,12 +361,13 @@ calendar-day divisor, incident rate and CAC amortization period are
 **unknown** until measured or contracted. Customer-order payment and delivery
 remain pass-through unless an approved agreement says BABAI absorbs them.
 
-#### Income trigger and unit sensitivity
+#### Prior ₹25L income-trigger wording — remains unresolved
 
-The founder goal is to model progress through **500 restaurants or a ₹25L+
-income trigger**. The unit of the ₹25L trigger was not supplied; monthly and
-annual interpretations are therefore explicit sensitivities, not an invented
-decision. `c` below is the WhatsApp conversion sensitivity and `S` is the
+The earlier founder wording described progress through **500 restaurants or a
+₹25L+ income trigger**. The unit of that income trigger was not supplied;
+monthly and annual interpretations below remain explicit sensitivities, not an
+invented decision. This is **not** the clarified ₹25L monthly operating-profit
+target added below. `c` is the WhatsApp conversion sensitivity and `S` is the
 recognized income per active restaurant in the selected unit. Conversion is a
 traffic sensitivity, not an assumption that the number of active restaurants
 changes.
@@ -384,12 +386,165 @@ restaurants_trigger = ₹25L / S_(selected_unit)
 | 50% | 12,500 | ₹5,000 / active restaurant / month | ₹5,000 / active restaurant / year | `₹25L / (12,500 × calendar_days)` |
 | 100% | 25,000 | ₹5,000 / active restaurant / month | ₹5,000 / active restaurant / year | `₹25L / (25,000 × calendar_days)` |
 
-If the trigger is monthly, ₹25L/month is ₹3Cr/year only under a sustained
-12-month run-rate assumption. If it is annual, the equivalent monthly
-run-rate is approximately ₹2.083L/month. Both are **derived planning
-sensitivities**; the founder must choose the accounting income unit and
-recognition treatment, active-restaurant count and any order-linked pricing
-rule before using the trigger. `calendar_days` and `S_order` are **unknown**.
+If the prior trigger is monthly, ₹25L/month is ₹3Cr/year only under a
+sustained 12-month run-rate assumption. If it is annual, the equivalent
+monthly run-rate is approximately ₹2.083L/month. Both are **derived planning
+sensitivities**; the prior trigger still needs a decision on accounting
+income unit and recognition treatment, active-restaurant count and any
+order-linked pricing rule. `calendar_days` and `S_order` are **unknown**.
+
+#### Founder economic target clarification — internal planning trigger
+
+The current founder clarification defines a separate internal planning
+trigger: **₹25,00,000 monthly operating profit after non-founder operating
+costs**. It is a business target for scenario work, **not a forecast,
+guarantee, approved price, approved margin, or pilot success threshold**. The
+full-time transition is a separate founder compensation/transition cost:
+This clarification is recorded from the current founder packet and scale
+baseline; the product boundary and direct merchant-money flow remain anchored
+in `nekurama.raw.chat.json:L192-L205` and `L79721-L79820`, and the required
+cost evidence remains the field-research list at
+`nekurama.babai.research.md:L145-L163`.
+
+| Case | Founder transition cost per month | Treatment |
+|---|---:|---|
+| **A — one founder full-time** | **₹5,00,000** | All-in salary plus operational cost; internal planning assumption |
+| **B — both founders full-time** | **₹10,00,000** | All-in salary plus operational cost; internal planning assumption unless later changed |
+
+The required formula is:
+
+```text
+monthly_revenue_target
+  = non_founder_operating_expenditure
+  + founder_transition_cost
+  + ₹25,00,000 target operating profit
+```
+
+When subscription collection and BABAI refund/credit reserves are modelled as
+revenue-linked costs, the equivalent solved form is:
+
+```text
+R = O_non_founder_fixed + F_transition + ₹25,00,000
+    + R × (p_sub + q_refund)
+
+R = (O_non_founder_fixed + F_transition + ₹25,00,000)
+    / (1 - p_sub - q_refund)
+
+business_operating_profit
+  = recognized BABAI revenue
+  - non-founder operating expenditure
+  - founder transition cost
+```
+
+The target case sets `business_operating_profit = ₹25,00,000/month`. This is
+separate from:
+
+```text
+cash_contribution
+economic_contribution
+economic_contribution_rate
+founder compensation / transition cost
+```
+
+The target is **not** a percentage contribution margin. Customer-order GMV,
+merchant payment fees, restaurant value/ROI and pass-through delivery costs
+remain outside BABAI revenue unless an approved contract says otherwise.
+
+##### Quantified planning basis for the scenario tables
+
+The tables use the existing **base advisory** planning reference only to make
+the arithmetic reproducible. It is not approved pricing or a forecast. The
+quantified non-founder cost floor includes the existing scale-curve shared
+hosting/tooling allocation, Meta/provider/retry cost, advisory AI usage and
+the existing **cash CAC** reference amortized over the existing 12-month
+planning lifetime. Revenue-linked collection and refund reserves use the
+existing 2% + 2% planning inputs.
+
+```text
+O_non_founder_fixed(N)
+  = ₹70,000 / 12
+  + N × (
+      ₹170.41 Meta
+      + ₹318.75 provider/BSP
+      + ₹14.67 retry reserve
+      + ₹185.92 advisory AI
+      + ₹4,000 / 12 cash CAC amortization
+    )
+```
+
+| Cohort | `O_non_founder_fixed(N)` before revenue-linked costs | Revenue-linked planning costs | Scenario treatment |
+|---:|---:|---:|---|
+| 500 restaurants | **₹5,17,375/month** | `p_sub + q_refund = 2% + 2% = 4% of R` | Quantified planning floor; rounded display |
+| 1,000 restaurants | **₹10,28,917/month** | `p_sub + q_refund = 2% + 2% = 4% of R` | Quantified planning floor; rounded display |
+
+The floor does **not** silently price unknown storage/logging/queue/DB,
+delivery absorbed by BABAI, direct onboarding cash, staffed non-founder
+support, provider minimums/FX, or model/rate changes. Those remain separate
+cost buckets and must be added to `O_non_founder_fixed` when actual invoices,
+exports or approved planning rates exist. Founder onboarding and support time
+remain economic-cost ledger fields; they are not silently relabelled as
+founder salary or folded into the transition cost.
+
+For auditability, the existing base economic-cost references remain visible:
+120 recurring support minutes are ₹2,000 of founder opportunity cost per
+restaurant/month, 240 onboarding minutes amortized over 12 months are ₹333.33
+per restaurant/month, and economic CAC is ₹7,000 per acquired restaurant
+against the ₹4,000 cash-CAC reference used in the floor. These are not
+additional founder-transition costs and are not silently treated as
+non-founder cash expenditure.
+
+##### Case A — one founder full-time
+
+| Restaurants | WhatsApp conversion of 50-order ceiling | Completed orders/day | `O_non_founder_fixed` | Founder transition | Target operating profit | Required monthly revenue `R` | Implied price / active restaurant / month | Support-capacity implication |
+|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| 500 | 10% | 2,500 | ₹5,17,375 | ₹5,00,000 | ₹25,00,000 | **₹36,63,932** | **₹7,328** | 1,000 base support h/mo; 500–2,500 h/mo at low–high planning bands |
+| 500 | 25% | 6,250 | ₹5,17,375 | ₹5,00,000 | ₹25,00,000 | **₹36,63,932** | **₹7,328** | Same support load; conversion changes traffic, not subscription target |
+| 500 | 50% | 12,500 | ₹5,17,375 | ₹5,00,000 | ₹25,00,000 | **₹36,63,932** | **₹7,328** | Same support load; conversion changes traffic, not subscription target |
+| 500 | 100% | 25,000 | ₹5,17,375 | ₹5,00,000 | ₹25,00,000 | **₹36,63,932** | **₹7,328** | Same support load; 25,000 orders/day is the full planning envelope |
+| 1,000 | 10% | 5,000 | ₹10,28,917 | ₹5,00,000 | ₹25,00,000 | **₹41,96,788** | **₹4,197** | 2,000 base support h/mo; 1,000–5,000 h/mo at low–high planning bands |
+| 1,000 | 25% | 12,500 | ₹10,28,917 | ₹5,00,000 | ₹25,00,000 | **₹41,96,788** | **₹4,197** | Same support load; conversion changes traffic, not subscription target |
+| 1,000 | 50% | 25,000 | ₹10,28,917 | ₹5,00,000 | ₹25,00,000 | **₹41,96,788** | **₹4,197** | Same support load; conversion changes traffic, not subscription target |
+| 1,000 | 100% | 50,000 | ₹10,28,917 | ₹5,00,000 | ₹25,00,000 | **₹41,96,788** | **₹4,197** | Same support load; 50,000 orders/day is the full planning envelope |
+
+##### Case B — both founders full-time
+
+| Restaurants | WhatsApp conversion of 50-order ceiling | Completed orders/day | `O_non_founder_fixed` | Founder transition | Target operating profit | Required monthly revenue `R` | Implied price / active restaurant / month | Support-capacity implication |
+|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| 500 | 10% | 2,500 | ₹5,17,375 | ₹10,00,000 | ₹25,00,000 | **₹41,84,766** | **₹8,370** | 1,000 base support h/mo; 500–2,500 h/mo at low–high planning bands |
+| 500 | 25% | 6,250 | ₹5,17,375 | ₹10,00,000 | ₹25,00,000 | **₹41,84,766** | **₹8,370** | Same support load; conversion changes traffic, not subscription target |
+| 500 | 50% | 12,500 | ₹5,17,375 | ₹10,00,000 | ₹25,00,000 | **₹41,84,766** | **₹8,370** | Same support load; conversion changes traffic, not subscription target |
+| 500 | 100% | 25,000 | ₹5,17,375 | ₹10,00,000 | ₹25,00,000 | **₹41,84,766** | **₹8,370** | Same support load; 25,000 orders/day is the full planning envelope |
+| 1,000 | 10% | 5,000 | ₹10,28,917 | ₹10,00,000 | ₹25,00,000 | **₹47,17,622** | **₹4,718** | 2,000 base support h/mo; 1,000–5,000 h/mo at low–high planning bands |
+| 1,000 | 25% | 12,500 | ₹10,28,917 | ₹10,00,000 | ₹25,00,000 | **₹47,17,622** | **₹4,718** | Same support load; conversion changes traffic, not subscription target |
+| 1,000 | 50% | 25,000 | ₹10,28,917 | ₹10,00,000 | ₹25,00,000 | **₹47,17,622** | **₹4,718** | Same support load; conversion changes traffic, not subscription target |
+| 1,000 | 100% | 50,000 | ₹10,28,917 | ₹10,00,000 | ₹25,00,000 | **₹47,17,622** | **₹4,718** | Same support load; 50,000 orders/day is the full planning envelope |
+
+The revenue and price cells are repeated across conversion sensitivities
+because this table assumes subscription revenue per active restaurant. If an
+approved order-linked charge is introduced, use the separate
+`order_linked_income` formula above and do not mix it into the subscription
+price column.
+
+##### Support-capacity implication
+
+At the existing base planning input of **120 recurring support minutes per
+restaurant/month**, 500 restaurants require 60,000 minutes / **1,000
+support-hours per month** and 1,000 restaurants require 120,000 minutes /
+**2,000 support-hours per month**. The low/high 60/300-minute bands produce
+500–2,500 hours and 1,000–5,000 hours respectively. These are workload
+implications, not staffing commitments or a claim that the founders can
+provide the service.
+
+The existing founder-only operating guardrail is 10 planned founder-hours per
+week and a 14-hour combined hard cap. Using `52 / 12` weeks per month, that
+is approximately 43.3 planned hours and 60.7 hard-cap hours per month. Base
+support at 500 restaurants is therefore about 23× the planned monthly
+founder envelope; at 1,000 it is about 46×. Non-founder support staffing,
+automation, provider escalation and a revised service design are required
+before treating either cohort as operationally admissible. Their rates and
+headcount are **unknown**, so they are not hidden inside the revenue output.
+[Capacity source: `docs/products/babai/architecture-cost-options.md`,
+“Founder-only support operations”.]
 
 #### Support and incident load at scale
 

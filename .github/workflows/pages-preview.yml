@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   deploy:
-    if: github.ref == 'refs/heads/nekurama/babai-feature'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -24,7 +24,7 @@ jobs:
       - name: Check out the committed preview source
         uses: actions/checkout@v4
         with:
-          ref: nekurama/babai-feature
+          ref: main
           persist-credentials: false
 
       - name: Set up Node.js

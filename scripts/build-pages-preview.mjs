@@ -13,8 +13,22 @@ const expectedSourceSha = skipSourceCheck
   : process.env.PAGES_PREVIEW_SOURCE_SHA ||
     "a438b9203c016e492a2cd9628037bf88584a8bf1";
 const sourceFiles = ["index.html", "styles.css", "script.js", "mock-data.json"];
-const outputFiles = ["favicon.svg", ...sourceFiles];
-const deploymentFiles = [".github/workflows/pages-preview.yml", "scripts/build-pages-preview.mjs"];
+const prototypePages = [
+  {
+    source: "docs/products/babai/pro-operations-prototype.html",
+    output: "pro/index.html",
+  },
+  {
+    source: "docs/products/babai/restaurant-whatsapp-prototype.html",
+    output: "whatsapp/index.html",
+  },
+];
+const outputFiles = ["favicon.svg", ...sourceFiles, ...prototypePages.map(({ output }) => output)];
+const deploymentFiles = [
+  ".github/workflows/pages-preview.yml",
+  "scripts/build-pages-preview.mjs",
+  ...prototypePages.map(({ source }) => source),
+];
 
 const git = (...args) =>
   execFileSync("git", args, { cwd: root, encoding: "utf8" }).trim();
@@ -25,7 +39,7 @@ const assert = (condition, message) => {
   }
 };
 
-const assertLocalReferences = async (html) => {
+const assertLocalReferences = async (html, baseDir = outputDir) => {
   const references = [...html.matchAll(/(?:href|src)="([^"]+)"/g)]
     .map(([, reference]) => reference)
     .filter(
@@ -37,7 +51,7 @@ const assertLocalReferences = async (html) => {
     );
 
   for (const reference of references) {
-    const target = path.resolve(outputDir, reference.split(/[?#]/, 1)[0]);
+    const target = path.resolve(baseDir, reference.split(/[?#]/, 1)[0]);
     assert(target.startsWith(`${outputDir}${path.sep}`), `Unsafe reference: ${reference}`);
     await stat(target);
   }
@@ -65,6 +79,17 @@ const sanitizeStyles = (styles) =>
     .split("\n")
     .filter((line) => !line.includes("candidate-"))
     .join("\n");
+
+const sanitizePrototypeHtml = (html) => html.replaceAll('href="../../../favicon.svg"', 'href="../favicon.svg"');
+
+const assertStaticBoundary = (html) => {
+  assert(
+    !/https?:\/\/|XMLHttpRequest|WebSocket|sendBeacon|EventSource|localStorage|sessionStorage|document\.cookie/.test(
+      html,
+    ),
+    "Prototype contains an external or persistent browser boundary",
+  );
+};
 
 const main = async () => {
   const head = git("rev-parse", "HEAD");
@@ -106,6 +131,7 @@ const main = async () => {
     !/fetch\s*\((?!\s*["']mock-data\.json["'])/.test(script),
     "Site code contains a non-local data request",
   );
+  assertStaticBoundary(html);
 
   await rm(outputDir, { recursive: true, force: true });
   await mkdir(outputDir, { recursive: true });
@@ -114,6 +140,16 @@ const main = async () => {
   await cp(path.join(root, "script.js"), path.join(outputDir, "script.js"));
   await cp(path.join(root, "mock-data.json"), path.join(outputDir, "mock-data.json"));
   await writeFile(path.join(outputDir, "favicon.svg"), favicon);
+  for (const prototype of prototypePages) {
+    const prototypeHtml = sanitizePrototypeHtml(
+      await readFile(path.join(root, prototype.source), "utf8"),
+    );
+    assertStaticBoundary(prototypeHtml);
+    const outputPath = path.join(outputDir, prototype.output);
+    await mkdir(path.dirname(outputPath), { recursive: true });
+    await writeFile(outputPath, prototypeHtml);
+    await assertLocalReferences(prototypeHtml, path.dirname(outputPath));
+  }
 
   const outputListing = execFileSync("find", [outputDir, "-type", "f", "-printf", "%P\n"], {
     cwd: root,

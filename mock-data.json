@@ -1,0 +1,59 @@
+{
+  "mode": "mock-only",
+  "schemaVersion": 3,
+  "source": "invented deterministic local journey catalog",
+  "runtime": "Checked-in QA fixture; script.js uses inline state and never fetches this file.",
+  "resetBehavior": "Return to Invite and BASE; never persist or transmit values.",
+  "pilotReadiness": {
+    "marker": "90-day paid pilot / readiness review",
+    "status": "internal mock marker only",
+    "legalText": false
+  },
+  "pricingExperiment": {
+    "status": "proposed pilot pricing / internal experiment",
+    "currency": "INR",
+    "tax": "pre-GST",
+    "tolerance": "±15%",
+    "tiers": {
+      "LITE": "₹4,999",
+      "BASE": "₹9,999",
+      "PRO": "₹19,999"
+    },
+    "boundaries": {
+      "LITE": {
+        "allow": ["menu review", "order capture", "human escalation"],
+        "deny": ["payment flow", "delivery flow"],
+        "gated": ["pricing and entitlement approval"]
+      },
+      "BASE": {
+        "allow": ["menu/order review", "pickup illustration", "team coordination"],
+        "deny": ["unrestricted AI action"],
+        "gated": ["payment/provider path", "delivery provider path"]
+      },
+      "PRO": {
+        "allow": ["advanced control review", "governance placeholder", "provider recovery illustration"],
+        "deny": ["unrestricted AI action", "unbounded automation"],
+        "gated": ["payment/reconciliation provider", "delivery/API provider"]
+      }
+    }
+  },
+  "stages": [
+    "admin-onboarding",
+    "owner-setup",
+    "customer-discovery",
+    "cart-order-review",
+    "payment-fulfillment",
+    "restaurant-order-desk",
+    "human-takeover",
+    "notifications-recovery"
+  ],
+  "boundary": [
+    "no forms",
+    "no auth",
+    "no payments",
+    "no customer records",
+    "no backend",
+    "no network calls",
+    "no public claims"
+  ]
+}

@@ -471,8 +471,9 @@ claim until the commercial, tax, payment and approval gates are closed:
 | BASE | ₹5,999 pilot / ₹7,499 post-pilot |
 | PRO | ₹12,999 pilot / ₹14,999 post-pilot |
 
-The requested **3 / 4 / 3 sensitivity** means three LITE, four BASE and three
-PRO subscriptions (10 restaurants) held for three months. Before discounts,
+The requested **3 / 4 / 3 sensitivity** is a planning model of three LITE,
+four BASE and three PRO subscriptions held for three months. It is not a
+simultaneous founder-supported enrollment promise. Before discounts,
 GST treatment, refunds or subsidies:
 
 | Scenario | Monthly revenue | 90-day revenue | ±15% realization/volume variance |

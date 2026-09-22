@@ -78,4 +78,18 @@ Partial or unknown areas should be recorded as questions rather than invented.
 - [`economics-model.md`](economics-model.md) — total-expenditure versus income model
 - [`validation.md`](validation.md) — pilot evidence and external-validation boundary
 - [`pilot-metrics.md`](pilot-metrics.md) — proposed scorecard and team-defined readiness evidence gate
+- [`end-to-end-architecture.md`](end-to-end-architecture.md) — HLD/LLD handoff, hybrid evolution path, Pro UI contracts and runtime boundaries
+- [`technical-requirements.md`](technical-requirements.md) — technical requirements, non-functional requirements, capacity, security and acceptance gates
+- [`overnight-review.md`](overnight-review.md) — overnight packet index, hybrid decision, open gaps and review checklist
+- [`test-and-validation-plan.md`](test-and-validation-plan.md) — state, provider, AI, recovery, load, browser and pilot validation plan
+- [`operations-runbook.md`](operations-runbook.md) — incident, recovery, reconciliation, restore and cost/enrollment controls
+- [`schema-and-migration-plan.md`](schema-and-migration-plan.md) — PostgreSQL ownership, indexes, migrations, retention, outbox/inbox and scale triggers
+- [`api-contracts.md`](api-contracts.md) — webhook, BFF/query/command, error, freshness, auth and versioning contracts
+- [`events-catalog.md`](events-catalog.md) — bounded-context event registry, envelope, idempotency and replay rules
+- [`runtime-and-ai-architecture.md`](runtime-and-ai-architecture.md) — runtime topology, cost model, AI routing and workflow-engine decision
+- [`pro-operations-ux.md`](pro-operations-ux.md) — WhatsApp card rules and high-volume Pro operations UX
+- [`pro-operations-prototype.html`](pro-operations-prototype.html) — standalone HTML cockpit prototype for dense restaurant operations
+- [`restaurant-whatsapp-prototype.html`](restaurant-whatsapp-prototype.html) — owner/staff-scoped WhatsApp card and mirrored temporary-channel mock
+- [`sdlc-standard.md`](sdlc-standard.md) — human/bot coding, review, testing and release standard
+- [`contract-controls.md`](contract-controls.md) — restaurant/business e-contract control surface and professional gates
 - [`../../execution/oct-dec-plan.md`](../../execution/oct-dec-plan.md) — October–December quality-first execution plan

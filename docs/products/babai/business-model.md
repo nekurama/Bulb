@@ -18,9 +18,10 @@ sources:
 BABAI remains the current product under NEKURAMA, and **“BABAI — Business
 Automation by AI”** remains founder-approved wording. Historical Tadka, Thali,
 Dawat, Feast or similar labels are source evidence only; they are not current
-tiers, packages, entitlements or pilot variants. For a 10-restaurant pilot,
-use neutral **Pilot Variant A/B/C** labels or functional scope descriptions.
-These are internal test labels, not public pricing. [Current founder
+tiers, packages, entitlements or pilot variants. For the 10-restaurant
+validation sensitivity, use neutral **Pilot Variant A/B/C** labels or
+functional scope descriptions. These are internal test labels, not public
+pricing, and do not imply simultaneous enrollment. [Current founder
 correction: `2026-09-21 FOUNDER NAMING CORRECTION (current task input)`; raw
 history: `nekurama.raw.chat.json:L215-L216`; corroboration:
 `nekurama.chatgpt.md:L2432-L2685`]

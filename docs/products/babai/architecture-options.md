@@ -65,6 +65,12 @@ This recommendation does **not** select a cloud service, queue vendor,
 workflow engine, Meta partner, payment provider, support schedule or
 production SLO beyond the committed initial RPO/RTO baseline.
 
+The overnight architecture review refines the target into **hybrid
+evolution**: isolate gateway/BFF, provider/notification, workflow/
+reconciliation, AI-task and projection capacity before extracting
+tenant/catalog/order/payment domains. Extraction remains evidence-driven; this
+is not a commitment to microservices or Kubernetes.
+
 ## AWS managed runtime options
 
 | Option | Fit for the modular monolith | Credit/cost posture | Portability and risks | Status |

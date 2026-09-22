@@ -44,7 +44,11 @@ The repository must not turn “the CA is handling it,” “the application was
 2. After the certificate, complete the founder/shareholder and company adoption documents with CS/lawyer review before material contracts.
 3. Use the finance, incentive, provider, and account-control evidence to update this register and the relevant company checklist.
 
-See [`e-setup-checklist.md`](e-setup-checklist.md) for the broader transition checklist and [`README.md`](README.md) for company status conventions.
+See [`e-setup-checklist.md`](e-setup-checklist.md) for the broader transition
+checklist, [`README.md`](README.md) for company status conventions, and
+[`../products/babai/contract-controls.md`](../products/babai/contract-controls.md)
+for the BABAI customer/business contract packet and execution evidence
+requirements.
 
 ## Source notes
 

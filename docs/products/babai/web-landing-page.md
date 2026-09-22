@@ -68,7 +68,9 @@ The page may state that the business normally retains its own customer relations
 
 If the page mentions the beta, it must call it a **planned/current controlled validation gate**, not completed traction:
 
-- The first **10 restaurants** are the primary validation gate.
+- The first **10 restaurants** are the eventual validation hypothesis, not a
+  simultaneous enrollment promise; operate a controlled one-to-three-
+  restaurant cohort at a time and expand only after the readiness gate.
 - The initial boundary is one restaurant/tenant, one branch, and one WhatsApp channel per participating restaurant.
 - The pilot is founder-led and pickup-first.
 

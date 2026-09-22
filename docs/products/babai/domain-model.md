@@ -98,6 +98,12 @@ Still unresolved:
 
 The raw mapping records the research-stage instruction to define the State Engine contract and compare options before selecting an implementation; it explicitly does not lock Temporal or another product. [Raw T122 `0011555d-10c7-4dbc-aca8-2bf7c55d324b`; Raw T136 `09c90c51-c4ae-40a6-9bd8-aea16eaf3339`]
 
+The overnight design packet now provides the implementation candidate:
+flow-specific aggregate state machines remain authoritative, while a typed
+workflow port plus queue/outbox coordinates timers, retries, human waits and
+reconciliation. [`end-to-end-architecture.md`](end-to-end-architecture.md);
+[`runtime-and-ai-architecture.md`](runtime-and-ai-architecture.md)
+
 ### Tenant-scoped privacy and deletion
 
 - The canonical customer identity may be global, but the relationship, consent, conversation, order and operational data exposed to a business are always scoped through `TenantCustomer`.

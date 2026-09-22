@@ -51,6 +51,34 @@ evidence rather than an independently current decision source.
 
 This document uses those labels to avoid turning research discussion, assistant recommendations or candidate deployment shapes into decisions.
 
+## Overnight architecture packet
+
+The detailed review packet is split into focused artifacts:
+
+- [`end-to-end-architecture.md`](end-to-end-architecture.md) — system
+  context, module ownership, Pro UI command path, state machines, persistence,
+  security, evolution roadmap and hybrid deployment options.
+- [`events-catalog.md`](events-catalog.md) — bounded-context event registry,
+  envelope, idempotency, replay and projection rules.
+- [`runtime-and-ai-architecture.md`](runtime-and-ai-architecture.md) —
+  modular-monolith, hybrid and microservice comparison, runtime cost model,
+  AI routing and workflow-engine decision.
+- [`technical-requirements.md`](technical-requirements.md) — functional,
+  non-functional, capacity, security and acceptance requirements.
+- [`pro-operations-ux.md`](pro-operations-ux.md) — WhatsApp and
+  high-throughput Pro operations UX.
+- [`sdlc-standard.md`](sdlc-standard.md) and
+  [`contract-controls.md`](contract-controls.md) — coding/review standards
+  and contract/e-contract controls.
+- [`contracts.ts`](contracts.ts) and [`overnight-review.md`](overnight-review.md)
+  — code-ready command/event/port shapes and the review handoff.
+
+The architecture target is **hybrid evolution**, not “monolith forever”:
+keep domain transactions together initially, isolate workers/provider
+adapters/read-models early, and extract a domain service only when measured
+security, data ownership, scaling, provider-failure, lifecycle or operational
+ownership evidence justifies the distributed-systems cost.
+
 ## Committed starting posture
 
 The **Admin Decision Packet (2026-09-20)** establishes the implementation

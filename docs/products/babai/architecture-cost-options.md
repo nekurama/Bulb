@@ -51,6 +51,19 @@ selection, a production SLO, or a claim that any control is already
 implemented. [Admin Decision Packet (2026-09-20); `architecture.md`;
 `architecture-lld.md`; `architecture-boundaries.md`]
 
+### Overnight topology clarification
+
+The modular monolith remains the **pilot domain-transaction starting posture**.
+The target evolution is hybrid: keep domain modules and authoritative
+PostgreSQL transactions together while independently scaling or isolating the
+API/BFF, provider/notification workers, workflow/reconciliation workers,
+AI-task workers and projection/report workers. A domain microservice is a
+later extraction only when measured security, data ownership, independent
+scaling, provider-failure containment, lifecycle or operational ownership
+evidence justifies the added distributed-systems cost. See
+[`runtime-and-ai-architecture.md`](runtime-and-ai-architecture.md) and
+[`end-to-end-architecture.md`](end-to-end-architecture.md).
+
 ## Provisional LITE / BASE / PRO cost and operating implications
 
 The tier matrix is an internal scope experiment, not a public price or final
@@ -115,6 +128,26 @@ features until evidence justifies them. AWS credits may lower cash spend, but
 the true cost model must retain pre-credit cost, founder hours, provider
 pass-throughs and tax. Provider choices, credits, rates, legal approvals and
 production SLOs remain **unresolved/input-required**.
+
+### Cost-minimal alternative for evaluation
+
+The overnight public-pricing research adds a lower-cash-cost candidate:
+
+| Component | Candidate | Public planning reference |
+|---|---|---:|
+| Always-on application host | AWS Lightsail Linux | ~$5/month |
+| Managed Postgres | Neon Launch 0.25–0.5 CU | ~$22–$41/month with small storage/restore |
+| Durable queue | SQS Standard | ~$0–$2/month at low request volume |
+| Cache/rate limits | Upstash Redis PAYG | ~$0–$10/month initially |
+| Object storage | Cloudflare R2 | ~$0.015/GB-month plus operations |
+| Observability | Better Stack/Grafana free tier | $0 initially |
+
+This yields a rough **$27–$45/month** small-production baseline before Meta,
+AI, domain, taxes and unusual egress. It is not a replacement decision for
+the AWS ECS/Fargate candidate: a single Lightsail host is a single-host
+failure risk, Neon connection/wake behavior needs validation, and migration to
+two hosts or independently scaled ECS/Fargate workers must be rehearsed.
+Rebuild automation, external backups and restore testing are mandatory.
 
 ## Founder Decision Packet: recommended now / revisit when
 

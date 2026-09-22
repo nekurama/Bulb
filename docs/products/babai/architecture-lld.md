@@ -23,6 +23,15 @@ This is the low-level companion to `architecture.md` and
 `architecture-boundaries.md`. It records the implementation starting posture
 without collapsing logical domain boundaries into deployment boundaries.
 
+The overnight implementation handoff is
+[`end-to-end-architecture.md`](end-to-end-architecture.md), with canonical
+contracts in [`contracts.ts`](contracts.ts), events in
+[`events-catalog.md`](events-catalog.md), and runtime/AI decisions in
+[`runtime-and-ai-architecture.md`](runtime-and-ai-architecture.md). It
+narrows the workflow recommendation to typed flow-specific state machines plus
+queue/outbox orchestration, while retaining LangGraph/Temporal as replaceable
+later options rather than authorities.
+
 For AWS/provider/queue/database trade-offs, portability, continuity economics
 and founder-only support capacity, see `architecture-cost-options.md`. That file
 contains options and validation gates rather than additional implementation

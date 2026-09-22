@@ -58,6 +58,17 @@
       .empty { padding: 28px 14px; color: var(--muted); text-align: center; }
       .panel-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; }
       .panel { padding: 16px; }
+      .order[draggable="true"] { cursor: grab; }
+      .order.dragging { opacity: .45; }
+      .column.drop-target { outline: 3px dashed #536bff; outline-offset: -6px; }
+      .channel-bar, .chat-thread { display: grid; gap: 10px; }
+      .channel-bar { grid-template-columns: 1fr 1fr; margin-top: 14px; }
+      .chat-thread { max-height: 230px; overflow-y: auto; padding: 10px; background: var(--paper); border: 1px solid var(--line); }
+      .chat-message { max-width: 88%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); font-size: .82rem; }
+      .chat-message.outgoing { margin-left: auto; background: var(--lime); }
+      .chat-compose { display: flex; gap: 8px; }
+      .chat-compose input { flex: 1; min-width: 0; }
+      .scope-note { padding: 8px 10px; background: rgba(216,240,107,.3); color: var(--muted); font-size: .78rem; }
       @media (max-width: 980px) { .workspace { grid-template-columns: 1fr; } .columns { grid-template-columns: repeat(4, 250px); } }
       @media (max-width: 620px) { main { width: min(100% - 20px, 1500px); } header { flex-direction: column; } .panel-row { grid-template-columns: 1fr; } }
     </style>
@@ -81,6 +92,8 @@
         <input type="search" aria-label="Search order or customer" placeholder="Search order, customer or phone">
         <select aria-label="Filter by channel"><option>All channels</option><option>WhatsApp</option><option>Web</option></select>
         <select aria-label="Filter by branch"><option>Hyderabad / branch 1</option></select>
+        <select id="role-select" aria-label="Current operator role"><option value="owner">Owner / cashier</option><option value="staff1">Staff 1</option><option value="staff2">Staff 2</option><option value="staff3">Staff 3</option></select>
+        <select id="channel-select" aria-label="Channel to inspect"><option value="orders">Orders channel</option><option value="support-1042">Support · #1042</option><option value="staff-1-1048">Staff 1 · #1048</option></select>
         <button class="primary" type="button">Claim next support case</button>
         <span class="spacer"></span>
         <span class="freshness">Projection updated 12 seconds ago</span>
@@ -97,13 +110,13 @@
             <section class="column" data-queue="new" aria-labelledby="new-title">
               <header><strong id="new-title">NEW</strong><span class="count">3</span></header>
               <div class="order-list">
-                <article class="order selected" data-order-id="1048">
+                <article class="order selected" draggable="true" data-order-id="1048" data-assignee="owner">
                   <div class="order-top"><span class="order-id">#1048</span><span class="order-time">2m</span></div>
                   <strong>2 × Chicken Biryani · 1 × Paneer Tikka</strong>
                   <div class="order-meta"><span>WhatsApp · ₹780 paid</span><span class="chip">DELIVERY</span></div>
                   <div class="actions"><button type="button">Accept</button><button type="button">Reject</button></div>
                 </article>
-                <article class="order" data-order-id="1047">
+                <article class="order" draggable="true" data-order-id="1047" data-assignee="owner">
                   <div class="order-top"><span class="order-id">#1047</span><span class="order-time">4m</span></div>
                   <strong>1 × Family Combo</strong>
                   <div class="order-meta"><span>WhatsApp · payment pending</span><span class="chip warn">PAYMENT</span></div>
@@ -114,7 +127,7 @@
             <section class="column" data-queue="support" aria-labelledby="support-title">
               <header><strong id="support-title">NEEDS SUPPORT</strong><span class="count">1</span></header>
               <div class="order-list">
-                <article class="order" data-order-id="1042">
+                <article class="order" draggable="true" data-order-id="1042" data-assignee="staff1">
                   <div class="order-top"><span class="order-id">#1042</span><span class="order-time">11m</span></div>
                   <strong>Starter replacement · ₹100 pending</strong>
                   <div class="order-meta"><span>Customer waiting</span><span class="chip warn">STAFF 1</span></div>
@@ -125,7 +138,7 @@
             <section class="column" data-queue="preparing" aria-labelledby="prep-title">
               <header><strong id="prep-title">PREPARING</strong><span class="count">5</span></header>
               <div class="order-list">
-                <article class="order" data-order-id="1039">
+                <article class="order" draggable="true" data-order-id="1039" data-assignee="kitchen">
                   <div class="order-top"><span class="order-id">#1039</span><span class="order-time">8m</span></div>
                   <strong>3 × Rice Bowl · 2 × Drinks</strong>
                   <div class="order-meta"><span>Kitchen started</span><span class="chip">PAID</span></div>
@@ -136,7 +149,7 @@
             <section class="column" data-queue="ready" aria-labelledby="ready-title">
               <header><strong id="ready-title">READY / DELIVERY</strong><span class="count">3</span></header>
               <div class="order-list">
-                <article class="order" data-order-id="1038">
+                <article class="order" draggable="true" data-order-id="1038" data-assignee="delivery">
                   <div class="order-top"><span class="order-id">#1038</span><span class="order-time">3m</span></div>
                   <strong>Pickup code 4821</strong>
                   <div class="order-meta"><span>Partner assigned</span><span class="chip">OUT</span></div>
@@ -173,6 +186,18 @@
           <div class="detail-section state-box stale">
             <strong>Projection freshness</strong>
             <p class="muted">This view is 12 seconds old. Writes re-check authoritative order version before applying.</p>
+          </div>
+          <div class="detail-section">
+            <p class="eyebrow">TEMPORARY SUPPORT CHANNEL</p>
+            <h3 id="chat-title">Orders channel · #1048</h3>
+            <p id="scope-note" class="scope-note">Owner view: all staff and channels are available.</p>
+            <div id="chat-thread" class="chat-thread" aria-live="polite">
+              <div class="chat-message">BABAI: Select “Open chat” or assign this order to open a temporary support thread.</div>
+            </div>
+            <div class="chat-compose">
+              <input id="chat-input" type="text" aria-label="Message in temporary support channel" placeholder="Type a local mock reply">
+              <button id="chat-send" class="primary" type="button">Send</button>
+            </div>
           </div>
         </aside>
       </div>
@@ -257,6 +282,143 @@
           }
           announce(`${button.textContent.trim()} applied to the local fixture`);
         });
+      })();
+    </script>
+    <script>
+      (() => {
+        const roleSelect = document.querySelector("#role-select");
+        const channelSelect = document.querySelector("#channel-select");
+        const status = document.querySelector("#action-status");
+        const chatTitle = document.querySelector("#chat-title");
+        const chatThread = document.querySelector("#chat-thread");
+        const chatInput = document.querySelector("#chat-input");
+        const scopeNote = document.querySelector("#scope-note");
+        const columns = [...document.querySelectorAll(".column")];
+        const orders = [...document.querySelectorAll(".order")];
+        const details = {
+          "1048": { title: "#1048 · Delivery", text: "2 × Chicken Biryani · 1 × Paneer Tikka · medium spicy · extra raita", amount: "₹780 · PAID", channel: "Staff 1 · #1048" },
+          "1047": { title: "#1047 · Payment pending", text: "1 × Family Combo · customer awaiting payment", amount: "₹399 · PENDING", channel: "Orders channel · #1047" },
+          "1042": { title: "#1042 · Support", text: "Starter replacement · ₹100 pending · Staff 1 assigned", amount: "₹100 · PENDING", channel: "Support · #1042" },
+          "1039": { title: "#1039 · Preparing", text: "3 × Rice Bowl · 2 × Drinks · kitchen started", amount: "₹620 · PAID", channel: "Orders channel · #1039" },
+          "1038": { title: "#1038 · Pickup", text: "Pickup code 4821 · partner assigned", amount: "₹480 · PAID", channel: "Orders channel · #1038" },
+        };
+        const selectedOrder = () => document.querySelector(".order.selected");
+        const announce = (message) => {
+          if (status) status.textContent = `Local mock: ${message}. Nothing submits.`;
+        };
+        const renderDetail = (order) => {
+          if (!order) return;
+          const detail = details[order.dataset.orderId] || details["1048"];
+          document.querySelector("#detail-title").textContent = detail.title;
+          const sections = document.querySelectorAll(".detail-section");
+          sections[1]?.querySelector("p:first-of-type")?.replaceChildren(document.createTextNode(`“${detail.text}”`));
+          sections[1]?.querySelector("p:last-of-type")?.replaceChildren(document.createTextNode(`${detail.amount} · local fixture`));
+          chatTitle.textContent = detail.channel;
+          announce(`order ${order.dataset.orderId} selected`);
+        };
+        const canView = (order) => {
+          const role = roleSelect.value;
+          return role === "owner" || order.dataset.assignee === role;
+        };
+        const applyScope = () => {
+          orders.forEach((order) => {
+            order.hidden = !canView(order);
+          });
+          const owner = roleSelect.value === "owner";
+          scopeNote.textContent = owner
+            ? "Owner view: all staff and channels are available."
+            : `Staff view: only ${roleSelect.options[roleSelect.selectedIndex].text} assigned channels are available.`;
+          channelSelect.disabled = owner === false;
+          if (!owner) channelSelect.value = roleSelect.value === "staff1" ? "staff-1-1048" : "orders";
+          announce(owner ? "owner scope enabled" : `${roleSelect.options[roleSelect.selectedIndex].text} scope enabled`);
+        };
+        const moveOrder = (order, columnName, state) => {
+          const target = document.querySelector(`[data-queue="${columnName}"] .order-list`);
+          if (!target) return;
+          target.append(order);
+          order.dataset.state = state;
+          const chip = order.querySelector(".chip");
+          if (chip) chip.textContent = state;
+        };
+        const addChat = (text, outgoing = false) => {
+          const message = document.createElement("div");
+          message.className = `chat-message${outgoing ? " outgoing" : ""}`;
+          message.textContent = text;
+          chatThread.append(message);
+          chatThread.scrollTop = chatThread.scrollHeight;
+        };
+        const openTemporaryChat = (order) => {
+          const role = roleSelect.value;
+          const actor = role === "owner" ? "Owner / cashier" : roleSelect.options[roleSelect.selectedIndex].text;
+          chatTitle.textContent = `${actor} ↔ Customer · #${order.dataset.orderId}`;
+          addChat(`BABAI: Temporary channel opened for ${actor} ↔ customer. This thread reflects on restaurant WhatsApp.`, false);
+          addChat(`${actor}: I’m reviewing order #${order.dataset.orderId}.`, true);
+          announce(`temporary support channel opened for order ${order.dataset.orderId}`);
+        };
+        orders.forEach((order) => {
+          order.addEventListener("click", (event) => {
+            if (event.target.closest("button")) return;
+            orders.forEach((item) => item.classList.remove("selected"));
+            order.classList.add("selected");
+            renderDetail(order);
+          });
+          order.addEventListener("dragstart", (event) => {
+            event.dataTransfer.setData("text/plain", order.dataset.orderId);
+            order.classList.add("dragging");
+          });
+          order.addEventListener("dragend", () => order.classList.remove("dragging"));
+        });
+        columns.forEach((column) => {
+          column.addEventListener("dragover", (event) => {
+            event.preventDefault();
+            column.classList.add("drop-target");
+          });
+          column.addEventListener("dragleave", () => column.classList.remove("drop-target"));
+          column.addEventListener("drop", (event) => {
+            event.preventDefault();
+            column.classList.remove("drop-target");
+            const order = document.querySelector(`[data-order-id="${event.dataTransfer.getData("text/plain")}"]`);
+            if (!order || !canView(order)) return announce("drop denied by role scope");
+            const queueName = column.dataset.queue;
+            const states = { new: "NEW", support: "NEEDS SUPPORT", preparing: "PREPARING", ready: "READY / DELIVERY" };
+            moveOrder(order, queueName, states[queueName]);
+            orders.forEach((item) => item.classList.remove("selected"));
+            order.classList.add("selected");
+            renderDetail(order);
+            announce(`order ${order.dataset.orderId} moved to ${states[queueName]}`);
+          });
+        });
+        roleSelect.addEventListener("change", applyScope);
+        channelSelect.addEventListener("change", () => {
+          chatTitle.textContent = channelSelect.options[channelSelect.selectedIndex].text;
+          announce(`channel changed to ${channelSelect.options[channelSelect.selectedIndex].text}`);
+        });
+        document.addEventListener("click", (event) => {
+          const button = event.target.closest("button");
+          if (!button) return;
+          const action = button.textContent.trim().toLowerCase();
+          const order = button.closest(".order") || selectedOrder();
+          if (action === "open chat" || action === "open support" || action === "view staff thread") {
+            if (order && canView(order)) openTemporaryChat(order);
+          }
+          if (action === "assign" && order && canView(order)) {
+            order.dataset.assignee = roleSelect.value === "owner" ? "staff1" : roleSelect.value;
+            announce(`order ${order.dataset.orderId} assigned to ${order.dataset.assignee}`);
+          }
+        });
+        document.querySelector("#chat-send")?.addEventListener("click", () => {
+          const text = chatInput.value.trim();
+          if (!text) return;
+          addChat(`${roleSelect.options[roleSelect.selectedIndex].text}: ${text}`, true);
+          addChat("BABAI: Message reflected to the matching WhatsApp conversation mock.", false);
+          chatInput.value = "";
+          announce("message reflected to web and WhatsApp mock channels");
+        });
+        chatInput?.addEventListener("keydown", (event) => {
+          if (event.key === "Enter") document.querySelector("#chat-send")?.click();
+        });
+        applyScope();
+        renderDetail(selectedOrder());
       })();
     </script>
   </body>

@@ -149,4 +149,3 @@ restaurant credentials.
 - Keep old consumers working through migration windows.
 - Record API/event schema and deployment version in audit/outbox.
 - Deprecate with owner, date and migration evidence.
-

@@ -496,3 +496,27 @@ For the broadest fit, choose **Option A — Balanced desktop workstation plus th
 For the best operational architecture, choose **Option B — Hybrid workstation, thin PC, and cloud**.
 
 Choose a Premium option only when you can name the workload that requires its additional VRAM, memory capacity, PCIe lanes, or reliability. For most of the user’s stated activities, the Mid-tier balanced desktop or Hybrid 1 provides the best combination of capability, flexibility, and long-term usefulness.
+
+---
+
+# Current Decision Checkpoint — 2026-09-27
+
+The current purchase decision has been refined since the original options above were written. The detailed, current save point is maintained separately in:
+
+**docs/company/workstation-decision-2026-09-27.md**
+
+Key current decisions:
+
+- Babai production is cloud-hosted; this workstation is not a production server.
+- Phase 1 is a development/test workstation centered on Ryzen 9 9950X3D + expandable X870/X870E + RTX 5070 Ti + 2TB + 4TB + 1000W ATX 3.1 + pure-sine UPS.
+- RAM is **2×64GB if reasonably priced; otherwise 2×32GB 64GB now**, with a January 2027 workload checkpoint.
+- 1×64GB is not a preferred configuration.
+- 4-DIMM/4×32GB is not the default architecture, but may remain a last-resort future fallback if justified by actual workload and pricing.
+- Future local AI is an upgrade trigger, not a reason to buy Phase 2 hardware today.
+- The existing LG 29WP60G monitor is retained; no monitor is required for Phase 1.
+- Exact motherboard PCIe/M.2 topology must be verified before payment.
+- Mac mini/Mac Studio M5 Max/M5 Ultra are alternative architectures being evaluated, not automatic replacements.
+- Vendor quotes should show 64GB and 128GB RAM variants side-by-side using exact component models.
+- The ₹3.5L all-in target including UPS remains an internal purchasing target and should not be disclosed to vendors during initial quotation.
+
+See the checkpoint document for the full decision matrix, vendor process, RAM policy, Phase 1/Phase 2 boundary, and current vendor quote context.

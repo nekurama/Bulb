@@ -63,7 +63,7 @@ button { font: inherit; }
 .brand > span:last-child { display: grid; line-height: 1.05; }
 .brand strong { font-size: 1rem; letter-spacing: .03em; }
 .brand small { margin-top: 4px; color: var(--muted); font-size: .63rem; letter-spacing: .13em; text-transform: uppercase; }
-.brand-mark { display: grid; width: 36px; height: 36px; place-items: center; border-radius: 50%; background: var(--ink); color: var(--lime); font-family: var(--display); font-size: 1.3rem; }
+.brand-mark { display: block; width: 36px; height: 36px; flex: 0 0 36px; object-fit: cover; border-radius: 50%; background: #fff; }
 .header-safety { display: inline-flex; align-items: center; gap: 9px; color: var(--red-text); font-size: .68rem; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
 .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 4px rgba(243,101,75,.13); }
 .hero { display: grid; grid-template-columns: minmax(0,1fr) 260px; align-items: center; gap: 80px; min-height: 570px; padding-top: 80px; padding-bottom: 78px; }

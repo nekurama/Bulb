@@ -23,10 +23,19 @@ const prototypePages = [
     output: "whatsapp/index.html",
   },
 ];
-const outputFiles = ["favicon.svg", ...sourceFiles, ...prototypePages.map(({ output }) => output)];
+const outputFiles = [
+  "favicon.svg",
+  "brand-assets/babai-monochrome-face.jpeg",
+  ...sourceFiles,
+  ...prototypePages.map(({ output }) => output),
+];
 const deploymentFiles = [
   ".github/workflows/pages-preview.yml",
   "scripts/build-pages-preview.mjs",
+  "index.html",
+  "styles.css",
+  "brand-assets/babai-monochrome-face.jpeg",
+  "brand-assets/README.md",
   ...prototypePages.map(({ source }) => source),
 ];
 
@@ -140,6 +149,11 @@ const main = async () => {
   await cp(path.join(root, "script.js"), path.join(outputDir, "script.js"));
   await cp(path.join(root, "mock-data.json"), path.join(outputDir, "mock-data.json"));
   await writeFile(path.join(outputDir, "favicon.svg"), favicon);
+  await mkdir(path.join(outputDir, "brand-assets"), { recursive: true });
+  await cp(
+    path.join(root, "brand-assets/babai-monochrome-face.jpeg"),
+    path.join(outputDir, "brand-assets/babai-monochrome-face.jpeg"),
+  );
   for (const prototype of prototypePages) {
     const prototypeHtml = sanitizePrototypeHtml(
       await readFile(path.join(root, prototype.source), "utf8"),
